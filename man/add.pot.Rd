@@ -1,0 +1,29 @@
+\name{add.pot}
+\alias{add.pot}
+\title{add a paraggraph to an existing set of paragraphs of text}
+\usage{
+  add.pot(x, value)
+}
+\arguments{
+  \item{x}{\code{set_of_paragraphs} object}
+
+  \item{value}{\code{pot} object to add as a new paragraph}
+}
+\description{
+  add a paraggraph to an existing set of paragraphs of text
+  (\code{\link{set_of_paragraphs}} object).
+}
+\examples{
+pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
+my.pars = set_of_paragraphs( pot1 )
+pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs", textProperties(color="blue") )
+my.pars = add.pot( my.pars, pot2 )
+}
+\seealso{
+  \code{\link{set_of_paragraphs}},
+  \code{\link{addParagraph}},
+  \code{\link{addParagraph.docx}},
+  \code{\link{addParagraph.pptx}},
+  \code{\link{addParagraph.html}}
+}
+

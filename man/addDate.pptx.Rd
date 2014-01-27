@@ -1,0 +1,50 @@
+\name{addDate.pptx}
+\alias{addDate.pptx}
+\title{Insert a date shape into a document pptx object}
+\usage{
+  \method{addDate}{pptx} (doc, value,
+    str.format = "\%Y-\%m-\%d", ...)
+}
+\arguments{
+  \item{doc}{Object of class \code{"pptx"}}
+
+  \item{value}{character value to add into the date shape
+  of the current slide. optionnal. If missing current date
+  will be used.}
+
+  \item{str.format}{character value to use to format
+  current date (if \code{value} is missing).}
+
+  \item{...}{further arguments, not used.}
+}
+\value{
+  a document object
+}
+\description{
+  Insert a date into the current slide of a \code{pptx}
+  object.
+}
+\examples{
+# Create a new document
+doc = pptx( title = "title" )
+# add a slide with layout "Title Slide"
+doc = addSlide( doc, slide.layout = "Title Slide" )
+doc = addTitle( doc, "Presentation title" ) #set the main title
+doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
+
+## add a date on the current slide
+doc = addDate( doc )
+
+doc = addSlide( doc, slide.layout = "Title and Content" )
+## add a page number on the current slide but not the default text (slide number)
+doc = addDate( doc, "Dummy date" )
+
+# Write the object in file "~/presentation.pptx"
+writeDoc( doc, "~/presentation.pptx" )
+}
+\seealso{
+  \code{\link{pptx}}, \code{\link{addFooter.pptx}},
+  \code{\link{addPageNumber.pptx}} ,
+  \code{\link{strptime}}, \code{\link{addDate}}
+}
+

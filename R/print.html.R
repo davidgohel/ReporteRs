@@ -1,0 +1,26 @@
+#' @title print informations about an object of class \code{"html"}.
+#'
+#' @description
+#' print informations about an object of class \code{"html"}.
+#' 
+#' @param x an object of class \code{"html"}
+#' @param ... further arguments, not used. 
+#' @examples
+#' # Create a new document 
+#' doc <- html( title = "title" )
+#' print( doc )
+#' @seealso \code{\link{html}}, \code{\link{print}}
+#' @method print html
+#' @S3method print html
+
+print.html = function (x, ...){
+
+	cat("[html object]\n")
+	
+	cat("title:", x$title, "\n")
+	
+	invisible()
+	
+}
+
+

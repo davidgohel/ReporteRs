@@ -1,0 +1,29 @@
+#' @title print informations about an object of class \code{"docx"}.
+#'
+#' @description
+#' print informations about an object of class \code{"docx"}.
+#' 
+#' @param x an object of class \code{"docx"}
+#' @param ... further arguments, not used. 
+#' @examples
+#' # Create a new document 
+#' doc <- docx( title = "title" )
+#' print( doc )
+#' @seealso \code{\link{docx}}, \code{\link{print}}
+#' @method print docx
+#' @S3method print docx
+
+print.docx = function (x, ...){
+	cat("[docx object]\n")
+	
+	cat("title:", x$title, "\n")
+	
+	cat(paste( "Original document: '", x$basefile, "'\n", sep = "" ) )
+	
+	cat( "Styles:\n" )
+	print( styles( x ) )
+	
+	invisible()
+}
+
+
