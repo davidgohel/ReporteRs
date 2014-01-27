@@ -6,8 +6,8 @@
     header.labels, groupedheader.row = list(),
     span.columns = character(0), col.types,
     columns.bg.colors = list(),
-    columns.font.colors = list(), row.names = T, bookmark,
-    ...)
+    columns.font.colors = list(), row.names = FALSE,
+    bookmark, ...)
 }
 \arguments{
   \item{doc}{the \code{docx} to use}

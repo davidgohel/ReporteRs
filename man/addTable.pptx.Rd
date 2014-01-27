@@ -6,7 +6,7 @@
     header.labels, groupedheader.row = list(),
     span.columns = character(0), col.types,
     columns.bg.colors = list(),
-    columns.font.colors = list(), row.names = T, ...)
+    columns.font.colors = list(), row.names = FALSE, ...)
 }
 \arguments{
   \item{doc}{the \code{pptx} to use}
