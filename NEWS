@@ -3,5 +3,3 @@ ReporteRs 0.1
 
 NEW FEATURES
 
-* MS Word bookmarks can now be replaced with R output, bookmark is now an optional argument
-  of addParagraph, addPlot and addTable.
