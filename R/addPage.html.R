@@ -34,7 +34,7 @@ addPage.html = function( doc, title, ... ) {
 	if( length( title ) != 1 )
 		stop("title must be a character vector of length 1.")
 	
-	slide = .jnew("com/lysis/reporting/HTMLPageContent", title )
+	slide = .jnew(class.html4r.HTMLPageContent, title )
 	rJava::.jcall( doc$obj , "V", "addNewPage", title, slide )
 	doc$current_slide = slide
 	

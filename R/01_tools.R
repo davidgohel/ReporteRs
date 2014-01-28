@@ -88,11 +88,11 @@ setData2Java = function( obj, data, header.labels, col.types
 table.format.2java = function( x, type = "docx" ){
 	
 	if( type == "docx" ){
-		jclassname = "com/lysis/reporters/tables/TableLayoutDOCX"
+		jclassname = class.docx4r.TableLayoutDOCX
 	} else if( type == "pptx" ){
-		jclassname = "com/lysis/reporters/tables/TableLayoutPPTX"
+		jclassname = class.pptx4r.TableLayoutPPTX
 	} else if( type == "html" ){
-		jclassname = "com/lysis/reporters/tables/TableLayoutHTML"
+		jclassname = class.html4r.TableLayoutHTML
 	} else stop("unknown document type: ", type )
 	
 	obj = .jnew(jclassname, x$percent.addsymbol
@@ -229,7 +229,7 @@ get_text_coord = function( x, height ){
 
 plotSlideLayout = function( doc, layout.name ){
 	
-	SlideLayout = rJava::.jcall( doc$obj, "Lcom/lysis/pptx4r/elements/layouts/SlideLayout;", "getSlideLayout", as.character(layout.name) )
+	SlideLayout = rJava::.jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", as.character(layout.name) )
 	maxid = rJava::.jcall( SlideLayout, "I", "getContentSize")
 	content_shapes = list()
 	content_size = rJava::.jcall( SlideLayout, "I", "getContentSize" )

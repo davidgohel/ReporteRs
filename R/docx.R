@@ -145,7 +145,7 @@ docx = function( title = "untitled", template){
 		stop(template , " is not a valid file.")
 	
 	# java calls
-	obj = .jnew("com/lysis/reporting/docx4R" )
+	obj = .jnew( class.docx4r.document )
 	rJava::.jcall( obj, "V", "setBaseDocument", template )
 	.sysenv = Sys.getenv(c("USERDOMAIN","COMPUTERNAME","USERNAME"))
 	

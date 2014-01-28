@@ -70,9 +70,9 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 		stop("Slide layout '", slide.layout, "' does not exist in defined layouts.")				
 	}
 	if( missing( bookmark ) )
-		slide = .jnew("com/lysis/reporting/SlideContent", slide.layout, doc$obj )
+		slide = .jnew(class.pptx4r.SlideContent, slide.layout, doc$obj )
 	else {
-		slide = .jnew("com/lysis/reporting/SlideContent", slide.layout, doc$obj, as.integer(bookmark) )		
+		slide = .jnew(class.pptx4r.SlideContent, slide.layout, doc$obj, as.integer(bookmark) )		
 	}
 	doc$current_slide = slide
 	doc$plot_first_id = rJava::.jcall( slide, "I", "getmax_shape"  ) + 1

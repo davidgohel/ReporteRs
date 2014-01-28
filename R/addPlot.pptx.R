@@ -71,7 +71,7 @@ addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
 	offys = double( maxid-id )
 	j=0
 	LayoutName = rJava::.jcall( slide, "S", "getLayoutName" )
-	SlideLayout = rJava::.jcall( doc$obj, "Lcom/lysis/pptx4r/elements/layouts/SlideLayout;", "getSlideLayout", LayoutName )
+	SlideLayout = rJava::.jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", LayoutName )
 	
 	for(i in seq(id,maxid-1, by=1) ){
 		dims = rJava::.jcall( SlideLayout, "[I", "getContentDimensions", as.integer(i) )
@@ -104,7 +104,7 @@ addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
 			plotfiles = list.files( dirname , full.names = T )
 			for( i in 1:length( plotfiles ) ){
 				if( i <= nbplots ){
-					gr = .jnew("com/lysis/pptx4r/elements/DrawingMLPlot", plotfiles[i]  )
+					gr = .jnew(class.pptx4r.DrawingMLList, plotfiles[i]  )
 					out = rJava::.jcall( slide, "I", "add", gr )
 					if( isSlideError( out ) ){
 						stop( getSlideErrorString( out , "dml") )

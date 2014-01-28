@@ -40,7 +40,7 @@ addParagraph.pptx = function(doc, value, ... ) {
 	
 	if( inherits(value, "set_of_paragraphs") ){
 		slide = doc$current_slide 
-		paragrah = .jnew("com/lysis/pptx4r/elements/POT")
+		paragrah = .jnew(class.pptx4r.POT)
 		for( pot_index in 1:length( value ) ){
 			rJava::.jcall( paragrah, "V", "addP")
 			pot_value = value[[pot_index]]

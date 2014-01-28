@@ -110,7 +110,7 @@ html = function( title = "untitled" ){
 	
 	
 	# java calls
-	obj = .jnew("com/lysis/reporting/html4R", title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
+	obj = .jnew(class.html4r.document, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
 	
 	.Object = list( obj = obj
 		, title = title

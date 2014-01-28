@@ -55,10 +55,10 @@ addParagraph.html = function(doc, value, stylename = "text-primary", parent.type
 	}
 	
 	if( inherits(value, "set_of_paragraphs") ){
-		paragrah = .jnew("com/lysis/html4r/elements/SetOfPot", parent.type, stylename )
+		paragrah = .jnew(class.html4r.POTsList, parent.type, stylename )
 		
 		for( pot_index in 1:length( value ) ){
-			jpot = .jnew("com/lysis/html4r/elements/POT", parent.type )
+			jpot = .jnew(class.html4r.POT, parent.type )
 			pot_value = value[[pot_index]]
 			for( i in 1:length(pot_value)){
 				if( is.null( pot_value[[i]]$format ) ) rJava::.jcall( jpot, "V", "addText", pot_value[[i]]$value )

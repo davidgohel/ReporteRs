@@ -9,7 +9,7 @@ FontMetric = function( fontfamily, fontsize ){
 	#cat("FontMetric(fontfamily='", fontfamily, "', fontsize=", fontsize, ")\n", sep = "" )
 	#Could run check.fontfamily(fontname) but has already been done in device call init.
 	
-	fontMetric = .jnew("com/lysis/fonts/FontMetric", fontfamily, as.integer( fontsize ) )
+	fontMetric = .jnew(class.fontMetric, fontfamily, as.integer( fontsize ) )
 	widths = list()
 	info = list()
 	for(ff in 0:3){
