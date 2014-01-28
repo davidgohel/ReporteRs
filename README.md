@@ -5,21 +5,39 @@ ReporteRs is a R package for creating MS Word documents, MS PowerPoint documents
 
 Features
 --------
-* Create docx, pptx or html files with only a few lines of R code. 
-* Add tables, plots, texts, etc.
-* Simple R functions are available for customizing formatting properties of R output.
+* Create docx and pptx files with only a few lines of R code.
+* Add tables, plots, text or tables of contents into Word PowerPoint and html documents.
+* Customize formatting of R output.
+* Take advantage of the benefits of reproducible research.
 
 Installation
 ------------
+
+**Dependencies**
+
+Java (it has been tested with java version >= 1.6).
+
+ReporteRs needs some R packages ; run the following script to install them if needed.
+
+
+    if( !require( rJava ) ) install.packages("rJava")
+    if( !require( ggplot2 ) ) install.packages("ggplot2")
+    if( !require( base64 ) ) install.packages("base64")
+    if( !require( highlight ) ) install.packages("highlight")
+
+**From sources**
+
 From an R console (R >= 3.0):
 
     install.packages("devtools")
     devtools::install_github('ReporteRs', 'davidgohel')
 
-**Dependencies**
+**Binary package**
 
-    R packages : rJava, ggplot2, base64, highlight
-	Java (it has been tested with java version >= 1.6)
+A binary package is available here:
+https://github.com/davidgohel/ReporteRs/releases/tag/v0.1
+
+    
 	
 Getting Started
 ---------------
