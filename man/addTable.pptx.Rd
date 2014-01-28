@@ -113,6 +113,7 @@ doc <- addTable( doc
 writeDoc( doc, "~/presentation.pptx" )
 }
 \seealso{
-  \code{\link{pptx}}, \code{\link{addTable}}
+  \code{\link{pptx}}, \code{\link{addTable}},
+  \code{\link{tableProperties}}
 }
 

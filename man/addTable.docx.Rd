@@ -109,6 +109,7 @@ doc <- addTable( doc
 writeDoc( doc, "~/document.docx" )
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addTable}}
+  \code{\link{docx}}, \code{\link{addTable}},
+  \code{\link{tableProperties}}
 }
 
