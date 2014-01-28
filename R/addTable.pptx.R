@@ -69,7 +69,7 @@
 #' writeDoc( doc, "~/presentation.pptx" )
 #' 
 #' @return an object of class \code{"pptx"}.
-#' @seealso \code{\link{pptx}}, \code{\link{addTable}}
+#' @seealso \code{\link{pptx}}, \code{\link{addTable}}, \code{\link{tableProperties}}
 #' @method addTable pptx
 #' @S3method addTable pptx
 

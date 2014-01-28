@@ -63,7 +63,7 @@
 #' 
 #' # Write the object in file "~/document.docx"
 #' writeDoc( doc, "~/document.docx" )
-#' @seealso \code{\link{docx}}, \code{\link{addTable}}
+#' @seealso \code{\link{docx}}, \code{\link{addTable}}, \code{\link{tableProperties}}
 #' @method addTable docx
 #' @S3method addTable docx
 addTable.docx = function(doc, data, layout.properties

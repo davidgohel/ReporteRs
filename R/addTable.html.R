@@ -64,7 +64,7 @@
 #' # write the html object in a directory
 #' pages = writeDoc( doc, "~/html_output_dir")
 #' print( pages ) # print filenames of generated html pages
-#' @seealso \code{\link{html}}, \code{\link{addTable}}
+#' @seealso \code{\link{html}}, \code{\link{addTable}}, \code{\link{tableProperties}}
 #' @method addTable html
 #' @S3method addTable html
 addTable.html = function(doc, data, layout.properties
