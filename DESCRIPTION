@@ -2,7 +2,7 @@ Package: ReporteRs
 Type: Package
 Title: ReporteRs: a package to create document from R
 Version: 0.2
-Date: 2014-01-02
+Date: 2014-01-28
 Author: David Gohel <david.gohel@lysis-consultants.fr>
 Maintainer: David Gohel <david.gohel@lysis-consultants.fr>
 Description: Create MS docx, MS pptx and HTML documents from R
