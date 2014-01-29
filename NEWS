@@ -1,5 +1,31 @@
-ReporteRs 0.1
-----------------------------------------------------------------
+ReporteRs 0.2
+==================================================================
+BUG FIXES
+------------------------------------------------------------------
+* Title texts can now have accents and '&' and '>' and '<'. 
+  (reported by Jean-François Collin) 
+
+* namespace of java codes have been changed to 'org.lysis'.
+  ReporteRs can coexists with R2DOCX now 
+  (reported by Jean-François Collin) 
+
+* got rid of java rendersnake for html generation
+
+ENHANCEMENT 
+------------------------------------------------------------------
+* The default Word template has now separate numbering index for 
+  styles rPlotLegend and rTableLegend
 
 NEW FEATURES
+------------------------------------------------------------------
+
+
+ReporteRs 0.1
+==================================================================
+
+NEW FEATURES
+------------------------------------------------------------------
+* argument row.names in addTable (suggested by Rees Morrison)
+
+* argument underlined in textProperties (suggested by Rees Morrison)
 
