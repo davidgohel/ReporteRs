@@ -19,7 +19,7 @@ get.default.tableProperties = function(){
 	data.cellProperties = cellProperties( border.width = 1, background.color = "#ffffff" )
 	data.textProperties = textProperties( font.size = 12 )
 	
-	global_parProperties = parProperties( padding = 3, text.align = "right" )
+	global_parProperties = parProperties( padding = 3, text.align = "left" )
 	
 	
 	my.formats = tableProperties( 
