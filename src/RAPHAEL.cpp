@@ -356,7 +356,7 @@ static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 		Rf_error("error while opening %s\n", filename);
 	}
 	updateFontInfo(dev, gc);
-	pd->objectname = getObjectName(pd->filename, pd->pageNumber);
+	pd->objectname = getJSVariableName(pd->filename, pd->canvas_id);
 	fprintf(pd->dmlFilePointer, "var %s = new Raphael(document.getElementById('%s'), %.0f, %.0f);\n"
 			, pd->objectname, canvasname, dev->right, dev->bottom);
 

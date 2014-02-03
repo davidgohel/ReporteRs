@@ -17,7 +17,7 @@ void closeFile( FILE *file);
 
 char* getFilename(char* filename, int index);
 char* getRaphaelFilename(char* filename, int index);
-char* getObjectName(char* filename, int index);
+char* getJSVariableName(char* filename, int index);
 char* getCanvasName( int index);
 void update_canvas_id(pDevDesc dev);
 char *RGBHexValue(unsigned int col);

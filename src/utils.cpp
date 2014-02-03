@@ -67,7 +67,7 @@ char* getCanvasName( int index){
 	sprintf(buf, "canvas_%03d", index);
 	return buf;
 }
-char* getObjectName(char* filename, int index){
+char* getJSVariableName(char* filename, int index){
 	char *buf;
 	buf = (char*)malloc( ( 10 ) * sizeof(char) );
 	sprintf(buf, "paper%03d", index);

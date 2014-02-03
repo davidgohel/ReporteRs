@@ -16,18 +16,10 @@
 \value{
   the function a character vector containing generated html
   documents filenames.
-
-  an object of class \code{"pptx"}.
 }
 \description{
   Write the \code{"html"} object in '.html' files located
   in a specified directory.
-}
-\details{
-  A page is where content is added. This function is a key
-  function ; if no page has been added into the document
-  object no content (tables, plots, images, texts) can be
-  added.
 }
 \examples{
 # Create a new document
