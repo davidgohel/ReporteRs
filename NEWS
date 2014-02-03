@@ -18,7 +18,9 @@ ENHANCEMENT
 
 NEW FEATURES
 ------------------------------------------------------------------
-
+* Reveal doc : see ?reveal
+an adaptation of the html object
+generate reveal presentations http://lab.hakim.se/reveal-js/#/1
 
 ReporteRs 0.1
 ==================================================================

@@ -6,12 +6,6 @@
 #' @param directory single character value, name of the directory that will contain generated html pages.
 #' @param ... further arguments, not used. 
 #' @return the function a character vector containing generated html documents filenames.
-#' @details 
-#' A page is where content is added.
-#' This function is a key function ; if no page has been added into the document object
-#' no content (tables, plots, images, texts) can be added. 
-#' 
-#' @return an object of class \code{"pptx"}.
 #' @examples
 #' # Create a new document 
 #' doc = html( title = "title" )
