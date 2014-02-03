@@ -67,4 +67,3 @@ Collate:
     'ReporteRs.R'
     'themes.tableProperties.R'
     'java_description.R'
-    'getShinyTable.R'
