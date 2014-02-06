@@ -74,5 +74,4 @@ Collate:
     'addPlot.reveal.R'
     'addParagraph.reveal.R'
     'reveal.copy.R'
-    'getShinyTable.R'
     'addSlide.reveal.R'
