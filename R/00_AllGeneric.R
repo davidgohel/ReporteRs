@@ -15,6 +15,13 @@ addDate = function(doc, ...){
 	UseMethod("addDate")
 }
 
+#' @export
+addFlexTable = function(doc, ...){
+	checkHasSlide(doc)
+	UseMethod("addFlexTable")
+}
+
+
 #' @title Insert a footer into a document object
 #'
 #' @description Insert a footer into a document object

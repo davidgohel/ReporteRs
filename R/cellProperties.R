@@ -229,5 +229,28 @@ print.cellProperties = function (x, ...){
 	cat( "\tpadding-right: {", x$padding.right, "}\n" )
 	cat( "\tbackground-color: {", x$background.color, "}\n" )
 }
+borderProperties = function( borderColor, borderStyle, borderWidth ){
+	.jnew("org/lysis/reporters/tables/BorderProperties"
+		, as.character(borderColor), as.character(borderStyle)
+		, as.integer( borderWidth )
+	)
+}
 
 
+.jCellProperties = function( robject ){
+	
+	
+	jcellProp = .jnew("org/lysis/reporters/tables/CellProperties"
+			, borderProperties(robject$border.bottom.color, robject$border.bottom.style, robject$border.bottom.width )
+			, borderProperties(robject$border.left.color, robject$border.left.style, robject$border.left.width )
+			, borderProperties(robject$border.top.color, robject$border.top.style, robject$border.top.width )
+			, borderProperties(robject$border.right.color, robject$border.right.style, robject$border.right.width )
+			, as.character(robject$vertical.align )
+			, as.integer( robject$padding.bottom )
+			, as.integer( robject$padding.top )
+			, as.integer( robject$padding.left )
+			, as.integer( robject$padding.right )
+			, as.character(robject$background.color )
+	)
+	jcellProp
+}

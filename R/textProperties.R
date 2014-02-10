@@ -104,3 +104,14 @@ as.character.textProperties = function (x, ...){
 		, "underlined:" , x$underlined, ";"
 		, "font-family:" , x$font.family, ";}" )
 }
+
+.jTextProperties = function( robject ){
+	textProp = .jnew("org/lysis/reporters/texts/TextProperties"
+		, robject$font.size, robject$font.weight=="bold"
+		, robject$font.style=="italic"
+		, robject$underlined
+		, robject$color
+		, robject$font.family )
+	textProp
+}
+
