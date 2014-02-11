@@ -9,7 +9,7 @@
 }
 \details{
   \tabular{ll}{ Package: \tab ReporteRs\cr Type: \tab
-  Package\cr Version: \tab 0.1\cr Date: \tab 2014-01-01\cr
+  Package\cr Version: \tab 0.2\cr Date: \tab 2014-01-01\cr
   License: \tab GPL (>= 3)\cr LazyLoad: \tab yes\cr }
 
   To get an r document object: \itemize{ \item

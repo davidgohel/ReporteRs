@@ -78,7 +78,7 @@ print.parProperties = function (x, ...){
 
 
 .jParProperties = function( robject ){
-	jparProp = .jnew("org/lysis/reporters/texts/ParProperties"
+	jparProp = rJava::.jnew(class.texts.ParProperties
 			, robject$text.align
 			, robject$padding.bottom, robject$padding.top
 			, robject$padding.left, robject$padding.right )

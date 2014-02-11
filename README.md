@@ -49,6 +49,7 @@ Getting Started
 
 	?ReporteRs
 	?addTable
+	?FlexTable
 	?addPlot
 	?addParagraph
 	?docx

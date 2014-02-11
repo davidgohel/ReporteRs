@@ -104,7 +104,7 @@ addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
 			plotfiles = list.files( dirname , full.names = T )
 			for( i in 1:length( plotfiles ) ){
 				if( i <= nbplots ){
-					gr = .jnew(class.pptx4r.DrawingMLList, plotfiles[i]  )
+					gr = rJava::.jnew(class.pptx4r.DrawingMLList, plotfiles[i]  )
 					out = rJava::.jcall( slide, "I", "add", gr )
 					if( isSlideError( out ) ){
 						stop( getSlideErrorString( out , "dml") )

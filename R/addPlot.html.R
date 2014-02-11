@@ -60,7 +60,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
 		
-		jimg = .jnew(class.html4r.ImagesList )
+		jimg = rJava::.jnew(class.html4r.ImagesList )
 		
 		for( i in 1:length( plotfiles ) ){
 			.tempfile <- tempfile()
@@ -84,7 +84,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		plot_ids = get("plot_ids", envir = env )
 		doc$canvas_id = get("canvas_id", envir = env )
 		
-		jimg = .jnew( class.html4r.RaphaelList )
+		jimg = rJava::.jnew( class.html4r.RaphaelList )
 		
 		for(i in 1:length( plot_ids ) ){
 			file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))

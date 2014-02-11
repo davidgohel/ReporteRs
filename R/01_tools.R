@@ -95,7 +95,7 @@ table.format.2java = function( x, type = "docx" ){
 		jclassname = class.html4r.TableLayoutHTML
 	} else stop("unknown document type: ", type )
 	
-	obj = .jnew(jclassname, x$percent.addsymbol
+	obj = rJava::.jnew(jclassname, x$percent.addsymbol
 			, x$fraction.double.digit, x$fraction.percent.digit
 			, "YYYY-mm-dd", "HH:MM", "YYYY-mm-dd HH:MM"
 			, x$locale.language, x$locale.region
@@ -104,7 +104,7 @@ table.format.2java = function( x, type = "docx" ){
 	rootnames = c("header", "groupedheader", "double", "integer", "percent", "character", "date", "datetime", "logical")
 	
 	for( what in rootnames ){
-		#TODO: change that code (refactor r2doc also in s3)
+		#TODO: change that code 
 		jwhatmethod = paste( casefold( substring(what , 1, 1 ),  upper = T ), casefold( substring(what , 2, nchar(what) ),  upper = F ), sep = "" )
 		jwhatmethod = paste( "set", jwhatmethod, "Text", sep = "" )
 		rwhatobject = paste( what, ".text", sep = "" )
@@ -116,6 +116,7 @@ table.format.2java = function( x, type = "docx" ){
 				, as.logical(robject$font.style=="italic")
 				, as.logical(robject$underlined)
 				, robject$font.family
+				, robject$vertical.align
 		)
 		
 	}
@@ -301,7 +302,7 @@ registerRaphaelGraph = function( plot_attributes, env ){
 	invisible()
 }
 check.fontfamily = function( fontfamily ){
-	font = .jnew("java/awt/Font", fontfamily, 0L, 12L )
+	font = rJava::.jnew("java/awt/Font", fontfamily, 0L, 12L )
 	font_family = rJava::.jcall( font, "S", "getFamily" )
 	if( font_family == "Dialog" )
 		stop("Font ", fontfamily, " can't be found in available fonts on this machine.")

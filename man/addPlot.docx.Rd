@@ -7,7 +7,7 @@
     vector.graphic = F, width = 6, height = 6,
     fontname = getOption("ReporteRs-default-font"),
     editable = TRUE, bookmark,
-    plotParStyle = parProperties(text.align = "center", padding = 5),
+    parStyle = parProperties(text.align = "center", padding = 5),
     ...)
 }
 \arguments{
@@ -33,8 +33,8 @@
   If not provided, plot(s) will be added at the end of the
   document.}
 
-  \item{plotParStyle}{paragraph formatting properties of
-  the paragraph that contains plot(s). An object of class
+  \item{parStyle}{paragraph formatting properties of the
+  paragraph that contains plot(s). An object of class
   \code{\link{parProperties}}}
 
   \item{pointsize}{the default pointsize of plotted text in
@@ -66,7 +66,7 @@ doc = addPlot( doc, fun = plot
 		, main = "base plot main title"
 		, vector.graphic = TRUE
 		, width = 5, height = 7
-		, plotParStyle = parProperties(text.align = "left")
+		, parStyle = parProperties(text.align = "left")
 	)
 
 doc = addTitle( doc, "Plot 2", level = 1 )

@@ -26,13 +26,11 @@
   of class \code{"reveal"}.
 
   \itemize{ \item \code{\link{addTitle.reveal}} add titles
-  \item \code{\link{addImage.reveal}} add external images
   \item \code{\link{addParagraph.reveal}} add texts \item
   \code{\link{addPlot.reveal}} add plots \item
-  \code{\link{addTable.reveal}} add tables \item
-  \code{\link{addRScript.reveal}} add R Script } Once
-  object has content, user can write the htmls pages into a
-  file, see \code{\link{writeDoc.reveal}}.
+  \code{\link{addTable.reveal}} add tables } Once object
+  has content, user can write the htmls pages into a file,
+  see \code{\link{writeDoc.reveal}}.
 }
 \examples{
 \donttest{

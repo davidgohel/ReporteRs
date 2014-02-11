@@ -161,7 +161,7 @@ pptx = function( title, template){
 #	// public static int slidedimensions_error = 7;
 #	public static int UNDEFINED_ERROR = -1;
 	# java calls
-	obj = .jnew( class.pptx4r.document )
+	obj = rJava::.jnew( class.pptx4r.document )
 	
 	basedoc.return = rJava::.jcall( obj, "I", "setBaseDocument", template )
 	if( basedoc.return != error_codes["NO_ERROR"] ){

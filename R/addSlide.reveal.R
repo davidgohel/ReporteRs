@@ -30,7 +30,7 @@
 #' @S3method addSlide reveal
 addSlide.reveal = function( doc, ... ) {
 	
-	slide = .jnew(class.reveal4r.RevealSection )
+	slide = rJava::.jnew(class.reveal4r.RevealSection )
 	rJava::.jcall( doc$obj , "V", "addNewSection", slide )
 	doc$current_slide = slide
 	

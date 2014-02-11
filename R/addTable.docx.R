@@ -26,6 +26,7 @@
 #'		A name list, names are \code{data} column names and values 
 #' 			are character vectors specifying cells font colors.
 #'		Each element of the list is a vector of length \code{nrow(data)}.
+#' @param parStyle paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
 #' @param bookmark a character vector specifying bookmark id to replace by the table. 
 #'   	If provided, table will replace the paragraph that contains the bookmark.
 #'   	If not provided, table will be added at the end of the document.
@@ -71,6 +72,7 @@ addTable.docx = function(doc, data, layout.properties
 	, span.columns = character(0), col.types
 	, columns.bg.colors = list(), columns.font.colors = list()
 	, row.names = FALSE
+	, parStyle = parProperties(text.align = "left", padding = 0 )
 	, bookmark
 	, ...) {
 	
@@ -82,7 +84,6 @@ addTable.docx = function(doc, data, layout.properties
 	
 	if( missing(header.labels) ){
 		header.labels = names(data)
-		#names( header.labels ) = names(data)
 	}
 	
 	if( missing(layout.properties) )
@@ -95,7 +96,7 @@ addTable.docx = function(doc, data, layout.properties
 	}
 	
 	.jformats.object = table.format.2java( layout.properties, type = "docx" )
-	obj = .jnew(class.docx4r.DataTable, .jformats.object  )
+	obj = rJava::.jnew(class.docx4r.DataTable, .jformats.object  )
 	setData2Java( obj, data, header.labels, col.types, groupedheader.row, columns.bg.colors, columns.font.colors, row.names )
 
 	for(j in span.columns ){
@@ -108,12 +109,12 @@ addTable.docx = function(doc, data, layout.properties
 		   else {
 		     instructions[[i]] = c(1 , rep(2, groups.counts[i]-1 ) )
 		   }
-		 }
+		}
 		rJava::.jcall( obj , "V", "setMergeInstructions", j, .jarray( as.integer( unlist(instructions) ) ) )
 	}
 	if( missing( bookmark ) )
-		rJava::.jcall( doc$obj, "V", "add", obj )
-	else rJava::.jcall( doc$obj, "V", "insert", bookmark, obj )
+		rJava::.jcall( doc$obj, "V", "add", obj, .jParProperties(parStyle) )
+	else rJava::.jcall( doc$obj, "V", "insert", bookmark, obj, .jParProperties(parStyle) )
 	doc
 }
 

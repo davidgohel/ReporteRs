@@ -230,7 +230,7 @@ print.cellProperties = function (x, ...){
 	cat( "\tbackground-color: {", x$background.color, "}\n" )
 }
 borderProperties = function( borderColor, borderStyle, borderWidth ){
-	.jnew("org/lysis/reporters/tables/BorderProperties"
+	rJava::.jnew(class.tables.BorderProperties
 		, as.character(borderColor), as.character(borderStyle)
 		, as.integer( borderWidth )
 	)
@@ -240,7 +240,7 @@ borderProperties = function( borderColor, borderStyle, borderWidth ){
 .jCellProperties = function( robject ){
 	
 	
-	jcellProp = .jnew("org/lysis/reporters/tables/CellProperties"
+	jcellProp = rJava::.jnew(class.tables.CellProperties
 			, borderProperties(robject$border.bottom.color, robject$border.bottom.style, robject$border.bottom.width )
 			, borderProperties(robject$border.left.color, robject$border.left.style, robject$border.left.width )
 			, borderProperties(robject$border.top.color, robject$border.top.style, robject$border.top.width )

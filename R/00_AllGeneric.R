@@ -15,9 +15,32 @@ addDate = function(doc, ...){
 	UseMethod("addDate")
 }
 
+#' @title Insert a FlexTable into a document object
+#'
+#' @description Insert a FlexTable into a document object
+#' 
+#' @param doc document object
+#' @param flextable the \code{FlexTable} object
+#' @param ... further arguments passed to other methods 
+#' @return a document object
 #' @export
-addFlexTable = function(doc, ...){
+#' @seealso \code{\link{FlexTable}}
+#' @examples
+#' \dontrun{
+#' data( data_ReporteRs )
+#' myFlexTable = FlexTable( data = data_ReporteRs ,span.columns="col1", header.columns=TRUE, row.names=FALSE )
+#' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
+#' myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
+#' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
+#' myFlexTable = setFlexCellContent( myFlexTable, 3, 6, pot("Hello", format=textProperties(font.weight="bold") ) + pot("World", format=textProperties(font.weight="bold", vertical.align="superscript") ) )
+#' doc = addFlexTable( doc, myFlexTable )
+#' }
+addFlexTable = function(doc, flextable, ...){
+	
 	checkHasSlide(doc)
+	if( !inherits(flextable, "FlexTable") )
+		stop("argument flextable must be a FlexTable object.")
+	
 	UseMethod("addFlexTable")
 }
 
@@ -155,7 +178,6 @@ addParagraph = function(doc, value, ...){
 		return( doc )
 	}
 	UseMethod("addParagraph")
-	
 }
 
 
@@ -300,6 +322,7 @@ addRScript = function(doc, file, text, ...){
 #' @param columns.bg.colors A named list of character vector. Define the background color of cells for a given column. optional.  
 #' Names are \code{data} column names and values are character vectors specifying cells background colors.
 #' Each element of the list is a vector of length \code{nrow(data)}.
+#' @param row.names logical value - should the row.names be included in the table. 
 #' @param columns.font.colors A named list of character vector. Define the font color of cells per column. optional.
 #'		A name list, names are \code{data} column names and values 
 #' 			are character vectors specifying cells font colors.
@@ -351,7 +374,7 @@ addRScript = function(doc, file, text, ...){
 addTable = function(doc, data, layout.properties
 		, header.labels, groupedheader.row
 		, span.columns, col.types
-		, columns.bg.colors, columns.font.colors, ...){
+		, columns.bg.colors, columns.font.colors, row.names, ...){
 
 	checkHasSlide(doc)
 	known.types = c("character", "double", "integer", "percent", "date", "datetime", "logical")

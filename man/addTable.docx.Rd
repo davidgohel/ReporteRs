@@ -7,6 +7,7 @@
     span.columns = character(0), col.types,
     columns.bg.colors = list(),
     columns.font.colors = list(), row.names = FALSE,
+    parStyle = parProperties(text.align = "left", padding = 0),
     bookmark, ...)
 }
 \arguments{
@@ -58,6 +59,10 @@
   names and values are character vectors specifying cells
   font colors.  Each element of the list is a vector of
   length \code{nrow(data)}.}
+
+  \item{parStyle}{paragraph formatting properties of the
+  paragraph that contains the table. An object of class
+  \code{\link{parProperties}}}
 
   \item{bookmark}{a character vector specifying bookmark id
   to replace by the table.  If provided, table will replace

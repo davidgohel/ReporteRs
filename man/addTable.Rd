@@ -4,7 +4,7 @@
 \usage{
   addTable(doc, data, layout.properties, header.labels,
     groupedheader.row, span.columns, col.types,
-    columns.bg.colors, columns.font.colors, ...)
+    columns.bg.colors, columns.font.colors, row.names, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -48,6 +48,9 @@
   values are character vectors specifying cells background
   colors. Each element of the list is a vector of length
   \code{nrow(data)}.}
+
+  \item{row.names}{logical value - should the row.names be
+  included in the table.}
 
   \item{columns.font.colors}{A named list of character
   vector. Define the font color of cells per column.

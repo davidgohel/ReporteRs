@@ -34,7 +34,7 @@ addPage.html = function( doc, title, ... ) {
 	if( length( title ) != 1 )
 		stop("title must be a character vector of length 1.")
 	
-	slide = .jnew(class.html4r.HTMLPageContent, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
+	slide = rJava::.jnew(class.html4r.HTMLPageContent, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
 	
 	rJava::.jcall( slide , "V", "addJavascript", "js/jquery.min.js" )
 	rJava::.jcall( slide , "V", "addJavascript", "js/bootstrap.min.js" )

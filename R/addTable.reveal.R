@@ -97,7 +97,7 @@ addTable.reveal = function(doc, data, layout.properties
 	}
 	
 	.jformats.object = table.format.2java( layout.properties, type = "html" )
-	obj = .jnew(class.html4r.DataTable, .jformats.object  )
+	obj = rJava::.jnew(class.html4r.DataTable, .jformats.object  )
 	setData2Java( obj, data, header.labels, col.types, groupedheader.row, columns.bg.colors, columns.font.colors, row.names)
 	
 	for(j in span.columns ){

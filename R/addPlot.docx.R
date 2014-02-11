@@ -16,7 +16,7 @@
 #'   	If provided, plot(s) will replace the paragraph that contains the bookmark.\cr
 #'   	If not provided, plot(s) will be added at the end of the document.
 #' 
-#' @param plotParStyle paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}
+#' @param parStyle paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}
 #' @param pointsize the default pointsize of plotted text in pixels, default to getOption("ReporteRs-fontsize").
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param editable logical value - if TRUE vector graphics elements (points, texts, etc.) are editable.
@@ -34,7 +34,7 @@
 #' 		, main = "base plot main title"
 #' 		, vector.graphic = TRUE
 #' 		, width = 5, height = 7
-#' 		, plotParStyle = parProperties(text.align = "left")
+#' 		, parStyle = parProperties(text.align = "left")
 #' 	)
 #' 
 #' doc = addTitle( doc, "Plot 2", level = 1 )
@@ -57,7 +57,7 @@ addPlot.docx = function(doc, fun
 		, fontname = getOption("ReporteRs-default-font")
 		, editable = TRUE
 		, bookmark 
-		, plotParStyle = parProperties(text.align = "center", padding = 5 )
+		, parStyle = parProperties(text.align = "center", padding = 5 )
 		, ... ) {
 
 	plotargs = list(...)
@@ -82,18 +82,18 @@ addPlot.docx = function(doc, fun
 		# Send the graph to java that will 'encode64ize' and place it in a docx4J object
 		if( missing( bookmark ) )
 			rJava::.jcall( doc$obj, "V", "addImage", .jarray( plotfiles ), .jarray(dims)
-					, plotParStyle$text.align
-					, plotParStyle$padding.bottom
-					, plotParStyle$padding.top
-					, plotParStyle$padding.left
-					, plotParStyle$padding.right
+					, parStyle$text.align
+					, parStyle$padding.bottom
+					, parStyle$padding.top
+					, parStyle$padding.left
+					, parStyle$padding.right
 			)
 		else rJava::.jcall( doc$obj, "V", "insertImage", bookmark, .jarray( plotfiles ), .jarray(dims)
-					, plotParStyle$text.align
-					, plotParStyle$padding.bottom
-					, plotParStyle$padding.top
-					, plotParStyle$padding.left
-					, plotParStyle$padding.right
+					, parStyle$text.align
+					, parStyle$padding.bottom
+					, parStyle$padding.top
+					, parStyle$padding.left
+					, parStyle$padding.right
 			)
 	} else {
 		doc$plot_first_id = rJava::.jcall( doc$obj, "I", "getElementIndex")
@@ -115,19 +115,19 @@ addPlot.docx = function(doc, fun
 		if( missing( bookmark ) ){
 			
 			rJava::.jcall( doc$obj, "V", "addDML", .jarray( plotfiles ), .jarray(dims)
-					, plotParStyle$text.align
-					, plotParStyle$padding.bottom
-					, plotParStyle$padding.top
-					, plotParStyle$padding.left
-					, plotParStyle$padding.right
+					, parStyle$text.align
+					, parStyle$padding.bottom
+					, parStyle$padding.top
+					, parStyle$padding.left
+					, parStyle$padding.right
 					)
 		} else {
 			rJava::.jcall( doc$obj, "V", "insertDML", bookmark, .jarray( plotfiles ), .jarray(dims) 
-					, plotParStyle$text.align
-					, plotParStyle$padding.bottom
-					, plotParStyle$padding.top
-					, plotParStyle$padding.left
-					, plotParStyle$padding.right
+					, parStyle$text.align
+					, parStyle$padding.bottom
+					, parStyle$padding.top
+					, parStyle$padding.left
+					, parStyle$padding.right
 					)
 		}
 	}

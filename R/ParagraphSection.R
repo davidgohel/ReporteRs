@@ -1,3 +1,9 @@
+#' @title ParagraphSection (internal use only)
+#'
+#' @description ParagraphSection (internal use only)
+#' 
+#' @param value a set_of_paragraphs object
+#' @param parProp a parProperties object
 #' @export
 ParagraphSection = function(value, parProp ) {
 	if( !inherits( parProp, "parProperties" ) ){
@@ -10,7 +16,7 @@ ParagraphSection = function(value, parProp ) {
 	
 	jparProp = .jParProperties(parProp)
 	
-	paragraphsSection = .jnew("org/lysis/reporters/texts/ParagraphsSection", jparProp)
+	paragraphsSection = rJava::.jnew("org/lysis/reporters/texts/ParagraphsSection", jparProp)
 	for( i in 1:length(value)){
 		current_value = Paragraph(value[[i]])
 		rJava::.jcall( paragraphsSection, "V", "addParagraph", current_value$jobj )

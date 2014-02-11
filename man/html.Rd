@@ -111,6 +111,47 @@ doc <- addTable( doc
 		)
 )
 
+# add a FlexTable with many options
+# let's take a sample of iris
+irisdata = iris[47:54,c(5,1:4)]
+
+## properties to use later
+# cell headers props
+cpHeader = cellProperties(background.color = "#102E37", border.color = "#F78D3F")
+# cell data props
+cpData = cellProperties( background.color = "#E8EDE0", border.color="#F78D3F")
+# text headers props
+tpHeader = textProperties( color = "#E8EDE0", font.weight="bold")
+# text data props
+tpData = textProperties( color = "#102E37")
+
+# create the FlexTable
+myFlexTable = FlexTable( data = irisdata
+  , cell_format = cpData, text_format = tpData
+  , span.columns = "Species"
+  , header.columns = FALSE, row.names = FALSE
+  )
+
+# create a FlexRow to use as FlexTable header row
+headerRow = FlexRow()
+for(i in 1:ncol(irisdata))
+   headerRow[i] = FlexCell( pot( names(irisdata)[i], format = tpHeader )
+      , cellProp = cpHeader )
+myFlexTable = addHeaderRow( myFlexTable, headerRow)
+
+# Let's format text cells in red
+myFlexTable[ 1:2, 1:2] = textProperties( color = "red" )
+# Let's right align column 1 paragraphs
+myFlexTable[ , 1] = parProperties( text.align = "right" )
+# Let's change background color of a cell
+myFlexTable[ 8, 5] = cellProperties( background.color = "#FF9729", border.width = 0)
+
+# Replace a cell with a pot object
+myFlexTable = setFlexCellContent( myFlexTable, 8, 5
+  , pot("Hello", format = textProperties( font.weight = "bold" ) ) + pot("World"
+      , format = textProperties( font.weight = "bold", vertical.align = "superscript") ) )
+
+doc = addFlexTable( doc, myFlexTable )
 html.files = writeDoc( doc, directory = html.directory )
 # browseURL( html.files[1] )
 }

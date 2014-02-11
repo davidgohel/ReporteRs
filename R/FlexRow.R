@@ -1,7 +1,16 @@
-#' @export 
+#' @title Row object for FlexTable
+#'
+#' @description Create a representation of a row that can be inserted in a FlexTable.
+#' 
+#' @export
+#' @seealso \code{\link{addFlexTable}}
+#' @examples
+#' headerRow = FlexRow()
+#' headerRow[1] = FlexCell( "Column 1" )
+#' headerRow[2] = FlexCell( "Column 2" )
 FlexRow = function( ){
 	.Object = list()
-	.Object$jobj = rJava::.jnew("org/lysis/reporters/tables/FlexRow")
+	.Object$jobj = rJava::.jnew(class.FlexRow)
 	class( .Object ) = c("FlexRow", "FlexElement")
 	.Object
 }
@@ -12,6 +21,9 @@ length.FlexRow <- function(x) {
 	return(rJava::.jcall( x$jobj, "I", "size" ))
 }
 
+weight.FlexRow <- function(x) {
+	return(rJava::.jcall( x$jobj, "I", "weight" ))
+}
 
 #' @method [<- FlexRow
 #' @S3method [<- FlexRow

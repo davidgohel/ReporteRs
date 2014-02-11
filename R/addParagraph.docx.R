@@ -46,7 +46,7 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 	
 	if( inherits(value, "set_of_paragraphs") ){
 		basedoc.j = rJava::.jcall( doc$obj, paste0("L", class.docx4j.WordprocessingMLPackage, ";"), "getBaseDocument" )
-		paragrah = .jnew(class.docx4r.POT, basedoc.j, stylename )
+		paragrah = rJava::.jnew(class.docx4r.POT, basedoc.j, stylename )
 		for( pot_index in 1:length( value ) ){
 			rJava::.jcall( paragrah, "V", "addP")
 			pot_value = value[[pot_index]]
@@ -59,6 +59,7 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 					, pot_value[[i]]$format$underlined
 					, pot_value[[i]]$format$color
 					, pot_value[[i]]$format$font.family
+					, pot_value[[i]]$format$vertical.align
 					)
 			}
 		}

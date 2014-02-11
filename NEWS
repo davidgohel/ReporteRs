@@ -18,8 +18,12 @@ ENHANCEMENT
 
 NEW FEATURES
 ------------------------------------------------------------------
+* FlexTable : see ?FlexTable
+A new object and its methods to generate complex tables
+
 * Reveal doc : see ?reveal
-an adaptation of the html object
+an adaptation of the html object - need improvements on content layout
+	maybe definition of a grid layout
 generate reveal presentations http://lab.hakim.se/reveal-js/#/1
 
 ReporteRs 0.1

@@ -55,10 +55,10 @@ addParagraph.reveal = function(doc, value, stylename = "text-primary", parent.ty
 	}
 	
 	if( inherits(value, "set_of_paragraphs") ){
-		paragrah = .jnew(class.html4r.POTsList, parent.type, stylename )
+		paragrah = rJava::.jnew(class.html4r.POTsList, parent.type, stylename )
 		
 		for( pot_index in 1:length( value ) ){
-			jpot = .jnew(class.html4r.POT, parent.type )
+			jpot = rJava::.jnew(class.html4r.POT, parent.type )
 			pot_value = value[[pot_index]]
 			for( i in 1:length(pot_value)){
 				if( is.null( pot_value[[i]]$format ) ) rJava::.jcall( jpot, "V", "addText", pot_value[[i]]$value )
@@ -69,6 +69,7 @@ addParagraph.reveal = function(doc, value, stylename = "text-primary", parent.ty
 					, pot_value[[i]]$format$underlined
 					, pot_value[[i]]$format$color
 					, pot_value[[i]]$format$font.family
+					, pot_value[[i]]$format$vertical.align
 					)
 			}
 			rJava::.jcall( paragrah, "V", "addP" , jpot)

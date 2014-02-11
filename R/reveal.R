@@ -16,11 +16,9 @@
 #'  
 #' \itemize{
 #'   \item \code{\link{addTitle.reveal}} add titles
-#'   \item \code{\link{addImage.reveal}} add external images
 #'   \item \code{\link{addParagraph.reveal}} add texts
 #'   \item \code{\link{addPlot.reveal}} add plots
 #'   \item \code{\link{addTable.reveal}} add tables
-#'   \item \code{\link{addRScript.reveal}} add R Script
 #' }
 #' Once object has content, user can write the htmls pages into a file, see \code{\link{writeDoc.reveal}}.
 #' @export
@@ -103,7 +101,7 @@ reveal = function( title = "untitled" ){
 	
 	
 	# java calls
-	obj = .jnew(class.reveal4r.document, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
+	obj = rJava::.jnew(class.reveal4r.document, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
 	
 	rJava::.jcall( obj , "V", "addJavascript", "lib/js/head.min.js" )
 	rJava::.jcall( obj , "V", "addJavascript", "js/reveal.min.js" )

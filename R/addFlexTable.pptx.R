@@ -15,15 +15,18 @@
 #' myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
 #' myFlexTable = setFlexCellContent( myFlexTable, 3, 6, pot("Hello", format=textProperties(font.weight="bold") ) + pot("World", format=textProperties(font.weight="bold", vertical.align="superscript") ) )
-#' doc = docx( title = "title" )
+#' doc = pptx( title = "title" )
+#' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' doc = addFlexTable( doc, myFlexTable )
-#' writeDoc( doc, "document.docx")
-#' @method addFlexTable docx
-#' @S3method addFlexTable docx
-addFlexTable.docx = function(doc, flextable, ... ) {
+#' writeDoc( doc, "presentation.pptx")
+#' @method addFlexTable pptx
+#' @S3method addFlexTable pptx
+addFlexTable.pptx = function(doc, flextable, ... ) {
 			
-	rJava::.jcall( doc$obj, "V", "add", flextable$jobj )
-
+	out = rJava::.jcall( doc$current_slide, "I", "add", flextable$jobj )
+	if( isSlideError( out ) ){
+		stop( getSlideErrorString( out , "table") )
+	}
 	doc
 }
 

@@ -12,6 +12,8 @@
 #' (default to \code{FALSE}).
 #' @param font.family single character value specifying font name (it has to be 
 #' an existing font in the OS). (default to \code{Arial}).
+#' @param vertical.align single character value specifying font vertical alignments.
+#' Expected value is one of the following : default \code{'baseline'} or \code{'subscript'} or \code{'superscript'}
 #' @export
 #' @examples
 #' # Create a new document 
@@ -30,7 +32,8 @@
 #' @seealso \code{\link{docx}}
 textProperties = function( color = "black", font.size = getOption("ReporteRs-fontsize")
 		, font.weight = "normal", font.style = "normal", underlined = FALSE
-		, font.family = getOption("ReporteRs-default-font") ){
+		, font.family = getOption("ReporteRs-default-font")
+		, vertical.align = "baseline"){
 	
 	out = list( "color" = "black"
 			, "font.size" = 12
@@ -68,6 +71,13 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 		out$font.family = font.family
 	} else stop("font.family must be a character scalar (a font name, eg. 'Arial', 'Times', ...).")
 
+	if( is.character( vertical.align ) ){
+		if( is.element( vertical.align, c("subscript", "superscript") ) )
+			out$vertical.align = vertical.align
+		else out$vertical.align = "baseline"
+	} else stop("vertical.align must be a character scalar ('baseline' | 'subscript' | 'superscript').")
+	
+	
 	class( out ) = "textProperties"
 	
 	out
@@ -92,26 +102,37 @@ print.textProperties = function (x, ...){
 	cat( "font-style:" , x$font.style, ";" )
 	cat( "underlined:" , x$underlined, ";" )
 	cat( "font-family:" , x$font.family, ";}" )
+	cat( "vertical.align:" , x$vertical.align, ";}" )
 }
 
 #' @method as.character textProperties
 #' @S3method as.character textProperties
 as.character.textProperties = function (x, ...){
+	
+	if( x$vertical.align == "baseline" ) v.al = ""
+	else if( x$vertical.align == "subscript" ) v.al = "vertical-align:sub;"
+	else if( x$vertical.align == "superscript" ) v.al = "vertical-align:super;"
+	else v.al = ""
 	paste0( "{color:" , x$color, ";"
 		, "font-size:" , x$font.size, ";"
 		, "font-weight:" , x$font.weight, ";"
 		, "font-style:" , x$font.style, ";"
 		, "underlined:" , x$underlined, ";"
-		, "font-family:" , x$font.family, ";}" )
+		, "font-family:" , x$font.family, ";" 
+		, v.al
+		, "}" 
+		)
 }
 
 .jTextProperties = function( robject ){
-	textProp = .jnew("org/lysis/reporters/texts/TextProperties"
+	textProp = rJava::.jnew(class.texts.TextProperties
 		, robject$font.size, robject$font.weight=="bold"
 		, robject$font.style=="italic"
 		, robject$underlined
 		, robject$color
-		, robject$font.family )
+		, robject$font.family 
+		, robject$vertical.align 
+		)
 	textProp
 }
 

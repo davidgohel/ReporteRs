@@ -1,7 +1,16 @@
-#' @export 
-FlexCell = function( value
-		, colspan = 1, rowspan = 1
-		, parProp, cellProp ) {
+#' @title Cell object for FlexTable
+#'
+#' @description Create a representation of a cell that can be inserted in a FlexTable.
+#' 
+#' @param value a content value - a value of type \code{character} or \code{pot} or \code{set_of_paragraphs}.
+#' @param colspan defines the number of columns the cell should span
+#' @param parProp parProperties to apply to content
+#' @param cellProp cellProperties to apply to content
+#' @export
+#' @seealso \code{\link{addFlexTable}}
+#' @examples
+#' FlexCell( value = "Hello" )
+FlexCell = function( value, colspan = 1, parProp = parProperties(), cellProp = cellProperties() ) {
 	
 	if( !inherits( parProp, "parProperties" ) ){
 		stop("argument 'parProp' must be an object of class 'parProperties'")
@@ -18,6 +27,9 @@ FlexCell = function( value
 		value = set_of_paragraphs( value )
 	}
 	
+	if( inherits(value, "pot") )
+		value = set_of_paragraphs( value )
+	
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("argument value must be a character vector or an object of class 'set_of_paragraphs'.")
 	
@@ -25,13 +37,11 @@ FlexCell = function( value
 	
 	jcellProp = .jCellProperties(cellProp)
 
-	flexCell = .jnew("org/lysis/reporters/tables/FlexCell", paragraphsSection$jobj, jcellProp)
+	flexCell = rJava::.jnew(class.FlexCell, paragraphsSection$jobj, jcellProp)
 	rJava::.jcall( flexCell, "V", "setColspan", as.integer( colspan ) )
-	rJava::.jcall( flexCell, "V", "setRowspan", as.integer( rowspan ) )
 	
 	.Object = list()
 	.Object$jobj = flexCell
-	.Object$rowspan = rowspan
 	.Object$colspan = colspan
 
 	class( .Object ) = c("FlexCell", "FlexElement")

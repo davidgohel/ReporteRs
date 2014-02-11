@@ -23,7 +23,7 @@ addImage.html = function(doc, filename, ... ) {
 
 	slide = doc$current_slide 
 	
-	jimg = .jnew(class.html4r.ImagesList )
+	jimg = rJava::.jnew(class.html4r.ImagesList )
 	
 	for( i in 1:length( filename ) ){
 		.tempfile <- tempfile()

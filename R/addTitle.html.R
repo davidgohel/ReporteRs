@@ -21,7 +21,7 @@
 #' @method addTitle html
 #' @S3method addTitle html
 addTitle.html = function( doc, value, level, ... ) {
-	jtitle = .jnew(class.html4r.Title, as.character(value), as.integer(level)  )
+	jtitle = rJava::.jnew(class.html4r.Title, as.character(value), as.integer(level)  )
 	out = rJava::.jcall( doc$current_slide , "I", "add", jtitle )
 	if( out != 1 ){
 		stop( "Problem while trying to add title." )

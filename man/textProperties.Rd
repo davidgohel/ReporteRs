@@ -6,7 +6,8 @@
     font.size = getOption("ReporteRs-fontsize"),
     font.weight = "normal", font.style = "normal",
     underlined = FALSE,
-    font.family = getOption("ReporteRs-default-font"))
+    font.family = getOption("ReporteRs-default-font"),
+    vertical.align = "baseline")
 }
 \arguments{
   \item{color}{single character value specifying font
@@ -29,6 +30,11 @@
   \item{font.family}{single character value specifying font
   name (it has to be an existing font in the OS). (default
   to \code{Arial}).}
+
+  \item{vertical.align}{single character value specifying
+  font vertical alignments. Expected value is one of the
+  following : default \code{'baseline'} or
+  \code{'subscript'} or \code{'superscript'}}
 }
 \description{
   Create an object that describes text formating

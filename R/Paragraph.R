@@ -1,9 +1,14 @@
+#' @title Paragraph (internal use only)
+#'
+#' @description Paragraph (internal use only)
+#' 
+#' @param value a pot object
 #' @export
 Paragraph = function(value) {
 	if( !inherits( value, "pot" ) ){
 		stop("argument 'value' must be an object of class 'pot'")
 	}
-	paragrah = .jnew("org/lysis/reporters/texts/Paragraph")
+	paragrah = rJava::.jnew("org/lysis/reporters/texts/Paragraph")
 	for( i in 1:length(value)){
 		current_value = value[[i]]
 		if( is.null( current_value$format ) ) 

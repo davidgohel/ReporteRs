@@ -4,7 +4,7 @@
 \usage{
   \method{addImage}{docx} (doc, filename, width = 6,
     height = 6, bookmark,
-    plotParStyle = parProperties(text.align = "center", padding = 5),
+    parStyle = parProperties(text.align = "center", padding = 5),
     ...)
 }
 \arguments{
@@ -24,8 +24,8 @@
   bookmark to replace by the image. optional. if missing,
   image is added at the end of the document.}
 
-  \item{plotParStyle}{paragraph formatting properties of
-  the paragraph that contains images. An object of class
+  \item{parStyle}{paragraph formatting properties of the
+  paragraph that contains images. An object of class
   \code{\link{parProperties}}}
 
   \item{...}{further arguments, not used.}
