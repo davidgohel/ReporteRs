@@ -35,8 +35,7 @@ From an R console (R >= 3.0):
 **Binary package**
 
 A binary package is available here:
-https://github.com/davidgohel/ReporteRs/releases/tag/v0.1
-
+https://github.com/davidgohel/ReporteRs/releases/tag/v0.2
     
 	
 Getting Started
