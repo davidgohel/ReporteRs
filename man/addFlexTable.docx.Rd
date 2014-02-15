@@ -2,12 +2,24 @@
 \alias{addFlexTable.docx}
 \title{Insert a FlexTable into a docx object}
 \usage{
-  \method{addFlexTable}{docx} (doc, flextable, ...)
+  \method{addFlexTable}{docx} (doc, flextable,
+    parStyle = parProperties(text.align = "left"),
+    bookmark, ...)
 }
 \arguments{
   \item{doc}{docx object}
 
   \item{flextable}{the \code{FlexTable} object}
+
+  \item{parStyle}{paragraph formatting properties of the
+  paragraph that contains the table. An object of class
+  \code{\link{parProperties}}}
+
+  \item{bookmark}{a character vector specifying bookmark id
+  (where to put the table).  If provided, table will be add
+  after paragraph that contains the bookmark.  If not
+  provided, table will be added at the end of the
+  document.}
 
   \item{...}{further arguments - not used}
 }

@@ -68,8 +68,6 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 		else rJava::.jcall( doc$obj, "V", "insert", bookmark, paragrah )
 	} else stop("value must be an object of class 'set_of_paragraphs' or a character vector!")
 	
-	if( !missing( bookmark ) )
-		rJava::.jcall( doc$obj, "V", "deleteBookmark", bookmark )
 	
 	doc
 }

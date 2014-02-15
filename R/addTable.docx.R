@@ -27,8 +27,8 @@
 #' 			are character vectors specifying cells font colors.
 #'		Each element of the list is a vector of length \code{nrow(data)}.
 #' @param parStyle paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
-#' @param bookmark a character vector specifying bookmark id to replace by the table. 
-#'   	If provided, table will replace the paragraph that contains the bookmark.
+#' @param bookmark a character vector specifying bookmark id (where to put the table). 
+#'   	If provided, table will be add after paragraph that contains the bookmark.
 #'   	If not provided, table will be added at the end of the document.
 #' @param row.names logical value - should the row.names be included in the table. 
 #' @param ... addTable arguments - see \code{\link{addTable}}. 

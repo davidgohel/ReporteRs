@@ -65,8 +65,8 @@
   \code{\link{parProperties}}}
 
   \item{bookmark}{a character vector specifying bookmark id
-  to replace by the table.  If provided, table will replace
-  the paragraph that contains the bookmark.  If not
+  (where to put the table).  If provided, table will be add
+  after paragraph that contains the bookmark.  If not
   provided, table will be added at the end of the
   document.}
 

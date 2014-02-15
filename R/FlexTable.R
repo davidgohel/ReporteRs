@@ -30,7 +30,8 @@ FlexTable = function(data, span.columns = character(0)
 	, header.columns = TRUE, row.names = FALSE
 	, cell_format = cellProperties()
 	, par_format = parProperties()
-	, text_format = textProperties() ){
+	, text_format = textProperties()
+	){
 
 	#### data checking
 	if( missing( data ) ) stop("data is missing.")

@@ -111,6 +111,7 @@ doc <- addTable( doc
 		)
 )
 
+doc = addTitle( doc, "FlexTable add", level = 2 )
 # add a FlexTable with many options
 # let's take a sample of iris
 irisdata = iris[47:54,c(5,1:4)]

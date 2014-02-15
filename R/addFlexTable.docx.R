@@ -4,6 +4,10 @@
 #' 
 #' @param doc docx object
 #' @param flextable the \code{FlexTable} object
+#' @param parStyle paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
+#' @param bookmark a character vector specifying bookmark id (where to put the table). 
+#'   	If provided, table will be add after paragraph that contains the bookmark.
+#'   	If not provided, table will be added at the end of the document.
 #' @param ... further arguments - not used
 #' @return a docx object
 #' @export
@@ -20,9 +24,13 @@
 #' writeDoc( doc, "document.docx")
 #' @method addFlexTable docx
 #' @S3method addFlexTable docx
-addFlexTable.docx = function(doc, flextable, ... ) {
-			
-	rJava::.jcall( doc$obj, "V", "add", flextable$jobj )
+addFlexTable.docx = function(doc, flextable
+	, parStyle = parProperties(text.align = "left" )
+	, bookmark, ... ) {
+		
+	if( missing( bookmark ) )
+		rJava::.jcall( doc$obj, "V", "add", flextable$jobj, .jParProperties(parStyle) )
+	else rJava::.jcall( doc$obj, "V", "add", bookmark, flextable$jobj, .jParProperties(parStyle) )
 
 	doc
 }

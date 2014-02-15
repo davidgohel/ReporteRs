@@ -397,10 +397,10 @@ addTable = function(doc, data, layout.properties
 	#### check that every colnames has a matching label
 	if( !missing( header.labels ) ){
 		if( !is.character( header.labels ) )
-			stop( "header.labels must be a named character vector")
+			stop( "header.labels must be a character vector")
 
 		if( length(header.labels) != ncol(data) ){
-			stop( "header.labels length must be the same that the number of columns" ) 
+			stop( "header.labels length must be equal to the number of columns" ) 
 		}
 	}
 	
@@ -416,7 +416,7 @@ addTable = function(doc, data, layout.properties
 	}
 	if( !missing( col.types ) ){
 		if( !is.character( col.types ) )
-			stop("col.types must be a named character vector.")
+			stop("col.types must be a character vector.")
 		
 		if( length(col.types) != ncol(data) ){
 			stop( "col.types length must be the same that the number of columns" ) 

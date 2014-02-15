@@ -83,3 +83,4 @@ Collate:
     'addFlexTable.html.R'
     'addFlexTable.docx.R'
     'addFlexTable.pptx.R'
+    'deleteBookmark.R'
