@@ -55,7 +55,7 @@
 #' @S3method addPlot pptx
 
 addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
-	, vector.graphic = T, fontname = getOption("ReporteRs-default-font")
+	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
 	, editable = TRUE
 	, ... ) {
 	slide = doc$current_slide 

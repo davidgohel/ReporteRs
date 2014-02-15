@@ -432,3 +432,5 @@ pip-log.txt
 .mr.developer.cfg
 >>>>>>> refs/heads/RevealTest
 /todo.txt
+/src-i386
+/src-x64
