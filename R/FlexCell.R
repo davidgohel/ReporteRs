@@ -7,9 +7,11 @@
 #' @param parProp parProperties to apply to content
 #' @param cellProp cellProperties to apply to content
 #' @export
-#' @seealso \code{\link{addFlexTable}}
+#' @seealso \code{\link{addFlexTable}}, \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples
 #' FlexCell( value = "Hello" )
+#' FlexCell( value = "Hello", colspan = 3)
+#' FlexCell( "Column 1", cellProp = cellProperties(background.color="#527578")  )
 FlexCell = function( value, colspan = 1, parProp = parProperties(), cellProp = cellProperties() ) {
 	
 	if( !inherits( parProp, "parProperties" ) ){

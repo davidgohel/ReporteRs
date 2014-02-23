@@ -4,7 +4,7 @@
 \usage{
   \method{addPlot}{pptx} (doc, fun,
     pointsize = getOption("ReporteRs-fontsize"),
-    vector.graphic = T,
+    vector.graphic = TRUE,
     fontname = getOption("ReporteRs-default-font"),
     editable = TRUE, ...)
 }

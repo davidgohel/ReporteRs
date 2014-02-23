@@ -33,8 +33,8 @@
 
   Default values:
 
-  With ReporteRs, some options are set to reduce usage of
-  some parameters: \itemize{ \item
+  With ReporteRs, some options can be used to reduce usage
+  of some parameters: \itemize{ \item
   \code{ReporteRs-default-font} Default font family to use
   (default to "Helvetica"). This will be used as default
   values for argument \code{fontname} of

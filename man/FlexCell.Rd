@@ -23,8 +23,11 @@
 }
 \examples{
 FlexCell( value = "Hello" )
+FlexCell( value = "Hello", colspan = 3)
+FlexCell( "Column 1", cellProp = cellProperties(background.color="#527578")  )
 }
 \seealso{
-  \code{\link{addFlexTable}}
+  \code{\link{addFlexTable}}, \code{\link{addHeaderRow}},
+  \code{\link{addFooterRow}}
 }
 

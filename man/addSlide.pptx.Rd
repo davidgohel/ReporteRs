@@ -79,7 +79,7 @@ doc = addTable( doc, iris[ 1:10,] )
 
 # add a slide with layout "Two Content" then add content
 doc = addSlide( doc, slide.layout = "Two Content" )
-doc = addTitle( doc, "Options demo", level = 1 )
+doc = addTitle( doc, "Two Content demo", level = 1 )
 doc <- addTable( doc, iris[ 46:55,] )
 doc <- addParagraph(doc, "Hello Word!" )
 

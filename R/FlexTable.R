@@ -235,18 +235,20 @@ print.FlexTable = function(x, ...){
 #' @S3method [<- FlexTable
 "[<-.FlexTable" = function (x, i, j, value){
 
-	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
-	if( !missing(i) )
-		if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !missing(j) )
-		if( !is.numeric(j) ) stop("argument j must be an integer argument.")
+	if( missing(i) && missing(j) ) {
+		i = 1:length(x)
+		j = 1:x$ncol
+	} else if( missing(i) && !missing(j) ) {
+		i = 1:length(x)
+	} else if( !missing(i) && missing(j) ) {
+		j = 1:x$ncol
+	} 
+	
+	if( !is.numeric(i) ) stop("argument i must be an integer argument.")
+	if( !is.numeric(j) ) stop("argument j must be an integer argument.")
+	
 	
 	if( inherits(value, c("textProperties", "parProperties", "cellProperties")) ){
-		if( !missing(i) && missing(j) ){
-			j = 1:x$ncol
-		} else if( missing(i) && !missing(j) ){
-			i = 1:length(x)
-		}
 		
 		if( inherits(value, "textProperties" ) ){
 			x = updateTextProperties.FlexTable( x=x, i=i, j=j, value=value )
@@ -255,8 +257,7 @@ print.FlexTable = function(x, ...){
 		} else {
 			x = updateCellProperties.FlexTable( x=x, i=i, j=j, value=value )
 		}
-		
-		
+
 	} else stop("value must be an object of class 'textProperties' or 'parProperties' or 'cellProperties'.")
 	  
 	x
