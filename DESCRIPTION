@@ -14,7 +14,7 @@ Depends:
 Imports:
     base64,
     highlight
-URL: www.nourlyet.org
+URL: davidgohel.github.io/ReporteRs/index.html
 Collate:
     'docx.R'
     'print.docx.R'

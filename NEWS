@@ -16,6 +16,10 @@ ENHANCEMENT
 * The default Word template has now separate numbering index for 
   styles rPlotLegend and rTableLegend
 
+* bookmark are no more deleted, replacements over the same docx or pptx is now possible
+
+* help at http://davidgohel.github.io/ReporteRs/index.html
+
 NEW FEATURES
 ------------------------------------------------------------------
 * FlexTable : see ?FlexTable
