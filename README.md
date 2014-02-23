@@ -40,11 +40,14 @@ https://github.com/davidgohel/ReporteRs/releases/tag/v0.2
 	
 Getting Started
 ---------------
+Help:
+http://davidgohel.github.io/ReporteRs/index.html
+
 
     library(ReporteRs)
     example(docx) #run a complete and detailed docx example
-    example(pptx) #run a complete and detailed docx example
-	example(html) #run a complete and detailed docx example
+    example(pptx) #run a complete and detailed pptx example
+	example(html) #run a complete and detailed html example
 
 	?ReporteRs
 	?addTable

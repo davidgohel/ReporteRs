@@ -22,6 +22,7 @@
 #' \itemize{
 #'   \item \code{\link{addTitle}} Add a title
 #'   \item \code{\link{addTable}} Add a table
+#'   \item \code{\link{addFlexTable}} Add a table (new)
 #'   \item \code{\link{addPlot}} Add plots
 #'   \item \code{\link{addImage}} Add external images
 #'   \item \code{\link{addParagraph}} Add paragraphs of text
