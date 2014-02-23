@@ -3,11 +3,11 @@ ReporteRs 0.2
 BUG FIXES
 ------------------------------------------------------------------
 * Title texts can now have accents and '&' and '>' and '<'. 
-  (reported by Jean-François Collin) 
+  (reported by Jean-Francois Collin) 
 
 * namespace of java codes have been changed to 'org.lysis'.
   ReporteRs can coexists with R2DOCX now 
-  (reported by Jean-François Collin) 
+  (reported by Jean-Francois Collin) 
 
 * got rid of java rendersnake for html generation
 
