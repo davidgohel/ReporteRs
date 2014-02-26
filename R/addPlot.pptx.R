@@ -37,19 +37,21 @@
 #' doc = addTitle( doc, "2 ggplot2 examples" )
 #' doc = addPlot( doc
 #' 		, function(){
-#' 			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7)) )
+#' 			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+#' 				, size = Petal.Width, alpha = I(0.7)) )
 #' 		}
 #' 	)
 #' 
-#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7))
+#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+#' 			, size = Petal.Width, alpha = I(0.7))
 #' doc = addPlot( doc
 #' 		, print
 #' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
 #' 		, vector.graphic = FALSE
 #' 	)
 #' 
-#' # Write the object in file "~/presentation.pptx"
-#' writeDoc( doc, "~/presentation.pptx" )
+#' # Write the object in file "presentation.pptx"
+#' writeDoc( doc, "presentation.pptx" )
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
 #' @method addPlot pptx
 #' @S3method addPlot pptx

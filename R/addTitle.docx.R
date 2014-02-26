@@ -31,8 +31,8 @@
 #' # add another title (level 2)
 #' doc = addTitle( doc, "My first sub-title", level = 2 )
 #' doc <- addParagraph(doc, "Hello Word!", "Normal");
-#' # Write the object in file "~/document.docx"
-#' writeDoc( doc, "~/document.docx" )
+#' # Write the object in file "document.docx"
+#' writeDoc( doc, "document.docx" )
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{declareTitlesStyles.docx}}, \code{\link{styles.docx}}
 #' @method addTitle docx

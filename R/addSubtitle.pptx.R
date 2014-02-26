@@ -19,8 +19,8 @@
 #' doc = addTitle( doc, "Presentation title" ) #set the main title
 #' doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
 #' 
-#' # Write the object in file "~/presentation.pptx"
-#' writeDoc( doc, "~/presentation.pptx" )
+#' # Write the object in file "presentation.pptx"
+#' writeDoc( doc, "presentation.pptx" )
 #' @seealso \code{\link{pptx}}, \code{\link{addSubtitle}}
 #' @method addSubtitle pptx
 #' @S3method addSubtitle pptx

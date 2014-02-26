@@ -25,8 +25,8 @@
 #' ## add a page number on the current slide but not the default text (slide number)
 #' doc = addDate( doc, "Dummy date" )
 #' 
-#' # Write the object in file "~/presentation.pptx"
-#' writeDoc( doc, "~/presentation.pptx" )
+#' # Write the object in file "presentation.pptx"
+#' writeDoc( doc, "presentation.pptx" )
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addFooter.pptx}}, \code{\link{addPageNumber.pptx}}
 #' , \code{\link{strptime}},  \code{\link{addDate}}

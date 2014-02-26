@@ -16,7 +16,8 @@
 #' headerRow[2] = FlexCell( "Column 2", cellProp = cellProperties(background.color="#527578")  )
 #' 
 #' ## example 2
-#' headerRow = FlexRow( c("Column 1", "Column 2"), cellProp = cellProperties(background.color="#527578") )
+#' headerRow = FlexRow( c("Column 1", "Column 2")
+#' 	, cellProp = cellProperties(background.color="#527578") )
 FlexRow = function( values, colspan, textProp = textProperties(), parProp = parProperties(), cellProp = cellProperties()){
 	.Object = list()
 	.Object$jobj = rJava::.jnew(class.FlexRow)

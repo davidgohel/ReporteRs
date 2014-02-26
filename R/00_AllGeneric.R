@@ -28,11 +28,14 @@ addDate = function(doc, ...){
 #' @examples
 #' \dontrun{
 #' data( data_ReporteRs )
-#' myFlexTable = FlexTable( data = data_ReporteRs ,span.columns="col1", header.columns=TRUE, row.names=FALSE )
+#' myFlexTable = FlexTable( data = data_ReporteRs, span.columns="col1"
+#' 	, header.columns=TRUE, row.names=FALSE )
 #' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
 #' myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
-#' myFlexTable = setFlexCellContent( myFlexTable, 3, 6, pot("Hello", format=textProperties(font.weight="bold") ) + pot("World", format=textProperties(font.weight="bold", vertical.align="superscript") ) )
+#' myFlexTable = setFlexCellContent( myFlexTable, 3, 6, pot("Hello"
+#' 	, format=textProperties(font.weight="bold") ) + pot("World"
+#' 	, format=textProperties(font.weight="bold", vertical.align="superscript") ) )
 #' doc = addFlexTable( doc, myFlexTable )
 #' }
 addFlexTable = function(doc, flextable, ...){
@@ -68,7 +71,8 @@ addFooter = function(doc, ...){
 #' @description Add an external image into a document object
 #' 
 #' @param doc document object
-#' @param filename \code{"character"} value, complete filename of the external image
+#' @param filename \code{"character"} value, complete filename 
+#' of the external image
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
@@ -145,9 +149,11 @@ addPageNumber = function(doc, ...){
 #' 
 #' @details a paragraph is a set of texts that ends with an end of line(\code{'\n'} in C). 
 #' Read \code{\link{pot}} to see how to get different font formats.
-#' Trying to insert a \code{'\n'} will have no effect. If an end of line is required, a new paragraph is required.
+#' Trying to insert a \code{'\n'} will have no effect. If an end of line is required
+#' , a new paragraph is required.
 #' @param doc document object
-#' @param value character vector containing texts to add OR an object of class \code{\link{set_of_paragraphs}}.
+#' @param value character vector containing texts to add OR an object of 
+#' class \code{\link{set_of_paragraphs}}.
 #' A set_of_paragraphs object is a container for \code{pot} objects.
 #' @param ... further arguments passed to other methods 
 #' @return a document object
@@ -158,9 +164,11 @@ addPageNumber = function(doc, ...){
 #' 
 #' # Add into the document : "My tailor is rich" and "Cats and Dogs"
 #' # format some of the pieces of text
-#' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
+#' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+#' 	, textProperties(font.weight="bold") )
 #' my.pars = set_of_paragraphs( pot1 )
-#' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs", textProperties(color="blue") )
+#' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
+#' 	, textProperties(color="blue") )
 #' my.pars = set_of_paragraphs( pot1, pot2 )
 #' doc <- addParagraph(doc, my.pars )
 #' }
@@ -194,7 +202,8 @@ addParagraph = function(doc, value, ...){
 #' and DrawingML instructions for \code{docx} and \code{pptx} objects. 
 #' 
 #' DrawingML instructions
-#' offer advantage to provide editable graphics (forms and texts colors, texts contents, moving and resizing is disabled).
+#' offer advantage to provide editable graphics (forms and texts colors
+#' , texts contents, moving and resizing is disabled).
 #' @param pointsize the default pointsize of plotted text in pixels, default to 12.
 #' @param ... further arguments passed to or from other methods.. 
 #' @return a document object
@@ -222,7 +231,8 @@ addParagraph = function(doc, value, ...){
 #' 	)
 #' 
 #' ## Add a ggplot2
-#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7))
+#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+#' 	, size = Petal.Width, alpha = I(0.7))
 #' doc = addPlot( doc = doc
 #' 		, fun = print
 #' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
@@ -232,7 +242,8 @@ addParagraph = function(doc, value, ...){
 #' require(ggplot2)
 #' doc = addPlot( doc = doc
 #' 		, fun = function(){
-#' 			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7)) )
+#' 			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+#' 				, size = Petal.Width, alpha = I(0.7)) )
 #' 			plot(x = rnorm( 100 ), y = rnorm (100 ), main = "base plot main title")
 #' 		}
 #' 	)
@@ -306,24 +317,34 @@ addRScript = function(doc, file, text, ...){
 #' 
 #' @param doc document object
 #' @param data (a \code{data.frame} or \code{matrix} object) to add
-#' @param layout.properties a \code{tableProperties} object to specify styles to use to format the table. optional
-#' @param header.labels a character whose elements define labels to display in table headers instead of colnames. 
+#' @param layout.properties a \code{tableProperties} object to specify 
+#' styles to use to format the table. optional
+#' @param header.labels a character whose elements define labels to display 
+#' in table headers instead of colnames. 
 #' Optional, if missing, headers will be filled with \code{data} column names.
-#' @param groupedheader.row a named list whose elements define the upper header row (grouped header). Optional. 
-#' Elements of that list are \code{values} and \code{colspan} (\code{list(values, colspan)}). Element \code{values} is a character vector containing labels 
-#' to display in the grouped header row. Element \code{colspan} is an integer vector containing number of columns to span 
-#' for each \code{values}.
-#' @param span.columns a character vector specifying columns names where row merging should be done (if successive values in a column are the same ; if data[p,j]==data[p-1,j] )
-#' @param col.types a character whose elements define the formating style of columns via their data roles. Optional
+#' @param groupedheader.row a named list whose elements define the upper 
+#' header row (grouped header). Optional. 
+#' Elements of that list are \code{values} and \code{colspan} (\code{list(values, colspan)}). 
+#' Element \code{values} is a character vector containing labels to display 
+#' in the grouped header row. Element \code{colspan} is an integer vector containing 
+#' number of columns to span for each \code{values}.
+#' @param span.columns a character vector specifying columns names 
+#' where row merging should be done (if successive values in a column 
+#' are the same ; if data[p,j]==data[p-1,j] )
+#' @param col.types a character whose elements define the formating style 
+#' of columns via their data roles. Optional
 #' Possible values are : \emph{"character"}, \emph{"integer"}, \emph{"logical"}
 #' 			, \emph{"double"}, \emph{"percent"}, \emph{"date"}, \emph{"datetime}".
 #' If missing, factor and character will be formated as character
 #' 			, integer as integer and numeric as double.
-#' @param columns.bg.colors A named list of character vector. Define the background color of cells for a given column. optional.  
-#' Names are \code{data} column names and values are character vectors specifying cells background colors.
+#' @param columns.bg.colors A named list of character vector. Define the 
+#' background color of cells for a given column. optional.  
+#' Names are \code{data} column names and values are character vectors specifying 
+#' cells background colors.
 #' Each element of the list is a vector of length \code{nrow(data)}.
 #' @param row.names logical value - should the row.names be included in the table. 
-#' @param columns.font.colors A named list of character vector. Define the font color of cells per column. optional.
+#' @param columns.font.colors A named list of character vector. Define the font 
+#' color of cells per column. optional.
 #'		A name list, names are \code{data} column names and values 
 #' 			are character vectors specifying cells font colors.
 #'		Each element of the list is a vector of length \code{nrow(data)}.
@@ -354,8 +375,10 @@ addRScript = function(doc, file, text, ...){
 #' # add iris and customise some options
 #' doc <- addTable( doc
 #'		, data = data_ReporteRs
-#'		, header.labels = c( "Header 1", "Header 2", "Header 3", "Header 4", "Header 5", "Header 6" )
-#'		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2"), colspan = c(3, 3) )
+#'		, header.labels = c( "Header 1", "Header 2", "Header 3"
+#' 			, "Header 4", "Header 5", "Header 6" )
+#'		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
+#' 			, colspan = c(3, 3) )
 #'		, col.types = c( "character", "integer", "double", "date", "percent", "character" )
 #'		, columns.font.colors = list( 
 #' 			"col1" = c("#527578", "#84978F", "#ADA692", "#47423F")
@@ -498,7 +521,8 @@ addTable = function(doc, data, layout.properties
 #' @param ... further arguments passed to or from other methods.. 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}, \code{\link{pptx}}, \code{\link{addTitle.pptx}}
+#' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}, \code{\link{pptx}}
+#' , \code{\link{addTitle.pptx}}
 addTitle = function(doc, value, ...){
 	checkHasSlide(doc)
 	UseMethod("addTitle")

@@ -62,8 +62,8 @@
 #' 			)
 #'	)
 #' 
-#' # Write the object in file "~/document.docx"
-#' writeDoc( doc, "~/document.docx" )
+#' # Write the object in file "document.docx"
+#' writeDoc( doc, "document.docx" )
 #' @seealso \code{\link{docx}}, \code{\link{addTable}}, \code{\link{tableProperties}}
 #' @method addTable docx
 #' @S3method addTable docx

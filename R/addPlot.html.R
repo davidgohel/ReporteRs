@@ -26,7 +26,8 @@
 #' 		, y = rnorm (100 )
 #' 		, main = "base plot main title"
 #' 	)
-#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7))
+#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+#' 	, size = Petal.Width, alpha = I(0.7))
 #' doc = addPlot( doc
 #' 		, print
 #' 		, width = 6, height = 7
@@ -34,7 +35,7 @@
 #' 	)
 #' 
 #' # write the html object in a directory
-#' pages = writeDoc( doc, "~/html_output_dir")
+#' pages = writeDoc( doc, "html_output_dir")
 #' print( pages ) # print filenames of generated html pages
 #' @import base64
 #' @seealso \code{\link{html}}, \code{\link{addPlot}}

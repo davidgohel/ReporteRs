@@ -6,9 +6,11 @@
 #' Formating can be done on cells, paragraphs and texts (borders, colors, fonts, etc.)
 #' 
 #' @param data (a \code{data.frame} or \code{matrix} object) to add
-#' @param span.columns a character vector specifying columns names where row merging should be done (if successive values in a column are the same ; if data[p,j]==data[p-1,j] )
-#' @param header.columns logical value - should the colnames be included in the table as table headers. 
-#' If FALSE, no headers will be printed unless you use \code{\link{addHeaderRow}}. 
+#' @param span.columns a character vector specifying columns names where row merging 
+#' should be done (if successive values in a column are the same ; if data[p,j]==data[p-1,j] )
+#' @param header.columns logical value - should the colnames be included in the table 
+#' as table headers. If FALSE, no headers will be printed unless you 
+#' use \code{\link{addHeaderRow}}. 
 #' @param row.names logical value - should the row.names be included in the table. 
 #' @param cell_format default cells formatting properties for any data
 #' @param par_format default paragraphs formatting properties for any data
@@ -122,7 +124,8 @@ FlexTable = function(data, span.columns = character(0)
 	if( header.columns ){
 		headerRow = FlexRow()
 		for( j in 1:out$ncol )
-			headerRow[j] = FlexCell(pot( .colnames[j], text_format ), parProp = par_format, cellProp = cell_format )
+			headerRow[j] = FlexCell(pot( .colnames[j], text_format )
+				, parProp = par_format, cellProp = cell_format )
 		
 		out = addHeaderRow( out, headerRow )
 	}
@@ -148,7 +151,8 @@ FlexTable = function(data, span.columns = character(0)
 #' 
 #' headerRow = FlexRow()
 #' for(i in 1:ncol(data_ReporteRs))
-#'    headerRow[i] = FlexCell( pot( names(data_ReporteRs)[i], format=textProperties(font.weight="bold") ), cellProp = cp1 )
+#'    headerRow[i] = FlexCell( pot( names(data_ReporteRs)[i]
+#' 		, format=textProperties(font.weight="bold") ), cellProp = cp1 )
 #' myFlexTable = addHeaderRow( myFlexTable, headerRow)
 addHeaderRow = function( x, value ){
 	
@@ -179,7 +183,9 @@ addHeaderRow = function( x, value ){
 #' 
 #' footerRow = FlexRow()
 #' for(i in 1:ncol(data_ReporteRs))
-#'    footerRow[i] = FlexCell( pot( paste("footer", i), format=textProperties(font.weight="bold") ), cellProp = cp1 )
+#'    footerRow[i] = FlexCell( pot( paste("footer", i)
+#' 		, format = textProperties(font.weight="bold") )
+#' 		, cellProp = cp1 )
 #' myFlexTable = addFooterRow( myFlexTable, footerRow)
 addFooterRow = function( x, value ){
 	

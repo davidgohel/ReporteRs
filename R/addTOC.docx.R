@@ -28,8 +28,8 @@
 #' doc = addTitle( doc, "My first title", level = 1 )
 #' doc = addTitle( doc, "My second title", level = 1 )
 #' 
-#' # Write the object in file "~/document.docx"
-#' writeDoc( doc, "~/document.docx" )
+#' # Write the object in file "document.docx"
+#' writeDoc( doc, "document.docx" )
 #' 
 #' ### example 2
 #' # Create a new document 
@@ -46,7 +46,8 @@
 #' 	)
 #' doc = addParagraph( doc, value="graph example 1", stylename = "rPlotLegend" )
 #' 
-#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7))
+#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+#' 		, size = Petal.Width, alpha = I(0.7))
 #' doc = addPlot( doc = doc
 #' 		, fun = print
 #' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
@@ -58,8 +59,8 @@
 #' # entries in the generated TOC 
 #' doc <- addTOC(doc, stylename = "rPlotLegend")
 #' 
-#' # Write the object in file "~/document.docx"
-#' writeDoc( doc, "~/document.docx" )
+#' # Write the object in file "document.docx"
+#' writeDoc( doc, "document.docx" )
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}
 #' , \code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
 #' @method addTOC docx

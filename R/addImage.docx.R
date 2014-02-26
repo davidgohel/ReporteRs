@@ -6,8 +6,10 @@
 #' @param filename \code{"character"} value, complete filenamed of the external images
 #' @param width images width in inches (default value is 6).
 #' @param height images height in inches (default value is 6).
-#' @param bookmark a character value ; id of the Word bookmark to replace by the image. optional. if missing, image is added at the end of the document.
-#' @param parStyle paragraph formatting properties of the paragraph that contains images. An object of class \code{\link{parProperties}}
+#' @param bookmark a character value ; id of the Word bookmark to replace by the image. 
+#' optional. if missing, image is added at the end of the document.
+#' @param parStyle paragraph formatting properties of the paragraph that contains images. 
+#' An object of class \code{\link{parProperties}}
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"docx"}.
 #' @examples
@@ -17,8 +19,8 @@
 #' img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
 #' doc <- addImage(doc, img.file )#work with only windows
 #' 
-#' # Write the object in file "~/document.docx"
-#' writeDoc( doc, "~/document.docx" )
+#' # Write the object in file "document.docx"
+#' writeDoc( doc, "document.docx" )
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
 #' , \code{\link{addImage}}
 #' @method addImage docx

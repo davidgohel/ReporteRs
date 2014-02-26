@@ -4,7 +4,8 @@
 #' 
 #' @param doc docx object
 #' @param flextable the \code{FlexTable} object
-#' @param parStyle paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
+#' @param parStyle paragraph formatting properties of the paragraph that contains the table. 
+#' An object of class \code{\link{parProperties}}
 #' @param bookmark a character vector specifying bookmark id (where to put the table). 
 #'   	If provided, table will be add after paragraph that contains the bookmark.
 #'   	If not provided, table will be added at the end of the document.
@@ -14,11 +15,14 @@
 #' @seealso \code{\link{FlexTable}}
 #' @examples
 #' data( data_ReporteRs )
-#' myFlexTable = FlexTable( data = data_ReporteRs ,span.columns="col1", header.columns=TRUE, row.names=FALSE )
+#' myFlexTable = FlexTable( data = data_ReporteRs ,span.columns="col1", header.columns=TRUE
+#' 	, row.names=FALSE )
 #' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
 #' myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
-#' myFlexTable = setFlexCellContent( myFlexTable, 3, 6, pot("Hello", format=textProperties(font.weight="bold") ) + pot("World", format=textProperties(font.weight="bold", vertical.align="superscript") ) )
+#' myFlexTable = setFlexCellContent( myFlexTable, 3, 6, pot("Hello"
+#' 	, format=textProperties(font.weight="bold") ) + pot("World"
+#' 	, format=textProperties(font.weight="bold", vertical.align="superscript") ) )
 #' doc = docx( title = "title" )
 #' doc = addFlexTable( doc, myFlexTable )
 #' writeDoc( doc, "document.docx")

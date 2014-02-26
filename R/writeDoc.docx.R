@@ -10,8 +10,8 @@
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' doc <- addParagraph(doc, "Hello Word!", "Normal");
-#' # Write the object in file "~/document.docx"
-#' writeDoc( doc, "~/document.docx" )
+#' # Write the object in file "document.docx"
+#' writeDoc( doc, "document.docx" )
 #' @seealso \code{\link{docx}}, \code{\link{writeDoc}}
 #' @method writeDoc docx
 #' @S3method writeDoc docx

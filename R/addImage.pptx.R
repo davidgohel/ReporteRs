@@ -18,8 +18,8 @@
 #' img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
 #' doc <- addImage(doc, img.file )#work with only windows
 #' 
-#' # Write the object in file "~/presentation.pptx"
-#' writeDoc( doc, "~/presentation.pptx" )
+#' # Write the object in file "presentation.pptx"
+#' writeDoc( doc, "presentation.pptx" )
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot.pptx}}
 #' , \code{\link{addImage}}
 #' @method addImage pptx

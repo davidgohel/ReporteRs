@@ -17,8 +17,8 @@
 #' ## add a page number on the current slide
 #' doc = addFooter( doc, "Hi!" )
 #' 
-#' # Write the object in file "~/presentation.pptx"
-#' writeDoc( doc, "~/presentation.pptx" )
+#' # Write the object in file "presentation.pptx"
+#' writeDoc( doc, "presentation.pptx" )
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addDate.pptx}}
 #' , \code{\link{addPageNumber.pptx}}, \code{\link{addFooter}} 

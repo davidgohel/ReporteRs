@@ -1,10 +1,3 @@
-# tools functions 
-# 
-# Author: David GOHEL <david.gohel@lysis-consultants.fr>
-# Date: 31 mars 2013
-# Version: 0.1
-###############################################################################
-
 #' @import rJava
 .onLoad= function(libname, pkgname){
 	rJava::.jpackage( pkgname, lib.loc = libname )

@@ -36,7 +36,7 @@
 #' library( ReporteRs )
 #' 
 #' # PowerPoint document to write
-#' pptx.file <- "~/presentation.pptx"
+#' pptx.file <- "presentation.pptx"
 #' 
 #' 
 #' # Create a new document
