@@ -109,8 +109,8 @@ doc <- addTable( doc
 			, "col4" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540")
 			)
 	)
-# Write the object in file "~/presentation.pptx"
-writeDoc( doc, "~/presentation.pptx" )
+# Write the object in file "presentation.pptx"
+writeDoc( doc, "presentation.pptx" )
 }
 \seealso{
   \code{\link{pptx}}, \code{\link{addTable}},

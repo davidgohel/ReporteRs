@@ -34,7 +34,8 @@ headerRow[1] = FlexCell( "Column 1", cellProp = cellProperties(background.color=
 headerRow[2] = FlexCell( "Column 2", cellProp = cellProperties(background.color="#527578")  )
 
 ## example 2
-headerRow = FlexRow( c("Column 1", "Column 2"), cellProp = cellProperties(background.color="#527578") )
+headerRow = FlexRow( c("Column 1", "Column 2")
+	, cellProp = cellProperties(background.color="#527578") )
 }
 \seealso{
   \code{\link{addFlexTable}}

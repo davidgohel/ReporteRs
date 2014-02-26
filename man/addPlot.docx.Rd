@@ -70,14 +70,15 @@ doc = addPlot( doc, fun = plot
 	)
 
 doc = addTitle( doc, "Plot 2", level = 1 )
-myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7))
+myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+	, size = Petal.Width, alpha = I(0.7))
 doc = addPlot( doc = doc
 		, fun = print
 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
 	)
 
-# Write the object in file "~/document.docx"
-writeDoc( doc, "~/document.docx" )
+# Write the object in file "document.docx"
+writeDoc( doc, "document.docx" )
 }
 \seealso{
   \code{\link{docx}}, \code{\link{addPlot}}

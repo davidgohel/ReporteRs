@@ -35,8 +35,8 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 ## add a page number on the current slide but not the default text (slide number)
 doc = addPageNumber( doc, value = "Page number text")
 
-# Write the object in file "~/presentation.pptx"
-writeDoc( doc, "~/presentation.pptx" )
+# Write the object in file "presentation.pptx"
+writeDoc( doc, "presentation.pptx" )
 }
 \seealso{
   \code{\link{pptx}}, \code{\link{addDate.pptx}} ,

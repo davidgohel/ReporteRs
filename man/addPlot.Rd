@@ -18,7 +18,7 @@
   objects.
 
   DrawingML instructions offer advantage to provide
-  editable graphics (forms and texts colors, texts
+  editable graphics (forms and texts colors , texts
   contents, moving and resizing is disabled).}
 
   \item{pointsize}{the default pointsize of plotted text in
@@ -56,7 +56,8 @@ doc = addPlot( doc = doc, fun = plot
 	)
 
 ## Add a ggplot2
-myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7))
+myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+	, size = Petal.Width, alpha = I(0.7))
 doc = addPlot( doc = doc
 		, fun = print
 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
@@ -66,7 +67,8 @@ doc = addPlot( doc = doc
 require(ggplot2)
 doc = addPlot( doc = doc
 		, fun = function(){
-			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7)) )
+			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+				, size = Petal.Width, alpha = I(0.7)) )
 			plot(x = rnorm( 100 ), y = rnorm (100 ), main = "base plot main title")
 		}
 	)

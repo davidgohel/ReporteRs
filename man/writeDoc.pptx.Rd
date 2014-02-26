@@ -26,8 +26,8 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 # add a dummy text in the content shape
 doc <- addParagraph(doc, "Hello Word!")
 
-# Write the object in file "~/presentation.pptx"
-writeDoc( doc, "~/presentation.pptx" )
+# Write the object in file "presentation.pptx"
+writeDoc( doc, "presentation.pptx" )
 }
 \seealso{
   \code{\link{pptx}}, \code{\link{writeDoc}}

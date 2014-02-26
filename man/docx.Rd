@@ -50,7 +50,7 @@
 library( ReporteRs )
 
 # Word document to write
-docx.file <- "~/document.docx"
+docx.file <- "document.docx"
 
 
 # Create a new document

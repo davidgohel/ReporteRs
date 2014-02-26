@@ -164,7 +164,8 @@
   \code{\link{addTable}}.
 }
 \examples{
-# define table properties - set headers aligned on the right, font color is gray and font size is 12 points
+# define table properties - set headers aligned on the right, font color
+# is gray and font size is 12 points
 tableProperties( header.text = textProperties(color="gray", font.size = 12)
 		, header.par = parProperties( text.align = "right" )
 )

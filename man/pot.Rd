@@ -21,7 +21,8 @@
   the same.
 }
 \examples{
-pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
+pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+	, textProperties(font.weight="bold") )
 }
 \seealso{
   \code{\link{addParagraph}},

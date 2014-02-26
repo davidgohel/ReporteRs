@@ -86,8 +86,8 @@ doc <- addParagraph(doc, "Hello Word!" )
 # to see available layouts :
 slide.layouts( doc )
 
-# Write the object in file "~/presentation.pptx"
-writeDoc( doc, "~/presentation.pptx" )
+# Write the object in file "presentation.pptx"
+writeDoc( doc, "presentation.pptx" )
 }
 \seealso{
   \code{\link{addTitle.pptx}}, \code{\link{slide.layouts}}

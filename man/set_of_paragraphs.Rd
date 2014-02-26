@@ -18,8 +18,10 @@
   are to be used with \code{\link{addParagraph}}.
 }
 \examples{
-pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
-pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs", textProperties(color="blue") )
+pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+	, textProperties(font.weight="bold") )
+pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
+	, textProperties(color="blue") )
 my.pars = set_of_paragraphs( pot1, pot2 )
 }
 \seealso{

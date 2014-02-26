@@ -43,8 +43,8 @@ doc = docx( title = "title" )
 img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
 doc <- addImage(doc, img.file )#work with only windows
 
-# Write the object in file "~/document.docx"
-writeDoc( doc, "~/document.docx" )
+# Write the object in file "document.docx"
+writeDoc( doc, "document.docx" )
 }
 \seealso{
   \code{\link{docx}}, \code{\link{addPlot.docx}} ,

@@ -23,7 +23,9 @@ cp1 = cellProperties(background.color="#EBEBEB")
 
 footerRow = FlexRow()
 for(i in 1:ncol(data_ReporteRs))
-   footerRow[i] = FlexCell( pot( paste("footer", i), format=textProperties(font.weight="bold") ), cellProp = cp1 )
+   footerRow[i] = FlexCell( pot( paste("footer", i)
+		, format = textProperties(font.weight="bold") )
+		, cellProp = cp1 )
 myFlexTable = addFooterRow( myFlexTable, footerRow)
 }
 \seealso{

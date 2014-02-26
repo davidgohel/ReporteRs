@@ -31,9 +31,11 @@ doc <- addParagraph(doc, "Hello Word!" )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 # Add into the document : "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text
-pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
+pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+	, textProperties(font.weight="bold") )
 my.pars = set_of_paragraphs( pot1 )
-pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs", textProperties(color="blue") )
+pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
+	, textProperties(color="blue") )
 my.pars = set_of_paragraphs( pot1, pot2 )
 doc <- addParagraph(doc, my.pars )
 writeDoc( doc, "addParagraph_example.pptx")

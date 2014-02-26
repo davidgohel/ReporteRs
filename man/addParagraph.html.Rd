@@ -46,16 +46,18 @@ doc = addPage( doc, title = "page example 2" )
 
 # Add into the document : "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text
-pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
+pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+	, textProperties(font.weight="bold") )
 my.pars = set_of_paragraphs( pot1 )
-pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs", textProperties(color="blue") )
+pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
+	, textProperties(color="blue") )
 my.pars = set_of_paragraphs( pot1, pot2 )
 
 # used parent.type = "ul" so that paragraphs will be preceded by bullet points
 doc <- addParagraph(doc, my.pars, stylename = "text-primary", parent.type = "ul")
 
 # write the html object in a directory
-pages = writeDoc( doc, "~/html_output_dir")
+pages = writeDoc( doc, "html_output_dir")
 print( pages ) # print filenames of generated html pages
 }
 \seealso{

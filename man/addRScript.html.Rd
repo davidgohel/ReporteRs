@@ -37,7 +37,7 @@ doc = addPage( doc, title = "page example" )
 doc <- addRScript(doc, text = "ls()" )
 
 # write the html object in a directory
-pages = writeDoc( doc, "~/html_output_dir")
+pages = writeDoc( doc, "html_output_dir")
 print( pages ) # print filenames of generated html pages
 }
 }

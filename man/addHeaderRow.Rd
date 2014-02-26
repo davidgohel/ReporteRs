@@ -23,7 +23,8 @@ cp1 = cellProperties(background.color="#EBEBEB")
 
 headerRow = FlexRow()
 for(i in 1:ncol(data_ReporteRs))
-   headerRow[i] = FlexCell( pot( names(data_ReporteRs)[i], format=textProperties(font.weight="bold") ), cellProp = cp1 )
+   headerRow[i] = FlexCell( pot( names(data_ReporteRs)[i]
+		, format=textProperties(font.weight="bold") ), cellProp = cp1 )
 myFlexTable = addHeaderRow( myFlexTable, headerRow)
 }
 \seealso{

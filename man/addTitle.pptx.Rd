@@ -28,8 +28,8 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 # Here we fill the title shape with "My title"
 doc = addTitle( doc, "My title" )
 
-# Write the object in file "~/presentation.pptx"
-writeDoc( doc, "~/presentation.pptx" )
+# Write the object in file "presentation.pptx"
+writeDoc( doc, "presentation.pptx" )
 }
 \seealso{
   \code{\link{pptx}}, \code{\link{addTitle}},
