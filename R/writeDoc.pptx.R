@@ -36,7 +36,7 @@ writeDoc.pptx = function(doc, file, ...) {
 			T
 			}, error = function( e ) F, warning = function ( e ) F , finally = T) )
 		stop("writeDoc: Cannot write to ", file)
-	out = rJava::.jcall( doc$obj , "I", "writePptxToStream", file )
+	out = .jcall( doc$obj , "I", "writePptxToStream", file )
 
 	if( out != error_codes["NO_ERROR"] )
 		stop( "Error - code[", names(error_codes)[which( error_codes == out )], "].")

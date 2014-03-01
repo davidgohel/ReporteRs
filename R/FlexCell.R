@@ -39,8 +39,8 @@ FlexCell = function( value, colspan = 1, parProp = parProperties(), cellProp = c
 	
 	jcellProp = .jCellProperties(cellProp)
 
-	flexCell = rJava::.jnew(class.FlexCell, paragraphsSection$jobj, jcellProp)
-	rJava::.jcall( flexCell, "V", "setColspan", as.integer( colspan ) )
+	flexCell = .jnew(class.FlexCell, paragraphsSection$jobj, jcellProp)
+	.jcall( flexCell, "V", "setColspan", as.integer( colspan ) )
 	
 	.Object = list()
 	.Object$jobj = flexCell
@@ -54,7 +54,7 @@ FlexCell = function( value, colspan = 1, parProp = parProperties(), cellProp = c
 #' @method print FlexCell
 #' @S3method print FlexCell
 print.FlexCell = function(x, ...){
-	out = rJava::.jcall( x$jobj, "S", "toString" )
+	out = .jcall( x$jobj, "S", "toString" )
 	cat(out)
 	invisible()
 }

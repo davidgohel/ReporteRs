@@ -30,15 +30,16 @@
   \item \code{\link{addParagraph.pptx}} add texts \item
   \code{\link{addPlot.pptx}} add plots \item
   \code{\link{addTable.pptx}} add tables \item
-  \code{\link{addDate.pptx}} add a date (most often in the
-  bottom left area of the slide) \item
-  \code{\link{addFooter.pptx}} add a comment in the footer
-  (most often in the bottom center area of the slide) \item
-  \code{\link{addPageNumber.pptx}} add a page number (most
-  often in the bottom right area of the slide) \item
-  \code{\link{addImage.pptx}} add external images } Once
-  object has content, user can write the pptx into a
-  ".pptx" file, see \code{\link{writeDoc}}.
+  \code{\link{addFlexTable.docx}} add
+  \code{\link{FlexTable}} \item \code{\link{addDate.pptx}}
+  add a date (most often in the bottom left area of the
+  slide) \item \code{\link{addFooter.pptx}} add a comment
+  in the footer (most often in the bottom center area of
+  the slide) \item \code{\link{addPageNumber.pptx}} add a
+  page number (most often in the bottom right area of the
+  slide) \item \code{\link{addImage.pptx}} add external
+  images } Once object has content, user can write the pptx
+  into a ".pptx" file, see \code{\link{writeDoc}}.
 }
 \note{
   Power Point 2007-2013 (*.pptx) file formats are the only
@@ -50,8 +51,8 @@
   object.
 }
 \examples{
-\donttest{
-library( ReporteRs )
+#START_TAG_TEST
+require( ggplot2 )
 
 # PowerPoint document to write
 pptx.file <- "presentation.pptx"
@@ -134,8 +135,10 @@ data( data_ReporteRs )
 # add dummy dataset and customise some options
 doc <- addTable( doc
 	, data = data_ReporteRs
-	, header.labels = c( "Header 1", "Header 2", "Header 3", "Header 4", "Header 5", "Header 6" )
-	, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2"), colspan = c(3, 3) )
+	, header.labels = c( "Header 1", "Header 2", "Header 3"
+		, "Header 4", "Header 5", "Header 6" )
+	, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
+		, colspan = c(3, 3) )
 	, col.types = c( "character", "integer", "double", "date", "percent", "character" )
 	, columns.font.colors = list(
 		col1 = c("#527578", "#84978F", "#ADA692", "#47423F")
@@ -149,8 +152,7 @@ doc <- addTable( doc
 
 # write the doc
 writeDoc( doc, pptx.file)
-# browseURL( pptx.file )
-}
+#STOP_TAG_TEST
 }
 \references{
   Wikipedia: Office Open

@@ -57,14 +57,14 @@ addParagraph.html = function(doc, value, stylename = "text-primary", parent.type
 	}
 	
 	if( inherits(value, "set_of_paragraphs") ){
-		paragrah = rJava::.jnew(class.html4r.POTsList, parent.type, stylename )
+		paragrah = .jnew(class.html4r.POTsList, parent.type, stylename )
 		
 		for( pot_index in 1:length( value ) ){
-			jpot = rJava::.jnew(class.html4r.POT, parent.type )
+			jpot = .jnew(class.html4r.POT, parent.type )
 			pot_value = value[[pot_index]]
 			for( i in 1:length(pot_value)){
-				if( is.null( pot_value[[i]]$format ) ) rJava::.jcall( jpot, "V", "addText", pot_value[[i]]$value )
-				else rJava::.jcall( jpot, "V", "addPot", pot_value[[i]]$value
+				if( is.null( pot_value[[i]]$format ) ) .jcall( jpot, "V", "addText", pot_value[[i]]$value )
+				else .jcall( jpot, "V", "addPot", pot_value[[i]]$value
 					, pot_value[[i]]$format$font.size
 					, pot_value[[i]]$format$font.weight=="bold"
 					, pot_value[[i]]$format$font.style=="italic"
@@ -74,11 +74,11 @@ addParagraph.html = function(doc, value, stylename = "text-primary", parent.type
 					, pot_value[[i]]$format$vertical.align
 					)
 			}
-			rJava::.jcall( paragrah, "V", "addP" , jpot)
+			.jcall( paragrah, "V", "addP" , jpot)
 
 		}
 		
-		out = rJava::.jcall( doc$current_slide, "I", "add" , paragrah)
+		out = .jcall( doc$current_slide, "I", "add" , paragrah)
 		if( out != 1 ){
 			stop( "Problem while trying to add paragrahs." )
 		}	

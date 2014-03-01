@@ -42,13 +42,13 @@ addParagraph.pptx = function(doc, value, ... ) {
 	
 	if( inherits(value, "set_of_paragraphs") ){
 		slide = doc$current_slide 
-		paragrah = rJava::.jnew(class.pptx4r.POT)
+		paragrah = .jnew(class.pptx4r.POT)
 		for( pot_index in 1:length( value ) ){
-			rJava::.jcall( paragrah, "V", "addP")
+			.jcall( paragrah, "V", "addP")
 			pot_value = value[[pot_index]]
 			for( i in 1:length(pot_value)){
-				if( is.null( pot_value[[i]]$format ) ) rJava::.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-				else rJava::.jcall( paragrah, "V", "addPot", pot_value[[i]]$value
+				if( is.null( pot_value[[i]]$format ) ) .jcall( paragrah, "V", "addText", pot_value[[i]]$value )
+				else .jcall( paragrah, "V", "addPot", pot_value[[i]]$value
 							, pot_value[[i]]$format$font.size
 							, pot_value[[i]]$format$font.weight=="bold"
 							, pot_value[[i]]$format$font.style=="italic"
@@ -59,7 +59,7 @@ addParagraph.pptx = function(doc, value, ... ) {
 				)
 			}
 		}
-		out = rJava::.jcall( slide, "I", "add" , paragrah)
+		out = .jcall( slide, "I", "add" , paragrah)
 		if( isSlideError( out ) ){
 			stop( getSlideErrorString( out , "pot") )
 		}

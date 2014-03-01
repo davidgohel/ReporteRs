@@ -46,8 +46,8 @@
   on the object.
 }
 \examples{
-\donttest{
-library( ReporteRs )
+#START_TAG_TEST
+require( ggplot2 )
 
 # Word document to write
 docx.file <- "document.docx"
@@ -61,7 +61,8 @@ styles( doc )
 # add slide title
 doc = addParagraph( doc, "Document title", stylename = "TitleDoc" )
 # add slide subtitle
-doc = addParagraph( doc , "This document is generated with ReporteRs.", stylename="Citationintense")
+doc = addParagraph( doc , "This document is generated with ReporteRs."
+	, stylename="Citationintense")
 
 doc = addPageBreak( doc )
 doc = addTitle( doc, "Table of contents", level =  1 )
@@ -100,7 +101,7 @@ doc = addParagraph( doc, value = "my first plot", stylename = "rPlotLegend")
 
 doc = addTitle( doc, "Plot example 2" , level =  2 )
 doc = addPlot( doc, function( ) {
-			print( ggplot(iris, aes(Sepal.Length, fill = Species)) + geom_density(alpha = 0.7) )
+	print( ggplot(iris, aes(Sepal.Length, fill = Species)) + geom_density(alpha = 0.7) )
 		}
 )
 doc = addParagraph( doc, value = "my second plot", stylename = "rPlotLegend")
@@ -125,8 +126,10 @@ data( data_ReporteRs )
 # add dummy dataset and customise some options
 doc <- addTable( doc
 		, data = data_ReporteRs
-		, header.labels = c( "Header 1", "Header 2", "Header 3", "Header 4", "Header 5", "Header 6" )
-		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2"), colspan = c(3, 3) )
+		, header.labels = c( "Header 1", "Header 2", "Header 3"
+			, "Header 4", "Header 5", "Header 6" )
+		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
+			, colspan = c(3, 3) )
 		, col.types = c( "character", "integer", "double", "date", "percent", "character" )
 		, columns.font.colors = list(
 				"col1" = c("#527578", "#84978F", "#ADA692", "#47423F")
@@ -178,7 +181,8 @@ myFlexTable[ 8, 5] = cellProperties( background.color = "#FF9729", border.width 
 # Replace a cell with a pot object
 myFlexTable = setFlexCellContent( myFlexTable, 8, 5
   , pot("Hello", format = textProperties( font.weight = "bold" ) ) + pot("World"
-      , format = textProperties( font.weight = "bold", vertical.align = "superscript") ) )
+      , format = textProperties( font.weight = "bold"
+			, vertical.align = "superscript") ) )
 
 doc = addFlexTable( doc, myFlexTable )
 doc = addParagraph( doc, value = "my third table", stylename = "rTableLegend")
@@ -190,8 +194,7 @@ doc = addTOC( doc, stylename = "rTableLegend" )
 
 # write the doc
 writeDoc( doc, docx.file)
-# browseURL( docx.file )
-}
+#STOP_TAG_TEST
 }
 \references{
   Wikipedia: Office Open

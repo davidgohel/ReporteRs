@@ -27,6 +27,7 @@
   this can be used to produce a toc with only plots.
 }
 \examples{
+require( ggplot2 )
 ### example 1
 # Create a new document
 doc = docx( title = "title" )

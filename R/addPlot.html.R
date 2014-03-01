@@ -15,6 +15,7 @@
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{"html"}.
 #' @examples
+#' require( ggplot2 )
 #' # Create a new document 
 #' doc = html( title = "title" )
 #' 
@@ -37,7 +38,6 @@
 #' # write the html object in a directory
 #' pages = writeDoc( doc, "html_output_dir")
 #' print( pages ) # print filenames of generated html pages
-#' @import base64
 #' @seealso \code{\link{html}}, \code{\link{addPlot}}
 #' @method addPlot html
 #' @S3method addPlot html
@@ -61,15 +61,15 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
 		
-		jimg = rJava::.jnew(class.html4r.ImagesList )
+		jimg = .jnew(class.html4r.ImagesList )
 		
 		for( i in 1:length( plotfiles ) ){
 			.tempfile <- tempfile()
 			base64::encode(plotfiles[i], .tempfile)
-			rJava::.jcall( jimg, "V", "addImage", as.character(paste(readLines(.tempfile), collapse = "\n")) )
+			.jcall( jimg, "V", "addImage", as.character(paste(readLines(.tempfile), collapse = "\n")) )
 			unlink(.tempfile)
 		}
-		out = rJava::.jcall( doc$current_slide, "I", "add", jimg )
+		out = .jcall( doc$current_slide, "I", "add", jimg )
 		if( out != 1 ){
 			stop( "Problem while trying to add plot." )
 		}
@@ -85,15 +85,15 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		plot_ids = get("plot_ids", envir = env )
 		doc$canvas_id = get("canvas_id", envir = env )
 		
-		jimg = rJava::.jnew( class.html4r.RaphaelList )
+		jimg = .jnew( class.html4r.RaphaelList )
 		
 		for(i in 1:length( plot_ids ) ){
 			file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))
 			div.id = plot_ids[[i]]$div.id
 			
-			rJava::.jcall( jimg, "V", "addSlide", as.character(div.id), file )
+			.jcall( jimg, "V", "addSlide", as.character(div.id), file )
 		}
-		out = rJava::.jcall( doc$current_slide, "I", "add", jimg )
+		out = .jcall( doc$current_slide, "I", "add", jimg )
 		if( out != 1 ){
 			stop( "Problem while trying to add plot." )
 		}

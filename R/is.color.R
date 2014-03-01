@@ -2,7 +2,7 @@
 #'
 #' @description Check if character string is a valid color representation
 #' @details
-#' see http://stackoverflow.com/questions/13289009/check-if-character-string-is-a-valid-color-representation/13290832#13290832
+#' see \url{http://stackoverflow.com/questions/13289009/check-if-character-string-is-a-valid-color-representation/13290832#13290832}
 #' @param x value(s) to be tested
 #' @export
 #' @examples

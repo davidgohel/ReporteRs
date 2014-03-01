@@ -86,7 +86,7 @@ FlexTable = function(data, span.columns = character(0)
 	}
 	
 	
-	jFlexTable = rJava::.jnew( class.FlexTable
+	jFlexTable = .jnew( class.FlexTable
 		, as.integer( out$nrow ), as.integer( out$ncol )
 		, .jarray( as.character( t( data ) ) )
 		, .jTextProperties(text_format), .jParProperties(par_format), .jCellProperties(cell_format)
@@ -106,7 +106,7 @@ FlexTable = function(data, span.columns = character(0)
 			}
 		}
 		
-		rJava::.jcall( jFlexTable , "V", "setRowSpanInstructions"
+		.jcall( jFlexTable , "V", "setRowSpanInstructions"
 				, as.integer( match( j , .colnames ) - 1 )
 				, .jarray( as.integer( unlist( instructions ) ) )
 		)
@@ -161,7 +161,7 @@ addHeaderRow = function( x, value ){
 	.weights = weight.FlexRow( value )
 	if( .weights == x$ncol - 1 ) warning("Did you forget row.names header?")
 	if( .weights != x$ncol ) stop("The 'FlexRow' object has not the correct number of elements or the sum of colspan is different from the number of columns of the dataset.")
-	rJava::.jcall( x$jobj, "V", "addHeader", value$jobj )
+	.jcall( x$jobj, "V", "addHeader", value$jobj )
 	
 	x
 }
@@ -193,7 +193,7 @@ addFooterRow = function( x, value ){
 		stop("argument value must be an object of class 'FlexRow'.")
 	.weights = weight.FlexRow( value )
 	if( .weights != x$ncol ) stop("The 'FlexRow' object has not the correct number of elements or the sum of colspan is different from the number of columns of the dataset.")
-	rJava::.jcall( x$jobj, "V", "addFooter", value$jobj )
+	.jcall( x$jobj, "V", "addFooter", value$jobj )
 	
 	x
 }
@@ -208,7 +208,7 @@ length.FlexTable <- function(x) {
 #' @method print FlexTable
 #' @S3method print FlexTable
 print.FlexTable = function(x, ...){
-	out = rJava::.jcall( x$jobj, "S", "toString" )
+	out = .jcall( x$jobj, "S", "toString" )
 	cat(out)
 	invisible()
 }
@@ -334,7 +334,7 @@ updateCellProperties.FlexTable = function( x, i, j, value ){
 		stop("value is not a cellProperties object")
 	}
 	jcellProp = .jCellProperties( value )
-	jflexcell = rJava::.jcall( x$jobj, "V", "setCellProperties"
+	jflexcell = .jcall( x$jobj, "V", "setCellProperties"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jcellProp  )
@@ -361,7 +361,7 @@ updateParProperties.FlexTable = function( x, i, j, value ){
 	}
 	
 	jparProp = .jParProperties( value )
-	jflexcell = rJava::.jcall( x$jobj, "V", "setParProperties"
+	jflexcell = .jcall( x$jobj, "V", "setParProperties"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jparProp  )
@@ -388,7 +388,7 @@ updateTextProperties.FlexTable = function( x, i, j, value ){
 	}
 	
 	jtextProp = .jTextProperties( value )
-	jflexcell = rJava::.jcall( x$jobj, "V", "setTextProperties"
+	jflexcell = .jcall( x$jobj, "V", "setTextProperties"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jtextProp  )
@@ -418,7 +418,7 @@ updateContent.FlexTable = function( x, i, j, value ){
 		stop("argument value must be an object of class 'pot' or 'set_of_paragraphs'.")
 	
 	ps = ParagraphSection( value, x$par_format )
-	rJava::.jcall( x$jobj, "V", "setBodyText"
+	.jcall( x$jobj, "V", "setBodyText"
 			, as.integer( i-1 ), as.integer( j-1 ), ps$jobj  )
 	
 	x

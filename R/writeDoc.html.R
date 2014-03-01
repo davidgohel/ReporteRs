@@ -29,7 +29,7 @@ writeDoc.html = function(doc, directory, ...) {
 	dir.create( www.directory, recursive = T )
 	bootstrap.copy( www.directory, "ReporteRs")	
 	
-	out = rJava::.jcall( doc$obj , "I", "writeDocument", www.directory )
+	out = .jcall( doc$obj , "I", "writeDocument", www.directory )
 	if( out != 1 ){
 		stop( "Problem while trying to write html content onto the disk." )
 	}

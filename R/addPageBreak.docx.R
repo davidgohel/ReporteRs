@@ -12,7 +12,7 @@
 #' @method addPageBreak docx
 #' @S3method addPageBreak docx
 addPageBreak.docx =  function( doc, ... ) {
-	rJava::.jcall( doc$obj, "V", "addPageBreak" )
+	.jcall( doc$obj, "V", "addPageBreak" )
 	doc
 }
 

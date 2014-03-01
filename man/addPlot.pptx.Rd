@@ -46,6 +46,7 @@
   object.
 }
 \examples{
+require( ggplot2 )
 # Create a new document
 doc = pptx( title = "title" )
 

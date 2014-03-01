@@ -42,10 +42,10 @@
   Slide Master.
 
   read
-  http://office.microsoft.com/en-us/powerpoint-help/create-a-new-custom-layout-HA010079650.aspx
+  \url{http://office.microsoft.com/en-us/powerpoint-help/create-a-new-custom-layout-HA010079650.aspx}
 
   read
-  http://office.microsoft.com/en-us/powerpoint-help/change-a-placeholder-HA010064940.aspx
+  \url{http://office.microsoft.com/en-us/powerpoint-help/change-a-placeholder-HA010064940.aspx}
 
   Function \code{slide.layouts} returns available layout
   names of the template used when pptx object has been

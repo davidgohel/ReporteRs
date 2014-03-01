@@ -14,6 +14,7 @@
 #' 
 #' @return an object of class \code{"docx"}.
 #' @examples
+#' require( ggplot2 )
 #' ### example 1
 #' # Create a new document 
 #' doc = docx( title = "title" )
@@ -68,12 +69,12 @@
 
 addTOC.docx = function(doc, stylename, ... ) {
 	if( missing( stylename ) ){
-		rJava::.jcall( doc$obj, "V", "addTableOfContents" )
+		.jcall( doc$obj, "V", "addTableOfContents" )
 	} else {
 		if( !is.element( stylename , styles( doc ) ) ){
 			stop(paste("Style {", stylename, "} does not exists.", sep = "") )
 		}
-		else rJava::.jcall( doc$obj, "V", "addTableOfContents", stylename )
+		else .jcall( doc$obj, "V", "addTableOfContents", stylename )
 	}
 	doc
 	}

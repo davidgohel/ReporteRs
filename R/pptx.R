@@ -17,6 +17,7 @@
 #'   \item \code{\link{addParagraph.pptx}} add texts
 #'   \item \code{\link{addPlot.pptx}} add plots
 #'   \item \code{\link{addTable.pptx}} add tables
+#'   \item \code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}
 #'   \item \code{\link{addDate.pptx}} add a date (most often in the bottom left area of the slide)
 #'   \item \code{\link{addFooter.pptx}} add a comment in the footer (most often in the bottom center area of the slide)
 #'   \item \code{\link{addPageNumber.pptx}} add a page number (most often in the bottom right area of the slide)
@@ -32,8 +33,8 @@
 #' unless the \code{\link{writeDoc}} method has been called on the object.
 #' @export
 #' @examples
-#' \donttest{
-#' library( ReporteRs )
+#' #START_TAG_TEST
+#' require( ggplot2 )
 #' 
 #' # PowerPoint document to write
 #' pptx.file <- "presentation.pptx"
@@ -116,8 +117,10 @@
 #' # add dummy dataset and customise some options
 #' doc <- addTable( doc
 #' 	, data = data_ReporteRs		
-#' 	, header.labels = c( "Header 1", "Header 2", "Header 3", "Header 4", "Header 5", "Header 6" )		
-#' 	, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2"), colspan = c(3, 3) )		
+#' 	, header.labels = c( "Header 1", "Header 2", "Header 3"
+#' 		, "Header 4", "Header 5", "Header 6" )		
+#' 	, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
+#' 		, colspan = c(3, 3) )		
 #' 	, col.types = c( "character", "integer", "double", "date", "percent", "character" )		
 #' 	, columns.font.colors = list(		
 #' 		col1 = c("#527578", "#84978F", "#ADA692", "#47423F")	
@@ -131,8 +134,7 @@
 #' 
 #' # write the doc
 #' writeDoc( doc, pptx.file)
-#' # browseURL( pptx.file )
-#' }
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}}, \code{\link{addParagraph.pptx}}
 #' , \code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}}
 #' , \code{\link{slide.layouts.pptx}}, \code{\link{writeDoc.pptx}}
@@ -161,9 +163,9 @@ pptx = function( title, template){
 #	// public static int slidedimensions_error = 7;
 #	public static int UNDEFINED_ERROR = -1;
 	# java calls
-	obj = rJava::.jnew( class.pptx4r.document )
+	obj = .jnew( class.pptx4r.document )
 	
-	basedoc.return = rJava::.jcall( obj, "I", "setBaseDocument", template )
+	basedoc.return = .jcall( obj, "I", "setBaseDocument", template )
 	if( basedoc.return != error_codes["NO_ERROR"] ){
 		stop( "an error occured - code[", names(error_codes)[which( error_codes == basedoc.return )], "].")
 	}
@@ -171,7 +173,7 @@ pptx = function( title, template){
 	.Object = list( obj = obj
 		, title = title
 		, basefile = template
-		, styles = rJava::.jcall( obj, "[S", "getStyleNames" ) 
+		, styles = .jcall( obj, "[S", "getStyleNames" ) 
 		, plot_first_id = 0L
 		, current_slide = NULL
 		)

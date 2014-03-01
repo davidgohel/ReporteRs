@@ -20,7 +20,7 @@
 #' 	, cellProp = cellProperties(background.color="#527578") )
 FlexRow = function( values, colspan, textProp = textProperties(), parProp = parProperties(), cellProp = cellProperties()){
 	.Object = list()
-	.Object$jobj = rJava::.jnew(class.FlexRow)
+	.Object$jobj = .jnew(class.FlexRow)
 	class( .Object ) = c("FlexRow", "FlexElement")
 	
 	if( !missing ( values ) ){
@@ -40,11 +40,11 @@ FlexRow = function( values, colspan, textProp = textProperties(), parProp = parP
 #' @method length FlexRow
 #' @S3method length FlexRow
 length.FlexRow <- function(x) {
-	return(rJava::.jcall( x$jobj, "I", "size" ))
+	return(.jcall( x$jobj, "I", "size" ))
 }
 
 weight.FlexRow <- function(x) {
-	return(rJava::.jcall( x$jobj, "I", "weight" ))
+	return(.jcall( x$jobj, "I", "weight" ))
 }
 
 #' @method [<- FlexRow
@@ -63,9 +63,9 @@ weight.FlexRow <- function(x) {
 		stop("Next possible subset is ", length(x) + 1 )
 	}
 	if( doReplace ){
-		rJava::.jcall( x$jobj, "V", "add", value$jobj, as.integer(i -1) )		
+		.jcall( x$jobj, "V", "add", value$jobj, as.integer(i -1) )		
 	} else {
-		rJava::.jcall( x$jobj, "V", "add", value$jobj )
+		.jcall( x$jobj, "V", "add", value$jobj )
 	}
 	x
 }
@@ -74,7 +74,7 @@ weight.FlexRow <- function(x) {
 #' @method print FlexRow
 #' @S3method print FlexRow
 print.FlexRow = function(x, ...){
-	out = rJava::.jcall( x$jobj, "S", "toString" )
+	out = .jcall( x$jobj, "S", "toString" )
 	cat(out)
 	invisible()
 }

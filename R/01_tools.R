@@ -1,6 +1,8 @@
 #' @import rJava
+#' @import base64
+#' @import highlight
 .onLoad= function(libname, pkgname){
-	rJava::.jpackage( pkgname, lib.loc = libname )
+	.jpackage( pkgname, lib.loc = libname )
 	options("ReporteRs-default-font"="Helvetica")
 	options("ReporteRs-locale.language"="en")
 	options("ReporteRs-locale.region"="US")
@@ -29,7 +31,7 @@ setData2Java = function( obj, data, header.labels, col.types
 , row.names = T){
 	dnames = names( data )
 	if( row.names ){
-		rJava::.jcall( obj , "V", "setData", "row_names", "", .jarray( as.character(row.names( data ) ) ) )		
+		.jcall( obj , "V", "setData", "row_names", "", .jarray( as.character(row.names( data ) ) ) )		
 	}
 	for( j in 1:ncol( data ) ){
 		if( is.factor(data[, j] ) ) tempdata = as.character( data[, j] )
@@ -37,41 +39,41 @@ setData2Java = function( obj, data, header.labels, col.types
 		else tempdata = data[, j]
 		
 		if( col.types[j] == "percent" )
-			rJava::.jcall( obj , "V", "setPercentData", dnames[j], header.labels[j], .jarray(tempdata*100) )
+			.jcall( obj , "V", "setPercentData", dnames[j], header.labels[j], .jarray(tempdata*100) )
 		else if( col.types[j] == "double" )
-			rJava::.jcall( obj , "V", "setData", dnames[j], header.labels[j], .jarray( as.double(tempdata)) )
+			.jcall( obj , "V", "setData", dnames[j], header.labels[j], .jarray( as.double(tempdata)) )
 		else if( col.types[j] == "integer" )
-			rJava::.jcall( obj , "V", "setData", dnames[j], header.labels[j], .jarray( as.integer(tempdata)) )
+			.jcall( obj , "V", "setData", dnames[j], header.labels[j], .jarray( as.integer(tempdata)) )
 		else if( col.types[j] == "character" )
-			rJava::.jcall( obj , "V", "setData", dnames[j], header.labels[j], .jarray( as.character(tempdata)) )
+			.jcall( obj , "V", "setData", dnames[j], header.labels[j], .jarray( as.character(tempdata)) )
 		else if( col.types[j] == "date" )
-			rJava::.jcall( obj , "V", "setDateData", dnames[j], header.labels[j], .jarray( format( tempdata, "%Y-%m-%d" ) ) )
+			.jcall( obj , "V", "setDateData", dnames[j], header.labels[j], .jarray( format( tempdata, "%Y-%m-%d" ) ) )
 		else if( col.types[j] == "datetime" )
-			rJava::.jcall( obj , "V", "setDateData", dnames[j], header.labels[j], .jarray( format( tempdata, "%Y-%m-%d " ) ) )
+			.jcall( obj , "V", "setDateData", dnames[j], header.labels[j], .jarray( format( tempdata, "%Y-%m-%d " ) ) )
 		else if( col.types[j] == "logical" )
-			rJava::.jcall( obj , "V", "setLogicalData", dnames[j], header.labels[j], .jarray( as.character(tempdata)) )
+			.jcall( obj , "V", "setLogicalData", dnames[j], header.labels[j], .jarray( as.character(tempdata)) )
 	}
 	
 	if( length( groupedheader.row ) > 0 ){
 		if( row.names ){
-			rJava::.jcall( obj , "V", "setGroupedCols", "", 1L )
+			.jcall( obj , "V", "setGroupedCols", "", 1L )
 		}
 		for(gcol in 1:length(groupedheader.row$values ) ){
 			value = groupedheader.row$values[gcol]
 			colspan = groupedheader.row$colspan[gcol]
-			rJava::.jcall( obj , "V", "setGroupedCols", value, as.integer(colspan) )
+			.jcall( obj , "V", "setGroupedCols", value, as.integer(colspan) )
 		}
 	}
 	
 	if( length( columns.bg.colors ) > 0 ){
 		for( j in names( columns.bg.colors ) ){ 
-			rJava::.jcall( obj , "V", "setFillColors", j, .jarray( columns.bg.colors[[j]] ) )
+			.jcall( obj , "V", "setFillColors", j, .jarray( columns.bg.colors[[j]] ) )
 		}
 	}
 	
 	if( length( columns.font.colors ) > 0 ){
 		for( j in names( columns.font.colors ) ){ 
-			rJava::.jcall( obj , "V", "setFontColors", j, .jarray( columns.font.colors[[j]] ) )
+			.jcall( obj , "V", "setFontColors", j, .jarray( columns.font.colors[[j]] ) )
 		}
 	}
 	
@@ -88,7 +90,7 @@ table.format.2java = function( x, type = "docx" ){
 		jclassname = class.html4r.TableLayoutHTML
 	} else stop("unknown document type: ", type )
 	
-	obj = rJava::.jnew(jclassname, x$percent.addsymbol
+	obj = .jnew(jclassname, x$percent.addsymbol
 			, x$fraction.double.digit, x$fraction.percent.digit
 			, "YYYY-mm-dd", "HH:MM", "YYYY-mm-dd HH:MM"
 			, x$locale.language, x$locale.region
@@ -103,7 +105,7 @@ table.format.2java = function( x, type = "docx" ){
 		rwhatobject = paste( what, ".text", sep = "" )
 		str = paste( "x$", rwhatobject , sep = "" )
 		robject = eval( parse ( text = str ) )
-		rJava::.jcall( obj, "V", jwhatmethod, as.character(robject$color)
+		.jcall( obj, "V", jwhatmethod, as.character(robject$color)
 				, robject$font.size
 				, as.logical(robject$font.weight=="bold")
 				, as.logical(robject$font.style=="italic")
@@ -120,7 +122,7 @@ table.format.2java = function( x, type = "docx" ){
 		rwhatobject = paste( what, ".par", sep = "" )
 		str = paste( "x$", rwhatobject , sep = "" )
 		robject = eval( parse ( text = str ) )
-		rJava::.jcall( obj, "V", jwhatmethod, robject$text.align
+		.jcall( obj, "V", jwhatmethod, robject$text.align
 				, robject$padding.bottom
 				, robject$padding.top
 				, robject$padding.left
@@ -136,7 +138,7 @@ table.format.2java = function( x, type = "docx" ){
 		str = paste( "x$", rwhatobject , sep = "" )
 		robject = eval( parse ( text = str ) )
 
-		rJava::.jcall( obj, "V", jwhatmethod
+		.jcall( obj, "V", jwhatmethod
 				, as.character(robject$border.bottom.color )
 				, as.character(robject$border.bottom.style )
 				, as.integer( robject$border.bottom.width )
@@ -223,15 +225,15 @@ get_text_coord = function( x, height ){
 
 plotSlideLayout = function( doc, layout.name ){
 	
-	SlideLayout = rJava::.jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", as.character(layout.name) )
-	maxid = rJava::.jcall( SlideLayout, "I", "getContentSize")
+	SlideLayout = .jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", as.character(layout.name) )
+	maxid = .jcall( SlideLayout, "I", "getContentSize")
 	content_shapes = list()
-	content_size = rJava::.jcall( SlideLayout, "I", "getContentSize" )
+	content_size = .jcall( SlideLayout, "I", "getContentSize" )
 	if( content_size > 0 )
 		for(i in 0:( maxid - 1 ) ){
 			content_shapes[[i+1]] = list( 
 					text = "content"
-					, dim = rJava::.jcall( SlideLayout
+					, dim = .jcall( SlideLayout
 							, "[I", "getContentDimensions"
 							, as.integer(i) ) / 12700 
 			)
@@ -242,16 +244,16 @@ plotSlideLayout = function( doc, layout.name ){
 			, DATE = 3, SUBTITLE = 4, CRTTITLE = 5)
 	nummeta = 0
 	for(i in 1:length(metas)){
-		if( rJava::.jcall( SlideLayout, "Z", "contains", as.integer(metas[i]) ) ){
+		if( .jcall( SlideLayout, "Z", "contains", as.integer(metas[i]) ) ){
 			nummeta = nummeta + 1
 			meta_shapes[[nummeta]] = list( 
 					text = names(metas)[i]
-					, dim = rJava::.jcall( SlideLayout, "[I", "getMetaDimensions", as.integer(metas[i]) ) / 12700
+					, dim = .jcall( SlideLayout, "[I", "getMetaDimensions", as.integer(metas[i]) ) / 12700
 					)
 		}
 	}
 
-	dimensions = rJava::.jcall( doc$obj, "[I", "readSlideDimensions" ) / 12700
+	dimensions = .jcall( doc$obj, "[I", "readSlideDimensions" ) / 12700
 	
 	coords_poly_meta = lapply( meta_shapes, get_poly_coord, height = dimensions[2] )
 	coords_poly_meta = coords_poly_meta[ !sapply( coords_poly_meta, is.null ) ]
@@ -295,8 +297,8 @@ registerRaphaelGraph = function( plot_attributes, env ){
 	invisible()
 }
 check.fontfamily = function( fontfamily ){
-	font = rJava::.jnew("java/awt/Font", fontfamily, 0L, 12L )
-	font_family = rJava::.jcall( font, "S", "getFamily" )
+	font = .jnew("java/awt/Font", fontfamily, 0L, 12L )
+	font_family = .jcall( font, "S", "getFamily" )
 	if( font_family == "Dialog" )
 		stop("Font ", fontfamily, " can't be found in available fonts on this machine.")
 	invisible()

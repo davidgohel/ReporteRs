@@ -20,7 +20,7 @@ deleteBookmark = function( doc, bookmark ){
 		stop( "bookmark must be a single character value")
 	}
 	
-	rJava::.jcall( doc$obj, "V", "deleteBookmark", bookmark )
+	.jcall( doc$obj, "V", "deleteBookmark", bookmark )
 	invisible()
 }
 
@@ -48,6 +48,6 @@ deleteBookmarkNextContent = function( doc, bookmark ){
 		stop( "bookmark must be a single character value")
 	}
 	
-	rJava::.jcall( doc$obj, "V", "deleteBookmarkNextContent", bookmark )
+	.jcall( doc$obj, "V", "deleteBookmarkNextContent", bookmark )
 	invisible()
 }

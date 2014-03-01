@@ -29,12 +29,12 @@ addFooter.pptx = function(doc, value, ... ) {
 
 	slide = doc$current_slide 
 	
-#	shapeId = rJava::.jcall( doc$current_slide, "S", "getShapeId", "ftr" )
+#	shapeId = .jcall( doc$current_slide, "S", "getShapeId", "ftr" )
 #	if( is.null( shapeId ) ) 
 #		stop( "Can't find any shape of type 'Footer' in the layout.")
 	
 	if( !missing( value ) )
-		out = rJava::.jcall( slide, "I", "addFooter" , as.character(value))
+		out = .jcall( slide, "I", "addFooter" , as.character(value))
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "footer") )
 	}	

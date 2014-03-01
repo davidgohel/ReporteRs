@@ -55,6 +55,7 @@
   Add a plot into the \code{docx} object.
 }
 \examples{
+require( ggplot2 )
 # Create a new document
 doc = docx( title = "title" )
 

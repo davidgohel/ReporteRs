@@ -68,7 +68,8 @@ as.character.pot = function (x, ...){
 #' \code{pot} object with no associated format ; therefore, document default document style
 #' will be used (see \code{\link{addParagraph}}).
 #' @examples
-#' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
+#' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+#' 	, textProperties(font.weight="bold") )
 #' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{pptx}}, \code{\link{docx}}
 #' @method + pot
 #' @S3method + pot

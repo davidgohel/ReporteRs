@@ -26,7 +26,7 @@
 #' @S3method addFlexTable pptx
 addFlexTable.pptx = function(doc, flextable, ... ) {
 			
-	out = rJava::.jcall( doc$current_slide, "I", "add", flextable$jobj )
+	out = .jcall( doc$current_slide, "I", "add", flextable$jobj )
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "table") )
 	}

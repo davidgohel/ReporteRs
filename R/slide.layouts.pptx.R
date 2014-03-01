@@ -22,7 +22,7 @@
 #' @S3method slide.layouts pptx
 
 slide.layouts.pptx = function( doc, layout, ... ) {
-	layout.names = rJava::.jcall( doc$obj, "[S", "getStyleNames" )
+	layout.names = .jcall( doc$obj, "[S", "getStyleNames" )
 	if( !missing( layout ) ){
 		if( !is.character(layout) ) stop("layout must be a single string value.")
 		if( length(layout) != 1 ) stop("layout must be a single string value.")

@@ -8,7 +8,6 @@
 #' @param show_line_numbers logical indicating is row numbers should be written or not
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"html"}.
-#' @import highlight
 #' @examples
 #' \dontrun{
 #' # Create a new document 
@@ -40,8 +39,8 @@ addRScript.html = function(doc, file, text, show_line_numbers = T, ... ) {
 		, renderer = renderer_html(document = F, header = NULL, footer = NULL)
 		, show_line_numbers = FALSE )
 	sink()
-	RScript = rJava::.jnew(class.html4r.RScript, as.character(paste(readLines(tmpfile, warn = FALSE), collapse = "\n" ) ) )
-	out = rJava::.jcall( doc$current_slide , "I", "add", RScript )
+	RScript = .jnew(class.html4r.RScript, as.character(paste(readLines(tmpfile, warn = FALSE), collapse = "\n" ) ) )
+	out = .jcall( doc$current_slide , "I", "add", RScript )
 	if( out != 1 ){
 		stop( "Problem while trying to add RScript." )
 	}	

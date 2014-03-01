@@ -36,9 +36,11 @@ set_of_paragraphs = function( ... ){
 #' @param value \code{pot} object to add as a new paragraph
 #' @export
 #' @examples
-#' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
+#' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+#' 	, textProperties(font.weight="bold") )
 #' my.pars = set_of_paragraphs( pot1 )
-#' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs", textProperties(color="blue") )
+#' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
+#' 	, textProperties(color="blue") )
 #' my.pars = add.pot( my.pars, pot2 )
 #' @seealso \code{\link{set_of_paragraphs}}, \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
 add.pot = function( x, value ){

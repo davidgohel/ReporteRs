@@ -35,15 +35,15 @@
 
 addDate.pptx = function(doc, value, str.format = "%Y-%m-%d", ... ) {
 	
-#	shapeId = rJava::.jcall( doc$current_slide, "S", "getShapeId", "dt" )
+#	shapeId = .jcall( doc$current_slide, "S", "getShapeId", "dt" )
 #	if( is.null( shapeId ) ) 
 #		stop( "Can't find any shape of type 'Date' in the layout.")
 	
 	
 	slide = doc$current_slide 
 	if( missing( value ) )
-		out = rJava::.jcall( slide, "I", "addDate" , format( Sys.time(), str.format ))
-	else out = rJava::.jcall( slide, "I", "addDate" , as.character(value))
+		out = .jcall( slide, "I", "addDate" , format( Sys.time(), str.format ))
+	else out = .jcall( slide, "I", "addDate" , as.character(value))
 	
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "date") )

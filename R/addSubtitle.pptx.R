@@ -27,7 +27,7 @@
 addSubtitle.pptx = function( doc, value, ... ) {
 	
 	slide = doc$current_slide 
-	out = rJava::.jcall( slide, "I", "addSubTitle", value )
+	out = .jcall( slide, "I", "addSubTitle", value )
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "subtitle") )
 	}

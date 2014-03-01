@@ -223,6 +223,7 @@ addParagraph = function(doc, value, ...){
 #' }
 #' @examples 
 #' \dontrun{
+#' require( ggplot2 )
 #' # Add a base plot
 #' doc = addPlot( doc = doc, fun = plot
 #' 		, x = rnorm( 100 )
@@ -239,7 +240,6 @@ addParagraph = function(doc, value, ...){
 #' 	)
 #' 
 #' ## Add a ggplot2 and another plot
-#' require(ggplot2)
 #' doc = addPlot( doc = doc
 #' 		, fun = function(){
 #' 			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species
@@ -324,7 +324,7 @@ addRScript = function(doc, file, text, ...){
 #' Optional, if missing, headers will be filled with \code{data} column names.
 #' @param groupedheader.row a named list whose elements define the upper 
 #' header row (grouped header). Optional. 
-#' Elements of that list are \code{values} and \code{colspan} (\code{list(values, colspan)}). 
+#' Elements of that list are \code{values} and \code{colspan}. 
 #' Element \code{values} is a character vector containing labels to display 
 #' in the grouped header row. Element \code{colspan} is an integer vector containing 
 #' number of columns to span for each \code{values}.

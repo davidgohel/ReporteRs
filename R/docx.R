@@ -28,8 +28,8 @@
 #' @note Word 2007-2013 (*.docx) file formats are the only supported files.\cr Document are manipulated in-memory ; a \code{docx}'s document is not written to the disk unless the \code{\link{writeDoc}} method has been called on the object.
 #' @export
 #' @examples
-#' \donttest{
-#' library( ReporteRs )
+#' #START_TAG_TEST
+#' require( ggplot2 )
 #' 
 #' # Word document to write
 #' docx.file <- "document.docx"
@@ -43,7 +43,8 @@
 #' # add slide title
 #' doc = addParagraph( doc, "Document title", stylename = "TitleDoc" )
 #' # add slide subtitle
-#' doc = addParagraph( doc , "This document is generated with ReporteRs.", stylename="Citationintense")
+#' doc = addParagraph( doc , "This document is generated with ReporteRs."
+#' 	, stylename="Citationintense")
 #' 
 #' doc = addPageBreak( doc )
 #' doc = addTitle( doc, "Table of contents", level =  1 )
@@ -82,7 +83,7 @@
 #' 
 #' doc = addTitle( doc, "Plot example 2" , level =  2 )
 #' doc = addPlot( doc, function( ) {
-#' 			print( ggplot(iris, aes(Sepal.Length, fill = Species)) + geom_density(alpha = 0.7) ) 
+#' 	print( ggplot(iris, aes(Sepal.Length, fill = Species)) + geom_density(alpha = 0.7) ) 
 #' 		}
 #' )
 #' doc = addParagraph( doc, value = "my second plot", stylename = "rPlotLegend")
@@ -107,8 +108,10 @@
 #' # add dummy dataset and customise some options
 #' doc <- addTable( doc
 #' 		, data = data_ReporteRs
-#' 		, header.labels = c( "Header 1", "Header 2", "Header 3", "Header 4", "Header 5", "Header 6" )
-#' 		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2"), colspan = c(3, 3) )
+#' 		, header.labels = c( "Header 1", "Header 2", "Header 3"
+#' 			, "Header 4", "Header 5", "Header 6" )
+#' 		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
+#' 			, colspan = c(3, 3) )
 #' 		, col.types = c( "character", "integer", "double", "date", "percent", "character" )
 #' 		, columns.font.colors = list(
 #' 				"col1" = c("#527578", "#84978F", "#ADA692", "#47423F")
@@ -160,7 +163,8 @@
 #' # Replace a cell with a pot object
 #' myFlexTable = setFlexCellContent( myFlexTable, 8, 5
 #'   , pot("Hello", format = textProperties( font.weight = "bold" ) ) + pot("World"
-#'       , format = textProperties( font.weight = "bold", vertical.align = "superscript") ) )
+#'       , format = textProperties( font.weight = "bold"
+#' 			, vertical.align = "superscript") ) )
 #' 
 #' doc = addFlexTable( doc, myFlexTable )
 #' doc = addParagraph( doc, value = "my third table", stylename = "rTableLegend")
@@ -173,8 +177,7 @@
 #' 
 #' # write the doc 
 #' writeDoc( doc, docx.file)
-#' # browseURL( docx.file )
-#' }
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{addTitle.docx}}, \code{\link{addImage.docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{addPlot.docx}}, \code{\link{addTable.docx}}, \code{\link{addTOC.docx}}
 #' , \code{\link{styles.docx}}, \code{\link{writeDoc.docx}}
@@ -190,17 +193,17 @@ docx = function( title = "untitled", template){
 		stop(template , " is not a valid file.")
 	
 	# java calls
-	obj = rJava::.jnew( class.docx4r.document )
-	rJava::.jcall( obj, "V", "setBaseDocument", template )
+	obj = .jnew( class.docx4r.document )
+	.jcall( obj, "V", "setBaseDocument", template )
 	.sysenv = Sys.getenv(c("USERDOMAIN","COMPUTERNAME","USERNAME"))
 	
-	rJava::.jcall( obj, "V", "setDocPropertyTitle", title )
-	rJava::.jcall( obj, "V", "setDocPropertyCreator", paste( .sysenv["USERDOMAIN"], "/", .sysenv["USERNAME"], " on computer ", .sysenv["COMPUTERNAME"], sep = "" ) )
+	.jcall( obj, "V", "setDocPropertyTitle", title )
+	.jcall( obj, "V", "setDocPropertyCreator", paste( .sysenv["USERDOMAIN"], "/", .sysenv["USERNAME"], " on computer ", .sysenv["COMPUTERNAME"], sep = "" ) )
 	
 	.Object = list( obj = obj
 		, title = title
 		, basefile = template
-		, styles = rJava::.jcall( obj, "[S", "getStyleNames" ) 
+		, styles = .jcall( obj, "[S", "getStyleNames" ) 
 		, plot_first_id=1L
 		)
 	class( .Object ) = "docx"

@@ -12,7 +12,7 @@
 }
 \details{
   see
-  http://stackoverflow.com/questions/13289009/check-if-character-string-is-a-valid-color-representation/13290832#13290832
+  \url{http://stackoverflow.com/questions/13289009/check-if-character-string-is-a-valid-color-representation/13290832#13290832}
 }
 \examples{
 is.color( c(NA, "black", "blackk", "1", "#00", "#000000") )

@@ -1,25 +1,29 @@
 Package: ReporteRs
 Type: Package
-Title: ReporteRs: a package to create document from R
-Version: 0.2
-Date: 2014-01-28
+Title: Microsoft Word, Microsoft Powerpoint and HTML documents generation from R
+Version: 0.3
+Date: 2014-03-01
 Author: David Gohel <david.gohel@lysis-consultants.fr>
 Maintainer: David Gohel <david.gohel@lysis-consultants.fr>
-Description: An R package for creating Microsoft Word document, Microsoft
-    Powerpoint document and HTML documents from R. There are several features
-    to let you format and present R outputs ; e.g. Editable Vector Graphics,
-    functions for complex tables reporting , reuse of corporate template
-    document (*.docx and *.pptx). You can use the package as a tool for fast
-    reporting and as a tool for reporting automation.
+Description: An R package for creating Microsoft Word document (>=2007),
+    Microsoft Powerpoint document (>=2007) and HTML documents from R. There are
+    several features to let you format and present R outputs ; e.g. Editable
+    Vector Graphics, functions for complex tables reporting, reuse of corporate
+    template document (*.docx and *.pptx). You can use the package as a tool
+    for fast reporting and as a tool for reporting automation. The package does
+    not require any installation of Microsoft product to be able to write
+    Microsoft files (docx and pptx).
 License: GPL-3
+Copyright: See file COPYRIGHTS.
 Depends:
-    R (>= 3.0),
-    rJava,
-    ggplot2
+    R (>= 3.0)
 Imports:
-    base64,
-    highlight
+    rJava,base64,highlight
+Suggests:
+    ggplot2
+SystemRequirements: java (>= 1.6)
 URL: davidgohel.github.io/ReporteRs/index.html
+BugReports: https://github.com/davidgohel/ReporteRs/issues
 Collate:
     'docx.R'
     'print.docx.R'

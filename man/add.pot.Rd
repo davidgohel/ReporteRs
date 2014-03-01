@@ -14,9 +14,11 @@
   (\code{\link{set_of_paragraphs}} object).
 }
 \examples{
-pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich", textProperties(font.weight="bold") )
+pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+	, textProperties(font.weight="bold") )
 my.pars = set_of_paragraphs( pot1 )
-pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs", textProperties(color="blue") )
+pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
+	, textProperties(color="blue") )
 my.pars = add.pot( my.pars, pot2 )
 }
 \seealso{

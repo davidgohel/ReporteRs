@@ -47,14 +47,14 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 	}
 	
 	if( inherits(value, "set_of_paragraphs") ){
-		basedoc.j = rJava::.jcall( doc$obj, paste0("L", class.docx4j.WordprocessingMLPackage, ";"), "getBaseDocument" )
-		paragrah = rJava::.jnew(class.docx4r.POT, basedoc.j, stylename )
+		basedoc.j = .jcall( doc$obj, paste0("L", class.docx4j.WordprocessingMLPackage, ";"), "getBaseDocument" )
+		paragrah = .jnew(class.docx4r.POT, basedoc.j, stylename )
 		for( pot_index in 1:length( value ) ){
-			rJava::.jcall( paragrah, "V", "addP")
+			.jcall( paragrah, "V", "addP")
 			pot_value = value[[pot_index]]
 			for( i in 1:length(pot_value)){
-				if( is.null( pot_value[[i]]$format ) ) rJava::.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-				else rJava::.jcall( paragrah, "V", "addPot", pot_value[[i]]$value
+				if( is.null( pot_value[[i]]$format ) ) .jcall( paragrah, "V", "addText", pot_value[[i]]$value )
+				else .jcall( paragrah, "V", "addPot", pot_value[[i]]$value
 					, pot_value[[i]]$format$font.size
 					, pot_value[[i]]$format$font.weight=="bold"
 					, pot_value[[i]]$format$font.style=="italic"
@@ -66,8 +66,8 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 			}
 		}
 		if( missing( bookmark ) )
-			rJava::.jcall( doc$obj, "V", "add" , paragrah)
-		else rJava::.jcall( doc$obj, "V", "insert", bookmark, paragrah )
+			.jcall( doc$obj, "V", "add" , paragrah)
+		else .jcall( doc$obj, "V", "insert", bookmark, paragrah )
 	} else stop("value must be an object of class 'set_of_paragraphs' or a character vector!")
 	
 	

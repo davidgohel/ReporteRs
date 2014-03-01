@@ -6,7 +6,6 @@
 #' @param filename \code{"character"} value, complete filename of the external image
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"html"}.
-#' @import base64
 #' @examples
 #' # Create a new document 
 #' doc = html( title = "title" )
@@ -23,15 +22,15 @@ addImage.html = function(doc, filename, ... ) {
 
 	slide = doc$current_slide 
 	
-	jimg = rJava::.jnew(class.html4r.ImagesList )
+	jimg = .jnew(class.html4r.ImagesList )
 	
 	for( i in 1:length( filename ) ){
 		.tempfile <- tempfile()
 		base64::encode(filename[i], .tempfile)
-		rJava::.jcall( jimg, "V", "addImage", as.character(paste(readLines(.tempfile), collapse = "\n")) )
+		.jcall( jimg, "V", "addImage", as.character(paste(readLines(.tempfile), collapse = "\n")) )
 		unlink(.tempfile)
 	}
-	out = rJava::.jcall( slide, "I", "add", jimg )
+	out = .jcall( slide, "I", "add", jimg )
 	if( out != 1 ){
 		stop( "Problem while trying to add image(s)." )
 	}

@@ -14,7 +14,7 @@
 #' @S3method styles docx
 
 styles.docx = function( doc, ... ) {
-	rJava::.jcall( doc$obj, "[S", "getStyleNames" )
+	.jcall( doc$obj, "[S", "getStyleNames" )
 	}
 
 

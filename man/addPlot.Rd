@@ -48,6 +48,7 @@
 }
 \examples{
 \dontrun{
+require( ggplot2 )
 # Add a base plot
 doc = addPlot( doc = doc, fun = plot
 		, x = rnorm( 100 )
@@ -64,7 +65,6 @@ doc = addPlot( doc = doc
 	)
 
 ## Add a ggplot2 and another plot
-require(ggplot2)
 doc = addPlot( doc = doc
 		, fun = function(){
 			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species

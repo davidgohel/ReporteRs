@@ -19,6 +19,7 @@
 #' This dimensions can be defined in the layout 
 #' of the PowerPoint template used to create the \code{pptx} object. 
 #' @examples
+#' require( ggplot2 )
 #' # Create a new document 
 #' doc = pptx( title = "title" )
 #' 
@@ -62,8 +63,8 @@ addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
 	, ... ) {
 	slide = doc$current_slide 
 	plot_first_id = doc$plot_first_id
-	id = rJava::.jcall( slide, "I", "getNextIndex"  )
-	maxid = rJava::.jcall( slide, "I", "getmax_shape"  )
+	id = .jcall( slide, "I", "getNextIndex"  )
+	maxid = .jcall( slide, "I", "getmax_shape"  )
 	
 	if( maxid-id < 1 ) stop( getSlideErrorString( shape_errors["NOROOMLEFT"] , "plot") )
 
@@ -72,11 +73,11 @@ addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
 	offxs = double( maxid-id )
 	offys = double( maxid-id )
 	j=0
-	LayoutName = rJava::.jcall( slide, "S", "getLayoutName" )
-	SlideLayout = rJava::.jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", LayoutName )
+	LayoutName = .jcall( slide, "S", "getLayoutName" )
+	SlideLayout = .jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", LayoutName )
 	
 	for(i in seq(id,maxid-1, by=1) ){
-		dims = rJava::.jcall( SlideLayout, "[I", "getContentDimensions", as.integer(i) )
+		dims = .jcall( SlideLayout, "[I", "getContentDimensions", as.integer(i) )
 		j = j + 1
 		widths[j] = dims[3] / 12700
 		heights[j] = dims[4] / 12700
@@ -106,8 +107,8 @@ addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
 			plotfiles = list.files( dirname , full.names = T )
 			for( i in 1:length( plotfiles ) ){
 				if( i <= nbplots ){
-					gr = rJava::.jnew(class.pptx4r.DrawingMLList, plotfiles[i]  )
-					out = rJava::.jcall( slide, "I", "add", gr )
+					gr = .jnew(class.pptx4r.DrawingMLList, plotfiles[i]  )
+					out = .jcall( slide, "I", "add", gr )
 					if( isSlideError( out ) ){
 						stop( getSlideErrorString( out , "dml") )
 					}	
@@ -131,7 +132,7 @@ addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
 			plotfiles = list.files( dirname , full.names = T )
 			for( i in 1:length( plotfiles ) ){
 				if( i <= nbplots ){
-					out = rJava::.jcall( slide, "I", "addPicture", plotfiles[i] )
+					out = .jcall( slide, "I", "addPicture", plotfiles[i] )
 					if( isSlideError( out ) ){
 						stop( getSlideErrorString( out , "png") )
 					}

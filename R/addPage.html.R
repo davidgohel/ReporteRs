@@ -34,18 +34,18 @@ addPage.html = function( doc, title, ... ) {
 	if( length( title ) != 1 )
 		stop("title must be a character vector of length 1.")
 	
-	slide = rJava::.jnew(class.html4r.HTMLPageContent, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
+	slide = .jnew(class.html4r.HTMLPageContent, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
 	
-	rJava::.jcall( slide , "V", "addJavascript", "js/jquery.min.js" )
-	rJava::.jcall( slide , "V", "addJavascript", "js/bootstrap.min.js" )
-	rJava::.jcall( slide , "V", "addJavascript", "js/raphael-min.js" )
+	.jcall( slide , "V", "addJavascript", "js/jquery.min.js" )
+	.jcall( slide , "V", "addJavascript", "js/bootstrap.min.js" )
+	.jcall( slide , "V", "addJavascript", "js/raphael-min.js" )
 	
-	rJava::.jcall( slide , "V", "addStylesheet", "css/bootstrap.min.css" )
-	rJava::.jcall( slide , "V", "addStylesheet", "css/html4r.css" )
-	rJava::.jcall( slide , "V", "addStylesheet", "css/highlight.css" )
+	.jcall( slide , "V", "addStylesheet", "css/bootstrap.min.css" )
+	.jcall( slide , "V", "addStylesheet", "css/html4r.css" )
+	.jcall( slide , "V", "addStylesheet", "css/highlight.css" )
 	
 	
-	rJava::.jcall( doc$obj , "V", "addNewPage", title, slide )
+	.jcall( doc$obj , "V", "addNewPage", title, slide )
 	doc$current_slide = slide
 	
 	doc

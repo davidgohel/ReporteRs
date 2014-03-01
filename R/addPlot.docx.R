@@ -23,6 +23,7 @@
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{"docx"}.
 #' @examples
+#' require( ggplot2 )
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' 
@@ -82,14 +83,14 @@ addPlot.docx = function(doc, fun
 		
 		# Send the graph to java that will 'encode64ize' and place it in a docx4J object
 		if( missing( bookmark ) )
-			rJava::.jcall( doc$obj, "V", "addImage", .jarray( plotfiles ), .jarray(dims)
+			.jcall( doc$obj, "V", "addImage", .jarray( plotfiles ), .jarray(dims)
 					, parStyle$text.align
 					, parStyle$padding.bottom
 					, parStyle$padding.top
 					, parStyle$padding.left
 					, parStyle$padding.right
 			)
-		else rJava::.jcall( doc$obj, "V", "insertImage", bookmark, .jarray( plotfiles ), .jarray(dims)
+		else .jcall( doc$obj, "V", "insertImage", bookmark, .jarray( plotfiles ), .jarray(dims)
 					, parStyle$text.align
 					, parStyle$padding.bottom
 					, parStyle$padding.top
@@ -97,7 +98,7 @@ addPlot.docx = function(doc, fun
 					, parStyle$padding.right
 			)
 	} else {
-		doc$plot_first_id = rJava::.jcall( doc$obj, "I", "getElementIndex")
+		doc$plot_first_id = .jcall( doc$obj, "I", "getElementIndex")
 		
 		filename = file.path( dirname, "dml", fsep = "/"  )
 		filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
@@ -109,13 +110,13 @@ addPlot.docx = function(doc, fun
 		dev.off()
 		doc$plot_first_id = doc$plot_first_id + get("start_id", env) + 1
 		
-		rJava::.jcall( doc$obj, "V", "incrementElementIndex", as.integer( doc$plot_first_id - get("start_id", env) ) )
+		.jcall( doc$obj, "V", "incrementElementIndex", as.integer( doc$plot_first_id - get("start_id", env) ) )
 		dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
 		plotfiles = list.files( dirname , full.names = T )
 
 		if( missing( bookmark ) ){
 			
-			rJava::.jcall( doc$obj, "V", "addDML", .jarray( plotfiles ), .jarray(dims)
+			.jcall( doc$obj, "V", "addDML", .jarray( plotfiles ), .jarray(dims)
 					, parStyle$text.align
 					, parStyle$padding.bottom
 					, parStyle$padding.top
@@ -123,7 +124,7 @@ addPlot.docx = function(doc, fun
 					, parStyle$padding.right
 					)
 		} else {
-			rJava::.jcall( doc$obj, "V", "insertDML", bookmark, .jarray( plotfiles ), .jarray(dims) 
+			.jcall( doc$obj, "V", "insertDML", bookmark, .jarray( plotfiles ), .jarray(dims) 
 					, parStyle$text.align
 					, parStyle$padding.bottom
 					, parStyle$padding.top

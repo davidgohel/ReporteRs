@@ -16,15 +16,15 @@ ParagraphSection = function(value, parProp ) {
 	
 	jparProp = .jParProperties(parProp)
 	
-	paragraphsSection = rJava::.jnew("org/lysis/reporters/texts/ParagraphsSection", jparProp)
+	paragraphsSection = .jnew("org/lysis/reporters/texts/ParagraphsSection", jparProp)
 	for( i in 1:length(value)){
 		current_value = Paragraph(value[[i]])
-		rJava::.jcall( paragraphsSection, "V", "addParagraph", current_value$jobj )
+		.jcall( paragraphsSection, "V", "addParagraph", current_value$jobj )
 	}
 	
 	out = list()
 	out$jobj = paragraphsSection
-	out$size = rJava::.jcall( paragraphsSection, "I", "size" )
+	out$size = .jcall( paragraphsSection, "I", "size" )
 	class( out ) = "ParagraphSection"
 	out
 }
@@ -38,7 +38,7 @@ length.ParagraphSection = function(x){
 #' @method print ParagraphSection
 #' @S3method print ParagraphSection
 print.ParagraphSection = function(x, ...){
-	out = rJava::.jcall( x$jobj, "S", "toString" )
+	out = .jcall( x$jobj, "S", "toString" )
 	cat(out)
 	invisible()
 }

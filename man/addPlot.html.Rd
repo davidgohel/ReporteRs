@@ -38,6 +38,7 @@
   Add a plot into the \code{html} object.
 }
 \examples{
+require( ggplot2 )
 # Create a new document
 doc = html( title = "title" )
 

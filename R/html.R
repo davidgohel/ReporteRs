@@ -20,16 +20,17 @@
 #'   \item \code{\link{addParagraph.html}} add texts
 #'   \item \code{\link{addPlot.html}} add plots
 #'   \item \code{\link{addTable.html}} add tables
+#'   \item \code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}
 #'   \item \code{\link{addRScript.html}} add R Script
 #' }
 #' Once object has content, user can write the htmls pages into a directory, see \code{\link{writeDoc.html}}.
 #' @export
 #' @examples
-#' \donttest{
+#' #START_TAG_TEST
 #' # Create a new document 
-#' library( ReporteRs )	
+#' require( ggplot2 )
 #' 	
-#' # PowerPoint document to write	
+#' # Web pages directory 
 #' html.directory <- "document"	
 #' 
 #' # Create a new document	
@@ -88,8 +89,10 @@
 #' # add dummy dataset and customise some options	
 #' doc <- addTable( doc	
 #' 		, data = data_ReporteRs				
-#' 		, header.labels = c( "Header 1", "Header 2", "Header 3", "Header 4", "Header 5", "Header 6" )				
-#' 		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2"), colspan = c(3, 3) )				
+#' 		, header.labels = c( "Header 1", "Header 2", "Header 3"
+#' 			, "Header 4", "Header 5", "Header 6" )				
+#' 		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
+#' 			, colspan = c(3, 3) )				
 #' 		, col.types = c( "character", "integer", "double", "date", "percent", "character" )	
 #' 		, columns.font.colors = list(
 #' 			col1 = c("#527578", "#84978F", "#ADA692", "#47423F")
@@ -144,15 +147,14 @@
 #' 
 #' doc = addFlexTable( doc, myFlexTable )
 #' html.files = writeDoc( doc, directory = html.directory )	
-#' # browseURL( html.files[1] )	
-#' }
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{pptx}}
 
 html = function( title = "untitled" ){
 	
 	
 	# java calls
-	obj = rJava::.jnew(class.html4r.document, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
+	obj = .jnew(class.html4r.document, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
 	
 	.Object = list( obj = obj
 		, title = title

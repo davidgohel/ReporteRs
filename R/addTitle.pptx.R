@@ -25,7 +25,7 @@
 addTitle.pptx = function( doc, value, ... ) {
 
 	slide = doc$current_slide 
-	out = rJava::.jcall( slide, "I", "addTitle", value )
+	out = .jcall( slide, "I", "addTitle", value )
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "title(or crttitle)") )
 	}

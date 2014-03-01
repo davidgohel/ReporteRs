@@ -34,14 +34,14 @@ addImage.docx = function(doc, filename, width = 6, height = 6
 	dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
 	# Send the graph to java that will 'encode64ize' and place it in a docx4J object
 	if( missing( bookmark ) )
-		rJava::.jcall( doc$obj, "V", "addImage", .jarray( filename ), .jarray(dims)
+		.jcall( doc$obj, "V", "addImage", .jarray( filename ), .jarray(dims)
 				, parStyle$text.align
 				, parStyle$padding.bottom
 				, parStyle$padding.top
 				, parStyle$padding.left
 				, parStyle$padding.right
 		)
-	else rJava::.jcall( doc$obj, "V", "insertImage", bookmark, .jarray( filename ), .jarray(dims)
+	else .jcall( doc$obj, "V", "insertImage", bookmark, .jarray( filename ), .jarray(dims)
 				, parStyle$text.align
 				, parStyle$padding.bottom
 				, parStyle$padding.top

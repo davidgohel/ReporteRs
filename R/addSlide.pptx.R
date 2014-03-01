@@ -18,9 +18,9 @@
 #' 
 #' On the View tab, in the Presentation Views group, click Slide Master. 
 #' 
-#' read http://office.microsoft.com/en-us/powerpoint-help/create-a-new-custom-layout-HA010079650.aspx 
+#' read \url{http://office.microsoft.com/en-us/powerpoint-help/create-a-new-custom-layout-HA010079650.aspx} 
 #' 
-#' read http://office.microsoft.com/en-us/powerpoint-help/change-a-placeholder-HA010064940.aspx
+#' read \url{http://office.microsoft.com/en-us/powerpoint-help/change-a-placeholder-HA010064940.aspx}
 #' 
 #' Function \code{slide.layouts} returns available layout names of the template used when pptx object has been created.
 #' It is important to know that when using addParagraph.pptx, paragraph and defaut font formats will be defined 
@@ -70,11 +70,11 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 		stop("Slide layout '", slide.layout, "' does not exist in defined layouts.")				
 	}
 	if( missing( bookmark ) )
-		slide = rJava::.jnew(class.pptx4r.SlideContent, slide.layout, doc$obj )
+		slide = .jnew(class.pptx4r.SlideContent, slide.layout, doc$obj )
 	else {
-		slide = rJava::.jnew(class.pptx4r.SlideContent, slide.layout, doc$obj, as.integer(bookmark) )		
+		slide = .jnew(class.pptx4r.SlideContent, slide.layout, doc$obj, as.integer(bookmark) )		
 	}
 	doc$current_slide = slide
-	doc$plot_first_id = rJava::.jcall( slide, "I", "getmax_shape"  ) + 1
+	doc$plot_first_id = .jcall( slide, "I", "getmax_shape"  ) + 1
 	doc
 }

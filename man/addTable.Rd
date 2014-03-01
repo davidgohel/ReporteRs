@@ -23,11 +23,11 @@
   \item{groupedheader.row}{a named list whose elements
   define the upper header row (grouped header). Optional.
   Elements of that list are \code{values} and
-  \code{colspan} (\code{list(values, colspan)}). Element
-  \code{values} is a character vector containing labels to
-  display in the grouped header row. Element \code{colspan}
-  is an integer vector containing number of columns to span
-  for each \code{values}.}
+  \code{colspan}. Element \code{values} is a character
+  vector containing labels to display in the grouped header
+  row. Element \code{colspan} is an integer vector
+  containing number of columns to span for each
+  \code{values}.}
 
   \item{span.columns}{a character vector specifying columns
   names where row merging should be done (if successive

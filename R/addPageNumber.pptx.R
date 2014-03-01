@@ -32,15 +32,15 @@
 
 addPageNumber.pptx = function(doc, value, ... ) {
 	
-#	shapeId = rJava::.jcall( doc$current_slide, "S", "getShapeId", "sln" )
+#	shapeId = .jcall( doc$current_slide, "S", "getShapeId", "sln" )
 #	if( is.null( shapeId ) ) 
 #		stop( "Can't find any shape of type 'Slide number' in the layout.")
 	
-#	sln = rJava::.jcall( doc$obj, "I", "getSlideNumber" )
+#	sln = .jcall( doc$obj, "I", "getSlideNumber" )
 	slide = doc$current_slide 
 	if( !missing( value ) )
-		out = rJava::.jcall( slide, "I", "addSlideNumber" , as.character(value))
-	else out = rJava::.jcall( slide, "I", "addSlideNumber" )
+		out = .jcall( slide, "I", "addSlideNumber" , as.character(value))
+	else out = .jcall( slide, "I", "addSlideNumber" )
 	
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "slide number") )

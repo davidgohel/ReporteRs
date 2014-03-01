@@ -28,7 +28,7 @@
 addImage.pptx = function(doc, filename, ... ) {
 	
 	slide = doc$current_slide 
-	out = rJava::.jcall( slide, "I", "addPicture", filename )
+	out = .jcall( slide, "I", "addPicture", filename )
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "image") )
 	}	

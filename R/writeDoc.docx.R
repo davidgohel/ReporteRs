@@ -33,7 +33,7 @@ writeDoc.docx = function(doc, file, ...) {
 			}, error = function( e ) F, warning = function ( e ) F , finally = T) )
 		stop("writeDoc: Cannot write to ", file)
 	
-	rJava::.jcall( doc$obj , "V", "writeDocxToStream", file )
+	.jcall( doc$obj , "V", "writeDocxToStream", file )
 	}
 
 

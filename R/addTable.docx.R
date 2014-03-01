@@ -10,7 +10,7 @@
 #' @param header.labels a character whose elements define labels to display in table headers instead of colnames. 
 #' Optional, if missing, headers will be filled with \code{data} column names.
 #' @param groupedheader.row a named list whose elements define the upper header row (grouped header). Optional. 
-#' Elements of that list are \\code{values} and \\code{colspan} (\code{list(values, colspan)}). Element \code{values} is a character vector containing labels 
+#' Elements of that list are \code{values} and \code{colspan}. Element \code{values} is a character vector containing labels 
 #' to display in the grouped header row. Element \code{colspan} is an integer vector containing number of columns to span 
 #' for each \code{values}.
 #' @param span.columns a character vector specifying columns names where row merging should be done (if successive values in a column are the same ; if data[p,j]==data[p-1,j] )
@@ -49,8 +49,10 @@
 #' # add dummy data 'data_ReporteRs' and customise some options
 #' doc <- addTable( doc
 #'		, data = data_ReporteRs
-#'		, header.labels = c( "Header 1", "Header 2", "Header 3", "Header 4", "Header 5", "Header 6" )
-#'		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2"), colspan = c(3, 3) )
+#'		, header.labels = c( "Header 1", "Header 2", "Header 3"
+#' 			, "Header 4", "Header 5", "Header 6" )
+#'		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
+#' 				, colspan = c(3, 3) )
 #'		, col.types = c( "character", "integer", "double", "date", "percent", "character" )
 #'		, columns.font.colors = list( 
 #' 			"col1" = c("#527578", "#84978F", "#ADA692", "#47423F")
@@ -96,7 +98,7 @@ addTable.docx = function(doc, data, layout.properties
 	}
 	
 	.jformats.object = table.format.2java( layout.properties, type = "docx" )
-	obj = rJava::.jnew(class.docx4r.DataTable, .jformats.object  )
+	obj = .jnew(class.docx4r.DataTable, .jformats.object  )
 	setData2Java( obj, data, header.labels, col.types, groupedheader.row, columns.bg.colors, columns.font.colors, row.names )
 
 	for(j in span.columns ){
@@ -110,11 +112,11 @@ addTable.docx = function(doc, data, layout.properties
 		     instructions[[i]] = c(1 , rep(2, groups.counts[i]-1 ) )
 		   }
 		}
-		rJava::.jcall( obj , "V", "setMergeInstructions", j, .jarray( as.integer( unlist(instructions) ) ) )
+		.jcall( obj , "V", "setMergeInstructions", j, .jarray( as.integer( unlist(instructions) ) ) )
 	}
 	if( missing( bookmark ) )
-		rJava::.jcall( doc$obj, "V", "add", obj, .jParProperties(parStyle) )
-	else rJava::.jcall( doc$obj, "V", "insert", bookmark, obj, .jParProperties(parStyle) )
+		.jcall( doc$obj, "V", "add", obj, .jParProperties(parStyle) )
+	else .jcall( doc$obj, "V", "insert", bookmark, obj, .jParProperties(parStyle) )
 	doc
 }
 
