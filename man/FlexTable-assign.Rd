@@ -28,7 +28,7 @@ myFlexTable = FlexTable( data = data_ReporteRs
 , header.columns = TRUE
 , row.names = FALSE )
 myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
-myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
+myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
 myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
 }
 \seealso{

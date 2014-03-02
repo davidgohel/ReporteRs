@@ -24,7 +24,7 @@
 #include "utils.h"
 
 
-//TODO:http://cran.r-project.org/doc/manuals/R-ints.html#Handling-text
+//http://cran.r-project.org/doc/manuals/R-ints.html#Handling-text
 
 void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 		double* descent, double* width, pDevDesc dev) {
@@ -41,7 +41,6 @@ void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 
 
 double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
-//	const char *p;
 	double sum;
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	updateFontInfo(dev, gc);
