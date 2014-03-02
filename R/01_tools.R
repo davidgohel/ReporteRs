@@ -1,4 +1,5 @@
 #' @import rJava
+#' @import ReporteRsjars
 #' @import base64
 #' @import highlight
 .onLoad= function(libname, pkgname){
@@ -307,3 +308,6 @@ check.fontfamily = function( fontfamily ){
 getHexColorCode = function( valid.color ){
 	rgb( t(col2rgb(valid.color)/255 ))
 }
+
+border.styles = c( "none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset" )
+

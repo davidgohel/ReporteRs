@@ -2,7 +2,7 @@
 \alias{addTOC.docx}
 \title{Insert a table of contents into a docx object}
 \usage{
-  \method{addTOC}{docx} (doc, stylename, ...)
+\method{addTOC}{docx}(doc, stylename, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"} where table of
@@ -14,20 +14,22 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  an object of class \code{"docx"}.
+an object of class \code{"docx"}.
 }
 \description{
-  Insert a table of contents into a \code{"docx"} object.
+Insert a table of contents into a \code{"docx"} object.
 }
 \details{
-  If stylename is not used, a classical table of content
-  will be produced.\cr If stylename is used, a custom table
-  of contents will be produced, pointing to entries that
-  have been formated with \code{stylename}. For example,
-  this can be used to produce a toc with only plots.
+If stylename is not used, a classical table of content will
+be produced.\cr If stylename is used, a custom table of
+contents will be produced, pointing to entries that have
+been formated with \code{stylename}. For example, this can
+be used to produce a toc with only plots.
 }
 \examples{
+#START_TAG_TEST
 require( ggplot2 )
+
 ### example 1
 # Create a new document
 doc = docx( title = "title" )
@@ -42,8 +44,9 @@ doc = addPageBreak(doc)
 doc = addTitle( doc, "My first title", level = 1 )
 doc = addTitle( doc, "My second title", level = 1 )
 
-# Write the object in file "document.docx"
-writeDoc( doc, "document.docx" )
+# Write the object in file "addTOC_example1.docx"
+writeDoc( doc, "addTOC_example1.docx" )
+
 
 ### example 2
 # Create a new document
@@ -73,12 +76,12 @@ doc = addParagraph( doc, value="graph example 2", stylename = "rPlotLegend" )
 # entries in the generated TOC
 doc <- addTOC(doc, stylename = "rPlotLegend")
 
-# Write the object in file "document.docx"
-writeDoc( doc, "document.docx" )
+# Write the object in file "addTOC_example2.docx"
+writeDoc( doc, "addTOC_example2.docx" )
+#STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addTitle.docx}} ,
-  \code{\link{styles.docx}},
-  \code{\link{addParagraph.docx}}
+\code{\link{docx}}, \code{\link{addTitle.docx}} ,
+\code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
 }
 

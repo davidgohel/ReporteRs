@@ -2,8 +2,7 @@
 \alias{addPlot}
 \title{Add a plot into a document object}
 \usage{
-  addPlot(doc, fun, pointsize = 12, vector.graphic = F,
-    ...)
+addPlot(doc, fun, pointsize = 12, vector.graphic = F, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -28,23 +27,23 @@
   methods..}
 }
 \value{
-  a document object
+a document object
 }
 \description{
-  Add a plot into a document object
+Add a plot into a document object
 }
 \details{
-  Plot parameters are specified with the \code{...}
-  argument. However, the most convenient usage is to wrap
-  the plot code into a function whose parameters will be
-  specified as '...'.
+Plot parameters are specified with the \code{...} argument.
+However, the most convenient usage is to wrap the plot code
+into a function whose parameters will be specified as
+'...'.
 
-  If you want to add ggplot2 or lattice plot, use
-  \code{print} function. See examples for more details.
-  \describe{ \item{vector.graphic}{If document is a pptx or
-  html document, vector graphics will always be displayed.
-  Don't use vector graphics if document is a docx and MS
-  Word version used to open the document is 2007.  } }
+If you want to add ggplot2 or lattice plot, use
+\code{print} function. See examples for more details.
+\describe{ \item{vector.graphic}{If document is a pptx or
+html document, vector graphics will always be displayed.
+Don't use vector graphics if document is a docx and MS Word
+version used to open the document is 2007.  } }
 }
 \examples{
 \dontrun{
@@ -75,8 +74,8 @@ doc = addPlot( doc = doc
 }
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addPlot.docx}} ,
-  \code{\link{pptx}}, \code{\link{addPlot.pptx}} ,
-  \code{\link{html}}, \code{\link{addPlot.html}}
+\code{\link{docx}}, \code{\link{addPlot.docx}} ,
+\code{\link{pptx}}, \code{\link{addPlot.pptx}} ,
+\code{\link{html}}, \code{\link{addPlot.html}}
 }
 

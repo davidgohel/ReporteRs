@@ -2,13 +2,10 @@
 \alias{addPlot.docx}
 \title{Add a plot into a docx object}
 \usage{
-  \method{addPlot}{docx} (doc, fun,
-    pointsize = getOption("ReporteRs-fontsize"),
-    vector.graphic = F, width = 6, height = 6,
-    fontname = getOption("ReporteRs-default-font"),
-    editable = TRUE, bookmark,
-    parStyle = parProperties(text.align = "center", padding = 5),
-    ...)
+\method{addPlot}{docx}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
+  vector.graphic = F, width = 6, height = 6,
+  fontname = getOption("ReporteRs-default-font"), editable = TRUE, bookmark,
+  parStyle = parProperties(text.align = "center", padding = 5), ...)
 }
 \arguments{
   \item{doc}{the \code{docx} to use}
@@ -49,18 +46,21 @@
   \item{...}{arguments for \code{fun}.}
 }
 \value{
-  an object of class \code{"docx"}.
+an object of class \code{"docx"}.
 }
 \description{
-  Add a plot into the \code{docx} object.
+Add a plot into the \code{docx} object.
 }
 \examples{
+#START_TAG_TEST
 require( ggplot2 )
+
 # Create a new document
 doc = docx( title = "title" )
 
 doc = addTitle( doc, "Plot 1", level = 1 )
-# Add a base plot
+# Add a base plot - set vector.graphic to FALSE if Word version
+# used to read the file is <= 2007
 doc = addPlot( doc, fun = plot
 		, x = rnorm( 100 )
 		, y = rnorm (100 )
@@ -78,10 +78,11 @@ doc = addPlot( doc = doc
 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
 	)
 
-# Write the object in file "document.docx"
-writeDoc( doc, "document.docx" )
+# Write the object in file "addPlot_example.docx"
+writeDoc( doc, "addPlot_example.docx" )
+#STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addPlot}}
+\code{\link{docx}}, \code{\link{addPlot}}
 }
 

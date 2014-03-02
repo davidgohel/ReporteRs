@@ -10,6 +10,7 @@
 #' @export
 #' @seealso \code{\link{addFlexTable}}
 #' @examples
+#' #START_TAG_TEST
 #' ## example 1
 #' headerRow = FlexRow()
 #' headerRow[1] = FlexCell( "Column 1", cellProp = cellProperties(background.color="#527578")  )
@@ -18,6 +19,7 @@
 #' ## example 2
 #' headerRow = FlexRow( c("Column 1", "Column 2")
 #' 	, cellProp = cellProperties(background.color="#527578") )
+#' #STOP_TAG_TEST
 FlexRow = function( values, colspan, textProp = textProperties(), parProp = parProperties(), cellProp = cellProperties()){
 	.Object = list()
 	.Object$jobj = .jnew(class.FlexRow)

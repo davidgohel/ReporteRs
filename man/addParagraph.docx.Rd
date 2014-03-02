@@ -2,8 +2,7 @@
 \alias{addParagraph.docx}
 \title{Insert a paragraph into a docx object}
 \usage{
-  \method{addParagraph}{docx} (doc, value, stylename,
-    bookmark, ...)
+\method{addParagraph}{docx}(doc, value, stylename, bookmark, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"} where paragraph
@@ -22,12 +21,13 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  an object of class \code{"docx"}.
+an object of class \code{"docx"}.
 }
 \description{
-  Insert paragraph(s) of text into a \code{docx} object
+Insert paragraph(s) of text into a \code{docx} object
 }
 \examples{
+#START_TAG_TEST
 # Create a new document
 doc = docx( title = "title" )
 
@@ -38,7 +38,6 @@ doc <- addParagraph(doc, "Hello Word!", "Normal");
 # format some of the pieces of text
 pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 	, textProperties(font.weight="bold") )
-my.pars = set_of_paragraphs( pot1 )
 pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 	, textProperties(color="blue") )
 my.pars = set_of_paragraphs( pot1, pot2 )
@@ -47,10 +46,10 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 # ("BulletList" is an existing style in the defaut template docx of the package)
 doc <- addParagraph(doc, my.pars, "BulletList");
 
-# Write the object in file "document.docx"
-writeDoc( doc, "document.docx" )
+writeDoc( doc, "addParagraph_example.docx" )
+#STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addParagraph}}
+\code{\link{docx}}, \code{\link{addParagraph}}
 }
 

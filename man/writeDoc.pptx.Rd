@@ -2,7 +2,7 @@
 \alias{writeDoc.pptx}
 \title{Write a pptx object in a pptx file}
 \usage{
-  \method{writeDoc}{pptx} (doc, file, ...)
+\method{writeDoc}{pptx}(doc, file, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"} that has to be
@@ -14,9 +14,10 @@
   \item{...}{further arguments, not used.}
 }
 \description{
-  Write the \code{"pptx"} object in a '.pptx' file.
+Write the \code{"pptx"} object in a '.pptx' file.
 }
 \examples{
+#START_TAG_TEST
 # Create a new document
 doc = pptx( title = "title" )
 
@@ -26,10 +27,11 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 # add a dummy text in the content shape
 doc <- addParagraph(doc, "Hello Word!")
 
-# Write the object in file "presentation.pptx"
-writeDoc( doc, "presentation.pptx" )
+# Write the object in file "writeDoc_example.pptx"
+writeDoc( doc, "writeDoc_example.pptx" )
+#STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{pptx}}, \code{\link{writeDoc}}
+\code{\link{pptx}}, \code{\link{writeDoc}}
 }
 

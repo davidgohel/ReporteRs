@@ -29,6 +29,7 @@
 #' @param ... addTable arguments - see \code{\link{addTable}}. 
 #' @return an object of class \code{"html"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = html( title = "title" )
 #' 
@@ -64,8 +65,9 @@
 #'	)
 #' 
 #' # write the html object in a directory
-#' pages = writeDoc( doc, "html_output_dir")
+#' pages = writeDoc( doc, "addTable_example")
 #' print( pages ) # print filenames of generated html pages
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{html}}, \code{\link{addTable}}, \code{\link{tableProperties}}
 #' @method addTable html
 #' @S3method addTable html

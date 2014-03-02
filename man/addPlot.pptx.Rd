@@ -2,11 +2,8 @@
 \alias{addPlot.pptx}
 \title{Add a plot into a pptx object}
 \usage{
-  \method{addPlot}{pptx} (doc, fun,
-    pointsize = getOption("ReporteRs-fontsize"),
-    vector.graphic = TRUE,
-    fontname = getOption("ReporteRs-default-font"),
-    editable = TRUE, ...)
+\method{addPlot}{pptx}(doc, fun, pointsize = 11, vector.graphic = TRUE,
+  fontname = getOption("ReporteRs-default-font"), editable = TRUE, ...)
 }
 \arguments{
   \item{doc}{the \code{pptx} to use}
@@ -30,22 +27,22 @@
   \item{...}{arguments for \code{fun}.}
 }
 \value{
-  an object of class \code{"pptx"}.
+an object of class \code{"pptx"}.
 }
 \description{
-  Add a plot to the current slide of an existing
-  \code{pptx} object.
+Add a plot to the current slide of an existing \code{pptx}
+object.
 }
 \details{
-  Width and height can't be controled here. They are
-  defined by the width and height of the shape that will
-  contain the graphics.
+Width and height can't be controled here. They are defined
+by the width and height of the shape that will contain the
+graphics.
 
-  This dimensions can be defined in the layout of the
-  PowerPoint template used to create the \code{pptx}
-  object.
+This dimensions can be defined in the layout of the
+PowerPoint template used to create the \code{pptx} object.
 }
 \examples{
+#START_TAG_TEST
 require( ggplot2 )
 # Create a new document
 doc = pptx( title = "title" )
@@ -78,10 +75,11 @@ doc = addPlot( doc
 		, vector.graphic = FALSE
 	)
 
-# Write the object in file "presentation.pptx"
-writeDoc( doc, "presentation.pptx" )
+# Write the object in file "addPlot_example.pptx"
+writeDoc( doc, "addPlot_example.pptx" )
+#STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{pptx}}, \code{\link{addPlot}}
+\code{\link{pptx}}, \code{\link{addPlot}}
 }
 

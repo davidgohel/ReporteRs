@@ -8,6 +8,7 @@
 #' 
 #' @return an object of class \code{"pptx"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = pptx( title = "title" )
 #' 
@@ -17,8 +18,9 @@
 #' # Here we fill the title shape with "My title"
 #' doc = addTitle( doc, "My title" )
 #' 
-#' # Write the object in file "presentation.pptx"
-#' writeDoc( doc, "presentation.pptx" )
+#' # Write the object in file "addTitle_example.pptx"
+#' writeDoc( doc, "addTitle_example.pptx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addTitle}}, \code{\link{addSlide.pptx}}
 #' @method addTitle pptx
 #' @S3method addTitle pptx

@@ -11,6 +11,7 @@
 #' @details
 #' Subtitle shape only exist in slide of type 'Title Slide'.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = pptx( title = "title" )
 #' 
@@ -19,8 +20,9 @@
 #' doc = addTitle( doc, "Presentation title" ) #set the main title
 #' doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
 #' 
-#' # Write the object in file "presentation.pptx"
-#' writeDoc( doc, "presentation.pptx" )
+#' # Write the object in file "addSubtitle_example.pptx"
+#' writeDoc( doc, "addSubtitle_example.pptx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addSubtitle}}
 #' @method addSubtitle pptx
 #' @S3method addSubtitle pptx

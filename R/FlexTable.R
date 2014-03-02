@@ -16,18 +16,21 @@
 #' @param par_format default paragraphs formatting properties for any data
 #' @param text_format default texts formatting properties for any data
 #' @export
-#' @seealso \code{\link{addFlexTable}}, \code{\link{FlexRow}}, \code{\link{FlexCell}}
-#' , \code{\link{pot}}, \code{\link{set_of_paragraphs}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}} 
 #' @examples
+#' #START_TAG_TEST
 #' data( data_ReporteRs )
+#' 
 #' myFlexTable = FlexTable( data = data_ReporteRs
-#' 	, span.columns = "col1"
-#' 	, header.columns = TRUE
+#' 	, span.columns = "col1", header.columns = TRUE
 #'  , row.names = FALSE )
+#' 
 #' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
 #' myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
+#' #STOP_TAG_TEST
+#' @seealso \code{\link{addFlexTable}}, \code{\link{FlexRow}}, \code{\link{FlexCell}}
+#' , \code{\link{pot}}, \code{\link{set_of_paragraphs}}, \code{\link{addFlexTable.docx}}
+#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}} 
 FlexTable = function(data, span.columns = character(0)
 	, header.columns = TRUE, row.names = FALSE
 	, cell_format = cellProperties()
@@ -122,11 +125,7 @@ FlexTable = function(data, span.columns = character(0)
 	class( out ) = c("FlexTable", "FlexElement")
 	
 	if( header.columns ){
-		headerRow = FlexRow()
-		for( j in 1:out$ncol )
-			headerRow[j] = FlexCell(pot( .colnames[j], text_format )
-				, parProp = par_format, cellProp = cell_format )
-		
+		headerRow = FlexRow(values = .colnames, textProp = text_format, parProp = par_format, cellProp = cell_format )
 		out = addHeaderRow( out, headerRow )
 	}
 	
@@ -424,3 +423,22 @@ updateContent.FlexTable = function( x, i, j, value ){
 	x
 }
 
+#setInnerBorder = function( border.width = 1, border.style = "solid", border.color = "black"){
+#
+#	if( is.numeric( border.width ) ) {
+#		if( as.integer( border.width ) < 0 || !is.finite( as.integer( border.width ) ) ) stop("invalid border.width : ", border.width )
+#	} else {
+#		stop("border.width must be a integer value >= 0")
+#	}
+#	
+#	if( is.character( border.style ) ) {
+#		match.arg( border.style, choices = border.styles, several.ok = F )
+#	} else {
+#		stop("border.style must be a character value.")
+#	}
+#	
+#	if( !is.color( border.color ) )
+#		stop("border.color must be a valid color.")
+#	
+#	
+#}

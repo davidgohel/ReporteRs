@@ -6,10 +6,11 @@
 #' @param x an object of class \code{"pptx"}
 #' @param ... further arguments, not used. 
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = pptx( title = "title" )
-#' 
 #' print( doc )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{print}}
 #' @method print pptx
 #' @S3method print pptx

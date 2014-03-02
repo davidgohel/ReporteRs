@@ -7,12 +7,19 @@
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"html"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = html( title = "title" )
-#' # add a page where to add R outputs with title 'page example'
+#' 
+#' # add a page where to add content
 #' doc = addPage( doc, title = "page example" )
-#' doc <- addImage(doc, file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" ) );
-#' writeDoc( doc, "image_html" )
+#' 
+#' # the file 'logo.jpg' only exists in R for Windows
+#' img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
+#' doc <- addImage(doc, img.file )
+#' 
+#' writeDoc( doc, "addImage_example" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{html}}, \code{\link{addPlot.html}}
 #' , \code{\link{addImage}}
 #' @method addImage html

@@ -17,7 +17,7 @@
 #' the style to use for title 2, etc.
 #' @param ... further arguments, not used. 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' doc <- docx( title = "My example" )
 #' styles( doc )
 #' # [1] "Normal"                  "Title1"                  "Title2"                 
@@ -33,7 +33,6 @@
 #' ,\code{\link{declareTitlesStyles}}
 #' @method declareTitlesStyles docx
 #' @S3method declareTitlesStyles docx
-
 declareTitlesStyles.docx = function( doc, stylenames, ... ) {
 	if( !all( is.element( stylenames, styles( doc ) ) ) ){
 		stop("Some of the stylenames are not in available styles (run styles on your object to list available styles.")

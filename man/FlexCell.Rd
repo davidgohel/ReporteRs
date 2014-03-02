@@ -2,8 +2,8 @@
 \alias{FlexCell}
 \title{Cell object for FlexTable}
 \usage{
-  FlexCell(value, colspan = 1, parProp = parProperties(),
-    cellProp = cellProperties())
+FlexCell(value, colspan = 1, parProp = parProperties(),
+  cellProp = cellProperties())
 }
 \arguments{
   \item{value}{a content value - a value of type
@@ -18,8 +18,8 @@
   \item{cellProp}{cellProperties to apply to content}
 }
 \description{
-  Create a representation of a cell that can be inserted in
-  a FlexTable.
+Create a representation of a cell that can be inserted in a
+FlexTable.
 }
 \examples{
 FlexCell( value = "Hello" )
@@ -27,7 +27,7 @@ FlexCell( value = "Hello", colspan = 3)
 FlexCell( "Column 1", cellProp = cellProperties(background.color="#527578")  )
 }
 \seealso{
-  \code{\link{addFlexTable}}, \code{\link{addHeaderRow}},
-  \code{\link{addFooterRow}}
+\code{\link{addFlexTable}}, \code{\link{addHeaderRow}},
+\code{\link{addFooterRow}}
 }
 

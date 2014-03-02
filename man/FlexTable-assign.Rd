@@ -2,7 +2,7 @@
 \alias{[<-.FlexTable}
 \title{Format FlexTable content}
 \usage{
-  \method{[}{FlexTable} (x, i, j) <- value
+\method{[}{FlexTable} (x, i, j) <- value
 }
 \arguments{
   \item{x}{the \code{FlexTable} object}
@@ -17,7 +17,7 @@
   \code{\link{textProperties}}.}
 }
 \description{
-  Format content of a FlexTable object
+Format content of a FlexTable object
 }
 \examples{
 data( data_ReporteRs )
@@ -30,6 +30,6 @@ myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
 myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
 }
 \seealso{
-  \code{\link{addFlexTable}}
+\code{\link{addFlexTable}}
 }
 

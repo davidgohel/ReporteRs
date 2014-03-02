@@ -6,9 +6,11 @@
 #' @param ... further arguments, not used. 
 #' @details Available styles will be paragraph styles of the base document (e.g. Normal, Title1, etc.).
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' styles(doc) #returns available paragraph styles in a character vector
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{styles}}
 #' @method styles docx
 #' @S3method styles docx

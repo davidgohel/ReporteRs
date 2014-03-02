@@ -8,6 +8,7 @@
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"pptx"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc <- pptx( )
 #' # Add a slide
@@ -22,12 +23,12 @@
 #' # format some of the pieces of text
 #' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
-#' my.pars = set_of_paragraphs( pot1 )
 #' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 #' 	, textProperties(color="blue") )
 #' my.pars = set_of_paragraphs( pot1, pot2 )
 #' doc <- addParagraph(doc, my.pars )
 #' writeDoc( doc, "addParagraph_example.pptx")
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addParagraph}}
 #' @method addParagraph pptx
 #' @S3method addParagraph pptx

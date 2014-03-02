@@ -11,12 +11,15 @@
 #' If layout is specified, the layout representation will be produced in a plot. 
 #' This can be usefull to check available shapes.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = pptx( title = "title" )
+#' 
 #' slide.layouts(doc)
 #' 
 #' # plot the layout "Two Content"
 #' slide.layouts(doc, layout = "Two Content" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}
 #' @method slide.layouts pptx
 #' @S3method slide.layouts pptx

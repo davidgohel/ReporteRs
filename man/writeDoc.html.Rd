@@ -2,7 +2,7 @@
 \alias{writeDoc.html}
 \title{Write a html object in a html file}
 \usage{
-  \method{writeDoc}{html} (doc, directory, ...)
+\method{writeDoc}{html}(doc, directory, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"} that has to be
@@ -14,14 +14,15 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  the function a character vector containing generated html
-  documents filenames.
+the function a character vector containing generated html
+documents filenames.
 }
 \description{
-  Write the \code{"html"} object in '.html' files located
-  in a specified directory.
+Write the \code{"html"} object in '.html' files located in
+a specified directory.
 }
 \examples{
+#START_TAG_TEST
 # Create a new document
 doc = html( title = "title" )
 
@@ -31,10 +32,11 @@ doc = addPage( doc, title = "page example" )
 doc <- addTable(doc, iris )
 
 # write the html object in a directory
-pages = writeDoc( doc, "html_output_dir")
+pages = writeDoc( doc, "writeDoc_example")
 print( pages ) # print filenames of generated html pages
+#STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{html}}, \code{\link{writeDoc}}
+\code{\link{html}}, \code{\link{writeDoc}}
 }
 

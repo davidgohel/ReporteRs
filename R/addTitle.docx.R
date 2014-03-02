@@ -22,6 +22,7 @@
 #' will be able then to add a table of content in your Word document.
 #' @return an object of class \code{"docx"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' 
@@ -30,9 +31,11 @@
 #' 
 #' # add another title (level 2)
 #' doc = addTitle( doc, "My first sub-title", level = 2 )
-#' doc <- addParagraph(doc, "Hello Word!", "Normal");
-#' # Write the object in file "document.docx"
-#' writeDoc( doc, "document.docx" )
+#' doc <- addParagraph(doc, "Hello Word!", stylename = "Normal")
+#' 
+#' # Write the object in file "addTitle_example.docx"
+#' writeDoc( doc, "addTitle_example.docx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{declareTitlesStyles.docx}}, \code{\link{styles.docx}}
 #' @method addTitle docx

@@ -2,7 +2,7 @@
 \alias{addPageNumber.pptx}
 \title{Insert a page number shape into a document pptx object}
 \usage{
-  \method{addPageNumber}{pptx} (doc, value, ...)
+\method{addPageNumber}{pptx}(doc, value, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"}}
@@ -14,19 +14,22 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  a \code{pptx} document object
+a \code{pptx} document object
 }
 \description{
-  Insert a page number shape into the current slide of a
-  \code{pptx} object.
+Insert a page number shape into the current slide of a
+\code{pptx} object.
 }
 \examples{
+#START_TAG_TEST
 # Create a new document
 doc = pptx( title = "title" )
+
 # add a slide with layout "Title Slide"
 doc = addSlide( doc, slide.layout = "Title Slide" )
 doc = addTitle( doc, "Presentation title" ) #set the main title
-doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
+#set the sub-title
+doc = addSubtitle( doc , "This document is generated with ReporteRs.")
 
 ## add a page number on the current slide
 doc = addPageNumber( doc )
@@ -36,10 +39,11 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addPageNumber( doc, value = "Page number text")
 
 # Write the object in file "presentation.pptx"
-writeDoc( doc, "presentation.pptx" )
+writeDoc( doc, "addPageNumber_example.pptx" )
+#STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{pptx}}, \code{\link{addDate.pptx}} ,
-  \code{\link{addPageNumber}}
+\code{\link{pptx}}, \code{\link{addDate.pptx}} ,
+\code{\link{addPageNumber}}
 }
 

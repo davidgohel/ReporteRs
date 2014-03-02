@@ -4,15 +4,17 @@ these components are included below):
 
 - jQuery
 	http://jquery.com/
+	
 - Bootstrap
 	http://getbootstrap.com/
+	
 - raphaeljs
 	http://raphaeljs.com/
+	
 - docx4j (which use Apache XML Graphics Commons, Apache Commons IO, Apache 
          Commons Lang, Apache Commons Logging and Apache Log4j and  SLF4J)
 	http://www.docx4java.org
-
-
+	Theses jars are located in package ReporteRsjars.
 
 
 
@@ -94,7 +96,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-docx4j, Apache XML Graphics Commons, Apache Commons IO, Apache Commons Lang, Apache Commons Logging and Apache Log4j License
+docx4j, Apache XML Graphics Commons, Apache Commons IO
+, Apache Commons Lang, Apache Commons Logging and Apache Log4j License
 ----------------------------------------------------------------------
 
 

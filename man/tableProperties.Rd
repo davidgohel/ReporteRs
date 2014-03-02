@@ -2,39 +2,33 @@
 \alias{tableProperties}
 \title{Table formating properties}
 \usage{
-  tableProperties(header.text = textProperties(font.size = 12, font.weight = "bold"),
-    header.par = parProperties(padding = 3, text.align = "left"),
-    header.cell = cellProperties(border.width = 1, background.color = "#e8eaeb"),
-    groupedheader.text = textProperties(font.size = 12, font.weight = "bold"),
-    groupedheader.par = parProperties(padding = 3, text.align = "left"),
-    groupedheader.cell = cellProperties(border.width = 1, background.color = "#e8eaeb"),
-    double.text = textProperties(font.size = 12),
-    double.par = parProperties(padding = 3, text.align = "left"),
-    double.cell = cellProperties(),
-    integer.text = textProperties(font.size = 12),
-    integer.par = parProperties(padding = 3, text.align = "left"),
-    integer.cell = cellProperties(),
-    percent.text = textProperties(font.size = 12),
-    percent.par = parProperties(padding = 3, text.align = "left"),
-    percent.cell = cellProperties(),
-    character.text = textProperties(font.size = 12),
-    character.par = parProperties(padding = 3, text.align = "left"),
-    character.cell = cellProperties(),
-    date.text = textProperties(font.size = 12, font.style = "italic"),
-    date.par = parProperties(padding = 3, text.align = "left"),
-    date.cell = cellProperties(),
-    datetime.text = textProperties(font.size = 12, font.style = "italic"),
-    datetime.par = parProperties(padding = 3, text.align = "left"),
-    datetime.cell = cellProperties(),
-    logical.text = textProperties(font.size = 12, font.style = "italic"),
-    logical.par = parProperties(padding = 3, text.align = "left"),
-    logical.cell = cellProperties(),
-    percent.addsymbol = "\%",
-    locale.language = getOption("ReporteRs-locale.language"),
-    locale.region = getOption("ReporteRs-locale.region"),
-    fraction.double.digit = 4L,
-    fraction.percent.digit = 3L, data.cell, data.par,
-    data.text)
+tableProperties(header.text = textProperties(font.size = 12, font.weight =
+  "bold"), header.par = parProperties(padding = 3, text.align = "left"),
+  header.cell = cellProperties(border.width = 1, background.color =
+  "#e8eaeb"), groupedheader.text = textProperties(font.size = 12, font.weight
+  = "bold"), groupedheader.par = parProperties(padding = 3, text.align =
+  "left"), groupedheader.cell = cellProperties(border.width = 1,
+  background.color = "#e8eaeb"), double.text = textProperties(font.size = 12),
+  double.par = parProperties(padding = 3, text.align = "left"),
+  double.cell = cellProperties(), integer.text = textProperties(font.size =
+  12), integer.par = parProperties(padding = 3, text.align = "left"),
+  integer.cell = cellProperties(), percent.text = textProperties(font.size =
+  12), percent.par = parProperties(padding = 3, text.align = "left"),
+  percent.cell = cellProperties(), character.text = textProperties(font.size
+  = 12), character.par = parProperties(padding = 3, text.align = "left"),
+  character.cell = cellProperties(), date.text = textProperties(font.size =
+  12, font.style = "italic"), date.par = parProperties(padding = 3, text.align
+  = "left"), date.cell = cellProperties(),
+  datetime.text = textProperties(font.size = 12, font.style = "italic"),
+  datetime.par = parProperties(padding = 3, text.align = "left"),
+  datetime.cell = cellProperties(), logical.text = textProperties(font.size
+  = 12, font.style = "italic"), logical.par = parProperties(padding = 3,
+  text.align = "left"), logical.cell = cellProperties(),
+  percent.addsymbol = "\%",
+  locale.language = getOption("ReporteRs-locale.language"),
+  locale.region = getOption("ReporteRs-locale.region"),
+  fraction.double.digit = 4L, fraction.percent.digit = 3L, data.cell,
+  data.par, data.text)
 }
 \arguments{
   \item{data.cell}{cell formatting properties for columns
@@ -149,19 +143,18 @@
   etc.) - default to getOption("ReporteRs-locale.region")}
 }
 \description{
-  Create an object that describes table formating
-  properties.
+Create an object that describes table formating properties.
 }
 \details{
-  tableProperties is used to control table format when
-  addTable is used. One can customize headers (or grouped
-  headers) and content. Headers share all the same format.
-  Content is formated according to its data type
-  (\code{col.types} argument in \code{\link{addTable}}).
-  "double" columns share all the same format, "character"
-  columns share all the same format, etc. Conditionnal
-  formating is not specified in tableProperties but in
-  \code{\link{addTable}}.
+tableProperties is used to control table format when
+addTable is used. One can customize headers (or grouped
+headers) and content. Headers share all the same format.
+Content is formated according to its data type
+(\code{col.types} argument in \code{\link{addTable}}).
+"double" columns share all the same format, "character"
+columns share all the same format, etc. Conditionnal
+formating is not specified in tableProperties but in
+\code{\link{addTable}}.
 }
 \examples{
 # define table properties - set headers aligned on the right, font color
@@ -171,6 +164,6 @@ tableProperties( header.text = textProperties(color="gray", font.size = 12)
 )
 }
 \seealso{
-  \code{\link{addTable}}
+\code{\link{addTable}}
 }
 

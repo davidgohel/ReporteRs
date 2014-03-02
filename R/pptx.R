@@ -37,22 +37,26 @@
 #' require( ggplot2 )
 #' 
 #' # PowerPoint document to write
-#' pptx.file <- "presentation.pptx"
+#' pptx.file <- "document_example.pptx"
 #' 
+#' # set default font to 28pt
+#' options("ReporteRs-fontsize" = 28)
 #' 
 #' # Create a new document
 #' doc = pptx( title = "title" )
+#' 
 #' # display layouts names
 #' slide.layouts( doc )
 #' 
 #' # add a slide with layout "Title Slide"
 #' doc = addSlide( doc, slide.layout = "Title Slide" )
+#' 
 #' doc = addTitle( doc, "Presentation title" ) #set the main title
 #' doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
 #' 
 #' # add a slide with layout "Title and Content" then add content
 #' doc = addSlide( doc, slide.layout = "Two Content" )
-#' doc = addTitle( doc, "Texts demo" )
+#' doc = addTitle( doc, "Texts demo" ) #set the main title
 #' texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 #' , "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
 #' , "Quisque dictum tristique ligula."
@@ -62,75 +66,30 @@
 #' 
 #' # Add "My tailor is rich" and "Cats and Dogs"
 #' # format some of the pieces of text
-#' pot1 = pot("My tailor", textProperties(color="red"
-#' 	, font.size = 28 ) ) + " is " + pot("rich"		
-#' 	, textProperties(font.weight="bold") )		
-#' my.pars = set_of_paragraphs( pot1 )
-#' pot2 = pot("Cats", textProperties(color="red", font.size = 28)
-#' ) + " and " + pot("Dogs", textProperties(color="blue", font.size = 28) )
-#' my.pars = set_of_paragraphs( pot1, pot2 )
-#' doc <- addParagraph(doc, my.pars )
+#' # Add "My tailor is rich" and "Cats and Dogs"
+#' # format some of the pieces of text
+#' pot1 = pot("My tailor"
+#'      , textProperties(color="red") ) + " is " + pot("rich"
+#'              , textProperties(font.weight="bold") )
+#' pot2 = pot("Cats", textProperties(color="red")
+#' ) + " and " + pot("Dogs", textProperties(color="blue") )
+#' doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 #' 
 #' 
 #' myplot = qplot(Sepal.Length, Petal.Length
-#' 	, data = iris, color = Species		
-#' 	, size = Petal.Width, alpha = I(0.7)		
-#' )
-#' 
-#' # add a slide with layout "Section Header" then add content
-#' doc = addSlide( doc, slide.layout = "Section Header" )
-#' doc = addTitle( doc, "Plot examples", )
-#' doc = addParagraph( doc, "Here we will output plots" )
-#' 
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' doc = addTitle( doc, "Plot example 1" )
-#' doc = addPlot( doc, function( ) print( myplot ) )
-#' 
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' doc = addTitle( doc, "Plot example 2" )
-#' doc = addPlot( doc, function( ) {
-#' 	print( ggplot(iris, aes(Sepal.Length, fill = Species)) + geom_density(alpha = 0.7) )		
-#' 	}		
+#'      , data = iris, color = Species
+#'      , size = Petal.Width, alpha = I(0.7)
 #' )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' doc = addTitle( doc, "Plot example 3")
-#' doc = addPlot( doc, function( ) {
-#' 	plot(iris$Sepal.Length, iris$Petal.Length, col = iris$Species)		
-#' 	}, fontname = "Arial"		
-#' )
 #' 
-#' # add a slide with layout "Section Header" then add content
-#' doc = addSlide( doc, slide.layout = "Section Header" )
-#' doc = addTitle( doc, "Table examples", )
-#' doc = addParagraph( doc, "Here we will output table" )
+#' # Add title and then 'myplot' 
+#' doc = addTitle( doc, "Plot example" )
+#' doc = addPlot( doc, function( ) print( myplot ), pointsize = 11 )
 #' 
-#' # add a slide with layout "Comparison"
-#' doc = addSlide( doc, slide.layout = "Comparison" )
-#' doc = addTitle( doc, "Example 1 and 2" )
-#' 
-#' doc = addParagraph( doc, "Simple add" )
-#' # add iris sample
+#' doc = addSlide( doc, slide.layout = "Title and Content" )
+#' # Add title and then a sample of iris
+#' doc = addTitle( doc, "Table example" )
 #' doc = addTable( doc, data = iris[25:33, ] )
-#' 
-#' doc = addParagraph( doc, "Customized table add", stylename="Normal" )
-#' data( data_ReporteRs )
-#' # add dummy dataset and customise some options
-#' doc <- addTable( doc
-#' 	, data = data_ReporteRs		
-#' 	, header.labels = c( "Header 1", "Header 2", "Header 3"
-#' 		, "Header 4", "Header 5", "Header 6" )		
-#' 	, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
-#' 		, colspan = c(3, 3) )		
-#' 	, col.types = c( "character", "integer", "double", "date", "percent", "character" )		
-#' 	, columns.font.colors = list(		
-#' 		col1 = c("#527578", "#84978F", "#ADA692", "#47423F")	
-#' 		, "col3" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540")	
-#' 	)		
-#' 	, columns.bg.colors = list(		
-#' 		col2 = c("#527578", "#84978F", "#ADA692", "#47423F")	
-#' 		, "col4" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540")	
-#' 	)		
-#' )
 #' 
 #' # write the doc
 #' writeDoc( doc, pptx.file)

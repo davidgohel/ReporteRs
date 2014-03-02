@@ -13,6 +13,7 @@
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"html"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = html( title = "title" )
 #' 
@@ -20,7 +21,7 @@
 #' doc = addPage( doc, title = "page example 1" )
 #' 
 #' # Add "Hello World" into the document doc
-#' doc <- addParagraph(doc, "Hello Word!", stylename = "text-primary", parent.type = "div")
+#' doc <- addParagraph(doc, "Hello Word!")
 #' 
 #' # add a page where to add R outputs with title 'page example 2'
 #' doc = addPage( doc, title = "page example 2" )
@@ -29,17 +30,17 @@
 #' # format some of the pieces of text
 #' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
-#' my.pars = set_of_paragraphs( pot1 )
 #' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 #' 	, textProperties(color="blue") )
 #' my.pars = set_of_paragraphs( pot1, pot2 )
 #' 
 #' # used parent.type = "ul" so that paragraphs will be preceded by bullet points
-#' doc <- addParagraph(doc, my.pars, stylename = "text-primary", parent.type = "ul")
+#' doc <- addParagraph(doc, my.pars, parent.type = "ul")
 #' 
 #' # write the html object in a directory
-#' pages = writeDoc( doc, "html_output_dir")
+#' pages = writeDoc( doc, "addParagraph_example")
 #' print( pages ) # print filenames of generated html pages
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}
 #' , \code{\link{addTOC.docx}}, \code{\link{addParagraph}}
 #' @method addParagraph html

@@ -34,6 +34,7 @@
 #' @param ... addTable arguments - see \code{\link{addTable}}. 
 #' @return an object of class \code{"docx"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' 
@@ -64,8 +65,9 @@
 #' 			)
 #'	)
 #' 
-#' # Write the object in file "document.docx"
-#' writeDoc( doc, "document.docx" )
+#' # Write the object in file "addTable_example.docx"
+#' writeDoc( doc, "addTable_example.docx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addTable}}, \code{\link{tableProperties}}
 #' @method addTable docx
 #' @S3method addTable docx

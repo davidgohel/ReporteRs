@@ -7,8 +7,11 @@
 #' @param ... further arguments, not used. 
 #' @return a document object
 #' @examples
+#' #START_TAG_TEST
+#' 
 #' # Create a new document 
 #' doc = pptx( title = "title" )
+#' 
 #' # add a slide with layout "Title Slide"
 #' doc = addSlide( doc, slide.layout = "Title Slide" )
 #' doc = addTitle( doc, "Presentation title" ) #set the main title
@@ -17,8 +20,8 @@
 #' ## add a page number on the current slide
 #' doc = addFooter( doc, "Hi!" )
 #' 
-#' # Write the object in file "presentation.pptx"
-#' writeDoc( doc, "presentation.pptx" )
+#' writeDoc( doc, "addFooter_example.pptx" )
+#' #STOP_TAG_TEST
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addDate.pptx}}
 #' , \code{\link{addPageNumber.pptx}}, \code{\link{addFooter}} 

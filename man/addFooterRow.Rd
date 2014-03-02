@@ -2,7 +2,7 @@
 \alias{addFooterRow}
 \title{add footer in a FlexTable}
 \usage{
-  addFooterRow(x, value)
+addFooterRow(x, value)
 }
 \arguments{
   \item{x}{a \code{FlexTable} object}
@@ -11,7 +11,7 @@
   row}
 }
 \description{
-  add a footer row in a FlexTable
+add a footer row in a FlexTable
 }
 \examples{
 data( data_ReporteRs )
@@ -29,6 +29,6 @@ for(i in 1:ncol(data_ReporteRs))
 myFlexTable = addFooterRow( myFlexTable, footerRow)
 }
 \seealso{
-  \code{\link{FlexTable}}
+\code{\link{FlexTable}}
 }
 

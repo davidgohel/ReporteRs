@@ -10,6 +10,7 @@
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"docx"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' 
@@ -20,7 +21,6 @@
 #' # format some of the pieces of text
 #' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
-#' my.pars = set_of_paragraphs( pot1 )
 #' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 #' 	, textProperties(color="blue") )
 #' my.pars = set_of_paragraphs( pot1, pot2 )
@@ -29,8 +29,8 @@
 #' # ("BulletList" is an existing style in the defaut template docx of the package)
 #' doc <- addParagraph(doc, my.pars, "BulletList");
 #' 
-#' # Write the object in file "document.docx"
-#' writeDoc( doc, "document.docx" )
+#' writeDoc( doc, "addParagraph_example.docx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph}}
 #' @method addParagraph docx
 #' @S3method addParagraph docx

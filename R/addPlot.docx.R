@@ -23,12 +23,15 @@
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{"docx"}.
 #' @examples
+#' #START_TAG_TEST
 #' require( ggplot2 )
+#' 
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' 
 #' doc = addTitle( doc, "Plot 1", level = 1 )
-#' # Add a base plot
+#' # Add a base plot - set vector.graphic to FALSE if Word version 
+#' # used to read the file is <= 2007
 #' doc = addPlot( doc, fun = plot
 #' 		, x = rnorm( 100 )
 #' 		, y = rnorm (100 )
@@ -46,8 +49,9 @@
 #' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
 #' 	)
 #' 
-#' # Write the object in file "document.docx"
-#' writeDoc( doc, "document.docx" )
+#' # Write the object in file "addPlot_example.docx"
+#' writeDoc( doc, "addPlot_example.docx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addPlot}}
 #' @method addPlot docx
 #' @S3method addPlot docx

@@ -9,8 +9,10 @@
 #' of text where some texts are not all formated the same.
 #' @export
 #' @examples
+#' #START_TAG_TEST
 #' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
 #' , \code{\link{pptx}}, \code{\link{docx}}, \code{\link{html}}
 pot = function( value , format = textProperties() ){

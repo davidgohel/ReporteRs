@@ -13,14 +13,17 @@
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"docx"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' 
+#' # the file 'logo.jpg' only exists in R for Windows
 #' img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-#' doc <- addImage(doc, img.file )#work with only windows
+#' doc <- addImage(doc, img.file )
 #' 
-#' # Write the object in file "document.docx"
-#' writeDoc( doc, "document.docx" )
+#' # Write the object in file "addImage_example.docx"
+#' writeDoc( doc, "addImage_example.docx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
 #' , \code{\link{addImage}}
 #' @method addImage docx
@@ -32,6 +35,7 @@ addImage.docx = function(doc, filename, width = 6, height = 6
 	, ... ) {
 
 	dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
+	
 	# Send the graph to java that will 'encode64ize' and place it in a docx4J object
 	if( missing( bookmark ) )
 		.jcall( doc$obj, "V", "addImage", .jarray( filename ), .jarray(dims)

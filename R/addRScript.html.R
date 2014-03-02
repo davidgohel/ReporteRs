@@ -16,11 +16,10 @@
 #' # add a page where to add R outputs with title 'page example'
 #' doc = addPage( doc, title = "page example" )
 #' 
-#' # add iris dataset as a table in the page
 #' doc <- addRScript(doc, text = "ls()" )
 #' 
 #' # write the html object in a directory
-#' pages = writeDoc( doc, "html_output_dir")
+#' pages = writeDoc( doc, "addRScript_example")
 #' print( pages ) # print filenames of generated html pages
 #' }
 #' @seealso \code{\link{html}}, \code{\link{addRScript}}
@@ -33,13 +32,12 @@ addRScript.html = function(doc, file, text, show_line_numbers = T, ... ) {
 	} else {
 		myexpr = parse( file = file )
 	}
-	tmpfile = tempfile()
-	sink(tmpfile)
-	highlight::highlight( parse.output = myexpr
+
+	str = highlight( parse.output = myexpr
 		, renderer = renderer_html(document = F, header = NULL, footer = NULL)
-		, show_line_numbers = FALSE )
-	sink()
-	RScript = .jnew(class.html4r.RScript, as.character(paste(readLines(tmpfile, warn = FALSE), collapse = "\n" ) ) )
+		, show_line_numbers = FALSE, output = NULL )
+		
+	RScript = .jnew(class.html4r.RScript, as.character(paste(str, collapse = "\n" ) ) )
 	out = .jcall( doc$current_slide , "I", "add", RScript )
 	if( out != 1 ){
 		stop( "Problem while trying to add RScript." )

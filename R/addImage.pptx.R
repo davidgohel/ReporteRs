@@ -10,16 +10,19 @@
 #' See \code{\link{slide.layouts.pptx}} to view the slide layout.
 #' @return an object of class \code{"pptx"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = pptx( title = "title" )
+#' 
 #' # add a slide with layout "Title and Content" then add an image
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' 
+#' # the file 'logo.jpg' only exists in R for Windows
 #' img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-#' doc <- addImage(doc, img.file )#work with only windows
+#' doc <- addImage(doc, img.file )
 #' 
-#' # Write the object in file "presentation.pptx"
-#' writeDoc( doc, "presentation.pptx" )
+#' writeDoc( doc, "addImage_example.pptx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot.pptx}}
 #' , \code{\link{addImage}}
 #' @method addImage pptx

@@ -31,6 +31,7 @@
 #' , this has to be done in the PowerPoint template used when creating the \code{pptx} object. 
 #' @return an object of class \code{"pptx"}.
 #' @examples 
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = pptx( title = "title" )
 #' 
@@ -55,9 +56,9 @@
 #' # to see available layouts :
 #' slide.layouts( doc )
 #' 
-#' # Write the object in file "presentation.pptx"
-#' writeDoc( doc, "presentation.pptx" )
-#' 
+#' # Write the object in file "addSlide_example.pptx"
+#' writeDoc( doc, "addSlide_example.pptx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{addTitle.pptx}}, \code{\link{slide.layouts}}
 #' , \code{\link{pptx}}, \code{\link{addSlide}}
 #' @method addSlide pptx

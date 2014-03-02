@@ -19,6 +19,7 @@
 #' This dimensions can be defined in the layout 
 #' of the PowerPoint template used to create the \code{pptx} object. 
 #' @examples
+#' #START_TAG_TEST
 #' require( ggplot2 )
 #' # Create a new document 
 #' doc = pptx( title = "title" )
@@ -51,13 +52,14 @@
 #' 		, vector.graphic = FALSE
 #' 	)
 #' 
-#' # Write the object in file "presentation.pptx"
-#' writeDoc( doc, "presentation.pptx" )
+#' # Write the object in file "addPlot_example.pptx"
+#' writeDoc( doc, "addPlot_example.pptx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
 #' @method addPlot pptx
 #' @S3method addPlot pptx
 
-addPlot.pptx = function(doc, fun, pointsize=getOption("ReporteRs-fontsize")
+addPlot.pptx = function(doc, fun, pointsize=11
 	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
 	, editable = TRUE
 	, ... ) {

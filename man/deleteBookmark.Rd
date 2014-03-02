@@ -2,7 +2,7 @@
 \alias{deleteBookmark}
 \title{delete a bookmark into a docx object}
 \usage{
-  deleteBookmark(doc, bookmark)
+deleteBookmark(doc, bookmark)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"}}
@@ -11,9 +11,9 @@
   to delete}
 }
 \description{
-  delete a bookmark into a docx object
+delete a bookmark into a docx object
 }
 \seealso{
-  \code{\link{docx}}
+\code{\link{docx}}
 }
 

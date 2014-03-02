@@ -8,15 +8,21 @@
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"html"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = html( title = "title" )
+#' 
 #' # add a page where to write
 #' doc = addPage( doc, title = "page example" )
+#' 
 #' doc = addTitle( doc, "My first title", level = 1 )
 #' doc = addTitle( doc, "My first sub-title", level = 2 )
-#' doc <- addParagraph(doc, "Hello Word!", "Normal");
-#' # writes document in directory "Hello_Word"
-#' writeDoc( doc, "Hello_Word" )
+#' 
+#' doc <- addParagraph(doc, "Hello Word!" )
+#' 
+#' # writes document in directory "addTitle_example"
+#' writeDoc( doc, "addTitle_example" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{html}}, \code{\link{addTitle}}
 #' @method addTitle html
 #' @S3method addTitle html

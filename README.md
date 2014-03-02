@@ -30,12 +30,14 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 From an R console (R >= 3.0):
 
     install.packages("devtools")
+    devtools::install_github('ReporteRsjars', 'davidgohel')
     devtools::install_github('ReporteRs', 'davidgohel')
 
 **Binary package**
 
-A binary package is available here:
-https://github.com/davidgohel/ReporteRs/releases/tag/v0.2
+A packages are available here:
+https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.1
+https://github.com/davidgohel/ReporteRs/releases/tag/v0.3
     
 	
 Getting Started

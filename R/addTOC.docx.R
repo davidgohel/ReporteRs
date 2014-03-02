@@ -14,7 +14,9 @@
 #' 
 #' @return an object of class \code{"docx"}.
 #' @examples
+#' #START_TAG_TEST
 #' require( ggplot2 )
+#' 
 #' ### example 1
 #' # Create a new document 
 #' doc = docx( title = "title" )
@@ -29,8 +31,9 @@
 #' doc = addTitle( doc, "My first title", level = 1 )
 #' doc = addTitle( doc, "My second title", level = 1 )
 #' 
-#' # Write the object in file "document.docx"
-#' writeDoc( doc, "document.docx" )
+#' # Write the object in file "addTOC_example1.docx"
+#' writeDoc( doc, "addTOC_example1.docx" )
+#' 
 #' 
 #' ### example 2
 #' # Create a new document 
@@ -60,8 +63,9 @@
 #' # entries in the generated TOC 
 #' doc <- addTOC(doc, stylename = "rPlotLegend")
 #' 
-#' # Write the object in file "document.docx"
-#' writeDoc( doc, "document.docx" )
+#' # Write the object in file "addTOC_example2.docx"
+#' writeDoc( doc, "addTOC_example2.docx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}
 #' , \code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
 #' @method addTOC docx

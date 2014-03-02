@@ -16,7 +16,7 @@ Description: An R package for creating Microsoft Word document (>=2007),
 License: GPL-3
 Copyright: See file COPYRIGHTS.
 Depends:
-    R (>= 3.0)
+    R (>= 3.0),ReporteRsjars
 Imports:
     rJava,base64,highlight
 Suggests:
@@ -24,64 +24,3 @@ Suggests:
 SystemRequirements: java (>= 1.6)
 URL: davidgohel.github.io/ReporteRs/index.html
 BugReports: https://github.com/davidgohel/ReporteRs/issues
-Collate:
-    'docx.R'
-    'print.docx.R'
-    'addPageBreak.docx.R'
-    '00_AllGeneric.R'
-    '01_tools.R'
-    'addImage.docx.R'
-    'addParagraph.docx.R'
-    'addPlot.docx.R'
-    'addTable.docx.R'
-    'addTOC.docx.R'
-    'setHeaderStyle.docx.R'
-    'styles.docx.R'
-    'writeDoc.docx.R'
-    'pptx.R'
-    'writeDoc.pptx.R'
-    'addTable.pptx.R'
-    'addPlot.pptx.R'
-    'addImage.pptx.R'
-    'addParagraph.pptx.R'
-    'print.pptx.R'
-    'addDate.pptx.R'
-    'addPageNumber.pptx.R'
-    'addFooter.pptx.R'
-    'addSlide.pptx.R'
-    'textProperties.R'
-    'parProperties.R'
-    'cellProperties.R'
-    'tableProperties.R'
-    'is.color.R'
-    'pot.R'
-    'addSubtitle.pptx.R'
-    'set_of_pot.R'
-    'addTitle.html.R'
-    'html.R'
-    'writeDoc.html.R'
-    'addTable.html.R'
-    'addPlot.html.R'
-    'addParagraph.html.R'
-    'bootstrap.copy.R'
-    'drawingML.R'
-    'FontMetric.R'
-    'addImage.html.R'
-    'addRScript.html.R'
-    'addPage.html.R'
-    'addTitle.docx.R'
-    'addTitle.pptx.R'
-    'print.html.R'
-    'slide.layouts.pptx.R'
-    'ReporteRs.R'
-    'themes.tableProperties.R'
-    'java_description.R'
-    'FlexCell.R'
-    'FlexRow.R'
-    'FlexTable.R'
-    'Paragraph.R'
-    'ParagraphSection.R'
-    'addFlexTable.html.R'
-    'addFlexTable.docx.R'
-    'addFlexTable.pptx.R'
-    'deleteBookmark.R'

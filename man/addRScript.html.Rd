@@ -2,8 +2,7 @@
 \alias{addRScript.html}
 \title{Add R script into a html object}
 \usage{
-  \method{addRScript}{html} (doc, file, text,
-    show_line_numbers = T, ...)
+\method{addRScript}{html}(doc, file, text, show_line_numbers = T, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"} where
@@ -20,28 +19,27 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  an object of class \code{"html"}.
+an object of class \code{"html"}.
 }
 \description{
-  Add R script into a \code{"html"} object.
+Add R script into a \code{"html"} object.
 }
 \examples{
-\dontrun{
+\donttest{
 # Create a new document
 doc = html( title = "title" )
 
 # add a page where to add R outputs with title 'page example'
 doc = addPage( doc, title = "page example" )
 
-# add iris dataset as a table in the page
 doc <- addRScript(doc, text = "ls()" )
 
 # write the html object in a directory
-pages = writeDoc( doc, "html_output_dir")
+pages = writeDoc( doc, "addRScript_example")
 print( pages ) # print filenames of generated html pages
 }
 }
 \seealso{
-  \code{\link{html}}, \code{\link{addRScript}}
+\code{\link{html}}, \code{\link{addRScript}}
 }
 

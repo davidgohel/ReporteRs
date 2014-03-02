@@ -10,8 +10,9 @@
 #' This function is a key function ; if no page has been added into the document object
 #' no content (tables, plots, images, texts) can be added. 
 #' 
-#' @return an object of class \code{"pptx"}.
+#' @return an object of class \code{"html"}.
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = html( title = "title" )
 #' 
@@ -22,8 +23,9 @@
 #' doc <- addTable(doc, iris )
 #' 
 #' # write the html object in a directory
-#' pages = writeDoc( doc, "html_output_dir")
+#' pages = writeDoc( doc, "addPage_example")
 #' print( pages ) # print filenames of generated html pages
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{html}}, \code{\link{addPage}}
 #' @method addPage html
 #' @S3method addPage html

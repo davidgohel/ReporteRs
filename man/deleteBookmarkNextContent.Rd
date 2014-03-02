@@ -2,7 +2,7 @@
 \alias{deleteBookmarkNextContent}
 \title{delete first content after a bookmark into a docx object}
 \usage{
-  deleteBookmarkNextContent(doc, bookmark)
+deleteBookmarkNextContent(doc, bookmark)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"}}
@@ -11,9 +11,9 @@
   to delete}
 }
 \description{
-  delete first content after a bookmark into a docx object
+delete first content after a bookmark into a docx object
 }
 \seealso{
-  \code{\link{docx}}
+\code{\link{docx}}
 }
 

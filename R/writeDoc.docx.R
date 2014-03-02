@@ -7,11 +7,15 @@
 #' @param ... further arguments, not used. 
 #' 
 #' @examples
+#' #START_TAG_TEST
 #' # Create a new document 
 #' doc = docx( title = "title" )
-#' doc <- addParagraph(doc, "Hello Word!", "Normal");
-#' # Write the object in file "document.docx"
-#' writeDoc( doc, "document.docx" )
+#' 
+#' doc <- addParagraph(doc, "Hello Word!", stylename = "Normal")
+#' 
+#' # Write the object in file "writeDoc_example.docx"
+#' writeDoc( doc, "writeDoc_example.docx" )
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{writeDoc}}
 #' @method writeDoc docx
 #' @S3method writeDoc docx

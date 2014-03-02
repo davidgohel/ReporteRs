@@ -15,6 +15,7 @@
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{"html"}.
 #' @examples
+#' #START_TAG_TEST
 #' require( ggplot2 )
 #' # Create a new document 
 #' doc = html( title = "title" )
@@ -36,8 +37,9 @@
 #' 	)
 #' 
 #' # write the html object in a directory
-#' pages = writeDoc( doc, "html_output_dir")
+#' pages = writeDoc( doc, "addPlot_example")
 #' print( pages ) # print filenames of generated html pages
+#' #STOP_TAG_TEST
 #' @seealso \code{\link{html}}, \code{\link{addPlot}}
 #' @method addPlot html
 #' @S3method addPlot html
