@@ -25,7 +25,7 @@ an object of class \code{"html"}.
 Add R script into a \code{"html"} object.
 }
 \examples{
-\donttest{
+\dontrun{
 # Create a new document
 doc = html( title = "title" )
 

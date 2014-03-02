@@ -25,7 +25,7 @@
 #'  , row.names = FALSE )
 #' 
 #' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
-#' myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
+#' myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{addFlexTable}}, \code{\link{FlexRow}}, \code{\link{FlexCell}}
@@ -67,15 +67,17 @@ FlexTable = function(data, span.columns = character(0)
 	if( !inherits(cell_format, "cellProperties") )
 		stop("argument cell_format must be a cellProperties object.")
 	
-
+	.row_names = row.names(data)
 	if( row.names ){
-		data = cbind(rownames = row.names(data), data )
+		data = cbind(rownames = .row_names, data )
 	}
 	row.names( data ) = NULL
 	
 	out = list(
 			ncol = ncol( data )
 			, nrow = nrow( data )
+			, row.names = row.names
+			, row_id = .row_names
 	)
 	
 	data = apply( data, 2, function(x) {
@@ -84,6 +86,7 @@ FlexTable = function(data, span.columns = character(0)
 				else format(x)
 			} )
 	.colnames = dimnames( data )[[2]]
+	out$col_id = .colnames
 	if( row.names ){
 		.colnames[1]=""
 	}
@@ -121,7 +124,7 @@ FlexTable = function(data, span.columns = character(0)
 	out$cell_format = cell_format
 	out$par_format = par_format
 	out$text_format = text_format
-	
+
 	class( out ) = c("FlexTable", "FlexElement")
 	
 	if( header.columns ){
@@ -220,8 +223,8 @@ print.FlexTable = function(x, ...){
 #' 
 #' @usage \method{[}{FlexTable} (x, i, j) <- value
 #' @param x the \code{FlexTable} object
-#' @param i vector integer index for rows. 
-#' @param j vector integer index for columns. 
+#' @param i vector (integer index, row.names values or boolean vector) for rows. 
+#' @param j vector (integer index, col.names values or boolean vector) for columns. 
 #' @param value an object of class \code{\link{cellProperties}} or an object of class \code{\link{parProperties}} 
 #' or an object of class \code{\link{textProperties}}.
 #' @export
@@ -233,7 +236,7 @@ print.FlexTable = function(x, ...){
 #' , header.columns = TRUE
 #' , row.names = FALSE )
 #' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
-#' myFlexTable[ 4:5, 4:5] = parProperties( text.align="right" )
+#' myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
 #' @rdname FlexTable-assign
 #' @method [<- FlexTable
@@ -249,8 +252,25 @@ print.FlexTable = function(x, ...){
 		j = 1:x$ncol
 	} 
 	
-	if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !is.numeric(j) ) stop("argument j must be an integer argument.")
+	if( is.numeric (i) ){
+		if( any( i < 1 | i > length(x) ) ) stop("invalid row subset - out of bound")
+	} else if( is.logical (i) ){
+		if( length( i ) != length(x) ) stop("invalid row subset - incorrect length")
+		else i = ( 1:length(x) )[i]
+	} else if( is.character (i) ){
+		if( !all( is.element(i, x$row_id)) ) stop("invalid row.names subset")
+		else i = match(i, x$row_id)
+	} else stop("row subset must be a logical vector, an integer vector or a character vector(row.names).")
+	
+	if( is.numeric (j) ){
+		if( any( j < 1 | j > x$ncol ) ) stop("invalid col subset - out of bound")
+	} else if( is.logical (j) ){
+		if( length( j ) != x$ncol ) stop("invalid col subset - incorrect length")
+		else j = ( 1:x$ncol )[j]
+	} else if( is.character (j) ){
+		if( !all( is.element(j, x$col_id)) ) stop("invalid col.names subset")
+		else j = match(j, x$col_id)
+	} else stop("col subset must be a logical vector, an integer vector or a character vector(row.names).")
 	
 	
 	if( inherits(value, c("textProperties", "parProperties", "cellProperties")) ){
@@ -272,12 +292,12 @@ print.FlexTable = function(x, ...){
 
 #' @title Replace FlexTable content 
 #'
-#' @description Replace a cell content of a FlexTable object 
+#' @description Replace cells contents of a FlexTable object 
 #' with one or more paragraph of texts.
 #' 
 #' @param object a \code{FlexTable} object
-#' @param i vector integer index for rows. It must be a single value. 
-#' @param j vector integer index for columns. It must be a single value.
+#' @param i vector (integer index, row.names values or boolean vector) for rows. 
+#' @param j vector (integer index, col.names values or boolean vector) for columns. 
 #' @param value a \code{\link{pot}} or a \code{\link{set_of_paragraphs}} object to insert as new cell content. 
 #' @export
 #' @seealso \code{\link{addFlexTable}}
@@ -294,14 +314,40 @@ print.FlexTable = function(x, ...){
 #' @export 
 setFlexCellContent = function (object, i, j, value){
 	
-	if( missing(i) || missing(j) ){
-		stop("argument i and j can't be missing when inserting content.")
+	if( missing(i) && missing(j) ) {
+		i = 1:length(object)
+		j = 1:object$ncol
+	} else if( missing(i) && !missing(j) ) {
+		i = 1:length(object)
+	} else if( !missing(i) && missing(j) ) {
+		j = 1:object$ncol
 	} 
-	if( !is.numeric(i) || length( i ) != 1 ) stop("argument i must be a single integer argument.")
-	if( !is.numeric(j) || length( j ) != 1 ) stop("argument j must be a single integer argument.")
 
+	if( is.numeric (i) ){
+		if( any( i < 1 | i > length(object) ) ) stop("invalid row subset - out of bound")
+	} else if( is.logical (i) ){
+		if( length( i ) != length(object) ) stop("invalid row subset - incorrect length")
+		else i = ( 1:length(object) )[i]
+	} else if( is.character (i) ){
+		if( !all( is.element(i, object$row_id)) ) stop("invalid row.names subset")
+		else i = match(i, object$row_id)
+	} else stop("row subset must be a logical vector, an integer vector or a character vector(from row.names).")
+	
+	if( is.numeric (j) ){
+		if( any( j < 1 | j > object$ncol ) ) stop("invalid col subset - out of bound")
+	} else if( is.logical (j) ){
+		if( length( j ) != object$ncol ) stop("invalid col subset - incorrect length")
+		else j = ( 1:object$ncol )[j]
+	} else if( is.character (j) ){
+		if( !all( is.element(j, object$col_id)) ) stop("invalid col.names subset")
+		else j = match(j, object$col_id)
+	} else stop("col subset must be a logical vector, an integer vector or a character vector(row.names).")
+	
+	
 	if( inherits(value, c("pot", "set_of_paragraphs") ) ){
-		object = updateContent.FlexTable( x=object, i=i, j=j, value=value )
+		for( row_index in i )
+			for( col_index in j)
+				object = updateContent.FlexTable( x = object, i = row_index, j = col_index, value = value )
 	} else {
 		stop("value must be an object of class 'pot' or 'set_of_paragraphs'.")
 	}

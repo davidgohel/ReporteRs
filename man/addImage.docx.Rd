@@ -44,7 +44,7 @@ img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
 doc <- addImage(doc, img.file )
 
 # Write the object in file "addImage_example.docx"
-writeDoc( doc, "document.docx" )
+writeDoc( doc, "addImage_example.docx" )
 #STOP_TAG_TEST
 }
 \seealso{

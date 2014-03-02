@@ -7,18 +7,18 @@ setFlexCellContent(object, i, j, value)
 \arguments{
   \item{object}{a \code{FlexTable} object}
 
-  \item{i}{vector integer index for rows. It must be a
-  single value.}
+  \item{i}{vector (integer index, row.names values or
+  boolean vector) for rows.}
 
-  \item{j}{vector integer index for columns. It must be a
-  single value.}
+  \item{j}{vector (integer index, col.names values or
+  boolean vector) for columns.}
 
   \item{value}{a \code{\link{pot}} or a
   \code{\link{set_of_paragraphs}} object to insert as new
   cell content.}
 }
 \description{
-Replace a cell content of a FlexTable object with one or
+Replace cells contents of a FlexTable object with one or
 more paragraph of texts.
 }
 \examples{

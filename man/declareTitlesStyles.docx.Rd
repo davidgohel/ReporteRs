@@ -30,7 +30,7 @@ declareTitlesStyles to indicate which available styles are
 meant to be used as header styles.
 }
 \examples{
-\donttest{
+\dontrun{
 doc <- docx( title = "My example" )
 styles( doc )
 # [1] "Normal"                  "Title1"                  "Title2"

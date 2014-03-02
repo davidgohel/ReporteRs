@@ -7,9 +7,11 @@
 \arguments{
   \item{x}{the \code{FlexTable} object}
 
-  \item{i}{vector integer index for rows.}
+  \item{i}{vector (integer index, row.names values or
+  boolean vector) for rows.}
 
-  \item{j}{vector integer index for columns.}
+  \item{j}{vector (integer index, col.names values or
+  boolean vector) for columns.}
 
   \item{value}{an object of class
   \code{\link{cellProperties}} or an object of class
