@@ -1,12 +1,12 @@
 ReporteRs
 ======
-ReporteRs is a R package for creating MS Word documents, MS PowerPoint documents and HTML documents from R.
+ReporteRs is a R package for creating Microsoft Word, Microsoft Powerpoint and HTML documents from R.
 
 
 Features
 --------
-* Create docx and pptx files with only a few lines of R code.
-* Add tables, plots, text or tables of contents into Word PowerPoint and html documents.
+* Create docx, pptx or html files with only a few lines of R code.
+* Add tables, plots, text or tables of contents into Word, PowerPoint and html documents.
 * Customize formatting of R output.
 * Take advantage of the benefits of reproducible research.
 
@@ -29,13 +29,13 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 
 From an R console (R >= 3.0):
 
-    install.packages("devtools")
+    if( !require( devtools ) ) install.packages("devtools")
     devtools::install_github('ReporteRsjars', 'davidgohel')
     devtools::install_github('ReporteRs', 'davidgohel')
 
 **Binary package**
 
-A packages are available here:
+Packages are available here:
 https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.1
 https://github.com/davidgohel/ReporteRs/releases/tag/v0.3
     
@@ -62,4 +62,4 @@ http://davidgohel.github.io/ReporteRs/index.html
 	
 License
 -------
-The ReporteRs package is licensed under the GPLv3.
+The ReporteRs package is licensed under the GPLv3. See COPYRIGHTS file in the inst directory for additional details.  
