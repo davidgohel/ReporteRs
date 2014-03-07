@@ -2,10 +2,12 @@
 \alias{textProperties}
 \title{Text formating properties}
 \usage{
-textProperties(color = "black", font.size = getOption("ReporteRs-fontsize"),
-  font.weight = "normal", font.style = "normal", underlined = FALSE,
-  font.family = getOption("ReporteRs-default-font"),
-  vertical.align = "baseline")
+  textProperties(color = "black",
+    font.size = getOption("ReporteRs-fontsize"),
+    font.weight = "normal", font.style = "normal",
+    underlined = FALSE,
+    font.family = getOption("ReporteRs-default-font"),
+    vertical.align = "baseline")
 }
 \arguments{
   \item{color}{single character value specifying font
@@ -35,7 +37,8 @@ textProperties(color = "black", font.size = getOption("ReporteRs-fontsize"),
   \code{'subscript'} or \code{'superscript'}}
 }
 \description{
-Create an object that describes text formating properties.
+  Create an object that describes text formating
+  properties.
 }
 \examples{
 #START_TAG_TEST
@@ -57,6 +60,6 @@ writeDoc( doc, "textProperties_example.docx" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}
+  \code{\link{docx}}
 }
 

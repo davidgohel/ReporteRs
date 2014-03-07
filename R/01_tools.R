@@ -14,14 +14,14 @@
 getDefaultColTypes = function( data ){
 	lapply( data , function(x) {
 		out = class(x)
-		if( out == "factor") out = "character"
-		else if( out == "integer") out = "integer"
-		else if( out == "numeric") out = "double"
-		else if( out == "logical") out = "logical" 
-		else if( out == "Date") out = "date"
-		else if( out == "POSIXct") out = "datetime"
-		else if( out == "POSIXlt") out = "datetime"
-		else "character"
+		if( is.factor( out ) ) out = "character"
+		else if (is.integer(out)) out = "integer"
+		else if (is.numeric(out)) out = "double"
+		else if (is.logical(out)) out = "logical"
+		else if (inherits(out, "Date")) out = "date"
+		else if (inherits(out, "POSIXct")) out = "datetime"
+		else if (inherits(out, "POSIXlt")) out = "datetime"
+		else out = "character"
 		out
 	} )
 }

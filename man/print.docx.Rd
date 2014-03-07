@@ -2,7 +2,7 @@
 \alias{print.docx}
 \title{print informations about an object of class \code{"docx"}.}
 \usage{
-\method{print}{docx}(x, ...)
+  \method{print}{docx} (x, ...)
 }
 \arguments{
   \item{x}{an object of class \code{"docx"}}
@@ -10,7 +10,8 @@
   \item{...}{further arguments, not used.}
 }
 \description{
-print informations about an object of class \code{"docx"}.
+  print informations about an object of class
+  \code{"docx"}.
 }
 \examples{
 #START_TAG_TEST
@@ -20,6 +21,6 @@ print( doc )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{print}}
+  \code{\link{docx}}, \code{\link{print}}
 }
 

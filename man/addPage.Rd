@@ -2,7 +2,7 @@
 \alias{addPage}
 \title{Add a page into a document object}
 \usage{
-addPage(doc, ...)
+  addPage(doc, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -10,12 +10,12 @@ addPage(doc, ...)
   \item{...}{further arguments passed to other methods}
 }
 \value{
-a document object
+  a document object
 }
 \description{
-Add a page into a document object
+  Add a page into a document object
 }
 \seealso{
-\code{\link{html}}
+  \code{\link{html}}
 }
 

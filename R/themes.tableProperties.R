@@ -82,17 +82,17 @@ get.light.tableProperties = function(){
 #' , \code{\link{get.darker.tableProperties}}
 get.greenheader.tableProperties = function(){
 	
-	tableProperties( 
-			  header.text = textProperties( color = "#102E37", font.weight="bold", font.size=12 )
-			, header.par = parProperties( text.align = "right", padding.bottom=2, padding.top=2, padding.right=0, padding.left=10 )
-			, header.cell = cellProperties(border.bottom.color="#102E37", border.top.width=0, border.left.width=0, border.right.width=0)
-			, groupedheader.text = textProperties( color = "#102E37", font.weight="bold", font.size=12 )
-			, groupedheader.par = parProperties( text.align = "right", padding.bottom=2, padding.top=2, padding.right=0, padding.left=10 )
-			, groupedheader.cell = cellProperties(border.bottom.color="#102E37", border.top.width=0, border.left.width=0, border.right.width=0)
-			, data.par = parProperties( text.align = "right", padding.bottom=1, padding.top=1, padding.right=0, padding.left=10  )
-			, data.cell = cellProperties( border.width=0)
-			, data.text = textProperties( color = "#102E37", font.size=11)
-			, percent.addsymbol= "%" , fraction.double.digit=3, fraction.percent.digit=2
+	tableProperties( header.text = textProperties( color = "#333333", font.weight="bold", font.size=12 )
+		, header.par = parProperties( text.align = "right", padding.bottom=2, padding.top=2, padding.right=0, padding.left=10 )
+		, header.cell = cellProperties(background.color="#90CA77", border.width=1)
+		, data.par = parProperties( text.align = "right", padding.bottom=1, padding.top=1, padding.right=0, padding.left=10  )
+		, data.cell = cellProperties( border.width = 1) 
+		, character.text = textProperties( font.style="italic", font.size=11) 
+		, percent.text = textProperties( color="#003366", font.size=11 ) 
+		, double.text = textProperties( font.size=11) 
+		, date.text = textProperties( color="#999999", font.size=11) 
+		, integer.text = textProperties( font.size=11) 
+		, percent.addsymbol= " %" , fraction.double.digit=3, fraction.percent.digit=2
 	)
 }
 

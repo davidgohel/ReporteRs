@@ -2,7 +2,7 @@
 \alias{pptx}
 \title{Create Microsoft PowerPoint document object representation}
 \usage{
-pptx(title, template)
+  pptx(title, template)
 }
 \arguments{
   \item{title}{\code{"character"} value: title of the
@@ -12,42 +12,43 @@ pptx(title, template)
   the filename of the pptx file used as a template.}
 }
 \value{
-an object of class \code{"pptx"}.
+  an object of class \code{"pptx"}.
 }
 \description{
-Create a \code{"pptx"} object
+  Create a \code{"pptx"} object
 }
 \details{
-To send R output in a pptx document, a slide (see
-\code{\link{addSlide.pptx}} have to be added to the object
-first (because output is beeing written in slides).
+  To send R output in a pptx document, a slide (see
+  \code{\link{addSlide.pptx}} have to be added to the
+  object first (because output is beeing written in
+  slides).
 
-Several methods can used to send R output into an object of
-class \code{"pptx"}.
+  Several methods can used to send R output into an object
+  of class \code{"pptx"}.
 
-\itemize{ \item \code{\link{addTitle.pptx}} add titles
-\item \code{\link{addParagraph.pptx}} add texts \item
-\code{\link{addPlot.pptx}} add plots \item
-\code{\link{addTable.pptx}} add tables \item
-\code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}
-\item \code{\link{addDate.pptx}} add a date (most often in
-the bottom left area of the slide) \item
-\code{\link{addFooter.pptx}} add a comment in the footer
-(most often in the bottom center area of the slide) \item
-\code{\link{addPageNumber.pptx}} add a page number (most
-often in the bottom right area of the slide) \item
-\code{\link{addImage.pptx}} add external images } Once
-object has content, user can write the pptx into a ".pptx"
-file, see \code{\link{writeDoc}}.
+  \itemize{ \item \code{\link{addTitle.pptx}} add titles
+  \item \code{\link{addParagraph.pptx}} add texts \item
+  \code{\link{addPlot.pptx}} add plots \item
+  \code{\link{addTable.pptx}} add tables \item
+  \code{\link{addFlexTable.docx}} add
+  \code{\link{FlexTable}} \item \code{\link{addDate.pptx}}
+  add a date (most often in the bottom left area of the
+  slide) \item \code{\link{addFooter.pptx}} add a comment
+  in the footer (most often in the bottom center area of
+  the slide) \item \code{\link{addPageNumber.pptx}} add a
+  page number (most often in the bottom right area of the
+  slide) \item \code{\link{addImage.pptx}} add external
+  images } Once object has content, user can write the pptx
+  into a ".pptx" file, see \code{\link{writeDoc}}.
 }
 \note{
-Power Point 2007-2013 (*.pptx) file formats are the only
-supported files.
+  Power Point 2007-2013 (*.pptx) file formats are the only
+  supported files.
 
-Document are manipulated in-memory ; a \code{pptx}'s
-document is not written to the disk unless the
-\code{\link{writeDoc}} method has been called on the
-object.
+  Document are manipulated in-memory ; a \code{pptx}'s
+  document is not written to the disk unless the
+  \code{\link{writeDoc}} method has been called on the
+  object.
 }
 \examples{
 #START_TAG_TEST
@@ -113,14 +114,14 @@ writeDoc( doc, pptx.file)
 #STOP_TAG_TEST
 }
 \references{
-Wikipedia: Office Open
-XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
+  Wikipedia: Office Open
+  XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \seealso{
-\code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}},
-\code{\link{addParagraph.pptx}} ,
-\code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}} ,
-\code{\link{slide.layouts.pptx}},
-\code{\link{writeDoc.pptx}}
+  \code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}},
+  \code{\link{addParagraph.pptx}} ,
+  \code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}} ,
+  \code{\link{slide.layouts.pptx}},
+  \code{\link{writeDoc.pptx}}
 }
 

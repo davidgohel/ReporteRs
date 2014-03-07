@@ -2,7 +2,7 @@
 \alias{declareTitlesStyles.docx}
 \title{Set manually headers'styles of a docx object}
 \usage{
-\method{declareTitlesStyles}{docx}(doc, stylenames, ...)
+  \method{declareTitlesStyles}{docx} (doc, stylenames, ...)
 }
 \arguments{
   \item{doc}{\code{docx} object to be used with
@@ -16,18 +16,18 @@
   \item{...}{further arguments, not used.}
 }
 \description{
-Set manually headers'styles of a docx object
+  Set manually headers'styles of a docx object
 }
 \details{
-Function \code{addTitle} need to know which styles are
-corresponding to which title level (1 ; 1.1 ; 1.1.1 ;
-etc.). When template is read, function \code{docx} try to
-guess what are theses styles. If he do not succeed, an
-error occured saying 'You must defined header styles via
-declareTitlesStyles first.'. In that case, run
-\code{styles(...)} to see what are available styles, then
-declareTitlesStyles to indicate which available styles are
-meant to be used as header styles.
+  Function \code{addTitle} need to know which styles are
+  corresponding to which title level (1 ; 1.1 ; 1.1.1 ;
+  etc.). When template is read, function \code{docx} try to
+  guess what are theses styles. If he do not succeed, an
+  error occured saying 'You must defined header styles via
+  declareTitlesStyles first.'. In that case, run
+  \code{styles(...)} to see what are available styles, then
+  declareTitlesStyles to indicate which available styles
+  are meant to be used as header styles.
 }
 \examples{
 \dontrun{
@@ -44,7 +44,7 @@ doc = addTitle( doc, "title 1", 1 )
 }
 }
 \seealso{
-\code{\link{docx}},\code{\link{styles.docx}},\code{\link{addTitle.docx}}
-,\code{\link{declareTitlesStyles}}
+  \code{\link{docx}},\code{\link{styles.docx}},\code{\link{addTitle.docx}}
+  ,\code{\link{declareTitlesStyles}}
 }
 

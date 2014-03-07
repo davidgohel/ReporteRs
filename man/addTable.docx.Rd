@@ -2,11 +2,13 @@
 \alias{addTable.docx}
 \title{Insert a table into a docx object}
 \usage{
-\method{addTable}{docx}(doc, data, layout.properties, header.labels,
-  groupedheader.row = list(), span.columns = character(0), col.types,
-  columns.bg.colors = list(), columns.font.colors = list(),
-  row.names = FALSE, parStyle = parProperties(text.align = "left", padding =
-  0), bookmark, ...)
+  \method{addTable}{docx} (doc, data, layout.properties,
+    header.labels, groupedheader.row = list(),
+    span.columns = character(0), col.types,
+    columns.bg.colors = list(),
+    columns.font.colors = list(), row.names = FALSE,
+    parStyle = parProperties(text.align = "left", padding = 0),
+    bookmark, ...)
 }
 \arguments{
   \item{doc}{the \code{docx} to use}
@@ -75,10 +77,10 @@
   \code{\link{addTable}}.}
 }
 \value{
-an object of class \code{"docx"}.
+  an object of class \code{"docx"}.
 }
 \description{
-Insert a table into the \code{docx} object.
+  Insert a table into the \code{docx} object.
 }
 \examples{
 #START_TAG_TEST
@@ -116,7 +118,7 @@ writeDoc( doc, "addTable_example.docx" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addTable}},
-\code{\link{tableProperties}}
+  \code{\link{docx}}, \code{\link{addTable}},
+  \code{\link{tableProperties}}
 }
 

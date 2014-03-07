@@ -2,7 +2,7 @@
 \alias{writeDoc.docx}
 \title{Write a docx object in a docx file}
 \usage{
-\method{writeDoc}{docx}(doc, file, ...)
+  \method{writeDoc}{docx} (doc, file, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"} that has to be
@@ -14,7 +14,7 @@
   \item{...}{further arguments, not used.}
 }
 \description{
-Write the \code{"docx"} object in a '.docx' file.
+  Write the \code{"docx"} object in a '.docx' file.
 }
 \examples{
 #START_TAG_TEST
@@ -28,6 +28,6 @@ writeDoc( doc, "writeDoc_example.docx" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{writeDoc}}
+  \code{\link{docx}}, \code{\link{writeDoc}}
 }
 

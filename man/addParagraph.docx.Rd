@@ -2,7 +2,8 @@
 \alias{addParagraph.docx}
 \title{Insert a paragraph into a docx object}
 \usage{
-\method{addParagraph}{docx}(doc, value, stylename, bookmark, ...)
+  \method{addParagraph}{docx} (doc, value, stylename,
+    bookmark, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"} where paragraph
@@ -21,10 +22,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+  an object of class \code{"docx"}.
 }
 \description{
-Insert paragraph(s) of text into a \code{docx} object
+  Insert paragraph(s) of text into a \code{docx} object
 }
 \examples{
 #START_TAG_TEST
@@ -50,6 +51,6 @@ writeDoc( doc, "addParagraph_example.docx" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addParagraph}}
+  \code{\link{docx}}, \code{\link{addParagraph}}
 }
 

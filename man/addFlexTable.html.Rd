@@ -2,7 +2,7 @@
 \alias{addFlexTable.html}
 \title{Insert a FlexTable into a docx object}
 \usage{
-\method{addFlexTable}{html}(doc, flextable, ...)
+  \method{addFlexTable}{html} (doc, flextable, ...)
 }
 \arguments{
   \item{doc}{docx object}
@@ -12,10 +12,10 @@
   \item{...}{further arguments - not used}
 }
 \value{
-a docx object
+  a docx object
 }
 \description{
-Insert a FlexTable into a docx object
+  Insert a FlexTable into a docx object
 }
 \examples{
 #START_TAG_TEST
@@ -39,6 +39,6 @@ writeDoc( doc, directory = "addFlexTable_example")
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}
+  \code{\link{FlexTable}}
 }
 

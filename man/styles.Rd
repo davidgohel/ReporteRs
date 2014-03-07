@@ -2,7 +2,7 @@
 \alias{styles}
 \title{Get styles names of a document object}
 \usage{
-styles(doc, ...)
+  styles(doc, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -10,9 +10,9 @@ styles(doc, ...)
   \item{...}{further arguments passed to other methods}
 }
 \description{
-Get styles names that exist into a document
+  Get styles names that exist into a document
 }
 \seealso{
-\code{\link{docx}}, \code{\link{styles.docx}}
+  \code{\link{docx}}, \code{\link{styles.docx}}
 }
 
