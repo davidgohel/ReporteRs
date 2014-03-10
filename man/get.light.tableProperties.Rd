@@ -2,18 +2,18 @@
 \alias{get.light.tableProperties}
 \title{get a 'lighter' tableProperties}
 \usage{
-get.light.tableProperties()
+  get.light.tableProperties()
 }
 \description{
-light tableProperties object
+  light tableProperties object
 }
 \examples{
 get.light.tableProperties()
 }
 \seealso{
-\code{\link{addTable}} ,
-\code{\link{get.default.tableProperties}} ,
-\code{\link{get.greenheader.tableProperties}} ,
-\code{\link{get.darker.tableProperties}}
+  \code{\link{addTable}} ,
+  \code{\link{get.default.tableProperties}} ,
+  \code{\link{get.greenheader.tableProperties}} ,
+  \code{\link{get.darker.tableProperties}}
 }
 

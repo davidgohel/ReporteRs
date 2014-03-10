@@ -2,7 +2,7 @@
 \alias{addParagraph.pptx}
 \title{Insert a paragraph into a pptx object}
 \usage{
-\method{addParagraph}{pptx}(doc, value, ...)
+  \method{addParagraph}{pptx} (doc, value, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"} where paragraph
@@ -14,10 +14,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"pptx"}.
+  an object of class \code{"pptx"}.
 }
 \description{
-Insert paragraph(s) of text into a \code{pptx} object
+  Insert paragraph(s) of text into a \code{pptx} object
 }
 \examples{
 #START_TAG_TEST
@@ -42,6 +42,6 @@ writeDoc( doc, "addParagraph_example.pptx")
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{pptx}}, \code{\link{addParagraph}}
+  \code{\link{pptx}}, \code{\link{addParagraph}}
 }
 

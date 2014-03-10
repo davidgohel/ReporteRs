@@ -2,7 +2,7 @@
 \alias{addPage.html}
 \title{Insert a page into an html object}
 \usage{
-\method{addPage}{html}(doc, title, ...)
+  \method{addPage}{html} (doc, title, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"} where page has
@@ -14,16 +14,16 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+  an object of class \code{"html"}.
 }
 \description{
-Add a page into a \code{"html"} object.
+  Add a page into a \code{"html"} object.
 }
 \details{
-A page is where content is added. This function is a key
-function ; if no page has been added into the document
-object no content (tables, plots, images, texts) can be
-added.
+  A page is where content is added. This function is a key
+  function ; if no page has been added into the document
+  object no content (tables, plots, images, texts) can be
+  added.
 }
 \examples{
 #START_TAG_TEST
@@ -42,6 +42,6 @@ print( pages ) # print filenames of generated html pages
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}, \code{\link{addPage}}
+  \code{\link{html}}, \code{\link{addPage}}
 }
 

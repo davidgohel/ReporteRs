@@ -2,7 +2,7 @@
 \alias{addTitle.html}
 \title{Insert a title into a html object}
 \usage{
-\method{addTitle}{html}(doc, value, level, ...)
+  \method{addTitle}{html} (doc, value, level, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"}}
@@ -16,10 +16,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+  an object of class \code{"html"}.
 }
 \description{
-Add a title into a \code{"html"} object.
+  Add a title into a \code{"html"} object.
 }
 \examples{
 #START_TAG_TEST
@@ -39,6 +39,6 @@ writeDoc( doc, "addTitle_example" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}, \code{\link{addTitle}}
+  \code{\link{html}}, \code{\link{addTitle}}
 }
 

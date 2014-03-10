@@ -2,15 +2,17 @@
 \alias{cellProperties}
 \title{Cell formating properties}
 \usage{
-cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
-  border.bottom.width = 1, border.left.color = "black",
-  border.left.style = "solid", border.left.width = 1,
-  border.top.color = "black", border.top.style = "solid",
-  border.top.width = 1, border.right.color = "black",
-  border.right.style = "solid", border.right.width = 1,
-  vertical.align = "middle", padding.bottom = 1, padding.top = 1,
-  padding.left = 1, padding.right = 1, background.color = "white",
-  padding, border.width, border.style, border.color)
+  cellProperties(border.bottom.color = "black",
+    border.bottom.style = "solid", border.bottom.width = 1,
+    border.left.color = "black",
+    border.left.style = "solid", border.left.width = 1,
+    border.top.color = "black", border.top.style = "solid",
+    border.top.width = 1, border.right.color = "black",
+    border.right.style = "solid", border.right.width = 1,
+    vertical.align = "middle", padding.bottom = 1,
+    padding.top = 1, padding.left = 1, padding.right = 1,
+    background.color = "white", padding, border.width,
+    border.style, border.color)
 }
 \arguments{
   \item{padding}{cell padding - integer value : 0>= value -
@@ -87,8 +89,9 @@ cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
   value (e.g. "#000000" or "black")}
 }
 \description{
-Create an object that describes cell formating properties.
-This objects are used by \code{\link{tableProperties}}.
+  Create an object that describes cell formating
+  properties. This objects are used by
+  \code{\link{tableProperties}}.
 }
 \examples{
 cellProperties( border.color = "gray", border.width = 2 )
@@ -98,7 +101,8 @@ cellProperties(border.left.width = 0, border.right.width = 0
          , padding.left = 2, padding.right = 2 )
 }
 \seealso{
-\code{\link{tableProperties}}, \code{\link{textProperties}}
-, \code{\link{parProperties}}
+  \code{\link{tableProperties}},
+  \code{\link{textProperties}} ,
+  \code{\link{parProperties}}
 }
 

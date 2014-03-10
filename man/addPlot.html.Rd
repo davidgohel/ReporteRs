@@ -2,9 +2,10 @@
 \alias{addPlot.html}
 \title{Add a plot into an html object}
 \usage{
-\method{addPlot}{html}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
-  vector.graphic = T, width = 6, height = 6,
-  fontname = getOption("ReporteRs-default-font"), ...)
+  \method{addPlot}{html} (doc, fun,
+    pointsize = getOption("ReporteRs-fontsize"),
+    vector.graphic = T, width = 6, height = 6,
+    fontname = getOption("ReporteRs-default-font"), ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"} where paragraph
@@ -31,10 +32,10 @@
   \item{...}{arguments for \code{fun}.}
 }
 \value{
-an object of class \code{"html"}.
+  an object of class \code{"html"}.
 }
 \description{
-Add a plot into the \code{html} object.
+  Add a plot into the \code{html} object.
 }
 \examples{
 #START_TAG_TEST
@@ -64,6 +65,6 @@ print( pages ) # print filenames of generated html pages
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}, \code{\link{addPlot}}
+  \code{\link{html}}, \code{\link{addPlot}}
 }
 

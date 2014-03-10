@@ -359,6 +359,112 @@ setFlexCellContent = function (object, i, j, value){
 
 
 
+#' @title Add content in a FlexTable  
+#'
+#' @description add texts or paragraphs in cells contents of a FlexTable object 
+
+#' @param object a \code{FlexTable} object
+#' @param i vector (integer index, row.names values or boolean vector) for rows. 
+#' @param j vector (integer index, col.names values or boolean vector) for columns. 
+#' @param value text values or values that have a \code{format} method 
+#' returning character value.
+#' @param textProperties formating properties (an object of class \code{textProperties}).
+#' @param newpar logical value specifying wether or not the content should be added 
+#' as a new paragraph
+#' @param byrow logical. If FALSE (the default) content is added by columns
+#' , otherwise content is added by rows.
+#' @export
+#' @seealso \code{\link{addFlexTable}}
+#' @examples
+#' data( data_ReporteRs )
+#' myFlexTable = FlexTable( data = data_ReporteRs
+#' 	, span.columns = "col1"
+#' 	, header.columns = TRUE
+#' 	, row.names = FALSE )
+#' myFlexTable = addFlexCellContent( myFlexTable
+#' 	, i = 1:4, j = 1
+#' 	, value = c("A", "B", "C", "D")
+#' 	, textProperties = textProperties( color="red" )
+#' 	)
+#' myFlexTable = addFlexCellContent( myFlexTable
+#' 	, i = 1:4, j = 2
+#' 	, value = c("E", "F", "G", "H")
+#' 	, textProperties = textProperties( color="red" )
+#' 	, newpar = TRUE
+#' 	)
+#' @export 
+addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, byrow = FALSE){
+	
+	if( missing(i) && missing(j) ) {
+		i = 1:length(object)
+		j = 1:object$ncol
+	} else if( missing(i) && !missing(j) ) {
+		i = 1:length(object)
+	} else if( !missing(i) && missing(j) ) {
+		j = 1:object$ncol
+	}
+	
+	if( is.numeric (i) ){
+		if( any( i < 1 | i > length(object) ) ) stop("invalid row subset - out of bound")
+	} else if( is.logical (i) ){
+		if( length( i ) != length(object) ) stop("invalid row subset - incorrect length")
+		else i = ( 1:length(object) )[i]
+	} else if( is.character (i) ){
+		if( !all( is.element(i, object$row_id)) ) stop("invalid row.names subset")
+		else i = match(i, object$row_id)
+	} else stop("row subset must be a logical vector, an integer vector or a character vector(from row.names).")
+	
+	if( is.numeric (j) ){
+		if( any( j < 1 | j > object$ncol ) ) stop("invalid col subset - out of bound")
+	} else if( is.logical (j) ){
+		if( length( j ) != object$ncol ) stop("invalid col subset - incorrect length")
+		else j = ( 1:object$ncol )[j]
+	} else if( is.character (j) ){
+		if( !all( is.element(j, object$col_id)) ) stop("invalid col.names subset")
+		else j = match(j, object$col_id)
+	} else stop("col subset must be a logical vector, an integer vector or a character vector(row.names).")
+	
+	value = format( value )
+	if( !is.character( value ) ){
+		stop("value must be a character vector or must have a format method returning a string value.")
+	} 
+	
+	if( !inherits(textProperties, "textProperties") )
+		stop("argument textProperties must be a textProperties object.")
+	
+	textProp = .jTextProperties( textProperties )
+	if( byrow ){
+		for( row_index in i ){
+			for( col_index in j){
+				.jcall( object$jobj, "V", "addBodyText"
+						, as.integer( row_index - 1 ) #i
+						, as.integer( col_index - 1 ) #j
+						, value[ (row_index-1) * object$ncol + col_index ] #par
+						, textProp #tp
+						, as.logical(newpar) #newPar
+					)
+			}
+		}
+	} else {
+		for( col_index in j){
+			for( row_index in i ){
+				.jcall( object$jobj, "V", "addBodyText"
+						, as.integer( row_index - 1 ) #i
+						, as.integer( col_index - 1 ) #j
+						, value[ (col_index - 1) + row_index ] #par
+						, textProp #tp
+						, as.logical(newpar) #newPar
+				)
+			}
+		}
+	}
+	object
+}
+
+
+
+
+
 
 
 updateCellProperties.FlexTable = function( x, i, j, value ){

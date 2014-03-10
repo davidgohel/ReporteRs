@@ -3,12 +3,9 @@
 \alias{gforge_datacopy}
 \title{melanoma dataset from boot package}
 \format{A data frame with 4 rows and 10 variables}
-\usage{
-data(gforge_datacopy)
-}
 \description{
-Transformed dataset to reproduce blog :
-http://gforge.se/2014/01/fast-track-publishing-using-knitr-part-iv/
+  Transformed dataset to reproduce blog :
+  http://gforge.se/2014/01/fast-track-publishing-using-knitr-part-iv/
 }
 \keyword{datasets}
 

@@ -2,7 +2,7 @@
 \alias{writeDoc}
 \title{Write a document object}
 \usage{
-writeDoc(doc, ...)
+  writeDoc(doc, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -10,13 +10,13 @@ writeDoc(doc, ...)
   \item{...}{further arguments passed to other methods}
 }
 \value{
-a document object
+  a document object
 }
 \description{
-Write a document object into a file
+  Write a document object into a file
 }
 \seealso{
-\code{\link{docx}}, \code{\link{pptx}},
-\code{\link{writeDoc.pptx}}
+  \code{\link{docx}}, \code{\link{pptx}},
+  \code{\link{writeDoc.pptx}}
 }
 

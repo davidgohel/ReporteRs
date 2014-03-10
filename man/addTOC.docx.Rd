@@ -2,7 +2,7 @@
 \alias{addTOC.docx}
 \title{Insert a table of contents into a docx object}
 \usage{
-\method{addTOC}{docx}(doc, stylename, ...)
+  \method{addTOC}{docx} (doc, stylename, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"} where table of
@@ -14,17 +14,17 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+  an object of class \code{"docx"}.
 }
 \description{
-Insert a table of contents into a \code{"docx"} object.
+  Insert a table of contents into a \code{"docx"} object.
 }
 \details{
-If stylename is not used, a classical table of content will
-be produced.\cr If stylename is used, a custom table of
-contents will be produced, pointing to entries that have
-been formated with \code{stylename}. For example, this can
-be used to produce a toc with only plots.
+  If stylename is not used, a classical table of content
+  will be produced.\cr If stylename is used, a custom table
+  of contents will be produced, pointing to entries that
+  have been formated with \code{stylename}. For example,
+  this can be used to produce a toc with only plots.
 }
 \examples{
 #START_TAG_TEST
@@ -81,7 +81,8 @@ writeDoc( doc, "addTOC_example2.docx" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addTitle.docx}} ,
-\code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
+  \code{\link{docx}}, \code{\link{addTitle.docx}} ,
+  \code{\link{styles.docx}},
+  \code{\link{addParagraph.docx}}
 }
 

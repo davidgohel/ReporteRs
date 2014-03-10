@@ -2,7 +2,7 @@
 \alias{writeDoc.pptx}
 \title{Write a pptx object in a pptx file}
 \usage{
-\method{writeDoc}{pptx}(doc, file, ...)
+  \method{writeDoc}{pptx} (doc, file, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"} that has to be
@@ -14,7 +14,7 @@
   \item{...}{further arguments, not used.}
 }
 \description{
-Write the \code{"pptx"} object in a '.pptx' file.
+  Write the \code{"pptx"} object in a '.pptx' file.
 }
 \examples{
 #START_TAG_TEST
@@ -32,6 +32,6 @@ writeDoc( doc, "writeDoc_example.pptx" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{pptx}}, \code{\link{writeDoc}}
+  \code{\link{pptx}}, \code{\link{writeDoc}}
 }
 

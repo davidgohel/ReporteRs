@@ -2,38 +2,39 @@
 \alias{html}
 \title{Create an HTML document object representation}
 \usage{
-html(title = "untitled")
+  html(title = "untitled")
 }
 \arguments{
   \item{title}{\code{"character"} value: title of the
   document (in the doc properties).}
 }
 \value{
-an object of class \code{"html"}.
+  an object of class \code{"html"}.
 }
 \description{
-Create a \code{"html"} object
+  Create a \code{"html"} object
 }
 \details{
-\code{html} objects are experimental ; codes and api will
-probably change later.
+  \code{html} objects are experimental ; codes and api will
+  probably change later.
 
-To send R output in an html document, a page (see
-\code{\link{addPage.html}} have to be added to the object
-first (because output is beeing written in pages).
+  To send R output in an html document, a page (see
+  \code{\link{addPage.html}} have to be added to the object
+  first (because output is beeing written in pages).
 
-Several methods can used to send R output into an object of
-class \code{"html"}.
+  Several methods can used to send R output into an object
+  of class \code{"html"}.
 
-\itemize{ \item \code{\link{addTitle.html}} add titles
-\item \code{\link{addImage.html}} add external images \item
-\code{\link{addParagraph.html}} add texts \item
-\code{\link{addPlot.html}} add plots \item
-\code{\link{addTable.html}} add tables \item
-\code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}
-\item \code{\link{addRScript.html}} add R Script } Once
-object has content, user can write the htmls pages into a
-directory, see \code{\link{writeDoc.html}}.
+  \itemize{ \item \code{\link{addTitle.html}} add titles
+  \item \code{\link{addImage.html}} add external images
+  \item \code{\link{addParagraph.html}} add texts \item
+  \code{\link{addPlot.html}} add plots \item
+  \code{\link{addTable.html}} add tables \item
+  \code{\link{addFlexTable.docx}} add
+  \code{\link{FlexTable}} \item
+  \code{\link{addRScript.html}} add R Script } Once object
+  has content, user can write the htmls pages into a
+  directory, see \code{\link{writeDoc.html}}.
 }
 \examples{
 #START_TAG_TEST
@@ -88,6 +89,6 @@ print(html.files) # return produced html files
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{pptx}}
+  \code{\link{docx}}, \code{\link{pptx}}
 }
 

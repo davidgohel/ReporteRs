@@ -2,8 +2,8 @@
 \alias{addParagraph.html}
 \title{Insert a paragraph into an html object}
 \usage{
-\method{addParagraph}{html}(doc, value, stylename = "text-primary",
-  parent.type = "div", ...)
+  \method{addParagraph}{html} (doc, value,
+    stylename = "text-primary", parent.type = "div", ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"} where paragraph
@@ -26,10 +26,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+  an object of class \code{"html"}.
 }
 \description{
-Insert paragraph(s) of text into a \code{html} object
+  Insert paragraph(s) of text into a \code{html} object
 }
 \examples{
 #START_TAG_TEST
@@ -62,7 +62,7 @@ print( pages ) # print filenames of generated html pages
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addTitle.docx}} ,
-\code{\link{addTOC.docx}}, \code{\link{addParagraph}}
+  \code{\link{docx}}, \code{\link{addTitle.docx}} ,
+  \code{\link{addTOC.docx}}, \code{\link{addParagraph}}
 }
 

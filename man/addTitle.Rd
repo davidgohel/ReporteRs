@@ -2,7 +2,7 @@
 \alias{addTitle}
 \title{Add a title into a document object}
 \usage{
-addTitle(doc, value, ...)
+  addTitle(doc, value, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -14,13 +14,13 @@ addTitle(doc, value, ...)
   methods..}
 }
 \value{
-a document object
+  a document object
 }
 \description{
-Add a title into a document object
+  Add a title into a document object
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addTitle.docx}},
-\code{\link{pptx}} , \code{\link{addTitle.pptx}}
+  \code{\link{docx}}, \code{\link{addTitle.docx}},
+  \code{\link{pptx}} , \code{\link{addTitle.pptx}}
 }
 

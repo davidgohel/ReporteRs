@@ -2,7 +2,7 @@
 \alias{addTitle.pptx}
 \title{Insert a title into a pptx object}
 \usage{
-\method{addTitle}{pptx}(doc, value, ...)
+  \method{addTitle}{pptx} (doc, value, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"}}
@@ -13,10 +13,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"pptx"}.
+  an object of class \code{"pptx"}.
 }
 \description{
-Add a title into a \code{"pptx"} object.
+  Add a title into a \code{"pptx"} object.
 }
 \examples{
 #START_TAG_TEST
@@ -34,7 +34,7 @@ writeDoc( doc, "addTitle_example.pptx" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{pptx}}, \code{\link{addTitle}},
-\code{\link{addSlide.pptx}}
+  \code{\link{pptx}}, \code{\link{addTitle}},
+  \code{\link{addSlide.pptx}}
 }
 

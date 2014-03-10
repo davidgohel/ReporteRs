@@ -2,10 +2,13 @@
 \alias{addPlot.docx}
 \title{Add a plot into a docx object}
 \usage{
-\method{addPlot}{docx}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
-  vector.graphic = F, width = 6, height = 6,
-  fontname = getOption("ReporteRs-default-font"), editable = TRUE, bookmark,
-  parStyle = parProperties(text.align = "center", padding = 5), ...)
+  \method{addPlot}{docx} (doc, fun,
+    pointsize = getOption("ReporteRs-fontsize"),
+    vector.graphic = F, width = 6, height = 6,
+    fontname = getOption("ReporteRs-default-font"),
+    editable = TRUE, bookmark,
+    parStyle = parProperties(text.align = "center", padding = 5),
+    ...)
 }
 \arguments{
   \item{doc}{the \code{docx} to use}
@@ -46,10 +49,10 @@
   \item{...}{arguments for \code{fun}.}
 }
 \value{
-an object of class \code{"docx"}.
+  an object of class \code{"docx"}.
 }
 \description{
-Add a plot into the \code{docx} object.
+  Add a plot into the \code{docx} object.
 }
 \examples{
 #START_TAG_TEST
@@ -83,6 +86,6 @@ writeDoc( doc, "addPlot_example.docx" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addPlot}}
+  \code{\link{docx}}, \code{\link{addPlot}}
 }
 

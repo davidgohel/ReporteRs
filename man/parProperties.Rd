@@ -2,8 +2,9 @@
 \alias{parProperties}
 \title{Paragraph formating properties}
 \usage{
-parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
-  padding.left = 1, padding.right = 1, padding)
+  parProperties(text.align = "left", padding.bottom = 1,
+    padding.top = 1, padding.left = 1, padding.right = 1,
+    padding)
 }
 \arguments{
   \item{text.align}{text alignment - one of the following
@@ -25,13 +26,13 @@ parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
   value overwrite all padding.* values.}
 }
 \description{
-Create an object that describes paragraph formating
-properties.
+  Create an object that describes paragraph formating
+  properties.
 }
 \details{
-parProperties is used to control paragraph properties. It
-is used when creating a tableProperties and when adding
-plots into a docx object.
+  parProperties is used to control paragraph properties. It
+  is used when creating a tableProperties and when adding
+  plots into a docx object.
 }
 \examples{
 parProperties( text.align = "center", padding = 5)
@@ -39,6 +40,6 @@ parProperties( text.align = "center", padding.top = 5, padding.bottom = 0, paddi
 	, padding.right = 0)
 }
 \seealso{
-\code{\link{addTable}}, \code{\link{addPlot.docx}}
+  \code{\link{addTable}}, \code{\link{addPlot.docx}}
 }
 

@@ -2,9 +2,11 @@
 \alias{FlexTable}
 \title{FlexTable}
 \usage{
-FlexTable(data, span.columns = character(0), header.columns = TRUE,
-  row.names = FALSE, cell_format = cellProperties(),
-  par_format = parProperties(), text_format = textProperties())
+  FlexTable(data, span.columns = character(0),
+    header.columns = TRUE, row.names = FALSE,
+    cell_format = cellProperties(),
+    par_format = parProperties(),
+    text_format = textProperties())
 }
 \arguments{
   \item{data}{(a \code{data.frame} or \code{matrix} object)
@@ -33,11 +35,11 @@ FlexTable(data, span.columns = character(0), header.columns = TRUE,
   for any data}
 }
 \description{
-Create a representation of a table. FlexTable can be
-manipulated so that almost any formating can be specified.
-It allows to insert headers and footers rows (with merged
-cells). Formating can be done on cells, paragraphs and
-texts (borders, colors, fonts, etc.)
+  Create a representation of a table. FlexTable can be
+  manipulated so that almost any formating can be
+  specified. It allows to insert headers and footers rows
+  (with merged cells). Formating can be done on cells,
+  paragraphs and texts (borders, colors, fonts, etc.)
 }
 \examples{
 #START_TAG_TEST
@@ -53,11 +55,11 @@ myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addFlexTable}}, \code{\link{FlexRow}},
-\code{\link{FlexCell}} , \code{\link{pot}},
-\code{\link{set_of_paragraphs}},
-\code{\link{addFlexTable.docx}} ,
-\code{\link{addFlexTable.pptx}},
-\code{\link{addFlexTable.html}}
+  \code{\link{addFlexTable}}, \code{\link{FlexRow}},
+  \code{\link{FlexCell}} , \code{\link{pot}},
+  \code{\link{set_of_paragraphs}},
+  \code{\link{addFlexTable.docx}} ,
+  \code{\link{addFlexTable.pptx}},
+  \code{\link{addFlexTable.html}}
 }
 
