@@ -21,7 +21,7 @@ deleteBookmark = function( doc, bookmark ){
 	}
 	
 	.jcall( doc$obj, "V", "deleteBookmark", bookmark )
-	invisible()
+	doc
 }
 
 
@@ -49,5 +49,5 @@ deleteBookmarkNextContent = function( doc, bookmark ){
 	}
 	
 	.jcall( doc$obj, "V", "deleteBookmarkNextContent", bookmark )
-	invisible()
+	doc
 }
