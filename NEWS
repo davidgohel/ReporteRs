@@ -1,3 +1,19 @@
+ReporteRs 0.4
+==================================================================
+BUG FIXES
+------------------------------------------------------------------
+* deleteBookmark and deleteBookmarkNextContent did not return 
+  the input document as expected - returned invisible() instead
+  (reported by Günter Lutz) 
+
+ENHANCEMENT 
+------------------------------------------------------------------
+* Higher PNG resolution (par res of png is set to 300) in pptx
+  and docx documents(suggested by Goulven Salic)
+  
+* addFlexCellContent is a new function to add formated content 
+  in FlexTable objects
+
 ReporteRs 0.3
 ==================================================================
 OTHERS

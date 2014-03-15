@@ -75,8 +75,8 @@ addPlot.docx = function(doc, fun
 		
 		filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 		grDevices::png (filename = filename
-				, width = width*72.2, height = height*72.2
-				, pointsize = pointsize
+				, width = width, height = height, units = 'in'
+				, pointsize = pointsize, res = 300
 		)
 		
 		fun(...)

@@ -123,8 +123,8 @@ addPlot.pptx = function(doc, fun, pointsize=11
 	} else {
 		filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 		grDevices::png (filename = filename
-				, width = widths[1], height = heights[1]
-				, pointsize = pointsize
+				, width = widths[1]/72.2, height = heights[1]/72.2, units = 'in'
+				, pointsize = pointsize, res = 300
 		)
 		
 		fun(...)
