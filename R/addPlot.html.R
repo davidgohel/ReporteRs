@@ -55,15 +55,19 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 	
 		filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 		grDevices::png (filename = filename
-				, width = width*72.2, height = height*72.2
-				, pointsize = pointsize
+				, width = width, height = height, units = 'in'
+				, pointsize = pointsize, res = 300
 		)
+#		grDevices::png (filename = filename
+#				, width = width*72.2, height = height*72.2
+#				, pointsize = pointsize
+#		)
 		
 		fun_res = try( fun(...), silent = T )
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
 		
-		jimg = .jnew(class.html4r.ImagesList )
+		jimg = .jnew(class.html4r.ImagesList, as.integer( width*72.2 ), as.integer( height*72.2 ) )
 		
 		for( i in 1:length( plotfiles ) ){
 			.tempfile <- tempfile()
