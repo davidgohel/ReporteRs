@@ -36,6 +36,20 @@
 #' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
 #' 	)
 #' 
+#' doc = addPlot( doc, print
+#' 		, width = 6, height = 7
+#' 		, x = myplot, vector.graphic = FALSE
+#' 	)
+#' 
+#' ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
+#' trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
+#' group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
+#' weight <- c(ctl, trt)
+#' lm.D9 <- lm(weight ~ group)
+#' doc = addPlot( doc, function() plot( lm.D9 )
+#' 		, width = 6, height = 7
+#' 		, x = myplot, vector.graphic = FALSE
+#' 	)
 #' # write the html object in a directory
 #' pages = writeDoc( doc, "addPlot_example")
 #' print( pages ) # print filenames of generated html pages
