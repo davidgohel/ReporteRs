@@ -8,8 +8,8 @@ BUG FIXES
 
 ENHANCEMENT 
 ------------------------------------------------------------------
-* Higher PNG resolution (par res of png is set to 300) in pptx
-  and docx documents(suggested by Goulven Salic)
+* Higher PNG resolution (par res of png is set to 300) in 
+  documents(suggested by Goulven Salic)
   
 * addFlexCellContent is a new function to add formated content 
   in FlexTable objects
