@@ -37,9 +37,9 @@ From an R console (R >= 3.0):
 
 Packages are available here:
 
-    https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.1
-    https://github.com/davidgohel/ReporteRs/releases/tag/v0.3
-    
+https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.1
+https://github.com/davidgohel/ReporteRs/releases/tag/v0.4
+ 
 	
 Getting Started
 ---------------
