@@ -444,3 +444,4 @@ SEXP R_RAPHAEL_Device(SEXP filename
 	END_SUSPEND_INTERRUPTS;
 	return R_NilValue;
 }
+

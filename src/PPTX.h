@@ -76,3 +76,4 @@ static double PPTX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
 SEXP R_PPTX_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
 		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP env);
 };
+

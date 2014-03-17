@@ -579,3 +579,4 @@ SEXP R_PPTX_Device(SEXP filename
 	END_SUSPEND_INTERRUPTS;
 	return R_NilValue;
 }
+

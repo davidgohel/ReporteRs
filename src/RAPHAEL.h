@@ -76,3 +76,4 @@ static double RAPHAEL_StrWidth(const char *str, const pGEcontext gc, pDevDesc de
 SEXP R_RAPHAEL_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
 		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP env);
 };
+

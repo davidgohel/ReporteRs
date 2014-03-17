@@ -60,3 +60,4 @@ double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 
 	return sum;
 }
+

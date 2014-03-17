@@ -366,3 +366,4 @@ void RAPHAEL_SetFontSpec(pDevDesc dev, R_GE_gcontext *gc, int idx) {
 	setlocale(LC_NUMERIC, saved_locale);
 
 }
+

@@ -55,3 +55,4 @@ void RAPHAEL_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc, int idx);
 void RAPHAEL_SetFillColor(pDevDesc dev, R_GE_gcontext *gc, int idx);
 void RAPHAEL_SetFontSpec(pDevDesc dev, R_GE_gcontext *gc, int idx);
 }
+
