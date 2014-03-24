@@ -37,7 +37,7 @@ addRScript.html = function(doc, file, text, show_line_numbers = T, ... ) {
 		, renderer = renderer_html(document = F, header = NULL, footer = NULL)
 		, show_line_numbers = FALSE, output = NULL )
 		
-	RScript = .jnew(class.html4r.RScript, as.character(paste(str, collapse = "\n" ) ) )
+	RScript = .jnew(class.html4r.RScript, as.character(paste(str, collapse = "" ) ) )
 	out = .jcall( doc$current_slide , "I", "add", RScript )
 	if( out != 1 ){
 		stop( "Problem while trying to add RScript." )
