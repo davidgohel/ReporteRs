@@ -191,17 +191,23 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_idx(dev);
 
-	double temp;
-	if( y1 > y2 ){
-		temp = y1;
-		y1 = y2;
-		y2 = temp;
+	double maxx = 0, maxy = 0;
+	double minx = 0, miny = 0;
+	if (x2 > x1) {
+		maxx = x2;
+		minx = x1;
+	} else {
+		maxx = x1;
+		minx = x2;
 	}
-	if( x1 > x2 ){
-		temp = x1;
-		x1 = x2;
-		x2 = temp;
+	if (y2 > y1) {
+		maxy = y2;
+		miny = y1;
+	} else {
+		maxy = y1;
+		miny = y2;
 	}
+
 	fprintf(pd->dmlFilePointer, pptx_elt_tag_start);
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
@@ -210,18 +216,17 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 		"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Line %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
 
 	fprintf(pd->dmlFilePointer, "<p:spPr><a:xfrm>");
-	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>",
-			p2e_(pd->offx + x1), p2e_(pd->offy + y1));
-	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(x2-x1), p2e_(y2-y1));
+	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>"
+			, p2e_(pd->offx + minx), p2e_(pd->offy + miny));
+	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(maxx-minx), p2e_(maxy-miny));
 
 	fprintf(pd->dmlFilePointer, "</a:xfrm><a:custGeom><a:avLst />");
 	fprintf(pd->dmlFilePointer, "<a:pathLst>");
-	fprintf(pd->dmlFilePointer, "<a:path w=\"%.0f\" h=\"%.0f\">", p2e_(x2 - x1), p2e_(y2 - y1));
+	fprintf(pd->dmlFilePointer, "<a:path w=\"%.0f\" h=\"%.0f\">", p2e_(maxx-minx), p2e_(maxy-miny));
 	fprintf(pd->dmlFilePointer,
-			"<a:moveTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:moveTo>", 0.0, 0.0);
+			"<a:moveTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:moveTo>", p2e_(x1 - minx), p2e_(y1 - miny) );
 	fprintf(pd->dmlFilePointer,
-			"<a:lnTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:lnTo>", p2e_(x2 - x1),
-			p2e_(y2 - y1));
+			"<a:lnTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:lnTo>", p2e_(x2 - minx), p2e_(y2 - miny));
 	fprintf(pd->dmlFilePointer, "</a:path></a:pathLst>");
 
 	fprintf(pd->dmlFilePointer, "</a:custGeom>");

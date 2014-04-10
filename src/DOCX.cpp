@@ -266,8 +266,7 @@ static void DOCX_Line(double x1, double y1, double x2, double y2,
 				fprintf(pd->dmlFilePointer,
 						"<a:moveTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:moveTo>", p2e_(x1 - minx), p2e_(y1 - miny));
 				fprintf(pd->dmlFilePointer,
-						"<a:lnTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:lnTo>", p2e_(x2 - minx),
-						p2e_(y2 - miny));
+						"<a:lnTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:lnTo>", p2e_(x2 - minx), p2e_(y2 - miny));
 			fprintf(pd->dmlFilePointer, "</a:path>");
 		fprintf(pd->dmlFilePointer, "</a:pathLst>");
 
