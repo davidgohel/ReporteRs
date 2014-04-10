@@ -2,9 +2,9 @@
 #'
 #' @description Create a representation of a table.
 #' FlexTable can be manipulated so that almost any formating can be specified.
-#' It allows to insert headers and footers rows (with merged cells).
-#' Formating can be done on cells, paragraphs and texts (borders, colors, fonts, etc.)
-#' 
+#' It allows to insert headers and footers rows with eventually merged cells (see \code{\link{FlexRow}}, \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}).
+#' Formating can be done on cells, paragraphs and texts (borders, colors, fonts, etc.), see ?"[<-.FlexTable".
+#' Content (formated or not) can be added with the function \code{\link{addFlexCellContent}}.
 #' @param data (a \code{data.frame} or \code{matrix} object) to add
 #' @param span.columns a character vector specifying columns names where row merging 
 #' should be done (if successive values in a column are the same ; if data[p,j]==data[p-1,j] )
@@ -29,6 +29,7 @@
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{addFlexTable}}, \code{\link{FlexRow}}, \code{\link{FlexCell}}
+#' , \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}
 #' , \code{\link{pot}}, \code{\link{set_of_paragraphs}}, \code{\link{addFlexTable.docx}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}} 
 FlexTable = function(data, span.columns = character(0)
