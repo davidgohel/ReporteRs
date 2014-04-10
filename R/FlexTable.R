@@ -45,6 +45,10 @@ FlexTable = function(data, span.columns = character(0)
 	# check data is a data.frame
 	if( !is.data.frame( data ) && !is.matrix( data ) )
 		stop("data is not a data.frame nor a matrix.")
+	
+	if( is.data.frame( data ) ) .names = names( data )
+	else .names = dimnames( data )[[2]]
+
 	# check data is a data.frame
 	if( nrow( data )<1)
 		stop("data has 0 row.")
@@ -54,7 +58,7 @@ FlexTable = function(data, span.columns = character(0)
 		if( !is.character( span.columns ) )
 			stop( "span.columns must be a character vector")
 		
-		.ie.span.columns = is.element( span.columns , names( data ) )
+		.ie.span.columns = is.element( span.columns , .names )
 		if( !all ( .ie.span.columns ) ){
 			stop("span.columns contains unknown columns names :", paste( span.columns[!.ie.span.columns], collapse = "," ) )
 		}	
@@ -408,7 +412,7 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 		if( any( i < 1 | i > length(object) ) ) stop("invalid row subset - out of bound")
 	} else if( is.logical (i) ){
 		if( length( i ) != length(object) ) stop("invalid row subset - incorrect length")
-		else i = ( 1:length(object) )[i]
+		else i = which(i)
 	} else if( is.character (i) ){
 		if( !all( is.element(i, object$row_id)) ) stop("invalid row.names subset")
 		else i = match(i, object$row_id)
@@ -418,7 +422,7 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 		if( any( j < 1 | j > object$ncol ) ) stop("invalid col subset - out of bound")
 	} else if( is.logical (j) ){
 		if( length( j ) != object$ncol ) stop("invalid col subset - incorrect length")
-		else j = ( 1:object$ncol )[j]
+		else j = which(j)
 	} else if( is.character (j) ){
 		if( !all( is.element(j, object$col_id)) ) stop("invalid col.names subset")
 		else j = match(j, object$col_id)
@@ -433,13 +437,16 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 		stop("argument textProperties must be a textProperties object.")
 	
 	textProp = .jTextProperties( textProperties )
+	value_id = 0
+	
 	if( byrow ){
 		for( row_index in i ){
 			for( col_index in j){
+				value_id = value_id+1
 				.jcall( object$jobj, "V", "addBodyText"
 						, as.integer( row_index - 1 ) #i
 						, as.integer( col_index - 1 ) #j
-						, value[ (row_index-1) * object$ncol + col_index ] #par
+						, value[ value_id ] #par
 						, textProp #tp
 						, as.logical(newpar) #newPar
 					)
@@ -448,10 +455,11 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 	} else {
 		for( col_index in j){
 			for( row_index in i ){
+				value_id = value_id+1
 				.jcall( object$jobj, "V", "addBodyText"
 						, as.integer( row_index - 1 ) #i
 						, as.integer( col_index - 1 ) #j
-						, value[ (col_index - 1) + row_index ] #par
+						, value[ value_id ] #par
 						, textProp #tp
 						, as.logical(newpar) #newPar
 				)

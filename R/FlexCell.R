@@ -24,7 +24,10 @@ FlexCell = function( value, colspan = 1, parProp = parProperties(), cellProp = c
 	
 	if( missing(value) )
 		stop("argument value is missing.")
-
+	
+	if( is.null(value) )
+		stop("argument value is null.")
+	
 	if( inherits(value, "character") ){
 		value = set_of_paragraphs( value )
 	}

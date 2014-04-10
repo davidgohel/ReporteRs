@@ -20,10 +20,12 @@
 set_of_paragraphs = function( ... ){
 	
 	.Object = list(...)
-	if( !all( sapply( .Object , inherits, c("pot", "character") ) ) )
-		stop("set_of_paragraphs can only contains pot objects.")
-	# cast characters as pot if any
-	.Object = lapply( .Object, function( x ) if( inherits(x, "character") ) pot(x) else x )
+	if( length( .Object ) > 0 ){
+		if( !all( sapply( .Object , inherits, c("pot", "character") ) ) )
+			stop("set_of_paragraphs can only contains pot objects.")
+		# cast characters as pot if any
+		.Object = lapply( .Object, function( x ) if( inherits(x, "character") ) pot(x) else x )
+	} else .Object = list()
 	
 	class( .Object ) = c("set_of_paragraphs")
 	.Object
@@ -58,7 +60,7 @@ add.pot = function( x, value ){
 #' @method print set_of_paragraphs
 #' @S3method print set_of_paragraphs
 print.set_of_paragraphs = function (x, ...){
-	for(i in 1:length(x)){
+	for(i in seq_along(x)){
 		print(x[[i]])
 	}
 }
