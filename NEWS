@@ -2,7 +2,10 @@ ReporteRs 0.5
 ==================================================================
 BUG FIXES
 ------------------------------------------------------------------
-* Fixed a bug with lines in pptx graphical device driver
+* Fixed an issue with lines in pptx graphical device driver
+  (reported by Julio Alejandro Di Rienzo) 
+
+* a java exception was throwed when accents were used in pptx
   (reported by Julio Alejandro Di Rienzo) 
 
 ReporteRs 0.4
