@@ -41,13 +41,14 @@ char* getFilename(char* filename, int index);
 char* getRaphaelFilename(char* filename, int index);
 char* getJSVariableName(char* filename, int index);
 char* getCanvasName( int index);
-void update_canvas_id(pDevDesc dev);
 char *RGBHexValue(unsigned int col);
 
 void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc);
-void update_start_id(pDevDesc dev);
-int getEditable(pDevDesc dev);
-int get_idx(pDevDesc dev);
+void get_current_canvas_id(int *dn, int *res);
+void get_current_element_id(int *dn, int *res);
+void get_current_idx(int *dn, int *res);
+
+int get_and_increment_idx(pDevDesc dev);
 void SetFillColor(pDevDesc dev, R_GE_gcontext *gc);
 void SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
 void SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);

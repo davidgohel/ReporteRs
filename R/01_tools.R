@@ -282,29 +282,6 @@ plotSlideLayout = function( doc, layout.name ){
 
 
 
-#' @title register Raphael plots
-#'
-#' @description register Raphael plots - internal use only
-#' 
-#' @param plot_attributes plot attributes
-#' @param env environment
-#' @export 
-registerRaphaelGraph = function( plot_attributes, env ){
-	plot_ids = get("plot_ids" , envir = env )
-	plot_attributes = as.list( plot_attributes )
-	names( plot_attributes ) = c("filename", "js.plotid","div.id")
-	plot_ids[[length( plot_ids ) + 1]] = plot_attributes
-	assign("plot_ids", plot_ids, envir = env)
-	invisible()
-}
-check.fontfamily = function( fontfamily ){
-	font = .jnew("java/awt/Font", fontfamily, 0L, 12L )
-	font_family = .jcall( font, "S", "getFamily" )
-	if( font_family == "Dialog" )
-		stop("Font ", fontfamily, " can't be found in available fonts on this machine.")
-	invisible()
-}
-
 getHexColorCode = function( valid.color ){
 	rgb( t(col2rgb(valid.color)/255 ))
 }

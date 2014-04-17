@@ -34,11 +34,11 @@ extern "C" {
 
 static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
-		const char* fontname, SEXP env);
+		const char* fontname, int id_init_value, int editable);
 
 
 void GE_DOCXDevice(const char* filename, double* width, double* height, double* offx,
-		double* offy, double ps, int nbplots, const char* fontfamily);
+		double* offy, double ps, int nbplots, const char* fontfamily, int id_init_value, int editable);
 
 static void DOCX_activate(pDevDesc dev);
 
@@ -71,10 +71,8 @@ static void DOCX_Size(double *left, double *right, double *bottom, double *top,
 
 static double DOCX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
 
-//SEXP setDimensions(SEXP devNumber, SEXP ext, SEXP off);
-
 SEXP R_DOCX_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
-		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP env);
+		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP start_id, SEXP is_editable);
 
 };
 

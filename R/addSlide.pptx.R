@@ -76,6 +76,10 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 		slide = .jnew(class.pptx4r.SlideContent, slide.layout, doc$obj, as.integer(bookmark) )		
 	}
 	doc$current_slide = slide
+	
+	# start plot element id after the max number of shape into the pptx
+	# just in case of - want to make sure element id unique into a slide
+	# as rules are not that clear
 	doc$plot_first_id = .jcall( slide, "I", "getmax_shape"  ) + 1
 	doc
 }
