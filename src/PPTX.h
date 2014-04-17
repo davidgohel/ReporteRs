@@ -28,17 +28,16 @@
 #include <R_ext/Boolean.h>
 
 
-
 extern "C" {
 
 
 static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
-		const char* fontname, SEXP env);
+		const char* fontname, int id_init_value, int editable);
 
 
 void GE_PPTXDevice(const char* filename, double* width, double* height, double* offx,
-		double* offy, double ps, int nbplots, const char* fontfamily);
+		double* offy, double ps, int nbplots, const char* fontfamily, int id_init_value, int editable);
 
 static void PPTX_activate(pDevDesc dev);
 
@@ -74,6 +73,6 @@ static double PPTX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
 //SEXP setDimensions(SEXP devNumber, SEXP ext, SEXP off);
 
 SEXP R_PPTX_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
-		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP env);
+		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP start_id, SEXP is_editable);
 };
 

@@ -26,7 +26,6 @@
 
 #define R_USE_PROTOTYPES 1
 
-
 #include "datastruct.h"
 #include "utils.h"
 #include "common.h"
@@ -38,7 +37,7 @@
 
 static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
-		const char* fontname, SEXP env) {
+		const char* fontname, int canvas_id, SEXP env) {
 
 
 	DOCDesc *rd;
@@ -49,10 +48,7 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 	fi->fontsize=(int)ps;
 	rd->fi = fi;
 
-	SEXP ans;
-	ans = findVar(install("canvas_id"), env);
-	rd->canvas_id = asInteger(ans);
-
+	rd->canvas_id = canvas_id;
 
 	rd->filename = strdup(filename);
 	rd->fontname = strdup(fontname);
@@ -133,7 +129,7 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 
 
 void GE_RAPHAELDevice(const char* filename, double* width, double* height, double* offx,
-		double* offy, double ps, int nbplots, const char* fontfamily, SEXP env) {
+		double* offy, double ps, int nbplots, const char* fontfamily, int canvas_id, SEXP env) {
 	pDevDesc dev = NULL;
 	pGEDevDesc dd;
 	R_GE_checkVersionOrDie (R_GE_version);
@@ -142,7 +138,7 @@ void GE_RAPHAELDevice(const char* filename, double* width, double* height, doubl
 	if (!(dev = (pDevDesc) calloc(1, sizeof(DevDesc))))
 		Rf_error("unable to start RAPHAEL device");
 	if (!RAPHAELDeviceDriver(dev, filename, width, height, offx, offy, ps, nbplots,
-			fontfamily, env)) {
+			fontfamily, canvas_id, env)) {
 		free(dev);
 		Rf_error("unable to start RAPHAEL device");
 	}
@@ -153,13 +149,13 @@ void GE_RAPHAELDevice(const char* filename, double* width, double* height, doubl
 }
 
 static void RAPHAEL_activate(pDevDesc dev) {
-
 }
+
 
 static void RAPHAEL_Circle(double x, double y, double r, const pGEcontext gc,
 		pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	fprintf(pd->dmlFilePointer,
 			"var elt_%d = %s.circle(%.0f, %.0f, %.0f);\n", idx, pd->objectname, x, y, r);
@@ -174,7 +170,7 @@ static void RAPHAEL_Line(double x1, double y1, double x2, double y2,
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 
 	if (gc->lty > -1 && gc->lwd > 0.0 ){
-		int idx = get_idx(dev);
+		int idx = get_and_increment_idx(dev);
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
 		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x1, y1);
 		fprintf(pd->dmlFilePointer, "L %.0f %.0f", x2, y2);
@@ -195,7 +191,7 @@ static void RAPHAEL_Polyline(int n, double *x, double *y, const pGEcontext gc,
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	if (gc->lty > -1 && gc->lwd > 0.0 ){
 
-		int idx = get_idx(dev);
+		int idx = get_and_increment_idx(dev);
 		int i;
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
 		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x[0], y[0]);
@@ -216,7 +212,7 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 	int i;
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
@@ -238,7 +234,7 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	double temp;
 	if( y1 < y0 ){
@@ -310,7 +306,7 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 	double w = RAPHAEL_StrWidth(str, gc, dev);
 	double fontsize = getFontSize(gc->cex, gc->ps, gc->lineheight);
 	double h = fontsize;
@@ -398,7 +394,7 @@ static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 }
 static void RAPHAEL_Close(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	update_canvas_id(dev);
+	//update_canvas_id(dev);
 	closeFile(pd->dmlFilePointer);
 	free(pd);
 }
@@ -428,7 +424,7 @@ static double RAPHAEL_StrWidth(const char *str, const pGEcontext gc, pDevDesc de
 
 SEXP R_RAPHAEL_Device(SEXP filename
 		, SEXP width, SEXP height, SEXP offx,
-		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP env) {
+		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP canvas_id, SEXP env) {
 
 	double* w = REAL(width);
 	double* h = REAL(height);
@@ -438,9 +434,13 @@ SEXP R_RAPHAEL_Device(SEXP filename
 	int nx = length(width);
 
 	double ps = asReal(pointsize);
+	int canvasid = INTEGER(canvas_id)[0];
 
 	BEGIN_SUSPEND_INTERRUPTS;
-	GE_RAPHAELDevice(CHAR(STRING_ELT(filename, 0)), w, h, x, y, ps, nx, CHAR(STRING_ELT(fontfamily, 0)), env);
+	GE_RAPHAELDevice(CHAR(STRING_ELT(filename, 0))
+			, w, h, x, y, ps, nx, CHAR(STRING_ELT(fontfamily, 0))
+			, canvasid
+			, env);
 	END_SUSPEND_INTERRUPTS;
 	return R_NilValue;
 }

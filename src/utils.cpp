@@ -24,6 +24,7 @@
 #include "datastruct.h"
 #include <locale.h>
 
+
 double p2e_(double x) {
 	double y = x * 12700;
 	return y;
@@ -60,38 +61,33 @@ void closeFile( FILE *file){
 
 char* getFilename(char* filename, int index){
 	char *buf;
-	buf = (char*)malloc( ( strlen(filename) + 8 ) * sizeof(char) );
-	sprintf(buf, "%s_%03d.dml", filename,index);
+	int len = snprintf(NULL, 0, "%s_%03d.dml", filename, index);
+	buf = (char*)malloc( (len + 1) * sizeof(char) );
+	sprintf(buf, "%s_%03d.dml", filename, index);
 
 	return buf;
 }
 
 char* getRaphaelFilename(char* filename, int index){
 	char *buf;
-	buf = (char*)malloc( ( strlen(filename) + 8 ) * sizeof(char) );
+	int len = snprintf(NULL, 0, "%s_%03d.js", filename,index);
+	buf = (char*)malloc( (len + 1) * sizeof(char) );
 	sprintf(buf, "%s_%03d.js", filename,index);
 	return buf;
-}
-
-void update_canvas_id(pDevDesc dev){
-	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	SEXP env,ans;
-	PROTECT(env = (SEXP) pd->env);
-	ans = findVar(install("canvas_id"), env);
-	INTEGER(ans)[0] = pd->canvas_id;
-	UNPROTECT(1);
 }
 
 char* getCanvasName( int index){
 
 	char *buf;
-	buf = (char*)malloc( ( 11 ) * sizeof(char) );
+	int len = snprintf(NULL, 0, "canvas_%03d", index);
+	buf = (char*)malloc( (len + 1) * sizeof(char) );
 	sprintf(buf, "canvas_%03d", index);
 	return buf;
 }
 char* getJSVariableName(char* filename, int index){
 	char *buf;
-	buf = (char*)malloc( ( 10 ) * sizeof(char) );
+	int len = snprintf(NULL, 0, "paper%03d", index);
+	buf = (char*)malloc( (len + 1) * sizeof(char) );
 	sprintf(buf, "paper%03d", index);
 	return buf;
 }
@@ -152,28 +148,31 @@ void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc) {
 	}
 }
 
-void update_start_id(pDevDesc dev){
-	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	SEXP env,ans;
-	PROTECT(env = (SEXP) pd->env);
-	ans = findVar(install("start_id"), env);
-	INTEGER(ans)[0] = pd->id;
-	UNPROTECT(1);
+void get_current_canvas_id(int *dn, int *res) {
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (dev) {
+		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+		*res = pd->canvas_id;
+	} else *res = -1;
 }
 
-int getEditable(pDevDesc dev){
-	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	SEXP env,ans;
-	int out;
-	PROTECT(env = (SEXP) pd->env);
-	ans = findVar(install("editable"), env);
-	out = INTEGER(ans)[0];
-	UNPROTECT(1);
-	return out;
+void get_current_element_id(int *dn, int *res) {
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (dev) {
+		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+		*res = pd->id;
+	} else *res = -1;
+}
+//current_id = .C("get_current_idx", (dev.cur()-1L), 0L)[[2]]
+void get_current_idx(int *dn, int *res) {
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (dev) {
+		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+		*res = pd->id;
+	} else *res = -1;
 }
 
-
-int get_idx(pDevDesc dev) {
+int get_and_increment_idx(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int id = pd->id;
 	pd->id++;
@@ -185,8 +184,8 @@ void SetFillColor(pDevDesc dev, R_GE_gcontext *gc) {
 	int alpha =  (int) (R_ALPHA(gc->fill)/255.0 * 100000);
 	if (alpha > 0) {
 		fprintf(xd->dmlFilePointer,
-				"<a:solidFill><a:srgbClr val=\"%s\"><a:alpha val=\"%d\" /></a:srgbClr></a:solidFill>",
-				RGBHexValue(gc->fill), alpha);
+			"<a:solidFill><a:srgbClr val=\"%s\"><a:alpha val=\"%d\" /></a:srgbClr></a:solidFill>",
+			RGBHexValue(gc->fill), alpha);
 	}
 }
 
@@ -197,8 +196,8 @@ void SetFontColor(pDevDesc dev, R_GE_gcontext *gc) {
 
 	if (alpha > 0) {
 		fprintf(xd->dmlFilePointer,
-				"<a:solidFill><a:srgbClr val=\"%s\"><a:alpha val=\"%d\" /></a:srgbClr></a:solidFill>",
-				RGBHexValue(gc->col), alpha);
+			"<a:solidFill><a:srgbClr val=\"%s\"><a:alpha val=\"%d\" /></a:srgbClr></a:solidFill>",
+			RGBHexValue(gc->col), alpha);
 	}
 }
 

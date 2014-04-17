@@ -26,7 +26,6 @@
 
 #define R_USE_PROTOTYPES 1
 
-
 #include "datastruct.h"
 #include "utils.h"
 #include "common.h"
@@ -72,7 +71,7 @@ void DOCX_setRunProperties(pDevDesc dev, R_GE_gcontext *gc, double fontsize){
 
 static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
-		const char* fontname, SEXP env) {
+		const char* fontname, int id_init_value, int editable) {
 
 
 	DOCDesc *rd;
@@ -86,7 +85,7 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 
 	rd->filename = strdup(filename);
 	rd->fontname = strdup(fontname);
-	rd->id = 0;
+	rd->id = id_init_value;
 	rd->pageNumber = 0;
 	rd->offx = offx[0];
 	rd->offy = offy[0];
@@ -99,7 +98,7 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	rd->height = height;
 	rd->fontface = 1;
 	rd->fontsize = (int) ps;
-	rd->env=env;
+	//rd->env=env;
 
 
 	//
@@ -160,14 +159,14 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	dev->haveTransparency = 2;
 	dev->haveTransparentBg = 3;
 
-	rd->editable = getEditable(dev);
+	rd->editable = editable;
 
 	return (Rboolean) TRUE;
 }
 
 
 void GE_DOCXDevice(const char* filename, double* width, double* height, double* offx,
-		double* offy, double ps, int nbplots, const char* fontfamily, SEXP env) {
+		double* offy, double ps, int nbplots, const char* fontfamily, int id_init_value, int editable) {
 	pDevDesc dev = NULL;
 	pGEDevDesc dd;
 	R_GE_checkVersionOrDie (R_GE_version);
@@ -176,7 +175,7 @@ void GE_DOCXDevice(const char* filename, double* width, double* height, double* 
 	if (!(dev = (pDevDesc) calloc(1, sizeof(DevDesc))))
 		Rf_error("unable to start DOCX device");
 	if (!DOCXDeviceDriver(dev, filename, width, height, offx, offy, ps, nbplots,
-			fontfamily, env)) {
+			fontfamily, id_init_value, editable)) {
 		free(dev);
 		Rf_error("unable to start DOCX device");
 	}
@@ -193,7 +192,7 @@ static void DOCX_activate(pDevDesc dev) {
 static void DOCX_Circle(double x, double y, double r, const pGEcontext gc,
 		pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	fprintf(pd->dmlFilePointer, docx_elt_tag_start);
 	if( pd->editable > 0 )
@@ -240,7 +239,7 @@ static void DOCX_Line(double x1, double y1, double x2, double y2,
 
 //	Rprintf("line x{from %.3f to %.3f} y{from %.3f to %.3f}\n", x1, x2, y1, y2);
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	fprintf(pd->dmlFilePointer, docx_elt_tag_start);
 	if( pd->editable > 0 )
@@ -289,7 +288,7 @@ static void DOCX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 //	Rprintf("DOCX_Polyline\n");
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 	int i;
 	double maxx = 0, maxy = 0;
 	for (i = 0; i < n; i++) {
@@ -358,7 +357,7 @@ static void DOCX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 	int i;
 	double maxx = 0, maxy = 0;
 	for (i = 0; i < n; i++) {
@@ -424,7 +423,7 @@ static void DOCX_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) {
 	double tmp;
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	if (x0 >= x1) {
 		tmp = x0;
@@ -472,7 +471,7 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	double pi = 3.141592653589793115997963468544185161590576171875;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	double w = DOCX_StrWidth(str, gc, dev);
 	if( strlen(str) < 3 ) w+= 1 * w / strlen(str);
@@ -552,7 +551,7 @@ static void DOCX_NewPage(const pGEcontext gc, pDevDesc dev) {
 	int which = pd->pageNumber % pd->maxplot;
 	pd->pageNumber++;
 
-	update_start_id(dev);
+	//update_start_id(dev);
 	dev->right = pd->width[which];
 	dev->bottom = pd->height[which];
 	pd->offx = pd->x[which];
@@ -572,7 +571,7 @@ static void DOCX_NewPage(const pGEcontext gc, pDevDesc dev) {
 }
 static void DOCX_Close(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	update_start_id(dev);
+	//update_start_id(dev);
 	closeFile(pd->dmlFilePointer);
 	free(pd);
 }
@@ -631,7 +630,7 @@ static void javaGDresize_(int dev) {
 
 SEXP R_DOCX_Device(SEXP filename
 		, SEXP width, SEXP height, SEXP offx,
-		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP env) {
+		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP start_id, SEXP is_editable ) {
 
 	double* w = REAL(width);
 	double* h = REAL(height);
@@ -641,9 +640,13 @@ SEXP R_DOCX_Device(SEXP filename
 	int nx = length(width);
 
 	double ps = asReal(pointsize);
-
+	int id_init_value = INTEGER(start_id)[0];
+	int editable = INTEGER(is_editable)[0];
 	BEGIN_SUSPEND_INTERRUPTS;
-	GE_DOCXDevice(CHAR(STRING_ELT(filename, 0)), w, h, x, y, ps, nx, CHAR(STRING_ELT(fontfamily, 0)), env);
+	GE_DOCXDevice(CHAR(STRING_ELT(filename, 0))
+			, w, h, x, y, ps, nx, CHAR(STRING_ELT(fontfamily, 0))
+			, id_init_value, editable
+			);
 	END_SUSPEND_INTERRUPTS;
 	return R_NilValue;
 }

@@ -102,19 +102,27 @@ addPlot.docx = function(doc, fun
 					, parStyle$padding.right
 			)
 	} else {
-		doc$plot_first_id = .jcall( doc$obj, "I", "getElementIndex")
-		
+		# one important and painful point is that shape ids must be unique 
+		# in the whole document
+		last_docx_elt_index = .jcall( doc$obj, "I", "getElementIndex") + 1L
+		# OK, maybe start_id should be named last_id... 
+		doc_elt_index = last_docx_elt_index;
 		filename = file.path( dirname, "dml", fsep = "/"  )
 		filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 		env = dml.docx( file = filename, width=width*72.2, height = height*72.2
 				, offx = 0, offy = 0, ps = pointsize, fontname = fontname
-				, firstid = as.integer( doc$plot_first_id + 1L ), editable = editable
+				, firstid = as.integer( last_docx_elt_index )
+				, editable = editable
 		)
 		fun_res = try( fun(...), silent = T )
-		dev.off()
-		doc$plot_first_id = doc$plot_first_id + get("start_id", env) + 1
+		last_id = .C("get_current_element_id", (dev.cur()-1L), 0L)[[2]]
 		
-		.jcall( doc$obj, "V", "incrementElementIndex", as.integer( doc$plot_first_id - get("start_id", env) ) )
+#		browser()
+		dev.off()
+		
+
+		.jcall( doc$obj, "V", "incrementElementIndex", as.integer( last_id - doc_elt_index + 1 ) )
+
 		dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
 		plotfiles = list.files( dirname , full.names = T )
 

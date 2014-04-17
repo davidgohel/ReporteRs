@@ -26,7 +26,6 @@
 
 #define R_USE_PROTOTYPES 1
 
-
 #include "datastruct.h"
 #include "utils.h"
 #include "common.h"
@@ -42,7 +41,7 @@ static char pptx_unlock_properties[] = "<p:cNvSpPr/><p:nvPr />";
 
 static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
-		const char* fontname, SEXP env) {
+		const char* fontname, int id_init_value, int editable) {
 
 
 	DOCDesc *rd;
@@ -55,7 +54,9 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 
 	rd->filename = strdup(filename);
 	rd->fontname = strdup(fontname);
-	rd->id = 0;
+
+
+	rd->id = id_init_value;
 	rd->pageNumber = 0;
 	rd->offx = offx[0];
 	rd->offy = offy[0];
@@ -68,7 +69,7 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	rd->height = height;
 	rd->fontface = 1;
 	rd->fontsize = (int) ps;
-	rd->env=env;
+//	rd->env=env;
 	//
 	//  Device functions
 	//
@@ -127,14 +128,15 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	dev->haveTransparency = 2;
 	dev->haveTransparentBg = 3;
 
-	rd->editable = getEditable(dev);
+	rd->editable = editable;
+
 
 	return (Rboolean) TRUE;
 }
 
 
 void GE_PPTXDevice(const char* filename, double* width, double* height, double* offx,
-		double* offy, double ps, int nbplots, const char* fontfamily, SEXP env) {
+		double* offy, double ps, int nbplots, const char* fontfamily, int id_init_value, int editable) {
 	pDevDesc dev = NULL;
 	pGEDevDesc dd;
 	R_GE_checkVersionOrDie (R_GE_version);
@@ -143,7 +145,7 @@ void GE_PPTXDevice(const char* filename, double* width, double* height, double* 
 	if (!(dev = (pDevDesc) calloc(1, sizeof(DevDesc))))
 		Rf_error("unable to start PPTX device");
 	if (!PPTXDeviceDriver(dev, filename, width, height, offx, offy, ps, nbplots,
-			fontfamily, env)) {
+			fontfamily, id_init_value, editable)) {
 		free(dev);
 		Rf_error("unable to start PPTX device");
 	}
@@ -160,7 +162,7 @@ static void PPTX_activate(pDevDesc dev) {
 static void PPTX_Circle(double x, double y, double r, const pGEcontext gc,
 		pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	fprintf(pd->dmlFilePointer, pptx_elt_tag_start);
 	if( pd->editable < 1 )
@@ -189,7 +191,7 @@ static void PPTX_Circle(double x, double y, double r, const pGEcontext gc,
 static void PPTX_Line(double x1, double y1, double x2, double y2,
 		const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	double maxx = 0, maxy = 0;
 	double minx = 0, miny = 0;
@@ -248,7 +250,7 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 //	Rprintf("PPTX_Polyline\n");
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 	int i;
 	double maxx = 0, maxy = 0;
 	for (i = 0; i < n; i++) {
@@ -308,7 +310,7 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 	int i;
 	double maxx = 0, maxy = 0;
 	for (i = 0; i < n; i++) {
@@ -368,7 +370,7 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) {
 	double tmp;
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	if (x0 >= x1) {
 		tmp = x0;
@@ -413,7 +415,7 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int idx = get_idx(dev);
+	int idx = get_and_increment_idx(dev);
 
 	double pi = 3.141592653589793115997963468544185161590576171875;
 	double w = PPTX_StrWidth(str, gc, dev);
@@ -517,7 +519,7 @@ static void PPTX_NewPage(const pGEcontext gc, pDevDesc dev) {
 	int which = pd->pageNumber % pd->maxplot;
 	pd->pageNumber++;
 
-	update_start_id(dev);
+	//update_start_id(dev);
 
 	dev->right = pd->width[which];
 	dev->bottom = pd->height[which];
@@ -538,7 +540,7 @@ static void PPTX_NewPage(const pGEcontext gc, pDevDesc dev) {
 }
 static void PPTX_Close(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	update_start_id(dev);
+	//update_start_id(dev);
 	closeFile(pd->dmlFilePointer);
 	free(pd);
 }
@@ -567,8 +569,10 @@ static double PPTX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) 
 
 
 SEXP R_PPTX_Device(SEXP filename
-		, SEXP width, SEXP height, SEXP offx,
-		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP env) {
+		, SEXP width, SEXP height, SEXP offx
+		, SEXP offy, SEXP pointsize, SEXP fontfamily
+		, SEXP start_id, SEXP is_editable
+		) {
 
 	double* w = REAL(width);
 	double* h = REAL(height);
@@ -578,9 +582,14 @@ SEXP R_PPTX_Device(SEXP filename
 	int nx = length(width);
 
 	double ps = asReal(pointsize);
+	int id_init_value = INTEGER(start_id)[0];
+	int editable = INTEGER(is_editable)[0];
 
 	BEGIN_SUSPEND_INTERRUPTS;
-	GE_PPTXDevice(CHAR(STRING_ELT(filename, 0)), w, h, x, y, ps, nx, CHAR(STRING_ELT(fontfamily, 0)), env);
+	GE_PPTXDevice(CHAR(STRING_ELT(filename, 0))
+			, w, h, x, y, ps, nx, CHAR(STRING_ELT(fontfamily, 0))
+			, id_init_value, editable
+			);
 	END_SUSPEND_INTERRUPTS;
 	return R_NilValue;
 }
