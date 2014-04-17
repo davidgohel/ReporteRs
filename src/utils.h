@@ -46,8 +46,8 @@ void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc);
 void get_current_canvas_id(int *dn, int *res);
 void get_current_element_id(int *dn, int *res);
 void get_current_idx(int *dn, int *res);
-
 int get_and_increment_idx(pDevDesc dev);
+
 void SetFillColor(pDevDesc dev, R_GE_gcontext *gc);
 void SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
 void SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);

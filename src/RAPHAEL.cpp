@@ -34,7 +34,6 @@
 #include <R_ext/Riconv.h>
 #include <errno.h>
 
-
 static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
 		const char* fontname, int canvas_id, SEXP env) {

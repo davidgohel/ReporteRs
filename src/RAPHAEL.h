@@ -27,9 +27,7 @@
 #include "R_ext/GraphicsDevice.h"
 #include <R_ext/Boolean.h>
 
-
 extern "C" {
-
 
 static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,

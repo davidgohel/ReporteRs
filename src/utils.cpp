@@ -51,7 +51,6 @@ double getFontSize(double cex, double fontsize, double lineheight) {
 	return size;
 }
 
-
 void closeFile( FILE *file){
 	BEGIN_SUSPEND_INTERRUPTS;
 	fflush(file);
