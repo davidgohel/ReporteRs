@@ -34,7 +34,6 @@ double p2t(double x);
 int getFontface( int ff );
 double getFontSize(double cex, double fontsize, double lineheight);
 
-
 void closeFile( FILE *file);
 
 char* getFilename(char* filename, int index);

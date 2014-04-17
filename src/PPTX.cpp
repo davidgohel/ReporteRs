@@ -26,7 +26,6 @@
 
 #define R_USE_PROTOTYPES 1
 
-
 #include "datastruct.h"
 #include "utils.h"
 #include "common.h"

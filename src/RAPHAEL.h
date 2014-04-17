@@ -28,7 +28,6 @@
 #include <R_ext/Boolean.h>
 
 
-
 extern "C" {
 
 
