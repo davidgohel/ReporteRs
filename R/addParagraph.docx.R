@@ -4,8 +4,11 @@
 #' Insert paragraph(s) of text into a \code{docx} object
 #' 
 #' @param doc Object of class \code{"docx"} where paragraph has to be added
-#' @param value character vector containing texts to add OR an object of class \code{\link{set_of_paragraphs}}.
-#' @param stylename value of the named style to apply to paragraphs in the docx document. see \code{\link{styles.docx}}.
+#' @param value character vector containing texts to add OR an object of class 
+#' \code{\link{set_of_paragraphs}}.
+#' @param stylename value of the named style to apply to paragraphs in the docx document.
+#' Expected value is an existing stylename of the template document used to create the 
+#' \code{docx} object. see \code{\link{styles.docx}}.
 #' @param bookmark a character value ; id of the Word bookmark to replace by the table. optional
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"docx"}.
@@ -14,7 +17,10 @@
 #' # Create a new document 
 #' doc = docx( title = "title" )
 #' 
-#' # Add "Hello World" into the document doc
+#' # Add "Hello World" into the document doc with
+#' # stylename "Normal". Run the following code to 
+#' # see available stylenames: 
+#' # \code{styles(doc)}
 #' doc <- addParagraph(doc, "Hello Word!", "Normal");
 #' 
 #' # Add into the document : "My tailor is rich" and "Cats and Dogs"

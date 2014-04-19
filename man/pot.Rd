@@ -2,7 +2,7 @@
 \alias{pot}
 \title{Piece of Text (formated text)}
 \usage{
-pot(value, format = textProperties())
+pot(value = "", format = textProperties())
 }
 \arguments{
   \item{value}{text value or a value that has a

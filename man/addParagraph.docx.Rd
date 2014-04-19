@@ -12,7 +12,9 @@
   an object of class \code{\link{set_of_paragraphs}}.}
 
   \item{stylename}{value of the named style to apply to
-  paragraphs in the docx document. see
+  paragraphs in the docx document. Expected value is an
+  existing stylename of the template document used to
+  create the \code{docx} object. see
   \code{\link{styles.docx}}.}
 
   \item{bookmark}{a character value ; id of the Word
@@ -31,7 +33,10 @@ Insert paragraph(s) of text into a \code{docx} object
 # Create a new document
 doc = docx( title = "title" )
 
-# Add "Hello World" into the document doc
+# Add "Hello World" into the document doc with
+# stylename "Normal". Run the following code to
+# see available stylenames:
+# \\code{styles(doc)}
 doc <- addParagraph(doc, "Hello Word!", "Normal");
 
 # Add into the document : "My tailor is rich" and "Cats and Dogs"

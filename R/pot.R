@@ -15,7 +15,7 @@
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
 #' , \code{\link{pptx}}, \code{\link{docx}}, \code{\link{html}}
-pot = function( value , format = textProperties() ){
+pot = function( value ="", format = textProperties() ){
 
 	value = format( value )
 	if( !is.character( value ) ){
@@ -42,7 +42,7 @@ pot = function( value , format = textProperties() ){
 #' @method print pot
 #' @S3method print pot
 print.pot = function (x, ...){
-	for(i in 1:length(x)){
+	for(i in seq_along(x)){
 		if( !is.null(x[[i]]$format) ) cat("[", x[[i]]$value, as.character(x[[i]]$format), "]", sep = "" )
 		else cat("[", x[[i]]$value, "]", sep = "" )
 	}
@@ -51,7 +51,7 @@ print.pot = function (x, ...){
 #' @S3method as.character pot
 as.character.pot = function (x, ...){
 	out = ""
-	for(i in 1:length(x)){
+	for(i in seq_along(x)){
 		if( !is.null(x[[i]]$format) ) out = paste0(out, "[", x[[i]]$value, as.character(x[[i]]$format), "]" )
 		else out = paste0(out, "[", x[[i]]$value, "]" )
 	}
