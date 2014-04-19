@@ -2,8 +2,7 @@
 \alias{addImage.html}
 \title{Insert an external image into a html object}
 \usage{
-  \method{addImage}{html} (doc, filename, width, height,
-    ...)
+\method{addImage}{html}(doc, filename, width, height, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"} where external
@@ -19,10 +18,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  an object of class \code{"html"}.
+an object of class \code{"html"}.
 }
 \description{
-  Add an external image into a \code{"html"} object.
+Add an external image into a \code{"html"} object.
 }
 \examples{
 #START_TAG_TEST
@@ -40,7 +39,7 @@ writeDoc( doc, "addImage_example" )
 #STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{html}}, \code{\link{addPlot.html}} ,
-  \code{\link{addImage}}
+\code{\link{html}}, \code{\link{addPlot.html}} ,
+\code{\link{addImage}}
 }
 

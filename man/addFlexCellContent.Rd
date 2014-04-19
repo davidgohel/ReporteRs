@@ -2,8 +2,8 @@
 \alias{addFlexCellContent}
 \title{Add content in a FlexTable}
 \usage{
-  addFlexCellContent(object, i, j, value, textProperties,
-    newpar = F, byrow = FALSE)
+addFlexCellContent(object, i, j, value, textProperties, newpar = F,
+  byrow = FALSE)
 }
 \arguments{
   \item{object}{a \code{FlexTable} object}
@@ -27,8 +27,8 @@
   added by columns , otherwise content is added by rows.}
 }
 \description{
-  add texts or paragraphs in cells contents of a FlexTable
-  object
+add texts or paragraphs in cells contents of a FlexTable
+object
 }
 \examples{
 data( data_ReporteRs )
@@ -49,6 +49,6 @@ myFlexTable = addFlexCellContent( myFlexTable
 	)
 }
 \seealso{
-  \code{\link{addFlexTable}}
+\code{\link{addFlexTable}}
 }
 

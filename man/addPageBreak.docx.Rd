@@ -2,7 +2,7 @@
 \alias{addPageBreak.docx}
 \title{Insert a page break into a docx object}
 \usage{
-  \method{addPageBreak}{docx} (doc, ...)
+\method{addPageBreak}{docx}(doc, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"} where page break
@@ -11,10 +11,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  an object of class \code{"docx"}.
+an object of class \code{"docx"}.
 }
 \description{
-  Insert a page break into a \code{"docx"} object.
+Insert a page break into a \code{"docx"} object.
 }
 \examples{
 #START_TAG_TEST
@@ -23,6 +23,6 @@ doc <- addPageBreak( doc )
 #STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addPageBreak}}
+\code{\link{docx}}, \code{\link{addPageBreak}}
 }
 

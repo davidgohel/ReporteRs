@@ -2,7 +2,7 @@
 \alias{addRScript}
 \title{Add R script into a document object}
 \usage{
-  addRScript(doc, file, text, ...)
+addRScript(doc, file, text, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -15,12 +15,12 @@
   \item{...}{further arguments passed to other methods}
 }
 \value{
-  a document object
+a document object
 }
 \description{
-  Add R script into a document object
+Add R script into a document object
 }
 \seealso{
-  \code{\link{html}}
+\code{\link{html}}
 }
 

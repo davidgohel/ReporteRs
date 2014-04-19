@@ -2,8 +2,8 @@
 \alias{FlexRow}
 \title{Row object for FlexTable}
 \usage{
-  FlexRow(values, colspan, textProp = textProperties(),
-    parProp = parProperties(), cellProp = cellProperties())
+FlexRow(values, colspan, textProp = textProperties(),
+  parProp = parProperties(), cellProp = cellProperties())
 }
 \arguments{
   \item{values}{Optional. a character vector to use as text
@@ -24,8 +24,8 @@
   corresponding value (in \code{values}).}
 }
 \description{
-  Create a representation of a row that can be inserted in
-  a FlexTable.
+Create a representation of a row that can be inserted in a
+FlexTable.
 }
 \examples{
 #START_TAG_TEST
@@ -40,6 +40,6 @@ headerRow = FlexRow( c("Column 1", "Column 2")
 #STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{addFlexTable}}
+\code{\link{addFlexTable}}
 }
 

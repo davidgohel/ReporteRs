@@ -2,11 +2,10 @@
 \alias{addTable.html}
 \title{Insert a table into an html object}
 \usage{
-  \method{addTable}{html} (doc, data, layout.properties,
-    header.labels, groupedheader.row = list(),
-    span.columns = character(0), col.types,
-    columns.bg.colors = list(),
-    columns.font.colors = list(), row.names = FALSE, ...)
+\method{addTable}{html}(doc, data, layout.properties, header.labels,
+  groupedheader.row = list(), span.columns = character(0), col.types,
+  columns.bg.colors = list(), columns.font.colors = list(),
+  row.names = FALSE, ...)
 }
 \arguments{
   \item{doc}{the \code{html} to use}
@@ -64,10 +63,10 @@
   \code{\link{addTable}}.}
 }
 \value{
-  an object of class \code{"html"}.
+an object of class \code{"html"}.
 }
 \description{
-  Insert a table into the \code{html} object.
+Insert a table into the \code{html} object.
 }
 \examples{
 #START_TAG_TEST
@@ -111,7 +110,7 @@ print( pages ) # print filenames of generated html pages
 #STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{html}}, \code{\link{addTable}},
-  \code{\link{tableProperties}}
+\code{\link{html}}, \code{\link{addTable}},
+\code{\link{tableProperties}}
 }
 

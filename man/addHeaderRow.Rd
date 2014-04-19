@@ -2,7 +2,7 @@
 \alias{addHeaderRow}
 \title{add header in a FlexTable}
 \usage{
-  addHeaderRow(x, value)
+addHeaderRow(x, value)
 }
 \arguments{
   \item{x}{a \code{FlexTable} object}
@@ -11,7 +11,7 @@
   row}
 }
 \description{
-  add a header row in a FlexTable
+add a header row in a FlexTable
 }
 \examples{
 data( data_ReporteRs )
@@ -28,6 +28,6 @@ for(i in 1:ncol(data_ReporteRs))
 myFlexTable = addHeaderRow( myFlexTable, headerRow)
 }
 \seealso{
-  \code{\link{FlexTable}}
+\code{\link{FlexTable}}
 }
 

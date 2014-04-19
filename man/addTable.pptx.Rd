@@ -2,11 +2,10 @@
 \alias{addTable.pptx}
 \title{Insert a table into an pptx object}
 \usage{
-  \method{addTable}{pptx} (doc, data, layout.properties,
-    header.labels, groupedheader.row = list(),
-    span.columns = character(0), col.types,
-    columns.bg.colors = list(),
-    columns.font.colors = list(), row.names = FALSE, ...)
+\method{addTable}{pptx}(doc, data, layout.properties, header.labels,
+  groupedheader.row = list(), span.columns = character(0), col.types,
+  columns.bg.colors = list(), columns.font.colors = list(),
+  row.names = FALSE, ...)
 }
 \arguments{
   \item{doc}{the \code{pptx} to use}
@@ -64,14 +63,14 @@
   \code{\link{addTable}}.}
 }
 \value{
-  an object of class \code{"pptx"}.
+an object of class \code{"pptx"}.
 }
 \description{
-  Insert a table into the \code{pptx} object.
+Insert a table into the \code{pptx} object.
 }
 \details{
-  Width of the table is the width of the shape where table
-  is added.
+Width of the table is the width of the shape where table is
+added.
 }
 \examples{
 #START_TAG_TEST
@@ -117,7 +116,7 @@ writeDoc( doc, "addTable_example.pptx" )
 #STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{pptx}}, \code{\link{addTable}},
-  \code{\link{tableProperties}}
+\code{\link{pptx}}, \code{\link{addTable}},
+\code{\link{tableProperties}}
 }
 

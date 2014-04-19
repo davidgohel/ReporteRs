@@ -2,9 +2,9 @@
 \alias{addTable}
 \title{Add a table into a document object}
 \usage{
-  addTable(doc, data, layout.properties, header.labels,
-    groupedheader.row, span.columns, col.types,
-    columns.bg.colors, columns.font.colors, row.names, ...)
+addTable(doc, data, layout.properties, header.labels, groupedheader.row,
+  span.columns, col.types, columns.bg.colors, columns.font.colors, row.names,
+  ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -63,25 +63,24 @@
   methods..}
 }
 \value{
-  a document object
+a document object
 }
 \description{
-  Add a table into a document object
+Add a table into a document object
 }
 \details{
-  The table below shows the display model used to format
-  tables:\cr
-  \preformatted{+--------------+---------------+}
-  \preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
-  \preformatted{+------+-------+-------+-------+}
-  \preformatted{HEADER1|HEADER2|HEADER3|HEADER4|}
-  \preformatted{+------+-------+-------+-------+}
-  \preformatted{ x[1,1]| x[1,2]| x[1,3]|| x[1,4]|}
-  \preformatted{+------+-------+-------+-------+}
-  \preformatted{ x[2,1]| x[2,2]| x[2,3]|| x[2,4]|}
-  \preformatted{+------+-------+-------+-------+}
-  \preformatted{ x[3,1]| x[3,2]| x[3,3]|| x[3,4]|}
-  \preformatted{+------+-------+-------+-------+}
+The table below shows the display model used to format
+tables:\cr \preformatted{+--------------+---------------+}
+\preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
+\preformatted{+------+-------+-------+-------+}
+\preformatted{HEADER1|HEADER2|HEADER3|HEADER4|}
+\preformatted{+------+-------+-------+-------+}
+\preformatted{ x[1,1]| x[1,2]| x[1,3]|| x[1,4]|}
+\preformatted{+------+-------+-------+-------+}
+\preformatted{ x[2,1]| x[2,2]| x[2,3]|| x[2,4]|}
+\preformatted{+------+-------+-------+-------+}
+\preformatted{ x[3,1]| x[3,2]| x[3,3]|| x[3,4]|}
+\preformatted{+------+-------+-------+-------+}
 }
 \examples{
 \dontrun{
@@ -112,8 +111,8 @@ doc <- addTable( doc
 }
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addTable.docx}} ,
-  \code{\link{pptx}}, \code{\link{addTable.pptx}} ,
-  \code{\link{html}}, \code{\link{addTable.html}}
+\code{\link{docx}}, \code{\link{addTable.docx}} ,
+\code{\link{pptx}}, \code{\link{addTable.pptx}} ,
+\code{\link{html}}, \code{\link{addTable.html}}
 }
 

@@ -2,7 +2,7 @@
 \alias{addImage}
 \title{Add an external image into a document object}
 \usage{
-  addImage(doc, filename, ...)
+addImage(doc, filename, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -13,14 +13,14 @@
   \item{...}{further arguments passed to other methods}
 }
 \value{
-  a document object
+a document object
 }
 \description{
-  Add an external image into a document object
+Add an external image into a document object
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addImage.docx}} ,
-  \code{\link{pptx}}, \code{\link{addImage.pptx}} ,
-  \code{\link{html}}, \code{\link{addImage.html}}
+\code{\link{docx}}, \code{\link{addImage.docx}} ,
+\code{\link{pptx}}, \code{\link{addImage.pptx}} ,
+\code{\link{html}}, \code{\link{addImage.html}}
 }
 

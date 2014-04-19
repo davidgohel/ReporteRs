@@ -2,7 +2,7 @@
 \alias{addFlexTable}
 \title{Insert a FlexTable into a document object}
 \usage{
-  addFlexTable(doc, flextable, ...)
+addFlexTable(doc, flextable, ...)
 }
 \arguments{
   \item{doc}{document object}
@@ -12,10 +12,10 @@
   \item{...}{further arguments passed to other methods}
 }
 \value{
-  a document object
+a document object
 }
 \description{
-  Insert a FlexTable into a document object
+Insert a FlexTable into a document object
 }
 \examples{
 \dontrun{
@@ -32,6 +32,6 @@ doc = addFlexTable( doc, myFlexTable )
 }
 }
 \seealso{
-  \code{\link{FlexTable}}
+\code{\link{FlexTable}}
 }
 

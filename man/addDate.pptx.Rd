@@ -2,8 +2,7 @@
 \alias{addDate.pptx}
 \title{Insert a date shape into a document pptx object}
 \usage{
-  \method{addDate}{pptx} (doc, value,
-    str.format = "\%Y-\%m-\%d", ...)
+\method{addDate}{pptx}(doc, value, str.format = "\%Y-\%m-\%d", ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"}}
@@ -18,11 +17,11 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  a document object
+a document object
 }
 \description{
-  Insert a date into the current slide of a \code{pptx}
-  object.
+Insert a date into the current slide of a \code{pptx}
+object.
 }
 \examples{
 #START_TAG_TEST
@@ -45,8 +44,8 @@ writeDoc( doc, "addDate_example.pptx" )
 #STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{pptx}}, \code{\link{addFooter.pptx}},
-  \code{\link{addPageNumber.pptx}} ,
-  \code{\link{strptime}}, \code{\link{addDate}}
+\code{\link{pptx}}, \code{\link{addFooter.pptx}},
+\code{\link{addPageNumber.pptx}} , \code{\link{strptime}},
+\code{\link{addDate}}
 }
 

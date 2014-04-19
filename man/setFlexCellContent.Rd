@@ -2,7 +2,7 @@
 \alias{setFlexCellContent}
 \title{Replace FlexTable content}
 \usage{
-  setFlexCellContent(object, i, j, value)
+setFlexCellContent(object, i, j, value)
 }
 \arguments{
   \item{object}{a \code{FlexTable} object}
@@ -18,8 +18,8 @@
   cell content.}
 }
 \description{
-  Replace cells contents of a FlexTable object with one or
-  more paragraph of texts.
+Replace cells contents of a FlexTable object with one or
+more paragraph of texts.
 }
 \examples{
 data( data_ReporteRs )
@@ -33,6 +33,6 @@ myFlexTable = setFlexCellContent( myFlexTable
 )
 }
 \seealso{
-  \code{\link{addFlexTable}}
+\code{\link{addFlexTable}}
 }
 

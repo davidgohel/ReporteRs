@@ -2,10 +2,8 @@
 \alias{addImage.docx}
 \title{Insert external images into a docx object}
 \usage{
-  \method{addImage}{docx} (doc, filename, width = 6,
-    height = 6, bookmark,
-    parStyle = parProperties(text.align = "center", padding = 5),
-    ...)
+\method{addImage}{docx}(doc, filename, width = 6, height = 6, bookmark,
+  parStyle = parProperties(text.align = "center", padding = 5), ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"} where external
@@ -31,10 +29,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-  an object of class \code{"docx"}.
+an object of class \code{"docx"}.
 }
 \description{
-  Add external images into a \code{"docx"} object.
+Add external images into a \code{"docx"} object.
 }
 \examples{
 #START_TAG_TEST
@@ -50,7 +48,7 @@ writeDoc( doc, "addImage_example.docx" )
 #STOP_TAG_TEST
 }
 \seealso{
-  \code{\link{docx}}, \code{\link{addPlot.docx}} ,
-  \code{\link{addImage}}
+\code{\link{docx}}, \code{\link{addPlot.docx}} ,
+\code{\link{addImage}}
 }
 

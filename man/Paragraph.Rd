@@ -2,12 +2,12 @@
 \alias{Paragraph}
 \title{Paragraph (internal use only)}
 \usage{
-  Paragraph(value)
+Paragraph(value)
 }
 \arguments{
   \item{value}{a pot object}
 }
 \description{
-  Paragraph (internal use only)
+Paragraph (internal use only)
 }
 
