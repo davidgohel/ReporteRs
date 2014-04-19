@@ -1,3 +1,16 @@
+ReporteRs 0.5.2
+==================================================================
+BUG FIXES
+------------------------------------------------------------------
+* compilation with flags -Wformat -Wformat-security (default 
+  compiler flags on Ubuntu) was driving to an error. Code changed:
+  usage of fputs instead of fprintf when no formatting is required
+  (reported by Günter Lutz)
+
+ENHANCEMENT 
+------------------------------------------------------------------
+* Cleaning and reorganization of the C code files
+
 ReporteRs 0.5.1
 ==================================================================
 BUG FIXES
