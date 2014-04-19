@@ -24,6 +24,36 @@
 #include "datastruct.h"
 
 
+void set_tracer_on(int *dn) {
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (dev) {
+		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+		pd->elt_tracer->on = 1;
+		pd->elt_tracer->isinit = 0;
+		pd->elt_tracer->first_elt = -1;
+		pd->elt_tracer->last_elt = -1;
+	}
+}
+void set_tracer_off(int *dn) {
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (dev) {
+		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+		pd->elt_tracer->on = 0;
+		pd->elt_tracer->isinit = 0;
+		pd->elt_tracer->first_elt = -1;
+		pd->elt_tracer->last_elt = -1;
+	}
+}
+
+void collect_id(int *dn, int *res) {
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (dev) {
+		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+
+		res[0] = pd->elt_tracer->first_elt;
+		res[1] = pd->elt_tracer->last_elt;
+	}
+}
 
 
 void get_current_canvas_id(int *dn, int *res) {

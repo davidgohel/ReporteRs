@@ -132,6 +132,24 @@ int get_and_increment_idx(pDevDesc dev) {
 	return id;
 }
 
+
+void register_element(pDevDesc dev) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int id = pd->id;
+
+	if( pd->elt_tracer->on ){
+		if( pd->elt_tracer->isinit < 1 ){
+			pd->elt_tracer->first_elt = id;
+			pd->elt_tracer->last_elt = id;
+
+			pd->elt_tracer->isinit = 1;
+		} else {
+			pd->elt_tracer->last_elt = id;
+		}
+	}
+}
+
+
 void closeFile( FILE *file){
 	BEGIN_SUSPEND_INTERRUPTS;
 	fflush(file);

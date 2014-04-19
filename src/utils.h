@@ -30,4 +30,8 @@
 extern "C" {
 	void get_current_canvas_id(int *dn, int *res);
 	void get_current_element_id(int *dn, int *res);
+
+	void set_tracer_on(int *dn);
+	void set_tracer_off(int *dn);
+	void collect_id(int *dn, int *res);
 }

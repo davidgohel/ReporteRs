@@ -33,6 +33,12 @@ typedef struct {
 	int isinit;
 } FontInfo;
 
+typedef struct {
+	int first_elt;
+	int last_elt;
+	int on;
+	int isinit;
+} ElementTracer;
 
 typedef struct {
 	char *filename;
@@ -57,6 +63,7 @@ typedef struct {
 	double* height;
 	int maxplot;
 	FontInfo *fi;
+	ElementTracer *elt_tracer;
 	SEXP env;
 
 } DOCDesc;

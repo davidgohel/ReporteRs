@@ -30,6 +30,7 @@ raphael <- function( file, width=504, height=504, offx = 50, offy = 50, ps=12, f
 	check.fontfamily(fontname)
 	#assign("canvas_id", as.integer( canvas_id ), envir = env)
 	assign("plot_ids", list(), envir = env)
+	assign("element_ids", list(), envir = env)
 	.Call("R_RAPHAEL_Device", file, as.double(width), as.double(height)
 			, as.double(offx), as.double(offy), as.double(ps), fontname 
 			, as.integer( canvas_id ), env
@@ -52,6 +53,22 @@ registerRaphaelGraph = function( plot_attributes, env ){
 	plot_ids[[length( plot_ids ) + 1]] = plot_attributes
 	assign("plot_ids", plot_ids, envir = env)
 	invisible()
+}
+
+#' @title setInteractiveElements
+#'
+#' @description register Raphael plots - internal use only
+#' @param fun plot attributes
+#' @param popup plot attributes
+#' @param dbclick plot attributes
+#' @param ... environment
+#' @export 
+setInteractiveElements = function( fun, ..., popup, dbclick ){
+	.C("set_tracer_on", (dev.cur()-1L))
+	fun(...)#TODO:ICI mettre le bousin droit
+	ids = .C("collect_id", (dev.cur()-1L), integer(2))[[2]]
+	.C("set_tracer_off", (dev.cur()-1L))
+	ids
 }
 
 check.fontfamily = function( fontfamily ){

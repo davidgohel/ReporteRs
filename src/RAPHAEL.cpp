@@ -49,6 +49,11 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 	fi->fontsize=(int)ps;
 	rd->fi = fi;
 
+	ElementTracer *elt_tracer = (ElementTracer *) malloc(sizeof(ElementTracer));
+	elt_tracer->on = 0;
+	elt_tracer->isinit = 0;
+	rd->elt_tracer = elt_tracer;
+
 	rd->canvas_id = canvas_id;
 
 	rd->filename = strdup(filename);
@@ -265,6 +270,7 @@ static void RAPHAEL_Circle(double x, double y, double r, const pGEcontext gc,
 		pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
+	register_element( dev);
 
 	fprintf(pd->dmlFilePointer,
 			"var elt_%d = %s.circle(%.0f, %.0f, %.0f);\n", idx, pd->objectname, x, y, r);
@@ -280,6 +286,7 @@ static void RAPHAEL_Line(double x1, double y1, double x2, double y2,
 
 	if (gc->lty > -1 && gc->lwd > 0.0 ){
 		int idx = get_and_increment_idx(dev);
+		register_element( dev);
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
 		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x1, y1);
 		fprintf(pd->dmlFilePointer, "L %.0f %.0f", x2, y2);
@@ -301,6 +308,7 @@ static void RAPHAEL_Polyline(int n, double *x, double *y, const pGEcontext gc,
 	if (gc->lty > -1 && gc->lwd > 0.0 ){
 
 		int idx = get_and_increment_idx(dev);
+		register_element( dev);
 		int i;
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
 		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x[0], y[0]);
@@ -322,6 +330,7 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
+	register_element( dev);
 	int i;
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
@@ -344,7 +353,7 @@ static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
-
+	register_element( dev);
 	double temp;
 	if( y1 < y0 ){
 		temp = y1;
@@ -375,6 +384,7 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
+	register_element( dev);
 	double w = RAPHAEL_StrWidth(str, gc, dev);
 	double fontsize = getFontSize(gc->cex, gc->ps, gc->lineheight);
 	double h = fontsize;
