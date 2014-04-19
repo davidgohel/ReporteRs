@@ -20,19 +20,16 @@
  * along with ReporteRs.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#include <stdio.h>
-#include <Rinternals.h>
-#include <R.h>
+static char color_value[7];
+static char HexReferenceTable[] = "0123456789ABCDEF";
 
-#include <R_ext/GraphicsEngine.h>
-#include <R_ext/GraphicsDevice.h>
-
-double p2e_(double x);
-char* get_dml_filename(char* filename, int index);
-
-void DML_SetFillColor(pDevDesc dev, R_GE_gcontext *gc);
-void DML_SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
-void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);
-
-int get_and_increment_idx(pDevDesc dev);
-
+char *RGBHexValue(unsigned int col) {
+	color_value[0] = HexReferenceTable[(col >> 4) & 15];
+	color_value[1] = HexReferenceTable[(col) & 15];
+	color_value[2] = HexReferenceTable[(col >> 12) & 15];
+	color_value[3] = HexReferenceTable[(col >> 8) & 15];
+	color_value[4] = HexReferenceTable[(col >> 20) & 15];
+	color_value[5] = HexReferenceTable[(col >> 16) & 15];
+	color_value[6] = '\0';
+	return &color_value[0];
+}

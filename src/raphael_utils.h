@@ -27,12 +27,6 @@
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/GraphicsDevice.h>
 
-double p2e_(double x);
-char* get_dml_filename(char* filename, int index);
-
-void DML_SetFillColor(pDevDesc dev, R_GE_gcontext *gc);
-void DML_SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
-void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);
-
-int get_and_increment_idx(pDevDesc dev);
-
+char* get_raphael_filename(char* filename, int index);
+char* get_raphael_canvasname( int index);
+char* get_raphael_jsobject_name(char* filename, int index);

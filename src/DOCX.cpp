@@ -27,10 +27,11 @@
 #define R_USE_PROTOTYPES 1
 
 #include "datastruct.h"
-#include "utils.h"
+#include "colors.h"
 #include "dml_utils.h"
 #include "common.h"
 #include "DOCX.h"
+#include "utils.h"
 
 static char docx_elt_tag_start[] = "<wps:wsp>";
 static char docx_elt_tag_end[] = "</wps:wsp>";
@@ -557,7 +558,7 @@ static void DOCX_NewPage(const pGEcontext gc, pDevDesc dev) {
 	pd->exty = pd->height[which];
 
 	char *str={0};
-	str = getFilename(pd->filename, pd->pageNumber);
+	str = get_dml_filename(pd->filename, pd->pageNumber);
 	pd->dmlFilePointer = (FILE *) fopen(str, "w");
 
 	if (pd->dmlFilePointer == NULL) {

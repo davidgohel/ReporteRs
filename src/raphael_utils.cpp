@@ -20,19 +20,30 @@
  * along with ReporteRs.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#include <stdio.h>
-#include <Rinternals.h>
-#include <R.h>
+#include "datastruct.h"
 
-#include <R_ext/GraphicsEngine.h>
-#include <R_ext/GraphicsDevice.h>
 
-double p2e_(double x);
-char* get_dml_filename(char* filename, int index);
+char* get_raphael_filename(char* filename, int index){
+	char *buf;
+	int len = snprintf(NULL, 0, "%s_%03d.js", filename,index);
+	buf = (char*)malloc( (len + 1) * sizeof(char) );
+	sprintf(buf, "%s_%03d.js", filename,index);
+	return buf;
+}
 
-void DML_SetFillColor(pDevDesc dev, R_GE_gcontext *gc);
-void DML_SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
-void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);
+char* get_raphael_canvasname( int index){
 
-int get_and_increment_idx(pDevDesc dev);
+	char *buf;
+	int len = snprintf(NULL, 0, "canvas_%03d", index);
+	buf = (char*)malloc( (len + 1) * sizeof(char) );
+	sprintf(buf, "canvas_%03d", index);
+	return buf;
+}
+char* get_raphael_jsobject_name(char* filename, int index){
+	char *buf;
+	int len = snprintf(NULL, 0, "paper%03d", index);
+	buf = (char*)malloc( (len + 1) * sizeof(char) );
+	sprintf(buf, "paper%03d", index);
+	return buf;
+}
 

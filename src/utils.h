@@ -28,15 +28,6 @@
 #include <R_ext/GraphicsDevice.h>
 
 extern "C" {
-
-void closeFile( FILE *file);
-
-char* getRaphaelFilename(char* filename, int index);
-char* getJSVariableName(char* filename, int index);
-char* getCanvasName( int index);
-char *RGBHexValue(unsigned int col);
-
-void get_current_canvas_id(int *dn, int *res);
-void get_current_element_id(int *dn, int *res);
-
+	void get_current_canvas_id(int *dn, int *res);
+	void get_current_element_id(int *dn, int *res);
 }

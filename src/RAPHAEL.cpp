@@ -32,8 +32,10 @@
 #define R_USE_PROTOTYPES 1
 
 #include "datastruct.h"
-#include "utils.h"
+#include "colors.h"
+#include "raphael_utils.h"
 #include "common.h"
+#include "utils.h"
 
 static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
@@ -429,16 +431,16 @@ static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 	pd->exty = pd->height[which];
 
 	char *filename={0};
-	filename = getRaphaelFilename(pd->filename, pd->pageNumber);
+	filename = get_raphael_filename(pd->filename, pd->pageNumber);
 
 	pd->dmlFilePointer = (FILE *) fopen(filename, "w");
 	char *canvasname={0};
-	canvasname = getCanvasName(pd->canvas_id);
+	canvasname = get_raphael_canvasname(pd->canvas_id);
 	if (pd->dmlFilePointer == NULL) {
 		Rf_error("error while opening %s\n", filename);
 	}
 	updateFontInfo(dev, gc);
-	pd->objectname = getJSVariableName(pd->filename, pd->canvas_id);
+	pd->objectname = get_raphael_jsobject_name(pd->filename, pd->canvas_id);
 	fprintf(pd->dmlFilePointer, "var %s = new Raphael(document.getElementById('%s'), %.0f, %.0f);\n"
 			, pd->objectname, canvasname, dev->right, dev->bottom);
 

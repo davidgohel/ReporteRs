@@ -26,51 +26,6 @@
 
 
 
-void closeFile( FILE *file){
-	BEGIN_SUSPEND_INTERRUPTS;
-	fflush(file);
-	fclose(file);
-	END_SUSPEND_INTERRUPTS;
-}
-
-char* getRaphaelFilename(char* filename, int index){
-	char *buf;
-	int len = snprintf(NULL, 0, "%s_%03d.js", filename,index);
-	buf = (char*)malloc( (len + 1) * sizeof(char) );
-	sprintf(buf, "%s_%03d.js", filename,index);
-	return buf;
-}
-
-char* getCanvasName( int index){
-
-	char *buf;
-	int len = snprintf(NULL, 0, "canvas_%03d", index);
-	buf = (char*)malloc( (len + 1) * sizeof(char) );
-	sprintf(buf, "canvas_%03d", index);
-	return buf;
-}
-char* getJSVariableName(char* filename, int index){
-	char *buf;
-	int len = snprintf(NULL, 0, "paper%03d", index);
-	buf = (char*)malloc( (len + 1) * sizeof(char) );
-	sprintf(buf, "paper%03d", index);
-	return buf;
-}
-
-static char color_value[7];
-static char HexReferenceTable[] = "0123456789ABCDEF";
-
-char *RGBHexValue(unsigned int col) {
-	color_value[0] = HexReferenceTable[(col >> 4) & 15];
-	color_value[1] = HexReferenceTable[(col) & 15];
-	color_value[2] = HexReferenceTable[(col >> 12) & 15];
-	color_value[3] = HexReferenceTable[(col >> 8) & 15];
-	color_value[4] = HexReferenceTable[(col >> 20) & 15];
-	color_value[5] = HexReferenceTable[(col >> 16) & 15];
-	color_value[6] = '\0';
-	return &color_value[0];
-}
-
 void get_current_canvas_id(int *dn, int *res) {
 	pGEDevDesc dev= GEgetDevice(*dn);
 	if (dev) {

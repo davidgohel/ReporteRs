@@ -21,7 +21,12 @@
 **/
 
 #include "datastruct.h"
-#include "utils.h"
+#include <stdio.h>
+#include <Rinternals.h>
+#include <R.h>
+
+#include <R_ext/GraphicsEngine.h>
+#include <R_ext/GraphicsDevice.h>
 
 double getFontSize(double cex, double fontsize, double lineheight) {
 
@@ -126,3 +131,12 @@ int get_and_increment_idx(pDevDesc dev) {
 	pd->id++;
 	return id;
 }
+
+void closeFile( FILE *file){
+	BEGIN_SUSPEND_INTERRUPTS;
+	fflush(file);
+	fclose(file);
+	END_SUSPEND_INTERRUPTS;
+}
+
+

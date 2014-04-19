@@ -20,8 +20,15 @@
  * along with ReporteRs.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#include "utils.h"
+#include <stdio.h>
+#include <Rinternals.h>
+#include <R.h>
+
+#include <R_ext/GraphicsEngine.h>
+#include <R_ext/GraphicsDevice.h>
+
 #include "datastruct.h"
+#include "colors.h"
 
 
 double p2e_(double x) {
@@ -29,7 +36,7 @@ double p2e_(double x) {
 	return y;
 }
 
-char* getFilename(char* filename, int index){
+char* get_dml_filename(char* filename, int index){
 	char *buf;
 	int len = snprintf(NULL, 0, "%s_%03d.dml", filename, index);
 	buf = (char*)malloc( (len + 1) * sizeof(char) );
