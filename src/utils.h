@@ -29,30 +29,14 @@
 
 extern "C" {
 
-double p2e_(double x);
-double p2t(double x);
-int getFontface( int ff );
-double getFontSize(double cex, double fontsize, double lineheight);
-
 void closeFile( FILE *file);
 
-char* getFilename(char* filename, int index);
 char* getRaphaelFilename(char* filename, int index);
 char* getJSVariableName(char* filename, int index);
 char* getCanvasName( int index);
 char *RGBHexValue(unsigned int col);
 
-void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc);
 void get_current_canvas_id(int *dn, int *res);
 void get_current_element_id(int *dn, int *res);
-void get_current_idx(int *dn, int *res);
-int get_and_increment_idx(pDevDesc dev);
 
-void SetFillColor(pDevDesc dev, R_GE_gcontext *gc);
-void SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
-void SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);
-void RAPHAEL_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc, int idx);
-void RAPHAEL_SetFillColor(pDevDesc dev, R_GE_gcontext *gc, int idx);
-void RAPHAEL_SetFontSpec(pDevDesc dev, R_GE_gcontext *gc, int idx);
 }
-

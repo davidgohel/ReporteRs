@@ -20,19 +20,19 @@
  * along with ReporteRs.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
+#include <stdio.h>
 #include <Rinternals.h>
 #include <R.h>
 
 #include <R_ext/GraphicsEngine.h>
-#include "R_ext/GraphicsDevice.h"
-#include <R_ext/Boolean.h>
+#include <R_ext/GraphicsDevice.h>
 
+double p2e_(double x);
+char* getFilename(char* filename, int index);
 
-double getFontSize(double cex, double fontsize, double lineheight);
-void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc);
+void DML_SetFillColor(pDevDesc dev, R_GE_gcontext *gc);
+void DML_SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
+void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);
 
-void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
-		double* descent, double* width, pDevDesc dev);
-
-double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
 int get_and_increment_idx(pDevDesc dev);
+

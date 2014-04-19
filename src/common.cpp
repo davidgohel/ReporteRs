@@ -23,6 +23,66 @@
 #include "datastruct.h"
 #include "utils.h"
 
+double getFontSize(double cex, double fontsize, double lineheight) {
+
+	double size = (cex * fontsize * 1.0 );
+	/* from GraphicsEngine, it says: Line height (multiply by font size) */
+	/* Where should I do that? Not here */
+	if( size < 1.0 ) size = 0.0;
+	return size;
+}
+
+
+void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	SEXP out;
+	char *fontname;
+
+	if( gc->fontface == 5 ) {
+		fontname = strdup("Symbol");
+	} else if( strlen( gc->fontfamily ) > 0 ) {
+		fontname = strdup(gc->fontfamily);
+	} else if( pd->fi->isinit > 0 ) {
+		fontname = strdup(pd->fi->fontname);
+	} else {
+		fontname = strdup(pd->fontname);
+	}
+
+	int fonsize = (int)getFontSize(gc->cex, gc->ps, gc->lineheight);
+
+	if (pd->fi->isinit < 1 || strcmp(pd->fi->fontname, fontname) != 0 || pd->fi->fontsize != fonsize) {
+		pd->fi->fontsize = fonsize;
+		pd->fi->fontname = fontname;
+		pd->fi->isinit = 1;
+		out = eval(
+				lang3(install("FontMetric"), mkString(fontname),
+						ScalarInteger(pd->fi->fontsize)), R_GlobalEnv);
+
+		int *fm = INTEGER(VECTOR_ELT(out, 0));
+		int *widthstemp = INTEGER(VECTOR_ELT(out, 1));
+		int f = 0;
+		int i = 0;
+
+		for (f = 0; f < 4; f++) {
+			pd->fi->ascent[f] = fm[f * 3 + 0];
+			pd->fi->descent[f] = fm[f * 3 + 1];
+			pd->fi->height[f] = fm[f * 3 + 2];
+		}
+
+		for (i = 0; i < 1024; i++)
+			pd->fi->widths[i] = widthstemp[i];
+
+	}
+}
+
+
+int getFontface( int ff ){
+	int fontface = ff;
+	if( fontface > 4 ) fontface = 0;
+	else if( fontface < 1 ) fontface = 0;
+	else fontface = fontface -1 ;
+	return fontface;
+}
 
 //http://cran.r-project.org/doc/manuals/R-ints.html#Handling-text
 
@@ -57,7 +117,12 @@ double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 		c++;
 	}
 
-
 	return sum;
 }
 
+int get_and_increment_idx(pDevDesc dev) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int id = pd->id;
+	pd->id++;
+	return id;
+}

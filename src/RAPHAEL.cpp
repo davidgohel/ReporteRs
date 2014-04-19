@@ -24,20 +24,20 @@
 #include <stdio.h>
 #include <math.h>
 
+#include <locale.h>
+#include <R_ext/Riconv.h>
+#include <errno.h>
+#include "RAPHAEL.h"
+
 #define R_USE_PROTOTYPES 1
 
 #include "datastruct.h"
 #include "utils.h"
 #include "common.h"
-#include "RAPHAEL.h"
-#include <locale.h>
-#include <R_ext/Riconv.h>
-#include <errno.h>
 
 static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
 		const char* fontname, int canvas_id, SEXP env) {
-
 
 	DOCDesc *rd;
 	rd = (DOCDesc *) malloc(sizeof(DOCDesc));
@@ -151,6 +151,114 @@ static void RAPHAEL_activate(pDevDesc dev) {
 }
 
 
+void RAPHAEL_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc, int idx) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	char *saved_locale;
+	saved_locale = setlocale(LC_NUMERIC, "C");
+
+	float alpha =  R_ALPHA(gc->col)/255.0;
+	fprintf(pd->dmlFilePointer, "elt_%d.attr({", idx);
+
+	if (gc->lty > -1 && gc->lwd > 0.0 && alpha > 0) {
+		fprintf(pd->dmlFilePointer, "'stroke': \"#%s\"", RGBHexValue(gc->col) );
+		fprintf(pd->dmlFilePointer, ", 'stroke-opacity': \"%.3f\"", alpha );
+
+		fprintf(pd->dmlFilePointer, ", 'stroke-width': %.3f", gc->lwd );
+
+		switch (gc->lty) {
+		case LTY_BLANK:
+			break;
+		case LTY_SOLID:
+			break;
+		case LTY_DOTTED:
+			fputs(", 'stroke-dasharray': \".\"", pd->dmlFilePointer );
+			break;
+		case LTY_DASHED:
+			fputs(", 'stroke-dasharray': \"-\"", pd->dmlFilePointer );
+			break;
+		case LTY_LONGDASH:
+			fputs(", 'stroke-dasharray': \"--\"", pd->dmlFilePointer );
+			break;
+		case LTY_DOTDASH:
+			fputs(", 'stroke-dasharray': \"-.\"", pd->dmlFilePointer );
+			break;
+		case LTY_TWODASH:
+			fputs(", 'stroke-dasharray': \"--\"", pd->dmlFilePointer );
+			break;
+		default:
+			break;
+		}
+
+		switch (gc->ljoin) {
+		case GE_ROUND_JOIN: //round
+			fputs(", 'stroke-linejoin': \"round\"", pd->dmlFilePointer );
+			break;
+		case GE_MITRE_JOIN: //mitre
+			fputs(", 'stroke-linejoin': \"miter\"", pd->dmlFilePointer );
+			break;
+		case GE_BEVEL_JOIN: //bevel
+			fputs(", 'stroke-linejoin': \"bevel\"", pd->dmlFilePointer );
+			break;
+		default:
+			fputs(", 'stroke-linejoin': \"round\"", pd->dmlFilePointer );
+			break;
+		}
+	} else {
+		fputs("'stroke-width': 0", pd->dmlFilePointer );
+	}
+	fputs("});\n", pd->dmlFilePointer );
+	setlocale(LC_NUMERIC, saved_locale);
+
+}
+
+void RAPHAEL_SetFillColor(pDevDesc dev, R_GE_gcontext *gc, int idx) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	char *saved_locale;
+	saved_locale = setlocale(LC_NUMERIC, "C");
+	fprintf(pd->dmlFilePointer, "elt_%d.attr({", idx);
+
+	float alpha =  R_ALPHA(gc->fill)/255.0;
+	if (alpha > 0) {
+		fprintf(pd->dmlFilePointer, "'fill': \"#%s\"", RGBHexValue(gc->fill) );
+		fprintf(pd->dmlFilePointer, ",'fill-opacity': \"%.3f\"", alpha );
+	}
+	fputs("});\n", pd->dmlFilePointer );
+	setlocale(LC_NUMERIC, saved_locale);
+
+}
+
+void RAPHAEL_SetFontSpec(pDevDesc dev, R_GE_gcontext *gc, int idx) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	char *saved_locale;
+	saved_locale = setlocale(LC_NUMERIC, "C");
+
+	float alpha =  R_ALPHA(gc->col)/255.0;
+	double fontsize = getFontSize(gc->cex, gc->ps, gc->lineheight);
+
+
+	if ( gc->cex > 0.0 && alpha > 0 ) {
+		fprintf(pd->dmlFilePointer, "elt_%d.attr({", idx);
+		fprintf(pd->dmlFilePointer, "'fill': \"#%s\"", RGBHexValue(gc->col) );
+		fprintf(pd->dmlFilePointer, ", 'fill-opacity': \"%.3f\"", alpha );
+		fprintf(pd->dmlFilePointer, ", 'font-family': \"%s\"", pd->fi->fontname );
+		fprintf(pd->dmlFilePointer, ", 'font-size': \"%.0f\"", fontsize );
+		if (gc->fontface == 2) {
+			fputs(", 'font-weight': \"bold\"", pd->dmlFilePointer );
+		} else if (gc->fontface == 3) {
+			fputs(", 'font-style'=\"italic\"", pd->dmlFilePointer );
+		} else if (gc->fontface == 4) {
+			fputs(", 'font-weight': \"bold\", 'font-style'=\"italic\"", pd->dmlFilePointer );
+		}
+		fputs("});\n", pd->dmlFilePointer );
+
+
+	}
+
+	setlocale(LC_NUMERIC, saved_locale);
+
+}
+
+
 static void RAPHAEL_Circle(double x, double y, double r, const pGEcontext gc,
 		pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
@@ -173,7 +281,7 @@ static void RAPHAEL_Line(double x1, double y1, double x2, double y2,
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
 		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x1, y1);
 		fprintf(pd->dmlFilePointer, "L %.0f %.0f", x2, y2);
-		fprintf(pd->dmlFilePointer, "\");\n");
+		fputs("\");\n", pd->dmlFilePointer );
 
 		RAPHAEL_SetLineSpec(dev, gc, idx);
 
@@ -198,8 +306,8 @@ static void RAPHAEL_Polyline(int n, double *x, double *y, const pGEcontext gc,
 		for (i = 1; i < n; i++) {
 			fprintf(pd->dmlFilePointer, "L %.0f %.0f", x[i], y[i]);
 		}
+		fputs("\");\n", pd->dmlFilePointer );
 
-		fprintf(pd->dmlFilePointer, "\");\n");
 
 		RAPHAEL_SetLineSpec(dev, gc, idx);
 
@@ -221,7 +329,7 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		fprintf(pd->dmlFilePointer, "L %.0f %.0f", x[i], y[i]);
 	}
 
-	fprintf(pd->dmlFilePointer, "Z\");\n");
+	fputs("Z\");\n", pd->dmlFilePointer );
 
 	RAPHAEL_SetLineSpec(dev, gc, idx);
 	RAPHAEL_SetFillColor(dev, gc, idx);
@@ -250,7 +358,7 @@ static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.rect(", idx, pd->objectname );
 	fprintf(pd->dmlFilePointer, "%.0f,%.0f", x0, y0);
 	fprintf(pd->dmlFilePointer, ",%.0f,%.0f", x1-x0, y1-y0);
-	fprintf(pd->dmlFilePointer, ");\n");
+	fputs(");\n", pd->dmlFilePointer );
 
 	RAPHAEL_SetLineSpec(dev, gc, idx);
 	RAPHAEL_SetFillColor(dev, gc, idx);
@@ -259,48 +367,7 @@ static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 
 }
 
-///* based on pcre.c */
-//static const int utf8_table1[] =
-//    { 0x7f, 0x7ff, 0xffff, 0x1fffff, 0x3ffffff, 0x7fffffff};
-//static const int utf8_table2[] = { 0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
-//static size_t inttomb(char *s, const int wc)
-//{
-//    int i, j;
-//    unsigned int cvalue = wc;
-//    char buf[10], *b;
-//
-//    b = s ? s : buf;
-//    if (cvalue == 0) {*b = 0; return 0;}
-//    for (i = 0; i < 6; i++)
-//	if (cvalue <= utf8_table1[i]) break;
-//    b += i;
-//    for (j = i; j > 0; j--) {
-//	*b-- = (char)(0x80 | (cvalue & 0x3f));
-//	cvalue >>= 6;
-//    }
-//    *b = (char)(utf8_table2[i] | cvalue);
-//    return i + 1;
-//}
-//char * inttoutf8(int *x, int nc){
-//	int i;
-//	/* Note that this gives zero length for input '0', so it is omitted */
-//	char *tmp;
-//	char buf[10];
-//	size_t used, len;
-//	for (i = 0, len = 0; i < nc; i++) {
-//	    len += inttomb(NULL, x[i]);
-//	}
-//	    R_CheckStack2(len+1);
-//	    tmp = (char*)alloca(len+1);
-//	    tmp[len] = '\0';
-//
-//	for (i = 0, len = 0; i < nc; i++) {
-//	    used = inttomb(buf, x[i]);
-//	    strncpy(tmp + len, buf, used);
-//	    len += used;
-//	}
-//	return tmp;
-//}
+
 static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev) {
 
@@ -332,16 +399,14 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 	fprintf(pd->dmlFilePointer, "%.0f,%.0f", corrected_offx, corrected_offy);
 
 	fprintf(pd->dmlFilePointer, ",\"%s\"", str);
-	fprintf(pd->dmlFilePointer, ");\n");
+	fputs(");\n", pd->dmlFilePointer );
 
 	RAPHAEL_SetFontSpec(dev, gc, idx);
 	if( rot > 0 ) {
 		fprintf(pd->dmlFilePointer, "elt_%d.transform(\"", idx);
 		fprintf(pd->dmlFilePointer, "R-%.0f", rot);
-		//fprintf(pd->dmlFilePointer, "T%.0f,0", (hadj-0.5)*w );
-		fprintf(pd->dmlFilePointer, "\");\n");
+		fputs("\");\n", pd->dmlFilePointer );
 	}
-
 
 	fflush(pd->dmlFilePointer);
 

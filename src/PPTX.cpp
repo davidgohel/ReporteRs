@@ -28,6 +28,7 @@
 
 #include "datastruct.h"
 #include "utils.h"
+#include "dml_utils.h"
 #include "common.h"
 #include "PPTX.h"
 
@@ -163,26 +164,25 @@ static void PPTX_Circle(double x, double y, double r, const pGEcontext gc,
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
 
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_start);
+	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Point %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
 	else fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Point %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
-	fprintf(pd->dmlFilePointer, "<p:spPr><a:xfrm>");
+	fputs("<p:spPr><a:xfrm>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>",
 			p2e_(pd->offx + x - r), p2e_(pd->offy + y - r));
 	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(r * 2),
 			p2e_(r * 2));
-	fprintf(pd->dmlFilePointer,
-			"</a:xfrm><a:prstGeom prst=\"ellipse\"><a:avLst /></a:prstGeom>");
-	SetLineSpec(dev, gc);
-	SetFillColor(dev, gc);
-	fprintf(pd->dmlFilePointer, "</p:spPr>");
+	fputs( "</a:xfrm><a:prstGeom prst=\"ellipse\"><a:avLst /></a:prstGeom>", pd->dmlFilePointer );
 
-	fprintf(pd->dmlFilePointer,
-			"<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>");
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_end);
+	DML_SetLineSpec(dev, gc);
+	DML_SetFillColor(dev, gc);
+	fputs( "</p:spPr>", pd->dmlFilePointer );
+
+	fputs( "<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>", pd->dmlFilePointer );
+	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
 
 	fflush(pd->dmlFilePointer);
 }
@@ -209,35 +209,33 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 		miny = y2;
 	}
 
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_start);
+	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Line %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
 	else fprintf(pd->dmlFilePointer,
 		"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Line %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
 
-	fprintf(pd->dmlFilePointer, "<p:spPr><a:xfrm>");
+	fputs( "<p:spPr><a:xfrm>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>"
 			, p2e_(pd->offx + minx), p2e_(pd->offy + miny));
 	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(maxx-minx), p2e_(maxy-miny));
 
-	fprintf(pd->dmlFilePointer, "</a:xfrm><a:custGeom><a:avLst />");
-	fprintf(pd->dmlFilePointer, "<a:pathLst>");
+	fputs( "</a:xfrm><a:custGeom><a:avLst />", pd->dmlFilePointer );
+	fputs( "<a:pathLst>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:path w=\"%.0f\" h=\"%.0f\">", p2e_(maxx-minx), p2e_(maxy-miny));
 	fprintf(pd->dmlFilePointer,
 			"<a:moveTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:moveTo>", p2e_(x1 - minx), p2e_(y1 - miny) );
 	fprintf(pd->dmlFilePointer,
 			"<a:lnTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:lnTo>", p2e_(x2 - minx), p2e_(y2 - miny));
-	fprintf(pd->dmlFilePointer, "</a:path></a:pathLst>");
+	fputs( "</a:path></a:pathLst>", pd->dmlFilePointer );
+	fputs( "</a:custGeom>", pd->dmlFilePointer );
+	DML_SetLineSpec(dev, gc);
+	fputs( "</p:spPr>", pd->dmlFilePointer );
 
-	fprintf(pd->dmlFilePointer, "</a:custGeom>");
-	SetLineSpec(dev, gc);
-	fprintf(pd->dmlFilePointer, "</p:spPr>");
-
-	fprintf(pd->dmlFilePointer,
-			"<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>");
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_end);
-	fprintf(pd->dmlFilePointer, "\n");
+	fputs( "<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>", pd->dmlFilePointer );
+	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
+//	fprintf(pd->dmlFilePointer, "\n");
 
 	fflush(pd->dmlFilePointer);
 
@@ -267,20 +265,20 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 			miny = y[i];
 	}
 
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_start);
+	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Polyline form %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
 	else fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Polyline form %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
 
-	fprintf(pd->dmlFilePointer, "<p:spPr><a:xfrm>");
+	fputs( "<p:spPr><a:xfrm>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>",
 			p2e_(pd->offx + minx), p2e_(pd->offy + miny));
 	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(maxx-minx), p2e_(maxy-miny));
-	fprintf(pd->dmlFilePointer, "</a:xfrm><a:custGeom><a:avLst />");
+	fputs( "</a:xfrm><a:custGeom><a:avLst />", pd->dmlFilePointer );
 	//fprintf(pd->dmlFilePointer, "<a:pathLst><a:path w=\"%ld\" h=\"%ld\">", pd->extx, pd->exty);
-	fprintf(pd->dmlFilePointer, "<a:pathLst>");
+	fputs( "<a:pathLst>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:path w=\"%.0f\" h=\"%.0f\">", p2e_(maxx-minx), p2e_(maxy-miny));
 	fprintf(pd->dmlFilePointer,
 			"<a:moveTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:moveTo>",
@@ -291,16 +289,15 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 				p2e_(x[i] - minx), p2e_(y[i] - miny));
 	}
 	//fprintf(pd->dmlFilePointer, "<a:close/></a:path></a:pathLst>");
-	fprintf(pd->dmlFilePointer, "</a:path></a:pathLst>");
-	fprintf(pd->dmlFilePointer, "</a:custGeom>");
-	//SetFillColor(dev, gc);
-	SetLineSpec(dev, gc);
-	fprintf(pd->dmlFilePointer, "</p:spPr>");
+	fputs( "</a:path></a:pathLst>", pd->dmlFilePointer );
+	fputs( "</a:custGeom>", pd->dmlFilePointer );
+	//DML_SetFillColor(dev, gc);
+	DML_SetLineSpec(dev, gc);
+	fputs( "</p:spPr>", pd->dmlFilePointer );
+	fputs( "<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>", pd->dmlFilePointer );
 
-	fprintf(pd->dmlFilePointer,
-			"<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>");
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_end);
-	fprintf(pd->dmlFilePointer, "\n");
+	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
+//	fprintf(pd->dmlFilePointer, "\n");
 	fflush(pd->dmlFilePointer);
 
 }
@@ -327,20 +324,20 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 			miny = y[i];
 	}
 
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_start);
+	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Polygon form %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
 	else fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Polygon form %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
-	fprintf(pd->dmlFilePointer, "<p:spPr><a:xfrm>");
+	
+	fputs("<p:spPr><a:xfrm>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>",
 			p2e_(pd->offx + minx), p2e_(pd->offy + miny));
 	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(maxx-minx), p2e_(maxy-miny));
-	fprintf(pd->dmlFilePointer, "</a:xfrm><a:custGeom><a:avLst />");
-	//fprintf(pd->dmlFilePointer, "<a:pathLst><a:path w=\"%ld\" h=\"%ld\">", pd->extx, pd->exty);
-	fprintf(pd->dmlFilePointer, "<a:pathLst>");
+	fputs("</a:xfrm><a:custGeom><a:avLst />", pd->dmlFilePointer );
+	fputs("<a:pathLst>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:path w=\"%.0f\" h=\"%.0f\">", p2e_(maxx-minx), p2e_(maxy-miny));
 	fprintf(pd->dmlFilePointer,
 			"<a:moveTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:moveTo>",
@@ -350,16 +347,15 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 				"<a:lnTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:lnTo>",
 				p2e_(x[i] - minx), p2e_(y[i] - miny));
 	}
-	fprintf(pd->dmlFilePointer, "<a:close/></a:path></a:pathLst>");
-
-	fprintf(pd->dmlFilePointer, "</a:custGeom>");
-	SetFillColor(dev, gc);
-	SetLineSpec(dev, gc);
-	fprintf(pd->dmlFilePointer, "</p:spPr>");
+	fputs("<a:close/></a:path></a:pathLst>", pd->dmlFilePointer );
+	fputs("</a:custGeom>", pd->dmlFilePointer );
+	DML_SetFillColor(dev, gc);
+	DML_SetLineSpec(dev, gc);
+	fputs("</p:spPr>", pd->dmlFilePointer );
 
 	fprintf(pd->dmlFilePointer,
 			"<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>");
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_end);
+	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "\n");
 	fflush(pd->dmlFilePointer);
 
@@ -383,28 +379,27 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 		y1 = tmp;
 	}
 
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_start);
+	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Rectangle %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
 	else fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Rectangle %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
-	fprintf(pd->dmlFilePointer, "<p:spPr><a:xfrm>");
+	fputs("<p:spPr><a:xfrm>", pd->dmlFilePointer );
+
 	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>",
 			p2e_(pd->offx + x0), p2e_(pd->offy + y0));
 	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>",
 			p2e_(x1 - x0), p2e_(y1 - y0));
-	fprintf(pd->dmlFilePointer,
-			"</a:xfrm><a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>");
-	SetFillColor(dev, gc);
-	SetLineSpec(dev, gc);
-	fprintf(pd->dmlFilePointer, "</p:spPr>");
+	fputs("</a:xfrm><a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>", pd->dmlFilePointer );
+	DML_SetFillColor(dev, gc);
+	DML_SetLineSpec(dev, gc);
+	fputs("</p:spPr>", pd->dmlFilePointer );
+	fputs("<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>", pd->dmlFilePointer );
 
-	fprintf(pd->dmlFilePointer,
-			"<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>");
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_end);
-	fprintf(pd->dmlFilePointer, "\n");
+	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
+//	fprintf(pd->dmlFilePointer, "\n");
 	fflush(pd->dmlFilePointer);
 
 }
@@ -444,67 +439,64 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 	double corrected_offy = Ppy - 0.5 * h;
 	//////////////
 
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_start);
+	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
 			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
 	else fprintf(pd->dmlFilePointer,
 				"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
-	fprintf(pd->dmlFilePointer, "<p:spPr>");
+	fputs("<p:spPr>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", (-rot) * 60000);
 	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>",
 			p2e_(pd->offx + corrected_offx), p2e_(pd->offy + corrected_offy));
 	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>",
 			p2e_(w), p2e_(h));
-	fprintf(pd->dmlFilePointer, "</a:xfrm>");
-	fprintf(pd->dmlFilePointer,
-			"<a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>");
-	fprintf(pd->dmlFilePointer, "<a:noFill />");
-	fprintf(pd->dmlFilePointer, "</p:spPr>");
+	fputs("</a:xfrm>", pd->dmlFilePointer );
+	fputs("<a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>", pd->dmlFilePointer );
+	fputs("<a:noFill />", pd->dmlFilePointer );
+	fputs("</p:spPr>", pd->dmlFilePointer );
 
-	fprintf(pd->dmlFilePointer, "<p:txBody>");
-	fprintf(pd->dmlFilePointer,
-			"<a:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\"");
-	fprintf(pd->dmlFilePointer, " anchor=\"b\">");
-	fprintf(pd->dmlFilePointer, "<a:spAutoFit />");
-	fprintf(pd->dmlFilePointer, "</a:bodyPr><a:lstStyle /><a:p>");
-	fprintf(pd->dmlFilePointer, "<a:pPr");
+	fputs("<p:txBody>", pd->dmlFilePointer );
+	fputs("<a:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\">", pd->dmlFilePointer );
+	fputs("<a:spAutoFit />", pd->dmlFilePointer );
+	fputs("</a:bodyPr><a:lstStyle /><a:p>", pd->dmlFilePointer );
+	fputs("<a:pPr", pd->dmlFilePointer );
 
 	if (hadj < 0.25)
-		fprintf(pd->dmlFilePointer, " algn=\"l\"");
+		fputs(" algn=\"l\"", pd->dmlFilePointer );
 	else if (hadj < 0.75)
-		fprintf(pd->dmlFilePointer, " algn=\"ctr\"");
+		fputs(" algn=\"ctr\"", pd->dmlFilePointer );
 	else
-		fprintf(pd->dmlFilePointer, " algn=\"r\"");
-	fprintf(pd->dmlFilePointer, " marL=\"0\" marR=\"0\" indent=\"0\" >");
+		fputs(" algn=\"r\"", pd->dmlFilePointer );
+	fputs(" marL=\"0\" marR=\"0\" indent=\"0\" >", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>",fontsize);
-	fprintf(pd->dmlFilePointer, "<a:spcBef><a:spcPts val=\"0\"/></a:spcBef>");
-	fprintf(pd->dmlFilePointer, "<a:spcAft><a:spcPts val=\"0\"/></a:spcAft>");
+	fputs("<a:spcBef><a:spcPts val=\"0\"/></a:spcBef>", pd->dmlFilePointer );
+	fputs("<a:spcAft><a:spcPts val=\"0\"/></a:spcAft>", pd->dmlFilePointer );
 
-	fprintf(pd->dmlFilePointer, "</a:pPr>");
-	fprintf(pd->dmlFilePointer, "<a:r>");
+	fputs("</a:pPr>", pd->dmlFilePointer );
+	fputs("<a:r>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:rPr sz=\"%.0f\"", fontsize);
 	if (gc->fontface == 2) {
-		fprintf(pd->dmlFilePointer, " b=\"1\"");
+		fputs(" b=\"1\"", pd->dmlFilePointer );
 	} else if (gc->fontface == 3) {
-		fprintf(pd->dmlFilePointer, " i=\"1\"");
+		fputs(" i=\"1\"", pd->dmlFilePointer );
 	} else if (gc->fontface == 4) {
-		fprintf(pd->dmlFilePointer, " b=\"1\" i=\"1\"");
+		fputs(" b=\"1\" i=\"1\"", pd->dmlFilePointer );
 	}
 
-	fprintf(pd->dmlFilePointer, ">");
-	SetFontColor(dev, gc);
+	fputs(">", pd->dmlFilePointer );
+	DML_SetFontColor(dev, gc);
 
 	fprintf(pd->dmlFilePointer,
 				"<a:latin typeface=\"%s\"/><a:cs typeface=\"%s\"/>",
 				pd->fi->fontname, pd->fi->fontname);
 
-	fprintf(pd->dmlFilePointer, "</a:rPr>");
+	fputs("</a:rPr>", pd->dmlFilePointer );
 
 	fprintf(pd->dmlFilePointer, "<a:t>%s</a:t></a:r></a:p></p:txBody>", str);
-	fprintf(pd->dmlFilePointer, pptx_elt_tag_end);
-	fprintf(pd->dmlFilePointer, "\n");
+	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
+	//fprintf(pd->dmlFilePointer, "\n");
 
 	fflush(pd->dmlFilePointer);
 }
