@@ -54,7 +54,7 @@
 #' pages = writeDoc( doc, "addPlot_example")
 #' print( pages ) # print filenames of generated html pages
 #' #STOP_TAG_TEST
-#' @seealso \code{\link{html}}, \code{\link{addPlot}}
+#' @seealso \code{\link{html}}, \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
 #' @method addPlot html
 #' @S3method addPlot html
 addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vector.graphic = T, width=6, height=6, fontname = getOption("ReporteRs-default-font"), ... ) {

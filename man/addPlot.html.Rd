@@ -78,6 +78,7 @@ print( pages ) # print filenames of generated html pages
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}, \code{\link{addPlot}}
+\code{\link{html}}, \code{\link{addPlot}},
+\code{\link{add.plot.interactivity}}
 }
 

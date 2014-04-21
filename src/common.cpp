@@ -38,6 +38,7 @@ double getFontSize(double cex, double fontsize, double lineheight) {
 }
 
 
+
 void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	SEXP out;

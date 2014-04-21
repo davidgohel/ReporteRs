@@ -35,7 +35,10 @@ void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 		double* descent, double* width, pDevDesc dev);
 
 double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
+
 int get_and_increment_idx(pDevDesc dev);
+
 void register_element(pDevDesc dev);
+
 void closeFile( FILE *file);
 

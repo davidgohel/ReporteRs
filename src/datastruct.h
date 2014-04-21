@@ -45,7 +45,6 @@ typedef struct {
 	char *fontname;
 	char *objectname;
 	int canvas_id;
-
 	int pageNumber; /* page number */
 	FILE *dmlFilePointer; /* output file */
 	int fontface;

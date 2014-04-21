@@ -73,7 +73,7 @@ void get_current_element_id(int *dn, int *res) {
 		*res = pd->id;
 	} else *res = -1;
 }
-//current_id = .C("get_current_idx", (dev.cur()-1L), 0L)[[2]]
+
 
 void add_popup(int *dn, int *id, char **str, int *l){
 	int nb_elts = *l;

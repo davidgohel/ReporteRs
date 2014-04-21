@@ -185,7 +185,6 @@ void GE_DOCXDevice(const char* filename, double* width, double* height, double* 
 }
 
 static void DOCX_activate(pDevDesc dev) {
-
 }
 
 static void DOCX_Circle(double x, double y, double r, const pGEcontext gc, pDevDesc dev) {

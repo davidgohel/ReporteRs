@@ -7,6 +7,11 @@ BUG FIXES
   usage of fputs instead of fprintf when no formatting is required
   (reported by Günter Lutz)
 
+ENHANCEMENT
+------------------------------------------------------------------
+* add function "setInteractiveElements" for plot interactivity 
+  when output is html.
+
 ENHANCEMENT 
 ------------------------------------------------------------------
 * Cleaning and reorganization of the C code files
