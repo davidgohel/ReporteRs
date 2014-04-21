@@ -34,6 +34,7 @@ void set_tracer_on(int *dn) {
 		pd->elt_tracer->last_elt = -1;
 	}
 }
+
 void set_tracer_off(int *dn) {
 	pGEDevDesc dev= GEgetDevice(*dn);
 	if (dev) {
@@ -74,4 +75,48 @@ void get_current_element_id(int *dn, int *res) {
 }
 //current_id = .C("get_current_idx", (dev.cur()-1L), 0L)[[2]]
 
+void add_popup(int *dn, int *id, char **str, int *l){
+	int nb_elts = *l;
+	int i;
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (!dev) return;
+
+	DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+	
+	for( i = 0 ; i < nb_elts ; i++ ){
+		fprintf(pd->dmlFilePointer, "var box_%d = elt_%d.getBBox();\n", id[i], id[i] );
+		fprintf(pd->dmlFilePointer, "var popup_%d = %s.popup(box_%d.x + box_%d.width / 2, box_%d.y + box_%d.height / 2, \"%s\").hide();\n"
+			, id[i], pd->objectname, id[i], id[i], id[i], id[i], str[i] );
+		fprintf(pd->dmlFilePointer, "elt_%d.mouseover(function(){popup_%d.show();});\n", id[i], id[i] );
+		fprintf(pd->dmlFilePointer, "elt_%d.mouseout(function(){popup_%d.hide();});\n", id[i], id[i] );
+	}
+
+}
+
+void add_click(int *dn, int *id, char **str, int *l){
+	int nb_elts = *l;
+	int i;
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (!dev) return;
+
+	DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+
+	for( i = 0 ; i < nb_elts ; i++ ){
+		fprintf(pd->dmlFilePointer, "elt_%d.click(function(){%s});\n", id[i], str[i] );
+	}
+
+}
+void add_dblclick(int *dn, int *id, char **str, int *l){
+	int nb_elts = *l;
+	int i;
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (!dev) return;
+
+	DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+
+	for( i = 0 ; i < nb_elts ; i++ ){
+		fprintf(pd->dmlFilePointer, "elt_%d.dblclick(function(){%s});\n", id[i], str[i] );
+	}
+
+}
 

@@ -41,6 +41,7 @@ addPage.html = function( doc, title, ... ) {
 	.jcall( slide , "V", "addJavascript", "js/jquery.min.js" )
 	.jcall( slide , "V", "addJavascript", "js/bootstrap.min.js" )
 	.jcall( slide , "V", "addJavascript", "js/raphael-min.js" )
+	.jcall( slide , "V", "addJavascript", "js/g.raphael-min.js" )
 	
 	.jcall( slide , "V", "addStylesheet", "css/bootstrap.min.css" )
 	.jcall( slide , "V", "addStylesheet", "css/html4r.css" )

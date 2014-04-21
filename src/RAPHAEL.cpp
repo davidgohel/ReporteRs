@@ -122,7 +122,7 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 	/*
 	 * Device capabilities
 	 */
-	dev->canClip = (Rboolean) FALSE;
+	dev->canClip = (Rboolean) TRUE;
 	dev->canHAdj = 2;//canHadj – integer: can the device do horizontal adjustment of text via the text callback, and if so, how precisely? 0 = no adjustment, 1 = {0, 0.5, 1} (left, centre, right justification) or 2 = continuously variable (in [0,1]) between left and right justification.
 	dev->canChangeGamma = (Rboolean) FALSE;	//canChangeGamma – Rboolean: can the display gamma be adjusted? This is now ignored, as gamma support has been removed.
 	dev->displayListOn = (Rboolean) FALSE;
@@ -285,6 +285,9 @@ static void RAPHAEL_Line(double x1, double y1, double x2, double y2,
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 
 	if (gc->lty > -1 && gc->lwd > 0.0 ){
+
+
+
 		int idx = get_and_increment_idx(dev);
 		register_element( dev);
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
@@ -302,7 +305,6 @@ static void RAPHAEL_Line(double x1, double y1, double x2, double y2,
 
 static void RAPHAEL_Polyline(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
-//	Rprintf("RAPHAEL_Polyline\n");
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	if (gc->lty > -1 && gc->lwd > 0.0 ){
@@ -470,12 +472,21 @@ static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 }
 static void RAPHAEL_Close(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	//update_canvas_id(dev);
 	closeFile(pd->dmlFilePointer);
 	free(pd);
 }
 
 static void RAPHAEL_Clip(double x0, double x1, double y0, double y1, pDevDesc dev) {
+/*	Rprintf("RAPHAEL_Clip %0.2f %0.2f %0.2f %0.2f\n", x0, x1, y0, y1);
+	Rprintf("\t left:%0.2f right:%0.2f bottom%0.2f top%0.2f\n", dev->left, dev->right, dev->bottom, dev->top);
+	Rprintf("\t clipRight:%0.2f clipRight:%0.2f clipBottom:%0.2f clipTop:%0.2f\n", dev->clipLeft, dev->clipRight, dev->clipBottom, dev->clipTop);
+*/
+//	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+//
+//	pd->clipleft = x0;
+//	pd->clipright = x1;
+//	pd->clipbottom = y0;
+//	pd->cliptop = y1;
 }
 
 static void RAPHAEL_MetricInfo(int c, const pGEcontext gc, double* ascent,

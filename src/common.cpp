@@ -135,7 +135,7 @@ int get_and_increment_idx(pDevDesc dev) {
 
 void register_element(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int id = pd->id;
+	int id = pd->id - 1;
 
 	if( pd->elt_tracer->on ){
 		if( pd->elt_tracer->isinit < 1 ){

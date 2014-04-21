@@ -235,7 +235,6 @@ static void DOCX_Line(double x1, double y1, double x2, double y2,
 		miny = y2;
 	}
 
-//	Rprintf("line x{from %.3f to %.3f} y{from %.3f to %.3f}\n", x1, x2, y1, y2);
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
 
@@ -253,7 +252,6 @@ static void DOCX_Line(double x1, double y1, double x2, double y2,
 			fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>"
 					, p2e_(maxx-minx), p2e_(maxy-miny));
 
-//	Rprintf("\toff {%.0f ; %.0f} ext{%.0f ; %.0f}\n", p2e_(pd->offx + x1), p2e_(pd->offy + y1), p2e_(maxx-minx), p2e_(maxy-miny));
 		fputs("</a:xfrm>", pd->dmlFilePointer );
 		fputs("<a:custGeom>", pd->dmlFilePointer );
 		fputs("<a:pathLst>", pd->dmlFilePointer );

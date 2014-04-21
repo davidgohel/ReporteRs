@@ -10,6 +10,9 @@ these components are included below):
 	
 - raphaeljs
 	http://raphaeljs.com/
+
+- gRaphael
+	http://g.raphaeljs.com/
 	
 - docx4j (which use Apache XML Graphics Commons, Apache Commons IO, Apache 
          Commons Lang, Apache Commons Logging and Apache Log4j and  SLF4J)
@@ -70,7 +73,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-raphaeljs License
+raphaeljs and gRaphael License
 ----------------------------------------------------------------------
 
 The MIT License (MIT)
