@@ -9,7 +9,7 @@ BUG FIXES
 
 ENHANCEMENT
 ------------------------------------------------------------------
-* add function "setInteractiveElements" for plot interactivity 
+* add function "add.plot.interactivity" for plot interactivity 
   when output is html.
 
 ENHANCEMENT 
