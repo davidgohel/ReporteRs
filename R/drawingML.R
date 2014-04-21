@@ -120,11 +120,13 @@ registerRaphaelGraph = function( plot_attributes, env ){
 #'	
 #'	lines( newdata$Sepal.Length, .pred$fit, col = colorsspec[[paste0( i, ".solid")]] )
 #'	# add interactive elts on points
-#'	add.plot.interactivity( fun = points, x = tempdata$Sepal.Length , y = tempdata$Petal.Length
-#'			, col = colorsspec[[paste0( i, ".solid")]], pch = 16
-#'			, popup.labels = paste( i, "\\n"
-#' 				, rep("double click on the point", nrow(tempdata) ), sep = "" )
-#'			, dblclick.actions = paste("alert('", format( tempdata$Petal.Length ), "');")
+#'	labs = paste( i, "\\n", rep("double click on the point", nrow(tempdata) ), sep = "" )
+#'	actions = paste("alert('", format( tempdata$Petal.Length ), "');")
+#'	add.plot.interactivity( fun = points
+#' 		, x = tempdata$Sepal.Length , y = tempdata$Petal.Length
+#'		, col = colorsspec[[paste0( i, ".solid")]], pch = 16
+#'		, popup.labels = labs
+#'		, dblclick.actions = actions
 #'	)
 #' }
 #' invisible()
