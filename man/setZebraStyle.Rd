@@ -17,12 +17,13 @@ setZebraStyle(object, odd, even)
 Zebra striping — coloring alternate rows on a table
 }
 \examples{
-myFlexTable2 = FlexTable( data=mtcars, header.columns=TRUE, add.rownames=TRUE
+myFlexTable2 = FlexTable( data = mtcars, header.columns=TRUE, add.rownames=TRUE
   , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
 )
 myFlexTable2 = setZebraStyle( myFlexTable2, "#D1E6E7", "#93A8A9" )
 }
 \seealso{
-\code{\link{FlexTable}}
+\code{\link{FlexTable}}, \code{\link{setRowColors}},
+\code{\link{setColColors}} , \code{\link{[<-.FlexTable}}
 }
 

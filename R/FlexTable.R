@@ -245,9 +245,9 @@ addFooterRow = function( x, value ){
 
 
 
-#' @title Format FlexTable content
+#' @title modify FlexTable content
 #'
-#' @description Format content of a FlexTable object
+#' @description add text into a FlexTable object or Format content of a FlexTable object
 #' 
 #' @usage \method{[}{FlexTable} (x, i, j) <- value
 #' @param x the \code{FlexTable} object
@@ -255,21 +255,31 @@ addFooterRow = function( x, value ){
 #' @param j vector (integer index, col.names values or boolean vector) for columns. 
 #' @param value an object of class \code{\link{cellProperties}} or an object of class \code{\link{parProperties}} 
 #' or an object of class \code{\link{textProperties}}.
+#' @param textProperties formating properties (an object of class \code{textProperties}).
+#' @param newpar logical value specifying wether or not the content should be added 
+#' as a new paragraph
+#' @param byrow logical. If FALSE (the default) content is added by columns
+#' , otherwise content is added by rows.
 #' @export
 #' @seealso \code{\link{addFlexTable}}
 #' @examples
 #' data( data_ReporteRs )
 #' myFlexTable = FlexTable( data = data_ReporteRs
-#' 	, span.columns = "col1"
-#' , header.columns = TRUE
-#' , add.rownames = FALSE )
+#'   , header.columns = TRUE
+#'   , add.rownames = FALSE )
 #' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
 #' myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
+#' 
+#' myFlexTable[1:4, 1:2, textProperties = textProperties( color="red" )
+#'   , newpar = TRUE] = c("A", "B", "C", "D", "E", "F", "G", "H")
+#' myFlexTable[1:4, 3
+#'   , textProperties = textProperties(vertical.align="superscript")] = c("1", "2", "3", "4")
+#' 
 #' @rdname FlexTable-assign
 #' @method [<- FlexTable
 #' @S3method [<- FlexTable
-"[<-.FlexTable" = function (x, i, j, value){
+"[<-.FlexTable" = function (x, i, j, value, textProperties, newpar = F, byrow = FALSE){
 
 	args.get.indexes = list(object = x)
 	if( !missing(i) ) args.get.indexes$i = i
@@ -286,104 +296,34 @@ addFooterRow = function( x, value ){
 		} else {
 			x = updateCellProperties.FlexTable( x=x, i=i, j=j, value=value )
 		}
-
-	} else stop("value must be an object of class 'textProperties' or 'parProperties' or 'cellProperties'.")
+	} else if( is.data.frame( value ) 
+			|| is.matrix( value ) 
+			|| ( is.vector( value ) && length(i)*length(j) == length(value) )
+			){
+		if( missing(textProperties))
+			textProperties = x$text_format
+		
+		x = addFlexCellContent (object = x, i = i, j = j
+				, value = value
+				, textProperties, newpar = newpar, byrow = byrow)
+		
+	} else if( is.character( value ) && length( value ) == 1 ){
+		if( missing(textProperties))
+			textProperties = x$text_format
+		
+		x = addFlexCellContent (object = x, i = i, j = j
+				, value = rep( value, length(i)*length(j) )
+				, textProperties, newpar = newpar, byrow = byrow)
+		
+	} else stop("value must be a valid content or an object of class 'textProperties' or 'parProperties' or 'cellProperties'. See details in help file.")
 	  
 	x
 }
 
 
 
-#' @title Replace FlexTable content 
-#'
-#' @description Replace cells contents of a FlexTable object 
-#' with one or more paragraph of texts.
-#' 
-#' @param object a \code{FlexTable} object
-#' @param i vector (integer index, row.names values or boolean vector) for rows. 
-#' @param j vector (integer index, col.names values or boolean vector) for columns. 
-#' @param value a \code{\link{pot}} or a \code{\link{set_of_paragraphs}} object to insert as new cell content. 
-#' @export
-#' @seealso \code{\link{addFlexTable}}
-#' @examples
-#' data( data_ReporteRs )
-#' myFlexTable = FlexTable( data = data_ReporteRs
-#' 	, span.columns = "col1"
-#' , header.columns = TRUE
-#' , add.rownames = FALSE )
-#' myFlexTable = setFlexCellContent( myFlexTable
-#' , i = 1, j = 1
-#' , pot("Hello World", format = textProperties( color="red" ) )
-#' )
-#' @export 
-setFlexCellContent = function (object, i, j, value){
-	
-	args.get.indexes = list(object = object)
-	if( !missing(i) ) args.get.indexes$i = i
-	if( !missing(j) ) args.get.indexes$j = j
-	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
-	i = indexes$i
-	j = indexes$j
-	
-	if( !inherits(value, c( "set_of_paragraphs", "pot") ) )
-		stop("argument value must be an object of class 'pot' or 'set_of_paragraphs'.")
-	if( inherits(value, c( "pot") ) )
-		value = set_of_paragraphs(value)
-	ps = ParagraphSection( value, x$par_format )
-	
-	.jcall( object$jobj, "V", "setBodyText"
-			, .jarray( as.integer( i -1 ) )
-			, .jarray( as.integer(  j - 1 ) )
-			, ps$jobj  
-	)
-	
-	object
-}
 
-
-
-
-#' @title Add content in a FlexTable  
-#'
-#' @description add texts or new paragraphs in cells contents of a FlexTable object 
-#' @param object a \code{FlexTable} object
-#' @param i vector (integer index, row.names values or boolean vector) for rows. 
-#' @param j vector (integer index, col.names values or boolean vector) for columns. 
-#' @param value text values or values that have a \code{format} method 
-#' returning character value.
-#' @param textProperties formating properties (an object of class \code{textProperties}).
-#' @param newpar logical value specifying wether or not the content should be added 
-#' as a new paragraph
-#' @param byrow logical. If FALSE (the default) content is added by columns
-#' , otherwise content is added by rows.
-#' @export
-#' @seealso \code{\link{addFlexTable}}
-#' @examples
-#' data( data_ReporteRs )
-#' myFlexTable = FlexTable( data = data_ReporteRs
-#' 	, span.columns = "col1"
-#' 	, header.columns = TRUE
-#' 	, add.rownames = FALSE )
-#' myFlexTable = addFlexCellContent( myFlexTable
-#' 	, i = 1:4, j = 1
-#' 	, value = c("A", "B", "C", "D")
-#' 	, textProperties = textProperties( color="red" )
-#' 	)
-#' myFlexTable = addFlexCellContent( myFlexTable
-#' 	, i = 1:4, j = 2
-#' 	, value = c("E", "F", "G", "H")
-#' 	, textProperties = textProperties( color="red" )
-#' 	, newpar = TRUE
-#' 	)
-#' @export 
 addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, byrow = FALSE){
-	
-	args.get.indexes = list(object = object)
-	if( !missing(i) ) args.get.indexes$i = i
-	if( !missing(j) ) args.get.indexes$j = j
-	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
-	i = indexes$i
-	j = indexes$j
 
 	if( !inherits(textProperties, "textProperties") )
 		stop("argument textProperties must be a textProperties object.")
@@ -464,11 +404,12 @@ setFlexBorder = function (object, inner_v = borderProperties(), inner_h = border
 #' @param odd background color applied to odd rows - single character value (e.g. "#000000" or "black")
 #' @param even background color applied to even rows - single character value (e.g. "#000000" or "black")
 #' @examples 
-#' myFlexTable2 = FlexTable( data=mtcars, header.columns=TRUE, add.rownames=TRUE
+#' myFlexTable2 = FlexTable( data = mtcars, header.columns=TRUE, add.rownames=TRUE
 #'   , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
 #' )
 #' myFlexTable2 = setZebraStyle( myFlexTable2, "#D1E6E7", "#93A8A9" )
-#' @seealso \code{\link{FlexTable}}
+#' @seealso \code{\link{FlexTable}}, \code{\link{setRowColors}}, \code{\link{setColColors}}
+#' , \code{\link{[<-.FlexTable}}
 #' @export 
 setZebraStyle = function (object, odd, even){
 	
