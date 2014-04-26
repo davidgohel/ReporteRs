@@ -17,7 +17,7 @@ add a header row in a FlexTable
 data( data_ReporteRs )
 myFlexTable = FlexTable( data = data_ReporteRs
 		, header.columns=FALSE
-		, row.names=FALSE )
+		, add.rownames=FALSE )
 
 cp1 = cellProperties(background.color="#EBEBEB")
 
@@ -26,6 +26,10 @@ for(i in 1:ncol(data_ReporteRs))
    headerRow[i] = FlexCell( pot( names(data_ReporteRs)[i]
 		, format=textProperties(font.weight="bold") ), cellProp = cp1 )
 myFlexTable = addHeaderRow( myFlexTable, headerRow)
+headerRow2 = FlexRow(names(data_ReporteRs)
+  , format=textProperties(font.weight="bold") )
+  , cellProp = cp1 )
+myFlexTable = addHeaderRow( myFlexTable, headerRow2)
 }
 \seealso{
 \code{\link{FlexTable}}

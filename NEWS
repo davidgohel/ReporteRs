@@ -12,8 +12,6 @@ ENHANCEMENT
 * add function "add.plot.interactivity" for plot interactivity 
   when output is html.
 
-ENHANCEMENT 
-------------------------------------------------------------------
 * Cleaning and reorganization of the C code files
 
 ReporteRs 0.5.1
@@ -34,10 +32,6 @@ BUG FIXES
 
 * a java exception was throwed when accents were used in pptx
   (reported by Julio Alejandro Di Rienzo) 
-
-* graphical element ids were not correctly incremented in the graphical
-  device drivers driving to an error when opening the docx 
-  (reported by Jean-Francois Collin)
 
 ReporteRs 0.4
 ==================================================================

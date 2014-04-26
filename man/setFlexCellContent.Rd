@@ -26,7 +26,7 @@ data( data_ReporteRs )
 myFlexTable = FlexTable( data = data_ReporteRs
 	, span.columns = "col1"
 , header.columns = TRUE
-, row.names = FALSE )
+, add.rownames = FALSE )
 myFlexTable = setFlexCellContent( myFlexTable
 , i = 1, j = 1
 , pot("Hello World", format = textProperties( color="red" ) )

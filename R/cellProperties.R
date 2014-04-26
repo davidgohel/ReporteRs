@@ -5,19 +5,19 @@
 #' 
 #' @param padding cell padding - integer value : 0>= value - overwrite all padding.* values
 #' @param border.width border width - an integer value : 0>= value - overwrite all border.*.style values
-#' @param border.style border style - a string value : "single" or "none" or "hidden" or "double" or "dotted" or "dashed" or "inset" or "outset" - overwrite all border.*.style values
+#' @param border.style border style - a string value : "none" or "solid" or "dotted" or "dashed" - overwrite all border.*.style values
 #' @param border.color border color - a string value (e.g. "#000000" or "black") - overwrite all border.*.color values
 #' @param border.bottom.color border bottom color - a string value (e.g. "#000000" or "black")
-#' @param border.bottom.style border bottom style - a string value : "single" or "none" or "hidden" or "double" or "dotted" or "dashed" or "inset" or "outset"
+#' @param border.bottom.style border bottom style - a string value : "none" or "solid" or "dotted" or "dashed"
 #' @param border.bottom.width border bottom width - an integer value : 0>= value
 #' @param border.left.color border left color - a string value (e.g. "#000000" or "black")
-#' @param border.left.style border left style - a string value : "single" or "none" or "hidden" or "double" or "dotted" or "dashed" or "inset" or "outset"
+#' @param border.left.style border left style - a string value : "none" or "solid" or "dotted" or "dashed"
 #' @param border.left.width border left width - an integer value : 0>= value
 #' @param border.top.color border top color - a string value (e.g. "#000000" or "black")
-#' @param border.top.style border top style - a string value : "single" or "none" or "hidden" or "double" or "dotted" or "dashed" or "inset" or "outset"
+#' @param border.top.style border top style - a string value : "none" or "solid" or "dotted" or "dashed"
 #' @param border.top.width border top width - an integer value : 0>= value
 #' @param border.right.color border right color - a string value (e.g. "#000000" or "black")
-#' @param border.right.style border right style - a string value : "single" or "none" or "hidden" or "double" or "dotted" or "dashed" or "inset" or "outset"
+#' @param border.right.style border right style - a string value : "none" or "solid" or "dotted" or "dashed"
 #' @param border.right.width border right width - integer value : 0>= value
 #' @param vertical.align cell content vertical alignment - a string value : "center" or "top" or "bottom"
 #' @param padding.bottom cell bottom padding - integer value : 0>= value
@@ -57,7 +57,6 @@ cellProperties = function(border.bottom.color = "black"
 		, border.style
 		, border.color
 	){
-	border.styles = c( "none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset" )
 	vertical.align.styles = c( "top", "middle", "bottom" )
 	
 	out = list(
@@ -118,24 +117,24 @@ cellProperties = function(border.bottom.color = "black"
 	}
 	
 	if( is.character( border.bottom.style ) ){
-		match.arg( border.bottom.style, choices = border.styles, several.ok = F )
+		match.arg( border.bottom.style, choices = ReporteRs.border.styles, several.ok = F )
 		out$border.bottom.style = border.bottom.style
-	} else stop("border.bottom.style must be a character scalar (", paste( border.styles, collapse = "|") ,").")
+	} else stop("border.bottom.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	
 	if( is.character( border.left.style ) ){
-		match.arg( border.left.style, choices = border.styles, several.ok = F )
+		match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = F )
 		out$border.left.style = border.left.style
-	} else stop("border.left.style must be a character scalar (", paste( border.styles, collapse = "|") ,").")
+	} else stop("border.left.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	
 	if( is.character( border.top.style ) ){
-		match.arg( border.top.style, choices = border.styles, several.ok = F )
+		match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = F )
 		out$border.top.style = border.top.style
-	} else stop("border.top.style must be a character scalar (", paste( border.styles, collapse = "|") ,").")
+	} else stop("border.top.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	
 	if( is.character( border.right.style ) ){
-		match.arg( border.right.style, choices = border.styles, several.ok = F )
+		match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = F )
 		out$border.right.style = border.right.style
-	} else stop("border.right.style must be a character scalar (", paste( border.styles, collapse = "|") ,").")
+	} else stop("border.right.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	
 	
 
@@ -229,22 +228,16 @@ print.cellProperties = function (x, ...){
 	cat( "\tpadding-right: {", x$padding.right, "}\n" )
 	cat( "\tbackground-color: {", x$background.color, "}\n" )
 }
-borderProperties = function( borderColor, borderStyle, borderWidth ){
-	.jnew(class.tables.BorderProperties
-		, as.character(borderColor), as.character(borderStyle)
-		, as.integer( borderWidth )
-	)
-}
 
 
 .jCellProperties = function( robject ){
 	
 	
 	jcellProp = .jnew(class.tables.CellProperties
-			, borderProperties(robject$border.bottom.color, robject$border.bottom.style, robject$border.bottom.width )
-			, borderProperties(robject$border.left.color, robject$border.left.style, robject$border.left.width )
-			, borderProperties(robject$border.top.color, robject$border.top.style, robject$border.top.width )
-			, borderProperties(robject$border.right.color, robject$border.right.style, robject$border.right.width )
+			, jborderProperties(robject$border.bottom.color, robject$border.bottom.style, robject$border.bottom.width )
+			, jborderProperties(robject$border.left.color, robject$border.left.style, robject$border.left.width )
+			, jborderProperties(robject$border.top.color, robject$border.top.style, robject$border.top.width )
+			, jborderProperties(robject$border.right.color, robject$border.right.style, robject$border.right.width )
 			, as.character(robject$vertical.align )
 			, as.integer( robject$padding.bottom )
 			, as.integer( robject$padding.top )

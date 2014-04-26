@@ -85,7 +85,7 @@ void add_popup(int *dn, int *id, char **str, int *l){
 	
 	for( i = 0 ; i < nb_elts ; i++ ){
 		fprintf(pd->dmlFilePointer, "var box_%d = elt_%d.getBBox();\n", id[i], id[i] );
-		fprintf(pd->dmlFilePointer, "var popup_%d = %s.popup(box_%d.x + box_%d.width / 2, box_%d.y + box_%d.height / 2, \"%s\").hide();\n"
+		fprintf(pd->dmlFilePointer, "var popup_%d = %s.popup(box_%d.x + box_%d.width / 2, box_%d.y + box_%d.height / 2 - 3, \"%s\").hide();\n"
 			, id[i], pd->objectname, id[i], id[i], id[i], id[i], str[i] );
 		fprintf(pd->dmlFilePointer, "elt_%d.mouseover(function(){popup_%d.show();});\n", id[i], id[i] );
 		fprintf(pd->dmlFilePointer, "elt_%d.mouseout(function(){popup_%d.hide();});\n", id[i], id[i] );

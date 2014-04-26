@@ -286,5 +286,4 @@ getHexColorCode = function( valid.color ){
 	rgb( t(col2rgb(valid.color)/255 ))
 }
 
-border.styles = c( "none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset" )
-
+ReporteRs.border.styles = c( "none", "solid", "dotted", "dashed" )

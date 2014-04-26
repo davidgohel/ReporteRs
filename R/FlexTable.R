@@ -6,12 +6,12 @@
 #' Formating can be done on cells, paragraphs and texts (borders, colors, fonts, etc.), see ?"[<-.FlexTable".
 #' Content (formated or not) can be added with the function \code{\link{addFlexCellContent}}.
 #' @param data (a \code{data.frame} or \code{matrix} object) to add
-#' @param span.columns a character vector specifying columns names where row merging 
-#' should be done (if successive values in a column are the same ; if data[p,j]==data[p-1,j] )
+#' @param numrow number of row in the table body. 
+#' @param numcol number of col in the table body. 
 #' @param header.columns logical value - should the colnames be included in the table 
 #' as table headers. If FALSE, no headers will be printed unless you 
 #' use \code{\link{addHeaderRow}}. 
-#' @param row.names logical value - should the row.names be included in the table. 
+#' @param add.rownames logical value - should the row.names be included in the table. 
 #' @param cell_format default cells formatting properties for any data
 #' @param par_format default paragraphs formatting properties for any data
 #' @param text_format default texts formatting properties for any data
@@ -22,108 +22,133 @@
 #' 
 #' myFlexTable = FlexTable( data = data_ReporteRs
 #' 	, span.columns = "col1", header.columns = TRUE
-#'  , row.names = FALSE )
+#'  , add.rownames = FALSE )
 #' 
 #' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
 #' myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
+#' 
+#' myFlexTable2 = FlexTable( data=mtcars, header.columns=TRUE, add.rownames=TRUE
+#'   , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
+#' )
+#' 
+#' myFlexTable2 = setZebraStyle( myFlexTable2, "#D1E6E7", "#93A8A9" )
+#' myFlexTable2 = setFlexBorder(myFlexTable2, inner_v=borderProperties(color="#EDBD3E", style="dotted", width=1)
+#'   , inner_h=borderProperties(color="#EDBD3E", style="none", width=0)
+#'   , outer_v=borderProperties(color="#EDBD3E", style="solid", width=1)
+#'   , outer_h=borderProperties(color="#EDBD3E", style="solid", width=1) )
+#' 
+#' 
+#' newdata = iris[1:10,]
+#' myFT3 = FlexTable( numrow = nrow(newdata), numcol =5 )
+#' 
+#' myFT3 = addFlexCellContent(object = myFT3
+#'   , value = newdata
+#'   , textProperties = textProperties( color="blue" )
+#' )
+#' myFT3 = addFlexCellContent(object = myFT3, i = 8:10, j=1:3
+#'   , value = matrix( paste( " (", letters[1:9], ")", sep = "" ), ncol = 3 )
+#'   , textProperties = textProperties( color="blue" )
+#' 	)
+#' myFT3 = spanRows( myFT3, j=1, from = 2, to = 5 )
+#' myFT3 = spanCols( myFT3, i=6, from = 2, to = 5 )
+#' myFT3[ 1:2, 2:3] = textProperties( color="blue" )
+#' myFT3[ 3:4, 4:5] = parProperties( text.align="right" )
+#' 
+#' headerRow = FlexRow( names( newdata )
+#' 	, cellProp = cellProperties(
+#'         background.color="#527578"
+#'       , border.color="orange"
+#'       , border.bottom.style="solid"
+#'       , border.bottom.width=1)
+#'   )
+#' myFT3 = addHeaderRow( myFT3, headerRow)
+#' 
+#' myFT3 = setZebraStyle( myFT3, "#8A949B", "#FAFAFA" )
+#' myFT3 = setFlexBorder(myFT3
+#'   , inner_v=borderProperties(color="gray", style="solid", width=1)
+#'   , inner_h=borderProperties(color="gray", style="solid", width=1)
+#'   , outer_v=borderProperties(color="orange", style="solid", width=1)
+#'   , outer_h=borderProperties(color="orange", style="solid", width=1) 
+#' )
+#' 
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{addFlexTable}}, \code{\link{FlexRow}}, \code{\link{FlexCell}}
 #' , \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}
 #' , \code{\link{pot}}, \code{\link{set_of_paragraphs}}, \code{\link{addFlexTable.docx}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}} 
-FlexTable = function(data, span.columns = character(0)
-	, header.columns = TRUE, row.names = FALSE
+FlexTable = function(data, numrow, numcol
+	, header.columns = TRUE, add.rownames = FALSE
 	, cell_format = cellProperties()
 	, par_format = parProperties()
 	, text_format = textProperties()
+	, header_text_format = textProperties( font.weight= "bold" )
 	){
-
-	#### data checking
-	if( missing( data ) ) stop("data is missing.")
-	
-	
-	# check data is a data.frame
-	if( !is.data.frame( data ) && !is.matrix( data ) )
-		stop("data is not a data.frame nor a matrix.")
-	
-	if( is.data.frame( data ) ) .names = names( data )
-	else .names = dimnames( data )[[2]]
-
-	# check data is a data.frame
-	if( nrow( data )<1)
-		stop("data has 0 row.")
-
-	#### check span.columns
-	if( !missing( span.columns ) ){
-		if( !is.character( span.columns ) )
-			stop( "span.columns must be a character vector")
-		
-		.ie.span.columns = is.element( span.columns , .names )
-		if( !all ( .ie.span.columns ) ){
-			stop("span.columns contains unknown columns names :", paste( span.columns[!.ie.span.columns], collapse = "," ) )
-		}	
-	}
-
+	miss_data = missing( data )
 	if( !inherits(text_format, "textProperties") )
 		stop("argument text_format must be a textProperties object.")
 	if( !inherits(par_format, "parProperties") )
 		stop("argument text_format must be a textProperties object.")
 	if( !inherits(cell_format, "cellProperties") )
 		stop("argument cell_format must be a cellProperties object.")
-	
-	.row_names = row.names(data)
-	if( row.names ){
-		data = cbind(rownames = .row_names, data )
+
+	if( miss_data && ( missing( numrow ) || missing( numcol ) ) ) {
+		stop("numrow and numcol must be defined if no data is provided.")
+	} else if( !miss_data && (!missing( numrow ) || !missing( numcol ) ) ) {
+		warning("numrow and numcol arguments redefined with data dimensions.")
 	}
-	row.names( data ) = NULL
 	
-	out = list(
-			ncol = ncol( data )
-			, nrow = nrow( data )
-			, row.names = row.names
-			, row_id = .row_names
-	)
-	
-	data = apply( data, 2, function(x) {
-				if( is.character( x) || is.factor( x ) ) x
+	if( !miss_data ){
+		# check data is a data.frame
+		if( !is.data.frame( data ) && !is.matrix( data ) )
+			stop("data is not a data.frame nor a matrix.")
+		
+		numrow = nrow( data )
+		numcol = ncol( data )
+		
+		if( numrow < 1 )
+			stop("data has 0 row.")
+
+		.row_names = row.names(data)
+		
+		if( add.rownames ){
+			.colnames = c( "", dimnames( data )[[2]] )
+			numcol = numcol +1
+		} else .colnames = dimnames( data )[[2]]
+		if( add.rownames ){
+			data = cbind(rownames = .row_names, data )
+		}
+		row.names( data ) = NULL
+		data = apply( data, 2, function(x) {
+				if( is.character( x) ) x
+				else if( is.factor( x ) ) as.character( x )
 				else if( is.logical( x ) ) ifelse( x, "TRUE", "FALSE" )
 				else format(x)
 			} )
-	.colnames = dimnames( data )[[2]]
-	out$col_id = .colnames
-	if( row.names ){
-		.colnames[1]=""
+	} else {
+		.row_names = rep(NA, numrow )
+		.colnames = rep(NA, numcol )
+		data = matrix("", nrow = numrow, ncol = numcol )
 	}
+
 	
-	
+	out = list(
+		numcol = numcol
+		, numrow = numrow
+		, add.rownames = add.rownames
+		, row_id = .row_names
+		, col_id = .colnames
+		, colspan = matrix(1, nrow = numrow, ncol = numcol )
+		, rowspan = matrix(1, nrow = numrow, ncol = numcol )
+	)
+		
 	jFlexTable = .jnew( class.FlexTable
-		, as.integer( out$nrow ), as.integer( out$ncol )
-		, .jarray( as.character( t( data ) ) )
-		, .jTextProperties(text_format), .jParProperties(par_format), .jCellProperties(cell_format)
+		, as.integer( out$numrow ), as.integer( out$numcol )
+		, .jTextProperties(text_format)
+		, .jParProperties(par_format)
+		, .jCellProperties(cell_format)
 		)
 
-	for(j in span.columns ){
-		instructions = list()
-		current.col = data[, j]
-		groups = cumsum( c(TRUE, current.col[-length(current.col)] != current.col[-1] ) )
-		groups.counts = tapply( groups, groups, length )
-		
-		for(i in 1:length( groups.counts )){
-			if( groups.counts[i] == 1 ) 
-				instructions[[i]] = 1
-			else {
-				instructions[[i]] = c(groups.counts[i] , rep(0, groups.counts[i]-1 ) )
-			}
-		}
-		
-		.jcall( jFlexTable , "V", "setRowSpanInstructions"
-				, as.integer( match( j , .colnames ) - 1 )
-				, .jarray( as.integer( unlist( instructions ) ) )
-		)
-
-	}
-	
 	out$jobj = jFlexTable
 
 	out$cell_format = cell_format
@@ -131,10 +156,19 @@ FlexTable = function(data, span.columns = character(0)
 	out$text_format = text_format
 
 	class( out ) = c("FlexTable", "FlexElement")
-	
-	if( header.columns ){
+
+	if( !miss_data && header.columns ){
 		headerRow = FlexRow(values = .colnames, textProp = text_format, parProp = par_format, cellProp = cell_format )
 		out = addHeaderRow( out, headerRow )
+	}
+	
+	if( !miss_data ){
+		addFlexCellContent (out, seq_len(out$numrow), seq_len(out$numcol)
+				, value = data
+				, textProperties = text_format
+				, newpar = F
+				, byrow = FALSE 
+		)
 	}
 	
 	out
@@ -152,7 +186,7 @@ FlexTable = function(data, span.columns = character(0)
 #' data( data_ReporteRs )
 #' myFlexTable = FlexTable( data = data_ReporteRs
 #' 		, header.columns=FALSE
-#' 		, row.names=FALSE )
+#' 		, add.rownames=FALSE )
 #' 
 #' cp1 = cellProperties(background.color="#EBEBEB")
 #' 
@@ -161,13 +195,17 @@ FlexTable = function(data, span.columns = character(0)
 #'    headerRow[i] = FlexCell( pot( names(data_ReporteRs)[i]
 #' 		, format=textProperties(font.weight="bold") ), cellProp = cp1 )
 #' myFlexTable = addHeaderRow( myFlexTable, headerRow)
+#' headerRow2 = FlexRow(names(data_ReporteRs)
+#'   , format=textProperties(font.weight="bold") )
+#'   , cellProp = cp1 )
+#' myFlexTable = addHeaderRow( myFlexTable, headerRow2)
 addHeaderRow = function( x, value ){
 	
 	if( !inherits(value, "FlexRow") )
 		stop("argument value must be an object of class 'FlexRow'.")
 	.weights = weight.FlexRow( value )
-	if( .weights == x$ncol - 1 ) warning("Did you forget row.names header?")
-	if( .weights != x$ncol ) stop("The 'FlexRow' object has not the correct number of elements or the sum of colspan is different from the number of columns of the dataset.")
+	if( .weights == x$numcol - 1 ) warning("Did you forget the rownames header?")
+	if( .weights != x$numcol ) stop("The 'FlexRow' object has not the correct number of elements or the sum of colspan is different from the number of columns of the dataset.")
 	.jcall( x$jobj, "V", "addHeader", value$jobj )
 	
 	x
@@ -184,7 +222,7 @@ addHeaderRow = function( x, value ){
 #' data( data_ReporteRs )
 #' myFlexTable = FlexTable( data = data_ReporteRs
 #' 		, header.columns=FALSE
-#' 		, row.names=FALSE )
+#' 		, add.rownames=FALSE )
 #' 
 #' cp1 = cellProperties(background.color="#EBEBEB")
 #' 
@@ -199,25 +237,10 @@ addFooterRow = function( x, value ){
 	if( !inherits(value, "FlexRow") )
 		stop("argument value must be an object of class 'FlexRow'.")
 	.weights = weight.FlexRow( value )
-	if( .weights != x$ncol ) stop("The 'FlexRow' object has not the correct number of elements or the sum of colspan is different from the number of columns of the dataset.")
+	if( .weights != x$numcol ) stop("The 'FlexRow' object has not the correct number of elements or the sum of colspan is different from the number of columns of the dataset.")
 	.jcall( x$jobj, "V", "addFooter", value$jobj )
 	
 	x
-}
-
-
-#' @method length FlexTable
-#' @S3method length FlexTable
-length.FlexTable <- function(x) {
-	return(x$nrow)
-}
-
-#' @method print FlexTable
-#' @S3method print FlexTable
-print.FlexTable = function(x, ...){
-	out = .jcall( x$jobj, "S", "toString" )
-	cat(out)
-	invisible()
 }
 
 
@@ -239,7 +262,7 @@ print.FlexTable = function(x, ...){
 #' myFlexTable = FlexTable( data = data_ReporteRs
 #' 	, span.columns = "col1"
 #' , header.columns = TRUE
-#' , row.names = FALSE )
+#' , add.rownames = FALSE )
 #' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
 #' myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
 #' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
@@ -248,38 +271,14 @@ print.FlexTable = function(x, ...){
 #' @S3method [<- FlexTable
 "[<-.FlexTable" = function (x, i, j, value){
 
-	if( missing(i) && missing(j) ) {
-		i = 1:length(x)
-		j = 1:x$ncol
-	} else if( missing(i) && !missing(j) ) {
-		i = 1:length(x)
-	} else if( !missing(i) && missing(j) ) {
-		j = 1:x$ncol
-	} 
-	
-	if( is.numeric (i) ){
-		if( any( i < 1 | i > length(x) ) ) stop("invalid row subset - out of bound")
-	} else if( is.logical (i) ){
-		if( length( i ) != length(x) ) stop("invalid row subset - incorrect length")
-		else i = ( 1:length(x) )[i]
-	} else if( is.character (i) ){
-		if( !all( is.element(i, x$row_id)) ) stop("invalid row.names subset")
-		else i = match(i, x$row_id)
-	} else stop("row subset must be a logical vector, an integer vector or a character vector(row.names).")
-	
-	if( is.numeric (j) ){
-		if( any( j < 1 | j > x$ncol ) ) stop("invalid col subset - out of bound")
-	} else if( is.logical (j) ){
-		if( length( j ) != x$ncol ) stop("invalid col subset - incorrect length")
-		else j = ( 1:x$ncol )[j]
-	} else if( is.character (j) ){
-		if( !all( is.element(j, x$col_id)) ) stop("invalid col.names subset")
-		else j = match(j, x$col_id)
-	} else stop("col subset must be a logical vector, an integer vector or a character vector(row.names).")
-	
-	
+	args.get.indexes = list(object = x)
+	if( !missing(i) ) args.get.indexes$i = i
+	if( !missing(j) ) args.get.indexes$j = j
+	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
+	i = indexes$i
+	j = indexes$j
+
 	if( inherits(value, c("textProperties", "parProperties", "cellProperties")) ){
-		
 		if( inherits(value, "textProperties" ) ){
 			x = updateTextProperties.FlexTable( x=x, i=i, j=j, value=value )
 		} else if( inherits(value, "parProperties" ) ){
@@ -311,7 +310,7 @@ print.FlexTable = function(x, ...){
 #' myFlexTable = FlexTable( data = data_ReporteRs
 #' 	, span.columns = "col1"
 #' , header.columns = TRUE
-#' , row.names = FALSE )
+#' , add.rownames = FALSE )
 #' myFlexTable = setFlexCellContent( myFlexTable
 #' , i = 1, j = 1
 #' , pot("Hello World", format = textProperties( color="red" ) )
@@ -319,43 +318,24 @@ print.FlexTable = function(x, ...){
 #' @export 
 setFlexCellContent = function (object, i, j, value){
 	
-	if( missing(i) && missing(j) ) {
-		i = 1:length(object)
-		j = 1:object$ncol
-	} else if( missing(i) && !missing(j) ) {
-		i = 1:length(object)
-	} else if( !missing(i) && missing(j) ) {
-		j = 1:object$ncol
-	} 
-
-	if( is.numeric (i) ){
-		if( any( i < 1 | i > length(object) ) ) stop("invalid row subset - out of bound")
-	} else if( is.logical (i) ){
-		if( length( i ) != length(object) ) stop("invalid row subset - incorrect length")
-		else i = ( 1:length(object) )[i]
-	} else if( is.character (i) ){
-		if( !all( is.element(i, object$row_id)) ) stop("invalid row.names subset")
-		else i = match(i, object$row_id)
-	} else stop("row subset must be a logical vector, an integer vector or a character vector(from row.names).")
+	args.get.indexes = list(object = object)
+	if( !missing(i) ) args.get.indexes$i = i
+	if( !missing(j) ) args.get.indexes$j = j
+	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
+	i = indexes$i
+	j = indexes$j
 	
-	if( is.numeric (j) ){
-		if( any( j < 1 | j > object$ncol ) ) stop("invalid col subset - out of bound")
-	} else if( is.logical (j) ){
-		if( length( j ) != object$ncol ) stop("invalid col subset - incorrect length")
-		else j = ( 1:object$ncol )[j]
-	} else if( is.character (j) ){
-		if( !all( is.element(j, object$col_id)) ) stop("invalid col.names subset")
-		else j = match(j, object$col_id)
-	} else stop("col subset must be a logical vector, an integer vector or a character vector(row.names).")
+	if( !inherits(value, c( "set_of_paragraphs", "pot") ) )
+		stop("argument value must be an object of class 'pot' or 'set_of_paragraphs'.")
+	if( inherits(value, c( "pot") ) )
+		value = set_of_paragraphs(value)
+	ps = ParagraphSection( value, x$par_format )
 	
-	
-	if( inherits(value, c("pot", "set_of_paragraphs") ) ){
-		for( row_index in i )
-			for( col_index in j)
-				object = updateContent.FlexTable( x = object, i = row_index, j = col_index, value = value )
-	} else {
-		stop("value must be an object of class 'pot' or 'set_of_paragraphs'.")
-	}
+	.jcall( object$jobj, "V", "setBodyText"
+			, .jarray( as.integer( i -1 ) )
+			, .jarray( as.integer(  j - 1 ) )
+			, ps$jobj  
+	)
 	
 	object
 }
@@ -363,11 +343,9 @@ setFlexCellContent = function (object, i, j, value){
 
 
 
-
 #' @title Add content in a FlexTable  
 #'
-#' @description add texts or paragraphs in cells contents of a FlexTable object 
-
+#' @description add texts or new paragraphs in cells contents of a FlexTable object 
 #' @param object a \code{FlexTable} object
 #' @param i vector (integer index, row.names values or boolean vector) for rows. 
 #' @param j vector (integer index, col.names values or boolean vector) for columns. 
@@ -385,7 +363,7 @@ setFlexCellContent = function (object, i, j, value){
 #' myFlexTable = FlexTable( data = data_ReporteRs
 #' 	, span.columns = "col1"
 #' 	, header.columns = TRUE
-#' 	, row.names = FALSE )
+#' 	, add.rownames = FALSE )
 #' myFlexTable = addFlexCellContent( myFlexTable
 #' 	, i = 1:4, j = 1
 #' 	, value = c("A", "B", "C", "D")
@@ -400,206 +378,259 @@ setFlexCellContent = function (object, i, j, value){
 #' @export 
 addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, byrow = FALSE){
 	
-	if( missing(i) && missing(j) ) {
-		i = 1:length(object)
-		j = 1:object$ncol
-	} else if( missing(i) && !missing(j) ) {
-		i = 1:length(object)
-	} else if( !missing(i) && missing(j) ) {
-		j = 1:object$ncol
-	}
-	
-	if( is.numeric (i) ){
-		if( any( i < 1 | i > length(object) ) ) stop("invalid row subset - out of bound")
-	} else if( is.logical (i) ){
-		if( length( i ) != length(object) ) stop("invalid row subset - incorrect length")
-		else i = which(i)
-	} else if( is.character (i) ){
-		if( !all( is.element(i, object$row_id)) ) stop("invalid row.names subset")
-		else i = match(i, object$row_id)
-	} else stop("row subset must be a logical vector, an integer vector or a character vector(from row.names).")
-	
-	if( is.numeric (j) ){
-		if( any( j < 1 | j > object$ncol ) ) stop("invalid col subset - out of bound")
-	} else if( is.logical (j) ){
-		if( length( j ) != object$ncol ) stop("invalid col subset - incorrect length")
-		else j = which(j)
-	} else if( is.character (j) ){
-		if( !all( is.element(j, object$col_id)) ) stop("invalid col.names subset")
-		else j = match(j, object$col_id)
-	} else stop("col subset must be a logical vector, an integer vector or a character vector(row.names).")
-	
-	value = format( value )
-	if( !is.character( value ) ){
-		stop("value must be a character vector or must have a format method returning a string value.")
-	} 
-	
+	args.get.indexes = list(object = object)
+	if( !missing(i) ) args.get.indexes$i = i
+	if( !missing(j) ) args.get.indexes$j = j
+	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
+	i = indexes$i
+	j = indexes$j
+
 	if( !inherits(textProperties, "textProperties") )
 		stop("argument textProperties must be a textProperties object.")
 	
 	textProp = .jTextProperties( textProperties )
-	value_id = 0
-	
+
 	if( byrow ){
-		for( row_index in i ){
-			for( col_index in j){
-				value_id = value_id+1
-				.jcall( object$jobj, "V", "addBodyText"
-						, as.integer( row_index - 1 ) #i
-						, as.integer( col_index - 1 ) #j
-						, value[ value_id ] #par
-						, textProp #tp
-						, as.logical(newpar) #newPar
-					)
-			}
-		}
+		.jcall( object$jobj, "V", "addBodyText"
+			, .jarray( as.integer( i - 1 ) )
+			, .jarray( as.integer( j - 1 ) )
+			, .jarray( get.formatted.dataset( value ) )
+			, textProp
+			, as.logical(newpar)
+		)
 	} else {
-		for( col_index in j){
-			for( row_index in i ){
-				value_id = value_id+1
-				.jcall( object$jobj, "V", "addBodyText"
-						, as.integer( row_index - 1 ) #i
-						, as.integer( col_index - 1 ) #j
-						, value[ value_id ] #par
-						, textProp #tp
-						, as.logical(newpar) #newPar
-				)
-			}
-		}
+		.jcall( object$jobj, "V", "addBodyText"
+			, .jarray( as.integer( i - 1 ) )
+			, .jarray( as.integer( j - 1 ) )
+			, .jarray( t( get.formatted.dataset( value ) ) )
+			, textProp
+			, as.logical(newpar) 
+		)
+	}
+	object
+}
+
+#' @title apply borders scheme to a FlexTable
+#'
+#' @description apply borders scheme to a FlexTable. A border scheme is 
+#' a set of 4 different borders : inner vectical and horizontal
+#' , outer vectical and horizontal. 
+#' 
+#' @param object a \code{FlexTable} object
+#' @param inner_h a \code{borderProperties} object
+#' @param inner_v a \code{borderProperties} object
+#' @param outer_h a \code{borderProperties} object
+#' @param outer_v a \code{borderProperties} object
+#' @examples 
+#' myFlexTable2 = FlexTable( data=mtcars, header.columns=TRUE, add.rownames=TRUE
+#'   , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
+#' )
+#' 
+#' myFlexTable2 = setFlexBorder(myFlexTable2, inner_v=borderProperties(style="none")
+#'   , inner_h=borderProperties(color="#EDBD3E", style="dotted")
+#'   , outer_v=borderProperties(color="#EDBD3E", style="solid")
+#'   , outer_h=borderProperties(color="#EDBD3E", style="solid") )
+#' 
+#' @seealso \code{\link{FlexTable}}
+#' @export 
+setFlexBorder = function (object, inner_v = borderProperties(), inner_h = borderProperties(), outer_v = borderProperties(), outer_h = borderProperties()){
+
+	if( !inherits(object, "FlexTable") )
+		stop("argument object_v must be a FlexTable object.")
+	if( !inherits(inner_v, "borderProperties") )
+		stop("argument inner_v must be a borderProperties object.")
+	if( !inherits(inner_h, "borderProperties") )
+		stop("argument inner_v must be a borderProperties object.")
+	if( !inherits(outer_v, "borderProperties") )
+		stop("argument inner_v must be a borderProperties object.")
+	if( !inherits(outer_h, "borderProperties") )
+		stop("argument inner_v must be a borderProperties object.")
+	
+	.jcall( object$jobj , "V", "setBorders"
+			, as.jborderProperties( inner_v )
+			, as.jborderProperties( inner_h )
+			, as.jborderProperties( outer_v )
+			, as.jborderProperties( outer_h )
+	)
+	
+	object
+}
+
+#' @title color alternate rows on a table
+#'
+#' @description Zebra striping — coloring alternate rows on a table
+#' 
+#' @param object a \code{FlexTable} object
+#' @param odd background color applied to odd rows - single character value (e.g. "#000000" or "black")
+#' @param even background color applied to even rows - single character value (e.g. "#000000" or "black")
+#' @examples 
+#' myFlexTable2 = FlexTable( data=mtcars, header.columns=TRUE, add.rownames=TRUE
+#'   , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
+#' )
+#' myFlexTable2 = setZebraStyle( myFlexTable2, "#D1E6E7", "#93A8A9" )
+#' @seealso \code{\link{FlexTable}}
+#' @export 
+setZebraStyle = function (object, odd, even){
+	
+	.jcall( object$jobj , "V", "setOddEvenColor"
+			, odd
+			, even
+		)
+	
+	object
+}
+
+#' @title color rows on a table
+#'
+#' @description color rows on a table
+#' 
+#' @param object a \code{FlexTable} object
+#' @param i row index
+#' @param colors background colors to apply (e.g. "#000000" or "black")
+#' @examples 
+#' myFlexTable2 = FlexTable( data=mtcars, header.columns=TRUE, add.rownames=TRUE
+#'   , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
+#' )
+#' myFlexTable2 = setRowColors( myFlexTable2, i=5:7, colors=rep( "red", 3) )
+#' @seealso \code{\link{FlexTable}}
+#' @export 
+setRowColors = function (object, i, colors){
+	
+	args.get.indexes = list(object = object)
+	if( !missing(i) ) args.get.indexes$i = i
+	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
+	i = indexes$i
+	
+	if( !is.character( colors ) ) {
+		stop("color must be a character value.")
+	} else if( any( !is.color(colors) ) ){
+		stop("colors must be valid colors.")
+	}
+	if( length( colors ) == 1 ) colors = rep(colors, length(i) )
+	if( length( colors ) != length(i) ) stop("expected ", length(i) , " colors")
+	
+	.jcall( object$jobj , "V", "setRowsColors"
+		, .jarray( as.integer( i - 1 ) )
+		, .jarray( as.character( colors ) )
+	)
+	
+	object
+}
+
+#' @title color columns on a table
+#'
+#' @description color columns on a table
+#' 
+#' @param object a \code{FlexTable} object
+#' @param j col index
+#' @param colors background colors to apply (e.g. "#000000" or "black")
+#' @examples 
+#' myFlexTable2 = FlexTable( data=mtcars, header.columns=TRUE, add.rownames=TRUE
+#'   , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
+#' )
+#' myFlexTable2 = setColColors( myFlexTable2, j=3, colors=rep( "red", nrow(mtcars)) )
+#' @seealso \code{\link{FlexTable}}
+#' @export 
+setColColors = function (object, j, colors){
+	args.get.indexes = list(object = object)
+	if( !missing(j) ) args.get.indexes$j = j
+	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
+	j = indexes$j
+	
+	if( !is.character( colors ) ) {
+		stop("colors must be a character value.")
+	} else if( any( !is.color(colors) ) ){
+		stop("colors must be valid colors.")
+	}
+	if( length( colors ) == 1 ) colors = rep(colors, length(j) )
+	if( length( colors ) != length(j) ) stop("expected ", length(j) , " colors")
+	
+	.jcall( object$jobj , "V", "setColumnsColors"
+			, .jarray( as.integer( j - 1 ) )
+			, .jarray( as.character( colors ) )
+	)
+	
+	object
+}
+
+#' @title Span rows within columns
+#'
+#' @description Span rows within columns. 
+#' 
+#' @param object a \code{FlexTable} object
+#' @param j vector (integer index, col.names values or boolean vector) for columns. 
+#' @param from first row to span (its content will be the visible one).  
+#' @param to last row to span.  
+#' @export
+#' @seealso \code{\link{FlexTable}}
+#' @export 
+spanRows = function (object, j, from, to){
+
+	args.get.indexes = list(object = object)
+	if( !missing(j) ) args.get.indexes$j = j
+	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
+	j = indexes$j
+	
+	if( missing( from ) || missing( to ) ) {
+		stop("argument from and to cannot be missing.")
+	}
+	if( !is.numeric( from ) ) {
+		stop("argument from must be an positive integer value.")
+	}
+	if( !is.numeric( to ) ) {
+		stop("argument to must be an positive integer value.")
+	}
+	.seq = seq( from, to, by = 1 )
+	
+	for( colid in j ){
+		rowspan = object$rowspan[,colid]
+		rowspan[.seq] = c( length(.seq), integer(length(.seq) - 1) )
+		if( sum( rowspan ) != object$numrow ) stop("row spanning not possible")
+		else object$rowspan[, colid ] = rowspan
+		
+		.jcall( object$jobj , "V", "setRowSpanInstructions"
+			, as.integer( colid - 1 )
+			, .jarray( as.integer( object$rowspan[, colid ] ) )
+		)
 	}
 	object
 }
 
 
-
-
-
-
-
-updateCellProperties.FlexTable = function( x, i, j, value ){
-	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
+#' @title Span rows within columns
+#'
+#' @description Span columns within rows. 
+#' 
+#' @param object a \code{FlexTable} object
+#' @param i vector integer index for columns. 
+#' @param from first col to span (its content will be the visible one).  
+#' @param to last col to span.  
+#' @export
+#' @seealso \code{\link{FlexTable}}
+#' @export 
+spanCols = function (object, i, from, to){
 	
-	if( !missing(i) )
-		if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !missing(j) )
-		if( !is.numeric(j) ) stop("argument j must be an integer argument.")
-	
-	if( !missing(i) && missing(j) ){
-		j = 1:x$ncol
-	} else if( missing(i) && !missing(j) ){
-		i = 1:length(x)
+	if( missing(i) && is.numeric (i) && length(i) != 1 ) {
+		stop("invalid argument i, it must be a unique positive integer.")
+	} 
+	if( missing( from ) || missing( to ) ) {
+		stop("argument from and to cannot be missing.")
 	}
+	.seq = seq( from, to, by = 1 )
 	
-	if( !inherits( value , "cellProperties" ) ){
-		stop("value is not a cellProperties object")
-	}
-	jcellProp = .jCellProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setCellProperties"
-			, .jarray( as.integer( i-1 ) )
-			, .jarray( as.integer( j-1 ) )
-			, jcellProp  )
+	colspan = object$colspan[i,]
+	colspan[.seq] = c( length(.seq), integer(length(.seq) - 1) )
+	if( sum( colspan ) != object$numcol ) stop("col spanning not possible")
+	else object$colspan[i, ] = colspan
 	
-	x
-}
-
-updateParProperties.FlexTable = function( x, i, j, value ){
-	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
+	.jcall( object$jobj , "V", "setColSpanInstructions"
+			, as.integer( i - 1 )
+			, .jarray( as.integer( object$colspan[i, ] ) )
+	)
 	
-	if( !missing(i) )
-		if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !missing(j) )
-		if( !is.numeric(j) ) stop("argument j must be an integer argument.")
 	
-	if( !missing(i) && missing(j) ){
-		j = 1:x$ncol
-	} else if( missing(i) && !missing(j) ){
-		i = 1:length(x)
-	}
-	
-	if( !inherits( value , "parProperties" ) ){
-		stop("value is not a parProperties object")
-	}
-	
-	jparProp = .jParProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setParProperties"
-			, .jarray( as.integer( i-1 ) )
-			, .jarray( as.integer( j-1 ) )
-			, jparProp  )
-	
-	x
-}
-
-updateTextProperties.FlexTable = function( x, i, j, value ){
-	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
-	
-	if( !missing(i) )
-		if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !missing(j) )
-		if( !is.numeric(j) ) stop("argument j must be an integer argument.")
-	
-	if( !missing(i) && missing(j) ){
-		j = 1:x$ncol
-	} else if( missing(i) && !missing(j) ){
-		i = 1:length(x)
-	}
-	
-	if( !inherits( value , "textProperties" ) ){
-		stop("value is not a textProperties object")
-	}
-	
-	jtextProp = .jTextProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setTextProperties"
-			, .jarray( as.integer( i-1 ) )
-			, .jarray( as.integer( j-1 ) )
-			, jtextProp  )
-	
-	x
+	object
 }
 
 
-updateContent.FlexTable = function( x, i, j, value ){
-	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
-	
-	if( !missing(i) )
-		if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !missing(j) )
-		if( !is.numeric(j) ) stop("argument j must be an integer argument.")
-	
-	if( !missing(i) && missing(j) ){
-		j = 1:x$ncol
-	} else if( missing(i) && !missing(j) ){
-		i = 1:length(x)
-	}
-	
-	if( inherits(value, c( "pot") ) )
-		value = set_of_paragraphs(value)
-	
-	if( !inherits(value, c( "set_of_paragraphs", "pot") ) )
-		stop("argument value must be an object of class 'pot' or 'set_of_paragraphs'.")
-	
-	ps = ParagraphSection( value, x$par_format )
-	.jcall( x$jobj, "V", "setBodyText"
-			, as.integer( i-1 ), as.integer( j-1 ), ps$jobj  )
-	
-	x
-}
 
-#setInnerBorder = function( border.width = 1, border.style = "solid", border.color = "black"){
-#
-#	if( is.numeric( border.width ) ) {
-#		if( as.integer( border.width ) < 0 || !is.finite( as.integer( border.width ) ) ) stop("invalid border.width : ", border.width )
-#	} else {
-#		stop("border.width must be a integer value >= 0")
-#	}
-#	
-#	if( is.character( border.style ) ) {
-#		match.arg( border.style, choices = border.styles, several.ok = F )
-#	} else {
-#		stop("border.style must be a character value.")
-#	}
-#	
-#	if( !is.color( border.color ) )
-#		stop("border.color must be a valid color.")
-#	
-#	
-#}

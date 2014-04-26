@@ -17,7 +17,7 @@ add a footer row in a FlexTable
 data( data_ReporteRs )
 myFlexTable = FlexTable( data = data_ReporteRs
 		, header.columns=FALSE
-		, row.names=FALSE )
+		, add.rownames=FALSE )
 
 cp1 = cellProperties(background.color="#EBEBEB")
 

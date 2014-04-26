@@ -27,15 +27,15 @@ addFlexCellContent(object, i, j, value, textProperties, newpar = F,
   added by columns , otherwise content is added by rows.}
 }
 \description{
-add texts or paragraphs in cells contents of a FlexTable
-object
+add texts or new paragraphs in cells contents of a
+FlexTable object
 }
 \examples{
 data( data_ReporteRs )
 myFlexTable = FlexTable( data = data_ReporteRs
 	, span.columns = "col1"
 	, header.columns = TRUE
-	, row.names = FALSE )
+	, add.rownames = FALSE )
 myFlexTable = addFlexCellContent( myFlexTable
 	, i = 1:4, j = 1
 	, value = c("A", "B", "C", "D")

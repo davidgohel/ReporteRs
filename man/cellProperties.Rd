@@ -20,8 +20,7 @@ cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
   value - overwrite all border.*.style values}
 
   \item{border.style}{border style - a string value :
-  "single" or "none" or "hidden" or "double" or "dotted" or
-  "dashed" or "inset" or "outset" - overwrite all
+  "none" or "solid" or "dotted" or "dashed" - overwrite all
   border.*.style values}
 
   \item{border.color}{border color - a string value (e.g.
@@ -32,8 +31,7 @@ cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
   value (e.g. "#000000" or "black")}
 
   \item{border.bottom.style}{border bottom style - a string
-  value : "single" or "none" or "hidden" or "double" or
-  "dotted" or "dashed" or "inset" or "outset"}
+  value : "none" or "solid" or "dotted" or "dashed"}
 
   \item{border.bottom.width}{border bottom width - an
   integer value : 0>= value}
@@ -42,8 +40,7 @@ cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
   value (e.g. "#000000" or "black")}
 
   \item{border.left.style}{border left style - a string
-  value : "single" or "none" or "hidden" or "double" or
-  "dotted" or "dashed" or "inset" or "outset"}
+  value : "none" or "solid" or "dotted" or "dashed"}
 
   \item{border.left.width}{border left width - an integer
   value : 0>= value}
@@ -52,8 +49,7 @@ cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
   (e.g. "#000000" or "black")}
 
   \item{border.top.style}{border top style - a string value
-  : "single" or "none" or "hidden" or "double" or "dotted"
-  or "dashed" or "inset" or "outset"}
+  : "none" or "solid" or "dotted" or "dashed"}
 
   \item{border.top.width}{border top width - an integer
   value : 0>= value}
@@ -62,8 +58,7 @@ cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
   value (e.g. "#000000" or "black")}
 
   \item{border.right.style}{border right style - a string
-  value : "single" or "none" or "hidden" or "double" or
-  "dotted" or "dashed" or "inset" or "outset"}
+  value : "none" or "solid" or "dotted" or "dashed"}
 
   \item{border.right.width}{border right width - integer
   value : 0>= value}
