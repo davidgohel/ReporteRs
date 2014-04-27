@@ -30,14 +30,14 @@ addFooterRow(x, value, colspan, text.properties, par.properties,
 add a footer row in a FlexTable
 }
 \examples{
-#
+#START_TAG_TEST
 #############################
 # simple example
 #############################
 
 data(pbc_summary)
 
-MyFTable = FlexTable( data = pbc_summary[,1:4], header.columns = T )
+MyFTable = FlexTable( data = pbc_summary[,1:4], header.columns = TRUE )
 
 # add a footer row with 1 cell that spans four columns
 MyFTable = addFooterRow( MyFTable
@@ -64,6 +64,7 @@ footerRow[1] = FlexCell( mytext, colspan = 4 )
 
 # add the FlexRow to the FlexTable
 MyFTable = addFooterRow( MyFTable, footerRow )
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{FlexRow}},

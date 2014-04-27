@@ -34,7 +34,7 @@ add text into a FlexTable object or Format content of a
 FlexTable object
 }
 \examples{
-#
+#START_TAG_TEST
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
 # specify cell formating properties for header columns row
@@ -52,6 +52,7 @@ MyFTable[ c(3,6:9), c( "mpg", "disp"
 # add text to elements of the column cyl
 MyFTable[, "cyl", text.properties = textProperties( 
   vertical.align="superscript", font.size = 9) ] = " miles/gallon"
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFlexTable}} ,

@@ -24,7 +24,7 @@ set of 4 different borders: inner vectical and horizontal ,
 outer vectical and horizontal.
 }
 \examples{
-#
+#START_TAG_TEST
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
 # specify cell formating properties for header columns row
@@ -37,6 +37,7 @@ MyFTable = setFlexTableBorders( MyFTable
   , outer.vertical = borderProperties( width = 2 )
   , outer.horizontal = borderProperties( width = 2 )
 )
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFlexTable}} ,

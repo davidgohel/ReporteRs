@@ -23,7 +23,7 @@ spanFlexTableRows(object, j, from, to, runs)
 Span rows within columns.
 }
 \examples{
-#
+#START_TAG_TEST
 data(pbc_summary)
 
 MyFTable = FlexTable( data = pbc_summary[, 1:4] )
@@ -33,6 +33,7 @@ MyFTable = spanFlexTableRows( MyFTable, j = 3, from = 5, to = 7 )
 MyFTable = spanFlexTableRows( MyFTable, j=1, runs = as.character( pbc_summary$trt ) )
 # merge cells in column 2 (sex) when successive values of sex are identical
 MyFTable = spanFlexTableRows( MyFTable, j=2, runs = as.character( pbc_summary$sex ) )
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}},

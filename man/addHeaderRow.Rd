@@ -39,7 +39,7 @@ addHeaderRow(x, value, colspan, text.properties, par.properties,
 add a header row in a FlexTable
 }
 \examples{
-#
+#START_TAG_TEST
 #############################
 # simple example
 #############################
@@ -131,6 +131,7 @@ MyFTable = setFlexTableBorders( MyFTable
   , outer.vertical = borderProperties( width = 2 )
   , outer.horizontal = borderProperties( width = 2 )
 )
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{FlexRow}},

@@ -4,7 +4,7 @@
 
 data(pbc_summary)
 
-MyFTable = FlexTable( data = pbc_summary[,1:4], header.columns = T )
+MyFTable = FlexTable( data = pbc_summary[,1:4], header.columns = TRUE )
 
 # add a footer row with 1 cell that spans four columns
 MyFTable = addFooterRow( MyFTable

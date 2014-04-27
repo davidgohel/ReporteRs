@@ -78,27 +78,24 @@ Merging cells can be done with functions
 }
 \examples{
 #START_TAG_TEST
-data( data_ReporteRs )
-
-myFlexTable = FlexTable( data = data_ReporteRs
-	, header.columns = TRUE
- , add.rownames = FALSE )
-
-myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
-myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
-myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
-
-myFlexTable2 = FlexTable( data=mtcars, header.columns=TRUE, add.rownames=TRUE
-  , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
+MyFTable = FlexTable( data = mtcars, add.rownames = TRUE
+  , cell_format = cellProperties( border.color="#EDBD3E")
+  , header_cell_format = cellProperties( background.color="#5B7778"
+    , border.color="#EDBD3E")
 )
 
-myFlexTable2 = setZebraStyle( myFlexTable2, "#D1E6E7", "#93A8A9" )
-myFlexTable2 = setFlexTableBorders(myFlexTable2, inner.vertical=borderProperties(color="#EDBD3E", style="dotted", width=1)
-  , inner.horizontal=borderProperties(color="#EDBD3E", style="none", width=0)
-  , outer.vertical=borderProperties(color="#EDBD3E", style="solid", width=1)
-  , outer.horizontal=borderProperties(color="#EDBD3E", style="solid", width=1) )
+MyFTable = setZebraStyle( MyFTable, odd = "#D1E6E7", even = "#93A8A9" )
 
-#STOP_TAG_TEST
+MyFTable = setFlexTableBorders(MyFTable
+  , inner.vertical = borderProperties( color="#EDBD3E", style="dotted" )
+  , inner.horizontal = borderProperties( color = "#EDBD3E", style = "none" )
+  , outer.vertical = borderProperties( color = "#EDBD3E", style = "solid" )
+  , outer.horizontal = borderProperties( color = "#EDBD3E", style = "solid" )
+)
+doc = docx( title = "title" )
+doc = addFlexTable( doc, MyFTable )
+writeDoc( doc, "addFlexTable.docx")
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addFlexTable}}, \code{\link{addHeaderRow}} and

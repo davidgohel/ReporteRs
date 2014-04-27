@@ -19,7 +19,7 @@ striping). Set a color if row index is odd and another if
 row index is even.
 }
 \examples{
-#
+#START_TAG_TEST
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
 # specify cell formating properties for header columns row
@@ -28,6 +28,7 @@ MyFTable = FlexTable( data = mtcars[1:10, ]
 )
 # Zebra striped table
 MyFTable = setZebraStyle( MyFTable, odd = "#8A949B", even = "#FAFAFA" )
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{setRowsColors}},

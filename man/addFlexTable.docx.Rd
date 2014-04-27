@@ -30,23 +30,24 @@ Insert a FlexTable into a docx object
 }
 \examples{
 #START_TAG_TEST
-data( data_ReporteRs )
+MyFTable = FlexTable( data = mtcars, add.rownames = TRUE
+  , cell_format = cellProperties( border.color="#EDBD3E")
+  , header_cell_format = cellProperties( background.color="#5B7778"
+    , border.color="#EDBD3E")
+)
 
-myFlexTable = FlexTable( data = data_ReporteRs, span.columns = "col1"
-	, header.columns = TRUE, row.names=FALSE )
+MyFTable = setZebraStyle( MyFTable, odd = "#D1E6E7", even = "#93A8A9" )
 
-myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
-myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
-myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
-
-myFlexTable = setFlexCellContent( myFlexTable, 3, 6, pot("Hello"
-	, format=textProperties(font.weight="bold") ) + pot("World"
-	, format=textProperties(font.weight="bold", vertical.align="superscript") ) )
-
+MyFTable = setFlexTableBorders(MyFTable
+  , inner.vertical = borderProperties( color="#EDBD3E", style="dotted" )
+  , inner.horizontal = borderProperties( color = "#EDBD3E", style = "none" )
+  , outer.vertical = borderProperties( color = "#EDBD3E", style = "solid" )
+  , outer.horizontal = borderProperties( color = "#EDBD3E", style = "solid" )
+)
 doc = docx( title = "title" )
-doc = addFlexTable( doc, myFlexTable )
-writeDoc( doc, "addFlexTable_example.docx")
-#STOP_TAG_TEST
+doc = addFlexTable( doc, MyFTable )
+writeDoc( doc, "addFlexTable.docx")
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}
