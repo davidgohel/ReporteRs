@@ -19,25 +19,20 @@ addDate = function(doc, ...){
 #'
 #' @description Insert a FlexTable into a document object
 #' 
+#' FlexTable can be manipulated so that almost any formating can be specified. See
+#' \code{\link{FlexTable}} for more details.
 #' @param doc document object
 #' @param flextable the \code{FlexTable} object
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{FlexTable}}
+#' @seealso \code{\link{FlexTable}}, \code{\link{addFlexTable.docx}}
+#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
+#' , \code{\link{addTable}}
 #' @examples
-#' \dontrun{
-#' data( data_ReporteRs )
-#' myFlexTable = FlexTable( data = data_ReporteRs, span.columns="col1"
-#' 	, header.columns=TRUE, row.names=FALSE )
-#' myFlexTable[ 1:2, 2:3] = textProperties( color="red" )
-#' myFlexTable[ 3:4, 4:5] = parProperties( text.align="right" )
-#' myFlexTable[ 1:2, 5:6] = cellProperties( background.color="#F2969F")
-#' myFlexTable = setFlexCellContent( myFlexTable, 3, 6, pot("Hello"
-#' 	, format=textProperties(font.weight="bold") ) + pot("World"
-#' 	, format=textProperties(font.weight="bold", vertical.align="superscript") ) )
-#' doc = addFlexTable( doc, myFlexTable )
-#' }
+#' #START_TAG_TEST
+#' @example examples/FlexTableExample.R
+#' @example examples/STOP_TAG_TEST.R
 addFlexTable = function(doc, flextable, ...){
 	
 	checkHasSlide(doc)
@@ -104,7 +99,7 @@ addImage = function(doc, filename, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{html}}
+#' @seealso \code{\link{html}}, \code{\link{addPage.html}}
 addPage = function(doc, ...){
 	UseMethod("addPage")
 }
@@ -118,7 +113,7 @@ addPage = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{docx}}
+#' @seealso \code{\link{docx}}, \code{\link{addPageBreak.docx}}
 addPageBreak = function(doc, ...){
 	checkHasSlide(doc)
 	UseMethod("addPageBreak")
@@ -136,7 +131,7 @@ addPageBreak = function(doc, ...){
 #' addPageNumber only works for pptx slides. See \code{\link{addPageNumber.pptx}}. 
 #' \code{docx} and \code{html} object have no method \code{addPageNumber} implemented.  
 #' @export
-#' @seealso \code{\link{pptx}}
+#' @seealso \code{\link{pptx}}, \code{\link{addPageNumber.pptx}}
 addPageNumber = function(doc, ...){
 	checkHasSlide(doc)
 	UseMethod("addPageNumber")
@@ -176,7 +171,6 @@ addPageNumber = function(doc, ...){
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{pptx}}, \code{\link{addParagraph.pptx}}
 #' , \code{\link{html}}, \code{\link{addParagraph.html}}
-
 addParagraph = function(doc, value, ...){
 	checkHasSlide(doc)
 	if( !inherits( value, c("set_of_paragraphs", "character") ) )
@@ -280,7 +274,7 @@ addSlide = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{pptx}}
+#' @seealso \code{\link{pptx}}, \code{\link{addSubtitle.pptx}}
 addSubtitle = function(doc, ...){
 	checkHasSlide(doc)
 	UseMethod("addSubtitle")
@@ -298,7 +292,7 @@ addSubtitle = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{html}}
+#' @seealso \code{\link{html}}, \code{\link{addRScript.html}}
 addRScript = function(doc, file, text, ...){
 	if( missing( file ) && missing( text ) )
 		stop("file OR text must be provided as argument.")
@@ -351,8 +345,7 @@ addRScript = function(doc, file, text, ...){
 #' @param ... further arguments passed to or from other methods.. 
 #' @details
 #' The table below shows the display model used to format tables:\cr
-#' \preformatted{+--------------+---------------+}
-#' \preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
+#' \preformatted{+--------------+---------------+\nGROUPEDHEADER_1|GROUPEDHEADER_2|}
 #' \preformatted{+------+-------+-------+-------+}
 #' \preformatted{HEADER1|HEADER2|HEADER3|HEADER4|}
 #' \preformatted{+------+-------+-------+-------+}
@@ -372,7 +365,7 @@ addRScript = function(doc, file, text, ...){
 #' doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 #' 
 #' data( data_ReporteRs )
-#' # add iris and customise some options
+#' # add data_ReporteRs and customise some options
 #' doc = addTable( doc
 #'		, data = data_ReporteRs
 #'		, header.labels = c( "Header 1", "Header 2", "Header 3"
@@ -522,7 +515,7 @@ addTable = function(doc, data, layout.properties
 #' @return a document object
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}, \code{\link{pptx}}
-#' , \code{\link{addTitle.pptx}}
+#' , \code{\link{addTitle.pptx}}, \code{\link{html}}, \code{\link{addTitle.html}}
 addTitle = function(doc, value, ...){
 	checkHasSlide(doc)
 	UseMethod("addTitle")
@@ -549,7 +542,8 @@ addTOC = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{styles.docx}}, \code{\link{declareTitlesStyles.docx}}
+#' @seealso \code{\link{docx}}, \code{\link{styles.docx}}
+#' , \code{\link{declareTitlesStyles.docx}}, \code{\link{addTOC.docx}}
 declareTitlesStyles = function(doc, ...){
 	UseMethod("declareTitlesStyles")
 }
@@ -561,7 +555,7 @@ declareTitlesStyles = function(doc, ...){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @export
-#' @seealso \code{\link{pptx}}, \code{\link{slide.layouts.pptx}}
+#' @seealso \code{\link{pptx}}, \code{\link{slide.layouts.pptx}}, \code{\link{addSlide.pptx}}
 slide.layouts = function(doc, ...){
 	UseMethod("slide.layouts")
 }
@@ -573,7 +567,7 @@ slide.layouts = function(doc, ...){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{styles.docx}}
+#' @seealso \code{\link{docx}}, \code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
 styles = function(doc, ...){
 	UseMethod("styles")
 }
@@ -587,7 +581,9 @@ styles = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{writeDoc.pptx}}
+#' @seealso \code{\link{docx}}, \code{\link{writeDoc.docx}}
+#' , \code{\link{pptx}}, \code{\link{writeDoc.pptx}}
+#' , \code{\link{html}}, \code{\link{writeDoc.html}}
 writeDoc = function(doc, ...){
 	UseMethod("writeDoc")
 }

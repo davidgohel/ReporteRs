@@ -1,6 +1,6 @@
 \name{addFlexTable.pptx}
 \alias{addFlexTable.pptx}
-\title{Insert a FlexTable into a docx object}
+\title{Insert a FlexTable into a pptx object}
 \usage{
 \method{addFlexTable}{pptx}(doc, flextable, ...)
 }
@@ -12,10 +12,10 @@
   \item{...}{further arguments - not used}
 }
 \value{
-a docx object
+a pptx object
 }
 \description{
-Insert a FlexTable into a docx object
+Insert a FlexTable into a pptx object
 }
 \examples{
 #START_TAG_TEST
@@ -40,6 +40,9 @@ writeDoc( doc, "addFlexTable_example.pptx")
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}
+\code{\link{FlexTable}}, \code{\link{pptx}} ,
+\code{\link{addFlexTable.html}},
+\code{\link{addFlexTable.docx}} ,
+\code{\link{addTable.pptx}}
 }
 

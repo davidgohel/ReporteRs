@@ -28,9 +28,15 @@ MyFTable = setRowsColors( MyFTable, i=1:4, colors = "red" )
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{spanFlexTableRows}},
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{alterFlexTable}},
+\code{\link{setFlexTableBorders}} ,
+\code{\link{spanFlexTableRows}},
 \code{\link{spanFlexTableColumns}} ,
-\code{\link{setColumnsColors}},
-\code{\link{setZebraStyle}}, \code{\link{alterFlexTable}}
+\code{\link{FlexTable}}, \code{\link{setColumnsColors}},
+\code{\link{setZebraStyle}} , \code{\link{addFlexTable}},
+\code{\link{addFlexTable.docx}} ,
+\code{\link{addFlexTable.pptx}},
+\code{\link{addFlexTable.html}}
 }
 

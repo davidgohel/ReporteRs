@@ -8,7 +8,7 @@
 #' @param height images height in inches (default value is 6).
 #' @param bookmark a character value ; id of the Word bookmark to replace by the image. 
 #' optional. if missing, image is added at the end of the document.
-#' @param parStyle paragraph formatting properties of the paragraph that contains images. 
+#' @param par.properties paragraph formatting properties of the paragraph that contains images. 
 #' An object of class \code{\link{parProperties}}
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"docx"}.
@@ -31,7 +31,7 @@
 
 addImage.docx = function(doc, filename, width = 6, height = 6
 	, bookmark
-	, parStyle = parProperties(text.align = "center", padding = 5 )
+	, par.properties = parProperties(text.align = "center", padding = 5 )
 	, ... ) {
 
 	dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
@@ -39,18 +39,18 @@ addImage.docx = function(doc, filename, width = 6, height = 6
 	# Send the graph to java that will 'encode64ize' and place it in a docx4J object
 	if( missing( bookmark ) )
 		.jcall( doc$obj, "V", "addImage", .jarray( filename ), .jarray(dims)
-				, parStyle$text.align
-				, parStyle$padding.bottom
-				, parStyle$padding.top
-				, parStyle$padding.left
-				, parStyle$padding.right
+				, par.properties$text.align
+				, par.properties$padding.bottom
+				, par.properties$padding.top
+				, par.properties$padding.left
+				, par.properties$padding.right
 		)
 	else .jcall( doc$obj, "V", "insertImage", bookmark, .jarray( filename ), .jarray(dims)
-				, parStyle$text.align
-				, parStyle$padding.bottom
-				, parStyle$padding.top
-				, parStyle$padding.left
-				, parStyle$padding.right
+				, par.properties$text.align
+				, par.properties$padding.bottom
+				, par.properties$padding.top
+				, par.properties$padding.left
+				, par.properties$padding.right
 		)
 	
 	doc

@@ -16,7 +16,8 @@ a document object
 Set manually titles'styles of a document object
 }
 \seealso{
-\code{\link{docx}}, \code{\link{styles.docx}},
-\code{\link{declareTitlesStyles.docx}}
+\code{\link{docx}}, \code{\link{styles.docx}} ,
+\code{\link{declareTitlesStyles.docx}},
+\code{\link{addTOC.docx}}
 }
 

@@ -31,8 +31,15 @@ MyFTable = setZebraStyle( MyFTable, odd = "#8A949B", even = "#FAFAFA" )
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{setRowsColors}},
-\code{\link{setColumnsColors}} ,
-\code{\link{alterFlexTable}}
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{alterFlexTable}},
+\code{\link{setFlexTableBorders}} ,
+\code{\link{spanFlexTableRows}},
+\code{\link{spanFlexTableColumns}} ,
+\code{\link{setRowsColors}},
+\code{\link{setColumnsColors}}, \code{\link{FlexTable}} ,
+\code{\link{addFlexTable}}, \code{\link{addFlexTable.docx}}
+, \code{\link{addFlexTable.pptx}},
+\code{\link{addFlexTable.html}}
 }
 

@@ -70,14 +70,14 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 	if( !inherits(textProperties, "textProperties") )
 		stop("argument textProperties must be a textProperties object.")
 	
-	textProp = .jTextProperties( textProperties )
+	jtext.properties = .jTextProperties( textProperties )
 	
 	if( byrow ){
 		.jcall( object$jobj, "V", "addBodyText"
 				, .jarray( as.integer( i - 1 ) )
 				, .jarray( as.integer( j - 1 ) )
 				, .jarray( get.formatted.dataset( value ) )
-				, textProp
+				, jtext.properties
 				, as.logical(newpar)
 		)
 	} else {
@@ -85,7 +85,7 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 				, .jarray( as.integer( i - 1 ) )
 				, .jarray( as.integer( j - 1 ) )
 				, .jarray( t( get.formatted.dataset( value ) ) )
-				, textProp
+				, jtext.properties
 				, as.logical(newpar) 
 		)
 	}

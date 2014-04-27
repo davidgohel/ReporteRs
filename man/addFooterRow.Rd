@@ -67,7 +67,16 @@ MyFTable = addFooterRow( MyFTable, footerRow )
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{FlexRow}},
-\code{\link{FlexCell}} , \code{\link{addHeaderRow}}
+\code{\link{addHeaderRow}}, \code{\link{FlexTable}} ,
+\code{\link{alterFlexTable}},
+\code{\link{setFlexTableBorders}} ,
+\code{\link{spanFlexTableRows}},
+\code{\link{spanFlexTableColumns}} ,
+\code{\link{setRowsColors}},
+\code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
+, \code{\link{addFlexTable}},
+\code{\link{addFlexTable.docx}} ,
+\code{\link{addFlexTable.pptx}},
+\code{\link{addFlexTable.html}}
 }
 

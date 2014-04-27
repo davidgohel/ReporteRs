@@ -14,8 +14,8 @@ Paragraph = function(value) {
 		if( is.null( current_value$format ) ) 
 			.jcall( paragrah, "V", "addText", current_value$value )
 		else {
-			textProp = .jTextProperties( current_value$format )
-			.jcall( paragrah, "V", "addText", current_value$value, textProp )
+			jtext.properties = .jTextProperties( current_value$format )
+			.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
 		}
 	}
 	out = list()

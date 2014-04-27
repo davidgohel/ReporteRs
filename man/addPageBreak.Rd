@@ -16,6 +16,6 @@ a document object
 Add a page break into a document object
 }
 \seealso{
-\code{\link{docx}}
+\code{\link{docx}}, \code{\link{addPageBreak.docx}}
 }
 

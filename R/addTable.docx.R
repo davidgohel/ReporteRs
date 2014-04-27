@@ -26,7 +26,7 @@
 #'		A name list, names are \code{data} column names and values 
 #' 			are character vectors specifying cells font colors.
 #'		Each element of the list is a vector of length \code{nrow(data)}.
-#' @param parStyle paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
+#' @param par.properties paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
 #' @param bookmark a character vector specifying bookmark id (where to put the table). 
 #'   	If provided, table will be add after paragraph that contains the bookmark.
 #'   	If not provided, table will be added at the end of the document.
@@ -76,7 +76,7 @@ addTable.docx = function(doc, data, layout.properties
 	, span.columns = character(0), col.types
 	, columns.bg.colors = list(), columns.font.colors = list()
 	, row.names = FALSE
-	, parStyle = parProperties(text.align = "left", padding = 0 )
+	, par.properties = parProperties(text.align = "left", padding = 0 )
 	, bookmark
 	, ...) {
 	
@@ -117,8 +117,8 @@ addTable.docx = function(doc, data, layout.properties
 		.jcall( obj , "V", "setMergeInstructions", j, .jarray( as.integer( unlist(instructions) ) ) )
 	}
 	if( missing( bookmark ) )
-		.jcall( doc$obj, "V", "add", obj, .jParProperties(parStyle) )
-	else .jcall( doc$obj, "V", "insert", bookmark, obj, .jParProperties(parStyle) )
+		.jcall( doc$obj, "V", "add", obj, .jParProperties(par.properties) )
+	else .jcall( doc$obj, "V", "insert", bookmark, obj, .jParProperties(par.properties) )
 	doc
 }
 

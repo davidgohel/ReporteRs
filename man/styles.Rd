@@ -13,6 +13,7 @@ styles(doc, ...)
 Get styles names that exist into a document
 }
 \seealso{
-\code{\link{docx}}, \code{\link{styles.docx}}
+\code{\link{docx}}, \code{\link{styles.docx}},
+\code{\link{addParagraph.docx}}
 }
 

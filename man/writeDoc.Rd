@@ -16,7 +16,8 @@ a document object
 Write a document object into a file
 }
 \seealso{
-\code{\link{docx}}, \code{\link{pptx}},
-\code{\link{writeDoc.pptx}}
+\code{\link{docx}}, \code{\link{writeDoc.docx}} ,
+\code{\link{pptx}}, \code{\link{writeDoc.pptx}} ,
+\code{\link{html}}, \code{\link{writeDoc.html}}
 }
 

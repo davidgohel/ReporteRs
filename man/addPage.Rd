@@ -16,6 +16,6 @@ a document object
 Add a page into a document object
 }
 \seealso{
-\code{\link{html}}
+\code{\link{html}}, \code{\link{addPage.html}}
 }
 

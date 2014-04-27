@@ -21,6 +21,7 @@ Add a title into a document object
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addTitle.docx}},
-\code{\link{pptx}} , \code{\link{addTitle.pptx}}
+\code{\link{pptx}} , \code{\link{addTitle.pptx}},
+\code{\link{html}}, \code{\link{addTitle.html}}
 }
 

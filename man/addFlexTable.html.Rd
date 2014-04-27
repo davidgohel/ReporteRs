@@ -40,6 +40,9 @@ writeDoc( doc, "addFlexTable_example")
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}
+\code{\link{FlexTable}}, \code{\link{html}} ,
+\code{\link{addFlexTable.pptx}},
+\code{\link{addFlexTable.docx}} ,
+\code{\link{addTable.html}}
 }
 

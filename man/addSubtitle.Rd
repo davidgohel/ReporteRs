@@ -16,6 +16,6 @@ a document object
 Add a subtitle shape into a document object
 }
 \seealso{
-\code{\link{pptx}}
+\code{\link{pptx}}, \code{\link{addSubtitle.pptx}}
 }
 

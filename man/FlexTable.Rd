@@ -94,15 +94,18 @@ MyFTable = setFlexTableBorders(MyFTable
 )
 doc = docx( title = "title" )
 doc = addFlexTable( doc, MyFTable )
-writeDoc( doc, "addFlexTable.docx")
+writeDoc( doc, "addFlexTable_example.docx")
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addFlexTable}}, \code{\link{addHeaderRow}} and
-\code{\link{addFooterRow}} , \code{\link{alterFlexTable}},
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{alterFlexTable}},
+\code{\link{setFlexTableBorders}} ,
 \code{\link{spanFlexTableRows}},
-\code{\link{spanFlexTableColumns}} , \code{\link{pot}},
-\code{\link{set_of_paragraphs}},
+\code{\link{spanFlexTableColumns}} ,
+\code{\link{setRowsColors}},
+\code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
+, \code{\link{addFlexTable}},
 \code{\link{addFlexTable.docx}} ,
 \code{\link{addFlexTable.pptx}},
 \code{\link{addFlexTable.html}}

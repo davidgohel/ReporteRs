@@ -3,15 +3,15 @@
 \title{Insert a FlexTable into a docx object}
 \usage{
 \method{addFlexTable}{docx}(doc, flextable,
-  parStyle = parProperties(text.align = "left"), bookmark, ...)
+  par.properties = parProperties(text.align = "left"), bookmark, ...)
 }
 \arguments{
   \item{doc}{docx object}
 
   \item{flextable}{the \code{FlexTable} object}
 
-  \item{parStyle}{paragraph formatting properties of the
-  paragraph that contains the table. An object of class
+  \item{par.properties}{paragraph formatting properties of
+  the paragraph that contains the table. An object of class
   \code{\link{parProperties}}}
 
   \item{bookmark}{a character vector specifying bookmark id
@@ -46,10 +46,13 @@ MyFTable = setFlexTableBorders(MyFTable
 )
 doc = docx( title = "title" )
 doc = addFlexTable( doc, MyFTable )
-writeDoc( doc, "addFlexTable.docx")
+writeDoc( doc, "addFlexTable_example.docx")
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}
+\code{\link{FlexTable}}, \code{\link{docx}} ,
+\code{\link{addFlexTable.pptx}},
+\code{\link{addFlexTable.html}} ,
+\code{\link{addTable.docx}}
 }
 

@@ -7,7 +7,9 @@
 #' @param ... further arguments - not used
 #' @return a docx object
 #' @export
-#' @seealso \code{\link{FlexTable}}
+#' @seealso \code{\link{FlexTable}}, \code{\link{html}}
+#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.docx}}
+#' , \code{\link{addTable.html}}
 #' @examples
 #' #START_TAG_TEST
 #' @example examples/FlexTableExample.R

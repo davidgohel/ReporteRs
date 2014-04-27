@@ -13,6 +13,7 @@ slide.layouts(doc, ...)
 Get layout names that exist into a document
 }
 \seealso{
-\code{\link{pptx}}, \code{\link{slide.layouts.pptx}}
+\code{\link{pptx}}, \code{\link{slide.layouts.pptx}},
+\code{\link{addSlide.pptx}}
 }
 

@@ -22,6 +22,6 @@ addPageNumber only works for pptx slides. See
 implemented.
 }
 \seealso{
-\code{\link{pptx}}
+\code{\link{pptx}}, \code{\link{addPageNumber.pptx}}
 }
 

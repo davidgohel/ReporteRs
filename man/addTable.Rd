@@ -70,8 +70,8 @@ Add a table into a document object
 }
 \details{
 The table below shows the display model used to format
-tables:\cr \preformatted{+--------------+---------------+}
-\preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
+tables:\cr
+\preformatted{+--------------+---------------+\nGROUPEDHEADER_1|GROUPEDHEADER_2|}
 \preformatted{+------+-------+-------+-------+}
 \preformatted{HEADER1|HEADER2|HEADER3|HEADER4|}
 \preformatted{+------+-------+-------+-------+}
@@ -91,7 +91,7 @@ doc = addTable( doc, head( iris, n = 5 ) )
 doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 
 data( data_ReporteRs )
-# add iris and customise some options
+# add data_ReporteRs and customise some options
 doc = addTable( doc
 		, data = data_ReporteRs
 		, header.labels = c( "Header 1", "Header 2", "Header 3"

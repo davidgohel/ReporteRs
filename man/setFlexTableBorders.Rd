@@ -40,10 +40,15 @@ MyFTable = setFlexTableBorders( MyFTable
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{addFlexTable}} ,
-\code{\link{addHeaderRow}} and \code{\link{addFooterRow}} ,
-\code{\link{alterFlexTable}},
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{alterFlexTable}}, \code{\link{FlexTable}} ,
 \code{\link{spanFlexTableRows}},
-\code{\link{spanFlexTableColumns}}
+\code{\link{spanFlexTableColumns}} ,
+\code{\link{setRowsColors}},
+\code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
+, \code{\link{addFlexTable}},
+\code{\link{addFlexTable.docx}} ,
+\code{\link{addFlexTable.pptx}},
+\code{\link{addFlexTable.html}}
 }
 

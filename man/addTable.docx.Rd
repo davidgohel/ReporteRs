@@ -5,8 +5,8 @@
 \method{addTable}{docx}(doc, data, layout.properties, header.labels,
   groupedheader.row = list(), span.columns = character(0), col.types,
   columns.bg.colors = list(), columns.font.colors = list(),
-  row.names = FALSE, parStyle = parProperties(text.align = "left", padding =
-  0), bookmark, ...)
+  row.names = FALSE, par.properties = parProperties(text.align = "left",
+  padding = 0), bookmark, ...)
 }
 \arguments{
   \item{doc}{the \code{docx} to use}
@@ -58,8 +58,8 @@
   font colors.  Each element of the list is a vector of
   length \code{nrow(data)}.}
 
-  \item{parStyle}{paragraph formatting properties of the
-  paragraph that contains the table. An object of class
+  \item{par.properties}{paragraph formatting properties of
+  the paragraph that contains the table. An object of class
   \code{\link{parProperties}}}
 
   \item{bookmark}{a character vector specifying bookmark id

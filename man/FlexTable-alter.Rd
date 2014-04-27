@@ -3,8 +3,7 @@
 \alias{alterFlexTable}
 \title{modify FlexTable content}
 \usage{
-\method{[}{FlexTable}(x, i, j, text.properties, newpar = F, byrow = FALSE)
-  <- value
+\method{[}{FlexTable} (x, i, j, text.properties, newpar = F, byrow = FALSE) <- value
 }
 \arguments{
   \item{x}{the \code{FlexTable} object}
@@ -55,11 +54,15 @@ MyFTable[, "cyl", text.properties = textProperties(
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{addFlexTable}} ,
-\code{\link{addHeaderRow}},
-\code{\link{spanFlexTableRows}},
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{FlexTable}}, \code{\link{setFlexTableBorders}}
+, \code{\link{spanFlexTableRows}},
 \code{\link{spanFlexTableColumns}} ,
 \code{\link{setRowsColors}},
 \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
+, \code{\link{addFlexTable}},
+\code{\link{addFlexTable.docx}} ,
+\code{\link{addFlexTable.pptx}},
+\code{\link{addFlexTable.html}}
 }
 
