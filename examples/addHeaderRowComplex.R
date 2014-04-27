@@ -16,7 +16,7 @@ cellProperties2 = cellProperties( border.top.width = 2
 
 # create a FlexTable
 MyFTable = FlexTable( data = pbc_summary[,1:4]
-  , header.columns = FALSE, text_format=textProperties() )
+  , header.columns = FALSE, body.text.props=textProperties() )
 
 # create a FlexRow - container for 2 cells
 headerRow = FlexRow()

@@ -31,8 +31,8 @@ Insert a FlexTable into a docx object
 \examples{
 #START_TAG_TEST
 MyFTable = FlexTable( data = mtcars, add.rownames = TRUE
-  , cell_format = cellProperties( border.color="#EDBD3E")
-  , header_cell_format = cellProperties( background.color="#5B7778"
+  , body.cell.props = cellProperties( border.color="#EDBD3E")
+  , header.cell.props = cellProperties( background.color="#5B7778"
     , border.color="#EDBD3E")
 )
 

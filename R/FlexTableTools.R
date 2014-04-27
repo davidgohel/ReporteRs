@@ -193,7 +193,7 @@ addContent.FlexTable = function( x, i, j, value ){
 	if( !inherits(value, c( "set_of_paragraphs", "pot") ) )
 		stop("argument value must be an object of class 'pot' or 'set_of_paragraphs'.")
 	
-	ps = ParagraphSection( value, x$par_format )
+	ps = ParagraphSection( value, x$body.par.props )
 	.jcall( x$jobj, "V", "setBodyText"
 			, as.integer( i-1 ), as.integer( j-1 ), ps$jobj  )
 	

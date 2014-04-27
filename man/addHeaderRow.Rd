@@ -19,21 +19,20 @@ addHeaderRow(x, value, colspan, text.properties, par.properties,
 
   \item{text.properties}{Optional. textProperties to apply
   to each cell. Used only if values are not missing.
-  Default is the value of argument
-  \code{header_text_format} provided to funtion
-  \code{FlexTable} when object has been created}
-
-  \item{par.properties}{Optional. parProperties to apply to
-  each cell. Used only if values are not missing. Default
-  is the value of argument \code{header_par_format}
+  Default is the value of argument \code{header.text.props}
   provided to funtion \code{FlexTable} when object has been
   created}
 
+  \item{par.properties}{Optional. parProperties to apply to
+  each cell. Used only if values are not missing. Default
+  is the value of argument \code{header.par.props} provided
+  to funtion \code{FlexTable} when object has been created}
+
   \item{cell.properties}{Optional. cellProperties to apply
   to each cell. Used only if values are not missing.
-  Default is the value of argument
-  \code{header_cell_format} provided to funtion
-  \code{FlexTable} when object has been created}
+  Default is the value of argument \code{header.cell.props}
+  provided to funtion \code{FlexTable} when object has been
+  created}
 }
 \description{
 add a header row in a FlexTable
@@ -68,7 +67,7 @@ MyFTable = addHeaderRow( MyFTable
 data(pbc_summary)
 
 MyFTable = FlexTable( data = pbc_summary[,1:4], header.columns = FALSE
-  , cell_format = cellProperties(border.color="#7895A2")
+  , body.cell.props = cellProperties(border.color="#7895A2")
 )
 # add an header row with table columns labels
 MyFTable = addHeaderRow( MyFTable
@@ -94,7 +93,7 @@ cellProperties2 = cellProperties( border.top.width = 2
 
 # create a FlexTable
 MyFTable = FlexTable( data = pbc_summary[,1:4]
-  , header.columns = FALSE, text_format=textProperties() )
+  , header.columns = FALSE, body.text.props=textProperties() )
 
 # create a FlexRow - container for 2 cells
 headerRow = FlexRow()

@@ -15,12 +15,12 @@
 #' as table headers. If FALSE, no headers will be printed unless you 
 #' use \code{\link{addHeaderRow}}. 
 #' @param add.rownames logical value - should the row.names be included in the table. 
-#' @param cell_format default cells formatting properties for any data
-#' @param par_format default paragraphs formatting properties for any data
-#' @param text_format default texts formatting properties for any data
-#' @param header_cell_format default cells formatting properties for header columns
-#' @param header_par_format default paragraphs formatting properties for header columns
-#' @param header_text_format default texts formatting properties for any header columns
+#' @param body.cell.props default cells formatting properties for table body
+#' @param body.par.props default paragraphs formatting properties for table body
+#' @param body.text.props default texts formatting properties for table body
+#' @param header.cell.props default cells formatting properties for table headers
+#' @param header.par.props default paragraphs formatting properties for table headers
+#' @param header.text.props default texts formatting properties for table headers
 #' @note The classical workflow would be to create a FlexTable, to add headers rows 
 #' (see \code{\link{addHeaderRow}}) and eventually footers 
 #' rows (see \code{\link{addFooterRow}}).
@@ -47,20 +47,20 @@
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 FlexTable = function(data, numrow, numcol
 	, header.columns = TRUE, add.rownames = FALSE
-	, cell_format = cellProperties()
-	, par_format = parProperties()
-	, text_format = textProperties()
-	, header_cell_format = cellProperties()
-	, header_par_format = parProperties()
-	, header_text_format = textProperties( font.weight= "bold" )
+	, body.cell.props = cellProperties()
+	, body.par.props = parProperties()
+	, body.text.props = textProperties()
+	, header.cell.props = cellProperties()
+	, header.par.props = parProperties()
+	, header.text.props = textProperties( font.weight= "bold" )
 ){
 	miss_data = missing( data )
-	if( !inherits(text_format, "textProperties") )
-		stop("argument text_format must be a textProperties object.")
-	if( !inherits(par_format, "parProperties") )
-		stop("argument text_format must be a textProperties object.")
-	if( !inherits(cell_format, "cellProperties") )
-		stop("argument cell_format must be a cellProperties object.")
+	if( !inherits(body.text.props, "textProperties") )
+		stop("argument body.text.props must be a textProperties object.")
+	if( !inherits(body.par.props, "parProperties") )
+		stop("argument body.text.props must be a textProperties object.")
+	if( !inherits(body.cell.props, "cellProperties") )
+		stop("argument body.cell.props must be a cellProperties object.")
 
 	if( miss_data && ( missing( numrow ) || missing( numcol ) ) ) {
 		stop("numrow and numcol must be defined if no data is provided.")
@@ -114,31 +114,31 @@ FlexTable = function(data, numrow, numcol
 		
 	jFlexTable = .jnew( class.FlexTable
 		, as.integer( out$numrow ), as.integer( out$numcol )
-		, .jTextProperties(text_format)
-		, .jParProperties(par_format)
-		, .jCellProperties(cell_format)
+		, .jTextProperties(body.text.props)
+		, .jParProperties(body.par.props)
+		, .jCellProperties(body.cell.props)
 		)
 
 	out$jobj = jFlexTable
 
-	out$cell_format = cell_format
-	out$par_format = par_format
-	out$text_format = text_format
-	out$header_cell_format = header_cell_format
-	out$header_par_format = header_par_format
-	out$header_text_format = header_text_format
+	out$body.cell.props = body.cell.props
+	out$body.par.props = body.par.props
+	out$body.text.props = body.text.props
+	out$header.cell.props = header.cell.props
+	out$header.par.props = header.par.props
+	out$header.text.props = header.text.props
 	
 	class( out ) = c("FlexTable", "FlexElement")
 
 	if( !miss_data && header.columns ){
-		headerRow = FlexRow(values = .colnames, text.properties = header_text_format, par.properties = header_par_format, cell.properties = header_cell_format )
+		headerRow = FlexRow(values = .colnames, text.properties = header.text.props, par.properties = header.par.props, cell.properties = header.cell.props )
 		out = addHeaderRow( out, headerRow )
 	}
 	
 	if( !miss_data ){
 		addFlexCellContent (out, seq_len(out$numrow), seq_len(out$numcol)
 				, value = data
-				, textProperties = text_format
+				, textProperties = body.text.props
 				, newpar = F
 				, byrow = FALSE 
 		)
@@ -159,15 +159,15 @@ FlexTable = function(data, numrow, numcol
 #' for each corresponding value (in \code{values}). 
 #' @param text.properties Optional. textProperties to apply to each cell. 
 #' Used only if values are not missing. Default is the value of argument 
-#' \code{header_text_format} provided to funtion \code{FlexTable} when object 
+#' \code{header.text.props} provided to funtion \code{FlexTable} when object 
 #' has been created
 #' @param par.properties Optional. parProperties to apply to each cell. 
 #' Used only if values are not missing. Default is the value of argument 
-#' \code{header_par_format} provided to funtion \code{FlexTable} when object 
+#' \code{header.par.props} provided to funtion \code{FlexTable} when object 
 #' has been created
 #' @param cell.properties Optional. cellProperties to apply to each cell. 
 #' Used only if values are not missing. Default is the value of argument 
-#' \code{header_cell_format} provided to funtion \code{FlexTable} when object 
+#' \code{header.cell.props} provided to funtion \code{FlexTable} when object 
 #' has been created
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFooterRow}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
@@ -192,11 +192,11 @@ addHeaderRow = function( x, value, colspan, text.properties, par.properties, cel
 		if( missing( colspan ) ) 
 			colspan = rep( 1, length( value ) )
 		if( missing( text.properties ) ) 
-			text.properties = x$header_text_format
+			text.properties = x$header.text.props
 		if( missing( par.properties ) ) 
-			par.properties = x$header_par_format
+			par.properties = x$header.par.props
 		if( missing( cell.properties ) ) 
-			cell.properties = x$header_cell_format
+			cell.properties = x$header.cell.props
 		
 		if( !inherits( text.properties , "textProperties" ) ){
 			stop("text.properties is not a textProperties object")
@@ -254,11 +254,11 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 		if( missing( colspan ) ) 
 			colspan = rep( 1, length( value ) )
 		if( missing( text.properties ) ) 
-			text.properties = x$header_text_format
+			text.properties = x$header.text.props
 		if( missing( par.properties ) ) 
-			par.properties = x$header_par_format
+			par.properties = x$header.par.props
 		if( missing( cell.properties ) ) 
-			cell.properties = x$header_cell_format
+			cell.properties = x$header.cell.props
 		
 		if( !inherits( text.properties , "textProperties" ) ){
 			stop("text.properties is not a textProperties object")
@@ -338,7 +338,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 			|| ( is.vector( value ) && length(i)*length(j) == length(value) )
 			){
 		if( missing(text.properties))
-			text.properties = x$text_format
+			text.properties = x$body.text.props
 		
 		x = addFlexCellContent (object = x, i = i, j = j
 				, value = value
@@ -346,7 +346,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 		
 	} else if( is.character( value ) && length( value ) == 1 ){
 		if( missing(text.properties))
-			text.properties = x$text_format
+			text.properties = x$body.text.props
 		
 		x = addFlexCellContent (object = x, i = i, j = j
 				, value = rep( value, length(i)*length(j) )

@@ -4,7 +4,7 @@
 data(pbc_summary)
 
 MyFTable = FlexTable( data = pbc_summary[,1:4], header.columns = FALSE
-  , cell_format = cellProperties(border.color="#7895A2")
+  , body.cell.props = cellProperties(border.color="#7895A2")
 )
 # add an header row with table columns labels
 MyFTable = addHeaderRow( MyFTable

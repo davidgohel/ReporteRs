@@ -3,10 +3,10 @@
 \title{FlexTable creation}
 \usage{
 FlexTable(data, numrow, numcol, header.columns = TRUE, add.rownames = FALSE,
-  cell_format = cellProperties(), par_format = parProperties(),
-  text_format = textProperties(), header_cell_format = cellProperties(),
-  header_par_format = parProperties(),
-  header_text_format = textProperties(font.weight = "bold"))
+  body.cell.props = cellProperties(), body.par.props = parProperties(),
+  body.text.props = textProperties(), header.cell.props = cellProperties(),
+  header.par.props = parProperties(),
+  header.text.props = textProperties(font.weight = "bold"))
 }
 \arguments{
   \item{data}{(a \code{data.frame} or \code{matrix} object)
@@ -26,23 +26,23 @@ FlexTable(data, numrow, numcol, header.columns = TRUE, add.rownames = FALSE,
   \item{add.rownames}{logical value - should the row.names
   be included in the table.}
 
-  \item{cell_format}{default cells formatting properties
-  for any data}
+  \item{body.cell.props}{default cells formatting
+  properties for table body}
 
-  \item{par_format}{default paragraphs formatting
-  properties for any data}
+  \item{body.par.props}{default paragraphs formatting
+  properties for table body}
 
-  \item{text_format}{default texts formatting properties
-  for any data}
+  \item{body.text.props}{default texts formatting
+  properties for table body}
 
-  \item{header_cell_format}{default cells formatting
-  properties for header columns}
+  \item{header.cell.props}{default cells formatting
+  properties for table headers}
 
-  \item{header_par_format}{default paragraphs formatting
-  properties for header columns}
+  \item{header.par.props}{default paragraphs formatting
+  properties for table headers}
 
-  \item{header_text_format}{default texts formatting
-  properties for any header columns}
+  \item{header.text.props}{default texts formatting
+  properties for table headers}
 }
 \description{
 Create an object of class \code{FlexTable}.
@@ -54,7 +54,7 @@ rows with eventually merged cells (see
 
 Formating can be done on cells, paragraphs and texts
 (borders, colors, fonts, etc.) , see
-\code{?alterFlexTable}.
+\code{\link{alterFlexTable}}.
 }
 \note{
 The classical workflow would be to create a FlexTable, to
@@ -79,8 +79,8 @@ Merging cells can be done with functions
 \examples{
 #START_TAG_TEST
 MyFTable = FlexTable( data = mtcars, add.rownames = TRUE
-  , cell_format = cellProperties( border.color="#EDBD3E")
-  , header_cell_format = cellProperties( background.color="#5B7778"
+  , body.cell.props = cellProperties( border.color="#EDBD3E")
+  , header.cell.props = cellProperties( background.color="#5B7778"
     , border.color="#EDBD3E")
 )
 
@@ -92,9 +92,6 @@ MyFTable = setFlexTableBorders(MyFTable
   , outer.vertical = borderProperties( color = "#EDBD3E", style = "solid" )
   , outer.horizontal = borderProperties( color = "#EDBD3E", style = "solid" )
 )
-doc = docx( title = "title" )
-doc = addFlexTable( doc, MyFTable )
-writeDoc( doc, "addFlexTable_example.docx")
 #' #STOP_TAG_TEST
 }
 \seealso{

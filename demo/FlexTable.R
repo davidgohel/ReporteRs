@@ -8,9 +8,9 @@ row.names( datamatrix ) = c("Gender", "Male", "Female", "Age"
 		, "Thickness", "Mean (SD)")
 
 myFlexTable = FlexTable( data = datamatrix, header.columns=FALSE, add.rownames=T
-		, cell_format = cellProperties(border.width=0, padding=0)
-		, par_format = parProperties(padding=0)
-		, text_format = textProperties()
+		, body.cell.props = cellProperties(border.width=0, padding=0)
+		, body.par.props = parProperties(padding=0)
+		, body.text.props = textProperties()
 )
 myFlexTable
 
