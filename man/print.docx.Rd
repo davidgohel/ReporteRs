@@ -15,7 +15,7 @@ print informations about an object of class \code{"docx"}.
 \examples{
 #START_TAG_TEST
 # Create a new document
-doc <- docx( title = "title" )
+doc = docx( title = "title" )
 print( doc )
 #STOP_TAG_TEST
 }

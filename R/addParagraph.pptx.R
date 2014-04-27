@@ -10,11 +10,11 @@
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 
-#' doc <- pptx( )
+#' doc = pptx( )
 #' # Add a slide
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' # Add "Hello World" into the document doc
-#' doc <- addParagraph(doc, "Hello Word!" )
+#' doc = addParagraph(doc, "Hello Word!" )
 #' 
 #' # Add a slide
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
@@ -26,7 +26,7 @@
 #' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 #' 	, textProperties(color="blue") )
 #' my.pars = set_of_paragraphs( pot1, pot2 )
-#' doc <- addParagraph(doc, my.pars )
+#' doc = addParagraph(doc, my.pars )
 #' writeDoc( doc, "addParagraph_example.pptx")
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addParagraph}}

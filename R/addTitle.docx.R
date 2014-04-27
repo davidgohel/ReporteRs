@@ -31,7 +31,7 @@
 #' 
 #' # add another title (level 2)
 #' doc = addTitle( doc, "My first sub-title", level = 2 )
-#' doc <- addParagraph(doc, "Hello Word!", stylename = "Normal")
+#' doc = addParagraph(doc, "Hello Word!", stylename = "Normal")
 #' 
 #' # Write the object in file "addTitle_example.docx"
 #' writeDoc( doc, "addTitle_example.docx" )
@@ -48,7 +48,7 @@ addTitle.docx = function( doc, value, level, ... ) {
 		stop("level = ", level, ". You defined only ", length( doc$header.styles ), " styles.")				
 	}
 	
-	doc <- addParagraph(doc, value, doc$header.styles[level] );
+	doc = addParagraph(doc, value, doc$header.styles[level] );
 	doc
 }
 

@@ -160,7 +160,7 @@ addPageNumber = function(doc, ...){
 #' @examples
 #' \dontrun{
 #' # Add "Hello World" into the document doc
-#' doc <- addParagraph(doc, "Hello Word!");
+#' doc = addParagraph(doc, "Hello Word!");
 #' 
 #' # Add into the document : "My tailor is rich" and "Cats and Dogs"
 #' # format some of the pieces of text
@@ -170,7 +170,7 @@ addPageNumber = function(doc, ...){
 #' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 #' 	, textProperties(color="blue") )
 #' my.pars = set_of_paragraphs( pot1, pot2 )
-#' doc <- addParagraph(doc, my.pars )
+#' doc = addParagraph(doc, my.pars )
 #' }
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
@@ -366,14 +366,14 @@ addRScript = function(doc, file, text, ...){
 #' @examples
 #' \dontrun{
 #' # add the first 5 lines of iris
-#' doc <- addTable( doc, head( iris, n = 5 ) )
+#' doc = addTable( doc, head( iris, n = 5 ) )
 #' 
 #' # demo span.columns
-#' doc <- addTable( doc, iris[ 46:55,], span.columns = "Species" )
+#' doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 #' 
 #' data( data_ReporteRs )
 #' # add iris and customise some options
-#' doc <- addTable( doc
+#' doc = addTable( doc
 #'		, data = data_ReporteRs
 #'		, header.labels = c( "Header 1", "Header 2", "Header 3"
 #' 			, "Header 4", "Header 5", "Header 6" )

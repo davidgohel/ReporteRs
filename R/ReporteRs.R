@@ -91,3 +91,12 @@ NULL
 #' @usage data(gforge_datacopy)
 #' @format A data frame with 4 rows and 10 variables
 NULL
+
+#' pbc summary
+#' 
+#' @docType data
+#' @keywords datasets
+#' @name pbc_summary
+#' @usage data(pbc_summary)
+#' @format A data frame
+NULL

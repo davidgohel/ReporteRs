@@ -24,7 +24,7 @@
 #' doc = addPageBreak(doc)
 #' # add a TOC (to be refresh when document is opened)
 #' # and add a page break
-#' doc <- addTOC(doc)
+#' doc = addTOC(doc)
 #' doc = addPageBreak(doc)
 #' 
 #' # add titles that will be entries in the TOC
@@ -61,7 +61,7 @@
 #' # Because we used "rPlotLegend" as legend in plot 
 #' # , addTOC will use this stylename to define 
 #' # entries in the generated TOC 
-#' doc <- addTOC(doc, stylename = "rPlotLegend")
+#' doc = addTOC(doc, stylename = "rPlotLegend")
 #' 
 #' # Write the object in file "addTOC_example2.docx"
 #' writeDoc( doc, "addTOC_example2.docx" )

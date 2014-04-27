@@ -19,7 +19,7 @@ Insert a page break into a \code{"docx"} object.
 \examples{
 #START_TAG_TEST
 doc = docx( title = "title" )
-doc <- addPageBreak( doc )
+doc = addPageBreak( doc )
 #STOP_TAG_TEST
 }
 \seealso{

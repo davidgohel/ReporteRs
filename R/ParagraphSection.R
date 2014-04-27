@@ -3,18 +3,18 @@
 #' @description ParagraphSection (internal use only)
 #' 
 #' @param value a set_of_paragraphs object
-#' @param parProp a parProperties object
+#' @param par.properties a parProperties object
 #' @export
-ParagraphSection = function(value, parProp ) {
-	if( !inherits( parProp, "parProperties" ) ){
-		stop("argument 'parProp' must be an object of class 'parProperties'")
+ParagraphSection = function(value, par.properties ) {
+	if( !inherits( par.properties, "parProperties" ) ){
+		stop("argument 'par.properties' must be an object of class 'parProperties'")
 	}
 	
 	if( !inherits( value, "set_of_paragraphs" ) ){
 		stop("argument 'value' must be an object of class 'set_of_paragraphs'")
 	}
 	
-	jparProp = .jParProperties(parProp)
+	jparProp = .jParProperties(par.properties)
 	
 	paragraphsSection = .jnew("org/lysis/reporters/texts/ParagraphsSection", jparProp)
 	for( i in 1:length(value)){

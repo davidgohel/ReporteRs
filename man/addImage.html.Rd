@@ -33,7 +33,7 @@ doc = addPage( doc, title = "page example" )
 
 # the file 'logo.jpg' only exists in R for Windows
 img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-doc <- addImage(doc, img.file, width = 100, height = 76 )
+doc = addImage(doc, img.file, width = 100, height = 76 )
 
 writeDoc( doc, "addImage_example" )
 #STOP_TAG_TEST

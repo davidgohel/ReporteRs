@@ -41,7 +41,7 @@ directory, see \code{\link{writeDoc.html}}.
 require( ggplot2 )
 
 # Web pages directory
-html.directory <- "document_example"
+html.directory = "document_example"
 
 # Create a new document
 doc = html( title = "document title" )
@@ -73,7 +73,7 @@ pot1 = pot("My tailor"
              , textProperties(font.weight="bold") )
 pot2 = pot("Cats", textProperties(color="red", font.size = 12)
              ) + " and " + pot("Dogs", textProperties(color="blue", font.size = 12) )
-doc <- addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
+doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 
 # add a page with title "Page 2"
 doc = addPage( doc, title = "Page 2" )

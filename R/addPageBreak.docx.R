@@ -8,7 +8,7 @@
 #' @examples
 #' #START_TAG_TEST
 #' doc = docx( title = "title" )
-#' doc <- addPageBreak( doc )
+#' doc = addPageBreak( doc )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addPageBreak}}
 #' @method addPageBreak docx

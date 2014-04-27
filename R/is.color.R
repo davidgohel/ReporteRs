@@ -9,7 +9,7 @@
 #' is.color( c(NA, "black", "blackk", "1", "#00", "#000000") )
 #' @seealso \code{\link{pptx}}, \code{\link{docx}}
 
-is.color <- function(x) {
+is.color = function(x) {
 	sapply(x, function( x ) {
 				tryCatch( is.matrix( col2rgb( x ) ), error = function( e ) F )
 			})

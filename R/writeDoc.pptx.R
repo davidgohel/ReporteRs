@@ -15,7 +15,7 @@
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' 
 #' # add a dummy text in the content shape
-#' doc <- addParagraph(doc, "Hello Word!")
+#' doc = addParagraph(doc, "Hello Word!")
 #' 
 #' # Write the object in file "writeDoc_example.pptx"
 #' writeDoc( doc, "writeDoc_example.pptx" )

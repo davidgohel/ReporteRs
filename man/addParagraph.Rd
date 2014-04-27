@@ -30,7 +30,7 @@ required , a new paragraph is required.
 \examples{
 \dontrun{
 # Add "Hello World" into the document doc
-doc <- addParagraph(doc, "Hello Word!");
+doc = addParagraph(doc, "Hello Word!");
 
 # Add into the document : "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text
@@ -40,7 +40,7 @@ my.pars = set_of_paragraphs( pot1 )
 pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 	, textProperties(color="blue") )
 my.pars = set_of_paragraphs( pot1, pot2 )
-doc <- addParagraph(doc, my.pars )
+doc = addParagraph(doc, my.pars )
 }
 }
 \seealso{

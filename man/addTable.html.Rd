@@ -78,16 +78,16 @@ doc = addPage( doc, title = "page example" )
 
 doc = addTitle( doc, "Iris dataset", level = 1 )
 # add the first 5 lines of iris
-doc <- addTable( doc, head( iris, n = 5 ) )
+doc = addTable( doc, head( iris, n = 5 ) )
 
 doc = addTitle( doc, "Iris sample dataset with span cells", level = 2 )
 # demo span.columns
-doc <- addTable( doc, iris[ 46:55,], span.columns = "Species" )
+doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 
 doc = addTitle( doc, "Dummy data and options demo", level = 1 )
 data( data_ReporteRs )
 # add dummy data 'data_ReporteRs' and customise some options
-doc <- addTable( doc
+doc = addTable( doc
 		, data = data_ReporteRs
 		, header.labels = c( "Header 1", "Header 2", "Header 3"
 			, "Header 4", "Header 5", "Header 6" )

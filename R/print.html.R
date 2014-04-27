@@ -8,7 +8,7 @@
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 
-#' doc <- html( title = "title" )
+#' doc = html( title = "title" )
 #' print( doc )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{html}}, \code{\link{print}}

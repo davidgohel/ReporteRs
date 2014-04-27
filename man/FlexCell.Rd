@@ -2,29 +2,44 @@
 \alias{FlexCell}
 \title{Cell object for FlexTable}
 \usage{
-FlexCell(value, colspan = 1, parProp = parProperties(),
-  cellProp = cellProperties())
+FlexCell(value, colspan = 1, par.properties = parProperties(),
+  cell.properties = cellProperties())
 }
 \arguments{
   \item{value}{a content value - a value of type
-  \code{character} or \code{pot} or
-  \code{set_of_paragraphs}.}
+  \code{character} or \code{\link{pot}} or
+  \code{\link{set_of_paragraphs}}.}
 
   \item{colspan}{defines the number of columns the cell
   should span}
 
-  \item{parProp}{parProperties to apply to content}
+  \item{par.properties}{parProperties to apply to content}
 
-  \item{cellProp}{cellProperties to apply to content}
+  \item{cell.properties}{cellProperties to apply to
+  content}
 }
 \description{
 Create a representation of a cell that can be inserted in a
-FlexTable.
+FlexRow.
 }
 \examples{
+#START_TAG_TEST
 FlexCell( value = "Hello" )
 FlexCell( value = "Hello", colspan = 3)
-FlexCell( "Column 1", cellProp = cellProperties(background.color="#527578")  )
+FlexCell( "Column 1", cell.properties = cellProperties(background.color="#527578")  )
+
+
+# define a complex formatted text
+mytext = pot("Hello", format = textProperties(color = "blue") 
+  ) + " " + pot( "world", format = textProperties(font.size = 9)
+)
+Fcell = FlexCell( mytext, colspan = 4 )
+
+# define two paragraph and put them in a FlexCell
+mytext1 = pot("Hello", format = textProperties(color = "blue") )
+mytext2 = pot( "world", format = textProperties(font.size = 9) )
+Fcell = FlexCell( set_of_paragraphs( mytext1, mytext2 ) )
+#' #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addFlexTable}}, \code{\link{addHeaderRow}},

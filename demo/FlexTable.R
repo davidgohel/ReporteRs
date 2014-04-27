@@ -19,11 +19,11 @@ cp02 = cellProperties(border.bottom.width=1, border.left.width=0, border.right.w
 
 headerRow = FlexRow()
 headerRow[1] = FlexCell( ""
-	, parProp = parProperties()
-	, cellProp = cp01, colspan = 3 )
+	, par.properties = parProperties()
+	, cell.properties = cp01, colspan = 3 )
 headerRow[2] = FlexCell( pot("Death", format=textProperties(font.weight="bold") )
-	, parProp = parProperties(text.align="center")
-	, cellProp = cp02
+	, par.properties = parProperties(text.align="center")
+	, cell.properties = cp02
 	, colspan = 2 )
 myFlexTable = addHeaderRow( myFlexTable, headerRow )
 
@@ -34,11 +34,11 @@ cp2 = cellProperties(border.bottom.width=1, border.left.width=0
 	, border.right.width=0, border.top.width=1)
 
 headerRow = FlexRow()
-headerRow[1] = FlexCell( "", parProp = parProperties(text.align="center"), cellProp = cp1 )
-headerRow[2] = FlexCell( "Total", parProp = parProperties(text.align="center"), cellProp=cp1)
-headerRow[3] = FlexCell( "Alive", parProp = parProperties(text.align="center"), cellProp=cp1)
-headerRow[4] = FlexCell( "Melanoma", parProp = parProperties(text.align="center"), cellProp=cp2)
-headerRow[5] = FlexCell("Non Melanoma", parProp = parProperties(text.align="center"), cellProp=cp2)
+headerRow[1] = FlexCell( "", par.properties = parProperties(text.align="center"), cell.properties = cp1 )
+headerRow[2] = FlexCell( "Total", par.properties = parProperties(text.align="center"), cell.properties=cp1)
+headerRow[3] = FlexCell( "Alive", par.properties = parProperties(text.align="center"), cell.properties=cp1)
+headerRow[4] = FlexCell( "Melanoma", par.properties = parProperties(text.align="center"), cell.properties=cp2)
+headerRow[5] = FlexCell("Non Melanoma", par.properties = parProperties(text.align="center"), cell.properties=cp2)
 
 myFlexTable = addHeaderRow( myFlexTable, headerRow )
 
@@ -51,8 +51,8 @@ myFlexTable = setFlexCellContent( myFlexTable, 9, 1, pot("Thickness", format=tex
 		, format=textProperties(font.weight="bold", vertical.align="superscript") ) )
 footerRow = FlexRow()
 footerRow[1] = FlexCell( pot("a", format=textProperties(font.weight="bold", vertical.align="superscript") ) + pot(" Also known as Breslow thickness", format=textProperties(color="gray") )
-				, parProp = parProperties(text.align="left")
-				, cellProp = cellProperties(border.bottom.width=0, border.left.width=0, border.right.width=0, border.top.width=1) 
+				, par.properties = parProperties(text.align="left")
+				, cell.properties = cellProperties(border.bottom.width=0, border.left.width=0, border.right.width=0, border.top.width=1) 
 				, colspan=5
 		)
 myFlexTable = addFooterRow( myFlexTable, footerRow )

@@ -1,6 +1,6 @@
 #' @method length FlexTable
 #' @S3method length FlexTable
-length.FlexTable <- function(x) {
+length.FlexTable = function(x) {
 	return(x$numrow)
 }
 
@@ -64,6 +64,34 @@ get.indexes.from.arguments = function( object, i, j){
 	
 	list( i = i , j = j )
 }
+
+addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, byrow = FALSE){
+	
+	if( !inherits(textProperties, "textProperties") )
+		stop("argument textProperties must be a textProperties object.")
+	
+	textProp = .jTextProperties( textProperties )
+	
+	if( byrow ){
+		.jcall( object$jobj, "V", "addBodyText"
+				, .jarray( as.integer( i - 1 ) )
+				, .jarray( as.integer( j - 1 ) )
+				, .jarray( get.formatted.dataset( value ) )
+				, textProp
+				, as.logical(newpar)
+		)
+	} else {
+		.jcall( object$jobj, "V", "addBodyText"
+				, .jarray( as.integer( i - 1 ) )
+				, .jarray( as.integer( j - 1 ) )
+				, .jarray( t( get.formatted.dataset( value ) ) )
+				, textProp
+				, as.logical(newpar) 
+		)
+	}
+	object
+}
+
 
 updateCellProperties.FlexTable = function( x, i, j, value ){
 	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")

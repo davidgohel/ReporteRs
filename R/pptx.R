@@ -37,7 +37,7 @@
 #' require( ggplot2 )
 #' 
 #' # PowerPoint document to write
-#' pptx.file <- "document_example.pptx"
+#' pptx.file = "document_example.pptx"
 #' 
 #' # set default font to 28pt
 #' options("ReporteRs-fontsize" = 28)

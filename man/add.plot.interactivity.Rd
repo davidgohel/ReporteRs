@@ -53,7 +53,7 @@ for(i in names( sdata ) ){
 	tempdata = sdata[[i]]
 	###############
 	# do some calculations to get, predictions and lower bands (3* se)
-	lo <- loess(Petal.Length~Sepal.Length, data = tempdata )
+	lo = loess(Petal.Length~Sepal.Length, data = tempdata )
 	min.x = min(tempdata$Sepal.Length, na.rm = TRUE)
 	max.x = max(tempdata$Sepal.Length, na.rm = TRUE)
 	newdata = data.frame( Sepal.Length = seq( min.x, max.x, length.out = 10 ) )

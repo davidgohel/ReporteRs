@@ -76,7 +76,7 @@ as.character.pot = function (x, ...){
 #' @method + pot
 #' @S3method + pot
 #' @rdname pot-add
-"+.pot" <- function(e1, e2) {
+"+.pot" = function(e1, e2) {
 	if( is.character(e1) ) e1 = pot(value = e1)
 	if( is.character(e2) ) e2 = pot(value = e2)
 	if( !inherits(e1, "pot") )

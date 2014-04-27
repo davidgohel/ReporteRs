@@ -91,11 +91,11 @@ doc = addSlide( doc, slide.layout = "Two Content" )
 doc = addTitle( doc, "Options demo", level = 1 )
 
 # demo span.columns
-doc <- addTable( doc, iris[ 46:55,], span.columns = "Species" )
+doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 
 data( data_ReporteRs )
 # add dummy data 'data_ReporteRs' and customise some options
-doc <- addTable( doc
+doc = addTable( doc
 		, data = data_ReporteRs
 		, header.labels = c( "Header 1", "Header 2", "Header 3"
 			, "Header 4", "Header 5", "Header 6" )

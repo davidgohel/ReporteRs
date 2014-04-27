@@ -29,7 +29,7 @@
 #' 				, font.family = "Courier New"
 #' 		) 
 #' ) + " is rich"
-#' doc <- addParagraph(doc, set_of_paragraphs(text), "Normal")
+#' doc = addParagraph(doc, set_of_paragraphs(text), "Normal")
 #' 
 #' writeDoc( doc, "textProperties_example.docx" )
 #' #STOP_TAG_TEST
@@ -129,7 +129,7 @@ as.character.textProperties = function (x, ...){
 }
 
 .jTextProperties = function( robject ){
-	textProp = .jnew(class.texts.TextProperties
+	jTextProperties = .jnew(class.texts.TextProperties
 		, robject$font.size, robject$font.weight=="bold"
 		, robject$font.style=="italic"
 		, robject$underlined
@@ -137,6 +137,6 @@ as.character.textProperties = function (x, ...){
 		, robject$font.family 
 		, robject$vertical.align 
 		)
-	textProp
+	jTextProperties
 }
 

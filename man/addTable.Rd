@@ -85,14 +85,14 @@ tables:\cr \preformatted{+--------------+---------------+}
 \examples{
 \dontrun{
 # add the first 5 lines of iris
-doc <- addTable( doc, head( iris, n = 5 ) )
+doc = addTable( doc, head( iris, n = 5 ) )
 
 # demo span.columns
-doc <- addTable( doc, iris[ 46:55,], span.columns = "Species" )
+doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 
 data( data_ReporteRs )
 # add iris and customise some options
-doc <- addTable( doc
+doc = addTable( doc
 		, data = data_ReporteRs
 		, header.labels = c( "Header 1", "Header 2", "Header 3"
 			, "Header 4", "Header 5", "Header 6" )

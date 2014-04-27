@@ -37,7 +37,7 @@ doc = docx( title = "title" )
 # stylename "Normal". Run the following code to
 # see available stylenames:
 # \\code{styles(doc)}
-doc <- addParagraph(doc, "Hello Word!", "Normal");
+doc = addParagraph(doc, "Hello Word!", "Normal");
 
 # Add into the document : "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text
@@ -49,7 +49,7 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 
 # used style is "BulletList" so that paragraphs will be preceded by bullet points
 # ("BulletList" is an existing style in the defaut template docx of the package)
-doc <- addParagraph(doc, my.pars, "BulletList");
+doc = addParagraph(doc, my.pars, "BulletList");
 
 writeDoc( doc, "addParagraph_example.docx" )
 #STOP_TAG_TEST

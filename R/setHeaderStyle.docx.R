@@ -18,7 +18,7 @@
 #' @param ... further arguments, not used. 
 #' @examples
 #' \dontrun{
-#' doc <- docx( title = "My example" )
+#' doc = docx( title = "My example" )
 #' styles( doc )
 #' # [1] "Normal"                  "Title1"                  "Title2"                 
 #' # [4] "Title3"                  "Title4"                  "Title5"                 

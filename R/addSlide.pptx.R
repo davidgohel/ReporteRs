@@ -50,8 +50,8 @@
 #' # add a slide with layout "Two Content" then add content
 #' doc = addSlide( doc, slide.layout = "Two Content" )
 #' doc = addTitle( doc, "Two Content demo", level = 1 )
-#' doc <- addTable( doc, iris[ 46:55,] )
-#' doc <- addParagraph(doc, "Hello Word!" )
+#' doc = addTable( doc, iris[ 46:55,] )
+#' doc = addParagraph(doc, "Hello Word!" )
 #' 
 #' # to see available layouts :
 #' slide.layouts( doc )

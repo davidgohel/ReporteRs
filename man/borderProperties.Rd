@@ -22,6 +22,6 @@ borderProperties(color="orange", style="solid", width=1)
 borderProperties(color="gray", style="dotted", width=1)
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{setFlexBorder}}
+\code{\link{FlexTable}}, \code{\link{setFlexTableBorders}}
 }
 

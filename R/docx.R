@@ -32,7 +32,7 @@
 #' require( ggplot2 )
 #' 
 #' # Word document to write
-#' docx.file <- "document_example.docx"
+#' docx.file = "document_example.docx"
 #' 
 #' # Create a new document
 #' doc = docx( title = "title" )
@@ -77,7 +77,7 @@
 #'      , textProperties(color="red", font.size = 12)
 #'      ) + " and " + pot("Dogs"
 #'              , textProperties(color="blue", font.size = 12) )
-#' doc <- addParagraph(doc, set_of_paragraphs( pot1, pot2 ), stylename="Normal" )
+#' doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), stylename="Normal" )
 #' 
 #' 
 #' myplot = qplot(Sepal.Length, Petal.Length
@@ -140,7 +140,7 @@ docx = function( title = "untitled", template){
 	matchheaders = regexpr("^(Heading|Titre|Rubrik|Overskrift|berschrift)[1-9]{1}$", .Object$styles )
 	#	matchheaders = regexpr("^(?i)(heading|titre|rubrik|overskrift|otsikko|titolo|titulo|baslik|uberschrift|rubrik)[1-9]{1}$", .Object@styles )
 	if( any( matchheaders > 0 ) ){
-		.Object <- declareTitlesStyles(.Object, stylenames = sort( .Object$styles[ matchheaders > 0 ] ) )
+		.Object = declareTitlesStyles(.Object, stylenames = sort( .Object$styles[ matchheaders > 0 ] ) )
 	} else .Object$header.styles = character(0)
 	
 	

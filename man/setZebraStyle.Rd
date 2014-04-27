@@ -1,29 +1,37 @@
 \name{setZebraStyle}
 \alias{setZebraStyle}
-\title{color alternate rows on a table}
+\title{FlexTable rows zebra striping}
 \usage{
 setZebraStyle(object, odd, even)
 }
 \arguments{
   \item{object}{a \code{FlexTable} object}
 
-  \item{odd}{background color applied to odd rows - single
-  character value (e.g. "#000000" or "black")}
-
-  \item{even}{background color applied to even rows -
+  \item{odd}{background color applied to odd row indexes -
   single character value (e.g. "#000000" or "black")}
+
+  \item{even}{background color applied to even row indexes
+  - single character value (e.g. "#000000" or "black")}
 }
 \description{
-Zebra striping — coloring alternate rows on a table
+applies background color to alternate rows (zebra
+striping). Set a color if row index is odd and another if
+row index is even.
 }
 \examples{
-myFlexTable2 = FlexTable( data = mtcars, header.columns=TRUE, add.rownames=TRUE
-  , cell_format=cellProperties(background.color="#5B7778", border.color="#EDBD3E")
+#
+# Create a FlexTable object with first 10 lines of data.frame mtcars
+# add row.names as first column
+# specify cell formating properties for header columns row
+MyFTable = FlexTable( data = mtcars[1:10, ]
+  , add.rownames=TRUE
 )
-myFlexTable2 = setZebraStyle( myFlexTable2, "#D1E6E7", "#93A8A9" )
+# Zebra striped table
+MyFTable = setZebraStyle( MyFTable, odd = "#8A949B", even = "#FAFAFA" )
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{setRowColors}},
-\code{\link{setColColors}} , \code{\link{[<-.FlexTable}}
+\code{\link{FlexTable}}, \code{\link{setRowsColors}},
+\code{\link{setColumnsColors}} ,
+\code{\link{alterFlexTable}}
 }
 

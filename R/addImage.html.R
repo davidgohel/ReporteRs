@@ -18,7 +18,7 @@
 #' 
 #' # the file 'logo.jpg' only exists in R for Windows
 #' img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-#' doc <- addImage(doc, img.file, width = 100, height = 76 )
+#' doc = addImage(doc, img.file, width = 100, height = 76 )
 #' 
 #' writeDoc( doc, "addImage_example" )
 #' #STOP_TAG_TEST
@@ -34,7 +34,7 @@ addImage.html = function(doc, filename, width, height, ... ) {
 	jimg = .jnew(class.html4r.ImagesList, as.integer(width), as.integer( height ) )
 	
 	for( i in 1:length( filename ) ){
-		.tempfile <- tempfile()
+		.tempfile = tempfile()
 		base64::encode(filename[i], .tempfile)
 		.jcall( jimg, "V", "addImage", as.character(paste(readLines(.tempfile), collapse = "\n")) )
 		unlink(.tempfile)

@@ -1,5 +1,5 @@
 #' @useDynLib ReporteRs
-dml.docx <- function( file, width=504, height=504, offx = 0, offy = 0
+dml.docx = function( file, width=504, height=504, offx = 0, offy = 0
 	, ps=12, fontname= "Helvetica", editable = TRUE
 	, firstid=1, env=new.env() ) {
 	check.fontfamily(fontname)
@@ -12,7 +12,7 @@ dml.docx <- function( file, width=504, height=504, offx = 0, offy = 0
 	env
 }
 
-dml.pptx <- function( file, width=504, height=504, offx = 50, offy = 50
+dml.pptx = function( file, width=504, height=504, offx = 50, offy = 50
 	, ps=12, fontname= "Helvetica", editable = TRUE
 	, firstid=1, env=new.env() ) {
 	check.fontfamily(fontname)
@@ -26,7 +26,7 @@ dml.pptx <- function( file, width=504, height=504, offx = 50, offy = 50
 }
 
 
-raphael <- function( file, width=504, height=504, offx = 50, offy = 50, ps=12, fontname= "Helvetica", canvas_id=1, env=new.env()) {
+raphael = function( file, width=504, height=504, offx = 50, offy = 50, ps=12, fontname= "Helvetica", canvas_id=1, env=new.env()) {
 	check.fontfamily(fontname)
 	#assign("canvas_id", as.integer( canvas_id ), envir = env)
 	assign("plot_ids", list(), envir = env)

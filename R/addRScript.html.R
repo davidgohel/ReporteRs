@@ -16,7 +16,7 @@
 #' # add a page where to add R outputs with title 'page example'
 #' doc = addPage( doc, title = "page example" )
 #' 
-#' doc <- addRScript(doc, text = "ls()" )
+#' doc = addRScript(doc, text = "ls()" )
 #' 
 #' # write the html object in a directory
 #' pages = writeDoc( doc, "addRScript_example")

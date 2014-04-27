@@ -1,25 +1,25 @@
 #' @title Cell object for FlexTable
 #'
-#' @description Create a representation of a cell that can be inserted in a FlexTable.
+#' @description Create a representation of a cell that can be inserted in a FlexRow.
 #' 
-#' @param value a content value - a value of type \code{character} or \code{pot} or \code{set_of_paragraphs}.
+#' @param value a content value - a value of type \code{character} or \code{\link{pot}} or \code{\link{set_of_paragraphs}}.
 #' @param colspan defines the number of columns the cell should span
-#' @param parProp parProperties to apply to content
-#' @param cellProp cellProperties to apply to content
+#' @param par.properties parProperties to apply to content
+#' @param cell.properties cellProperties to apply to content
 #' @export
 #' @seealso \code{\link{addFlexTable}}, \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
-#' @examples
-#' FlexCell( value = "Hello" )
-#' FlexCell( value = "Hello", colspan = 3)
-#' FlexCell( "Column 1", cellProp = cellProperties(background.color="#527578")  )
-FlexCell = function( value, colspan = 1, parProp = parProperties(), cellProp = cellProperties() ) {
+#' @examples 
+#' #START_TAG_TEST
+#' @example examples/FlexCell.R
+#' @example examples/STOP_TAG_TEST.R
+FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.properties = cellProperties() ) {
 	
-	if( !inherits( parProp, "parProperties" ) ){
-		stop("argument 'parProp' must be an object of class 'parProperties'")
+	if( !inherits( par.properties, "parProperties" ) ){
+		stop("argument 'par.properties' must be an object of class 'parProperties'")
 	}
 	
-	if( !inherits( cellProp, "cellProperties" ) ){
-		stop("argument 'cellProp' must be an object of class 'cellProperties'")
+	if( !inherits( cell.properties, "cellProperties" ) ){
+		stop("argument 'cell.properties' must be an object of class 'cellProperties'")
 	}
 	
 	if( missing(value) )
@@ -38,9 +38,9 @@ FlexCell = function( value, colspan = 1, parProp = parProperties(), cellProp = c
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("argument value must be a character vector or an object of class 'set_of_paragraphs'.")
 	
-	paragraphsSection = ParagraphSection(value, parProp = parProp )
+	paragraphsSection = ParagraphSection(value, par.properties = par.properties )
 	
-	jcellProp = .jCellProperties(cellProp)
+	jcellProp = .jCellProperties(cell.properties)
 
 	flexCell = .jnew(class.FlexCell, paragraphsSection$jobj, jcellProp)
 	.jcall( flexCell, "V", "setColspan", as.integer( colspan ) )

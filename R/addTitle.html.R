@@ -18,7 +18,7 @@
 #' doc = addTitle( doc, "My first title", level = 1 )
 #' doc = addTitle( doc, "My first sub-title", level = 2 )
 #' 
-#' doc <- addParagraph(doc, "Hello Word!" )
+#' doc = addParagraph(doc, "Hello Word!" )
 #' 
 #' # writes document in directory "addTitle_example"
 #' writeDoc( doc, "addTitle_example" )

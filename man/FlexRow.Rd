@@ -2,22 +2,22 @@
 \alias{FlexRow}
 \title{Row object for FlexTable}
 \usage{
-FlexRow(values, colspan, textProp = textProperties(),
-  parProp = parProperties(), cellProp = cellProperties())
+FlexRow(values, colspan, text.properties = textProperties(),
+  par.properties = parProperties(), cell.properties = cellProperties())
 }
 \arguments{
   \item{values}{Optional. a character vector to use as text
   content, the row will contain as many cells as there are
   in \code{values}.}
 
-  \item{textProp}{Optional. textProperties to apply to each
-  cell. Used only if values are not missing.}
+  \item{text.properties}{Optional. textProperties to apply
+  to each cell. Used only if values are not missing.}
 
-  \item{parProp}{Optional. parProperties to apply to each
-  cell. Used only if values are not missing.}
+  \item{par.properties}{Optional. parProperties to apply to
+  each cell. Used only if values are not missing.}
 
-  \item{cellProp}{Optional. cellProperties to apply to each
-  cell. Used only if values are not missing.}
+  \item{cell.properties}{Optional. cellProperties to apply
+  to each cell. Used only if values are not missing.}
 
   \item{colspan}{integer Optional. vector specifying for
   each element the number of columns to span for each
@@ -29,17 +29,20 @@ FlexTable.
 }
 \examples{
 #START_TAG_TEST
-## example 1
-headerRow = FlexRow()
-headerRow[1] = FlexCell( "Column 1", cellProp = cellProperties(background.color="#527578")  )
-headerRow[2] = FlexCell( "Column 2", cellProp = cellProperties(background.color="#527578")  )
-
-## example 2
+## example with characters
 headerRow = FlexRow( c("Column 1", "Column 2")
-	, cellProp = cellProperties(background.color="#527578") )
-#STOP_TAG_TEST
+  , cell.properties = cellProperties(background.color="#527578") )
+## example with FlexCell
+headerRow = FlexRow()
+headerRow[1] = FlexCell( "Column 1"
+  , cell.properties = cellProperties(background.color="#527578")  )
+headerRow[2] = FlexCell( "Column 2"
+  , cell.properties = cellProperties(background.color="#527578")  )
+#' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addFlexTable}}
+\code{\link{FlexTable}}, \code{\link{addFlexTable}},
+\code{\link{alterFlexRow}} , \code{\link{addHeaderRow}},
+\code{\link{addFooterRow}}
 }
 

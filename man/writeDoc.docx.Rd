@@ -21,7 +21,7 @@ Write the \code{"docx"} object in a '.docx' file.
 # Create a new document
 doc = docx( title = "title" )
 
-doc <- addParagraph(doc, "Hello Word!", stylename = "Normal")
+doc = addParagraph(doc, "Hello Word!", stylename = "Normal")
 
 # Write the object in file "writeDoc_example.docx"
 writeDoc( doc, "writeDoc_example.docx" )

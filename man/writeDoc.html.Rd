@@ -29,7 +29,7 @@ doc = html( title = "title" )
 # add a page where to add R outputs with title 'page example'
 doc = addPage( doc, title = "page example" )
 # add iris dataset as a table in the page
-doc <- addTable(doc, iris )
+doc = addTable(doc, iris )
 
 # write the html object in a directory
 pages = writeDoc( doc, "writeDoc_example")
