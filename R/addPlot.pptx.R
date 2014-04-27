@@ -110,7 +110,7 @@ addPlot.pptx = function(doc, fun, pointsize=11
 			plotfiles = list.files( dirname , full.names = T )
 			for( i in 1:length( plotfiles ) ){
 				if( i <= nbplots ){
-					gr = .jnew(class.pptx4r.DrawingMLList, plotfiles[i]  )
+					gr = .jnew(class.pptx4r.DMLGraphics, plotfiles[i]  )
 					out = .jcall( slide, "I", "add", gr )
 					#if( out == shape_errors["NOROOMLEFT"] ) warning("plot ",i, " has no room left, dropped." )
 					if( isSlideError( out ) ){

@@ -107,13 +107,13 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		if( last_canvas_id < 0 ) stop("unexpected error, could not find device information.")
 		else doc$canvas_id = last_canvas_id;
 
-		jimg = .jnew( class.html4r.RaphaelList )
+		jimg = .jnew( class.html4r.RAPHAELGraphics )
 		
 		for(i in 1:length( plot_ids ) ){
 			file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))
 			div.id = plot_ids[[i]]$div.id
 			
-			.jcall( jimg, "V", "addSlide", as.character(div.id), file )
+			.jcall( jimg, "V", "registerGraphic", as.character(div.id), file )
 		}
 		out = .jcall( doc$current_slide, "I", "add", jimg )
 		if( out != 1 ){

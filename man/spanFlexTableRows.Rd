@@ -22,6 +22,10 @@ spanFlexTableRows(object, j, from, to, runs)
 \description{
 Span rows within columns.
 }
+\note{
+Overlappings of horizontally merged cells and vertically
+merged cells are forbidden.
+}
 \examples{
 #START_TAG_TEST
 data(pbc_summary)

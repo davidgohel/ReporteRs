@@ -522,6 +522,7 @@ setColumnsColors = function (object, j, colors){
 #'
 #' @description Span rows within columns. 
 #' 
+#' @note Overlappings of horizontally merged cells and vertically merged cells are forbidden.
 #' @param object a \code{FlexTable} object
 #' @param j vector (integer index, col.names values or boolean vector) for columns selection. 
 #' @param from index of the first row to span (its content will be the visible one).  
@@ -585,6 +586,12 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 		}
 	}
 	
+	merged.rows = which( object$rowspan != 1 )
+	merged.cols = which( object$colspan != 1 )
+	overlaps = intersect(merged.rows, merged.cols)
+	if( length( overlaps ) > 0 )
+		stop("span overlappings, some merged cells are already merged with other cells.")
+	
 	for( colid in j ){
 		.jcall( object$jobj , "V", "setRowSpanInstructions"
 			, as.integer( colid - 1 )
@@ -599,6 +606,7 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 #'
 #' @description Span columns within rows. 
 #' 
+#' @note Overlappings of horizontally merged cells and vertically merged cells are forbidden.
 #' @param object a \code{FlexTable} object
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection. 
 #' @param from index of the first column to span (its content will be the visible one).  
@@ -630,6 +638,12 @@ spanFlexTableColumns = function (object, i, from, to){
 	colspan[.seq] = c( length(.seq), integer(length(.seq) - 1) )
 	if( sum( colspan ) != object$numcol ) stop("col spanning not possible")
 	else object$colspan[i, ] = colspan
+	
+	merged.rows = which( object$rowspan != 1 )
+	merged.cols = which( object$colspan != 1 )
+	overlaps = intersect(merged.rows, merged.cols)
+	if( length( overlaps ) > 0 )
+		stop("span overlappings, some merged cells are already merged with other cells.")
 	
 	.jcall( object$jobj , "V", "setColSpanInstructions"
 			, as.integer( i - 1 )
