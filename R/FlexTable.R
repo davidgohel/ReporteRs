@@ -353,17 +353,6 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 		} else {
 			x = updateCellProperties.FlexTable( x=x, i=i, j=j, value=value )
 		}
-	} else if( is.data.frame( value ) 
-			|| is.matrix( value ) 
-			|| ( is.vector( value ) && length(i)*length(j) == length(value) )
-			){
-		if( missing(text.properties))
-			text.properties = x$body.text.props
-		
-		x = addFlexCellContent (object = x, i = i, j = j
-				, value = value
-				, text.properties, newpar = newpar, byrow = byrow)
-		
 	} else if( is.character( value ) && length( value ) == 1 ){
 		if( missing(text.properties))
 			text.properties = x$body.text.props
@@ -372,7 +361,25 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 				, value = rep( value, length(i)*length(j) )
 				, text.properties, newpar = newpar, byrow = byrow)
 		
-	} else stop("value must be a valid content or an object of class 'textProperties' or 'parProperties' or 'cellProperties'. See details in help file.")
+	} else if( is.data.frame( value ) 
+			|| is.matrix( value ) || is.table( value ) 
+			|| ( is.vector( value ) )
+			){
+		
+		if( is.table(value) ) value = as.matrix(value)
+		
+		if( missing(text.properties))
+			text.properties = x$body.text.props
+		if( is.vector( value ) && length(i)*length(j) != length(value) )
+			stop("value has length ", length(value), " and selection length is ", length(i)*length(j))
+		else if( ( is.matrix( value ) || is.data.frame( value ) ) && length(i)*length(j) != prod(dim(value)) )
+			stop("value has ", prod(dim(value)), " elements and selection length is ", length(i)*length(j))
+		
+		x = addFlexCellContent (object = x, i = i, j = j
+				, value = value
+				, text.properties, newpar = newpar, byrow = byrow)
+		
+	} else stop("unknown type of assigned value. See details in help file.")
 	  
 	x
 }

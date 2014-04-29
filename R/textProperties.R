@@ -105,7 +105,7 @@ print.textProperties = function (x, ...){
 	cat( "font-weight:" , x$font.weight, ";" )
 	cat( "font-style:" , x$font.style, ";" )
 	cat( "underlined:" , x$underlined, ";" )
-	cat( "font-family:" , x$font.family, ";}" )
+	cat( "font-family:" , x$font.family, ";" )
 	cat( "vertical.align:" , x$vertical.align, ";}" )
 }
 
