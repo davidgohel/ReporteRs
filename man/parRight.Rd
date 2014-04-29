@@ -1,0 +1,24 @@
+\name{parRight}
+\alias{parRight}
+\title{shortcut for right alignment}
+\usage{
+parRight(...)
+}
+\arguments{
+  \item{...}{arguments passed to parProperties}
+}
+\description{
+shortcut for right alignment parProperties()
+}
+\examples{
+parRight()
+}
+\seealso{
+\code{\link{textNormal}} , \code{\link{textBold}} ,
+\code{\link{textItalic}} , \code{\link{textBoldItalic}} ,
+\code{\link{parLeft}} , \code{\link{parCenter}} ,
+\code{\link{parJustify}} , \code{\link{borderDotted}} ,
+\code{\link{borderDashed}} , \code{\link{borderNone}} ,
+\code{\link{borderSolid}}
+}
+

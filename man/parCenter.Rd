@@ -1,0 +1,24 @@
+\name{parCenter}
+\alias{parCenter}
+\title{shortcut for centered alignment}
+\usage{
+parCenter(...)
+}
+\arguments{
+  \item{...}{arguments passed to parProperties}
+}
+\description{
+shortcut for center alignment parProperties()
+}
+\examples{
+parLeft()
+}
+\seealso{
+\code{\link{textNormal}} , \code{\link{textBold}} ,
+\code{\link{textItalic}} , \code{\link{textBoldItalic}} ,
+\code{\link{parRight}} , \code{\link{parLeft}} ,
+\code{\link{parJustify}} , \code{\link{borderDotted}} ,
+\code{\link{borderDashed}} , \code{\link{borderNone}} ,
+\code{\link{borderSolid}}
+}
+

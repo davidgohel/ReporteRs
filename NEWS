@@ -1,3 +1,10 @@
+ReporteRs 0.5.3
+==================================================================
+ENHANCEMENT
+------------------------------------------------------------------
+* FlexTable API is now much more easier to use. Lot of new  
+  functions have been added. see ?FlexTable
+
 ReporteRs 0.5.2
 ==================================================================
 BUG FIXES

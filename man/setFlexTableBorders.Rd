@@ -5,7 +5,8 @@
 setFlexTableBorders(object, inner.vertical = borderProperties(),
   inner.horizontal = borderProperties(),
   outer.vertical = borderProperties(),
-  outer.horizontal = borderProperties())
+  outer.horizontal = borderProperties(), body = TRUE, header = TRUE,
+  footer = FALSE)
 }
 \arguments{
   \item{object}{a \code{FlexTable} object}
@@ -17,6 +18,15 @@ setFlexTableBorders(object, inner.vertical = borderProperties(),
   \item{outer.horizontal}{a \code{borderProperties} object}
 
   \item{outer.vertical}{a \code{borderProperties} object}
+
+  \item{body}{a logical value (default to TRUE), specifies
+  to apply scheme to table body}
+
+  \item{header}{a logical value (default to TRUE),
+  specifies to apply scheme to table header}
+
+  \item{footer}{a logical value (default to FALSE),
+  specifies to apply scheme to table footer}
 }
 \description{
 apply borders scheme to a FlexTable. A border scheme is a

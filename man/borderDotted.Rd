@@ -1,0 +1,24 @@
+\name{borderDotted}
+\alias{borderDotted}
+\title{shortcut for dotted border}
+\usage{
+borderDotted(...)
+}
+\arguments{
+  \item{...}{arguments passed to borderProperties}
+}
+\description{
+shortcut for a dotted border borderProperties()
+}
+\examples{
+borderDotted()
+}
+\seealso{
+\code{\link{textNormal}} , \code{\link{textBold}} ,
+\code{\link{textItalic}} , \code{\link{textBoldItalic}} ,
+\code{\link{parRight}} , \code{\link{parLeft}} ,
+\code{\link{parCenter}} , \code{\link{parJustify}} ,
+\code{\link{borderDashed}} , \code{\link{borderNone}} ,
+\code{\link{borderSolid}}
+}
+

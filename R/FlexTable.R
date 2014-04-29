@@ -70,24 +70,44 @@ FlexTable = function(data, numrow, numcol
 	
 	if( !miss_data ){
 		# check data is a data.frame
-		if( !is.data.frame( data ) && !is.matrix( data ) )
+		if( !is.data.frame( data ) && !is.matrix( data ) && !is.table( data ) )
 			stop("data is not a data.frame nor a matrix.")
+		
+		if( is.table( data ) ) {
+			if( length( dim( data ) ) > 2 )
+				stop("data dimensions cannot be > 2.")
+			else if( length( dim( data ) ) < 2 ){
+				data = matrix( unclass( data )
+					, dimnames = list( names( data ), "" )
+			  		, nrow = dim( data )
+			        )
+			}
+			else {
+			  data = matrix( unclass( data )
+			    , dimnames = dimnames( data )
+				, nrow = dim( data )[1]
+                )
+		  }
+		}
+		if( !is.data.frame( data ) ) 
+			data = as.data.frame( data )
 		
 		numrow = nrow( data )
 		numcol = ncol( data )
 		
 		if( numrow < 1 )
 			stop("data has 0 row.")
-
+		
 		.row_names = row.names(data)
 		
 		if( add.rownames ){
 			.colnames = c( "", dimnames( data )[[2]] )
-			numcol = numcol +1
-		} else .colnames = dimnames( data )[[2]]
-		if( add.rownames ){
+			numcol = numcol + 1
 			data = cbind(rownames = .row_names, data )
+		} else {
+			.colnames = dimnames( data )[[2]]
 		}
+		
 		row.names( data ) = NULL
 		data = apply( data, 2, function(x) {
 				if( is.character( x) ) x
@@ -371,6 +391,12 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @param inner.vertical a \code{borderProperties} object
 #' @param outer.horizontal a \code{borderProperties} object
 #' @param outer.vertical a \code{borderProperties} object
+#' @param body a logical value (default to TRUE), specifies 
+#' to apply scheme to table body
+#' @param header a logical value (default to TRUE), specifies 
+#' to apply scheme to table header
+#' @param footer a logical value (default to FALSE), specifies 
+#' to apply scheme to table footer
 #' @examples 
 #' #START_TAG_TEST
 #' @example examples/FlexTable.mtcars.R
@@ -383,7 +409,11 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' , \code{\link{addFlexTable}}, \code{\link{addFlexTable.docx}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 #' @export 
-setFlexTableBorders = function (object, inner.vertical = borderProperties(), inner.horizontal = borderProperties(), outer.vertical = borderProperties(), outer.horizontal = borderProperties()){
+setFlexTableBorders = function (object
+  , inner.vertical = borderProperties(), inner.horizontal = borderProperties()
+  , outer.vertical = borderProperties(), outer.horizontal = borderProperties()
+  , body = TRUE, header = TRUE, footer = FALSE
+){
 
 	if( !inherits(object, "FlexTable") )
 		stop("argument object_v must be a FlexTable object.")
@@ -396,13 +426,27 @@ setFlexTableBorders = function (object, inner.vertical = borderProperties(), inn
 	if( !inherits(outer.horizontal, "borderProperties") )
 		stop("argument outer.horizontal must be a borderProperties object.")
 	
-	.jcall( object$jobj , "V", "setBorders"
+	if( body )
+		.jcall( object$jobj , "V", "setBodyBorders"
 			, as.jborderProperties( inner.vertical )
 			, as.jborderProperties( inner.horizontal )
 			, as.jborderProperties( outer.vertical )
 			, as.jborderProperties( outer.horizontal )
-	)
-	
+		)
+	if( header )
+		.jcall( object$jobj , "V", "setHeaderBorders"
+				, as.jborderProperties( inner.vertical )
+				, as.jborderProperties( inner.horizontal )
+				, as.jborderProperties( outer.vertical )
+				, as.jborderProperties( outer.horizontal )
+		)
+	if( footer )
+		.jcall( object$jobj , "V", "setFooterBorders"
+				, as.jborderProperties( inner.vertical )
+				, as.jborderProperties( inner.horizontal )
+				, as.jborderProperties( outer.vertical )
+				, as.jborderProperties( outer.horizontal )
+		)	
 	object
 }
 

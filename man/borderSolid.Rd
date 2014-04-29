@@ -1,0 +1,24 @@
+\name{borderSolid}
+\alias{borderSolid}
+\title{shortcut for solid border}
+\usage{
+borderSolid(...)
+}
+\arguments{
+  \item{...}{arguments passed to borderProperties}
+}
+\description{
+shortcut for solid border borderProperties()
+}
+\examples{
+borderSolid()
+}
+\seealso{
+\code{\link{textNormal}} , \code{\link{textBold}} ,
+\code{\link{textItalic}} , \code{\link{textBoldItalic}} ,
+\code{\link{parRight}} , \code{\link{parLeft}} ,
+\code{\link{parCenter}} , \code{\link{parJustify}} ,
+\code{\link{borderDotted}} , \code{\link{borderDashed}} ,
+\code{\link{borderNone}}
+}
+

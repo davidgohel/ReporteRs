@@ -1,0 +1,24 @@
+\name{textBoldItalic}
+\alias{textBoldItalic}
+\title{shortcut for bold italic}
+\usage{
+textBoldItalic(...)
+}
+\arguments{
+  \item{...}{arguments passed to textProperties}
+}
+\description{
+shortcut for bold italic textProperties()
+}
+\examples{
+textBoldItalic()
+}
+\seealso{
+\code{\link{textNormal}} , \code{\link{textBold}} ,
+\code{\link{textItalic}} , \code{\link{parRight}} ,
+\code{\link{parLeft}} , \code{\link{parCenter}} ,
+\code{\link{parJustify}} , \code{\link{borderDotted}} ,
+\code{\link{borderDashed}} , \code{\link{borderNone}} ,
+\code{\link{borderSolid}}
+}
+
