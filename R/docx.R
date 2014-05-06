@@ -136,8 +136,8 @@ docx = function( title = "untitled", template){
 		, plot_first_id=1L
 		)
 	class( .Object ) = "docx"
-	
-	matchheaders = regexpr("^(Heading|Titre|Rubrik|Overskrift|berschrift)[1-9]{1}$", .Object$styles )
+	# uk-us,fr,?,?,?,simplifiedchinese
+	matchheaders = regexpr("^(Heading|Titre|Rubrik|Overskrift|berschrift|)[1-9]{1}$", .Object$styles )
 	#	matchheaders = regexpr("^(?i)(heading|titre|rubrik|overskrift|otsikko|titolo|titulo|baslik|uberschrift|rubrik)[1-9]{1}$", .Object@styles )
 	if( any( matchheaders > 0 ) ){
 		.Object = declareTitlesStyles(.Object, stylenames = sort( .Object$styles[ matchheaders > 0 ] ) )
