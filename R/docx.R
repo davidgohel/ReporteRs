@@ -132,10 +132,11 @@ docx = function( title = "untitled", template){
 	.Object = list( obj = obj
 		, title = title
 		, basefile = template
-		, styles = .jcall( obj, "[S", "getStyleNames" ) 
+		#, styles = .jcall( obj, "[S", "getStyleNames" ) 
 		, plot_first_id=1L
 		)
 	class( .Object ) = "docx"
+	.Object$styles = styles( .Object )
 	# uk-us,fr,?,?,?,simplifiedchinese
 	matchheaders = regexpr("^(Heading|Titre|Rubrik|Overskrift|berschrift|)[1-9]{1}$", .Object$styles )
 	#	matchheaders = regexpr("^(?i)(heading|titre|rubrik|overskrift|otsikko|titolo|titulo|baslik|uberschrift|rubrik)[1-9]{1}$", .Object@styles )

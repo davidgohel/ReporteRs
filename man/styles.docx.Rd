@@ -16,7 +16,8 @@ document).
 }
 \details{
 Available styles will be paragraph styles of the base
-document (e.g. Normal, Title1, etc.).
+document (e.g. Normal, Title1, etc.). Names of the returned
+character vector are labels associated with styles names.
 }
 \examples{
 #START_TAG_TEST
