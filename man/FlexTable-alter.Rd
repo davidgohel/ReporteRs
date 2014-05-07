@@ -24,9 +24,16 @@
   \item{byrow}{logical. If FALSE (the default) content is
   added by columns , otherwise content is added by rows.}
 
-  \item{value}{an object of class
+  \item{value}{To modify content formatting properties,
+  value should be an object of class
   \code{\link{cellProperties}} or an object of class
-  \code{\link{parProperties}}}
+  \code{\link{parProperties}} or an object of class
+  \code{\link{textProperties}}. To add content, value
+  should be a \code{data.frame} or a \code{matrix} or a
+  \code{vector} with as many elements as defined by the
+  selection. An exception is possible, if value is a vector
+  of length 1, its value will be repeated in all cells
+  defined by the selection.}
 }
 \description{
 add text into a FlexTable object or Format content of a

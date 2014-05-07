@@ -318,7 +318,13 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' as a new paragraph
 #' @param byrow logical. If FALSE (the default) content is added by columns
 #' , otherwise content is added by rows.
-#' @param value an object of class \code{\link{cellProperties}} or an object of class \code{\link{parProperties}} 
+#' @param value To modify content formatting properties, value should be an object of 
+#' class \code{\link{cellProperties}} 
+#' or an object of class \code{\link{parProperties}} 
+#' or an object of class \code{\link{textProperties}}. 
+#' To add content, value should be a \code{data.frame} or a \code{matrix} or a \code{vector}
+#' with as many elements as defined by the selection. An exception is possible, if value is
+#' a vector of length 1, its value will be repeated in all cells defined by the selection.
 #' @export
 #' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' , \code{\link{FlexTable}}, \code{\link{setFlexTableBorders}}
