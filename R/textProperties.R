@@ -45,6 +45,7 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 			, "font.style" = "normal"
 			, "underlined" = FALSE
 			, "font.family" = "Arial"
+			, "vertical.align" = "baseline"
 			)
 	out = list()
 	if( is.numeric( font.size ) ) {
