@@ -20,7 +20,7 @@ applies background colors to columns of a FlexTable
 #START_TAG_TEST
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
-# specify cell formating properties for header columns row
+# specify cell formatting properties for header columns row
 MyFTable = FlexTable( data = mtcars[1:10, ]
   , add.rownames=TRUE
 )

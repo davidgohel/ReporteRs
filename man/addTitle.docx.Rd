@@ -23,7 +23,7 @@ Add a title into a \code{"docx"} object.
 }
 \details{
 In MS Word, you can use whatever style you want as title
-formating style. But to be considered as entries for a
+formatting style. But to be considered as entries for a
 Table of Content, used styles must be 'title' styles.
 Theses are always available in MS Word list styles. When
 template is read, ReporteRs try to guess what are theses

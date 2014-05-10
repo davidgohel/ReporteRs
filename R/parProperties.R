@@ -1,24 +1,38 @@
-#' @title Paragraph formating properties 
+#' @title Paragraph formatting properties 
 #'
-#' @description Create an object that describes paragraph formating properties. 
+#' @description Create a \code{parProperties} object that describes 
+#' paragraph formatting properties. 
 #' 
 #' @details parProperties is used to control paragraph properties. 
-#' It is used when creating a tableProperties and when adding plots into a docx object.
+#' It is used when creating a tableProperties, when adding plots 
+#' into a docx object or when adding content in a FlexTable.
 #' 
-#' @param text.align text alignment - one of the following value : 'left', 'right', 'center', 'justify'.
-#' @param padding.bottom an integer value, bottom padding in pixels.
-#' @param padding.top an integer value, top padding in pixels.
-#' @param padding.left an integer value, left padding in pixels.
-#' @param padding.right an integer value, right padding in pixels.
-#' @param padding an integer value, paddings in pixels, this value overwrite all padding.* values.
-#' 
+#' Default values are:
+#' \itemize{
+#'   \item \code{text.align} "left"
+#'   \item \code{padding.bottom} 1
+#'   \item \code{padding.top} 1
+#'   \item \code{padding.left} 1
+#'   \item \code{padding.right} 1
+#' }
+#' @param text.align text alignment - a single character value, expected value 
+#' is one of 'left', 'right', 'center', 'justify'.
+#' @param padding.bottom paragraph bottom padding - 0 or positive integer value.
+#' @param padding.top paragraph top padding - 0 or positive integer value.
+#' @param padding.left paragraph left padding - 0 or positive integer value.
+#' @param padding.right paragraph right padding - 0 or positive integer value.
+#' @param padding paragraph padding - 0 or positive integer value. Argument \code{padding} overwrites
+#' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
+#' @return a \code{parProperties} object
 #' @export
 #' @examples
-#' parProperties( text.align = "center", padding = 5)
-#' parProperties( text.align = "center", padding.top = 5, padding.bottom = 0, padding.left = 2
-#' 	, padding.right = 0)
-#'  
-#' @seealso \code{\link{addTable}}, \code{\link{addPlot.docx}}
+#' #START_TAG_TEST
+#' @example examples/parProperties.R
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, \code{\link{textProperties}}
+#' , \code{\link{chprop.parProperties}}, \code{\link{chprop.textProperties}}
+#' , \code{\link{FlexTable}}, \code{\link{tableProperties}}, \code{\link{addTable}}
+#' , \code{\link{addPlot.docx}}
 parProperties = function(text.align = "left"
 		, padding.bottom = 1, padding.top = 1
 		, padding.left = 1, padding.right = 1, padding) {
@@ -67,14 +81,83 @@ parProperties = function(text.align = "left"
 		out
 }
 
+#' @title Modify paragraph formatting properties 
+#'
+#' @description Modify an object of class \code{parProperties}.  
+#' @param object \code{parProperties} object to modify
+#' @inheritParams parProperties
+#' @param ... further arguments - not used 
+#' @return a \code{parProperties} object
+#' @examples
+#' #START_TAG_TEST
+#' @example examples/chprop.parProperties.R
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, \code{\link{textProperties}}
+#' , \code{\link{chprop.cellProperties}}, \code{\link{chprop.textProperties}}
+#' , \code{\link{FlexTable}}, \code{\link{tableProperties}}
+#' @method chprop parProperties
+#' @S3method chprop parProperties
+chprop.parProperties <- function(object, text.align
+		, padding.bottom, padding.top
+		, padding.left, padding.right, padding, ...) {
+	
+	if( !missing( padding ) ){
+		if( is.numeric( padding ) ) {
+			if( as.integer( padding ) < 0 || !is.finite( as.integer( padding ) ) ) stop("invalid padding : ", padding )
+			padding.bottom = padding.top = padding.right = padding.left = as.integer( padding )
+		} else {
+			stop("padding must be a integer value ( >=0 ).")
+		}
+	}
+	
+	
+	if( !missing( text.align ) ){
+		if( is.character( text.align ) ){
+			match.arg( text.align, choices = c("left", "right", "center", "justify"), several.ok = F )
+			object$text.align = text.align
+		} else stop("text.align must be a character scalar ('left' | 'right' | 'center' | 'justify').")
+	}
+	
+	if( !missing( padding.bottom ) ){
+		if( is.numeric( padding.bottom ) ) {
+			if( as.integer( padding.bottom ) < 0 || !is.finite( as.integer( padding.bottom ) ) ) stop("invalid padding.bottom : ", padding.bottom)
+			object$padding.bottom = as.integer( padding.bottom )
+		} else stop("padding.bottom must be a numeric scalar (pixel unit).")
+	}
+	
+	if( !missing( padding.top ) ){
+		if( is.numeric( padding.top ) ) {
+			if( as.integer( padding.top ) < 0 || !is.finite( as.integer( padding.top ) ) ) stop("invalid padding.top : ", padding.top)
+			object$padding.top = as.integer( padding.top )
+		} else stop("padding.top must be a numeric scalar (pixel unit).")
+	}
+	
+	if( !missing( padding.left ) ){
+		if( is.numeric( padding.left ) ) {
+			if( as.integer( padding.left ) < 0 || !is.finite( as.integer( padding.left ) ) ) stop("invalid padding.left : ", padding.left)
+			object$padding.left = as.integer( padding.left )
+		} else stop("padding.left must be a numeric scalar (pixel unit).")
+	}
+	
+	if( !missing( padding.right ) ){
+		if( is.numeric( padding.right ) ) {
+			if( as.integer( padding.right ) < 0 || !is.finite( as.integer( padding.right ) ) ) stop("invalid padding.right : ", padding.right)
+			object$padding.right = as.integer( padding.right )
+		} else stop("padding.right must be a numeric scalar (pixel unit).")
+	}
+	
+	object					
+}
+
+
 #' @method print parProperties
 #' @S3method print parProperties
 print.parProperties = function (x, ...){
-	cat( "\ttext-align: {" , x$text.align, "}\n" )
-	cat( "\tpadding-bottom: {" , x$padding.bottom, "}\n" )
-	cat( "\tpadding-top: {", x$padding.top, "}\n" )
-	cat( "\tpadding-left: {", x$padding.left, "}\n" )
-	cat( "\tpadding.right: {", x$padding.right, "}\n" )
+	cat( "{text-align:" , x$text.align, ";" )
+	cat( "padding-bottom:" , x$padding.bottom, ";" )
+	cat( "padding-top:", x$padding.top, ";" )
+	cat( "padding-left:", x$padding.left, ";" )
+	cat( "padding.right:", x$padding.right, ";}\n" )
 }
 
 

@@ -52,8 +52,8 @@ created. It is important to know that when using
 addParagraph.pptx, paragraph and defaut font formats will
 be defined by the properties of the shape of the
 \code{slide.layout} where content will be added. For
-example, if you set the shape formating properties to a 'no
-bullet', paragraphs of texts won't have any bullet.
+example, if you set the shape formatting properties to a
+'no bullet', paragraphs of texts won't have any bullet.
 
 Also when using addPlot, plot dimensions will be the shape
 dimensions. It means that if you want to change plot

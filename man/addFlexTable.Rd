@@ -17,7 +17,7 @@ a document object
 \description{
 Insert a FlexTable into a document object
 
-FlexTable can be manipulated so that almost any formating
+FlexTable can be manipulated so that almost any formatting
 can be specified. See \code{\link{FlexTable}} for more
 details.
 }

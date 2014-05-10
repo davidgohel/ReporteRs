@@ -8,7 +8,7 @@
 #' @param ... further arguments, not used. 
 #' @details 
 #' 
-#' In MS Word, you can use whatever style you want as title formating style. 
+#' In MS Word, you can use whatever style you want as title formatting style. 
 #' But to be considered as entries for a Table of Content, used styles must be 'title' styles. 
 #' Theses are always available in MS Word list styles.
 #' When template is read, ReporteRs try to guess what are theses styles. 

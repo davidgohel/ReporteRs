@@ -8,11 +8,11 @@ pot(value = "", format = textProperties())
   \item{value}{text value or a value that has a
   \code{format} method returning character value.}
 
-  \item{format}{formating properties (an object of class
+  \item{format}{formatting properties (an object of class
   \code{textProperties}).}
 }
 \description{
-Create an object with a text to display and its formating
+Create an object with a text to display and its formatting
 properties.
 }
 \details{

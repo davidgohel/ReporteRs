@@ -1,6 +1,6 @@
 \name{textProperties}
 \alias{textProperties}
-\title{Text formating properties}
+\title{Text formatting properties}
 \usage{
 textProperties(color = "black", font.size = getOption("ReporteRs-fontsize"),
   font.weight = "normal", font.style = "normal", underlined = FALSE,
@@ -8,55 +8,58 @@ textProperties(color = "black", font.size = getOption("ReporteRs-fontsize"),
   vertical.align = "baseline")
 }
 \arguments{
-  \item{color}{single character value specifying font
-  color. (default to \code{black})}
+  \item{color}{font color - a single character value
+  specifying a valid color (e.g. "#000000" or "black").}
 
-  \item{font.size}{single integer value specifying font
-  size in pixel. (default to \code{10})}
+  \item{font.size}{font size - 0 or positive integer
+  value.}
 
   \item{font.weight}{single character value specifying font
-  weight (expected value is \code{normal} or \code{bold}).
-  (default to \code{normal})}
+  weight (expected value is \code{normal} or \code{bold}).}
 
   \item{font.style}{single character value specifying font
-  style (expected value is \code{normal} or \code{italic}).
-  (default to \code{normal})}
+  style (expected value is \code{normal} or
+  \code{italic}).}
 
   \item{underlined}{single logical value specifying if the
-  font is underlined (default to \code{FALSE}).}
+  font is underlined.}
 
   \item{font.family}{single character value specifying font
-  name (it has to be an existing font in the OS). (default
-  to \code{Arial}).}
+  name (it has to be an existing font in the OS).}
 
   \item{vertical.align}{single character value specifying
   font vertical alignments. Expected value is one of the
   following : default \code{'baseline'} or
   \code{'subscript'} or \code{'superscript'}}
 }
+\value{
+a \code{textProperties} object
+}
 \description{
-Create an object that describes text formating properties.
+Create a \code{textProperties} object that describes text
+formatting properties.
+}
+\details{
+Default values are: \itemize{ \item \code{color} "black"
+\item \code{font.size} getOption("ReporteRs-fontsize")
+\item \code{font.weight} "normal" \item \code{font.style}
+"normal" \item \code{underlined} FALSE \item
+\code{font.family} getOption("ReporteRs-default-font")
+\item \code{vertical.align} "baseline" }
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = docx( title = "title" )
-
-text = pot( value = "Hello Word"
-		, format = textProperties(color="red"
-				, font.size = 12
-				, font.weight = "bold"
-				, font.style = "italic"
-				, underlined = TRUE
-				, font.family = "Courier New"
-		)
-) + " is rich"
-doc = addParagraph(doc, set_of_paragraphs(text), "Normal")
-
-writeDoc( doc, "textProperties_example.docx" )
-#STOP_TAG_TEST
+parProperties( text.align = "center", padding = 5)
+parProperties( text.align = "center", padding.top = 5
+, padding.bottom = 0, padding.left = 2, padding.right = 0)
+#' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}
+\code{\link{cellProperties}}, \code{\link{parProperties}} ,
+\code{\link{chprop.parProperties}},
+\code{\link{chprop.textProperties}} ,
+\code{\link{chprop.cellProperties}} ,
+\code{\link{FlexTable}}, \code{\link{tableProperties}},
+\code{\link{addTable}} , \code{\link{pot}}
 }
 

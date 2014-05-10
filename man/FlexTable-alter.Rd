@@ -15,8 +15,8 @@
   boolean vector) for columns selection. or an object of
   class \code{\link{textProperties}}.}
 
-  \item{text.properties}{formating properties (an object of
-  class \code{textProperties}).}
+  \item{text.properties}{formatting properties (an object
+  of class \code{textProperties}).}
 
   \item{newpar}{logical value specifying wether or not the
   content should be added as a new paragraph}
@@ -43,16 +43,16 @@ FlexTable object
 #START_TAG_TEST
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
-# specify cell formating properties for header columns row
+# specify cell formatting properties for header columns row
 MyFTable = FlexTable( data = mtcars[1:10, ]
   , add.rownames=TRUE
 )
-# modify the text formating properties for the row.names column
+# modify the text formatting properties for the row.names column
 MyFTable[ , 1] = textProperties( font.style="italic", font.size = 9)
 # align text to right for the row.names column
 MyFTable[ , 1] = parProperties( text.align = "right" )
 
-# change cell formating properties for various columns
+# change cell formatting properties for various columns
 MyFTable[ c(3,6:9), c( "mpg", "disp"
   , "hp", "drat", "wt", "qsec" ) ] = cellProperties( background.color="#CCCCCC")
 # add text to elements of the column cyl

@@ -2,7 +2,7 @@
 #'
 #' @description Create an object of class \code{FlexTable}.
 #' 
-#' FlexTable can be manipulated so that almost any formating can be specified.
+#' FlexTable can be manipulated so that almost any formatting can be specified.
 #' It allows to insert headers and footers rows with eventually merged cells 
 #' (see \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}).
 #' 
@@ -313,7 +313,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection. 
 #' @param j vector (integer index, col.names values or boolean vector) for columns selection. 
 #' or an object of class \code{\link{textProperties}}.
-#' @param text.properties formating properties (an object of class \code{textProperties}).
+#' @param text.properties formatting properties (an object of class \code{textProperties}).
 #' @param newpar logical value specifying wether or not the content should be added 
 #' as a new paragraph
 #' @param byrow logical. If FALSE (the default) content is added by columns

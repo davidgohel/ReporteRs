@@ -25,7 +25,7 @@
 #' Function \code{slide.layouts} returns available layout names of the template used when pptx object has been created.
 #' It is important to know that when using addParagraph.pptx, paragraph and defaut font formats will be defined 
 #' by the properties of the shape of the \code{slide.layout} where content will be added. 
-#' For example, if you set the shape formating properties to a 'no bullet', paragraphs of texts won't have any bullet.
+#' For example, if you set the shape formatting properties to a 'no bullet', paragraphs of texts won't have any bullet.
 #' 
 #' Also when using addPlot, plot dimensions will be the shape dimensions. It means that if you want to change plot dimensions
 #' , this has to be done in the PowerPoint template used when creating the \code{pptx} object. 

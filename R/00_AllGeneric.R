@@ -19,7 +19,7 @@ addDate = function(doc, ...){
 #'
 #' @description Insert a FlexTable into a document object
 #' 
-#' FlexTable can be manipulated so that almost any formating can be specified. See
+#' FlexTable can be manipulated so that almost any formatting can be specified. See
 #' \code{\link{FlexTable}} for more details.
 #' @param doc document object
 #' @param flextable the \code{FlexTable} object
@@ -325,7 +325,7 @@ addRScript = function(doc, file, text, ...){
 #' @param span.columns a character vector specifying columns names 
 #' where row merging should be done (if successive values in a column 
 #' are the same ; if data[p,j]==data[p-1,j] )
-#' @param col.types a character whose elements define the formating style 
+#' @param col.types a character whose elements define the formatting style 
 #' of columns via their data roles. Optional
 #' Possible values are : \emph{"character"}, \emph{"integer"}, \emph{"logical"}
 #' 			, \emph{"double"}, \emph{"percent"}, \emph{"date"}, \emph{"datetime}".
@@ -532,6 +532,20 @@ addTitle = function(doc, value, ...){
 #' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}, \code{\link{styles.docx}}
 addTOC = function(doc, ...){
 	UseMethod("addTOC")
+}
+
+#' @title Change a formatting properties object
+#'
+#' @description Change a formatting properties object
+#' 
+#' @param object formatting properties object
+#' @param ... further arguments passed to other methods 
+#' @return a formatting properties object
+#' @export
+#' @seealso \code{\link{cellProperties}}, \code{\link{textProperties}}
+#' , \code{\link{parProperties}}
+chprop = function( object, ... ){
+	UseMethod("chprop")
 }
 
 #' @title Set manually headers'styles of a document object

@@ -1,6 +1,6 @@
 \name{tableProperties}
 \alias{tableProperties}
-\title{Table formating properties}
+\title{Table formatting properties}
 \usage{
 tableProperties(header.text = textProperties(font.size = 12, font.weight =
   "bold"), header.par = parProperties(padding = 3, text.align = "left"),
@@ -143,7 +143,8 @@ tableProperties(header.text = textProperties(font.size = 12, font.weight =
   etc.) - default to getOption("ReporteRs-locale.region")}
 }
 \description{
-Create an object that describes table formating properties.
+Create an object that describes table formatting
+properties.
 }
 \details{
 tableProperties is used to control table format when
@@ -153,7 +154,7 @@ Content is formated according to its data type
 (\code{col.types} argument in \code{\link{addTable}}).
 "double" columns share all the same format, "character"
 columns share all the same format, etc. Conditionnal
-formating is not specified in tableProperties but in
+formatting is not specified in tableProperties but in
 \code{\link{addTable}}.
 }
 \examples{

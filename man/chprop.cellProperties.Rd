@@ -1,0 +1,154 @@
+\name{chprop.cellProperties}
+\alias{chprop.cellProperties}
+\title{Modify a cell formatting properties object}
+\usage{
+\method{chprop}{cellProperties}(object, border.bottom.color,
+  border.bottom.style, border.bottom.width, border.left.color,
+  border.left.style, border.left.width, border.top.color, border.top.style,
+  border.top.width, border.right.color, border.right.style, border.right.width,
+  vertical.align, padding.bottom, padding.top, padding.left, padding.right,
+  background.color, padding, border.width, border.style, border.color, ...)
+}
+\arguments{
+  \item{object}{\code{cellProperties} object to modify}
+
+  \item{...}{further arguments - not used}
+
+  \item{border.bottom.color}{border bottom color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{border.bottom.style}{border bottom style - a single
+  character value, expected value is one of "none",
+  "solid", "dotted", "dashed".}
+
+  \item{border.bottom.width}{border bottom width - 0 or
+  positive integer value}
+
+  \item{border.left.color}{border left color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{border.left.style}{border left style - a single
+  character value, expected value is one of "none",
+  "solid", "dotted", "dashed".}
+
+  \item{border.left.width}{border left width - 0 or
+  positive integer value}
+
+  \item{border.top.color}{border top color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{border.top.style}{border top style - a single
+  character value, expected value is one of "none",
+  "solid", "dotted", "dashed".}
+
+  \item{border.top.width}{border top width - 0 or positive
+  integer value}
+
+  \item{border.right.color}{border right color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{border.right.style}{border right style - a single
+  character value, expected value is one of "none",
+  "solid", "dotted", "dashed".}
+
+  \item{border.right.width}{border right width - 0 or
+  positive integer value}
+
+  \item{vertical.align}{cell content vertical alignment - a
+  single character value , expected value is one of
+  "center" or "top" or "bottom"}
+
+  \item{padding.bottom}{cell bottom padding - 0 or positive
+  integer value.}
+
+  \item{padding.top}{cell top padding - 0 or positive
+  integer value.}
+
+  \item{padding.left}{cell left padding - 0 or positive
+  integer value.}
+
+  \item{padding.right}{cell right padding - 0 or positive
+  integer value.}
+
+  \item{background.color}{cell background color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{padding}{cell padding - 0 or positive integer
+  value. Argument \code{padding} overwrites arguments
+  \code{padding.bottom}, \code{padding.top},
+  \code{padding.left}, \code{padding.right}.}
+
+  \item{border.width}{border width - 0 or positive integer
+  value. Argument \code{border.width} overwrites arguments
+  \code{border.bottom.width}, \code{border.top.width} ,
+  \code{border.left.width}, \code{border.right.width}.}
+
+  \item{border.style}{border style - a single character
+  value, expected value is one of "none" , "solid",
+  "dotted", "dashed". Argument \code{border.style}
+  overwrites arguments \code{border.bottom.style},
+  \code{border.top.style}, \code{border.left.style} ,
+  \code{border.right.style}.}
+
+  \item{border.color}{border color - a single character
+  value specifying a valid color (e.g. "#000000" or
+  "black").  Argument \code{border.color} overwrites
+  arguments \code{border.bottom.color} ,
+  \code{border.top.color}, \code{border.left.color},
+  \code{border.right.color}.}
+}
+\value{
+a \code{cellProperties} object
+}
+\description{
+Modify an object of class \code{cellProperties}.
+}
+\examples{
+#START_TAG_TEST
+cellProp = cellProperties()
+
+cellProp01 = chprop( cellProp, border.bottom.color = "#8A949B" )
+cellProp02 = chprop( cellProp, border.right.color = "#8A949B" )
+cellProp03 = chprop( cellProp, border.left.color = "#8A949B" )
+cellProp04 = chprop( cellProp, border.top.color = "#8A949B" )
+cellProp05 = chprop( cellProp, border.color = "#8A949B" )
+
+cellProp06 = chprop( cellProp, border.bottom.width = 2 )
+cellProp07 = chprop( cellProp, border.left.width = 2 )
+cellProp08 = chprop( cellProp, border.top.width = 2 )
+cellProp09 = chprop( cellProp, border.right.width = 2 )
+cellProp10 = chprop( cellProp, border.width = 2 )
+
+cellProp11 = chprop( cellProp, padding.bottom = 5 )
+cellProp12 = chprop( cellProp, padding.top = 5 )
+cellProp13 = chprop( cellProp, padding.left = 5 )
+cellProp14 = chprop( cellProp, padding.right = 5 )
+cellProp15 = chprop( cellProp, padding = 5 )
+
+cellProp16 = chprop( cellProp, border.bottom.style = "dotted" )
+cellProp17 = chprop( cellProp, border.left.style = "dotted" )
+cellProp18 = chprop( cellProp, border.top.style = "dotted" )
+cellProp19 = chprop( cellProp, border.right.style = "dotted" )
+cellProp20 = chprop( cellProp, border.style = "dotted" )
+
+cellProp21 = chprop( cellProp, vertical.align = "middle" )
+cellProp22 = chprop( cellProp, background.color = "#517281" )
+
+cellProp23 = chprop( cellProp, background.color = "#517281"
+  , border.color = "#F37257", border.width = 2  )
+#' #STOP_TAG_TEST
+}
+\seealso{
+\code{\link{cellProperties}}, \code{\link{parProperties}},
+\code{\link{textProperties}} ,
+\code{\link{chprop.parProperties}},
+\code{\link{chprop.textProperties}} ,
+\code{\link{FlexTable}}, \code{\link{tableProperties}},
+\code{\link{addTable}}
+}
+

@@ -13,7 +13,7 @@
 #' to display in the grouped header row. Element \code{colspan} is an integer vector containing number of columns to span 
 #' for each \code{values}.
 #' @param span.columns a character vector specifying columns names where row merging should be done (if successive values in a column are the same ; if data[p,j]==data[p-1,j] )
-#' @param col.types a character whose elements define the formating style of columns via their data roles. Optional
+#' @param col.types a character whose elements define the formatting style of columns via their data roles. Optional
 #' Possible values are : \emph{"character"}, \emph{"integer"}, \emph{"logical"}
 #' 			, \emph{"double"}, \emph{"percent"}, \emph{"date"}, \emph{"datetime}".
 #' If missing, factor and character will be formated as character

@@ -1,6 +1,6 @@
-#' @title Table formating properties 
+#' @title Table formatting properties 
 #'
-#' @description Create an object that describes table formating properties. 
+#' @description Create an object that describes table formatting properties. 
 #' 
 #' @details tableProperties is used to control table format when addTable is used. 
 #' One can customize headers (or grouped headers) and content. 
@@ -8,7 +8,7 @@
 #' Content is formated according to its data type (\code{col.types} argument 
 #' in \code{\link{addTable}}). "double" columns share all the same format, 
 #' "character" columns share all the same format, etc. 
-#' Conditionnal formating is not specified in tableProperties but in \code{\link{addTable}}.
+#' Conditionnal formatting is not specified in tableProperties but in \code{\link{addTable}}.
 #' 
 #' @param data.cell cell formatting properties for columns of any type. Overwrites any *.cell (except headers)
 #' @param data.par paragraph formatting properties for columns of any type. Overwrites any *.par (except headers)

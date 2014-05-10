@@ -1,10 +1,10 @@
 #' @title Piece of Text (formated text)
 #'
 #' @description
-#' Create an object with a text to display and its formating properties.
+#' Create an object with a text to display and its formatting properties.
 #' 
 #' @param value text value or a value that has a \code{format} method returning character value.
-#' @param format formating properties (an object of class \code{textProperties}).
+#' @param format formatting properties (an object of class \code{textProperties}).
 #' @details a pot (piece of text) is a convenient way to define a paragraph 
 #' of text where some texts are not all formated the same.
 #' @export

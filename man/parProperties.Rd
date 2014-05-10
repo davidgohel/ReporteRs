@@ -1,44 +1,62 @@
 \name{parProperties}
 \alias{parProperties}
-\title{Paragraph formating properties}
+\title{Paragraph formatting properties}
 \usage{
 parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
   padding.left = 1, padding.right = 1, padding)
 }
 \arguments{
-  \item{text.align}{text alignment - one of the following
-  value : 'left', 'right', 'center', 'justify'.}
+  \item{text.align}{text alignment - a single character
+  value, expected value is one of 'left', 'right',
+  'center', 'justify'.}
 
-  \item{padding.bottom}{an integer value, bottom padding in
-  pixels.}
+  \item{padding.bottom}{paragraph bottom padding - 0 or
+  positive integer value.}
 
-  \item{padding.top}{an integer value, top padding in
-  pixels.}
+  \item{padding.top}{paragraph top padding - 0 or positive
+  integer value.}
 
-  \item{padding.left}{an integer value, left padding in
-  pixels.}
+  \item{padding.left}{paragraph left padding - 0 or
+  positive integer value.}
 
-  \item{padding.right}{an integer value, right padding in
-  pixels.}
+  \item{padding.right}{paragraph right padding - 0 or
+  positive integer value.}
 
-  \item{padding}{an integer value, paddings in pixels, this
-  value overwrite all padding.* values.}
+  \item{padding}{paragraph padding - 0 or positive integer
+  value. Argument \code{padding} overwrites arguments
+  \code{padding.bottom}, \code{padding.top},
+  \code{padding.left}, \code{padding.right}.}
+}
+\value{
+a \code{parProperties} object
 }
 \description{
-Create an object that describes paragraph formating
-properties.
+Create a \code{parProperties} object that describes
+paragraph formatting properties.
 }
 \details{
 parProperties is used to control paragraph properties. It
-is used when creating a tableProperties and when adding
-plots into a docx object.
+is used when creating a tableProperties, when adding plots
+into a docx object or when adding content in a FlexTable.
+
+Default values are: \itemize{ \item \code{text.align}
+"left" \item \code{padding.bottom} 1 \item
+\code{padding.top} 1 \item \code{padding.left} 1 \item
+\code{padding.right} 1 }
 }
 \examples{
+#START_TAG_TEST
 parProperties( text.align = "center", padding = 5)
-parProperties( text.align = "center", padding.top = 5, padding.bottom = 0, padding.left = 2
-	, padding.right = 0)
+parProperties( text.align = "center", padding.top = 5
+, padding.bottom = 0, padding.left = 2, padding.right = 0)
+#' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addTable}}, \code{\link{addPlot.docx}}
+\code{\link{cellProperties}}, \code{\link{parProperties}},
+\code{\link{textProperties}} ,
+\code{\link{chprop.parProperties}},
+\code{\link{chprop.textProperties}} ,
+\code{\link{FlexTable}}, \code{\link{tableProperties}},
+\code{\link{addTable}} , \code{\link{addPlot.docx}}
 }
 

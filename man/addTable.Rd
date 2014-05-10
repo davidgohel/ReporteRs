@@ -35,8 +35,8 @@ addTable(doc, data, layout.properties, header.labels, groupedheader.row,
   data[p,j]==data[p-1,j] )}
 
   \item{col.types}{a character whose elements define the
-  formating style of columns via their data roles. Optional
-  Possible values are : \emph{"character"},
+  formatting style of columns via their data roles.
+  Optional Possible values are : \emph{"character"},
   \emph{"integer"}, \emph{"logical"} , \emph{"double"},
   \emph{"percent"}, \emph{"date"}, \emph{"datetime}". If
   missing, factor and character will be formated as

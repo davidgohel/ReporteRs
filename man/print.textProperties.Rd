@@ -1,6 +1,6 @@
 \name{print.textProperties}
 \alias{print.textProperties}
-\title{print formating properties}
+\title{print formatting properties}
 \usage{
 \method{print}{textProperties}(x, ...)
 }
@@ -10,7 +10,7 @@
   \item{...}{further arguments, not used.}
 }
 \description{
-print text formating properties (an object of class
+print text formatting properties (an object of class
 \code{"textProperties"}).
 }
 \examples{

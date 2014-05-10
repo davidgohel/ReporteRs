@@ -47,7 +47,7 @@ FlexTable(data, numrow, numcol, header.columns = TRUE, add.rownames = FALSE,
 \description{
 Create an object of class \code{FlexTable}.
 
-FlexTable can be manipulated so that almost any formating
+FlexTable can be manipulated so that almost any formatting
 can be specified. It allows to insert headers and footers
 rows with eventually merged cells (see
 \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}).
