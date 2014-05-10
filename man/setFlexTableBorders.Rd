@@ -37,7 +37,6 @@ outer vectical and horizontal.
 #START_TAG_TEST
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
-# specify cell formatting properties for header columns row
 MyFTable = FlexTable( data = mtcars[1:10, ]
   , add.rownames=TRUE
 )
@@ -50,7 +49,8 @@ MyFTable = setFlexTableBorders( MyFTable
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}},
+\code{\link{setFlexTableWidths}} ,
 \code{\link{alterFlexTable}}, \code{\link{FlexTable}} ,
 \code{\link{spanFlexTableRows}},
 \code{\link{spanFlexTableColumns}} ,

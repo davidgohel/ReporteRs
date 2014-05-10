@@ -22,7 +22,6 @@ row index is even.
 #START_TAG_TEST
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
-# specify cell formatting properties for header columns row
 MyFTable = FlexTable( data = mtcars[1:10, ]
   , add.rownames=TRUE
 )
@@ -31,7 +30,8 @@ MyFTable = setZebraStyle( MyFTable, odd = "#8A949B", even = "#FAFAFA" )
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}},
+\code{\link{setFlexTableWidths}} ,
 \code{\link{alterFlexTable}},
 \code{\link{setFlexTableBorders}} ,
 \code{\link{spanFlexTableRows}},

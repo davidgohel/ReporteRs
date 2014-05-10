@@ -133,7 +133,8 @@ MyFTable = setFlexTableBorders( MyFTable
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{addFooterRow}} ,
+\code{\link{FlexTable}}, \code{\link{addFooterRow}},
+\code{\link{setFlexTableWidths}} ,
 \code{\link{alterFlexTable}},
 \code{\link{setFlexTableBorders}} ,
 \code{\link{spanFlexTableRows}},

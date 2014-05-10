@@ -39,7 +39,7 @@
 #' #START_TAG_TEST
 #' @example examples/FlexTableExample.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
@@ -189,7 +189,7 @@ FlexTable = function(data, numrow, numcol
 #' Used only if values are not missing. Default is the value of argument 
 #' \code{header.cell.props} provided to funtion \code{FlexTable} when object 
 #' has been created
-#' @seealso \code{\link{FlexTable}}, \code{\link{addFooterRow}}
+#' @seealso \code{\link{FlexTable}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
@@ -254,7 +254,7 @@ addHeaderRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @param par.properties Optional. parProperties to apply to each cell. Used only if values are not missing.
 #' @param cell.properties Optional. cellProperties to apply to each cell. Used only if values are not missing.
 #' @export
-#' @seealso \code{\link{addHeaderRow}}, \code{\link{FlexTable}}
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{FlexTable}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
@@ -415,7 +415,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/setFlexTableBorders1.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{FlexTable}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
@@ -429,7 +429,7 @@ setFlexTableBorders = function (object
 ){
 
 	if( !inherits(object, "FlexTable") )
-		stop("argument object_v must be a FlexTable object.")
+		stop("argument object must be a FlexTable object.")
 	if( !inherits(inner.vertical, "borderProperties") )
 		stop("argument inner.vertical must be a borderProperties object.")
 	if( !inherits(inner.horizontal, "borderProperties") )
@@ -476,7 +476,7 @@ setFlexTableBorders = function (object
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/setZebraStyle.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{FlexTable}}
@@ -504,7 +504,7 @@ setZebraStyle = function (object, odd, even){
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/setRowsColors.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{FlexTable}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
@@ -546,7 +546,7 @@ setRowsColors = function (object, i, colors){
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/setColumnsColors.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{FlexTable}}, \code{\link{setZebraStyle}}
@@ -592,7 +592,7 @@ setColumnsColors = function (object, j, colors){
 #' @example examples/spanFlexTableRows.R
 #' @example examples/STOP_TAG_TEST.R
 #' @export
-#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{FlexTable}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
@@ -674,7 +674,7 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 #' @example examples/spanFlexTableRows.R
 #' @example examples/STOP_TAG_TEST.R
 #' @export
-#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{FlexTable}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
@@ -710,3 +710,36 @@ spanFlexTableColumns = function (object, i, from, to){
 	
 	object
 }
+
+
+#' @title set columns widths of a FlexTable
+#'
+#' @description set columns widths of a FlexTable in inches. 
+#' 
+#' @param object a \code{FlexTable} object
+#' @param widths a numeric vector specifying columns widths in inches.
+#' @examples 
+#' #START_TAG_TEST
+#' @example examples/setFlexTableWidths.R
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
+#' , \code{\link{alterFlexTable}}, \code{\link{FlexTable}}
+#' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
+#' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
+#' , \code{\link{addFlexTable}}, \code{\link{addFlexTable.docx}}
+#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
+#' @export 
+setFlexTableWidths = function (object, widths ){
+	
+	if( !inherits(object, "FlexTable") )
+		stop("argument object must be a FlexTable object.")
+	if( !is.numeric( widths ) )
+		stop("argument widths must be a numeric vector.")
+	if( length(widths) != object$numcol )
+		stop("argument widths must be a vector of length ", object$numcol, ".")
+
+	.jcall( object$jobj, "V", "setWidths", .jarray( as.double(widths) ) )
+
+	object
+}
+

@@ -20,7 +20,6 @@ applies background colors to rows of a FlexTable
 #START_TAG_TEST
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
-# specify cell formatting properties for header columns row
 MyFTable = FlexTable( data = mtcars[1:10, ]
   , add.rownames=TRUE
 )
@@ -28,7 +27,8 @@ MyFTable = setRowsColors( MyFTable, i=1:4, colors = "red" )
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}},
+\code{\link{setFlexTableWidths}} ,
 \code{\link{alterFlexTable}},
 \code{\link{setFlexTableBorders}} ,
 \code{\link{spanFlexTableRows}},

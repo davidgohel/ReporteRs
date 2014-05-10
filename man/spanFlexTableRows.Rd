@@ -40,7 +40,8 @@ MyFTable = spanFlexTableRows( MyFTable, j=2, runs = as.character( pbc_summary$se
 #' #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}},
+\code{\link{setFlexTableWidths}} ,
 \code{\link{alterFlexTable}},
 \code{\link{setFlexTableBorders}} ,
 \code{\link{FlexTable}}, \code{\link{spanFlexTableColumns}}
