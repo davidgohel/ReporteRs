@@ -1,12 +1,14 @@
 #####################################################################
 
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
 # a summary of mtcars
 dataset = aggregate( mtcars[, c("disp", "mpg", "wt")]
 		, by = mtcars[, c("cyl", "gear", "carb")]
 		, FUN = mean )
 dataset = dataset[ order(dataset$cyl, dataset$gear, dataset$carb), ]
 
-options( "ReporteRs-fontsize" = 9 )
 
 # set cell padding defaut to 2
 baseCellProp = cellProperties( padding = 2 )

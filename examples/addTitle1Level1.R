@@ -1,2 +1,2 @@
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 1", level = 1 )

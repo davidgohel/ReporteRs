@@ -1,5 +1,8 @@
 #####################################################################
 
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body cells
 MyFTable = FlexTable( data = mtcars, add.rownames = TRUE
