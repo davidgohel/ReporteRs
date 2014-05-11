@@ -53,33 +53,40 @@ Add a plot into the \code{docx} object.
 }
 \examples{
 #START_TAG_TEST
+doc.filename = "addPlot_example.docx"
+
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
+doc = docx( )
+
+doc = addTitle( doc, "Title example 1", level = 1 )
+# Add a base plot
+# set vector.graphic to FALSE if Word version
+#   used to read the file is <= 2007
+doc = addPlot( doc, fun = plot
+  , x = rnorm( 100 ), y = rnorm (100 )
+  , main = "base plot main title"
+  , vector.graphic = TRUE
+  , width = 5, height = 7
+  , par.properties = parProperties(text.align = "left")
+)
+
+doc = addTitle( doc, "Title example 2", level = 1 )
+# load ggplot2
 require( ggplot2 )
 
-# Create a new document
-doc = docx( title = "title" )
+# create a ggplot2 plot
+myplot = qplot(Sepal.Length, Petal.Length, data = iris
+  , color = Species, size = Petal.Width, alpha = I(0.7) )
 
-doc = addTitle( doc, "Plot 1", level = 1 )
-# Add a base plot - set vector.graphic to FALSE if Word version
-# used to read the file is <= 2007
-doc = addPlot( doc, fun = plot
-		, x = rnorm( 100 )
-		, y = rnorm (100 )
-		, main = "base plot main title"
-		, vector.graphic = TRUE
-		, width = 5, height = 7
-		, par.properties = parProperties(text.align = "left")
-	)
+# Add myplot into object doc
+#   myplot is assigned to argument 'x' because function 'print' on ggplot
+#   objects is expecting argument 'x'.
+doc = addPlot( doc = doc, fun = print, x = myplot )
 
-doc = addTitle( doc, "Plot 2", level = 1 )
-myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-	, size = Petal.Width, alpha = I(0.7))
-doc = addPlot( doc = doc
-		, fun = print
-		, x = myplot #this argument MUST be named, print is expecting argument 'x'
-	)
-
-# Write the object in file "addPlot_example.docx"
-writeDoc( doc, "addPlot_example.docx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

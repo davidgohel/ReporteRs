@@ -21,24 +21,40 @@ Insert paragraph(s) of text into a \code{pptx} object
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = pptx( )
-# Add a slide
-doc = addSlide( doc, slide.layout = "Title and Content" )
-# Add "Hello World" into the document doc
-doc = addParagraph(doc, "Hello Word!" )
+doc.filename = "addParagraph_example.pptx"
 
-# Add a slide
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
+doc = pptx( title = "title" )
+
+# add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
-# Add into the document : "My tailor is rich" and "Cats and Dogs"
-# format some of the pieces of text
-pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-	, textProperties(font.weight="bold") )
-pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
-	, textProperties(color="blue") )
+
+doc = addTitle( doc, "Title example 1", level = 1 )
+
+# Add "Hello World" into the document doc
+doc = addParagraph(doc, "Hello Word" )
+
+# add a slide with layout "Title and Content"
+doc = addSlide( doc, slide.layout = "Title and Content" )
+
+doc = addTitle( doc, "Title example 2", level = 1 )
+# "My tailor is rich" with formatting on some words
+pot1 = pot("My tailor", textProperties(color = "red" ) 
+  ) + " is " + pot("rich", textProperties( font.weight = "bold" ) )
+# "Cats and dogs" with formatting on some words
+pot2 = pot("Cats", textProperties(color = "red" ) 
+  ) + " and " + pot("dogs", textProperties( color = "blue" ) )
+
+# create a set of paragraphs made of pot1 and pot2
 my.pars = set_of_paragraphs( pot1, pot2 )
+
+# Add my.pars into the document doc
 doc = addParagraph(doc, my.pars )
-writeDoc( doc, "addParagraph_example.pptx")
+
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

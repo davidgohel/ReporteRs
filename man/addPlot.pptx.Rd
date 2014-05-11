@@ -43,40 +43,46 @@ PowerPoint template used to create the \code{pptx} object.
 }
 \examples{
 #START_TAG_TEST
-require( ggplot2 )
-# Create a new document
+doc.filename = "addPlot_example.pptx"
+
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
 doc = pptx( title = "title" )
 
-# add a slide with layout "Title and Content" then add plot
+# add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
-doc = addTitle( doc, "base plot" )
+
+doc = addTitle( doc, "Title example 1" )
 # Add a base plot
+# set vector.graphic to FALSE if Word version
+#   used to read the file is <= 2007
 doc = addPlot( doc, fun = plot
-		, x = rnorm( 100 )
-		, y = rnorm (100 )
-		, main = "base plot main title"
-	)
+  , x = rnorm( 100 ), y = rnorm (100 )
+  , main = "base plot main title"
+  , vector.graphic = TRUE
+  , width = 5, height = 7
+  , par.properties = parProperties(text.align = "left")
+)
 
-# add a slide with layout "Two Content" then add 2 plots
-doc = addSlide( doc, slide.layout = "Two Content" )
-doc = addTitle( doc, "2 ggplot2 examples" )
-doc = addPlot( doc
-		, function(){
-			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-				, size = Petal.Width, alpha = I(0.7)) )
-		}
-	)
+# add a slide with layout "Title and Content"
+doc = addSlide( doc, slide.layout = "Title and Content" )
 
-myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-			, size = Petal.Width, alpha = I(0.7))
-doc = addPlot( doc
-		, print
-		, x = myplot #this argument MUST be named, print is expecting argument 'x'
-		, vector.graphic = FALSE
-	)
+doc = addTitle( doc, "Title example 2" )
+# load ggplot2
+require( ggplot2 )
 
-# Write the object in file "addPlot_example.pptx"
-writeDoc( doc, "addPlot_example.pptx" )
+# create a ggplot2 plot
+myplot = qplot(Sepal.Length, Petal.Length, data = iris
+  , color = Species, size = Petal.Width, alpha = I(0.7) )
+
+# Add myplot into object doc
+#   myplot is assigned to argument 'x' because function 'print' on ggplot
+#   objects is expecting argument 'x'.
+doc = addPlot( doc = doc, fun = print, x = myplot )
+
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

@@ -30,10 +30,18 @@ Insert a FlexTable into a docx object
 }
 \examples{
 #START_TAG_TEST
+doc.filename = "addFlexTable_example.docx"
+
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
 doc = docx( )
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 1", level = 1 )
 #####################################################################
+
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
 
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body cells
@@ -52,10 +60,14 @@ MyFTable = setFlexTableBorders(MyFTable
   , outer.horizontal = borderProperties( color = "#EDBD3E", style = "solid" )
 )
 
+# add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 2", level = 1 )
 #####################################################################
+
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
 
 # a summary of mtcars
 dataset = aggregate( mtcars[, c("disp", "mpg", "wt")]
@@ -63,7 +75,6 @@ dataset = aggregate( mtcars[, c("disp", "mpg", "wt")]
 		, FUN = mean )
 dataset = dataset[ order(dataset$cyl, dataset$gear, dataset$carb), ]
 
-options( "ReporteRs-fontsize" = 9 )
 
 # set cell padding defaut to 2
 baseCellProp = cellProperties( padding = 2 )
@@ -99,9 +110,11 @@ MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
 		, outer.horizontal = borderProperties( width = 2, color = "#666666" )
 )
 
+# add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-writeDoc( doc, file = "addFlexTable_example.docx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

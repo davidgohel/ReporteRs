@@ -30,28 +30,48 @@ Insert paragraph(s) of text into a \code{docx} object
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = docx( title = "title" )
+doc.filename = "addParagraph_example.docx"
 
-# Add "Hello World" into the document doc with
-# stylename "Normal". Run the following code to
-# see available stylenames:
-# \\code{styles(doc)}
-doc = addParagraph(doc, "Hello Word!", "Normal");
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
 
-# Add into the document : "My tailor is rich" and "Cats and Dogs"
-# format some of the pieces of text
-pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-	, textProperties(font.weight="bold") )
-pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
-	, textProperties(color="blue") )
+doc = docx( )
+
+# returns available stylenames
+styles( doc )
+
+doc = addTitle( doc, "Title example 1", level = 1 )
+
+# Add "Hello World" into the document doc
+doc = addParagraph(doc, "Hello Word", stylename = "Normal" )
+
+doc = addTitle( doc, "Title example 2", level = 1 )
+
+# define some texts
+texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+		, "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
+		, "Quisque dictum tristique ligula."
+)
+
+# add texts with stylename BulletList
+doc = addParagraph( doc, value = texts, stylename="BulletList" )
+
+doc = addTitle( doc, "Title example 3", level = 1 )
+# "My tailor is rich" with formatting on some words
+pot1 = pot("My tailor", textProperties(color = "red" ) 
+  ) + " is " + pot("rich", textProperties( font.weight = "bold" ) )
+# "Cats and dogs" with formatting on some words
+pot2 = pot("Cats", textProperties(color = "red" ) 
+  ) + " and " + pot("dogs", textProperties( color = "blue" ) )
+
+# create a set of paragraphs made of pot1 and pot2
 my.pars = set_of_paragraphs( pot1, pot2 )
 
-# used style is "BulletList" so that paragraphs will be preceded by bullet points
-# ("BulletList" is an existing style in the defaut template docx of the package)
-doc = addParagraph(doc, my.pars, "BulletList");
+# Add my.pars into the document doc
+doc = addParagraph(doc, my.pars, stylename = "Normal" )
 
-writeDoc( doc, "addParagraph_example.docx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

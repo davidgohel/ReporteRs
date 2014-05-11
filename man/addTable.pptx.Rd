@@ -74,12 +74,17 @@ added.
 }
 \examples{
 #START_TAG_TEST
+doc.filename = "addTable_example.pptx"
+
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-doc = addTitle( doc, "Title example" )
+doc = addTitle( doc, "Title example 1" )
 #
 # simpliest usage
 doc = addTable( doc, iris[ 1:10,] )
@@ -87,7 +92,7 @@ doc = addTable( doc, iris[ 1:10,] )
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-doc = addTitle( doc, "Title example" )
+doc = addTitle( doc, "Title example 2" )
 # demo span.columns
 # Iris sample dataset with span cells on column Species
 doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
@@ -95,7 +100,7 @@ doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-doc = addTitle( doc, "Title example" )
+doc = addTitle( doc, "Title example 3" )
 #
 # demo many options
 data( data_ReporteRs )
@@ -116,8 +121,9 @@ doc = addTable( doc
         , "col4" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540")
     )
 )
-# Write the object "doc" in file "addTable_example.pptx"
-writeDoc( doc, file = "addTable_example.pptx" )
+
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

@@ -46,9 +46,9 @@ document, vector graphics will always be displayed.Don't
 use vector graphics if document is a docx and MS Word
 version used to open the document is 2007.
 
-See \code{\link{addParagraph.docx}} or
-\code{\link{addParagraph.pptx}} or
-\code{\link{addParagraph.html}} for examples.
+See \code{\link{addPlot.docx}} or
+\code{\link{addPlot.pptx}} or \code{\link{addPlot.html}}
+for examples.
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addPlot.docx}} ,

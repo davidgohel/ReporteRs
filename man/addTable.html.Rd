@@ -70,22 +70,27 @@ Insert a table into the \code{html} object.
 }
 \examples{
 #START_TAG_TEST
+doc.dirname = "addTable_example"
+
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
 
 doc = html()
 
+# add a page with title "page example"
 doc = addPage( doc, title = "page example" )
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 1", level = 1 )
 #
 # simpliest usage
 doc = addTable( doc, iris[ 1:10,] )
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 2", level = 1 )
 # demo span.columns
 # Iris sample dataset with span cells on column Species
 doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 3", level = 1 )
 #
 # demo many options
 data( data_ReporteRs )
@@ -106,8 +111,9 @@ doc = addTable( doc
         , "col4" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540")
     )
 )
-# Write the object "doc" in directory "addTable_example"
-writeDoc( doc, directory = "addTable_example" )
+
+# Write the object
+writeDoc( doc, directory = doc.dirname )
 #STOP_TAG_TEST
 }
 \seealso{

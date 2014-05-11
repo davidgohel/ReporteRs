@@ -82,19 +82,24 @@ Insert a table into the \code{docx} object.
 }
 \examples{
 #START_TAG_TEST
+doc.filename = "addTable_example.docx"
+
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
 doc = docx( )
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 1", level = 1 )
 #
 # simpliest usage
 doc = addTable( doc, iris[ 1:10,] )
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 2", level = 1 )
 # demo span.columns
 # Iris sample dataset with span cells on column Species
 doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 
-doc = addTitle( doc, "Title example", level = 1 )
+doc = addTitle( doc, "Title example 3", level = 1 )
 #
 # demo many options
 data( data_ReporteRs )
@@ -115,8 +120,9 @@ doc = addTable( doc
         , "col4" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540")
     )
 )
-# Write the object "doc" in file "addTable_example.docx"
-writeDoc( doc, file = "addTable_example.docx" )
+
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

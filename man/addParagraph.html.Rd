@@ -33,32 +33,37 @@ Insert paragraph(s) of text into a \code{html} object
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = html( title = "title" )
+doc.dirname = "addParagraph_example"
 
-# add a page where to add R outputs with title 'page example 1'
-doc = addPage( doc, title = "page example 1" )
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
+doc = html()
+
+# add a page with title "page example"
+doc = addPage( doc, title = "page example" )
+
+doc = addTitle( doc, "Title example 1", level = 1 )
 
 # Add "Hello World" into the document doc
-doc = addParagraph(doc, "Hello Word!")
+doc = addParagraph(doc, "Hello Word" )
 
-# add a page where to add R outputs with title 'page example 2'
-doc = addPage( doc, title = "page example 2" )
+doc = addTitle( doc, "Title example 2", level = 1 )
+# "My tailor is rich" with formatting on some words
+pot1 = pot("My tailor", textProperties(color = "red" ) 
+  ) + " is " + pot("rich", textProperties( font.weight = "bold" ) )
+# "Cats and dogs" with formatting on some words
+pot2 = pot("Cats", textProperties(color = "red" ) 
+  ) + " and " + pot("dogs", textProperties( color = "blue" ) )
 
-# Add into the document : "My tailor is rich" and "Cats and Dogs"
-# format some of the pieces of text
-pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-	, textProperties(font.weight="bold") )
-pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
-	, textProperties(color="blue") )
+# create a set of paragraphs made of pot1 and pot2
 my.pars = set_of_paragraphs( pot1, pot2 )
 
-# used parent.type = "ul" so that paragraphs will be preceded by bullet points
-doc = addParagraph(doc, my.pars, parent.type = "ul")
+# Add my.pars into the document doc
+doc = addParagraph(doc, my.pars )
 
-# write the html object in a directory
-pages = writeDoc( doc, "addParagraph_example")
-print( pages ) # print filenames of generated html pages
+# Write the object
+writeDoc( doc, directory = doc.dirname )
 #STOP_TAG_TEST
 }
 \seealso{
