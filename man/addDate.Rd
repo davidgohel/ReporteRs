@@ -16,9 +16,10 @@ a document object
 Insert a date into a document object
 }
 \details{
-addDate only works for pptx slides. See
-\code{\link{addSlide.pptx}}. \code{docx} and \code{html}
-object have no method \code{addDate} implemented.
+addDate only works for pptx documents. See
+\code{\link{addSlide.pptx}}.
+
+See \code{\link{addSlide.pptx}} for examples.
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addSlide.pptx}}

@@ -18,6 +18,11 @@ a document object
 \description{
 Add an external image into a document object
 }
+\details{
+See \code{\link{addImage.docx}} or
+\code{\link{addImage.pptx}} or \code{\link{addImage.html}}
+for examples.
+}
 \seealso{
 \code{\link{docx}}, \code{\link{addImage.docx}} ,
 \code{\link{pptx}}, \code{\link{addImage.pptx}} ,

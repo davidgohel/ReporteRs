@@ -141,7 +141,7 @@ cellProp22 = chprop( cellProp, background.color = "#517281" )
 
 cellProp23 = chprop( cellProp, background.color = "#517281"
   , border.color = "#F37257", border.width = 2  )
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{cellProperties}}, \code{\link{parProperties}},

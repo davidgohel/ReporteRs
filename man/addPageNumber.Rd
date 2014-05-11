@@ -16,10 +16,9 @@ a document object
 Insert a page number into a document object
 }
 \details{
-addPageNumber only works for pptx slides. See
-\code{\link{addPageNumber.pptx}}. \code{docx} and
-\code{html} object have no method \code{addPageNumber}
-implemented.
+\code{addPageNumber} only works with pptx documents.
+
+See \code{\link{addPageNumber.pptx}} for examples.
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addPageNumber.pptx}}

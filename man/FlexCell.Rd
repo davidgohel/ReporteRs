@@ -39,7 +39,7 @@ Fcell = FlexCell( mytext, colspan = 4 )
 mytext1 = pot("Hello", format = textProperties(color = "blue") )
 mytext2 = pot( "world", format = textProperties(font.size = 9) )
 Fcell = FlexCell( set_of_paragraphs( mytext1, mytext2 ) )
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addFlexTable}}, \code{\link{addHeaderRow}},

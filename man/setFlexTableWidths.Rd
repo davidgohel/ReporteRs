@@ -18,7 +18,7 @@ set columns widths of a FlexTable in inches.
 # Create a FlexTable object with first 10 lines of data.frame iris
 MyFTable = FlexTable( data = iris[1:10, ] )
 MyFTable = setFlexTableWidths( MyFTable, widths = c(1,1,1,1,3))
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addHeaderRow}}, \code{\link{addFooterRow}},

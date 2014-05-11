@@ -21,23 +21,10 @@ FlexTable can be manipulated so that almost any formatting
 can be specified. See \code{\link{FlexTable}} for more
 details.
 }
-\examples{
-#START_TAG_TEST
-MyFTable = FlexTable( data = mtcars, add.rownames = TRUE
-  , body.cell.props = cellProperties( border.color="#EDBD3E")
-  , header.cell.props = cellProperties( background.color="#5B7778"
-    , border.color="#EDBD3E")
-)
-
-MyFTable = setZebraStyle( MyFTable, odd = "#D1E6E7", even = "#93A8A9" )
-
-MyFTable = setFlexTableBorders(MyFTable
-  , inner.vertical = borderProperties( color="#EDBD3E", style="dotted" )
-  , inner.horizontal = borderProperties( color = "#EDBD3E", style = "none" )
-  , outer.vertical = borderProperties( color = "#EDBD3E", style = "solid" )
-  , outer.horizontal = borderProperties( color = "#EDBD3E", style = "solid" )
-)
-#' #STOP_TAG_TEST
+\details{
+See \code{\link{addFlexTable.docx}} or
+\code{\link{addFlexTable.pptx}} or
+\code{\link{addFlexTable.html}} for examples.
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFlexTable.docx}} ,

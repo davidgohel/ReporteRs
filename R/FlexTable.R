@@ -205,6 +205,9 @@ FlexTable = function(data, numrow, numcol
 #' @export
 addHeaderRow = function( x, value, colspan, text.properties, par.properties, cell.properties ){
 	
+	if( !inherits(x, c("FlexTable") ) ) 
+		stop("x must be a FlexTable object.")
+	
 	if( !is.character(value) && !inherits(value, "FlexRow") )
 		stop("argument value must be an object of class 'FlexRow' or a character vector.")
 	
@@ -267,6 +270,9 @@ addHeaderRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @example examples/STOP_TAG_TEST.R
 addFooterRow = function( x, value, colspan, text.properties, par.properties, cell.properties ){
 
+	if( !inherits(x, c("FlexTable") ) ) 
+		stop("x must be a FlexTable object.")
+	
 	if( !is.character(value) && !inherits(value, "FlexRow") )
 		stop("argument value must be an object of class 'FlexRow' or a character vector.")
 	
@@ -372,7 +378,20 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 			|| ( is.vector( value ) )
 			){
 		
-		if( is.table(value) ) value = as.matrix(value)
+		if( is.table(value) ) {
+			if( length( dim( data ) ) < 2 ){
+				value = matrix( unclass( value )
+						, dimnames = list( names( value ), "" )
+						, nrow = dim( value )
+				)
+			}
+			else {
+				value = matrix( unclass( value )
+						, dimnames = dimnames( value )
+						, nrow = dim( value )[1]
+				)
+			}
+		}
 		
 		if( missing(text.properties))
 			text.properties = x$body.text.props
@@ -427,9 +446,9 @@ setFlexTableBorders = function (object
   , outer.vertical = borderProperties(), outer.horizontal = borderProperties()
   , body = TRUE, header = TRUE, footer = FALSE
 ){
-
 	if( !inherits(object, "FlexTable") )
 		stop("argument object must be a FlexTable object.")
+	
 	if( !inherits(inner.vertical, "borderProperties") )
 		stop("argument inner.vertical must be a borderProperties object.")
 	if( !inherits(inner.horizontal, "borderProperties") )
@@ -484,6 +503,16 @@ setFlexTableBorders = function (object
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 #' @export 
 setZebraStyle = function (object, odd, even){
+	if( !inherits(object, "FlexTable") )
+		stop("argument object must be a FlexTable object.")
+	if( !is.color( odd ) )
+		stop("odd must be a valid color." )
+	if( !is.color( even ) )
+		stop("even must be a valid color." )
+	
+	if( length( odd ) != 1 ) stop("odd must be of length 1")
+	if( length( even ) != 1 ) stop("even must be of length 1")
+	
 	.jcall( object$jobj , "V", "setOddEvenColor"
 			, odd
 			, even
@@ -512,6 +541,9 @@ setZebraStyle = function (object, odd, even){
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 #' @export 
 setRowsColors = function (object, i, colors){
+	
+	if( !inherits(object, "FlexTable") )
+		stop("argument object must be a FlexTable object.")
 	
 	args.get.indexes = list(object = object)
 	if( !missing(i) ) args.get.indexes$i = i
@@ -554,6 +586,9 @@ setRowsColors = function (object, i, colors){
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 #' @export 
 setColumnsColors = function (object, j, colors){
+	if( !inherits(object, "FlexTable") )
+		stop("argument object must be a FlexTable object.")
+	
 	args.get.indexes = list(object = object)
 	if( !missing(j) ) args.get.indexes$j = j
 	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
@@ -601,6 +636,9 @@ setColumnsColors = function (object, j, colors){
 #' @export 
 spanFlexTableRows = function (object, j, from, to, runs ){
 
+	if( !inherits(object, "FlexTable") )
+		stop("argument object must be a FlexTable object.")
+	
 	args.get.indexes = list(object = object)
 	if( !missing(j) ) args.get.indexes$j = j
 	indexes = do.call(get.indexes.from.arguments, args.get.indexes)
@@ -682,6 +720,9 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 #' @export 
 spanFlexTableColumns = function (object, i, from, to){
+	
+	if( !inherits(object, "FlexTable") )
+		stop("argument object must be a FlexTable object.")
 	
 	if( missing(i) && is.numeric (i) && length(i) != 1 ) {
 		stop("invalid argument i, it must be a unique positive integer.")

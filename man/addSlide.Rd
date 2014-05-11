@@ -15,6 +15,10 @@ a document object
 \description{
 Add a slide into a document object
 }
+\details{
+\code{addSlide} only works with pptx documents. See
+\code{\link{addSlide.pptx}} for examples.
+}
 \seealso{
 \code{\link{pptx}}, \code{\link{addSlide.pptx}}
 }

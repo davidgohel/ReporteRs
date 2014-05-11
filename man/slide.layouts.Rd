@@ -12,6 +12,10 @@ slide.layouts(doc, ...)
 \description{
 Get layout names that exist into a document
 }
+\details{
+\code{slide.layouts} only works with pptx documents. See
+\code{\link{slide.layouts.pptx}} for examples.
+}
 \seealso{
 \code{\link{pptx}}, \code{\link{slide.layouts.pptx}},
 \code{\link{addSlide.pptx}}

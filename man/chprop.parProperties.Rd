@@ -48,7 +48,7 @@ parProp04 = chprop( parProp, padding.left = 2 )
 parProp05 = chprop( parProp, padding = 2 )
 
 parProp06 = chprop( parProp, padding = 2, text.align = "center" )
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{cellProperties}}, \code{\link{parProperties}},

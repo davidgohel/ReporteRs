@@ -39,39 +39,16 @@ into a function whose parameters will be specified as
 '...'.
 
 If you want to add ggplot2 or lattice plot, use
-\code{print} function. See examples for more details.
-\describe{ \item{vector.graphic}{If document is a pptx or
-html document, vector graphics will always be displayed.
-Don't use vector graphics if document is a docx and MS Word
-version used to open the document is 2007.  } }
-}
-\examples{
-\dontrun{
-require( ggplot2 )
-# Add a base plot
-doc = addPlot( doc = doc, fun = plot
-		, x = rnorm( 100 )
-		, y = rnorm (100 )
-		, main = "base plot main title"
-	)
+\code{print} function.
 
-## Add a ggplot2
-myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-	, size = Petal.Width, alpha = I(0.7))
-doc = addPlot( doc = doc
-		, fun = print
-		, x = myplot #this argument MUST be named, print is expecting argument 'x'
-	)
+\code{vector.graphic}: if document is a pptx or html
+document, vector graphics will always be displayed.Don't
+use vector graphics if document is a docx and MS Word
+version used to open the document is 2007.
 
-## Add a ggplot2 and another plot
-doc = addPlot( doc = doc
-		, fun = function(){
-			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-				, size = Petal.Width, alpha = I(0.7)) )
-			plot(x = rnorm( 100 ), y = rnorm (100 ), main = "base plot main title")
-		}
-	)
-}
+See \code{\link{addParagraph.docx}} or
+\code{\link{addParagraph.pptx}} or
+\code{\link{addParagraph.html}} for examples.
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addPlot.docx}} ,

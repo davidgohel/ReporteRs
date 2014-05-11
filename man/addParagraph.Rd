@@ -27,22 +27,6 @@ to get different font formats. Trying to insert a
 \code{'\n'} will have no effect. If an end of line is
 required , a new paragraph is required.
 }
-\examples{
-\dontrun{
-# Add "Hello World" into the document doc
-doc = addParagraph(doc, "Hello Word!");
-
-# Add into the document : "My tailor is rich" and "Cats and Dogs"
-# format some of the pieces of text
-pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-	, textProperties(font.weight="bold") )
-my.pars = set_of_paragraphs( pot1 )
-pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
-	, textProperties(color="blue") )
-my.pars = set_of_paragraphs( pot1, pot2 )
-doc = addParagraph(doc, my.pars )
-}
-}
 \seealso{
 \code{\link{docx}}, \code{\link{addParagraph.docx}} ,
 \code{\link{pptx}}, \code{\link{addParagraph.pptx}} ,

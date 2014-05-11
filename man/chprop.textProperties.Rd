@@ -53,7 +53,7 @@ textProp06 = chprop( textProp, font.family = "Arial" )
 textProp07 = chprop( textProp, vertical.align = "superscript" )
 
 textProp08 = chprop( textProp, font.size = 12, font.weight = "bold", color = "red" )
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{cellProperties}}, \code{\link{parProperties}},

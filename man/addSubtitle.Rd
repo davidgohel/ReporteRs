@@ -15,6 +15,10 @@ a document object
 \description{
 Add a subtitle shape into a document object
 }
+\details{
+\code{addSubtitle} only works with pptx documents. See
+\code{\link{addSubtitle.pptx}} for examples.
+}
 \seealso{
 \code{\link{pptx}}, \code{\link{addSubtitle.pptx}}
 }

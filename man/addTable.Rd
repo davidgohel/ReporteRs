@@ -70,8 +70,8 @@ Add a table into a document object
 }
 \details{
 The table below shows the display model used to format
-tables:\cr
-\preformatted{+--------------+---------------+\nGROUPEDHEADER_1|GROUPEDHEADER_2|}
+tables:\cr \preformatted{+--------------+---------------+}
+\preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
 \preformatted{+------+-------+-------+-------+}
 \preformatted{HEADER1|HEADER2|HEADER3|HEADER4|}
 \preformatted{+------+-------+-------+-------+}
@@ -81,34 +81,10 @@ tables:\cr
 \preformatted{+------+-------+-------+-------+}
 \preformatted{ x[3,1]| x[3,2]| x[3,3]|| x[3,4]|}
 \preformatted{+------+-------+-------+-------+}
-}
-\examples{
-\dontrun{
-# add the first 5 lines of iris
-doc = addTable( doc, head( iris, n = 5 ) )
 
-# demo span.columns
-doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
-
-data( data_ReporteRs )
-# add data_ReporteRs and customise some options
-doc = addTable( doc
-		, data = data_ReporteRs
-		, header.labels = c( "Header 1", "Header 2", "Header 3"
-			, "Header 4", "Header 5", "Header 6" )
-		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
-			, colspan = c(3, 3) )
-		, col.types = c( "character", "integer", "double", "date", "percent", "character" )
-		, columns.font.colors = list(
-			"col1" = c("#527578", "#84978F", "#ADA692", "#47423F")
-			, "col3" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540")
-			)
-		, columns.bg.colors = list(
-			"col2" = c("#527578", "#84978F", "#ADA692", "#47423F")
-			, "col4" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540")
-			)
-	)
-}
+See \code{\link{addTable.docx}} or
+\code{\link{addTable.pptx}} or \code{\link{addTable.html}}
+for examples.
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addTable.docx}} ,

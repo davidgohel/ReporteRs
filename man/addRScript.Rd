@@ -20,6 +20,10 @@ a document object
 \description{
 Add R script into a document object
 }
+\details{
+\code{addRScript} only works with html documents. See
+\code{\link{addRScript.html}} for examples.
+}
 \seealso{
 \code{\link{html}}, \code{\link{addRScript.html}}
 }

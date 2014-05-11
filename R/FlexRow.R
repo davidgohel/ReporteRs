@@ -24,6 +24,7 @@ FlexRow = function( values, colspan, text.properties = textProperties(), par.pro
 		if( !is.character( values ) ) stop("argument 'values' must be a character vector.")
 		if( missing( colspan ) ) colspan = rep(1, length( values ) )
 		if( length( colspan ) != length( values ) ) stop("Length of colspan is different from length of values.")
+		if( any( is.na( values ) ) ) values[is.na(values)] = "NA"
 		for(i in 1:length( values ) )
 			.Object[i] = FlexCell( value = pot( values[i], format = text.properties )
 				, colspan = colspan[i]

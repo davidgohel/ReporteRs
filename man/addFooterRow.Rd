@@ -64,7 +64,7 @@ footerRow[1] = FlexCell( mytext, colspan = 4 )
 
 # add the FlexRow to the FlexTable
 MyFTable = addFooterRow( MyFTable, footerRow )
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addHeaderRow}}, \code{\link{FlexTable}},

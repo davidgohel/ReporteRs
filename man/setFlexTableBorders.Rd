@@ -46,7 +46,7 @@ MyFTable = setFlexTableBorders( MyFTable
   , outer.vertical = borderProperties( width = 2 )
   , outer.horizontal = borderProperties( width = 2 )
 )
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addHeaderRow}}, \code{\link{addFooterRow}},

@@ -24,7 +24,7 @@ MyFTable = FlexTable( data = mtcars[1:10, ]
   , add.rownames=TRUE
 )
 MyFTable = setRowsColors( MyFTable, i=1:4, colors = "red" )
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addHeaderRow}}, \code{\link{addFooterRow}},

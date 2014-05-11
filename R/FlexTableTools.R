@@ -48,7 +48,8 @@ get.indexes.from.arguments = function( object, i, j){
 		if( length( i ) != length(object) ) stop("invalid row subset - incorrect length")
 		else i = which(i)
 	} else if( is.character (i) ){
-		if( !all( is.element(i, object$row_id ) ) ) stop("invalid row.names subset")
+		if( any( is.na( object$row_id ) ) ) stop("null row.names")
+		else if( !all( is.element(i, object$row_id ) ) ) stop("invalid row.names subset")
 		else i = match(i, object$row_id )
 	} else stop("row subset must be a logical vector, an integer vector or a character vector(from row.names).")
 	
@@ -58,7 +59,8 @@ get.indexes.from.arguments = function( object, i, j){
 		if( length( j ) != object$numcol ) stop("invalid col subset - incorrect length")
 		else j = which(j)
 	} else if( is.character (j) ){
-		if( !all( is.element(j, object$col_id)) ) stop("invalid col.names subset")
+		if( any( is.na( object$col_id ) ) ) stop("null col.names")
+		else if( !all( is.element(j, object$col_id)) ) stop("invalid col.names subset")
 		else j = match(j, object$col_id)
 	} else stop("col subset must be a logical vector, an integer vector or a character vector(row.names).")
 	

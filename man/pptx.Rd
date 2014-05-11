@@ -117,10 +117,10 @@ Wikipedia: Office Open
 XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \seealso{
-\code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}},
-\code{\link{addParagraph.pptx}} ,
+\code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}} ,
+\code{\link{addParagraph.pptx}},
 \code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}} ,
-\code{\link{slide.layouts.pptx}},
+\code{\link{slide.layouts.pptx}}, \code{\link{dim.pptx}},
 \code{\link{writeDoc.pptx}}
 }
 

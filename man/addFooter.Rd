@@ -16,9 +16,8 @@ a document object
 Insert a footer into a document object
 }
 \details{
-addFooter only works for pptx slides. See
-\code{\link{addFooter.pptx}}. \code{docx} and \code{html}
-object have no method \code{addFooter} implemented.
+addFooter only works for pptx documents. See
+\code{\link{addFooter.pptx}} for examples.
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addSlide.pptx}}

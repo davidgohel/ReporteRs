@@ -6,8 +6,9 @@
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @details 
-#' addDate only works for pptx slides. See \code{\link{addSlide.pptx}}. 
-#' \code{docx} and \code{html} object have no method \code{addDate} implemented.  
+#' addDate only works for pptx documents. See \code{\link{addSlide.pptx}}. 
+#' 
+#' See \code{\link{addSlide.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}
 addDate = function(doc, ...){
@@ -24,15 +25,14 @@ addDate = function(doc, ...){
 #' @param doc document object
 #' @param flextable the \code{FlexTable} object
 #' @param ... further arguments passed to other methods 
+#' @details 
+#' See \code{\link{addFlexTable.docx}} or \code{\link{addFlexTable.pptx}}
+#' or \code{\link{addFlexTable.html}} for examples.
 #' @return a document object
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFlexTable.docx}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 #' , \code{\link{addTable}}
-#' @examples
-#' #START_TAG_TEST
-#' @example examples/FlexTableExample.R
-#' @example examples/STOP_TAG_TEST.R
 addFlexTable = function(doc, flextable, ...){
 	
 	checkHasSlide(doc)
@@ -51,8 +51,7 @@ addFlexTable = function(doc, flextable, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @details 
-#' addFooter only works for pptx slides. See \code{\link{addFooter.pptx}}. 
-#' \code{docx} and \code{html} object have no method \code{addFooter} implemented.  
+#' addFooter only works for pptx documents. See \code{\link{addFooter.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}
 addFooter = function(doc, ...){
@@ -70,6 +69,9 @@ addFooter = function(doc, ...){
 #' of the external image
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' See \code{\link{addImage.docx}} or \code{\link{addImage.pptx}}
+#' or \code{\link{addImage.html}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addImage.docx}}
 #' , \code{\link{pptx}}, \code{\link{addImage.pptx}}
@@ -98,6 +100,8 @@ addImage = function(doc, filename, ...){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' \code{addPage} only works with html documents. See \code{\link{addPage.html}} for examples.
 #' @export
 #' @seealso \code{\link{html}}, \code{\link{addPage.html}}
 addPage = function(doc, ...){
@@ -112,6 +116,10 @@ addPage = function(doc, ...){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' \code{addPageBreak} only works with docx documents. 
+#' 
+#' See \code{\link{addPageBreak.docx}} for examples. 
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addPageBreak.docx}}
 addPageBreak = function(doc, ...){
@@ -128,8 +136,9 @@ addPageBreak = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @details 
-#' addPageNumber only works for pptx slides. See \code{\link{addPageNumber.pptx}}. 
-#' \code{docx} and \code{html} object have no method \code{addPageNumber} implemented.  
+#' \code{addPageNumber} only works with pptx documents.
+#' 
+#' See \code{\link{addPageNumber.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addPageNumber.pptx}}
 addPageNumber = function(doc, ...){
@@ -152,22 +161,10 @@ addPageNumber = function(doc, ...){
 #' A set_of_paragraphs object is a container for \code{pot} objects.
 #' @param ... further arguments passed to other methods 
 #' @return a document object
-#' @examples
-#' \dontrun{
-#' # Add "Hello World" into the document doc
-#' doc = addParagraph(doc, "Hello Word!");
-#' 
-#' # Add into the document : "My tailor is rich" and "Cats and Dogs"
-#' # format some of the pieces of text
-#' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-#' 	, textProperties(font.weight="bold") )
-#' my.pars = set_of_paragraphs( pot1 )
-#' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
-#' 	, textProperties(color="blue") )
-#' my.pars = set_of_paragraphs( pot1, pot2 )
-#' doc = addParagraph(doc, my.pars )
-#' }
 #' @export
+#' @details 
+#' See \code{\link{addParagraph.docx}} or \code{\link{addParagraph.pptx}}
+#' or \code{\link{addParagraph.html}} for examples.
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{pptx}}, \code{\link{addParagraph.pptx}}
 #' , \code{\link{html}}, \code{\link{addParagraph.html}}
@@ -207,41 +204,15 @@ addParagraph = function(doc, value, ...){
 #' into a function whose parameters will be specified as '...'.
 #'  
 #' If you want to add ggplot2 or lattice plot, use 
-#' \code{print} function. See examples for more details.
-#' \describe{
-#'   \item{vector.graphic}{If document is a pptx or html document, 
-#' vector graphics will always be displayed.
-#' Don't use vector graphics if document is a 
-#' docx and MS Word version used to open the document is 2007.
-#'		}
-#' }
-#' @examples 
-#' \dontrun{
-#' require( ggplot2 )
-#' # Add a base plot
-#' doc = addPlot( doc = doc, fun = plot
-#' 		, x = rnorm( 100 )
-#' 		, y = rnorm (100 )
-#' 		, main = "base plot main title"
-#' 	)
+#' \code{print} function. 
 #' 
-#' ## Add a ggplot2
-#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-#' 	, size = Petal.Width, alpha = I(0.7))
-#' doc = addPlot( doc = doc
-#' 		, fun = print
-#' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
-#' 	)
+#' \code{vector.graphic}: if document is a pptx or html document, 
+#' vector graphics will always be displayed.Don't use vector 
+#' graphics if document is a docx and MS Word version used 
+#' to open the document is 2007.
 #' 
-#' ## Add a ggplot2 and another plot
-#' doc = addPlot( doc = doc
-#' 		, fun = function(){
-#' 			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-#' 				, size = Petal.Width, alpha = I(0.7)) )
-#' 			plot(x = rnorm( 100 ), y = rnorm (100 ), main = "base plot main title")
-#' 		}
-#' 	)
-#' }
+#' See \code{\link{addParagraph.docx}} or \code{\link{addParagraph.pptx}}
+#' or \code{\link{addParagraph.html}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
 #' , \code{\link{pptx}}, \code{\link{addPlot.pptx}}
@@ -259,6 +230,8 @@ addPlot = function(doc, fun, pointsize = 12, vector.graphic = F, ...){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' \code{addSlide} only works with pptx documents. See \code{\link{addSlide.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}
 addSlide = function(doc, ...){
@@ -273,6 +246,8 @@ addSlide = function(doc, ...){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' \code{addSubtitle} only works with pptx documents. See \code{\link{addSubtitle.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addSubtitle.pptx}}
 addSubtitle = function(doc, ...){
@@ -291,6 +266,8 @@ addSubtitle = function(doc, ...){
 #' @param text character vector. The text to parse. Not used if file is provided.
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' \code{addRScript} only works with html documents. See \code{\link{addRScript.html}} for examples.
 #' @export
 #' @seealso \code{\link{html}}, \code{\link{addRScript.html}}
 addRScript = function(doc, file, text, ...){
@@ -345,7 +322,8 @@ addRScript = function(doc, file, text, ...){
 #' @param ... further arguments passed to or from other methods.. 
 #' @details
 #' The table below shows the display model used to format tables:\cr
-#' \preformatted{+--------------+---------------+\nGROUPEDHEADER_1|GROUPEDHEADER_2|}
+#' \preformatted{+--------------+---------------+}
+#' \preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
 #' \preformatted{+------+-------+-------+-------+}
 #' \preformatted{HEADER1|HEADER2|HEADER3|HEADER4|}
 #' \preformatted{+------+-------+-------+-------+}
@@ -355,34 +333,11 @@ addRScript = function(doc, file, text, ...){
 #' \preformatted{+------+-------+-------+-------+}
 #' \preformatted{ x[3,1]| x[3,2]| x[3,3]|| x[3,4]|}
 #' \preformatted{+------+-------+-------+-------+}
+#'
+#' 
+#' See \code{\link{addTable.docx}} or \code{\link{addTable.pptx}}
+#' or \code{\link{addTable.html}} for examples.
 #' @return a document object
-#' @examples
-#' \dontrun{
-#' # add the first 5 lines of iris
-#' doc = addTable( doc, head( iris, n = 5 ) )
-#' 
-#' # demo span.columns
-#' doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
-#' 
-#' data( data_ReporteRs )
-#' # add data_ReporteRs and customise some options
-#' doc = addTable( doc
-#'		, data = data_ReporteRs
-#'		, header.labels = c( "Header 1", "Header 2", "Header 3"
-#' 			, "Header 4", "Header 5", "Header 6" )
-#'		, groupedheader.row = list( values = c("Grouped column 1", "Grouped column 2")
-#' 			, colspan = c(3, 3) )
-#'		, col.types = c( "character", "integer", "double", "date", "percent", "character" )
-#'		, columns.font.colors = list( 
-#' 			"col1" = c("#527578", "#84978F", "#ADA692", "#47423F")
-#' 			, "col3" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540") 
-#' 			)
-#'		, columns.bg.colors = list( 
-#' 			"col2" = c("#527578", "#84978F", "#ADA692", "#47423F")
-#' 			, "col4" = c("#74A6BD", "#7195A3", "#D4E7ED", "#EB8540") 
-#' 			)
-#'	)
-#' }
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addTable.docx}}
 #' , \code{\link{pptx}}, \code{\link{addTable.pptx}}
@@ -513,6 +468,9 @@ addTable = function(doc, data, layout.properties
 #' @param value \code{"character"} value to use as title text
 #' @param ... further arguments passed to or from other methods.. 
 #' @return a document object
+#' @details 
+#' See \code{\link{addTitle.docx}} or \code{\link{addTitle.pptx}}
+#' or \code{\link{addTitle.html}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}, \code{\link{pptx}}
 #' , \code{\link{addTitle.pptx}}, \code{\link{html}}, \code{\link{addTitle.html}}
@@ -528,6 +486,10 @@ addTitle = function(doc, value, ...){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' \code{addTOC} only works with docx documents. 
+#' 
+#' See \code{\link{addTOC.docx}} for examples. 
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}, \code{\link{styles.docx}}
 addTOC = function(doc, ...){
@@ -541,6 +503,9 @@ addTOC = function(doc, ...){
 #' @param object formatting properties object
 #' @param ... further arguments passed to other methods 
 #' @return a formatting properties object
+#' @details 
+#' See \code{\link{chprop.textProperties}} or \code{\link{chprop.parProperties}}
+#' or \code{\link{chprop.cellProperties}} for examples.
 #' @export
 #' @seealso \code{\link{cellProperties}}, \code{\link{textProperties}}
 #' , \code{\link{parProperties}}
@@ -555,6 +520,10 @@ chprop = function( object, ... ){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' \code{declareTitlesStyles} only works with docx documents. 
+#' 
+#' See \code{\link{declareTitlesStyles.docx}} for examples. 
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{styles.docx}}
 #' , \code{\link{declareTitlesStyles.docx}}, \code{\link{addTOC.docx}}
@@ -568,6 +537,8 @@ declareTitlesStyles = function(doc, ...){
 #' 
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
+#' @details 
+#' \code{slide.layouts} only works with pptx documents. See \code{\link{slide.layouts.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{slide.layouts.pptx}}, \code{\link{addSlide.pptx}}
 slide.layouts = function(doc, ...){
@@ -580,6 +551,10 @@ slide.layouts = function(doc, ...){
 #' 
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
+#' @details 
+#' \code{styles} only works with docx documents. 
+#' 
+#' See \code{\link{styles.docx}} for examples. 
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
 styles = function(doc, ...){
@@ -594,6 +569,9 @@ styles = function(doc, ...){
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
 #' @return a document object
+#' @details 
+#' See \code{\link{writeDoc.docx}} or \code{\link{writeDoc.pptx}}
+#' or \code{\link{writeDoc.html}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{writeDoc.docx}}
 #' , \code{\link{pptx}}, \code{\link{writeDoc.pptx}}

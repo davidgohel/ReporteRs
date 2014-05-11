@@ -94,10 +94,9 @@
 #' # write the doc
 #' writeDoc( doc, pptx.file)
 #' #STOP_TAG_TEST
-#' @seealso \code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}}, \code{\link{addParagraph.pptx}}
-#' , \code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}}
-#' , \code{\link{slide.layouts.pptx}}, \code{\link{writeDoc.pptx}}
-
+#' @seealso \code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}}
+#' , \code{\link{addParagraph.pptx}}, \code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}}
+#' , \code{\link{slide.layouts.pptx}}, \code{\link{dim.pptx}}, \code{\link{writeDoc.pptx}}
 pptx = function( title, template){
 	
 	# title mngt

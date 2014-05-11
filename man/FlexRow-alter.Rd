@@ -23,7 +23,7 @@ headerRow[1] = FlexCell( "Column 1"
   , cell.properties = cellProperties(background.color="#527578")  )
 headerRow[2] = FlexCell( "Column 2"
   , cell.properties = cellProperties(background.color="#527578")  )
-#' #STOP_TAG_TEST
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFlexTable}},
