@@ -14,29 +14,20 @@
 #' @return an object of class \code{"docx"}.
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = docx( title = "title" )
-#' 
-#' # Add "Hello World" into the document doc with
-#' # stylename "Normal". Run the following code to 
-#' # see available stylenames: 
-#' # \code{styles(doc)}
-#' doc = addParagraph(doc, "Hello Word!", "Normal");
-#' 
-#' # Add into the document : "My tailor is rich" and "Cats and Dogs"
-#' # format some of the pieces of text
-#' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-#' 	, textProperties(font.weight="bold") )
-#' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
-#' 	, textProperties(color="blue") )
-#' my.pars = set_of_paragraphs( pot1, pot2 )
-#' 
-#' # used style is "BulletList" so that paragraphs will be preceded by bullet points
-#' # ("BulletList" is an existing style in the defaut template docx of the package)
-#' doc = addParagraph(doc, my.pars, "BulletList");
-#' 
-#' writeDoc( doc, "addParagraph_example.docx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addParagraph_example.docx"
+#' @example examples/docx.R
+#' @example examples/styles.docx.R
+#' @example examples/addTitle1Level1.R
+#' @example examples/addParagraph_hello_docx.R
+#' @example examples/addTitle2Level1.R
+#' @example examples/addParagraph_bullets_docx.R
+#' @example examples/addTitle3Level1.R
+#' @example examples/pot1_example.R
+#' @example examples/pot2_example.R
+#' @example examples/set_of_paragraphs_example.R
+#' @example examples/addParagraph_sop_docx.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph}}
 #' @method addParagraph docx
 #' @S3method addParagraph docx

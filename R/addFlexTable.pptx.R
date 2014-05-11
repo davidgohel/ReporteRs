@@ -12,8 +12,17 @@
 #' , \code{\link{addTable.pptx}}
 #' @examples
 #' #START_TAG_TEST
+#' doc.filename = "addFlexTable_example.pptx"
+#' @example examples/pptx.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle1Level1.R
 #' @example examples/FlexTableExample.R
-#' @example examples/addFlexTable.pptx.R
+#' @example examples/addFlexTable.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle2Level1.R
+#' @example examples/agg.mtcars.FlexTable.R
+#' @example examples/addFlexTable.R
+#' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @method addFlexTable pptx
 #' @S3method addFlexTable pptx

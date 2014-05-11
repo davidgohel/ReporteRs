@@ -38,6 +38,7 @@
 #' @examples
 #' #START_TAG_TEST
 #' @example examples/FlexTableExample.R
+#' @example examples/agg.mtcars.FlexTable.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}

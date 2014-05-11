@@ -31,69 +31,11 @@
 #' 
 #' Document are manipulated in-memory ; a \code{pptx}'s document is not written to the disk 
 #' unless the \code{\link{writeDoc}} method has been called on the object.
-#' @export
 #' @examples
 #' #START_TAG_TEST
-#' require( ggplot2 )
-#' 
-#' # PowerPoint document to write
-#' pptx.file = "document_example.pptx"
-#' 
-#' # set default font to 28pt
-#' options("ReporteRs-fontsize" = 28)
-#' 
-#' # Create a new document
-#' doc = pptx( title = "title" )
-#' 
-#' # display layouts names
-#' slide.layouts( doc )
-#' 
-#' # add a slide with layout "Title Slide"
-#' doc = addSlide( doc, slide.layout = "Title Slide" )
-#' 
-#' doc = addTitle( doc, "Presentation title" ) #set the main title
-#' doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
-#' 
-#' # add a slide with layout "Title and Content" then add content
-#' doc = addSlide( doc, slide.layout = "Two Content" )
-#' doc = addTitle( doc, "Texts demo" ) #set the main title
-#' texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-#' , "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
-#' , "Quisque dictum tristique ligula."
-#' )
-#' # add simple text
-#' doc = addParagraph( doc, value = texts)
-#' 
-#' # Add "My tailor is rich" and "Cats and Dogs"
-#' # format some of the pieces of text
-#' # Add "My tailor is rich" and "Cats and Dogs"
-#' # format some of the pieces of text
-#' pot1 = pot("My tailor"
-#'      , textProperties(color="red") ) + " is " + pot("rich"
-#'              , textProperties(font.weight="bold") )
-#' pot2 = pot("Cats", textProperties(color="red")
-#' ) + " and " + pot("Dogs", textProperties(color="blue") )
-#' doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
-#' 
-#' 
-#' myplot = qplot(Sepal.Length, Petal.Length
-#'      , data = iris, color = Species
-#'      , size = Petal.Width, alpha = I(0.7)
-#' )
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' 
-#' # Add title and then 'myplot' 
-#' doc = addTitle( doc, "Plot example" )
-#' doc = addPlot( doc, function( ) print( myplot ), pointsize = 11 )
-#' 
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' # Add title and then a sample of iris
-#' doc = addTitle( doc, "Table example" )
-#' doc = addTable( doc, data = iris[25:33, ] )
-#' 
-#' # write the doc
-#' writeDoc( doc, pptx.file)
-#' #STOP_TAG_TEST
+#' @example examples/pptx_example.R
+#' @example examples/STOP_TAG_TEST.R
+#' @export 
 #' @seealso \code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}}
 #' , \code{\link{addParagraph.pptx}}, \code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}}
 #' , \code{\link{slide.layouts.pptx}}, \code{\link{dim.pptx}}, \code{\link{writeDoc.pptx}}

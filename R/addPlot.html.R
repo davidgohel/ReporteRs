@@ -3,7 +3,7 @@
 #' @description
 #' Add a plot into the \code{html} object.
 #' 
-#' @param doc Object of class \code{"html"} where paragraph has to be added
+#' @param doc Object of class \code{html} where paragraph has to be added
 #' @param fun plot function
 #' @param width plot width in inches (default value is 6).
 #' @param height plot height in inches (default value is 6).
@@ -16,44 +16,17 @@
 #' @return an object of class \code{"html"}.
 #' @examples
 #' #START_TAG_TEST
-#' require( ggplot2 )
-#' # Create a new document 
-#' doc = html( title = "title" )
-#' 
-#' # add a page where to add R plots with title 'Plots'
-#' doc = addPage( doc, title = "Plots" )
-#' # Add a base plot
-#' doc = addPlot( doc, fun = plot
-#' 		, x = rnorm( 100 )
-#' 		, y = rnorm (100 )
-#' 		, main = "base plot main title"
-#' 	)
-#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-#' 	, size = Petal.Width, alpha = I(0.7))
-#' doc = addPlot( doc
-#' 		, print
-#' 		, width = 6, height = 7
-#' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
-#' 	)
-#' 
-#' doc = addPlot( doc, print
-#' 		, width = 6, height = 7
-#' 		, x = myplot, vector.graphic = FALSE
-#' 	)
-#' 
-#' ctl = c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-#' trt = c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-#' group = gl(2, 10, 20, labels = c("Ctl","Trt"))
-#' weight = c(ctl, trt)
-#' lm.D9 = lm(weight ~ group)
-#' doc = addPlot( doc, plot
-#' 		, width = 6, height = 7
-#' 		, x = lm.D9, vector.graphic = FALSE
-#' )
-#' # write the html object in a directory
-#' pages = writeDoc( doc, "addPlot_example")
-#' print( pages ) # print filenames of generated html pages
-#' #STOP_TAG_TEST
+#' doc.dirname = "addPlot_example"
+#' @example examples/html.R
+#' @example examples/addPage.R
+#' @example examples/addTitle1Level1.R
+#' @example examples/addBasePlot_vg.R
+#' @example examples/addTitle2Level1.R
+#' @example examples/addggplot.R
+#' @example examples/addTitle3Level1.R
+#' @example examples/addLMPlot.R
+#' @example examples/writeDoc_directory.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{html}}, \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
 #' @method addPlot html
 #' @S3method addPlot html

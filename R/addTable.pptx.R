@@ -31,17 +31,18 @@
 #' Width of the table is the width of the shape where table is added. 
 #' @examples 
 #' #START_TAG_TEST
+#' doc.filename = "addTable_example.pptx"
 #' @example examples/pptx.R
 #' @example examples/addSlide.R
-#' @example examples/addTitlepptx.R
+#' @example examples/addTitle1NoLevel.R
 #' @example examples/simpleAddTable.R
 #' @example examples/addSlide.R
-#' @example examples/addTitlepptx.R
+#' @example examples/addTitle2NoLevel.R
 #' @example examples/spanAddTable.R
 #' @example examples/addSlide.R
-#' @example examples/addTitlepptx.R
+#' @example examples/addTitle3NoLevel.R
 #' @example examples/optionsDemoAddTable.R
-#' @example examples/writeDoc_addTable_example_pptx.R
+#' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @return an object of class \code{"pptx"}.
 #' @seealso \code{\link{pptx}}, \code{\link{addTable}}, \code{\link{tableProperties}}

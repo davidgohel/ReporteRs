@@ -17,14 +17,15 @@
 #' , \code{\link{addTable.docx}}
 #' @examples
 #' #START_TAG_TEST
+#' doc.filename = "addFlexTable_example.docx"
 #' @example examples/docx.R
-#' @example examples/addTitledocx.R
+#' @example examples/addTitle1Level1.R
 #' @example examples/FlexTableExample.R
-#' @example examples/addFlexTable.docx.R
-#' @example examples/addTitledocx.R
+#' @example examples/addFlexTable.R
+#' @example examples/addTitle2Level1.R
 #' @example examples/agg.mtcars.FlexTable.R
-#' @example examples/addFlexTable.docx.R
-#' @example examples/writeDoc_addFlexTable_example_docx.R
+#' @example examples/addFlexTable.R
+#' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @method addFlexTable docx
 #' @S3method addFlexTable docx

@@ -20,46 +20,20 @@
 #' of the PowerPoint template used to create the \code{pptx} object. 
 #' @examples
 #' #START_TAG_TEST
-#' require( ggplot2 )
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' 
-#' # add a slide with layout "Title and Content" then add plot
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' doc = addTitle( doc, "base plot" )
-#' # Add a base plot
-#' doc = addPlot( doc, fun = plot
-#' 		, x = rnorm( 100 )
-#' 		, y = rnorm (100 )
-#' 		, main = "base plot main title"
-#' 	)
-#' 
-#' # add a slide with layout "Two Content" then add 2 plots
-#' doc = addSlide( doc, slide.layout = "Two Content" )
-#' doc = addTitle( doc, "2 ggplot2 examples" )
-#' doc = addPlot( doc
-#' 		, function(){
-#' 			print( qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-#' 				, size = Petal.Width, alpha = I(0.7)) )
-#' 		}
-#' 	)
-#' 
-#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-#' 			, size = Petal.Width, alpha = I(0.7))
-#' doc = addPlot( doc
-#' 		, print
-#' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
-#' 		, vector.graphic = FALSE
-#' 	)
-#' 
-#' # Write the object in file "addPlot_example.pptx"
-#' writeDoc( doc, "addPlot_example.pptx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addPlot_example.pptx"
+#' @example examples/pptx.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle1NoLevel.R
+#' @example examples/addBasePlot_vg.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle2NoLevel.R
+#' @example examples/addggplot.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
 #' @method addPlot pptx
 #' @S3method addPlot pptx
-
-addPlot.pptx = function(doc, fun, pointsize=11
+addPlot.pptx = function(doc, fun, pointsize = 11
 	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
 	, editable = TRUE
 	, ... ) {

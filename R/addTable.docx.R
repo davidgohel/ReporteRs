@@ -35,14 +35,15 @@
 #' @return an object of class \code{"docx"}.
 #' @examples
 #' #START_TAG_TEST
+#' doc.filename = "addTable_example.docx"
 #' @example examples/docx.R
-#' @example examples/addTitledocx.R
+#' @example examples/addTitle1Level1.R
 #' @example examples/simpleAddTable.R
-#' @example examples/addTitledocx.R
+#' @example examples/addTitle2Level1.R
 #' @example examples/spanAddTable.R
-#' @example examples/addTitledocx.R
+#' @example examples/addTitle3Level1.R
 #' @example examples/optionsDemoAddTable.R
-#' @example examples/writeDoc_addTable_example_docx.R
+#' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addTable}}, \code{\link{tableProperties}}
 #' @method addTable docx

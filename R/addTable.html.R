@@ -30,15 +30,16 @@
 #' @return an object of class \code{"html"}.
 #' @examples
 #' #START_TAG_TEST
+#' doc.dirname = "addTable_example"
 #' @example examples/html.R
 #' @example examples/addPage.R
-#' @example examples/addTitledocx.R
+#' @example examples/addTitle1Level1.R
 #' @example examples/simpleAddTable.R
-#' @example examples/addTitledocx.R
+#' @example examples/addTitle2Level1.R
 #' @example examples/spanAddTable.R
-#' @example examples/addTitledocx.R
+#' @example examples/addTitle3Level1.R
 #' @example examples/optionsDemoAddTable.R
-#' @example examples/writeDoc_addTable_example_html.R
+#' @example examples/writeDoc_directory.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{html}}, \code{\link{addTable}}, \code{\link{tableProperties}}
 #' @method addTable html

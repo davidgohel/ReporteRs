@@ -27,60 +27,11 @@
 #' @export
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document
-#' require( ggplot2 )
-#' 
-#' # Web pages directory
-#' html.directory = "document_example"
-#' 
-#' # Create a new document
-#' doc = html( title = "document title" )
-#' 
-#' # add a page with title "Page 1"
-#' doc = addPage( doc, title = "Page 1" )
-#' 
-#' 
-#' myplot = qplot(Sepal.Length, Petal.Length
-#'              , data = iris, color = Species
-#'              , size = Petal.Width, alpha = I(0.7)
-#' )
-#' # Add myplot
-#' doc = addTitle( doc, "Plot example 1", level = 1 )
-#' doc = addPlot( doc, function( ) print( myplot ) )
-#' 
-#' doc = addTitle( doc, "Texts demo", level = 1 )
-#' texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-#' , "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
-#' , "Quisque dictum tristique ligula."
-#' )
-#' # add simple text
-#' doc = addParagraph( doc, value = texts )
-#' 
-#' # Add "My tailor is rich" and "Cats and Dogs"
-#' # format some of the pieces of text
-#' pot1 = pot("My tailor"
-#'      , textProperties(color="red", font.size = 12 ) ) + " is " + pot("rich"
-#'              , textProperties(font.weight="bold") )
-#' pot2 = pot("Cats", textProperties(color="red", font.size = 12)
-#'              ) + " and " + pot("Dogs", textProperties(color="blue", font.size = 12) )
-#' doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
-#' 
-#' # add a page with title "Page 2"
-#' doc = addPage( doc, title = "Page 2" )
-#' 
-#' # Add title and then a sample of iris
-#' doc = addTitle( doc, "Table example", level = 1 )
-#' doc = addTable( doc, data = iris[25:33, ] )
-#' 
-#' # generate html pages within html.directory
-#' html.files = writeDoc( doc, directory = html.directory )
-#' print(html.files) # return produced html files
-#' #STOP_TAG_TEST
+#' @example examples/html_example.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{pptx}}
-
 html = function( title = "untitled" ){
-	
-	
+		
 	# java calls
 	obj = .jnew(class.html4r.document, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1") )
 	
@@ -90,8 +41,6 @@ html = function( title = "untitled" ){
 		, current_slide = NULL
 		)
 	class( .Object ) = "html"
-	
 
 	.Object
 }
-

@@ -12,8 +12,16 @@
 #' , \code{\link{addTable.html}}
 #' @examples
 #' #START_TAG_TEST
+#' doc.dirname = "addTable_example"
+#' @example examples/html.R
+#' @example examples/addPage.R
+#' @example examples/addTitle1Level1.R
 #' @example examples/FlexTableExample.R
-#' @example examples/addFlexTable.html.R
+#' @example examples/addFlexTable.R
+#' @example examples/addTitle2Level1.R
+#' @example examples/agg.mtcars.FlexTable.R
+#' @example examples/addFlexTable.R
+#' @example examples/writeDoc_directory.R
 #' @example examples/STOP_TAG_TEST.R
 #' @method addFlexTable html
 #' @S3method addFlexTable html

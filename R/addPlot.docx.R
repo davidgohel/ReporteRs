@@ -24,38 +24,17 @@
 #' @return an object of class \code{"docx"}.
 #' @examples
 #' #START_TAG_TEST
-#' require( ggplot2 )
-#' 
-#' # Create a new document 
-#' doc = docx( title = "title" )
-#' 
-#' doc = addTitle( doc, "Plot 1", level = 1 )
-#' # Add a base plot - set vector.graphic to FALSE if Word version 
-#' # used to read the file is <= 2007
-#' doc = addPlot( doc, fun = plot
-#' 		, x = rnorm( 100 )
-#' 		, y = rnorm (100 )
-#' 		, main = "base plot main title"
-#' 		, vector.graphic = TRUE
-#' 		, width = 5, height = 7
-#' 		, par.properties = parProperties(text.align = "left")
-#' 	)
-#' 
-#' doc = addTitle( doc, "Plot 2", level = 1 )
-#' myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-#' 	, size = Petal.Width, alpha = I(0.7))
-#' doc = addPlot( doc = doc
-#' 		, fun = print
-#' 		, x = myplot #this argument MUST be named, print is expecting argument 'x'
-#' 	)
-#' 
-#' # Write the object in file "addPlot_example.docx"
-#' writeDoc( doc, "addPlot_example.docx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addPlot_example.docx"
+#' @example examples/docx.R
+#' @example examples/addTitle1Level1.R
+#' @example examples/addBasePlot_vg.R
+#' @example examples/addTitle2Level1.R
+#' @example examples/addggplot.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addPlot}}
 #' @method addPlot docx
 #' @S3method addPlot docx
-
 addPlot.docx = function(doc, fun
 		, pointsize = getOption("ReporteRs-fontsize")
 		, vector.graphic = F

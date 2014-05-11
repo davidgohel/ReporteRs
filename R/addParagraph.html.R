@@ -14,33 +14,18 @@
 #' @return an object of class \code{"html"}.
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = html( title = "title" )
-#' 
-#' # add a page where to add R outputs with title 'page example 1'
-#' doc = addPage( doc, title = "page example 1" )
-#' 
-#' # Add "Hello World" into the document doc
-#' doc = addParagraph(doc, "Hello Word!")
-#' 
-#' # add a page where to add R outputs with title 'page example 2'
-#' doc = addPage( doc, title = "page example 2" )
-#' 
-#' # Add into the document : "My tailor is rich" and "Cats and Dogs"
-#' # format some of the pieces of text
-#' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-#' 	, textProperties(font.weight="bold") )
-#' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
-#' 	, textProperties(color="blue") )
-#' my.pars = set_of_paragraphs( pot1, pot2 )
-#' 
-#' # used parent.type = "ul" so that paragraphs will be preceded by bullet points
-#' doc = addParagraph(doc, my.pars, parent.type = "ul")
-#' 
-#' # write the html object in a directory
-#' pages = writeDoc( doc, "addParagraph_example")
-#' print( pages ) # print filenames of generated html pages
-#' #STOP_TAG_TEST
+#' doc.dirname = "addParagraph_example"
+#' @example examples/html.R
+#' @example examples/addPage.R
+#' @example examples/addTitle1Level1.R
+#' @example examples/addParagraph_hello_nostylename.R
+#' @example examples/addTitle2Level1.R
+#' @example examples/pot1_example.R
+#' @example examples/pot2_example.R
+#' @example examples/set_of_paragraphs_example.R
+#' @example examples/addParagraph_sop_nostylename.R
+#' @example examples/writeDoc_directory.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}
 #' , \code{\link{addTOC.docx}}, \code{\link{addParagraph}}
 #' @method addParagraph html
