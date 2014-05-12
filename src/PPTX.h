@@ -33,7 +33,6 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 		double* height, double* offx, double* offy, double ps, int nbplots,
 		const char* fontname, int id_init_value, int editable);
 
-
 void GE_PPTXDevice(const char* filename, double* width, double* height, double* offx,
 		double* offy, double ps, int nbplots, const char* fontfamily, int id_init_value, int editable);
 

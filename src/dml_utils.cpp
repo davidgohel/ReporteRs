@@ -30,7 +30,6 @@
 #include "datastruct.h"
 #include "colors.h"
 
-
 double p2e_(double x) {
 	double y = x * 12700;
 	return y;

@@ -38,6 +38,7 @@ static char docx_elt_tag_end[] = "</wps:wsp>";
 static char docx_lock_properties[] = "<wps:cNvSpPr><a:spLocks noSelect=\"1\" noResize=\"1\" noEditPoints=\"1\" noTextEdit=\"1\" noMove=\"1\" noRot=\"1\" noChangeShapeType=\"1\"/></wps:cNvSpPr><wps:nvPr />";
 static char docx_unlock_properties[] = "<wps:cNvSpPr /><wps:nvPr />";
 
+
 void DOCX_setRunProperties(pDevDesc dev, R_GE_gcontext *gc, double fontsize){
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int alpha =  (int) ((255-R_ALPHA(gc->col))/255.0 * 100000);//n importe quoi

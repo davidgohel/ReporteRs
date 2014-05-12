@@ -41,4 +41,3 @@ int get_and_increment_idx(pDevDesc dev);
 void register_element(pDevDesc dev);
 
 void closeFile( FILE *file);
-

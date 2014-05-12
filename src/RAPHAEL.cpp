@@ -37,6 +37,7 @@
 #include "common.h"
 #include "utils.h"
 
+
 static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
 		const char* fontname, int canvas_id, SEXP env) {
@@ -410,8 +411,9 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.text(", idx, pd->objectname );
 	fprintf(pd->dmlFilePointer, "%.0f,%.0f", corrected_offx, corrected_offy);
-
-	fprintf(pd->dmlFilePointer, ",\"%s\"", str);
+	fputs(",\"", pd->dmlFilePointer );
+	raphael_text(str, pd);
+	fputs("\"", pd->dmlFilePointer );
 	fputs(");\n", pd->dmlFilePointer );
 
 	RAPHAEL_SetFontSpec(dev, gc, idx);

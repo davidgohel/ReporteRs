@@ -39,7 +39,6 @@ static char pptx_lock_properties[] = "<p:cNvSpPr><a:spLocks noSelect=\"1\" noRes
 static char pptx_unlock_properties[] = "<p:cNvSpPr/><p:nvPr />";
 
 
-
 static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
 		const char* fontname, int id_init_value, int editable) {

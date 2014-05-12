@@ -66,4 +66,3 @@ typedef struct {
 	SEXP env;
 
 } DOCDesc;
-

@@ -27,7 +27,6 @@
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/GraphicsDevice.h>
 
-
 extern "C" {
 	void get_current_canvas_id(int *dn, int *res);
 	void get_current_element_id(int *dn, int *res);
