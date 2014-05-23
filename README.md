@@ -23,7 +23,6 @@ ReporteRs needs some R packages ; run the following script to install them if ne
     if( !require( rJava ) ) install.packages("rJava")
     if( !require( ggplot2 ) ) install.packages("ggplot2")
     if( !require( base64 ) ) install.packages("base64")
-    if( !require( highlight ) ) install.packages("highlight")
 
 **From sources**
 
