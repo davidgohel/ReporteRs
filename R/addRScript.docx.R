@@ -1,10 +1,13 @@
-#' @title Add R script into a html object
+#' @title Add R script into a docx object
 #'
-#' @description Add R script into a \code{"html"} object.
+#' @description Add R script into a \code{"docx"} object.
 #' 
-#' @param doc Object of class \code{"html"} where expressions have to be added
+#' @param doc Object of class \code{"docx"} where expressions have to be added
 #' @param file R script file. Not used if text is provided.
 #' @param text character vector. The text to parse. Not used if file is provided.
+#' @param stylename value of the named style to apply to paragraphs in the docx document.
+#' Expected value is an existing stylename of the template document used to create the 
+#' \code{docx} object. see \code{\link{styles.docx}}.
 #' @param comment.properties comment textProperties
 #' @param symbol.properties symbol textProperties
 #' @param assignement.properties assignement textProperties
@@ -16,25 +19,24 @@
 #' @param number.properties number textProperties
 #' @param argument.properties argument textProperties
 #' @param package.properties package textProperties
+#' @param bookmark a character value ; id of the Word bookmark to replace by the table. optional
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"html"}.
 #' @examples
 #' #START_TAG_TEST
-#' doc.dirname = "addRScript_example"
+#' doc.filename = "addRScript_example.docx"
 #' # Create a new document 
-#' doc = html( title = "title" )
+#' doc = docx( title = "title" )
 #' 
-#' # add a page where to add R outputs with title 'page example'
-#' doc = addPage( doc, title = "page example" )
+#' doc = addRScript(doc, text = "ls()
+#' x = rnorm(10)", stylename = "rRawOutput" )
 #' 
-#' doc = addRScript(doc, text = "ls()" )
-#' 
-#' @example examples/writeDoc_directory.R
+#' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{html}}, \code{\link{addRScript}}
-#' @method addRScript html
-#' @S3method addRScript html
-addRScript.html = function(doc, file, text
+#' @seealso \code{\link{docx}}, \code{\link{addRScript}}
+#' @method addRScript docx
+#' @S3method addRScript docx
+addRScript.docx = function(doc, file, text
 	, comment.properties = textProperties( color = "#008200" )
 	, symbol.properties = textProperties( color = "#6599FF" )
 	, assignement.properties = textProperties( color = "#666666" )
@@ -46,9 +48,16 @@ addRScript.html = function(doc, file, text
 	, number.properties = textProperties( color = "blue" )
 	, argument.properties = textProperties( color = "#ff8000" )
 	, package.properties = textProperties( color = "#8000ff" )
+	, stylename, bookmark
 	, ... 
 	) {
 
+	if( missing( stylename )) {
+		stop("argument 'stylename' is missing")
+	} else if( !is.element( stylename , styles( doc ) ) ){
+		stop(paste("Style {", stylename, "} does not exists.", sep = "") )
+	}
+	
 	if( !missing( file ) ){
 		pot.list = get.pots.from.script( file = file
 		    , comment.properties = comment.properties
@@ -79,9 +88,8 @@ addRScript.html = function(doc, file, text
 		)
 	}
 	par = do.call(set_of_paragraphs, pot.list )
-	doc = addParagraph(doc, value = par
-		, parent.type = "pre" 
-		) 
-
+	if( missing( bookmark ) )
+		doc = addParagraph(doc, value = par, stylename = stylename ) 
+	else doc = addParagraph(doc, value = par, stylename = stylename, bookmark = bookmark )
 	doc
 }

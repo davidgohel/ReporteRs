@@ -1,8 +1,8 @@
-#' @title Add R script into a html object
+#' @title Add R script into a pptx object
 #'
-#' @description Add R script into a \code{"html"} object.
+#' @description Add R script into a \code{"pptx"} object.
 #' 
-#' @param doc Object of class \code{"html"} where expressions have to be added
+#' @param doc Object of class \code{"pptx"} where expressions have to be added
 #' @param file R script file. Not used if text is provided.
 #' @param text character vector. The text to parse. Not used if file is provided.
 #' @param comment.properties comment textProperties
@@ -17,24 +17,22 @@
 #' @param argument.properties argument textProperties
 #' @param package.properties package textProperties
 #' @param ... further arguments, not used. 
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{"pptx"}.
 #' @examples
 #' #START_TAG_TEST
-#' doc.dirname = "addRScript_example"
+#' doc.filename = "addRScript_example.pptx"
 #' # Create a new document 
-#' doc = html( title = "title" )
+#' doc = pptx( title = "title" )
+#' doc = addSlide( doc, slide.layout = "Title and Content" )
+#' doc = addRScript(doc, text = "ls()
+#' x = rnorm(10)" )
 #' 
-#' # add a page where to add R outputs with title 'page example'
-#' doc = addPage( doc, title = "page example" )
-#' 
-#' doc = addRScript(doc, text = "ls()" )
-#' 
-#' @example examples/writeDoc_directory.R
+#' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{html}}, \code{\link{addRScript}}
-#' @method addRScript html
-#' @S3method addRScript html
-addRScript.html = function(doc, file, text
+#' @seealso \code{\link{pptx}}, \code{\link{addRScript}}
+#' @method addRScript pptx
+#' @S3method addRScript pptx
+addRScript.pptx = function(doc, file, text
 	, comment.properties = textProperties( color = "#008200" )
 	, symbol.properties = textProperties( color = "#6599FF" )
 	, assignement.properties = textProperties( color = "#666666" )
@@ -48,7 +46,7 @@ addRScript.html = function(doc, file, text
 	, package.properties = textProperties( color = "#8000ff" )
 	, ... 
 	) {
-
+	
 	if( !missing( file ) ){
 		pot.list = get.pots.from.script( file = file
 		    , comment.properties = comment.properties
@@ -79,9 +77,6 @@ addRScript.html = function(doc, file, text
 		)
 	}
 	par = do.call(set_of_paragraphs, pot.list )
-	doc = addParagraph(doc, value = par
-		, parent.type = "pre" 
-		) 
-
+	doc = addParagraph(doc, value = par ) 
 	doc
 }

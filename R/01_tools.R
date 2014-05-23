@@ -287,3 +287,97 @@ getHexColorCode = function( valid.color ){
 }
 
 ReporteRs.border.styles = c( "none", "solid", "dotted", "dashed" )
+
+get.pots.from.script = function( file, text
+  , comment.properties
+  , symbol.properties
+  , assignement.properties
+  , keyword.properties
+  , formalargs.properties
+  , eqformalargs.properties
+  , functioncall.properties
+  , string.properties
+  , number.properties
+  , argument.properties
+  , package.properties
+){
+	
+	if( !missing( file ) ){
+		if( length( file ) != 1 ) stop("file must be a single filename.")
+		if( !file.exists( file ) ) stop("file does not exist.")
+	}
+	
+	if( missing( file ) ){
+		myexpr = parse( text = text, keep.source = TRUE )
+	} else {
+		myexpr = parse( file = file, keep.source = TRUE )
+	}
+	
+	data = getParseData( myexpr )
+	data = data[ data$terminal, ]
+	
+	desc_token   = as.character( data[ data[["terminal"]], "token" ] )
+	extentionTag = character( length( desc_token ) )
+	
+	extentionTag[ desc_token == "COMMENT"  ] = "comment"
+	extentionTag[ desc_token == "ROXYGEN_COMMENT" ] = "roxygencomment"
+	
+	extentionTag[ grepl( "^'.*?'$", desc_token ) ] = "keyword"
+	extentionTag[ desc_token %in% c( "FUNCTION", "FOR", "IN", "IF", 
+					"ELSE", "WHILE", "NEXT", "BREAK", "REPEAT", 
+					"AND", "AND2", "OR", "OR2", "GT", 
+					"LT", "GE", "LBB", "NE", "SPECIAL", 
+					"NS_GET_INT", "NS_GET") ] = "keyword" 
+	
+	extentionTag[ desc_token == "STR_CONST" ] = "string"
+	extentionTag[ desc_token == "NUM_CONST" ] = "number"
+	
+	extentionTag[ desc_token == "SYMBOL_FUNCTION_CALL" ] = "functioncall"
+	extentionTag[ desc_token %in% c("SYMBOL_SUB", "EQ_SUB" )  ] = "argument"
+	extentionTag[ desc_token == "SYMBOL_PACKAGE" ] = "package"
+	
+	extentionTag[ desc_token %in% c("SYMBOL_FORMALS") ] = "formalargs" 
+	extentionTag[ desc_token %in% "EQ_FORMALS" ] = "eqformalargs" 
+	
+	extentionTag[ desc_token %in% c("EQ_ASSIGN", "LEFT_ASSIGN" )] = "assignement"
+	extentionTag[ desc_token == "SYMBOL" ] = "symbol"
+	extentionTag[ desc_token == "SLOT" ] = "slot"
+	
+	data$extentionTag = extentionTag
+	
+	ldata = split( data, data[,1] )
+	
+	tp.list = list( comment.properties = comment.properties
+		, symbol.properties = symbol.properties
+		, assignement.properties = assignement.properties
+		, keyword.properties = keyword.properties
+		, formalargs.properties = formalargs.properties
+		, eqformalargs.properties = eqformalargs.properties
+		, functioncall.properties = functioncall.properties
+		, string.properties = string.properties
+		, number.properties = number.properties
+		, argument.properties = argument.properties
+		, package.properties = package.properties
+		)
+	
+	pot.list = lapply( ldata, function(x, tp.list ){
+				x = x[ order(x[,2] ), ]
+				out = pot()
+				last_pos = 0
+				for(i in 1:nrow(x) ){
+					if( x[i,2] != (last_pos + 1) ){
+						.size = x[i,2] - (last_pos + 1)
+						out = out + paste( rep( " ", .size ), collapse = "" )
+					}
+					out = out + pot( x[i,"text"]
+							, format = tp.list[[ paste( x[i,"extentionTag"], ".properties", sep = "" ) ]]
+					)
+					last_pos = x[i,4]
+				}
+				out
+			} , tp.list = tp.list )
+	out = lapply( 1: max( data[,3]) , function(x) pot() )
+	names( out ) = as.character( 1: max( data[,3] ) )
+	out[names(pot.list)] = pot.list
+	out
+}

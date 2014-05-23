@@ -264,20 +264,61 @@ addSubtitle = function(doc, ...){
 #' @param doc document object
 #' @param file R script file. Not used if text is provided.
 #' @param text character vector. The text to parse. Not used if file is provided.
+#' @param comment.properties comment textProperties
+#' @param symbol.properties symbol textProperties
+#' @param assignement.properties assignement textProperties
+#' @param keyword.properties keyword textProperties
+#' @param formalargs.properties formalargs textProperties
+#' @param eqformalargs.properties eqformalargs textProperties
+#' @param functioncall.properties functioncall textProperties
+#' @param string.properties string textProperties
+#' @param number.properties number textProperties
+#' @param argument.properties argument textProperties
+#' @param package.properties package textProperties
 #' @param ... further arguments passed to other methods 
 #' @return a document object
-#' @details 
-#' \code{addRScript} only works with html documents. See \code{\link{addRScript.html}} for examples.
 #' @export
 #' @seealso \code{\link{html}}, \code{\link{addRScript.html}}
-addRScript = function(doc, file, text, ...){
+addRScript = function(doc, file, text
+  , comment.properties = textProperties( color = "#008200" )
+  , symbol.properties = textProperties( color = "#6599FF" )
+  , assignement.properties = textProperties( color = "#666666" )
+  , keyword.properties = textProperties( color = "#097054" )
+  , formalargs.properties = textProperties( color = "#666666" )
+  , eqformalargs.properties = textProperties( color = "#666666" )
+  , functioncall.properties = textProperties( color = "#ff1493" )
+  , string.properties = textProperties( color = "blue" )
+  , number.properties = textProperties( color = "blue" )
+  , argument.properties = textProperties( color = "#ff8000" )
+  , package.properties = textProperties( color = "#8000ff" )
+  , ...
+  ){
+	
+	if( !inherits(comment.properties, "textProperties") )
+		stop("argument comment.properties must be a textProperties object.")
+	if( !inherits(symbol.properties, "textProperties") )
+		stop("argument symbol.properties must be a textProperties object.")
+	if( !inherits(assignement.properties, "textProperties") )
+		stop("argument assignement.properties must be a textProperties object.")
+	if( !inherits(keyword.properties, "textProperties") )
+		stop("argument keyword.properties must be a textProperties object.")
+	if( !inherits(formalargs.properties, "textProperties") )
+		stop("argument formalargs.properties must be a textProperties object.")
+	if( !inherits(eqformalargs.properties, "textProperties") )
+		stop("argument eqformalargs.properties must be a textProperties object.")
+	if( !inherits(functioncall.properties, "textProperties") )
+		stop("argument functioncall.properties must be a textProperties object.")
+	if( !inherits(string.properties, "textProperties") )
+		stop("argument string.properties must be a textProperties object.")
+	if( !inherits(number.properties, "textProperties") )
+		stop("argument number.properties must be a textProperties object.")
+	if( !inherits(argument.properties, "textProperties") )
+		stop("argument argument.properties must be a textProperties object.")
+	if( !inherits(package.properties, "textProperties") )
+		stop("argument package.properties must be a textProperties object.")
+
 	if( missing( file ) && missing( text ) )
 		stop("file OR text must be provided as argument.")
-	
-	if( !missing( file ) ){
-		if( length( file ) != 1 ) stop("file must be a single filename.")
-		if( !file.exists( file ) ) stop("file does not exist.")
-	}
 	
 	UseMethod("addRScript")
 }

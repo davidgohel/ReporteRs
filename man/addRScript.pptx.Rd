@@ -1,8 +1,8 @@
-\name{addRScript.html}
-\alias{addRScript.html}
-\title{Add R script into a html object}
+\name{addRScript.pptx}
+\alias{addRScript.pptx}
+\title{Add R script into a pptx object}
 \usage{
-\method{addRScript}{html}(doc, file, text,
+\method{addRScript}{pptx}(doc, file, text,
   comment.properties = textProperties(color = "#008200"),
   symbol.properties = textProperties(color = "#6599FF"),
   assignement.properties = textProperties(color = "#666666"),
@@ -16,7 +16,7 @@
   package.properties = textProperties(color = "#8000ff"), ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"html"} where
+  \item{doc}{Object of class \code{"pptx"} where
   expressions have to be added}
 
   \item{file}{R script file. Not used if text is provided.}
@@ -51,27 +51,25 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+an object of class \code{"pptx"}.
 }
 \description{
-Add R script into a \code{"html"} object.
+Add R script into a \code{"pptx"} object.
 }
 \examples{
 #START_TAG_TEST
-doc.dirname = "addRScript_example"
+doc.filename = "addRScript_example.pptx"
 # Create a new document
-doc = html( title = "title" )
-
-# add a page where to add R outputs with title 'page example'
-doc = addPage( doc, title = "page example" )
-
-doc = addRScript(doc, text = "ls()" )
+doc = pptx( title = "title" )
+doc = addSlide( doc, slide.layout = "Title and Content" )
+doc = addRScript(doc, text = "ls()
+x = rnorm(10)" )
 
 # Write the object
-writeDoc( doc, directory = doc.dirname )
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}, \code{\link{addRScript}}
+\code{\link{pptx}}, \code{\link{addRScript}}
 }
 
