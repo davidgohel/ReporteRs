@@ -2,7 +2,7 @@
 #'
 #' @description Insert a FlexTable into a docx object
 #' 
-#' @param doc docx object
+#' @param doc html object
 #' @param flextable the \code{FlexTable} object
 #' @param ... further arguments - not used
 #' @return a docx object
@@ -34,5 +34,26 @@ addFlexTable.html = function(doc, flextable, ... ) {
 	}
 
 	doc
+}
+
+#' @title get HTML code from a FlexTable
+#'
+#' @description get HTML code from a FlexTable
+#' 
+#' @param object the \code{FlexTable} object
+#' @param ... further arguments passed to other methods 
+#' @return a character value
+#' @seealso \code{\link{FlexTable}}
+#' @examples
+#' #START_TAG_TEST
+#' @example examples/FlexTableExample.R
+#' @example examples/as.html.MyFTable.R
+#' @example examples/STOP_TAG_TEST.R
+#' @method as.html FlexTable
+#' @S3method as.html FlexTable
+as.html.FlexTable = function( object, ... ) {
+		
+	.jcall( object$jobj, "S", "getHTML" )
+
 }
 

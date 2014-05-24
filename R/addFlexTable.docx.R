@@ -11,7 +11,6 @@
 #'   	If not provided, table will be added at the end of the document.
 #' @param ... further arguments - not used
 #' @return a docx object
-#' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{docx}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 #' , \code{\link{addTable.docx}}

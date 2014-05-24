@@ -6,7 +6,6 @@
 #' @param flextable the \code{FlexTable} object
 #' @param ... further arguments - not used
 #' @return a pptx object
-#' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{pptx}}
 #' , \code{\link{addFlexTable.html}}, \code{\link{addFlexTable.docx}}
 #' , \code{\link{addTable.pptx}}

@@ -585,6 +585,21 @@ chprop = function( object, ... ){
 	UseMethod("chprop")
 }
 
+#' @title get HTML code
+#'
+#' @description Get HTML code in a character vector.
+#' 
+#' @param object object to get HTML from
+#' @param ... further arguments passed to other methods 
+#' @return a character value
+#' @details 
+#' See \code{\link{FlexTable}} or \code{\link{raphael.html}} for examples.
+#' @export
+#' @seealso \code{\link{FlexTable}}, \code{\link{raphael.html}}
+as.html = function( object, ... ){
+	UseMethod("as.html")
+}
+
 #' @title Set manually headers'styles of a document object
 #'
 #' @description Set manually titles'styles of a document object

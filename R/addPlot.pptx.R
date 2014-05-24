@@ -24,7 +24,7 @@
 #' @example examples/pptx.R
 #' @example examples/addSlide.R
 #' @example examples/addTitle1NoLevel.R
-#' @example examples/addBasePlot_vg.R
+#' @example examples/addBasePlot_nodim.R
 #' @example examples/addSlide.R
 #' @example examples/addTitle2NoLevel.R
 #' @example examples/addggplot.R

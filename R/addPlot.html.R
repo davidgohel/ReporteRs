@@ -45,10 +45,6 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 				, width = width, height = height, units = 'in'
 				, pointsize = pointsize, res = 300
 		)
-#		grDevices::png (filename = filename
-#				, width = width*72.2, height = height*72.2
-#				, pointsize = pointsize
-#		)
 		
 		fun_res = try( fun(...), silent = T )
 		dev.off()
@@ -95,4 +91,61 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		
 	}
 	doc
+}
+
+
+
+#' @title Add a plot into an html object
+#'
+#' @description
+#' Add a plot into the \code{html} object.
+#' 
+#' @param fun plot function
+#' @param width plot width in inches (default value is 6).
+#' @param height plot height in inches (default value is 6).
+#' @param pointsize the default pointsize of plotted text in pixels, default to 12.
+#' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param canvas_id canvas id - an integer - unique id in the web page
+#' @param ... arguments for \code{fun}.
+#' @return an object of class \code{"html"}.
+#' @examples
+#' #START_TAG_TEST
+#' @example examples/raphael.html.R
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{html}}, \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
+#' , \code{\link{addPlot.html}}
+#' @export 
+raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize")
+	, width=6, height=6, fontname = getOption("ReporteRs-default-font")
+	, canvas_id = 0
+	, ... ) {
+	
+	plotargs = list(...)
+	
+	dirname = tempfile( )
+	dir.create( dirname )
+	
+	filename = file.path( dirname, "plot", fsep = "/" )
+	env = raphael( file = filename,width=width*72.2
+			, height = height*72.2
+			, ps=pointsize, fontname = fontname
+			, canvas_id = as.integer(canvas_id) )
+	fun(...)
+	dev.off()
+	plot_ids = get("plot_ids", envir = env )
+	
+	jimg = .jnew( class.html4r.RAPHAELGraphics )
+	
+	for(i in 1:length( plot_ids ) ){
+		file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))
+		div.id = plot_ids[[i]]$div.id
+		
+		.jcall( jimg, "V", "registerGraphic", as.character(div.id), file )
+	}
+	
+	out = .jcall( jimg, "S", "getHTML" )
+	attr( out, "javascript" ) = .jcall( jimg, "S", "getJS" )
+	attr( out, "div_id" ) = sapply( plot_ids, function(x) x$div.id )
+	attr( out, "js_id" ) = sapply( plot_ids, function(x) x$js.plotid )
+	out
 }
