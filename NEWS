@@ -10,6 +10,9 @@ ENHANCEMENT
 
 * addParagraph.pptx now comes with a parProperties argument
 
+* HTML code is available for FlexTable and plots. 
+  See as.html.FlexTable and raphael.html.
+
 ReporteRs 0.5.3
 ==================================================================
 BUG FIXES

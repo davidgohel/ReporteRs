@@ -5,7 +5,7 @@
 \method{addFlexTable}{html}(doc, flextable, ...)
 }
 \arguments{
-  \item{doc}{docx object}
+  \item{doc}{html object}
 
   \item{flextable}{the \code{FlexTable} object}
 
