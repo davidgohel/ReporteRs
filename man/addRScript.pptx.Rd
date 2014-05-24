@@ -3,17 +3,21 @@
 \title{Add R script into a pptx object}
 \usage{
 \method{addRScript}{pptx}(doc, file, text,
-  comment.properties = textProperties(color = "#008200"),
-  symbol.properties = textProperties(color = "#6599FF"),
-  assignement.properties = textProperties(color = "#666666"),
-  keyword.properties = textProperties(color = "#097054"),
-  formalargs.properties = textProperties(color = "#666666"),
-  eqformalargs.properties = textProperties(color = "#666666"),
-  functioncall.properties = textProperties(color = "#ff1493"),
-  string.properties = textProperties(color = "blue"),
-  number.properties = textProperties(color = "blue"),
-  argument.properties = textProperties(color = "#ff8000"),
-  package.properties = textProperties(color = "#8000ff"), ...)
+  comment.properties = textProperties(color = "#A7947D"),
+  roxygencomment.properties = textProperties(color = "#5FB0B8"),
+  symbol.properties = textProperties(color = "black"),
+  operators.properties = textProperties(color = "black"),
+  keyword.properties = textProperties(color = "#4A444D"),
+  string.properties = textProperties(color = "#008B8B", font.style =
+  "italic"), number.properties = textProperties(color = "blue"),
+  functioncall.properties = textProperties(color = "#823C3C"),
+  argument.properties = textProperties(color = "#F25774"),
+  package.properties = textProperties(color = "green"),
+  formalargs.properties = textProperties(color = "#424242"),
+  eqformalargs.properties = textProperties(color = "#424242"),
+  assignement.properties = textProperties(color = "black"),
+  slot.properties = textProperties(color = "#F25774"),
+  default.properties = textProperties(color = "black"), ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"} where
@@ -24,29 +28,41 @@
   \item{text}{character vector. The text to parse. Not used
   if file is provided.}
 
-  \item{comment.properties}{comment textProperties}
+  \item{comment.properties}{comment txtProperties object}
 
-  \item{symbol.properties}{symbol textProperties}
+  \item{roxygencomment.properties}{roxygencomment
+  txtProperties object}
 
-  \item{assignement.properties}{assignement textProperties}
+  \item{operators.properties}{operators txtProperties
+  object}
 
-  \item{keyword.properties}{keyword textProperties}
+  \item{keyword.properties}{keyword txtProperties object}
 
-  \item{formalargs.properties}{formalargs textProperties}
+  \item{string.properties}{string txtProperties object}
 
-  \item{eqformalargs.properties}{eqformalargs
-  textProperties}
+  \item{number.properties}{number txtProperties object}
 
-  \item{functioncall.properties}{functioncall
-  textProperties}
+  \item{functioncall.properties}{functioncall txtProperties
+  object}
 
-  \item{string.properties}{string textProperties}
+  \item{argument.properties}{argument txtProperties object}
 
-  \item{number.properties}{number textProperties}
+  \item{package.properties}{package txtProperties object}
 
-  \item{argument.properties}{argument textProperties}
+  \item{formalargs.properties}{formalargs txtProperties
+  object}
 
-  \item{package.properties}{package textProperties}
+  \item{eqformalargs.properties}{eqformalargs txtProperties
+  object}
+
+  \item{assignement.properties}{assignement txtProperties
+  object}
+
+  \item{symbol.properties}{symbol txtProperties object}
+
+  \item{slot.properties}{slot txtProperties object}
+
+  \item{default.properties}{default txtProperties object}
 
   \item{...}{further arguments, not used.}
 }

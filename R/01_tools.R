@@ -288,17 +288,21 @@ getHexColorCode = function( valid.color ){
 ReporteRs.border.styles = c( "none", "solid", "dotted", "dashed" )
 
 get.pots.from.script = function( file, text
-  , comment.properties
-  , symbol.properties
-  , assignement.properties
-  , keyword.properties
-  , formalargs.properties
-  , eqformalargs.properties
-  , functioncall.properties
-  , string.properties
-  , number.properties
-  , argument.properties
-  , package.properties
+, comment.properties
+, roxygencomment.properties
+, operators.properties
+, keyword.properties
+, string.properties
+, number.properties
+, functioncall.properties
+, argument.properties
+, package.properties
+, formalargs.properties
+, eqformalargs.properties
+, assignement.properties
+, symbol.properties
+, slot.properties
+, default.properties
 ){
 	
 	if( !missing( file ) ){
@@ -316,17 +320,14 @@ get.pots.from.script = function( file, text
 	data = data[ data$terminal, ]
 	
 	desc_token   = as.character( data[ data[["terminal"]], "token" ] )
-	extentionTag = character( length( desc_token ) )
+	extentionTag = rep( "default", length( desc_token ) )
 	
 	extentionTag[ desc_token == "COMMENT"  ] = "comment"
 	extentionTag[ desc_token == "ROXYGEN_COMMENT" ] = "roxygencomment"
+	operators.regexpr = "(^'.*?'$|AND|AND2|EQ|GE|GT|LBB|LE|LT|NE|NS_GET|NS_GET_INT|OR|OR2|SPECIAL)"
+	extentionTag[ grepl(operators.regexpr, desc_token ) ] = "operators"
 	
-	extentionTag[ grepl( "^'.*?'$", desc_token ) ] = "keyword"
-	extentionTag[ desc_token %in% c( "FUNCTION", "FOR", "IN", "IF", 
-					"ELSE", "WHILE", "NEXT", "BREAK", "REPEAT", 
-					"AND", "AND2", "OR", "OR2", "GT", 
-					"LT", "GE", "LBB", "NE", "SPECIAL", 
-					"NS_GET_INT", "NS_GET") ] = "keyword" 
+	extentionTag[ desc_token %in% c('FUNCTION', 'IF', 'ELSE', 'WHILE', 'FOR', 'IN', 'BREAK', 'REPEAT', 'NEXT', 'NULL_CONST') ] = "keyword" 
 	
 	extentionTag[ desc_token == "STR_CONST" ] = "string"
 	extentionTag[ desc_token == "NUM_CONST" ] = "number"
@@ -335,8 +336,8 @@ get.pots.from.script = function( file, text
 	extentionTag[ desc_token %in% c("SYMBOL_SUB", "EQ_SUB" )  ] = "argument"
 	extentionTag[ desc_token == "SYMBOL_PACKAGE" ] = "package"
 	
-	extentionTag[ desc_token %in% c("SYMBOL_FORMALS") ] = "formalargs" 
-	extentionTag[ desc_token %in% "EQ_FORMALS" ] = "eqformalargs" 
+	extentionTag[ desc_token %in% c("SYMBOL_FORMALS") ] = "formalargs"
+	extentionTag[ desc_token %in% "EQ_FORMALS" ] = "eqformalargs"
 	
 	extentionTag[ desc_token %in% c("EQ_ASSIGN", "LEFT_ASSIGN" )] = "assignement"
 	extentionTag[ desc_token == "SYMBOL" ] = "symbol"
@@ -347,16 +348,20 @@ get.pots.from.script = function( file, text
 	ldata = split( data, data[,1] )
 	
 	tp.list = list( comment.properties = comment.properties
-		, symbol.properties = symbol.properties
-		, assignement.properties = assignement.properties
-		, keyword.properties = keyword.properties
-		, formalargs.properties = formalargs.properties
-		, eqformalargs.properties = eqformalargs.properties
-		, functioncall.properties = functioncall.properties
-		, string.properties = string.properties
-		, number.properties = number.properties
-		, argument.properties = argument.properties
-		, package.properties = package.properties
+			, roxygencomment.properties = roxygencomment.properties
+			, operators.properties = operators.properties
+			, keyword.properties = keyword.properties
+			, string.properties = string.properties
+			, number.properties = number.properties
+			, functioncall.properties = functioncall.properties
+			, argument.properties = argument.properties
+			, package.properties = package.properties
+			, formalargs.properties = formalargs.properties
+			, eqformalargs.properties = eqformalargs.properties
+			, assignement.properties = assignement.properties
+			, symbol.properties = symbol.properties
+			, slot.properties = slot.properties
+			, default.properties = default.properties
 		)
 	
 	pot.list = lapply( ldata, function(x, tp.list ){
