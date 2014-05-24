@@ -63,6 +63,7 @@ MyFTable = setFlexTableBorders(MyFTable
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
+
 doc = addTitle( doc, "Title example 2", level = 1 )
 #####################################################################
 

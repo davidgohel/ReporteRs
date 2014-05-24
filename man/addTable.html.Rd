@@ -85,10 +85,12 @@ doc = addTitle( doc, "Title example 1", level = 1 )
 # simpliest usage
 doc = addTable( doc, iris[ 1:10,] )
 
+
 doc = addTitle( doc, "Title example 2", level = 1 )
 # demo span.columns
 # Iris sample dataset with span cells on column Species
 doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
+
 
 doc = addTitle( doc, "Title example 3", level = 1 )
 #

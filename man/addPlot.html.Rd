@@ -60,6 +60,7 @@ doc = addPlot( doc, fun = plot
   , par.properties = parProperties(text.align = "left")
 )
 
+
 doc = addTitle( doc, "Title example 2", level = 1 )
 # load ggplot2
 require( ggplot2 )
@@ -72,6 +73,7 @@ myplot = qplot(Sepal.Length, Petal.Length, data = iris
 #   myplot is assigned to argument 'x' because function 'print' on ggplot
 #   objects is expecting argument 'x'.
 doc = addPlot( doc = doc, fun = print, x = myplot )
+
 
 doc = addTitle( doc, "Title example 3", level = 1 )
 ###########################################################

@@ -92,6 +92,7 @@ doc = addTable( doc, iris[ 1:10,] )
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
+
 doc = addTitle( doc, "Title example 2" )
 # demo span.columns
 # Iris sample dataset with span cells on column Species
@@ -99,6 +100,7 @@ doc = addTable( doc, iris[ 46:55,], span.columns = "Species" )
 
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
+
 
 doc = addTitle( doc, "Title example 3" )
 #

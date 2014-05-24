@@ -72,6 +72,7 @@ doc = addPlot( doc, fun = plot
   , par.properties = parProperties(text.align = "left")
 )
 
+
 doc = addTitle( doc, "Title example 2", level = 1 )
 # load ggplot2
 require( ggplot2 )

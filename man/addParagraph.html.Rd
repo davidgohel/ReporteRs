@@ -48,10 +48,13 @@ doc = addTitle( doc, "Title example 1", level = 1 )
 # Add "Hello World" into the document doc
 doc = addParagraph(doc, "Hello Word" )
 
+
 doc = addTitle( doc, "Title example 2", level = 1 )
+
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
   ) + " is " + pot("rich", textProperties( font.weight = "bold" ) )
+
 # "Cats and dogs" with formatting on some words
 pot2 = pot("Cats", textProperties(color = "red" ) 
   ) + " and " + pot("dogs", textProperties( color = "blue" ) )

@@ -41,10 +41,13 @@ doc = addParagraph(doc, "Hello Word" )
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
+
 doc = addTitle( doc, "Title example 2", level = 1 )
+
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
   ) + " is " + pot("rich", textProperties( font.weight = "bold" ) )
+
 # "Cats and dogs" with formatting on some words
 pot2 = pot("Cats", textProperties(color = "red" ) 
   ) + " and " + pot("dogs", textProperties( color = "blue" ) )
@@ -58,10 +61,13 @@ doc = addParagraph(doc, my.pars )
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
+
 doc = addTitle( doc, "Title example 3", level = 1 )
+
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
   ) + " is " + pot("rich", textProperties( font.weight = "bold" ) )
+
 # "Cats and dogs" with formatting on some words
 pot2 = pot("Cats", textProperties(color = "red" ) 
   ) + " and " + pot("dogs", textProperties( color = "blue" ) )

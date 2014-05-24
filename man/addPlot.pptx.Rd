@@ -68,6 +68,7 @@ doc = addPlot( doc, fun = plot
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
+
 doc = addTitle( doc, "Title example 2" )
 # load ggplot2
 require( ggplot2 )

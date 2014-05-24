@@ -58,6 +58,7 @@ doc = addFlexTable( doc, MyFTable )
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
+
 doc = addTitle( doc, "Title example 2", level = 1 )
 #####################################################################
 

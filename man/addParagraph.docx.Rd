@@ -45,6 +45,7 @@ doc = addTitle( doc, "Title example 1", level = 1 )
 # Add "Hello World" into the document doc
 doc = addParagraph(doc, "Hello Word", stylename = "Normal" )
 
+
 doc = addTitle( doc, "Title example 2", level = 1 )
 
 # define some texts
@@ -56,10 +57,13 @@ texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 # add texts with stylename BulletList
 doc = addParagraph( doc, value = texts, stylename="BulletList" )
 
+
 doc = addTitle( doc, "Title example 3", level = 1 )
+
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
   ) + " is " + pot("rich", textProperties( font.weight = "bold" ) )
+
 # "Cats and dogs" with formatting on some words
 pot2 = pot("Cats", textProperties(color = "red" ) 
   ) + " and " + pot("dogs", textProperties( color = "blue" ) )
