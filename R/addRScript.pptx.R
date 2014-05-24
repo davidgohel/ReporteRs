@@ -20,6 +20,7 @@
 #' @param symbol.properties symbol txtProperties object
 #' @param slot.properties slot txtProperties object
 #' @param default.properties default txtProperties object
+#' @param par.properties a parProperties object
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"pptx"}.
 #' @examples
@@ -52,6 +53,7 @@ addRScript.pptx = function(doc, file, text
 	, assignement.properties = textProperties( color = "black" )
 	, slot.properties = textProperties( color = "#F25774" )
 	, default.properties = textProperties( color = "black" )
+	, par.properties = parProperties(padding = 0)
 	, ... 
 	) {
 	
@@ -92,7 +94,8 @@ addRScript.pptx = function(doc, file, text
 			, default.properties = default.properties
 		)
 	}
+	
 	par = do.call(set_of_paragraphs, pot.list )
-	doc = addParagraph(doc, value = par ) 
+	doc = addParagraph(doc, value = par, par.properties = par.properties ) 
 	doc
 }

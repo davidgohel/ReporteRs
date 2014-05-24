@@ -17,7 +17,8 @@
   eqformalargs.properties = textProperties(color = "#424242"),
   assignement.properties = textProperties(color = "black"),
   slot.properties = textProperties(color = "#F25774"),
-  default.properties = textProperties(color = "black"), ...)
+  default.properties = textProperties(color = "black"),
+  par.properties = parProperties(padding = 0), ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"} where
@@ -63,6 +64,8 @@
   \item{slot.properties}{slot txtProperties object}
 
   \item{default.properties}{default txtProperties object}
+
+  \item{par.properties}{a parProperties object}
 
   \item{...}{further arguments, not used.}
 }

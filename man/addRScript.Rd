@@ -71,6 +71,8 @@ a document object
 Add R script into a document object
 }
 \seealso{
-\code{\link{html}}, \code{\link{addRScript.html}}
+\code{\link{addRScript.html}},
+\code{\link{addRScript.docx}} ,
+\code{\link{addRScript.pptx}}
 }
 

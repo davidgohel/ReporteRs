@@ -8,6 +8,8 @@ ENHANCEMENT
 ------------------------------------------------------------------
 * addRScript implemented for docx, html and pptx
 
+* addParagraph.pptx now comes with a parProperties argument
+
 ReporteRs 0.5.3
 ==================================================================
 BUG FIXES

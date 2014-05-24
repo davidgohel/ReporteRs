@@ -2,7 +2,7 @@
 \alias{addParagraph.pptx}
 \title{Insert a paragraph into a pptx object}
 \usage{
-\method{addParagraph}{pptx}(doc, value, ...)
+\method{addParagraph}{pptx}(doc, value, par.properties = parProperties(), ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"} where paragraph
@@ -10,6 +10,8 @@
 
   \item{value}{character vector containing texts to add OR
   an object of class \code{\link{set_of_paragraphs}}.}
+
+  \item{par.properties}{a parProperties object}
 
   \item{...}{further arguments, not used.}
 }
@@ -52,6 +54,24 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 
 # Add my.pars into the document doc
 doc = addParagraph(doc, my.pars )
+
+# add a slide with layout "Title and Content"
+doc = addSlide( doc, slide.layout = "Title and Content" )
+
+doc = addTitle( doc, "Title example 3", level = 1 )
+# "My tailor is rich" with formatting on some words
+pot1 = pot("My tailor", textProperties(color = "red" ) 
+  ) + " is " + pot("rich", textProperties( font.weight = "bold" ) )
+# "Cats and dogs" with formatting on some words
+pot2 = pot("Cats", textProperties(color = "red" ) 
+  ) + " and " + pot("dogs", textProperties( color = "blue" ) )
+
+# create a set of paragraphs made of pot1 and pot2
+my.pars = set_of_paragraphs( pot1, pot2 )
+
+# Add my.pars into the document doc
+doc = addParagraph(doc, my.pars
+  , par.properties=parProperties(text.align="center", padding=24) )
 
 # Write the object
 writeDoc( doc, file = doc.filename )

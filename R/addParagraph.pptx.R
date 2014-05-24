@@ -5,6 +5,7 @@
 #' 
 #' @param doc Object of class \code{"pptx"} where paragraph has to be added
 #' @param value character vector containing texts to add OR an object of class \code{\link{set_of_paragraphs}}.
+#' @param par.properties a parProperties object
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"pptx"}.
 #' @examples
@@ -20,39 +21,36 @@
 #' @example examples/pot2_example.R
 #' @example examples/set_of_paragraphs_example.R
 #' @example examples/addParagraph_sop_nostylename.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle3Level1.R
+#' @example examples/pot1_example.R
+#' @example examples/pot2_example.R
+#' @example examples/set_of_paragraphs_example.R
+#' @example examples/addParagraph_parProperties.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addParagraph}}
 #' @method addParagraph pptx
 #' @S3method addParagraph pptx
 
-addParagraph.pptx = function(doc, value, ... ) {
+addParagraph.pptx = function(doc, value, par.properties = parProperties(), ... ) {
 	
 	if( inherits( value, "character" ) ){
 		x = lapply( value, function(x) pot(value = x) )
 		value = do.call( "set_of_paragraphs", x )
 	}
 	
+	if( !inherits( par.properties, "parProperties" ) ){
+		stop("argument 'par.properties' must be an object of class 'parProperties'")
+	}
+	
 	
 	if( inherits(value, "set_of_paragraphs") ){
 		slide = doc$current_slide 
-		paragrah = .jnew(class.pptx4r.POT)
-		for( pot_index in 1:length( value ) ){
-			.jcall( paragrah, "V", "addP")
-			pot_value = value[[pot_index]]
-			for( i in 1:length(pot_value)){
-				if( is.null( pot_value[[i]]$format ) ) .jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-				else .jcall( paragrah, "V", "addPot", pot_value[[i]]$value
-							, pot_value[[i]]$format$font.size
-							, pot_value[[i]]$format$font.weight=="bold"
-							, pot_value[[i]]$format$font.style=="italic"
-							, pot_value[[i]]$format$underlined
-							, pot_value[[i]]$format$color
-							, pot_value[[i]]$format$font.family
-							, pot_value[[i]]$format$vertical.align
-				)
-			}
-		}
+		paragrahSection = ParagraphSection (value, par.properties )
+		paragrah = .jnew(class.pptx4r.Paragraphs)
+		.jcall( paragrah, "V", "setTextBody", paragrahSection$jobj)
+
 		out = .jcall( slide, "I", "add" , paragrah)
 		if( isSlideError( out ) ){
 			stop( getSlideErrorString( out , "pot") )
