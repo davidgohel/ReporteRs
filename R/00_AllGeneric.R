@@ -282,7 +282,8 @@ addSubtitle = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{html}}, \code{\link{addRScript.html}}
+#' @seealso \code{\link{addRScript.html}}, \code{\link{addRScript.docx}}
+#' , \code{\link{addRScript.pptx}}
 addRScript = function(doc, file, text
 	, comment.properties = textProperties( color = "#A7947D" )
 	, roxygencomment.properties = textProperties( color = "#5FB0B8" )
@@ -300,53 +301,53 @@ addRScript = function(doc, file, text
 	, slot.properties = textProperties( color = "#F25774" )
 	, default.properties = textProperties( color = "black" )
   , ...
-  ){
+){
 	
-  if( !inherits(comment.properties, "textProperties") )
-	  stop("argument comment.properties must be a textProperties object.")
-  
-  if( !inherits(roxygencomment.properties, "textProperties") )
-	  stop("argument roxygencomment.properties must be a textProperties object.")
-  
-  if( !inherits(operators.properties, "textProperties") )
-	  stop("argument operators.properties must be a textProperties object.")
-  
-  if( !inherits(keyword.properties, "textProperties") )
-	  stop("argument keyword.properties must be a textProperties object.")
-  
-  if( !inherits(string.properties, "textProperties") )
-	  stop("argument string.properties must be a textProperties object.")
-  
-  if( !inherits(number.properties, "textProperties") )
-	  stop("argument number.properties must be a textProperties object.")
-  
-  if( !inherits(functioncall.properties, "textProperties") )
-	  stop("argument functioncall.properties must be a textProperties object.")
-  
-  if( !inherits(argument.properties, "textProperties") )
-	  stop("argument argument.properties must be a textProperties object.")
-  
-  if( !inherits(package.properties, "textProperties") )
-	  stop("argument package.properties must be a textProperties object.")
-  
-  if( !inherits(formalargs.properties, "textProperties") )
-	  stop("argument formalargs.properties must be a textProperties object.")
-  
-  if( !inherits(eqformalargs.properties, "textProperties") )
-	  stop("argument eqformalargs.properties must be a textProperties object.")
-  
-  if( !inherits(assignement.properties, "textProperties") )
-	  stop("argument assignement.properties must be a textProperties object.")
-  
-  if( !inherits(symbol.properties, "textProperties") )
-	  stop("argument symbol.properties must be a textProperties object.")
-  
-  if( !inherits(slot.properties, "textProperties") )
-	  stop("argument slot.properties must be a textProperties object.")
-  
-  if( !inherits(default.properties, "textProperties") )
-	  stop("argument default.properties must be a textProperties object.")
-
+	if( !inherits(comment.properties, "textProperties") )
+		stop("argument comment.properties must be a textProperties object.")
+	
+	if( !inherits(roxygencomment.properties, "textProperties") )
+		stop("argument roxygencomment.properties must be a textProperties object.")
+	
+	if( !inherits(operators.properties, "textProperties") )
+		stop("argument operators.properties must be a textProperties object.")
+	
+	if( !inherits(keyword.properties, "textProperties") )
+		stop("argument keyword.properties must be a textProperties object.")
+	
+	if( !inherits(string.properties, "textProperties") )
+		stop("argument string.properties must be a textProperties object.")
+	
+	if( !inherits(number.properties, "textProperties") )
+		stop("argument number.properties must be a textProperties object.")
+	
+	if( !inherits(functioncall.properties, "textProperties") )
+		stop("argument functioncall.properties must be a textProperties object.")
+	
+	if( !inherits(argument.properties, "textProperties") )
+		stop("argument argument.properties must be a textProperties object.")
+	
+	if( !inherits(package.properties, "textProperties") )
+		stop("argument package.properties must be a textProperties object.")
+	
+	if( !inherits(formalargs.properties, "textProperties") )
+		stop("argument formalargs.properties must be a textProperties object.")
+	
+	if( !inherits(eqformalargs.properties, "textProperties") )
+		stop("argument eqformalargs.properties must be a textProperties object.")
+	
+	if( !inherits(assignement.properties, "textProperties") )
+		stop("argument assignement.properties must be a textProperties object.")
+	
+	if( !inherits(symbol.properties, "textProperties") )
+		stop("argument symbol.properties must be a textProperties object.")
+	
+	if( !inherits(slot.properties, "textProperties") )
+		stop("argument slot.properties must be a textProperties object.")
+	
+	if( !inherits(default.properties, "textProperties") )
+		stop("argument default.properties must be a textProperties object.")
+	
 	if( missing( file ) && missing( text ) )
 		stop("file OR text must be provided as argument.")
 	
