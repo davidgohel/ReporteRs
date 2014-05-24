@@ -79,19 +79,6 @@ NULL
 NULL
 
 
-#' melanoma dataset from boot package
-#' 
-#' Transformed dataset to reproduce blog :
-#' http://gforge.se/2014/01/fast-track-publishing-using-knitr-part-iv/
-#' 
-#' 
-#' @docType data
-#' @keywords datasets
-#' @name gforge_datacopy
-#' @usage data(gforge_datacopy)
-#' @format A data frame with 4 rows and 10 variables
-NULL
-
 #' pbc summary
 #' 
 #' @docType data
