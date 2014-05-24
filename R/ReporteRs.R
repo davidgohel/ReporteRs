@@ -5,7 +5,7 @@
 #' Package: \tab ReporteRs\cr
 #' Type: \tab Package\cr
 #' Version: \tab 0.5.4\cr
-#' Date: \tab 2014-03-13\cr
+#' Date: \tab 2014-05-24\cr
 #' License: \tab GPL (>= 3)\cr
 #' LazyLoad: \tab yes\cr
 #' }
