@@ -34,3 +34,4 @@ char *RGBHexValue(unsigned int col) {
 	return &color_value[0];
 }
 
+

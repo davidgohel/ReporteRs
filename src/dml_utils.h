@@ -35,3 +35,4 @@ void DML_SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
 void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);
 
 int get_and_increment_idx(pDevDesc dev);
+

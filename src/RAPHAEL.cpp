@@ -533,3 +533,4 @@ SEXP R_RAPHAEL_Device(SEXP filename
 	return R_NilValue;
 }
 
+

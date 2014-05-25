@@ -123,5 +123,3 @@ void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc) {
 	}
 }
 
-
-

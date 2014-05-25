@@ -73,3 +73,4 @@ SEXP R_RAPHAEL_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
 		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP canvas_id, SEXP env);
 };
 
+

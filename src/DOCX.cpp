@@ -647,3 +647,4 @@ SEXP R_DOCX_Device(SEXP filename
 	return R_NilValue;
 }
 
+

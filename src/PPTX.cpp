@@ -584,3 +584,4 @@ SEXP R_PPTX_Device(SEXP filename
 	return R_NilValue;
 }
 
+

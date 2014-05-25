@@ -62,3 +62,4 @@ void raphael_text(const char *str, DOCDesc *pd){
 	    break;
 	}
 }
+

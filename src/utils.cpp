@@ -119,3 +119,4 @@ void add_dblclick(int *dn, int *id, char **str, int *l){
 	}
 
 }
+

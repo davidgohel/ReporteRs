@@ -73,3 +73,4 @@ SEXP R_PPTX_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
 		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP start_id, SEXP is_editable);
 };
 
+

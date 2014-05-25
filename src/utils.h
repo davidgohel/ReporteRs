@@ -39,3 +39,4 @@ extern "C" {
 	void add_click(int *dn, int *id, char **str, int *l);
 	void add_dblclick(int *dn, int *id, char **str, int *l);
 }
+
