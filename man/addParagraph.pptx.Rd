@@ -2,7 +2,8 @@
 \alias{addParagraph.pptx}
 \title{Insert a paragraph into a pptx object}
 \usage{
-\method{addParagraph}{pptx}(doc, value, par.properties = parProperties(), ...)
+\method{addParagraph}{pptx}(doc, value, offx, offy, width, height,
+  par.properties = parProperties(), ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"pptx"} where paragraph
@@ -10,6 +11,18 @@
 
   \item{value}{character vector containing texts to add OR
   an object of class \code{\link{set_of_paragraphs}}.}
+
+  \item{offx}{optional, x position of the shape (top left
+  position of the bounding box) in inch. See details.}
+
+  \item{offy}{optional, y position of the shape (top left
+  position of the bounding box) in inch. See details.}
+
+  \item{width}{optional, width of the shape in inch. See
+  details.}
+
+  \item{height}{optional, height of the shape in inch. See
+  details.}
 
   \item{par.properties}{a parProperties object}
 
@@ -20,6 +33,16 @@ an object of class \code{"pptx"}.
 }
 \description{
 Insert paragraph(s) of text into a \code{pptx} object
+}
+\details{
+If arguments offx, offy, width, height are missing,
+position and dimensions will be defined by the width and
+height of the next available shape of the slide. This
+dimensions can be defined in the layout of the PowerPoint
+template used to create the \code{pptx} object.
+
+If arguments offx, offy, width, height are provided, they
+become position and dimensions of the new shape.
 }
 \examples{
 #START_TAG_TEST
@@ -58,6 +81,10 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 # Add my.pars into the document doc
 doc = addParagraph(doc, my.pars )
 
+# Add my.pars into the document doc
+doc = addParagraph(doc, my.pars, offx = 3, offy = 3, width = 2, height = 0.5
+	, par.properties=parProperties(text.align="center", padding=0) )
+
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
@@ -77,7 +104,7 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 
 # Add my.pars into the document doc
 doc = addParagraph(doc, my.pars
-  , par.properties=parProperties(text.align="center", padding=24) )
+		, par.properties=parProperties(text.align="center", padding=24) )
 
 # Write the object
 writeDoc( doc, file = doc.filename )

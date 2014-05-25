@@ -1,6 +1,6 @@
 \name{dim.pptx}
 \alias{dim.pptx}
-\title{Get coordinates of next available shape of a PowerPoint document}
+\title{Get layout information on a PowerPoint slide}
 \usage{
 \method{dim}{pptx}(x)
 }
@@ -8,8 +8,8 @@
   \item{x}{Object of class \code{pptx}}
 }
 \description{
-Returns position and dimension of the next available shape
-in the current slide.
+Returns slide width and height, position and dimension of
+the next available shape in the current slide.
 }
 \examples{
 #START_TAG_TEST

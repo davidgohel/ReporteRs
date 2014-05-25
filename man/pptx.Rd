@@ -29,7 +29,7 @@ class \code{"pptx"}.
 \item \code{\link{addParagraph.pptx}} add texts \item
 \code{\link{addPlot.pptx}} add plots \item
 \code{\link{addTable.pptx}} add tables \item
-\code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}
+\code{\link{addFlexTable.pptx}} add \code{\link{FlexTable}}
 \item \code{\link{addDate.pptx}} add a date (most often in
 the bottom left area of the slide) \item
 \code{\link{addFooter.pptx}} add a comment in the footer

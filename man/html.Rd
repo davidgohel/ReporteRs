@@ -30,7 +30,7 @@ class \code{"html"}.
 \code{\link{addParagraph.html}} add texts \item
 \code{\link{addPlot.html}} add plots \item
 \code{\link{addTable.html}} add tables \item
-\code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}
+\code{\link{addFlexTable.html}} add \code{\link{FlexTable}}
 \item \code{\link{addRScript.html}} add R Script } Once
 object has content, user can write the htmls pages into a
 directory, see \code{\link{writeDoc.html}}.

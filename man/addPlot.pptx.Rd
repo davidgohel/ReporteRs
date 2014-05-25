@@ -3,7 +3,8 @@
 \title{Add a plot into a pptx object}
 \usage{
 \method{addPlot}{pptx}(doc, fun, pointsize = 11, vector.graphic = TRUE,
-  fontname = getOption("ReporteRs-default-font"), editable = TRUE, ...)
+  fontname = getOption("ReporteRs-default-font"), editable = TRUE, offx,
+  offy, width, height, ...)
 }
 \arguments{
   \item{doc}{the \code{pptx} to use}
@@ -24,6 +25,18 @@
   \item{editable}{logical value - if TRUE vector graphics
   elements (points, texts, etc.) are editable.}
 
+  \item{offx}{optional, x position of the shape (top left
+  position of the bounding box) in inch. See details.}
+
+  \item{offy}{optional, y position of the shape (top left
+  position of the bounding box) in inch. See details.}
+
+  \item{width}{optional, width of the shape in inch. See
+  details.}
+
+  \item{height}{optional, height of the shape in inch. See
+  details.}
+
   \item{...}{arguments for \code{fun}.}
 }
 \value{
@@ -34,12 +47,14 @@ Add a plot to the current slide of an existing \code{pptx}
 object.
 }
 \details{
-Width and height can't be controled here. They are defined
-by the width and height of the shape that will contain the
-graphics.
+If arguments offx, offy, width, height are missing,
+position and dimensions will be defined by the width and
+height of the next available shape of the slide. This
+dimensions can be defined in the layout of the PowerPoint
+template used to create the \code{pptx} object.
 
-This dimensions can be defined in the layout of the
-PowerPoint template used to create the \code{pptx} object.
+If arguments offx, offy, width, height are provided, they
+become position and dimensions of the new shape.
 }
 \examples{
 #START_TAG_TEST
@@ -58,6 +73,12 @@ doc = addTitle( doc, "Title example 1" )
 doc = addPlot( doc, fun = plot
   , x = rnorm( 100 ), y = rnorm (100 )
   , main = "base plot main title"
+)
+# Add a base plot at a specified location
+doc = addPlot( doc, fun = plot
+  , x = rnorm( 100 ), y = rnorm (100 ), col = "red"
+  , main = "small shape", pointsize=5
+  , offx = 3, offy = 3, width = 3, height = 3
 )
 
 # add a slide with layout "Title and Content"
