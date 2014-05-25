@@ -45,19 +45,21 @@ Getting Started
 ---------------
 
     library(ReporteRs)
+    
     example(docx) #run a complete and detailed docx example
     example(pptx) #run a complete and detailed pptx example
-	example(html) #run a complete and detailed html example
-
-	?ReporteRs
-	?addTable
-	?FlexTable
-	?addPlot
-	?addParagraph
-	?docx
-	?pptx
-	?html
+    example(html) #run a complete and detailed html example
+    
+    ?ReporteRs
+    ?addTable
+    ?FlexTable
+    ?addPlot
+    ?addParagraph
+    ?docx
+    ?pptx
+    ?html
 	
 License
 -------
-The ReporteRs package is licensed under the GPLv3. See COPYRIGHTS file in the inst directory for additional details.  
+The ReporteRs package is licensed under the GPLv3. See COPYRIGHTS file in the inst directory for additional details.
+
