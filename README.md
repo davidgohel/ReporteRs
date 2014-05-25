@@ -62,4 +62,3 @@ Getting Started
 License
 -------
 The ReporteRs package is licensed under the GPLv3. See COPYRIGHTS file in the inst directory for additional details.
-
