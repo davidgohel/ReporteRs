@@ -1,8 +1,8 @@
 Package: ReporteRs
 Type: Package
 Title: Microsoft Word, Microsoft Powerpoint and HTML documents generation from R
-Version: 0.5.4
-Date: 2014-04-10
+Version: 0.5.5
+Date: 2014-05-26
 Author: David Gohel <david.gohel@lysis-consultants.fr>
 Maintainer: David Gohel <david.gohel@lysis-consultants.fr>
 Description: An R package for creating Microsoft Word document (>=2007),

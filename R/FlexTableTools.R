@@ -7,8 +7,22 @@ length.FlexTable = function(x) {
 #' @method print FlexTable
 #' @S3method print FlexTable
 print.FlexTable = function(x, ...){
-	out = .jcall( x$jobj, "S", "toString" )
-	cat(out)
+	
+	cat("FlexTable object with", x$numrow, "row(s) and", x$numcol, "column(s).\n")
+	cat("Row ids:", paste( head( x$row_id ), collapse = ", " ), " ... \n" )
+	cat("Col ids:", paste( head( x$col_id ), collapse = ", " ), " ... \n" )
+	
+	if( is.jnull(x$jobj ) ) cat("java object is null. Object need to be rebuild.\n")
+	
+	invisible()
+}
+
+#' @method str FlexTable
+#' @S3method str FlexTable
+str.FlexTable = function(object, ...){
+	
+	print( object )
+	
 	invisible()
 }
 
