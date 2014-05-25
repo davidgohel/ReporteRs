@@ -84,7 +84,7 @@ addPlot.docx = function(doc, fun
 		# one important and painful point is that shape ids must be unique 
 		# in the whole document
 		last_docx_elt_index = .jcall( doc$obj, "I", "getElementIndex") + 1L
-		# OK, maybe start_id should be named last_id... 
+		# start_id should be named last_id... 
 		doc_elt_index = last_docx_elt_index;
 		filename = file.path( dirname, "dml", fsep = "/"  )
 		filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
@@ -96,7 +96,6 @@ addPlot.docx = function(doc, fun
 		fun_res = try( fun(...), silent = T )
 		last_id = .C("get_current_element_id", (dev.cur()-1L), 0L)[[2]]
 		
-#		browser()
 		dev.off()
 		
 

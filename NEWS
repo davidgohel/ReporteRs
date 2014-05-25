@@ -13,6 +13,11 @@ ENHANCEMENT
 * HTML code is available for FlexTable and plots. 
   See as.html.FlexTable and raphael.html.
 
+* addParagraph.pptx, addPlot.pptx, addFlexTable.pptx, addImage.pptx
+  gain arguments offx, offy, width and height (default missing)
+  to allow positioning shapes freely on a slide (independently of
+  what is defined in the slide layouts).
+
 ReporteRs 0.5.3
 ==================================================================
 BUG FIXES

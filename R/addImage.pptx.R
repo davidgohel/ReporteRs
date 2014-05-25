@@ -4,10 +4,22 @@
 #' 
 #' @param doc Object of class \code{"pptx"} where external image has to be added
 #' @param filename \code{"character"} value, complete filename of the external image
+#' @param offx optional, x position of the shape (top left position of the bounding box) in inch. See details.
+#' @param offy optional, y position of the shape (top left position of the bounding box) in inch See details.
+#' @param width optional, width of the shape in inch See details.
+#' @param height optional, height of the shape in inch See details.
 #' @param ... further arguments, not used. 
 #' @details 
-#' image is added to the next free 'content' shape of the current slide. 
+#' Image is added to the next free 'content' shape of the current slide. 
 #' See \code{\link{slide.layouts.pptx}} to view the slide layout.
+#' 
+#' If arguments offx, offy, width, height are missing, position and dimensions
+#' will be defined by the width and height of the next available shape of the slide. This 
+#' dimensions can be defined in the layout of the PowerPoint template used to create 
+#' the \code{pptx} object. 
+#' 
+#' If arguments offx, offy, width, height are provided, they become position and 
+#' dimensions of the new shape.
 #' @return an object of class \code{"pptx"}.
 #' @examples
 #' #START_TAG_TEST
@@ -28,10 +40,17 @@
 #' @method addImage pptx
 #' @S3method addImage pptx
 
-addImage.pptx = function(doc, filename, ... ) {
+addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
 	
 	slide = doc$current_slide 
-	out = .jcall( slide, "I", "addPicture", filename )
+
+	if( !missing( offx )){
+		out = .jcall( slide, "I", "addPicture", filename
+             , as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
+	} else {
+		out = .jcall( slide, "I", "addPicture", filename )
+	}
+	
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "image") )
 	}	
