@@ -1,6 +1,7 @@
 class.docx4r.DataTable = "org/lysis/reporters/docx4r/elements/DataTable"
 class.docx4r.POT = "org/lysis/reporters/docx4r/elements/POT"
 class.fontMetric = "org/lysis/reporters/graphicaldevices/fonts/FontMetric"
+class.fontInfo = "org/lysis/reporters/graphicaldevices/fonts/FontInfo"
 class.html4r.DataTable = "org/lysis/reporters/html4r/elements/DataTable"
 class.html4r.POT = "org/lysis/reporters/html4r/elements/POT"
 class.html4r.ImagesList = "org/lysis/reporters/html4r/elements/ImagesList"

@@ -1,3 +1,12 @@
+ReporteRs 0.5.5
+==================================================================
+BUG FIXES
+------------------------------------------------------------------
+* set headless mode when a java.awt library is used in the java code. 
+  The issue only appeared with RStudio Server, something to do with 
+  a null display device.
+  http://www.oracle.com/technetwork/articles/javase/headless-136834.html
+
 ReporteRs 0.5.4
 ==================================================================
 BUG FIXES

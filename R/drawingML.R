@@ -56,9 +56,15 @@ registerRaphaelGraph = function( plot_attributes, env ){
 }
 
 check.fontfamily = function( fontfamily ){
-	font = .jnew("java/awt/Font", fontfamily, 0L, 12L )
-	font_family = .jcall( font, "S", "getFamily" )
+	
+	if( !is.character( fontfamily ) ){
+		stop("fontfamily must be a single character.")
+	} else if( length( fontfamily ) != 1 ) stop("fontfamily must be a single character.")
+	
+	font = .jnew(class.fontInfo)
+	font_family = .jcall( font, "S", "getFontFamily", fontfamily )
 	if( font_family == "Dialog" )
 		stop("Font ", fontfamily, " can't be found in available fonts on this machine.")
 	invisible()
 }
+
