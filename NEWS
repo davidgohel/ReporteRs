@@ -7,6 +7,10 @@ BUG FIXES
   a null display device.
   http://www.oracle.com/technetwork/articles/javase/headless-136834.html
 
+ENHANCEMENT
+------------------------------------------------------------------
+* add str and print method for FlexTable
+
 ReporteRs 0.5.4
 ==================================================================
 BUG FIXES
