@@ -1,3 +1,10 @@
+ReporteRs 0.5.6
+==================================================================
+BUG FIXES
+------------------------------------------------------------------
+* debug addParagraph.docx into a bookmark with multiple paragraph
+  (reported by Günter Lutz)
+
 ReporteRs 0.5.5
 ==================================================================
 BUG FIXES
