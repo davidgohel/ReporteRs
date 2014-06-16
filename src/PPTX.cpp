@@ -39,6 +39,95 @@ static char pptx_lock_properties[] = "<p:cNvSpPr><a:spLocks noSelect=\"1\" noRes
 static char pptx_unlock_properties[] = "<p:cNvSpPr/><p:nvPr />";
 
 
+/* Draw To */
+
+//static void PicTeX_ClipLine(double x0, double y0, double x1, double y1,
+//		DOCDesc *ptd)
+//{
+//	ptd->clippedx0 = x0;
+//	ptd->clippedx1 = x1;
+//	ptd->clippedy0 = y0;
+//	ptd->clippedy1 = y1;
+//
+//	if ((ptd->clippedx0 < ptd->clipleft &&
+//			ptd->clippedx1 < ptd->clipleft) ||
+//			(ptd->clippedx0 > ptd->clipright &&
+//					ptd->clippedx1 > ptd->clipright) ||
+//					(ptd->clippedy0 < ptd->clipbottom &&
+//							ptd->clippedy1 < ptd->clipbottom) ||
+//							(ptd->clippedy0 > ptd->cliptop &&
+//									ptd->clippedy1 > ptd->cliptop)) {
+//		ptd->clippedx0 = ptd->clippedx1;
+//		ptd->clippedy0 = ptd->clippedy1;
+//		return;
+//	}
+//
+//	/*Clipping Left */
+//	if (ptd->clippedx1 >= ptd->clipleft && ptd->clippedx0 < ptd->clipleft) {
+//		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
+//				(ptd->clippedx1-ptd->clippedx0) *
+//				(ptd->clipleft-ptd->clippedx0)) +
+//						ptd->clippedy0;
+//		ptd->clippedx0 = ptd->clipleft;
+//	}
+//	if (ptd->clippedx1 <= ptd->clipleft && ptd->clippedx0 > ptd->clipleft) {
+//		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
+//				(ptd->clippedx1-ptd->clippedx0) *
+//				(ptd->clipleft-ptd->clippedx0)) +
+//						ptd->clippedy0;
+//		ptd->clippedx1 = ptd->clipleft;
+//	}
+//	/* Clipping Right */
+//	if (ptd->clippedx1 >= ptd->clipright &&
+//			ptd->clippedx0 < ptd->clipright) {
+//		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
+//				(ptd->clippedx1-ptd->clippedx0) *
+//				(ptd->clipright-ptd->clippedx0)) +
+//						ptd->clippedy0;
+//		ptd->clippedx1 = ptd->clipright;
+//	}
+//	if (ptd->clippedx1 <= ptd->clipright &&
+//			ptd->clippedx0 > ptd->clipright) {
+//		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
+//				(ptd->clippedx1-ptd->clippedx0) *
+//				(ptd->clipright-ptd->clippedx0)) +
+//						ptd->clippedy0;
+//		ptd->clippedx0 = ptd->clipright;
+//	}
+//	/*Clipping Bottom */
+//	if (ptd->clippedy1 >= ptd->clipbottom  &&
+//			ptd->clippedy0 < ptd->clipbottom ) {
+//		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
+//				(ptd->clippedy1-ptd->clippedy0) *
+//				(ptd->clipbottom -ptd->clippedy0)) +
+//						ptd->clippedx0;
+//		ptd->clippedy0 = ptd->clipbottom ;
+//	}
+//	if (ptd->clippedy1 <= ptd->clipbottom &&
+//			ptd->clippedy0 > ptd->clipbottom ) {
+//		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
+//				(ptd->clippedy1-ptd->clippedy0) *
+//				(ptd->clipbottom -ptd->clippedy0)) +
+//						ptd->clippedx0;
+//		ptd->clippedy1 = ptd->clipbottom ;
+//	}
+//	/*Clipping Top */
+//	if (ptd->clippedy1 >= ptd->cliptop  && ptd->clippedy0 < ptd->cliptop ) {
+//		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
+//				(ptd->clippedy1-ptd->clippedy0) *
+//				(ptd->cliptop -ptd->clippedy0)) +
+//						ptd->clippedx0;
+//		ptd->clippedy1 = ptd->cliptop ;
+//	}
+//	if (ptd->clippedy1 <= ptd->cliptop && ptd->clippedy0 > ptd->cliptop ) {
+//		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
+//				(ptd->clippedy1-ptd->clippedy0) *
+//				(ptd->cliptop -ptd->clippedy0)) +
+//						ptd->clippedx0;
+//		ptd->clippedy0 = ptd->cliptop ;
+//	}
+//}
+
 static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
 		const char* fontname, int id_init_value, int editable) {
@@ -69,6 +158,9 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	rd->height = height;
 	rd->fontface = 1;
 	rd->fontsize = (int) ps;
+
+
+
 //	rd->env=env;
 	//
 	//  Device functions
@@ -105,10 +197,15 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	 * Device physical characteristics
 	 */
 
-	dev->left = 0;
-	dev->right = width[0];
-	dev->bottom = height[0];
-	dev->top = 0;
+	rd->left = 0;
+	rd->right = width[0];
+	rd->bottom = height[0];
+	rd->top = 0;
+
+	rd->clipleft = rd->left;
+	rd->clipright = rd->right;
+	rd->clipbottom = rd->bottom;
+	rd->cliptop = rd->top;
 
 	dev->cra[0] = 0.9 * ps;
 	dev->cra[1] = 1.2 * ps;
@@ -120,7 +217,7 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	/*
 	 * Device capabilities
 	 */
-	dev->canClip = (Rboolean) FALSE;
+	dev->canClip = (Rboolean) TRUE;
 	dev->canHAdj = 2;//canHadj – integer: can the device do horizontal adjustment of text via the text callback, and if so, how precisely? 0 = no adjustment, 1 = {0, 0.5, 1} (left, centre, right justification) or 2 = continuously variable (in [0,1]) between left and right justification.
 	dev->canChangeGamma = (Rboolean) FALSE;	//canChangeGamma – Rboolean: can the display gamma be adjusted? This is now ignored, as gamma support has been removed.
 	dev->displayListOn = (Rboolean) FALSE;
@@ -194,6 +291,14 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 
 	double maxx = 0, maxy = 0;
 	double minx = 0, miny = 0;
+
+//	PicTeX_ClipLine(x1, y1, x2, y2, pd);
+//	x1 = pd->clippedx0;
+//	y1 = pd->clippedy0;
+//
+//	x2 = pd->clippedx1;
+//	y2 = pd->clippedy1;
+
 	if (x2 > x1) {
 		maxx = x2;
 		minx = x1;
@@ -208,7 +313,6 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 		maxy = y1;
 		miny = y2;
 	}
-
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
@@ -264,6 +368,14 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 			miny = y[i];
 	}
 
+//	PicTeX_ClipLine(minx, miny, maxx, maxy, pd);
+
+//	minx = pd->clippedx0;
+//	miny = pd->clippedy0;
+//
+//	maxx = pd->clippedx1;
+//	maxy = pd->clippedy1;
+
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
@@ -279,6 +391,18 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 	//fprintf(pd->dmlFilePointer, "<a:pathLst><a:path w=\"%ld\" h=\"%ld\">", pd->extx, pd->exty);
 	fputs( "<a:pathLst>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:path w=\"%.0f\" h=\"%.0f\">", p2e_(maxx-minx), p2e_(maxy-miny));
+
+//	for (i = 1; i < n; i++) {
+//		PicTeX_ClipLine(x[i-1], y[i-1], x[i], y[i], pd);
+//
+//		x[i-1] = pd->clippedx0;
+//		y[i-1] = pd->clippedy0;
+//
+//		x[i] = pd->clippedx1;
+//		y[i] = pd->clippedy1;
+//	}
+
+
 	fprintf(pd->dmlFilePointer,
 			"<a:moveTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:moveTo>",
 			p2e_(x[0] - minx), p2e_(y[0] - miny));
@@ -322,6 +446,24 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		if (y[i] < miny)
 			miny = y[i];
 	}
+//	PicTeX_ClipLine(minx, miny, maxx, maxy, pd);
+//
+//	minx = pd->clippedx0;
+//	miny = pd->clippedy0;
+//
+//	maxx = pd->clippedx1;
+//	maxy = pd->clippedy1;
+
+//	for (i = 1; i < n; i++) {
+//		PicTeX_ClipLine(x[i-1], y[i-1], x[i], y[i], pd);
+//
+//		x[i-1] = pd->clippedx0;
+//		y[i-1] = pd->clippedy0;
+//
+//		x[i] = pd->clippedx1;
+//		y[i] = pd->clippedy1;
+//	}
+
 
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
@@ -535,7 +677,15 @@ static void PPTX_Close(pDevDesc dev) {
 	free(pd);
 }
 
+
 static void PPTX_Clip(double x0, double x1, double y0, double y1, pDevDesc dev) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	Rprintf("%% Setting Clip Region to %.2f %.2f %.2f %.2f\n",
+		x0, y0, x1, y1);
+	pd->clipleft = x0;
+	pd->clipright = x1;
+	pd->clipbottom = y1;
+	pd->cliptop = y0;
 }
 
 static void PPTX_MetricInfo(int c, const pGEcontext gc, double* ascent,

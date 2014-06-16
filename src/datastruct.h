@@ -55,7 +55,10 @@ typedef struct {
 	double offy;
 	double extx;
 	double exty;
-	
+    double left, right, top, bottom;
+    double clipleft, clipright, cliptop, clipbottom;
+    double clippedx0, clippedy0, clippedx1, clippedy1;
+
 	double* x;
 	double* y;
 	double* width;
