@@ -41,92 +41,97 @@ static char pptx_unlock_properties[] = "<p:cNvSpPr/><p:nvPr />";
 
 /* Draw To */
 
-//static void PicTeX_ClipLine(double x0, double y0, double x1, double y1,
-//		DOCDesc *ptd)
-//{
-//	ptd->clippedx0 = x0;
-//	ptd->clippedx1 = x1;
-//	ptd->clippedy0 = y0;
-//	ptd->clippedy1 = y1;
-//
-//	if ((ptd->clippedx0 < ptd->clipleft &&
-//			ptd->clippedx1 < ptd->clipleft) ||
-//			(ptd->clippedx0 > ptd->clipright &&
-//					ptd->clippedx1 > ptd->clipright) ||
-//					(ptd->clippedy0 < ptd->clipbottom &&
-//							ptd->clippedy1 < ptd->clipbottom) ||
-//							(ptd->clippedy0 > ptd->cliptop &&
-//									ptd->clippedy1 > ptd->cliptop)) {
-//		ptd->clippedx0 = ptd->clippedx1;
-//		ptd->clippedy0 = ptd->clippedy1;
-//		return;
-//	}
-//
-//	/*Clipping Left */
-//	if (ptd->clippedx1 >= ptd->clipleft && ptd->clippedx0 < ptd->clipleft) {
-//		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
-//				(ptd->clippedx1-ptd->clippedx0) *
-//				(ptd->clipleft-ptd->clippedx0)) +
-//						ptd->clippedy0;
-//		ptd->clippedx0 = ptd->clipleft;
-//	}
-//	if (ptd->clippedx1 <= ptd->clipleft && ptd->clippedx0 > ptd->clipleft) {
-//		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
-//				(ptd->clippedx1-ptd->clippedx0) *
-//				(ptd->clipleft-ptd->clippedx0)) +
-//						ptd->clippedy0;
-//		ptd->clippedx1 = ptd->clipleft;
-//	}
-//	/* Clipping Right */
-//	if (ptd->clippedx1 >= ptd->clipright &&
-//			ptd->clippedx0 < ptd->clipright) {
-//		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
-//				(ptd->clippedx1-ptd->clippedx0) *
-//				(ptd->clipright-ptd->clippedx0)) +
-//						ptd->clippedy0;
-//		ptd->clippedx1 = ptd->clipright;
-//	}
-//	if (ptd->clippedx1 <= ptd->clipright &&
-//			ptd->clippedx0 > ptd->clipright) {
-//		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
-//				(ptd->clippedx1-ptd->clippedx0) *
-//				(ptd->clipright-ptd->clippedx0)) +
-//						ptd->clippedy0;
-//		ptd->clippedx0 = ptd->clipright;
-//	}
-//	/*Clipping Bottom */
-//	if (ptd->clippedy1 >= ptd->clipbottom  &&
-//			ptd->clippedy0 < ptd->clipbottom ) {
-//		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
-//				(ptd->clippedy1-ptd->clippedy0) *
-//				(ptd->clipbottom -ptd->clippedy0)) +
-//						ptd->clippedx0;
-//		ptd->clippedy0 = ptd->clipbottom ;
-//	}
-//	if (ptd->clippedy1 <= ptd->clipbottom &&
-//			ptd->clippedy0 > ptd->clipbottom ) {
-//		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
-//				(ptd->clippedy1-ptd->clippedy0) *
-//				(ptd->clipbottom -ptd->clippedy0)) +
-//						ptd->clippedx0;
-//		ptd->clippedy1 = ptd->clipbottom ;
-//	}
-//	/*Clipping Top */
-//	if (ptd->clippedy1 >= ptd->cliptop  && ptd->clippedy0 < ptd->cliptop ) {
-//		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
-//				(ptd->clippedy1-ptd->clippedy0) *
-//				(ptd->cliptop -ptd->clippedy0)) +
-//						ptd->clippedx0;
-//		ptd->clippedy1 = ptd->cliptop ;
-//	}
-//	if (ptd->clippedy1 <= ptd->cliptop && ptd->clippedy0 > ptd->cliptop ) {
-//		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
-//				(ptd->clippedy1-ptd->clippedy0) *
-//				(ptd->cliptop -ptd->clippedy0)) +
-//						ptd->clippedx0;
-//		ptd->clippedy0 = ptd->cliptop ;
-//	}
-//}
+static void PicTeX_ClipLine(double x0, double y0, double x1, double y1,
+		pDevDesc dev)
+{
+	DOCDesc *ptd = (DOCDesc *) dev->deviceSpecific;
+	ptd->clippedx0 = x0;
+	ptd->clippedx1 = x1;
+	ptd->clippedy0 = y0;
+	ptd->clippedy1 = y1;
+
+	if (( ptd->clippedx0 < dev->clipLeft && ptd->clippedx1 < dev->clipLeft ) ||
+			(ptd->clippedx0 > dev->clipRight && ptd->clippedx1 > dev->clipRight) ||
+			(ptd->clippedy0 < dev->clipBottom && ptd->clippedy1 < dev->clipBottom) ||
+			(ptd->clippedy0 > dev->clipTop && ptd->clippedy1 > dev->clipTop)) {
+		ptd->clippedx0 = ptd->clippedx1;
+		ptd->clippedy0 = ptd->clippedy1;
+		return;
+	}
+
+	/*Clipping Left */
+	if (ptd->clippedx1 >= dev->clipLeft && ptd->clippedx0 < dev->clipLeft) {
+//		Rprintf("%%\tClipping Left 1\n");
+		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
+				(ptd->clippedx1-ptd->clippedx0) *
+				(dev->clipLeft-ptd->clippedx0)) +
+						ptd->clippedy0;
+		ptd->clippedx0 = dev->clipLeft;
+	}
+	if (ptd->clippedx1 <= dev->clipLeft && ptd->clippedx0 > dev->clipLeft) {
+//		Rprintf("%%\tClipping Left 2\n");
+		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
+				(ptd->clippedx1-ptd->clippedx0) *
+				(dev->clipLeft-ptd->clippedx0)) +
+						ptd->clippedy0;
+		ptd->clippedx1 = dev->clipLeft;
+	}
+	/* Clipping Right */
+	if (ptd->clippedx1 >= dev->clipRight &&
+			ptd->clippedx0 < dev->clipRight) {
+//		Rprintf("%%\tClipping Right 1\n");
+		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
+				(ptd->clippedx1-ptd->clippedx0) *
+				(dev->clipRight-ptd->clippedx0)) +
+						ptd->clippedy0;
+		ptd->clippedx1 = dev->clipRight;
+	}
+	if (ptd->clippedx1 <= dev->clipRight &&
+			ptd->clippedx0 > dev->clipRight) {
+//		Rprintf("%%\tClipping Right 2\n");
+		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
+				(ptd->clippedx1-ptd->clippedx0) *
+				(dev->clipRight-ptd->clippedx0)) +
+						ptd->clippedy0;
+		ptd->clippedx0 = dev->clipRight;
+	}
+	/*Clipping Bottom */
+	if (ptd->clippedy1 >= dev->clipBottom  &&
+			ptd->clippedy0 < dev->clipBottom ) {
+//		Rprintf("%%\tClipping Bottom 1\n");
+		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
+				(ptd->clippedy1-ptd->clippedy0) *
+				(dev->clipBottom -ptd->clippedy0)) +
+						ptd->clippedx0;
+		ptd->clippedy0 = dev->clipBottom ;
+	}
+	if (ptd->clippedy1 <= dev->clipBottom &&
+			ptd->clippedy0 > dev->clipBottom ) {
+//		Rprintf("%%\tClipping Bottom 2\n");
+		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
+				(ptd->clippedy1-ptd->clippedy0) *
+				(dev->clipBottom -ptd->clippedy0)) +
+						ptd->clippedx0;
+		ptd->clippedy1 = dev->clipBottom ;
+	}
+	/*Clipping Top */
+	if (ptd->clippedy1 >= dev->clipTop  && ptd->clippedy0 < dev->clipTop ) {
+//		Rprintf("%%\tClipping Top 1\n");
+		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
+				(ptd->clippedy1-ptd->clippedy0) *
+				(dev->clipTop -ptd->clippedy0)) +
+						ptd->clippedx0;
+		ptd->clippedy1 = dev->clipTop ;
+	}
+	if (ptd->clippedy1 <= dev->clipTop && ptd->clippedy0 > dev->clipTop ) {
+//		Rprintf("%%\tClipping Top 2\n");
+		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
+				(ptd->clippedy1-ptd->clippedy0) *
+				(dev->clipTop -ptd->clippedy0)) +
+						ptd->clippedx0;
+		ptd->clippedy0 = dev->clipTop ;
+	}
+}
 
 static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
@@ -140,7 +145,6 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	fi->isinit=0;
 	fi->fontsize=(int) ps;
 	rd->fi = fi;
-
 	rd->filename = strdup(filename);
 	rd->fontname = strdup(fontname);
 
@@ -197,15 +201,20 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	 * Device physical characteristics
 	 */
 
-	rd->left = 0;
-	rd->right = width[0];
-	rd->bottom = height[0];
-	rd->top = 0;
+	dev->left = 0;
+	dev->right = width[0];
+	dev->bottom = height[0];
+	dev->top = 0;
 
-	rd->clipleft = rd->left;
-	rd->clipright = rd->right;
-	rd->clipbottom = rd->bottom;
-	rd->cliptop = rd->top;
+	dev->clipLeft = 0;
+	dev->clipRight = width[0];
+	dev->clipBottom = height[0];
+	dev->clipTop = 0;
+
+	rd->clippedx0 = dev->clipLeft;
+	rd->clippedy0 = dev->clipTop;
+	rd->clippedx1 = dev->clipRight;
+	rd->clippedy1 = dev->clipBottom;
 
 	dev->cra[0] = 0.9 * ps;
 	dev->cra[1] = 1.2 * ps;
@@ -292,12 +301,12 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 	double maxx = 0, maxy = 0;
 	double minx = 0, miny = 0;
 
-//	PicTeX_ClipLine(x1, y1, x2, y2, pd);
-//	x1 = pd->clippedx0;
-//	y1 = pd->clippedy0;
-//
-//	x2 = pd->clippedx1;
-//	y2 = pd->clippedy1;
+	PicTeX_ClipLine(x1, y1, x2, y2, dev);
+	x1 = pd->clippedx0;
+	y1 = pd->clippedy0;
+
+	x2 = pd->clippedx1;
+	y2 = pd->clippedy1;
 
 	if (x2 > x1) {
 		maxx = x2;
@@ -348,6 +357,7 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 
 static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
+	Rprintf("%%\tPPTX_Polyline\n");
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
@@ -368,13 +378,24 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 			miny = y[i];
 	}
 
-//	PicTeX_ClipLine(minx, miny, maxx, maxy, pd);
+	PicTeX_ClipLine(minx, miny, maxx, maxy, dev);
 
-//	minx = pd->clippedx0;
-//	miny = pd->clippedy0;
-//
-//	maxx = pd->clippedx1;
-//	maxy = pd->clippedy1;
+	minx = pd->clippedx0;
+	miny = pd->clippedy0;
+
+	maxx = pd->clippedx1;
+	maxy = pd->clippedy1;
+
+	for (i = 1; i < n; i++) {
+		PicTeX_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
+
+		x[i-1] = pd->clippedx0;
+		y[i-1] = pd->clippedy0;
+
+		x[i] = pd->clippedx1;
+		y[i] = pd->clippedy1;
+	}
+
 
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
@@ -392,16 +413,6 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 	fputs( "<a:pathLst>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<a:path w=\"%.0f\" h=\"%.0f\">", p2e_(maxx-minx), p2e_(maxy-miny));
 
-//	for (i = 1; i < n; i++) {
-//		PicTeX_ClipLine(x[i-1], y[i-1], x[i], y[i], pd);
-//
-//		x[i-1] = pd->clippedx0;
-//		y[i-1] = pd->clippedy0;
-//
-//		x[i] = pd->clippedx1;
-//		y[i] = pd->clippedy1;
-//	}
-
 
 	fprintf(pd->dmlFilePointer,
 			"<a:moveTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:moveTo>",
@@ -411,22 +422,20 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 				"<a:lnTo><a:pt x=\"%.0f\" y=\"%.0f\" /></a:lnTo>",
 				p2e_(x[i] - minx), p2e_(y[i] - miny));
 	}
-	//fprintf(pd->dmlFilePointer, "<a:close/></a:path></a:pathLst>");
 	fputs( "</a:path></a:pathLst>", pd->dmlFilePointer );
 	fputs( "</a:custGeom>", pd->dmlFilePointer );
-	//DML_SetFillColor(dev, gc);
 	DML_SetLineSpec(dev, gc);
 	fputs( "</p:spPr>", pd->dmlFilePointer );
 	fputs( "<p:txBody><a:bodyPr /><a:lstStyle /><a:p/></p:txBody>", pd->dmlFilePointer );
 
 	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
-//	fprintf(pd->dmlFilePointer, "\n");
 	fflush(pd->dmlFilePointer);
 
 }
 
 static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
+	Rprintf("%%\tPPTX_Polygon\n");
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
@@ -446,23 +455,23 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		if (y[i] < miny)
 			miny = y[i];
 	}
-//	PicTeX_ClipLine(minx, miny, maxx, maxy, pd);
-//
-//	minx = pd->clippedx0;
-//	miny = pd->clippedy0;
-//
-//	maxx = pd->clippedx1;
-//	maxy = pd->clippedy1;
+	PicTeX_ClipLine(minx, miny, maxx, maxy, dev);
 
-//	for (i = 1; i < n; i++) {
-//		PicTeX_ClipLine(x[i-1], y[i-1], x[i], y[i], pd);
-//
-//		x[i-1] = pd->clippedx0;
-//		y[i-1] = pd->clippedy0;
-//
-//		x[i] = pd->clippedx1;
-//		y[i] = pd->clippedy1;
-//	}
+	minx = pd->clippedx0;
+	miny = pd->clippedy0;
+
+	maxx = pd->clippedx1;
+	maxy = pd->clippedy1;
+
+	for (i = 1; i < n; i++) {
+		PicTeX_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
+
+		x[i-1] = pd->clippedx0;
+		y[i-1] = pd->clippedy0;
+
+		x[i] = pd->clippedx1;
+		y[i] = pd->clippedy1;
+	}
 
 
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
@@ -504,6 +513,7 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 
 static void PPTX_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) {
+	Rprintf("%%\tPPTX_Rect\n");
 	double tmp;
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
@@ -519,6 +529,13 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 		y0 = y1;
 		y1 = tmp;
 	}
+	PicTeX_ClipLine(x0, y0, x1, y1, dev);
+
+	x0 = pd->clippedx0;
+	y0 = pd->clippedy0;
+
+	x1 = pd->clippedx1;
+	y1 = pd->clippedy1;
 
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
@@ -655,6 +672,21 @@ static void PPTX_NewPage(const pGEcontext gc, pDevDesc dev) {
 
 	dev->right = pd->width[which];
 	dev->bottom = pd->height[which];
+	dev->left = 0;
+	dev->top = 0;
+
+	dev->clipLeft = 0;
+	dev->clipRight = dev->right;
+	dev->clipBottom = dev->bottom;
+	dev->clipTop = 0;
+
+	pd->clippedx0 = dev->clipLeft;
+	pd->clippedy0 = dev->clipTop;
+	pd->clippedx1 = dev->clipRight;
+	pd->clippedy1 = dev->clipBottom;
+
+
+
 	pd->offx = pd->x[which];
 	pd->offy = pd->y[which];
 	pd->extx = pd->width[which];
@@ -679,13 +711,12 @@ static void PPTX_Close(pDevDesc dev) {
 
 
 static void PPTX_Clip(double x0, double x1, double y0, double y1, pDevDesc dev) {
-	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	Rprintf("%% Setting Clip Region to %.2f %.2f %.2f %.2f\n",
-		x0, y0, x1, y1);
-	pd->clipleft = x0;
-	pd->clipright = x1;
-	pd->clipbottom = y1;
-	pd->cliptop = y0;
+//	Rprintf("%% Setting Clip Region to %.2f %.2f %.2f %.2f\n", x0, y0, x1, y1);
+	dev->clipLeft = x0;
+	dev->clipRight = x1;
+	dev->clipBottom = y1;
+	dev->clipTop = y0;
+
 }
 
 static void PPTX_MetricInfo(int c, const pGEcontext gc, double* ascent,

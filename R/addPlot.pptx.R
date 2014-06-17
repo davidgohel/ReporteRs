@@ -139,10 +139,10 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	dir.create( dirname )
 	filename = file.path( dirname, "/plot_"  )
 	filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
-	
+
 	env = dml.pptx( file = filename, width = width * 72.2, height = height * 72.2
 			, offx = offx * 72.2, offy = offy * 72.2, ps = pointsize, fontname = fontname
-			, firstid = plot_first_id, editable = editable
+			, firstid = doc$plot_first_id, editable = editable
 	)
 	
 	fun_res = try( fun(...), silent = T )
@@ -151,6 +151,7 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	doc$plot_first_id = last_id + 1
 	
 	plotfiles = list.files( dirname , full.names = T )
+
 	for( i in seq_along( plotfiles ) ){
 		if( check.dims < 4 ){
 			gr = .jnew(class.pptx4r.DMLGraphics, plotfiles[i]  )
