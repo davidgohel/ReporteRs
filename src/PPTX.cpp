@@ -357,7 +357,6 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 
 static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
-	Rprintf("%%\tPPTX_Polyline\n");
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
@@ -435,7 +434,6 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 
 static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
-	Rprintf("%%\tPPTX_Polygon\n");
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
@@ -513,7 +511,7 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 
 static void PPTX_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) {
-	Rprintf("%%\tPPTX_Rect\n");
+
 	double tmp;
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
