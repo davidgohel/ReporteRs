@@ -113,6 +113,16 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 	dev->bottom = height[0];
 	dev->top = 0;
 
+	dev->clipLeft = 0;
+	dev->clipRight = width[0];
+	dev->clipBottom = height[0];
+	dev->clipTop = 0;
+
+	rd->clippedx0 = dev->clipLeft;
+	rd->clippedy0 = dev->clipTop;
+	rd->clippedx1 = dev->clipRight;
+	rd->clippedy1 = dev->clipBottom;
+
 	dev->cra[0] = 0.9 * ps;
 	dev->cra[1] = 1.2 * ps;
 	dev->xCharOffset = 0.4900;
@@ -284,6 +294,10 @@ static void RAPHAEL_Line(double x1, double y1, double x2, double y2,
 		const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 
+	DOC_ClipLine(x1, y1, x2, y2, dev);
+	x1 = pd->clippedx0;y1 = pd->clippedy0;
+	x2 = pd->clippedx1;y2 = pd->clippedy1;
+
 	if (gc->lty > -1 && gc->lwd > 0.0 ){
 
 
@@ -307,6 +321,15 @@ static void RAPHAEL_Polyline(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int i;
+	for (i = 1; i < n; i++) {
+		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
+		x[i-1] = pd->clippedx0;
+		y[i-1] = pd->clippedy0;
+		x[i] = pd->clippedx1;
+		y[i] = pd->clippedy1;
+	}
+
 	if (gc->lty > -1 && gc->lwd > 0.0 ){
 
 		int idx = get_and_increment_idx(dev);
@@ -331,9 +354,17 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int i;
+	for (i = 1; i < n; i++) {
+		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
+		x[i-1] = pd->clippedx0;
+		y[i-1] = pd->clippedy0;
+		x[i] = pd->clippedx1;
+		y[i] = pd->clippedy1;
+	}
+
 	int idx = get_and_increment_idx(dev);
 	register_element( dev);
-	int i;
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
 	fprintf(pd->dmlFilePointer, "M %.0f %.0f", x[0], y[0]);
@@ -354,8 +385,13 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+
+	DOC_ClipLine(x0, y0, x1, y1, dev);
+	x0 = pd->clippedx0;y0 = pd->clippedy0;
+	x1 = pd->clippedx1;y1 = pd->clippedy1;
+
 	int idx = get_and_increment_idx(dev);
-	register_element( dev);
+	register_element( dev );
 	double temp;
 	if( y1 < y0 ){
 		temp = y1;
@@ -406,7 +442,7 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 	double Ppy = Qy + (Px-Qx) * _sin + (Py-Qy) * _cos;
 
 	double corrected_offx = Ppx ;//- 0.5 * w;
-	double corrected_offy = Ppy ;//- 0.5 * h;
+	double corrected_offy = Ppy ;//- 0.1 * h;
 
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.text(", idx, pd->objectname );
@@ -438,6 +474,19 @@ static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 	pd->canvas_id++;
 	dev->right = pd->width[which];
 	dev->bottom = pd->height[which];
+	dev->left = 0;
+	dev->top = 0;
+
+	dev->clipLeft = 0;
+	dev->clipRight = dev->right;
+	dev->clipBottom = dev->bottom;
+	dev->clipTop = 0;
+
+	pd->clippedx0 = dev->clipLeft;
+	pd->clippedy0 = dev->clipTop;
+	pd->clippedx1 = dev->clipRight;
+	pd->clippedy1 = dev->clipBottom;
+
 	pd->offx = pd->x[which];
 	pd->offy = pd->y[which];
 	pd->extx = pd->width[which];

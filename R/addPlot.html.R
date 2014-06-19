@@ -72,7 +72,6 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		last_canvas_id = .C("get_current_canvas_id", (dev.cur()-1L), 0L)[[2]]
 		dev.off()
 		plot_ids = get("plot_ids", envir = env )
-		
 		if( last_canvas_id < 0 ) stop("unexpected error, could not find device information.")
 		else doc$canvas_id = last_canvas_id;
 

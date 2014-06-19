@@ -38,101 +38,6 @@ static char pptx_elt_tag_end[] = "</p:sp>";
 static char pptx_lock_properties[] = "<p:cNvSpPr><a:spLocks noSelect=\"1\" noResize=\"1\" noEditPoints=\"1\" noTextEdit=\"1\" noMove=\"1\" noRot=\"1\" noChangeShapeType=\"1\"/></p:cNvSpPr><p:nvPr />";
 static char pptx_unlock_properties[] = "<p:cNvSpPr/><p:nvPr />";
 
-
-/* Draw To */
-
-static void PicTeX_ClipLine(double x0, double y0, double x1, double y1,
-		pDevDesc dev)
-{
-	DOCDesc *ptd = (DOCDesc *) dev->deviceSpecific;
-	ptd->clippedx0 = x0;
-	ptd->clippedx1 = x1;
-	ptd->clippedy0 = y0;
-	ptd->clippedy1 = y1;
-
-	if (( ptd->clippedx0 < dev->clipLeft && ptd->clippedx1 < dev->clipLeft ) ||
-			(ptd->clippedx0 > dev->clipRight && ptd->clippedx1 > dev->clipRight) ||
-			(ptd->clippedy0 < dev->clipBottom && ptd->clippedy1 < dev->clipBottom) ||
-			(ptd->clippedy0 > dev->clipTop && ptd->clippedy1 > dev->clipTop)) {
-		ptd->clippedx0 = ptd->clippedx1;
-		ptd->clippedy0 = ptd->clippedy1;
-		return;
-	}
-
-	/*Clipping Left */
-	if (ptd->clippedx1 >= dev->clipLeft && ptd->clippedx0 < dev->clipLeft) {
-//		Rprintf("%%\tClipping Left 1\n");
-		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
-				(ptd->clippedx1-ptd->clippedx0) *
-				(dev->clipLeft-ptd->clippedx0)) +
-						ptd->clippedy0;
-		ptd->clippedx0 = dev->clipLeft;
-	}
-	if (ptd->clippedx1 <= dev->clipLeft && ptd->clippedx0 > dev->clipLeft) {
-//		Rprintf("%%\tClipping Left 2\n");
-		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
-				(ptd->clippedx1-ptd->clippedx0) *
-				(dev->clipLeft-ptd->clippedx0)) +
-						ptd->clippedy0;
-		ptd->clippedx1 = dev->clipLeft;
-	}
-	/* Clipping Right */
-	if (ptd->clippedx1 >= dev->clipRight &&
-			ptd->clippedx0 < dev->clipRight) {
-//		Rprintf("%%\tClipping Right 1\n");
-		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
-				(ptd->clippedx1-ptd->clippedx0) *
-				(dev->clipRight-ptd->clippedx0)) +
-						ptd->clippedy0;
-		ptd->clippedx1 = dev->clipRight;
-	}
-	if (ptd->clippedx1 <= dev->clipRight &&
-			ptd->clippedx0 > dev->clipRight) {
-//		Rprintf("%%\tClipping Right 2\n");
-		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
-				(ptd->clippedx1-ptd->clippedx0) *
-				(dev->clipRight-ptd->clippedx0)) +
-						ptd->clippedy0;
-		ptd->clippedx0 = dev->clipRight;
-	}
-	/*Clipping Bottom */
-	if (ptd->clippedy1 >= dev->clipBottom  &&
-			ptd->clippedy0 < dev->clipBottom ) {
-//		Rprintf("%%\tClipping Bottom 1\n");
-		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
-				(ptd->clippedy1-ptd->clippedy0) *
-				(dev->clipBottom -ptd->clippedy0)) +
-						ptd->clippedx0;
-		ptd->clippedy0 = dev->clipBottom ;
-	}
-	if (ptd->clippedy1 <= dev->clipBottom &&
-			ptd->clippedy0 > dev->clipBottom ) {
-//		Rprintf("%%\tClipping Bottom 2\n");
-		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
-				(ptd->clippedy1-ptd->clippedy0) *
-				(dev->clipBottom -ptd->clippedy0)) +
-						ptd->clippedx0;
-		ptd->clippedy1 = dev->clipBottom ;
-	}
-	/*Clipping Top */
-	if (ptd->clippedy1 >= dev->clipTop  && ptd->clippedy0 < dev->clipTop ) {
-//		Rprintf("%%\tClipping Top 1\n");
-		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
-				(ptd->clippedy1-ptd->clippedy0) *
-				(dev->clipTop -ptd->clippedy0)) +
-						ptd->clippedx0;
-		ptd->clippedy1 = dev->clipTop ;
-	}
-	if (ptd->clippedy1 <= dev->clipTop && ptd->clippedy0 > dev->clipTop ) {
-//		Rprintf("%%\tClipping Top 2\n");
-		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
-				(ptd->clippedy1-ptd->clippedy0) *
-				(dev->clipTop -ptd->clippedy0)) +
-						ptd->clippedx0;
-		ptd->clippedy0 = dev->clipTop ;
-	}
-}
-
 static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* width,
 		double* height, double* offx, double* offy, double ps, int nbplots,
 		const char* fontname, int id_init_value, int editable) {
@@ -301,12 +206,9 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 	double maxx = 0, maxy = 0;
 	double minx = 0, miny = 0;
 
-	PicTeX_ClipLine(x1, y1, x2, y2, dev);
-	x1 = pd->clippedx0;
-	y1 = pd->clippedy0;
-
-	x2 = pd->clippedx1;
-	y2 = pd->clippedy1;
+	DOC_ClipLine(x1, y1, x2, y2, dev);
+	x1 = pd->clippedx0;y1 = pd->clippedy0;
+	x2 = pd->clippedx1;y2 = pd->clippedy1;
 
 	if (x2 > x1) {
 		maxx = x2;
@@ -322,6 +224,7 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 		maxy = y1;
 		miny = y2;
 	}
+
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
@@ -377,20 +280,14 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 			miny = y[i];
 	}
 
-	PicTeX_ClipLine(minx, miny, maxx, maxy, dev);
-
-	minx = pd->clippedx0;
-	miny = pd->clippedy0;
-
-	maxx = pd->clippedx1;
-	maxy = pd->clippedy1;
+	DOC_ClipLine(minx, miny, maxx, maxy, dev);
+	minx = pd->clippedx0;miny = pd->clippedy0;
+	maxx = pd->clippedx1;maxy = pd->clippedy1;
 
 	for (i = 1; i < n; i++) {
-		PicTeX_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
-
+		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
 		x[i-1] = pd->clippedx0;
 		y[i-1] = pd->clippedy0;
-
 		x[i] = pd->clippedx1;
 		y[i] = pd->clippedy1;
 	}
@@ -453,20 +350,15 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		if (y[i] < miny)
 			miny = y[i];
 	}
-	PicTeX_ClipLine(minx, miny, maxx, maxy, dev);
 
-	minx = pd->clippedx0;
-	miny = pd->clippedy0;
-
-	maxx = pd->clippedx1;
-	maxy = pd->clippedy1;
+	DOC_ClipLine(minx, miny, maxx, maxy, dev);
+	minx = pd->clippedx0;miny = pd->clippedy0;
+	maxx = pd->clippedx1;maxy = pd->clippedy1;
 
 	for (i = 1; i < n; i++) {
-		PicTeX_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
-
+		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
 		x[i-1] = pd->clippedx0;
 		y[i-1] = pd->clippedy0;
-
 		x[i] = pd->clippedx1;
 		y[i] = pd->clippedy1;
 	}
@@ -527,13 +419,10 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 		y0 = y1;
 		y1 = tmp;
 	}
-	PicTeX_ClipLine(x0, y0, x1, y1, dev);
 
-	x0 = pd->clippedx0;
-	y0 = pd->clippedy0;
-
-	x1 = pd->clippedx1;
-	y1 = pd->clippedy1;
+	DOC_ClipLine(x0, y0, x1, y1, dev);
+	x0 = pd->clippedx0;y0 = pd->clippedy0;
+	x1 = pd->clippedx1;y1 = pd->clippedy1;
 
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
@@ -574,7 +463,7 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 	double h = getFontSize(gc->cex, gc->ps, gc->lineheight);
 	if( h < 1.0 ) return;
 
-	double fontsize = h * 100;
+	double fontsize = h * 90;
 
 	/* translate and rotate ops */
 	//http://www.win.tue.nl/~vanwijk/2IV60/2IV60_3_2D_transformations.pdf

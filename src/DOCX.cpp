@@ -141,6 +141,16 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	dev->bottom = height[0];
 	dev->top = 0;
 
+	dev->clipLeft = 0;
+	dev->clipRight = width[0];
+	dev->clipBottom = height[0];
+	dev->clipTop = 0;
+
+	rd->clippedx0 = dev->clipLeft;
+	rd->clippedy0 = dev->clipTop;
+	rd->clippedx1 = dev->clipRight;
+	rd->clippedy1 = dev->clipBottom;
+
 	dev->cra[0] = 0.9 * ps;
 	dev->cra[1] = 1.2 * ps;
 	dev->xCharOffset = 0.4900;
@@ -151,7 +161,7 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	/*
 	 * Device capabilities
 	 */
-	dev->canClip = (Rboolean) FALSE;
+	dev->canClip = (Rboolean) TRUE;
 	dev->canHAdj = 2;//canHadj – integer: can the device do horizontal adjustment of text via the text callback, and if so, how precisely? 0 = no adjustment, 1 = {0, 0.5, 1} (left, centre, right justification) or 2 = continuously variable (in [0,1]) between left and right justification.
 	dev->canChangeGamma = (Rboolean) FALSE;	//canChangeGamma – Rboolean: can the display gamma be adjusted? This is now ignored, as gamma support has been removed.
 	dev->displayListOn = (Rboolean) FALSE;
@@ -217,9 +227,15 @@ static void DOCX_Circle(double x, double y, double r, const pGEcontext gc, pDevD
 
 static void DOCX_Line(double x1, double y1, double x2, double y2,
 		const pGEcontext gc, pDevDesc dev) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 
 	double maxx = 0, maxy = 0;
 	double minx = 0, miny = 0;
+
+	DOC_ClipLine(x1, y1, x2, y2, dev);
+	x1 = pd->clippedx0;y1 = pd->clippedy0;
+	x2 = pd->clippedx1;y2 = pd->clippedy1;
+
 	if (x2 > x1) {
 		maxx = x2;
 		minx = x1;
@@ -235,7 +251,6 @@ static void DOCX_Line(double x1, double y1, double x2, double y2,
 		miny = y2;
 	}
 
-	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
 
 	fputs(docx_elt_tag_start, pd->dmlFilePointer );
@@ -299,7 +314,19 @@ static void DOCX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 		if (y[i] < miny)
 			miny = y[i];
 	}
-//
+
+	DOC_ClipLine(minx, miny, maxx, maxy, dev);
+	minx = pd->clippedx0;miny = pd->clippedy0;
+	maxx = pd->clippedx1;maxy = pd->clippedy1;
+
+	for (i = 1; i < n; i++) {
+		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
+		x[i-1] = pd->clippedx0;
+		y[i-1] = pd->clippedy0;
+		x[i] = pd->clippedx1;
+		y[i] = pd->clippedy1;
+	}
+
 	fputs(docx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
@@ -366,7 +393,19 @@ static void DOCX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 		if (y[i] < miny)
 			miny = y[i];
 	}
-//
+
+	DOC_ClipLine(minx, miny, maxx, maxy, dev);
+	minx = pd->clippedx0;miny = pd->clippedy0;
+	maxx = pd->clippedx1;maxy = pd->clippedy1;
+
+	for (i = 1; i < n; i++) {
+		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
+		x[i-1] = pd->clippedx0;
+		y[i-1] = pd->clippedy0;
+		x[i] = pd->clippedx1;
+		y[i] = pd->clippedy1;
+	}
+
 	fputs(docx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
@@ -428,7 +467,11 @@ static void DOCX_Rect(double x0, double y0, double x1, double y1,
 		y0 = y1;
 		y1 = tmp;
 	}
-//
+
+	DOC_ClipLine(x0, y0, x1, y1, dev);
+	x0 = pd->clippedx0;y0 = pd->clippedy0;
+	x1 = pd->clippedx1;y1 = pd->clippedy1;
+
 	fputs(docx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
 		fprintf(pd->dmlFilePointer,
@@ -470,7 +513,7 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 	else w += 3 * w / strlen(str);
 	double h = getFontSize(gc->cex, gc->ps, gc->lineheight) * 1.0;
 	if( h < 1.0 ) return;
-	double fontsize = h;
+	double fontsize = h * .9;
 
 //	/* translate and rotate ops */
 	double alpha = -rot * pi / 180;
@@ -550,6 +593,19 @@ static void DOCX_NewPage(const pGEcontext gc, pDevDesc dev) {
 	//update_start_id(dev);
 	dev->right = pd->width[which];
 	dev->bottom = pd->height[which];
+	dev->left = 0;
+	dev->top = 0;
+
+	dev->clipLeft = 0;
+	dev->clipRight = dev->right;
+	dev->clipBottom = dev->bottom;
+	dev->clipTop = 0;
+
+	pd->clippedx0 = dev->clipLeft;
+	pd->clippedy0 = dev->clipTop;
+	pd->clippedx1 = dev->clipRight;
+	pd->clippedy1 = dev->clipBottom;
+
 	pd->offx = pd->x[which];
 	pd->offy = pd->y[which];
 	pd->extx = pd->width[which];
@@ -573,6 +629,10 @@ static void DOCX_Close(pDevDesc dev) {
 }
 
 static void DOCX_Clip(double x0, double x1, double y0, double y1, pDevDesc dev) {
+	dev->clipLeft = x0;
+	dev->clipRight = x1;
+	dev->clipBottom = y1;
+	dev->clipTop = y0;
 }
 
 static void DOCX_MetricInfo(int c, const pGEcontext gc, double* ascent,
