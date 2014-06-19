@@ -35,6 +35,7 @@ void set_tracer_on(int *dn) {
 	}
 }
 
+
 void set_tracer_off(int *dn) {
 	pGEDevDesc dev= GEgetDevice(*dn);
 	if (dev) {

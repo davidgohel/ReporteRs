@@ -73,3 +73,4 @@ SEXP R_DOCX_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
 };
 
 
+

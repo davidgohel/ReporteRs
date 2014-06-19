@@ -67,8 +67,6 @@ static void PPTX_Size(double *left, double *right, double *bottom, double *top,
 
 static double PPTX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
 
-//SEXP setDimensions(SEXP devNumber, SEXP ext, SEXP off);
-
 SEXP R_PPTX_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
 		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP start_id, SEXP is_editable);
 };
