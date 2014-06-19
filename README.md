@@ -38,7 +38,7 @@ Get the latest release:
     devtools::install_github('ReporteRs', 'davidgohel')
 
 Get the latest binary packages: 
-[ReporteRsjars](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.1 "ReporteRsjars") - [ReporteRs](https://github.com/davidgohel/ReporteRs/releases/tag/v0.5.5 "ReporteRs")
+[ReporteRsjars](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.1 "ReporteRsjars") - [ReporteRs](https://github.com/davidgohel/ReporteRs/releases/tag/v0.5.6 "ReporteRs")
 
 	
 Getting Started

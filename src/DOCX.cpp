@@ -321,8 +321,10 @@ static void DOCX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 
 	for (i = 1; i < n; i++) {
 		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
-		x[i-1] = pd->clippedx0;
-		y[i-1] = pd->clippedy0;
+		if( i < 2 ){
+			x[i-1] = pd->clippedx0;
+			y[i-1] = pd->clippedy0;
+		}
 		x[i] = pd->clippedx1;
 		y[i] = pd->clippedy1;
 	}
@@ -400,8 +402,10 @@ static void DOCX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 
 	for (i = 1; i < n; i++) {
 		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
-		x[i-1] = pd->clippedx0;
-		y[i-1] = pd->clippedy0;
+		if( i < 2 ){
+			x[i-1] = pd->clippedx0;
+			y[i-1] = pd->clippedy0;
+		}
 		x[i] = pd->clippedx1;
 		y[i] = pd->clippedy1;
 	}
@@ -468,9 +472,10 @@ static void DOCX_Rect(double x0, double y0, double x1, double y1,
 		y1 = tmp;
 	}
 
-	DOC_ClipLine(x0, y0, x1, y1, dev);
+	DOC_ClipRect(x0, y0, x1, y1, dev);
 	x0 = pd->clippedx0;y0 = pd->clippedy0;
 	x1 = pd->clippedx1;y1 = pd->clippedy1;
+
 
 	fputs(docx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
@@ -568,7 +573,11 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 	fputs("<w:r>", pd->dmlFilePointer );
 	
 	DOCX_setRunProperties( dev, gc, fontsize);
-	fprintf(pd->dmlFilePointer, "<w:t>%s</w:t></w:r></w:p>", str);
+
+	fputs("<w:t>", pd->dmlFilePointer );
+	dml_text(str, pd);
+	fputs("</w:t></w:r></w:p>", pd->dmlFilePointer );
+
 	fputs("</w:txbxContent>", pd->dmlFilePointer );
 	fputs("</wps:txbx>", pd->dmlFilePointer );
 	fputs("<wps:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\">", pd->dmlFilePointer );

@@ -263,9 +263,9 @@ void RAPHAEL_SetFontSpec(pDevDesc dev, R_GE_gcontext *gc, int idx) {
 		if (gc->fontface == 2) {
 			fputs(", 'font-weight': \"bold\"", pd->dmlFilePointer );
 		} else if (gc->fontface == 3) {
-			fputs(", 'font-style'=\"italic\"", pd->dmlFilePointer );
+			fputs(", 'font-style':\"italic\"", pd->dmlFilePointer );
 		} else if (gc->fontface == 4) {
-			fputs(", 'font-weight': \"bold\", 'font-style'=\"italic\"", pd->dmlFilePointer );
+			fputs(", 'font-weight': \"bold\", 'font-style':\"italic\"", pd->dmlFilePointer );
 		}
 		fputs("});\n", pd->dmlFilePointer );
 
@@ -324,8 +324,10 @@ static void RAPHAEL_Polyline(int n, double *x, double *y, const pGEcontext gc,
 	int i;
 	for (i = 1; i < n; i++) {
 		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
-		x[i-1] = pd->clippedx0;
-		y[i-1] = pd->clippedy0;
+		if( i < 2 ){
+			x[i-1] = pd->clippedx0;
+			y[i-1] = pd->clippedy0;
+		}
 		x[i] = pd->clippedx1;
 		y[i] = pd->clippedy1;
 	}
@@ -357,8 +359,10 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 	int i;
 	for (i = 1; i < n; i++) {
 		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
-		x[i-1] = pd->clippedx0;
-		y[i-1] = pd->clippedy0;
+		if( i < 2 ){
+			x[i-1] = pd->clippedx0;
+			y[i-1] = pd->clippedy0;
+		}
 		x[i] = pd->clippedx1;
 		y[i] = pd->clippedy1;
 	}
@@ -386,7 +390,7 @@ static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 
-	DOC_ClipLine(x0, y0, x1, y1, dev);
+	DOC_ClipRect(x0, y0, x1, y1, dev);
 	x0 = pd->clippedx0;y0 = pd->clippedy0;
 	x1 = pd->clippedx1;y1 = pd->clippedy1;
 
@@ -527,16 +531,10 @@ static void RAPHAEL_Close(pDevDesc dev) {
 }
 
 static void RAPHAEL_Clip(double x0, double x1, double y0, double y1, pDevDesc dev) {
-/*	Rprintf("RAPHAEL_Clip %0.2f %0.2f %0.2f %0.2f\n", x0, x1, y0, y1);
-	Rprintf("\t left:%0.2f right:%0.2f bottom%0.2f top%0.2f\n", dev->left, dev->right, dev->bottom, dev->top);
-	Rprintf("\t clipRight:%0.2f clipRight:%0.2f clipBottom:%0.2f clipTop:%0.2f\n", dev->clipLeft, dev->clipRight, dev->clipBottom, dev->clipTop);
-*/
-//	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-//
-//	pd->clipleft = x0;
-//	pd->clipright = x1;
-//	pd->clipbottom = y0;
-//	pd->cliptop = y1;
+	dev->clipLeft = x0;
+	dev->clipRight = x1;
+	dev->clipBottom = y1;
+	dev->clipTop = y0;
 }
 
 static void RAPHAEL_MetricInfo(int c, const pGEcontext gc, double* ascent,

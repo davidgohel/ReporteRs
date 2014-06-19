@@ -177,6 +177,8 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 			(ptd->clippedx0 > dev->clipRight && ptd->clippedx1 > dev->clipRight) ||
 			(ptd->clippedy0 < dev->clipBottom && ptd->clippedy1 < dev->clipBottom) ||
 			(ptd->clippedy0 > dev->clipTop && ptd->clippedy1 > dev->clipTop)) {
+//		Rprintf("%% DOC_ClipLine pas de trace\n" );
+
 		ptd->clippedx0 = ptd->clippedx1;
 		ptd->clippedy0 = ptd->clippedy1;
 		return;
@@ -184,6 +186,8 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 
 	/*Clipping Left */
 	if (ptd->clippedx1 >= dev->clipLeft && ptd->clippedx0 < dev->clipLeft) {
+//		Rprintf("%% DOC_ClipLine à gauche\n" );
+
 		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
 				(dev->clipLeft-ptd->clippedx0)) +
@@ -191,6 +195,7 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 		ptd->clippedx0 = dev->clipLeft;
 	}
 	if (ptd->clippedx1 <= dev->clipLeft && ptd->clippedx0 > dev->clipLeft) {
+//		Rprintf("%% DOC_ClipLine à gauche\n" );
 		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
 				(dev->clipLeft-ptd->clippedx0)) +
@@ -200,6 +205,8 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	/* Clipping Right */
 	if (ptd->clippedx1 >= dev->clipRight &&
 			ptd->clippedx0 < dev->clipRight) {
+//		Rprintf("%% DOC_ClipLine à droite\n" );
+
 		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
 				(dev->clipRight-ptd->clippedx0)) +
@@ -208,6 +215,8 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	}
 	if (ptd->clippedx1 <= dev->clipRight &&
 			ptd->clippedx0 > dev->clipRight) {
+//		Rprintf("%% DOC_ClipLine à droite\n" );
+
 		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
 				(dev->clipRight-ptd->clippedx0)) +
@@ -217,6 +226,7 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	/*Clipping Bottom */
 	if (ptd->clippedy1 >= dev->clipBottom  &&
 			ptd->clippedy0 < dev->clipBottom ) {
+//		Rprintf("%% DOC_ClipLine en bas\n" );
 		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
 				(ptd->clippedy1-ptd->clippedy0) *
 				(dev->clipBottom -ptd->clippedy0)) +
@@ -225,6 +235,7 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	}
 	if (ptd->clippedy1 <= dev->clipBottom &&
 			ptd->clippedy0 > dev->clipBottom ) {
+//		Rprintf("%% DOC_ClipLine en bas\n" );
 		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
 				(ptd->clippedy1-ptd->clippedy0) *
 				(dev->clipBottom -ptd->clippedy0)) +
@@ -233,6 +244,7 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	}
 	/*Clipping Top */
 	if (ptd->clippedy1 >= dev->clipTop  && ptd->clippedy0 < dev->clipTop ) {
+//		Rprintf("%% DOC_ClipLine en haut\n" );
 		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
 				(ptd->clippedy1-ptd->clippedy0) *
 				(dev->clipTop -ptd->clippedy0)) +
@@ -240,11 +252,65 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 		ptd->clippedy1 = dev->clipTop ;
 	}
 	if (ptd->clippedy1 <= dev->clipTop && ptd->clippedy0 > dev->clipTop ) {
+//		Rprintf("%% DOC_ClipLine en haut\n" );
 		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
 				(ptd->clippedy1-ptd->clippedy0) *
 				(dev->clipTop -ptd->clippedy0)) +
 						ptd->clippedx0;
 		ptd->clippedy0 = dev->clipTop ;
 	}
+}
+
+/*
+ * stolen from PicTeX code
+ *
+ * */
+void DOC_ClipRect(double x0, double y0, double x1, double y1,
+		pDevDesc dev)
+{
+	DOCDesc *ptd = (DOCDesc *) dev->deviceSpecific;
+	ptd->clippedx0 = x0;
+	ptd->clippedx1 = x1;
+	ptd->clippedy0 = y0;
+	ptd->clippedy1 = y1;
+
+	if (( ptd->clippedx0 < dev->clipLeft && ptd->clippedx1 < dev->clipLeft ) ||
+			(ptd->clippedx0 > dev->clipRight && ptd->clippedx1 > dev->clipRight) ||
+			(ptd->clippedy0 < dev->clipBottom && ptd->clippedy1 < dev->clipBottom) ||
+			(ptd->clippedy0 > dev->clipTop && ptd->clippedy1 > dev->clipTop)) {
+		ptd->clippedx0 = ptd->clippedx1;
+		ptd->clippedy0 = ptd->clippedy1;
+		return;
+	}
+
+	/*Clipping Left */
+	if ( ptd->clippedx0 < dev->clipLeft && ptd->clippedx1 >= dev->clipLeft ) {
+		ptd->clippedx0 = dev->clipLeft;
+	}
+	if ( ptd->clippedx0 > dev->clipLeft && ptd->clippedx1 <= dev->clipLeft ) {
+		ptd->clippedx1 = dev->clipLeft;
+	}
+	/* Clipping Right */
+	if ( ptd->clippedx0 < dev->clipRight && ptd->clippedx1 >= dev->clipRight ) {
+		ptd->clippedx1 = dev->clipRight;
+	}
+	if ( ptd->clippedx0 > dev->clipRight && ptd->clippedx1 <= dev->clipRight ) {
+		ptd->clippedx0 = dev->clipRight;
+	}
+	/*Clipping Bottom */
+	if ( ptd->clippedy0 < dev->clipBottom && ptd->clippedy1 >= dev->clipBottom ) {
+		ptd->clippedy0 = dev->clipBottom ;
+	}
+	if ( ptd->clippedy0 > dev->clipBottom && ptd->clippedy1 <= dev->clipBottom ) {
+		ptd->clippedy1 = dev->clipBottom ;
+	}
+	/*Clipping Top */
+	if ( ptd->clippedy0 < dev->clipTop && ptd->clippedy1 >= dev->clipTop ) {
+		ptd->clippedy1 = dev->clipTop ;
+	}
+	if ( ptd->clippedy0 > dev->clipTop && ptd->clippedy1 <= dev->clipTop ) {
+		ptd->clippedy0 = dev->clipTop ;
+	}
+
 }
 

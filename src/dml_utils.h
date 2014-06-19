@@ -33,6 +33,6 @@ char* get_dml_filename(char* filename, int index);
 void DML_SetFillColor(pDevDesc dev, R_GE_gcontext *gc);
 void DML_SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
 void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);
-
+void dml_text(const char *str, DOCDesc *pd);
 int get_and_increment_idx(pDevDesc dev);
 

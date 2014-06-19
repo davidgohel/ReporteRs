@@ -123,3 +123,21 @@ void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc) {
 	}
 }
 
+void dml_text(const char *str, DOCDesc *pd){
+    for( ; *str ; str++)
+	switch(*str) {
+	case '<':
+		fprintf(pd->dmlFilePointer, "&lt;");
+	    break;
+	case '>':
+		fprintf(pd->dmlFilePointer, "&gt;");
+	    break;
+	case '&':
+		fprintf(pd->dmlFilePointer, "&amp;");
+	    break;
+	default:
+	    fputc(*str, pd->dmlFilePointer);
+	    break;
+	}
+}
+

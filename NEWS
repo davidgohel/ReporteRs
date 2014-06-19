@@ -4,6 +4,14 @@ BUG FIXES
 ------------------------------------------------------------------
 * debug addParagraph.docx into a bookmark with multiple paragraph
   (reported by Günter Lutz)
+* debug text function in dml graphical devices when symbols 
+  '<', '>', '&' where used.
+  (reported by Ted Kwartler and Karen Zalvan)
+
+ENHANCEMENT
+------------------------------------------------------------------
+* add clipping for lines and polygons in graphical devices
+  (reported by Jean-Francois Collin)
 
 ReporteRs 0.5.5
 ==================================================================

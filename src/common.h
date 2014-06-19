@@ -43,3 +43,5 @@ void register_element(pDevDesc dev);
 void closeFile( FILE *file);
 
 void DOC_ClipLine(double x0, double y0, double x1, double y1, pDevDesc dev);
+void DOC_ClipRect(double x0, double y0, double x1, double y1,
+		pDevDesc dev);

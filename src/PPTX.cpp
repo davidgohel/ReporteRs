@@ -42,7 +42,6 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 		double* height, double* offx, double* offy, double ps, int nbplots,
 		const char* fontname, int id_init_value, int editable) {
 
-
 	DOCDesc *rd;
 	rd = (DOCDesc *) malloc(sizeof(DOCDesc));
 
@@ -52,7 +51,6 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	rd->fi = fi;
 	rd->filename = strdup(filename);
 	rd->fontname = strdup(fontname);
-
 
 	rd->id = id_init_value;
 	rd->pageNumber = 0;
@@ -174,6 +172,7 @@ static void PPTX_Circle(double x, double y, double r, const pGEcontext gc,
 		pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
+//	Rprintf("%% ----------PPTX_Circle\n" );
 
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
@@ -202,6 +201,7 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 		const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
+//	Rprintf("%% ----------PPTX_Line\n" );
 
 	double maxx = 0, maxy = 0;
 	double minx = 0, miny = 0;
@@ -264,6 +264,8 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
 	int i;
+//	Rprintf("%% ----------PPTX_Polyline\n" );
+
 	double maxx = 0, maxy = 0;
 	for (i = 0; i < n; i++) {
 		if (x[i] > maxx)
@@ -286,8 +288,10 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 
 	for (i = 1; i < n; i++) {
 		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
-		x[i-1] = pd->clippedx0;
-		y[i-1] = pd->clippedy0;
+		if( i < 2 ){
+			x[i-1] = pd->clippedx0;
+			y[i-1] = pd->clippedy0;
+		}
 		x[i] = pd->clippedx1;
 		y[i] = pd->clippedy1;
 	}
@@ -336,6 +340,8 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 	int idx = get_and_increment_idx(dev);
 	int i;
 	double maxx = 0, maxy = 0;
+//	Rprintf("%% ----------PPTX_Polygon\n" );
+
 	for (i = 0; i < n; i++) {
 		if (x[i] > maxx)
 			maxx = x[i];
@@ -357,8 +363,10 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 
 	for (i = 1; i < n; i++) {
 		DOC_ClipLine(x[i-1], y[i-1], x[i], y[i], dev);
-		x[i-1] = pd->clippedx0;
-		y[i-1] = pd->clippedy0;
+		if( i < 2 ){
+			x[i-1] = pd->clippedx0;
+			y[i-1] = pd->clippedy0;
+		}
 		x[i] = pd->clippedx1;
 		y[i] = pd->clippedy1;
 	}
@@ -407,6 +415,8 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 	double tmp;
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
+//	Rprintf("%% ----------PPTX_Rect\n" );
+//	Rprintf("%% Region from %.2f %.2f to %.2f %.2f\n", x0, y0, x1, y1);
 
 	if (x0 >= x1) {
 		tmp = x0;
@@ -420,7 +430,7 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 		y1 = tmp;
 	}
 
-	DOC_ClipLine(x0, y0, x1, y1, dev);
+	DOC_ClipRect(x0, y0, x1, y1, dev);
 	x0 = pd->clippedx0;y0 = pd->clippedy0;
 	x1 = pd->clippedx1;y1 = pd->clippedy1;
 
@@ -455,6 +465,7 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
+//	Rprintf("%% ----------PPTX_Text\n" );
 
 	double pi = 3.141592653589793115997963468544185161590576171875;
 	double w = PPTX_StrWidth(str, gc, dev);
@@ -538,10 +549,10 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 				pd->fi->fontname, pd->fi->fontname);
 
 	fputs("</a:rPr>", pd->dmlFilePointer );
-
-	fprintf(pd->dmlFilePointer, "<a:t>%s</a:t></a:r></a:p></p:txBody>", str);
+	fputs("<a:t>", pd->dmlFilePointer );
+	dml_text(str, pd);
+	fputs("</a:t></a:r></a:p></p:txBody>", pd->dmlFilePointer );
 	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
-	//fprintf(pd->dmlFilePointer, "\n");
 
 	fflush(pd->dmlFilePointer);
 }
