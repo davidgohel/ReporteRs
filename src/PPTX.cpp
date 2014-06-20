@@ -474,7 +474,7 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 	double h = getFontSize(gc->cex, gc->ps, gc->lineheight);
 	if( h < 1.0 ) return;
 
-	double fontsize = h * 90;
+	double fontsize = h * 100;
 
 	/* translate and rotate ops */
 	//http://www.win.tue.nl/~vanwijk/2IV60/2IV60_3_2D_transformations.pdf

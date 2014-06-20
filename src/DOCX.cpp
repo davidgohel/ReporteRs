@@ -518,7 +518,7 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 	else w += 3 * w / strlen(str);
 	double h = getFontSize(gc->cex, gc->ps, gc->lineheight) * 1.0;
 	if( h < 1.0 ) return;
-	double fontsize = h * .9;
+	double fontsize = h;
 
 //	/* translate and rotate ops */
 	double alpha = -rot * pi / 180;
