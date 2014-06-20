@@ -119,7 +119,8 @@ writeDoc( doc, directory = doc.dirname )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}, \code{\link{addTable}},
-\code{\link{tableProperties}}
+\code{\link{html}}, \code{\link{addTable}} ,
+\code{\link{tableProperties}},
+\code{\link{addFlexTable.html}} , \code{\link{FlexTable}}
 }
 

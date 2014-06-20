@@ -20,7 +20,8 @@
 
   \item{bookmark}{a character value ; id of the Word
   bookmark to replace by the image. optional. if missing,
-  image is added at the end of the document.}
+  image is added at the end of the document. See
+  \code{\link{bookmark}}.}
 
   \item{par.properties}{paragraph formatting properties of
   the paragraph that contains images. An object of class
@@ -49,6 +50,6 @@ writeDoc( doc, "addImage_example.docx" )
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addPlot.docx}} ,
-\code{\link{addImage}}
+\code{\link{addImage}}, \code{\link{bookmark}}
 }
 

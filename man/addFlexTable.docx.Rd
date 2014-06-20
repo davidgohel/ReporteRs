@@ -16,9 +16,9 @@
 
   \item{bookmark}{a character vector specifying bookmark id
   (where to put the table).  If provided, table will be add
-  after paragraph that contains the bookmark.  If not
-  provided, table will be added at the end of the
-  document.}
+  after paragraph that contains the bookmark. See
+  \code{\link{bookmark}}.  If not provided, table will be
+  added at the end of the document.}
 
   \item{...}{further arguments - not used}
 }
@@ -122,6 +122,6 @@ writeDoc( doc, file = doc.filename )
 \code{\link{FlexTable}}, \code{\link{docx}} ,
 \code{\link{addFlexTable.pptx}},
 \code{\link{addFlexTable.html}} ,
-\code{\link{addTable.docx}}
+\code{\link{addTable.docx}}, \code{\link{bookmark}}
 }
 

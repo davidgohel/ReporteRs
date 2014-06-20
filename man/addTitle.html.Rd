@@ -2,7 +2,7 @@
 \alias{addTitle.html}
 \title{Insert a title into a html object}
 \usage{
-\method{addTitle}{html}(doc, value, level, ...)
+\method{addTitle}{html}(doc, value, level = 1, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"}}
@@ -11,7 +11,8 @@
   text}
 
   \item{level}{\code{"integer"} positive value to use as
-  heading level. 1 for title1, 2 for title2, etc.}
+  heading level. 1 for title1, 2 for title2, etc. Default
+  to 1.}
 
   \item{...}{further arguments, not used.}
 }

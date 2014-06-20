@@ -32,7 +32,8 @@ class \code{"docx"}.
 
 R outputs (tables, plots, paragraphs and images) can be
 inserted (and not added at the end) in a document if a
-bookmark exists in the template file.
+bookmark exists in the template file. See
+\code{\link{bookmark}}.
 
 Once object has content, user can write the docx into a
 ".docx" file, see \code{\link{writeDoc}}.
@@ -169,6 +170,6 @@ XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 \code{\link{addParagraph.docx}} ,
 \code{\link{addPlot.docx}}, \code{\link{addTable.docx}},
 \code{\link{addTOC.docx}} , \code{\link{styles.docx}},
-\code{\link{writeDoc.docx}}
+\code{\link{writeDoc.docx}}, \code{\link{bookmark}}
 }
 

@@ -2,7 +2,7 @@
 \alias{addTitle.docx}
 \title{Insert a title into a docx object}
 \usage{
-\method{addTitle}{docx}(doc, value, level, ...)
+\method{addTitle}{docx}(doc, value, level = 1, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"}}
@@ -11,7 +11,8 @@
   text}
 
   \item{level}{\code{"integer"} positive value to use as
-  heading level. 1 for title1, 2 for title2, etc.}
+  heading level. 1 for title1, 2 for title2, etc. Default
+  to 1.}
 
   \item{...}{further arguments, not used.}
 }

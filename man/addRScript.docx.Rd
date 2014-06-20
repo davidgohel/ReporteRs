@@ -72,7 +72,8 @@
   \code{\link{styles.docx}}.}
 
   \item{bookmark}{a character value ; id of the Word
-  bookmark to replace by the table. optional}
+  bookmark to replace by the table. optional. See
+  \code{\link{bookmark}}.}
 
   \item{...}{further arguments, not used.}
 }
@@ -96,6 +97,7 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addRScript}}
+\code{\link{docx}}, \code{\link{addRScript}},
+\code{\link{bookmark}}
 }
 

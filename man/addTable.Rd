@@ -87,8 +87,11 @@ See \code{\link{addTable.docx}} or
 for examples.
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addTable.docx}} ,
-\code{\link{pptx}}, \code{\link{addTable.pptx}} ,
-\code{\link{html}}, \code{\link{addTable.html}}
+\code{\link{docx}}, \code{\link{addTable.docx}},
+\code{\link{addFlexTable.docx}} , \code{\link{pptx}},
+\code{\link{addTable.pptx}},
+\code{\link{addFlexTable.pptx}} , \code{\link{html}},
+\code{\link{addTable.html}},
+\code{\link{addFlexTable.html}} , \code{\link{FlexTable}}
 }
 

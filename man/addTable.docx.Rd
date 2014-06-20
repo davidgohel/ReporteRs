@@ -64,9 +64,9 @@
 
   \item{bookmark}{a character vector specifying bookmark id
   (where to put the table).  If provided, table will be add
-  after paragraph that contains the bookmark.  If not
-  provided, table will be added at the end of the
-  document.}
+  after paragraph that contains the bookmark. See
+  \code{\link{bookmark}}.  If not provided, table will be
+  added at the end of the document.}
 
   \item{row.names}{logical value - should the row.names be
   included in the table.}
@@ -129,6 +129,7 @@ writeDoc( doc, file = doc.filename )
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addTable}},
-\code{\link{tableProperties}}
+\code{\link{tableProperties}} , \code{\link{addFlexTable}},
+\code{\link{FlexTable}}, \code{\link{bookmark}}
 }
 

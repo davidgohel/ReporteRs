@@ -26,9 +26,9 @@
 
   \code{bookmark} is a character vector specifying bookmark
   id to replace by the plot(s).\cr If provided, plot(s)
-  will replace the paragraph that contains the bookmark.\cr
-  If not provided, plot(s) will be added at the end of the
-  document.}
+  will replace the paragraph that contains the bookmark.
+  See \code{\link{bookmark}}.\cr If not provided, plot(s)
+  will be added at the end of the document.}
 
   \item{par.properties}{paragraph formatting properties of
   the paragraph that contains plot(s). An object of class
@@ -91,6 +91,7 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addPlot}}
+\code{\link{docx}}, \code{\link{addPlot}},
+\code{\link{bookmark}}.
 }
 
