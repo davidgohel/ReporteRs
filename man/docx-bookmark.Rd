@@ -1,0 +1,116 @@
+\name{docx-bookmark}
+\alias{bookmark}
+\alias{docx-bookmark}
+\title{docx bookmarks}
+\description{
+\code{docx} can generate Word documents using bookmarks as
+placeholders to insert contents. Read MS documentation
+about bookmark here:
+
+http://office.microsoft.com/en-us/word-help/add-or-delete-bookmarks-HP001226532.aspx#BM1
+
+Functions \code{\link{addTable}},
+\code{\link{addFlexTable}}, \code{\link{addPlot}} ,
+\code{\link{addParagraph}} and \code{\link{addImage}} can
+send respective outputs into these bookmarks.
+
+These functions have an optional argument named
+\code{bookmark}.
+
+When used with \code{\link{addPlot}},
+\code{\link{addParagraph}} and \code{\link{addImage}},
+content (plots, paragraphs or images) will replace the
+whole paragraph containing the bookmark.
+
+When used with \code{\link{addTable}} and
+\code{\link{addFlexTable}} content (tables) will be
+inserted after the paragraph containing the bookmark.
+
+To be used with a \code{docx} object, bookmark must be
+placed into a single paragraph, if placed along 1 or more
+paragraphs side effects could occur and insertion of a
+content could fail.
+
+You can insert the bookmark at the beginning of the
+paragraph (see the file bookmark_example.docx in the
+templates directory of the package for an example) or on a
+portion of a text in a paragraph.
+}
+\examples{
+#START_TAG_TEST
+require( ReporteRs )
+
+# Word document to write
+docx.file = "document_new.docx"
+
+# create document
+doc = docx( title = "My example"
+  , template = file.path( find.package("ReporteRs"), "templates/bookmark_example.docx")
+  )
+
+# replace bookmarks 'AUTHOR' and 'REVIEWER'
+# located in 'ttest_example.docx' by dummy values
+doc = addParagraph( doc
+	, value = c( "James Sonny Crockett", "Ricardo Rico Tubbs" )	
+	, stylename = "Normal"
+	, bookmark = "AUTHOR" )
+doc = addParagraph( doc
+	, value = c( "Martin Marty Castillo" )	
+	, stylename = "Normal"
+	, bookmark = "REVIEWER" )
+
+
+
+MyFTable = FlexTable( data = mtcars[1:10, ]
+	, add.rownames=TRUE
+)
+
+# replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx'
+# by data.frame objects 'data' and 'conf.int'
+doc = addFlexTable( doc
+	, MyFTable
+	, bookmark = "DATA1" )
+
+# replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx' 
+# by data.frame objects 'data' and 'conf.int'
+doc = addTable( doc
+	, head( iris )
+	, bookmark = "DATA2" )
+
+doc = addPlot( doc, vector.graphic = TRUE
+	, fun = function(){
+		require(stats)
+		sale5 <- c(6, 4, 9, 7, 6, 12, 8, 10, 9, 13)
+		plot(sale5)
+		abline(lsfit(1:10, sale5))
+		abline(lsfit(1:10, sale5, intercept = FALSE), col = 4) 
+	}
+	, bookmark = "PLOT")
+
+
+doc = addParagraph( doc, value = c( "Header 1" )
+	, stylename = "NAMESTYLE", bookmark = "COLNAME1" )
+
+doc = addParagraph( doc, value = c( "Header 2" )
+	, stylename = "NAMESTYLE", bookmark = "COLNAME2" )
+
+doc = addParagraph( doc, value = c( "Header 3" )
+	, stylename = "NAMESTYLE", bookmark = "COLNAME3" )
+
+doc = addParagraph( doc, value = c( "Row name 1" )
+	, stylename = "NAMESTYLE", bookmark = "ROWNAME1" )
+
+doc = addParagraph( doc, value = c( "Row name 2" )
+	, stylename = "NAMESTYLE", bookmark = "ROWNAME2" )
+
+doc = addParagraph( doc, value = c( "Hello World" )
+	, stylename = "DATASTYLE", bookmark = "ANYDATA" )
+
+writeDoc( doc, docx.file )
+
+#STOP_TAG_TEST
+}
+\seealso{
+\code{\link{docx}}
+}
+
