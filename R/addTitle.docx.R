@@ -4,7 +4,8 @@
 #' 
 #' @param doc Object of class \code{"docx"}
 #' @param value \code{"character"} value to use as title text
-#' @param level \code{"integer"} positive value to use as heading level. 1 for title1, 2 for title2, etc.
+#' @param level \code{"integer"} positive value to use as 
+#' heading level. 1 for title1, 2 for title2, etc. Default to 1.
 #' @param ... further arguments, not used. 
 #' @details 
 #' 
@@ -40,13 +41,17 @@
 #' , \code{\link{declareTitlesStyles.docx}}, \code{\link{styles.docx}}
 #' @method addTitle docx
 #' @S3method addTitle docx
-addTitle.docx = function( doc, value, level, ... ) {
+addTitle.docx = function( doc, value, level = 1, ... ) {
 	if( length( doc$header.styles ) == 0 ){
 		stop("You must defined title styles via declareTitlesStyles first.")				
 	}
 	if( length( doc$header.styles ) < level ){
 		stop("level = ", level, ". You defined only ", length( doc$header.styles ), " styles.")				
 	}
+	if( !is.numeric( level ) )
+		stop("level must be an integer vector of length 1.")
+	if( length( level ) != 1 )
+		stop("level must be an integer vector of length 1.")
 	
 	doc = addParagraph(doc, value, doc$header.styles[level] );
 	doc

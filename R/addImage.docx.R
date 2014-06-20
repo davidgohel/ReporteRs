@@ -7,7 +7,7 @@
 #' @param width images width in inches (default value is 6).
 #' @param height images height in inches (default value is 6).
 #' @param bookmark a character value ; id of the Word bookmark to replace by the image. 
-#' optional. if missing, image is added at the end of the document.
+#' optional. if missing, image is added at the end of the document. See \code{\link{bookmark}}.
 #' @param par.properties paragraph formatting properties of the paragraph that contains images. 
 #' An object of class \code{\link{parProperties}}
 #' @param ... further arguments, not used. 
@@ -25,7 +25,7 @@
 #' writeDoc( doc, "addImage_example.docx" )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
-#' , \code{\link{addImage}}
+#' , \code{\link{addImage}}, \code{\link{bookmark}}
 #' @method addImage docx
 #' @S3method addImage docx
 

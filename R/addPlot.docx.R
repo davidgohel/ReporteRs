@@ -13,7 +13,7 @@
 #' @param bookmark id of the Word bookmark to replace by the plot. optional.
 #' 
 #' \code{bookmark} is a character vector specifying bookmark id to replace by the plot(s).\cr 
-#'   	If provided, plot(s) will replace the paragraph that contains the bookmark.\cr
+#'   	If provided, plot(s) will replace the paragraph that contains the bookmark. See \code{\link{bookmark}}.\cr
 #'   	If not provided, plot(s) will be added at the end of the document.
 #' 
 #' @param par.properties paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}
@@ -32,7 +32,7 @@
 #' @example examples/addggplot.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{docx}}, \code{\link{addPlot}}
+#' @seealso \code{\link{docx}}, \code{\link{addPlot}}, \code{\link{bookmark}}.
 #' @method addPlot docx
 #' @S3method addPlot docx
 addPlot.docx = function(doc, fun
@@ -62,6 +62,7 @@ addPlot.docx = function(doc, fun
 		dev.off()
 	
 		plotfiles = list.files( dirname , full.names = T )
+
 		dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
 		
 		# Send the graph to java that will 'encode64ize' and place it in a docx4J object

@@ -87,3 +87,41 @@ NULL
 #' @usage data(pbc_summary)
 #' @format A data frame
 NULL
+
+
+#' @title docx bookmarks
+#'
+#' @description \code{docx} can generate Word documents using bookmarks 
+#' as placeholders to insert contents. Read MS documentation about bookmark here:
+#' 
+#' http://office.microsoft.com/en-us/word-help/add-or-delete-bookmarks-HP001226532.aspx#BM1
+#' 
+#' Functions \code{\link{addTable}}, \code{\link{addFlexTable}}, \code{\link{addPlot}}
+#' , \code{\link{addParagraph}} and \code{\link{addImage}} can send respective 
+#' outputs into these bookmarks.
+#' 
+#' These functions have an optional argument named \code{bookmark}.
+#' 
+#' When used with \code{\link{addPlot}}, \code{\link{addParagraph}} 
+#' and \code{\link{addImage}}, content (plots, paragraphs or images) will replace 
+#' the whole paragraph containing the bookmark.
+#' 
+#' When used with \code{\link{addTable}} and \code{\link{addFlexTable}} 
+#' content (tables) will be inserted after the paragraph containing the bookmark.
+#' 
+#' To be used with a \code{docx} object, bookmark must be placed into 
+#' a single paragraph, if placed along 1 or more paragraphs
+#' side effects could occur and insertion of a content could fail. 
+#' 
+#' You can insert the bookmark at the beginning of the paragraph (see the file
+#' bookmark_example.docx in the templates directory of the package for an example) 
+#' or on a portion of a text in a paragraph.
+#' 
+#' @examples
+#' #START_TAG_TEST
+#' @example examples/bookmark.R
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{docx}}
+#' @name docx-bookmark
+#' @aliases bookmark
+NULL

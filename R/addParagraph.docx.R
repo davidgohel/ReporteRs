@@ -9,7 +9,8 @@
 #' @param stylename value of the named style to apply to paragraphs in the docx document.
 #' Expected value is an existing stylename of the template document used to create the 
 #' \code{docx} object. see \code{\link{styles.docx}}.
-#' @param bookmark a character value ; id of the Word bookmark to replace by the table. optional
+#' @param bookmark a character value ; id of the Word bookmark to 
+#' replace by the table. optional. See \code{\link{bookmark}}.
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"docx"}.
 #' @examples
@@ -28,7 +29,7 @@
 #' @example examples/addParagraph_sop_docx.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{docx}}, \code{\link{addParagraph}}
+#' @seealso \code{\link{docx}}, \code{\link{addParagraph}}, \code{\link{bookmark}}
 #' @method addParagraph docx
 #' @S3method addParagraph docx
 

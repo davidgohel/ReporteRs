@@ -78,6 +78,10 @@ addFooter = function(doc, ...){
 #' , \code{\link{html}}, \code{\link{addImage.html}}
 addImage = function(doc, filename, ...){
 	checkHasSlide(doc)
+	if( !inherits( filename, "character" ) )
+		stop("filename must be a single character value")
+	if( length( filename ) != 1 )
+		stop("filename must be a single character value")		
 	if( missing( filename ) )
 		stop("filename cannot be missing")
 	if( !file.exists( filename ) )
@@ -411,9 +415,10 @@ addRScript = function(doc, file, text
 #' or \code{\link{addTable.html}} for examples.
 #' @return a document object
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{addTable.docx}}
-#' , \code{\link{pptx}}, \code{\link{addTable.pptx}}
-#' , \code{\link{html}}, \code{\link{addTable.html}}
+#' @seealso \code{\link{docx}}, \code{\link{addTable.docx}}, \code{\link{addFlexTable.docx}}
+#' , \code{\link{pptx}}, \code{\link{addTable.pptx}}, \code{\link{addFlexTable.pptx}}
+#' , \code{\link{html}}, \code{\link{addTable.html}}, \code{\link{addFlexTable.html}}
+#' , \code{\link{FlexTable}}
 addTable = function(doc, data, layout.properties
 		, header.labels, groupedheader.row
 		, span.columns, col.types
@@ -548,6 +553,13 @@ addTable = function(doc, data, layout.properties
 #' , \code{\link{addTitle.pptx}}, \code{\link{html}}, \code{\link{addTitle.html}}
 addTitle = function(doc, value, ...){
 	checkHasSlide(doc)
+	
+	if( missing( value ) ) stop("value is missing.")
+	if( !is.character( value ) )
+		stop("value must be a character vector of length 1.")
+	if( length( value ) != 1 )
+		stop("value must be a character vector of length 1.")
+	
 	UseMethod("addTitle")
 }
 

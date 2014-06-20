@@ -36,15 +36,19 @@
 
 addPageNumber.pptx = function(doc, value, ... ) {
 	
-#	shapeId = .jcall( doc$current_slide, "S", "getShapeId", "sln" )
-#	if( is.null( shapeId ) ) 
-#		stop( "Can't find any shape of type 'Slide number' in the layout.")
 	
-#	sln = .jcall( doc$obj, "I", "getSlideNumber" )
+	
 	slide = doc$current_slide 
-	if( !missing( value ) )
+	if( !missing( value ) ){
+		if( length( value ) != 1 )
+			stop("length of value should be 1.")	
+		
 		out = .jcall( slide, "I", "addSlideNumber" , as.character(value))
-	else out = .jcall( slide, "I", "addSlideNumber" )
+	} else {
+		
+		out = .jcall( slide, "I", "addSlideNumber" )
+		
+	}
 	
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "slide number") )

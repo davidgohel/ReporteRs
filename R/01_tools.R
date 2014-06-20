@@ -373,9 +373,8 @@ get.pots.from.script = function( file, text
 						.size = x[i,2] - (last_pos + 1)
 						out = out + paste( rep( " ", .size ), collapse = "" )
 					}
-					out = out + pot( x[i,"text"]
-							, format = tp.list[[ paste( x[i,"extentionTag"], ".properties", sep = "" ) ]]
-					)
+					prop.name = paste( x[i,"extentionTag"], ".properties", sep = "" )
+					out = out + pot( x[i,"text"], format = tp.list[[ prop.name ]] )
 					last_pos = x[i,4]
 				}
 				out

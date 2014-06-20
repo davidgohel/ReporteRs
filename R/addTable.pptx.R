@@ -45,7 +45,9 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @return an object of class \code{"pptx"}.
-#' @seealso \code{\link{pptx}}, \code{\link{addTable}}, \code{\link{tableProperties}}
+#' @seealso \code{\link{pptx}}, \code{\link{addTable}}
+#' , \code{\link{tableProperties}}, \code{\link{addFlexTable.pptx}}
+#' , \code{\link{FlexTable}}
 #' @method addTable pptx
 #' @S3method addTable pptx
 addTable.pptx = function(doc, data, layout.properties

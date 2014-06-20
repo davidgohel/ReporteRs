@@ -41,7 +41,9 @@
 #' @example examples/optionsDemoAddTable.R
 #' @example examples/writeDoc_directory.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{html}}, \code{\link{addTable}}, \code{\link{tableProperties}}
+#' @seealso \code{\link{html}}, \code{\link{addTable}}
+#' , \code{\link{tableProperties}}, \code{\link{addFlexTable.html}}
+#' , \code{\link{FlexTable}}
 #' @method addTable html
 #' @S3method addTable html
 addTable.html = function(doc, data, layout.properties

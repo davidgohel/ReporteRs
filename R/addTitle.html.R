@@ -4,7 +4,8 @@
 #' 
 #' @param doc Object of class \code{"html"}
 #' @param value \code{"character"} value to use as title text
-#' @param level \code{"integer"} positive value to use as heading level. 1 for title1, 2 for title2, etc.
+#' @param level \code{"integer"} positive value to use as 
+#' heading level. 1 for title1, 2 for title2, etc. Default to 1.
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"html"}.
 #' @examples
@@ -26,7 +27,13 @@
 #' @seealso \code{\link{html}}, \code{\link{addTitle}}
 #' @method addTitle html
 #' @S3method addTitle html
-addTitle.html = function( doc, value, level, ... ) {
+addTitle.html = function( doc, value, level = 1, ... ) {
+
+	if( !is.numeric( level ) )
+		stop("level must be an integer vector of length 1.")
+	if( length( level ) != 1 )
+		stop("level must be an integer vector of length 1.")
+	
 	jtitle = .jnew(class.html4r.Title, as.character(value), as.integer(level)  )
 	out = .jcall( doc$current_slide , "I", "add", jtitle )
 	if( out != 1 ){

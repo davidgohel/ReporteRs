@@ -44,6 +44,20 @@ addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
 	
 	slide = doc$current_slide 
 
+	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
+	if( check.dims > 0 && check.dims < 4 ) {
+		if( missing( offx ) ) warning("arguments offx, offy, width and height must be all specified: offx is missing")
+		if( missing( offy ) ) warning("arguments offx, offy, width and height must be all specified: offy is missing")
+		if( missing( width ) ) warning("arguments offx, offy, width and height must be all specified: width is missing")
+		if( missing( height ) ) warning("arguments offx, offy, width and height must be all specified: height is missing")
+	}
+	if( check.dims > 3 ) {
+		if( !is.numeric( offx ) ) stop("arguments offx must be a numeric vector")
+		if( !is.numeric( offy ) ) stop("arguments offy must be a numeric vector")
+		if( !is.numeric( width ) ) stop("arguments width must be a numeric vector")
+		if( !is.numeric( height ) ) stop("arguments height must be a numeric vector")
+	}
+	
 	if( !missing( offx )){
 		out = .jcall( slide, "I", "addPicture", filename
              , as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )

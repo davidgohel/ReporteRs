@@ -31,6 +31,8 @@
 #' @S3method addPage html
 addPage.html = function( doc, title, ... ) {
 	
+	if( missing( title ) )
+		stop("title is missing.")
 	if( !is.character( title ) )
 		stop("title must be a character vector of length 1.")
 	if( length( title ) != 1 )

@@ -7,13 +7,13 @@
 #' @param par.properties paragraph formatting properties of the paragraph that contains the table. 
 #' An object of class \code{\link{parProperties}}
 #' @param bookmark a character vector specifying bookmark id (where to put the table). 
-#'   	If provided, table will be add after paragraph that contains the bookmark.
+#'   	If provided, table will be add after paragraph that contains the bookmark. See \code{\link{bookmark}}. 
 #'   	If not provided, table will be added at the end of the document.
 #' @param ... further arguments - not used
 #' @return a docx object
 #' @seealso \code{\link{FlexTable}}, \code{\link{docx}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
-#' , \code{\link{addTable.docx}}
+#' , \code{\link{addTable.docx}}, \code{\link{bookmark}}
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addFlexTable_example.docx"

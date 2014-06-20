@@ -28,7 +28,7 @@
 #'		Each element of the list is a vector of length \code{nrow(data)}.
 #' @param par.properties paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
 #' @param bookmark a character vector specifying bookmark id (where to put the table). 
-#'   	If provided, table will be add after paragraph that contains the bookmark.
+#'   	If provided, table will be add after paragraph that contains the bookmark. See \code{\link{bookmark}}.
 #'   	If not provided, table will be added at the end of the document.
 #' @param row.names logical value - should the row.names be included in the table. 
 #' @param ... addTable arguments - see \code{\link{addTable}}. 
@@ -46,6 +46,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addTable}}, \code{\link{tableProperties}}
+#' , \code{\link{addFlexTable}}, \code{\link{FlexTable}}, \code{\link{bookmark}}
 #' @method addTable docx
 #' @S3method addTable docx
 addTable.docx = function(doc, data, layout.properties

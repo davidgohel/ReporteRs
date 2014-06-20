@@ -195,7 +195,7 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 	dir.create( dirname )
 	filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 	grDevices::png (filename = filename
-			, width = width[1]/72.2, height = height[1]/72.2, units = 'in'
+			, width = width[1], height = height[1], units = 'in'
 			, pointsize = pointsize, res = 300
 	)
 	

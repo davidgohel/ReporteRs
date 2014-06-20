@@ -37,15 +37,15 @@
 
 addDate.pptx = function(doc, value, str.format = "%Y-%m-%d", ... ) {
 	
-#	shapeId = .jcall( doc$current_slide, "S", "getShapeId", "dt" )
-#	if( is.null( shapeId ) ) 
-#		stop( "Can't find any shape of type 'Date' in the layout.")
-	
 	
 	slide = doc$current_slide 
 	if( missing( value ) )
 		out = .jcall( slide, "I", "addDate" , format( Sys.time(), str.format ))
-	else out = .jcall( slide, "I", "addDate" , as.character(value))
+	else {
+		if( length( value ) != 1 )
+			stop("length of value should be 1.")	
+		out = .jcall( slide, "I", "addDate" , as.character(value))
+	}
 	
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "date") )
