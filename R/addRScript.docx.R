@@ -49,7 +49,7 @@ addRScript.docx = function(doc, file, text
 	, keyword.properties = textProperties( color = "#4A444D" )
 	, string.properties = textProperties( color = "#008B8B", font.style = "italic" )
 	, number.properties = textProperties( color = "blue" )
-	, functioncall.properties = textProperties( color = "#823C3C" )
+	, functioncall.properties = textProperties( color = "blue" )
 	, argument.properties = textProperties( color = "#F25774" )
 	, package.properties = textProperties( color = "green" )
 	, formalargs.properties = textProperties( color = "#424242" )

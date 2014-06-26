@@ -121,3 +121,40 @@ void add_dblclick(int *dn, int *id, char **str, int *l){
 
 }
 
+void add_post_commands( int *dn, int *id, char **str, int *l) {
+	int nb_elts = *l;
+	int i;
+
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (!dev) return;
+
+	if (dev) {//addPostCommand
+		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+		SEXP cmdSexp = PROTECT(allocVector(STRSXP, nb_elts));
+		for( i = 0 ; i < nb_elts ; i++ ){
+			SET_STRING_ELT(cmdSexp, i, mkChar(str[i]));
+		}
+		SEXP cmdSexp2 = PROTECT(allocVector(INTSXP, nb_elts));
+		for( i = 0 ; i < nb_elts ; i++ ){
+			INTEGER(cmdSexp2)[i] = id[i];
+		}
+
+		eval( lang4(install("addPostCommand")
+							, cmdSexp, cmdSexp2, pd->env
+							), R_GlobalEnv);
+	    UNPROTECT(2);
+
+	};
+}
+
+void trigger_last_post_commands( int *dn ) {
+
+	pGEDevDesc dev= GEgetDevice(*dn);
+	if (!dev) return;
+
+	if (dev) {
+		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+		eval( lang2(install("triggerPostCommand"), pd->env), R_GlobalEnv);
+	};
+}
+

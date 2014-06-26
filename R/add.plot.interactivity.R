@@ -106,7 +106,10 @@ add.plot.interactivity = function( fun, popup.labels, click.actions, dblclick.ac
 		if( !is.character( popup.labels ) ) stop("argument popup.labels must be a character vector")
 		if( length( popup.labels ) != length( ids ) ) stop("argument popup.labels must be the same length than plotted elements")
 		popup.labels = gsub("\\n", "\n", popup.labels)
-		.C("add_popup", (dev.cur()-1L), as.integer(ids), as.character( popup.labels ), length( ids ) )
+		instructs = list( as.integer(ids), as.character( popup.labels ), length( ids ) )
+		#.C("add_popup", (dev.cur()-1L), as.integer(ids), as.character( popup.labels ), length( ids ) )
+
+		.C("add_post_commands", (dev.cur()-1L), as.integer(ids), as.character( popup.labels ), length( ids ) )
 	}
 	
 	if( !missing( click.actions ) ){

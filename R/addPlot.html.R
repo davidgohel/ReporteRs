@@ -70,6 +70,8 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 			, canvas_id = as.integer(doc$canvas_id) )
 		fun(...)
 		last_canvas_id = .C("get_current_canvas_id", (dev.cur()-1L), 0L)[[2]]
+		.C("trigger_last_post_commands", (dev.cur()-1L) )
+		
 		dev.off()
 		plot_ids = get("plot_ids", envir = env )
 		if( last_canvas_id < 0 ) stop("unexpected error, could not find device information.")
@@ -106,7 +108,9 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param canvas_id canvas id - an integer - unique id in the web page
 #' @param ... arguments for \code{fun}.
-#' @return an object of class \code{"html"}.
+#' @return an html string with attributes \code{javascript} that contains 
+#' javascript instructions and \code{div_id} that contains the expected id
+#' of the html container (e.g div or span). 
 #' @examples
 #' #START_TAG_TEST
 #' @example examples/raphael.html.R
@@ -130,6 +134,7 @@ raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize")
 			, ps=pointsize, fontname = fontname
 			, canvas_id = as.integer(canvas_id) )
 	fun(...)
+	.C("trigger_last_post_commands", (dev.cur()-1L) )
 	dev.off()
 	plot_ids = get("plot_ids", envir = env )
 	

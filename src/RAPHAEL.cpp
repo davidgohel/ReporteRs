@@ -470,6 +470,7 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	if (pd->pageNumber > 0) {
+		eval( lang2(install("triggerPostCommand"), pd->env ), R_GlobalEnv);
 		closeFile(pd->dmlFilePointer);
 	}
 

@@ -26,7 +26,10 @@ raphael.html(fun, pointsize = getOption("ReporteRs-fontsize"), width = 6,
   \item{...}{arguments for \code{fun}.}
 }
 \value{
-an object of class \code{"html"}.
+an html string with attributes \code{javascript} that
+contains javascript instructions and \code{div_id} that
+contains the expected id of the html container (e.g div or
+span).
 }
 \description{
 Add a plot into the \code{html} object.

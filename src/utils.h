@@ -38,4 +38,6 @@ extern "C" {
 	void add_popup(int *dn, int *id, char **str, int *l);
 	void add_click(int *dn, int *id, char **str, int *l);
 	void add_dblclick(int *dn, int *id, char **str, int *l);
+	void add_post_commands( int *dn, int *id, char **str, int *l);
+	void trigger_last_post_commands( int *dn );
 }
