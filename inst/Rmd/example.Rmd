@@ -1,0 +1,85 @@
+---
+title: "knitr demo"
+author: "david"
+date: "Thursday, June 26, 2014"
+output: html_document
+---
+
+```{r,echo=FALSE}
+library(ReporteRs)
+library( lattice )
+library( RColorBrewer )
+library( latticeExtra )
+
+
+MyFTable = FlexTable( data = mtcars, add.rownames = TRUE
+  , body.cell.props = cellProperties( border.color = "#EDBD3E")
+  , header.cell.props = cellProperties( background.color = "#5B7778" )
+)
+# zebra stripes - alternate colored backgrounds on table rows
+MyFTable = setZebraStyle( MyFTable, odd = "#D1E6E7", even = "#93A8A9" )
+
+# applies a border grid on table
+MyFTable = setFlexTableBorders(MyFTable
+  , inner.vertical = borderProperties( color="#EDBD3E", style="dotted" )
+  , inner.horizontal = borderProperties( color = "#EDBD3E", style = "none" )
+  , outer.vertical = borderProperties( color = "#EDBD3E", style = "solid" )
+  , outer.horizontal = borderProperties( color = "#EDBD3E", style = "solid" )
+)
+
+
+attach(mtcars)
+
+# create factors with value labels
+gear.f = factor(gear, levels = c(3, 4, 5), labels = c( "3gears", "4gears", "5gears") )
+cyl.f = factor(cyl, levels = c(4, 6, 8), labels = c( "4cyl", "6cyl", "8cyl") )
+
+my_dyn_lattice = xyplot( mpg ~ wt | cyl.f * gear.f
+  , groups = row.names( mtcars )
+  , panel = function(x, y, subscripts, groups, ...) {
+      if( length( x ) > 0 ){
+          add.plot.interactivity( fun = panel.xyplot, dblclick.actions = paste0("window.open('https://www.google.fr/#q=", groups[subscripts],"');")
+            , x = x , y = y, ...
+            , popup.labels = groups[subscripts]
+    	    )
+      } else panel.xyplot( x, y, ... )
+    } 
+  , pch = 16, cex = 1.5
+  , par.settings = ggplot2like()
+  , axis = axis.grid
+  , main = "Scatterplots by Cylinders and Gears"
+  , ylab = "Miles per Gallon"
+  , xlab = "Car Weight"
+  )
+
+```
+
+knitr let me add FlexTable and Dynamic graphics.
+
+FlexTable example
+=================
+
+```{r results='asis', echo=FALSE}
+
+cat(as.html(MyFTable))
+```
+
+Dynamic plot example
+=================
+
+```{r results='asis', echo=FALSE}
+rplot = raphael.html( fun = function( ){
+  	print( my_dyn_lattice )
+	}
+	, width = 9, height = 6
+)
+cat("<div id=\"", attr( rplot, "div_id" ) ,"\"></div>", sep = "")
+cat("<script type=\"text/javascript\" src=\"js/raphael-min.js\"></script>")
+cat("<script type=\"text/javascript\" src=\"js/g.raphael-min.js\"></script>")
+
+cat("<script type=\"text/javascript\">")
+cat(attr( rplot, "javascript" ) )
+cat("</script>")
+```
+
+
