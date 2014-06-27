@@ -1,3 +1,15 @@
+ReporteRs 0.5.7
+==================================================================
+ENHANCEMENT
+------------------------------------------------------------------
+* add doc entry "bookmark".
+  > ?bookmark
+
+* better tootltips
+
+* in Rmd/example.Rmd, you will find an example of using ReporteRs
+  with knitr.
+
 ReporteRs 0.5.6
 ==================================================================
 BUG FIXES
