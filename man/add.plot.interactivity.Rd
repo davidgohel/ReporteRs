@@ -32,6 +32,7 @@ the element and execute javascript instructions when
 double-clicking the element.
 }
 \examples{
+#START_TAG_TEST
 plot_function = function(){
 head( iris )
 colorsspec = list( setosa.solid = rgb(153/255, 51/255, 0/255, 1)
@@ -91,6 +92,7 @@ doc = html( title = "title" )
 doc = addPage( doc, title = "Interactive plot example" )
 doc = addPlot( doc, fun = plot_function, width = 8 )
 pages = writeDoc( doc, "add_interactivity_example")
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{html}}, \code{\link{addPlot.html}}

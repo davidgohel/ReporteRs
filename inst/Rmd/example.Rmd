@@ -34,7 +34,7 @@ attach(mtcars)
 gear.f = factor(gear, levels = c(3, 4, 5), labels = c( "3gears", "4gears", "5gears") )
 cyl.f = factor(cyl, levels = c(4, 6, 8), labels = c( "4cyl", "6cyl", "8cyl") )
 
-my_dyn_lattice = xyplot( mpg ~ wt | cyl.f * gear.f
+my_dyn_lattice = xyplot( mpg ~ wt | cyl.f * gear.f, layout = c(3,1)
   , groups = row.names( mtcars )
   , panel = function(x, y, subscripts, groups, ...) {
       if( length( x ) > 0 ){
@@ -44,7 +44,7 @@ my_dyn_lattice = xyplot( mpg ~ wt | cyl.f * gear.f
     	    )
       } else panel.xyplot( x, y, ... )
     } 
-  , pch = 16, cex = 1.5
+  , pch = 16, cex = 1.5, col = "cyan"
   , par.settings = ggplot2like()
   , axis = axis.grid
   , main = "Scatterplots by Cylinders and Gears"
@@ -54,7 +54,7 @@ my_dyn_lattice = xyplot( mpg ~ wt | cyl.f * gear.f
 
 ```
 
-knitr let me add FlexTable and Dynamic graphics.
+knitr let me add FlexTable, dynamic graphics and texts.
 
 FlexTable example
 =================
@@ -67,19 +67,24 @@ cat(as.html(MyFTable))
 Dynamic plot example
 =================
 
+<script type="text/javascript" src="http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js"></script>
+<script type="text/javascript" src="https://raw.githubusercontent.com/DmitryBaranovskiy/g.raphael/master/min/g.raphael-min.js"></script>
+
 ```{r results='asis', echo=FALSE}
 rplot = raphael.html( fun = function( ){
   	print( my_dyn_lattice )
 	}
 	, width = 9, height = 6
 )
-cat("<div id=\"", attr( rplot, "div_id" ) ,"\"></div>", sep = "")
-cat("<script type=\"text/javascript\" src=\"js/raphael-min.js\"></script>")
-cat("<script type=\"text/javascript\" src=\"js/g.raphael-min.js\"></script>")
-
-cat("<script type=\"text/javascript\">")
-cat(attr( rplot, "javascript" ) )
-cat("</script>")
+cat(rplot)
 ```
 
 
+Text
+=================
+
+```{r results='asis', echo=FALSE}
+my_pot = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+ , textProperties(font.weight="bold") )
+cat( as.html( my_pot ) )
+```

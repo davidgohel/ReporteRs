@@ -108,9 +108,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param canvas_id canvas id - an integer - unique id in the web page
 #' @param ... arguments for \code{fun}.
-#' @return an html string with attributes \code{javascript} that contains 
-#' javascript instructions and \code{div_id} that contains the expected id
-#' of the html container (e.g div or span). 
+#' @return an html string. 
 #' @examples
 #' #START_TAG_TEST
 #' @example examples/raphael.html.R
@@ -146,9 +144,11 @@ raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize")
 		
 		.jcall( jimg, "V", "registerGraphic", as.character(div.id), file )
 	}
-	
+	js.code = .jcall( jimg, "S", "getJS" )
 	out = .jcall( jimg, "S", "getHTML" )
-	attr( out, "javascript" ) = .jcall( jimg, "S", "getJS" )
+	out = paste( out, "<script type=\"text/javascript\">", sep = "" )
+	out = paste( out, js.code, sep = "" )
+	out = paste( out, "</script>", sep = "" )
 	attr( out, "div_id" ) = sapply( plot_ids, function(x) x$div.id )
 	attr( out, "js_id" ) = sapply( plot_ids, function(x) x$js.plotid )
 	out

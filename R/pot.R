@@ -88,3 +88,23 @@ as.character.pot = function (x, ...){
 	e1
 }
 
+#' @title get HTML code from a pot
+#'
+#' @description get HTML code from a pot
+#' 
+#' @param object the \code{pot} object
+#' @param ... further arguments passed to other methods 
+#' @return a character value
+#' @seealso \code{\link{pot}}
+#' @examples
+#' #START_TAG_TEST
+#' my_pot = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
+#' 	, textProperties(font.weight="bold") )
+#' as.html( my_pot )
+#' @example examples/STOP_TAG_TEST.R
+#' @method as.html pot
+#' @S3method as.html pot
+as.html.pot = function( object, ... ) {
+	par = Paragraph(object)
+	.jcall( par$jobj, "S", "getHTML" )	
+}
