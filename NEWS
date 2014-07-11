@@ -10,6 +10,7 @@ ENHANCEMENT
   > ?toc.options.docx
   (reported by Isabella R. Ghement)
   
+* as.html now works on pot objects  
   
 ReporteRs 0.5.7
 ==================================================================
