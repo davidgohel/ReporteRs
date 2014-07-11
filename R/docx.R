@@ -53,10 +53,11 @@ docx = function( title = "untitled", template){
 	.jcall( obj, "V", "setDocPropertyTitle", title )
 	.jcall( obj, "V", "setDocPropertyCreator", paste( .sysenv["USERDOMAIN"], "/", .sysenv["USERNAME"], " on computer ", .sysenv["COMPUTERNAME"], sep = "" ) )
 	
+	.jcall( obj, "V", "setListSeparator" )
+	
 	.Object = list( obj = obj
 		, title = title
 		, basefile = template
-		#, styles = .jcall( obj, "[S", "getStyleNames" ) 
 		, plot_first_id=1L
 		)
 	class( .Object ) = "docx"

@@ -1,3 +1,16 @@
+ReporteRs 0.5.8
+==================================================================
+ENHANCEMENT
+------------------------------------------------------------------
+* add function toc.options for docx object. When list separator
+  used when building the TOC is different from the list separator 
+  in your computer's regional settings, the doc cannot be built.
+  toc.options let force the separator (read from the template 
+  document used to initialize the docx object)
+  > ?toc.options.docx
+  (reported by Isabella R. Ghement)
+  
+  
 ReporteRs 0.5.7
 ==================================================================
 ENHANCEMENT

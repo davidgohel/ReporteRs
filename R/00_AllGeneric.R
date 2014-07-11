@@ -563,6 +563,23 @@ addTitle = function(doc, value, ...){
 	UseMethod("addTitle")
 }
 
+#' @title Set TOC options for a document object
+#'
+#' @description Set custom table of contents options for a document object
+#' 
+#' @param doc document object
+#' @param ... further arguments passed to other methods 
+#' @return a document object
+#' @details 
+#' \code{toc.options} only works with docx documents. 
+#' 
+#' See \code{\link{toc.options.docx}} for examples. 
+#' @export
+#' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}
+toc.options = function(doc, ...){
+	UseMethod("toc.options")
+}
+
 #' @title Add a table of contents into a document object
 #'
 #' @description Add a table of contents into a document object

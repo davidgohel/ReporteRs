@@ -1,0 +1,26 @@
+\name{toc.options}
+\alias{toc.options}
+\title{Set TOC options for a document object}
+\usage{
+toc.options(doc, ...)
+}
+\arguments{
+  \item{doc}{document object}
+
+  \item{...}{further arguments passed to other methods}
+}
+\value{
+a document object
+}
+\description{
+Set custom table of contents options for a document object
+}
+\details{
+\code{toc.options} only works with docx documents.
+
+See \code{\link{toc.options.docx}} for examples.
+}
+\seealso{
+\code{\link{docx}}, \code{\link{addTOC.docx}}
+}
+
