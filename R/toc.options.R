@@ -3,8 +3,9 @@
 #' @description set options for custom table of contents 
 #' of a \code{docx} object.
 #' 
-#' @param x Object of class \code{docx}
+#' @param doc Object of class \code{docx}
 #' @param list.separator list separator (should be the same than in computer's regional settings)
+#' @param ... further arguments passed to other methods - not used.
 #' @details 
 #' This function is to be used if TOC cannot be built. It is 
 #' occuring when list separator used when building the TOC is 
@@ -19,7 +20,7 @@
 #' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}
 #' @method toc.options docx
 #' @S3method toc.options docx
-toc.options.docx = function( x, list.separator ){
+toc.options.docx = function( doc, list.separator, ... ){
 	
 	if( missing( list.separator ) )
 		stop("list.separator is missing")
@@ -27,6 +28,6 @@ toc.options.docx = function( x, list.separator ){
 		stop("length of list.separator must be 1")
 	if( nchar( list.separator ) != 1 )
 		stop("number of character of list.separator must be 1 (',' or ';'")
-	.jcall( x$obj, "V", "setListSeparator", list.separator )
-	x
+	.jcall( doc$obj, "V", "setListSeparator", list.separator )
+	doc
 }
