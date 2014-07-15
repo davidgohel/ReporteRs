@@ -2,13 +2,16 @@
 \alias{toc.options.docx}
 \title{Set TOC options}
 \usage{
-\method{toc.options}{docx}(x, list.separator)
+\method{toc.options}{docx}(doc, list.separator, ...)
 }
 \arguments{
-  \item{x}{Object of class \code{docx}}
+  \item{doc}{Object of class \code{docx}}
 
   \item{list.separator}{list separator (should be the same
   than in computer's regional settings)}
+
+  \item{...}{further arguments passed to other methods -
+  not used.}
 }
 \description{
 set options for custom table of contents of a \code{docx}
