@@ -9,8 +9,10 @@
   \item{doc}{Object of class \code{"html"} where paragraph
   has to be added}
 
-  \item{value}{character vector containing texts to add OR
-  an object of class \code{\link{set_of_paragraphs}}.}
+  \item{value}{character vector containing texts to add to
+  the document as paragraphs: an object of class
+  \code{\link{pot}} or \code{\link{set_of_paragraphs}} or a
+  character vector.}
 
   \item{stylename}{value of the named style to apply to
   paragraphs in the html document. See

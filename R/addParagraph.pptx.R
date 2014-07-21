@@ -4,9 +4,13 @@
 #' Insert paragraph(s) of text into a \code{pptx} object
 #' 
 #' @param doc Object of class \code{"pptx"} where paragraph has to be added
-#' @param value character vector containing texts to add OR an object of class \code{\link{set_of_paragraphs}}.
-#' @param offx optional, x position of the shape (top left position of the bounding box) in inch. See details.
-#' @param offy optional, y position of the shape (top left position of the bounding box) in inch. See details.
+#' @param value character vector containing texts to add to the document as paragraphs: 
+#' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
+#' or a character vector.
+#' @param offx optional, x position of the shape (top left position of the bounding box) 
+#' in inch. See details.
+#' @param offy optional, y position of the shape (top left position of the bounding box) 
+#' in inch. See details.
 #' @param width optional, width of the shape in inch. See details.
 #' @param height optional, height of the shape in inch. See details.
 #' @param par.properties a parProperties object
@@ -51,30 +55,34 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height, par.properti
 		x = lapply( value, function(x) pot(value = x) )
 		value = do.call( "set_of_paragraphs", x )
 	}
+	if( inherits( value, "pot" ) ){
+		value = set_of_paragraphs( value )
+	}
+	
+	if( !inherits(value, "set_of_paragraphs") )
+		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
 	if( !inherits( par.properties, "parProperties" ) ){
 		stop("argument 'par.properties' must be an object of class 'parProperties'")
 	}
 	
 	
-	if( inherits(value, "set_of_paragraphs") ){
-		slide = doc$current_slide 
-		paragrahSection = ParagraphSection (value, par.properties )
-		paragrah = .jnew(class.pptx4r.Paragraphs)
-		.jcall( paragrah, "V", "setTextBody", paragrahSection$jobj)
-
-		if( !missing( offx )){
-			out = .jcall( slide, "I", "add", paragrah
-					, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
-		} else {
-			out = .jcall( slide, "I", "add" , paragrah)
-		}	
-
-		if( isSlideError( out ) ){
-			stop( getSlideErrorString( out , "pot") )
-		}
-	} else stop("value must be an object of class 'set_of_paragraphs' or a character vector!")
-
+	slide = doc$current_slide 
+	paragrahSection = ParagraphSection (value, par.properties )
+	paragrah = .jnew(class.pptx4r.Paragraphs)
+	.jcall( paragrah, "V", "setTextBody", paragrahSection$jobj)
+	
+	if( !missing( offx )){
+		out = .jcall( slide, "I", "add", paragrah
+				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
+	} else {
+		out = .jcall( slide, "I", "add" , paragrah)
+	}	
+	
+	if( isSlideError( out ) ){
+		stop( getSlideErrorString( out , "pot") )
+	}
+	
 	doc
 }
 

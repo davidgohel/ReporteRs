@@ -96,10 +96,10 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 
 
 
-#' @title Add a plot into an html object
+#' @title get HTML code from a plot
 #'
 #' @description
-#' Add a plot into the \code{html} object.
+#' get HTML code from a plot
 #' 
 #' @param fun plot function
 #' @param width plot width in inches (default value is 6).

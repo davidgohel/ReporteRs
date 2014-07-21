@@ -2,13 +2,20 @@
 \alias{addRScript.html}
 \title{Add R script into a html object}
 \usage{
-\method{addRScript}{html}(doc, rscript, ...)
+\method{addRScript}{html}(doc, rscript, file, text, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"html"} where
   expressions have to be added}
 
-  \item{rscript}{an object of class \code{RScript}}
+  \item{file}{R script file. Not used if text or rscript is
+  provided.}
+
+  \item{text}{character vector. The text to parse. Not used
+  if file or rscript is provided.}
+
+  \item{rscript}{an object of class \code{RScript}. Not
+  used if file or text is provided.}
 
   \item{...}{further arguments, not used.}
 }
@@ -17,6 +24,10 @@ an object of class \code{"html"}.
 }
 \description{
 Add R script into a \code{"html"} object.
+}
+\details{
+You have to one of the following argument: file or text or
+rscript.
 }
 \examples{
 #START_TAG_TEST

@@ -49,7 +49,7 @@ doc = docx( title = "My example"
   )
 
 # replace bookmarks 'AUTHOR' and 'REVIEWER'
-# located in 'ttest_example.docx' by dummy values
+# by dummy values
 doc = addParagraph( doc
 	, value = c( "James Sonny Crockett", "Ricardo Rico Tubbs" )	
 	, stylename = "Normal"

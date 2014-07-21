@@ -3,8 +3,15 @@
 #' @description Add R script into a \code{"pptx"} object.
 #' 
 #' @param doc Object of class \code{"pptx"} where expressions have to be added
-#' @param rscript an object of class \code{RScript}
+#' @param file R script file. Not used if text or 
+#' rscript is provided.
+#' @param text character vector. The text to parse. 
+#' Not used if file or rscript is provided.
+#' @param rscript an object of class \code{RScript}. 
+#' Not used if file or text is provided.
 #' @param ... further arguments, not used. 
+#' @details 
+#' You have to one of the following argument: file or text or rscript. 
 #' @return an object of class \code{"pptx"}.
 #' @examples
 #' #START_TAG_TEST
@@ -21,7 +28,14 @@
 #' @seealso \code{\link{pptx}}, \code{\link{addRScript}}
 #' @method addRScript pptx
 #' @S3method addRScript pptx
-addRScript.pptx = function(doc, rscript, ... ) {
+addRScript.pptx = function(doc, rscript, file, text, ... ) {
+	
+	if( !missing ( file ) ){
+		rscript = RScript( file = file, ... )
+	} else if( !missing ( text ) ){
+		rscript = RScript( text = text, ... )
+	} 
+	
 	out = .jcall( doc$current_slide, "I", "add", rscript$jobj )
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "RScript") )

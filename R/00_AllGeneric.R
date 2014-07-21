@@ -160,9 +160,9 @@ addPageNumber = function(doc, ...){
 #' Trying to insert a \code{'\n'} will have no effect. If an end of line is required
 #' , a new paragraph is required.
 #' @param doc document object
-#' @param value character vector containing texts to add OR an object of 
-#' class \code{\link{set_of_paragraphs}}.
-#' A set_of_paragraphs object is a container for \code{pot} objects.
+#' @param value character vector containing texts to add to the document as paragraphs: 
+#' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
+#' or a character vector.
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
@@ -172,10 +172,11 @@ addPageNumber = function(doc, ...){
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{pptx}}, \code{\link{addParagraph.pptx}}
 #' , \code{\link{html}}, \code{\link{addParagraph.html}}
+#' , \code{\link{pot}}, \code{\link{textProperties}}
 addParagraph = function(doc, value, ...){
 	checkHasSlide(doc)
-	if( !inherits( value, c("set_of_paragraphs", "character") ) )
-		stop("value must be an object of class 'set_of_paragraphs' or a character vector!")
+	if( !inherits( value, c("set_of_paragraphs", "character", "pot") ) )
+		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	if( length(value) < 1 ){
 		warning("value is empty.")
 		return( doc )
@@ -266,19 +267,23 @@ addSubtitle = function(doc, ...){
 #' @description Add R script into a document object
 #' 
 #' @param doc document object
-#' @param rscript an object of class \code{RScript}
+#' @param file R script file. Not used if text or 
+#' rscript is provided.
+#' @param text character vector. The text to parse. 
+#' Not used if file or rscript is provided.
+#' @param rscript an object of class \code{RScript}. 
+#' Not used if file or text is provided.
 #' @param ... further arguments passed to other methods 
+#' @details 
+#' You have to one of the following argument: file or text or rscript. 
 #' @return a document object
 #' @export
 #' @seealso \code{\link{addRScript.html}}, \code{\link{addRScript.docx}}
 #' , \code{\link{addRScript.pptx}}
-addRScript = function(doc, rscript, ... ){
+addRScript = function(doc, rscript, file, text, ... ){
 
-	if( missing( rscript ) )
-		stop("rscript cannot be missing.")
-	
-	if( !inherits( rscript, "RScript" ) )
-		stop("rscript must be an object of class 'RScript'.")
+	if( missing( file ) && missing( text ) && missing( rscript ) )
+		stop("need a rscript or file or text argument.")
 	
 	UseMethod("addRScript")
 }
