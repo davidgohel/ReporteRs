@@ -203,7 +203,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/FlexTable.mtcars.alterProps.R
 #' @example examples/FlexTable.mtcars.alterContent.R
-#' @example examples/FlexTable.mtcars.alterHeader.R
+#' @example examples/FlexTableAPIFullDemo.R
 #' @example examples/STOP_TAG_TEST.R
 #' @rdname FlexTable-alter
 #' @aliases alterFlexTable
