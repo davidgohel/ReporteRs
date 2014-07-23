@@ -45,6 +45,42 @@ get.formatted.dataset = function( dataset ){
 	data
 }
 
+get.header.indexes.from.arguments = function( object, i, j){
+	
+	headerSize = .jcall( object$jobj, "I", "headerSize" )
+	if( headerSize < 1 ) stop("FlexTable object has no header row.")
+	if( missing(i) && missing(j) ) {
+		i = 1:headerSize
+		j = 1:object$numcol
+	} else if( missing(i) && !missing(j) ) {
+		i = 1:headerSize
+	} else if( !missing(i) && missing(j) ) {
+		j = 1:object$numcol
+	}
+	
+	if( is.numeric (i) ){
+		if( any( i < 1 | i > headerSize ) ) stop("invalid row subset - out of bound")
+	} else if( is.logical (i) ){
+		if( length( i ) != headerSize ) stop("invalid row subset - incorrect length")
+		else i = which(i)
+	} else stop("row subset must be a logical vector or an integer vector.")
+	
+	if( is.numeric (j) ){
+		if( any( j < 1 | j > object$numcol ) ) stop("invalid col subset - out of bound")
+	} else if( is.logical (j) ){
+		if( length( j ) != object$numcol ) stop("invalid col subset - incorrect length")
+		else j = which(j)
+	} else if( is.character (j) ){
+		if( any( is.na( object$col_id ) ) ) stop("null col.names")
+		else if( !all( is.element(j, object$col_id)) ) stop("invalid col.names subset")
+		else j = match(j, object$col_id)
+	} else stop("col subset must be a logical vector, an integer vector or a character vector(row.names).")
+	
+	list( i = i , j = j )
+}
+
+
+
 get.indexes.from.arguments = function( object, i, j){
 	
 	if( missing(i) && missing(j) ) {
@@ -98,6 +134,33 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 		)
 	} else {
 		.jcall( object$jobj, "V", "addBodyText"
+				, .jarray( as.integer( i - 1 ) )
+				, .jarray( as.integer( j - 1 ) )
+				, .jarray( t( get.formatted.dataset( value ) ) )
+				, jtext.properties
+				, as.logical(newpar) 
+		)
+	}
+	object
+}
+
+addFlexHeaderContent = function (object, i, j, value, textProperties, newpar = F, byrow = FALSE){
+	
+	if( !inherits(textProperties, "textProperties") )
+		stop("argument textProperties must be a textProperties object.")
+	
+	jtext.properties = .jTextProperties( textProperties )
+	
+	if( byrow ){
+		.jcall( object$jobj, "V", "addHeaderText"
+				, .jarray( as.integer( i - 1 ) )
+				, .jarray( as.integer( j - 1 ) )
+				, .jarray( get.formatted.dataset( value ) )
+				, jtext.properties
+				, as.logical(newpar)
+		)
+	} else {
+		.jcall( object$jobj, "V", "addHeaderText"
 				, .jarray( as.integer( i - 1 ) )
 				, .jarray( as.integer( j - 1 ) )
 				, .jarray( t( get.formatted.dataset( value ) ) )
@@ -189,6 +252,58 @@ updateTextProperties.FlexTable = function( x, i, j, value ){
 	x
 }
 
+updateHeaderTextProperties.FlexTable = function( x, i, j, value ){
+	
+	if( !inherits( value , "textProperties" ) ){
+		stop("value is not a textProperties object")
+	}
+	
+	jtextProp = .jTextProperties( value )
+	jflexcell = .jcall( x$jobj, "V", "setHeaderTextProperties"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, jtextProp  )
+	x
+}
+
+updateHeaderCellProperties.FlexTable = function( x, i, j, value ){
+	
+	if( !inherits( value , "cellProperties" ) ){
+		stop("value is not a cellProperties object")
+	}
+	
+	jcellProp = .jCellProperties( value )
+	jflexcell = .jcall( x$jobj, "V", "setHeaderCellProperties"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, jcellProp  )
+	x
+}
+
+updateHeaderParProperties.FlexTable = function( x, i, j, value ){
+	
+	if( !inherits( value , "parProperties" ) ){
+		stop("value is not a parProperties object")
+	}
+	
+	jparProp = .jParProperties( value )
+	jflexcell = .jcall( x$jobj, "V", "setHeaderParProperties"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, jparProp  )
+	x
+}
+
+addFlexHeaderPot = function( x, i, j, value, newpar ){
+	
+	ps = Paragraph( value )
+	.jcall( x$jobj, "V", "addHeaderText"
+			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
+			ps$jobj, as.logical(newpar)  )
+	
+	x
+}
+
 addContent.FlexTable = function( x, i, j, value ){
 	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
 	
@@ -203,11 +318,11 @@ addContent.FlexTable = function( x, i, j, value ){
 		i = 1:x$numrow
 	}
 	
-	if( inherits(value, c( "pot") ) )
-		value = set_of_paragraphs(value)
-	
 	if( !inherits(value, c( "set_of_paragraphs", "pot") ) )
 		stop("argument value must be an object of class 'pot' or 'set_of_paragraphs'.")
+	
+	if( inherits(value, c( "pot") ) )
+		value = set_of_paragraphs(value)
 	
 	ps = ParagraphSection( value, x$body.par.props )
 	.jcall( x$jobj, "V", "setBodyText"

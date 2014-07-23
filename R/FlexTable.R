@@ -785,3 +785,43 @@ setFlexTableWidths = function (object, widths ){
 	object
 }
 
+#' @method [[<- FlexTable
+#' @S3method [[<- FlexTable
+"[[<-.FlexTable" = function( x, i, j, text.properties, newpar = F, byrow = FALSE, value ){
+	
+	args.get.indexes = list(object = x)
+	if( !missing(i) ) args.get.indexes$i = i
+	if( !missing(j) ) args.get.indexes$j = j
+	indexes = do.call(get.header.indexes.from.arguments, args.get.indexes)
+	i = indexes$i
+	j = indexes$j
+	
+	if( inherits(value, c("textProperties", "parProperties", "cellProperties")) ){
+		if( inherits(value, "textProperties" ) ){
+			x = updateHeaderTextProperties.FlexTable( x=x, i=i, j=j, value=value )
+		} else if( inherits(value, "parProperties" ) ){
+			x = updateHeaderParProperties.FlexTable( x=x, i=i, j=j, value=value )
+		} else {
+			x = updateHeaderCellProperties.FlexTable( x=x, i=i, j=j, value=value )
+		}
+	} else if( is.character( value ) && length( value ) == 1 ){
+		if( missing(text.properties))
+			text.properties = x$header.text.props
+		
+		x = addFlexHeaderContent (object = x, i = i, j = j
+				, value = rep( value, length(i)*length(j) )
+				, text.properties, newpar = newpar, byrow = byrow)
+		
+	} else if( inherits( value , "pot") ){
+		
+		x = addFlexHeaderPot (x = x, i = i, j = j, value = value, newpar = newpar)
+		
+	} else stop("unknown type of assigned value. See details in help file.")
+
+	x
+}
+
+
+
+
+
