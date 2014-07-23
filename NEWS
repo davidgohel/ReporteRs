@@ -2,6 +2,9 @@ ReporteRs 0.5.8
 ==================================================================
 ENHANCEMENT
 ------------------------------------------------------------------
+* implementation of "[" operator for FlexTable headers and footers
+  modifications (add and format content)
+  
 * add function toc.options for docx object. When list separator
   used when building the TOC is different from the list separator 
   in your computer's regional settings, the doc cannot be built.

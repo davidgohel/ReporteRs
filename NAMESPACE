@@ -1,7 +1,6 @@
 S3method("+",pot)
 S3method("[<-",FlexRow)
 S3method("[<-",FlexTable)
-S3method("[[<-",FlexTable)
 S3method(addDate,pptx)
 S3method(addFlexTable,docx)
 S3method(addFlexTable,html)
