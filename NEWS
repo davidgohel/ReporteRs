@@ -3,7 +3,8 @@ ReporteRs 0.5.8
 ENHANCEMENT
 ------------------------------------------------------------------
 * implementation of "[" operator for FlexTable headers and footers
-  modifications (add and format content)
+  modifications (add and format content). borderProperties are now
+  supported.
   
 * add function toc.options for docx object. When list separator
   used when building the TOC is different from the list separator 
