@@ -9,7 +9,7 @@ and Powerpoint pptx) and html documents.
 }
 \details{
 \tabular{ll}{ Package: \tab ReporteRs\cr Type: \tab
-Package\cr Version: \tab 0.5.8\cr Date: \tab 2014-07-11\cr
+Package\cr Version: \tab 0.5.9\cr Date: \tab 2014-07-24\cr
 License: \tab GPL (>= 3)\cr LazyLoad: \tab yes\cr }
 
 To get an r document object: \itemize{ \item
@@ -27,6 +27,7 @@ format is (docx, pptx, html).
 \code{\link{addPlot}} Add plots \item
 \code{\link{addImage}} Add external images \item
 \code{\link{addParagraph}} Add paragraphs of text \item
+\code{\link{addRScript}} Add an r script \item
 \code{\link{writeDoc}} Write the document into a file or a
 directory }
 
