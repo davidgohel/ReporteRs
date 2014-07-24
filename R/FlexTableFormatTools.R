@@ -1,17 +1,4 @@
 chBodyCellProperties = function( x, i, j, value ){
-	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
-	
-	if( !missing(i) )
-		if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !missing(j) )
-		if( !is.numeric(j) ) stop("argument j must be an integer argument.")
-	
-	if( !missing(i) && missing(j) ){
-		j = 1:x$numcol
-	} else if( missing(i) && !missing(j) ){
-		i = 1:length(x)
-	}
-	
 	if( !inherits( value , "cellProperties" ) ){
 		stop("value is not a cellProperties object")
 	}
@@ -25,19 +12,6 @@ chBodyCellProperties = function( x, i, j, value ){
 }
 
 chBodyParProperties = function( x, i, j, value ){
-	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
-	
-	if( !missing(i) )
-		if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !missing(j) )
-		if( !is.numeric(j) ) stop("argument j must be an integer argument.")
-	
-	if( !missing(i) && missing(j) ){
-		j = 1:x$numcol
-	} else if( missing(i) && !missing(j) ){
-		i = 1:length(x)
-	}
-	
 	if( !inherits( value , "parProperties" ) ){
 		stop("value is not a parProperties object")
 	}
@@ -52,19 +26,6 @@ chBodyParProperties = function( x, i, j, value ){
 }
 
 chBodyTextProperties = function( x, i, j, value ){
-	if( missing(i) && missing(j) ) stop("arguments i and j are missing.")
-	
-	if( !missing(i) )
-		if( !is.numeric(i) ) stop("argument i must be an integer argument.")
-	if( !missing(j) )
-		if( !is.numeric(j) ) stop("argument j must be an integer argument.")
-	
-	if( !missing(i) && missing(j) ){
-		j = 1:x$numcol
-	} else if( missing(i) && !missing(j) ){
-		i = 1:length(x)
-	}
-	
 	if( !inherits( value , "textProperties" ) ){
 		stop("value is not a textProperties object")
 	}
@@ -74,6 +35,20 @@ chBodyTextProperties = function( x, i, j, value ){
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jtextProp  )
+	
+	x
+}
+chBodyBorderProperties = function( x, i, j, side, value ){
+
+	if( !inherits( value , "borderProperties" ) ){
+		stop("value is not a borderProperties object")
+	}
+	
+	jborderProp = as.jborderProperties( value )
+	.jcall( x$jobj, "V", "setBodyBorderProperties"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, jborderProp, side )
 	
 	x
 }
@@ -119,6 +94,19 @@ chHeaderParProperties = function( x, i, j, value ){
 			, jparProp  )
 	x
 }
+chHeaderBorderProperties = function( x, i, j, side, value ){
+	if( !inherits( value , "borderProperties" ) ){
+		stop("value is not a borderProperties object")
+	}	
+	
+	jborderProp = as.jborderProperties( value )
+	.jcall( x$jobj, "V", "setHeaderBorderProperties"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, jborderProp, side )
+	
+	x
+}
 
 chFooterTextProperties = function( x, i, j, value ){
 	
@@ -161,4 +149,18 @@ chFooterParProperties = function( x, i, j, value ){
 			, jparProp  )
 	x
 }
+chFooterBorderProperties = function( x, i, j, side, value ){
+	if( !inherits( value , "borderProperties" ) ){
+		stop("value is not a borderProperties object")
+	}	
+	
+	jborderProp = as.jborderProperties( value )
+	.jcall( x$jobj, "V", "setFooterBorderProperties"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, jborderProp, side )
+	
+	x
+}
+
 

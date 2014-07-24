@@ -3,7 +3,7 @@
 \alias{alterFlexTable}
 \title{alter FlexTable content and format}
 \usage{
-\method{[}{FlexTable} (x, i, j, text.properties, newpar = F, byrow = FALSE, to = "body") <- value
+\method{[}{FlexTable} (x, i, j, text.properties, newpar = F, byrow = FALSE, to = "body", side = "top") <- value
 }
 \arguments{
   \item{x}{the \code{FlexTable} object}
@@ -28,6 +28,11 @@
   the \code{value}, must be one of the following values
   "body" (default) or "header" or "footer"}
 
+  \item{side}{used only when value is a
+  \code{\link{borderProperties}}, specify on which side to
+  apply the properties. It must be one of "bottom", "top",
+  "left", "right".}
+
   \item{value}{see details.}
 }
 \description{
@@ -37,7 +42,8 @@ add text or format a FlexTable object
 To modify content formatting properties, value should be an
 object of class \code{\link{cellProperties}} or an object
 of class \code{\link{parProperties}} or an object of class
-\code{\link{textProperties}}.
+\code{\link{textProperties}} or an object of class
+\code{\link{borderProperties}}.
 
 To add content, there are two options:
 
@@ -117,6 +123,7 @@ iris_ft = setFlexTableBorders( iris_ft,
 , \code{\link{addFlexTable}},
 \code{\link{addFlexTable.docx}} ,
 \code{\link{addFlexTable.pptx}},
-\code{\link{addFlexTable.html}}
+\code{\link{addFlexTable.html}} ,
+\code{\link{borderProperties}}
 }
 

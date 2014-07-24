@@ -145,7 +145,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #'
 #' @description add text or format a FlexTable object
 #' 
-#' @usage \method{[}{FlexTable} (x, i, j, text.properties, newpar = F, byrow = FALSE, to = "body") <- value
+#' @usage \method{[}{FlexTable} (x, i, j, text.properties, newpar = F, byrow = FALSE, to = "body", side = "top") <- value
 #' @param x the \code{FlexTable} object
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection. 
 #' @param j vector (integer index, col.names values or boolean vector) for columns selection. 
@@ -157,13 +157,16 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' , otherwise content is added by rows.
 #' @param to specify on which part of the FlexTable to apply the \code{value}, must be one of the following 
 #' values "body" (default) or "header" or "footer"
+#' @param side used only when value is a \code{\link{borderProperties}}, specify on which side to 
+#' apply the properties. It must be one of "bottom", "top", "left", "right".
 #' @param value see details. 
 #' @details 
 #' 
 #' To modify content formatting properties, value should be an object of 
 #' class \code{\link{cellProperties}} 
 #' or an object of class \code{\link{parProperties}} 
-#' or an object of class \code{\link{textProperties}}. 
+#' or an object of class \code{\link{textProperties}} 
+#' or an object of class \code{\link{borderProperties}}. 
 #' 
 #' 
 #' To add content, there are two options: 
@@ -196,6 +199,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
 #' , \code{\link{addFlexTable}}, \code{\link{addFlexTable.docx}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
+#' , \code{\link{borderProperties}}
 #' @examples
 #' #START_TAG_TEST
 #' @example examples/FlexTable.mtcars.R
@@ -207,7 +211,8 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @aliases alterFlexTable
 #' @method [<- FlexTable
 #' @S3method [<- FlexTable
-"[<-.FlexTable" = function( x, i, j, text.properties, newpar = F, byrow = FALSE, to = "body", value ){
+"[<-.FlexTable" = function( x, i, j, text.properties, newpar = F, byrow = FALSE, 
+		to = "body", side = "top", value ){
 	
 	args.get.indexes = list(object = x)
 	if( !missing(i) ) args.get.indexes$i = i
@@ -228,74 +233,75 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 		text.properties = x$body.text.props
 	else text.properties = x$header.text.props
 	
+
 	
 	if( inherits(value, "textProperties" ) ){
 		switch(to,
-				body = {
-					x = chBodyTextProperties( x=x, i=i, j=j, value=value )
-				}, 
-				header = {
-					x = chHeaderTextProperties( x=x, i=i, j=j, value=value )
-				}, 
-				footer =  {
-					x = chFooterTextProperties( x=x, i=i, j=j, value=value )
-				}, stop("to should be one of 'body', 'header', 'footer'.")
-		)
-		
-		
-		
+			body = {
+				x = chBodyTextProperties( x=x, i=i, j=j, value=value )
+			}, 
+			header = {
+				x = chHeaderTextProperties( x=x, i=i, j=j, value=value )
+			}, 
+			footer =  {
+				x = chFooterTextProperties( x=x, i=i, j=j, value=value )
+			}, stop("to should be one of 'body', 'header', 'footer'.")
+		)	
+	} else if( inherits(value, "borderProperties" ) ){
+		switch(to,
+			body = {
+				x = chBodyBorderProperties ( x=x, i=i, j=j, side = side, value=value )
+			}, 
+			header = {
+				x = chHeaderBorderProperties ( x=x, i=i, j=j, side = side, value=value )
+			}, 
+			footer =  {
+				x = chFooterBorderProperties ( x=x, i=i, j=j, side = side, value=value )
+			}, stop("to should be one of 'body', 'header', 'footer'.")
+		)		
 	} else if( inherits(value, "parProperties" ) ){
 		switch(to,
-				body = {
-					x = chBodyParProperties( x=x, i=i, j=j, value=value )
-				}, 
-				header = {
-					x = chHeaderParProperties( x=x, i=i, j=j, value=value )
-				}, 
-				footer =  {
-					x = chFooterParProperties( x=x, i=i, j=j, value=value )
-				}, stop("to should be one of 'body', 'header', 'footer'.")
-		)
-		
-		
-		
+			body = {
+				x = chBodyParProperties( x=x, i=i, j=j, value=value )
+			}, 
+			header = {
+				x = chHeaderParProperties( x=x, i=i, j=j, value=value )
+			}, 
+			footer =  {
+				x = chFooterParProperties( x=x, i=i, j=j, value=value )
+			}, stop("to should be one of 'body', 'header', 'footer'.")
+		)		
 	} else if( inherits(value, "cellProperties" ) ){
 		switch(to,
-				body = {
-					x = chBodyCellProperties( x=x, i=i, j=j, value=value )
-				}, 
-				header = {
-					x = chHeaderCellProperties( x=x, i=i, j=j, value=value )
-				}, 
-				footer =  {
-					x = chFooterCellProperties( x=x, i=i, j=j, value=value )
-				}, stop("to should be one of 'body', 'header', 'footer'.")
-		)
-		
-		
-		
+			body = {
+				x = chBodyCellProperties( x=x, i=i, j=j, value=value )
+			}, 
+			header = {
+				x = chHeaderCellProperties( x=x, i=i, j=j, value=value )
+			}, 
+			footer =  {
+				x = chFooterCellProperties( x=x, i=i, j=j, value=value )
+			}, stop("to should be one of 'body', 'header', 'footer'.")
+		)		
 	} else if( is.character( value ) && length( value ) == 1 ){
 		
 		switch(to,
 				body = {
 					x = addFlexCellContent (object = x, i = i, j = j
-							, value = rep( value, length(i)*length(j) )
-							, text.properties, newpar = newpar, byrow = byrow)
+						, value = rep( value, length(i)*length(j) )
+						, text.properties, newpar = newpar, byrow = byrow)
 				}, 
 				header = {
 					x = addFlexHeaderContent (object = x, i = i, j = j
-							, value = rep( value, length(i)*length(j) )
-							, text.properties, newpar = newpar, byrow = byrow)
+						, value = rep( value, length(i)*length(j) )
+						, text.properties, newpar = newpar, byrow = byrow)
 				}, 
 				footer =  {
 					x = addFlexFooterContent (object = x, i = i, j = j
-							, value = rep( value, length(i)*length(j) )
-							, text.properties, newpar = newpar, byrow = byrow)
+						, value = rep( value, length(i)*length(j) )
+						, text.properties, newpar = newpar, byrow = byrow)
 				}, stop("to should be one of 'body', 'header', 'footer'.")
 		)
-		
-		
-		
 	} else if( inherits( value , "pot") ){
 		switch(to,
 				body = {
