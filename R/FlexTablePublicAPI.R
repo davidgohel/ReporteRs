@@ -166,29 +166,27 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' or an object of class \code{\link{textProperties}}. 
 #' 
 #' 
-#' To add content, there are two options. 
+#' To add content, there are two options: 
 #' 
-#' First option: value should be a \code{data.frame} or a \code{matrix} 
+#' * First option: value should be a \code{data.frame} or a \code{matrix} 
 #' or a \code{vector} with as many elements as defined by the selection. 
 #' \code{text.properties} can be used to specify how to format added values. 
 #' 
-#' Second option: value is a \code{pot} object, its value 
-#' will be repeated in all cells defined by the selection.
+#' * Second option: value is a \code{\link{pot}} object, its value 
+#' will be added in all cells defined by the selection.
 #' 
 #' 
-#' Use \code{YourFlexTable[ line subset, col subset] <- ...} to apply formatting properties 
-#' or to add text on the subset of body of the FlexTable.
+#' Use \code{ft_object[1:4, 2:3] <- ...} to perform the operation 
+#' on the body subset of of the FlexTable.
 #' 
-#' Use \code{YourFlexTable[..., to = "header"] <- ... } to apply formatting properties 
-#' or to add text on the subset of header of the FlexTable.
+#' Use \code{ft_object[1, 2, to = "header"] <- ... } to perform the operation 
+#' on the header subset of the FlexTable.
 #' 
-#' Use \code{YourFlexTable[..., to = "footer"] <- ... } to apply formatting properties 
-#' or to add text on the subset of footer of the FlexTable.
+#' Use \code{ft_object[1, 2, , to = "footer"] <- ... } to perform the operation 
+#' on the footer subset of the FlexTable.
 #' 
-#' Use \code{YourFlexTable[] <- ... } to apply formatting properties 
-#' or to add text on the whole body of the FlexTable (or header or 
-#' footer depending if you are using \code{to="header"} or 
-#' \code{to="footer"}).
+#' Use \code{ft_object[] <- ... } to perform the operation 
+#' on the whole part (body, header or footer) of the FlexTable.
 #' 
 #' 
 #' 

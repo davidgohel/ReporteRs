@@ -144,6 +144,75 @@ MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
 		, outer.vertical = borderProperties( width = 2, color = "#666666" )
 		, outer.horizontal = borderProperties( width = 2, color = "#666666" )
 )
+#####################################################################
+
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
+# a summary of mtcars
+dataset = aggregate( mtcars[, c("disp", "mpg", "wt")]
+		, by = mtcars[, c("cyl", "gear", "carb")]
+		, FUN = mean )
+dataset = dataset[ order(dataset$cyl, dataset$gear, dataset$carb), ]
+
+
+# set cell padding defaut to 2
+baseCellProp = cellProperties( padding = 2 )
+
+# Create a FlexTable with data.frame dataset
+MyFTable = FlexTable( data = dataset
+		, body.cell.props = baseCellProp
+		, header.cell.props = baseCellProp
+		, header.par.props = parProperties(text.align = "right" )
+)
+
+# set columns widths (in inches)
+MyFTable = setFlexTableWidths( MyFTable, widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
+
+# span successive identical cells within column 1, 2 and 3
+MyFTable = spanFlexTableRows( MyFTable, j = 1, runs = as.character( dataset$cyl ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 2, runs = as.character( dataset$gear ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 3, runs = as.character( dataset$carb ) )
+
+# overwrites some text formatting properties
+MyFTable[dataset$wt < 3, 6] = textProperties( color="#003366")
+MyFTable[dataset$mpg < 20, 5] = textProperties( color="#993300")
+
+# overwrites some paragraph formatting properties
+MyFTable[, 1:3] = parProperties(text.align = "center")
+MyFTable[, 4:6] = parProperties(text.align = "right")
+
+# applies a border grid on table
+MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
+		, inner.vertical = borderProperties( color = "#666666" )
+		, inner.horizontal = borderProperties( color = "#666666" )
+		, outer.vertical = borderProperties( width = 2, color = "#666666" )
+		, outer.horizontal = borderProperties( width = 2, color = "#666666" )
+)
+
+
+
+data( iris )
+iris = head( iris[, c(5, 1:4)] )
+
+default_text = textProperties( font.size = 11 )
+note_text = chprop(default_text, vertical.align = "superscript", color = "blue")
+
+iris_ft = FlexTable( data = iris, header.columns = FALSE )
+iris_ft = addHeaderRow( iris_ft, value = c("", "Measures" ), colspan = c( 4, 1 ) )
+iris_ft = addHeaderRow( iris_ft, value = gsub( "\\\\.", " ", names( iris ) ) )
+iris_ft[2, 2, newpar = TRUE ] = "Hi there"
+iris_ft[2, 1, to="header"] = pot("* this is a note", note_text )
+
+
+iris_ft = spanFlexTableRows( iris_ft, j = "Species", runs = as.character( iris$Species ) )
+iris_ft = setFlexTableBorders( iris_ft, 
+  inner.vertical = borderProperties( style = "none" ), 
+  inner.horizontal = borderProperties( width = 1 ), 
+  outer.vertical = borderProperties( width = 0 ), 
+  outer.horizontal = borderProperties( width = 2 ), 
+  footer = TRUE
+)
 #STOP_TAG_TEST
 }
 \seealso{
