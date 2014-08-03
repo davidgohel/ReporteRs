@@ -22,7 +22,7 @@ Several methods can used to send R output into an object of
 class \code{"docx"}.
 
 \itemize{ \item \code{\link{addTitle.docx}} add titles
-\item \code{\link{addParagraph.docx}} add texts \item
+\item \code{\link{addParagraph.docx}} add text \item
 \code{\link{addPlot.docx}} add plots \item
 \code{\link{addTable.docx}} add tables \item
 \code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}
@@ -91,14 +91,14 @@ doc = addPageBreak( doc )
 ################ TEXT DEMO ################
 
 # add a title
-doc = addTitle( doc, "Texts demo", level =  1 )
-texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+doc = addTitle( doc, "Text demo", level =  1 )
+sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
   , "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
   , "Quisque dictum tristique ligula."
 )
 
 # add simple text
-doc = addParagraph( doc, value = texts, stylename="BulletList" )
+doc = addParagraph( doc, value = sometext, stylename="BulletList" )
 
 # Add "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text

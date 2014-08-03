@@ -27,7 +27,7 @@ class \code{"html"}.
 
 \itemize{ \item \code{\link{addTitle.html}} add titles
 \item \code{\link{addImage.html}} add external images \item
-\code{\link{addParagraph.html}} add texts \item
+\code{\link{addParagraph.html}} add text \item
 \code{\link{addPlot.html}} add plots \item
 \code{\link{addTable.html}} add tables \item
 \code{\link{addFlexTable.html}} add \code{\link{FlexTable}}
@@ -56,13 +56,13 @@ doc = addPage( doc, title = "HTML demo" )
 
 # add a title
 doc = addTitle( doc, "Text demo", level = 1 )
-texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 		, "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
 		, "Quisque dictum tristique ligula."
 )
 
 # add simple text
-doc = addParagraph( doc, value = texts  )
+doc = addParagraph( doc, value = sometext )
 
 # Add "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text

@@ -26,7 +26,7 @@ Several methods can used to send R output into an object of
 class \code{"pptx"}.
 
 \itemize{ \item \code{\link{addTitle.pptx}} add titles
-\item \code{\link{addParagraph.pptx}} add texts \item
+\item \code{\link{addParagraph.pptx}} add text \item
 \code{\link{addPlot.pptx}} add plots \item
 \code{\link{addTable.pptx}} add tables \item
 \code{\link{addFlexTable.pptx}} add \code{\link{FlexTable}}
@@ -78,14 +78,14 @@ doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the s
 doc = addSlide( doc, slide.layout = "Two Content" )
 
 # add a title
-doc = addTitle( doc, "Texts demo" )
-texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+doc = addTitle( doc, "Text demo" )
+sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 		, "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
 		, "Quisque dictum tristique ligula."
 )
 
 # add simple text
-doc = addParagraph( doc, value = texts  )
+doc = addParagraph( doc, value = sometext )
 
 # Add "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text

@@ -17,7 +17,7 @@ properties.
 }
 \details{
 a pot (piece of text) is a convenient way to define a
-paragraph of text where some texts are not all formated the
+paragraph of text where some text are not all formated the
 same.
 }
 \examples{

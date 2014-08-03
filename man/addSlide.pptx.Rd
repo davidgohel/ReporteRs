@@ -25,7 +25,7 @@ Add a slide into a \code{"pptx"} object.
 \details{
 This function is a key function ; if no slide has been
 added into the document object no content (tables, plots,
-images, texts) can be added.
+images, text) can be added.
 
 If creating a slide of type "Title and Content", only one
 content can be added because there is only one content
@@ -53,7 +53,7 @@ addParagraph.pptx, paragraph and defaut font formats will
 be defined by the properties of the shape of the
 \code{slide.layout} where content will be added. For
 example, if you set the shape formatting properties to a
-'no bullet', paragraphs of texts won't have any bullet.
+'no bullet', paragraphs of text won't have any bullet.
 
 Also when using addPlot, plot dimensions will be the shape
 dimensions. It means that if you want to change plot

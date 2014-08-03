@@ -23,7 +23,7 @@
   to getOption("ReporteRs-default-font").}
 
   \item{editable}{logical value - if TRUE vector graphics
-  elements (points, texts, etc.) are editable.}
+  elements (points, text, etc.) are editable.}
 
   \item{offx}{optional, x position of the shape (top left
   position of the bounding box) in inch. See details.}

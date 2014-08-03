@@ -6,7 +6,7 @@
 #' It allows to insert headers and footers rows with eventually merged cells 
 #' (see \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}).
 #' 
-#' Formating can be done on cells, paragraphs and texts (borders, colors, fonts, etc.)
+#' Formating can be done on cells, paragraphs and text (borders, colors, fonts, etc.)
 #' , see \code{\link{alterFlexTable}}.
 #' @param data (a \code{data.frame} or \code{matrix} object) to add
 #' @param numrow number of row in the table body. Mandatory if data is missing. 
@@ -17,17 +17,17 @@
 #' @param add.rownames logical value - should the row.names be included in the table. 
 #' @param body.cell.props default cells formatting properties for table body
 #' @param body.par.props default paragraphs formatting properties for table body
-#' @param body.text.props default texts formatting properties for table body
+#' @param body.text.props default text formatting properties for table body
 #' @param header.cell.props default cells formatting properties for table headers
 #' @param header.par.props default paragraphs formatting properties for table headers
-#' @param header.text.props default texts formatting properties for table headers
+#' @param header.text.props default text formatting properties for table headers
 #' @note The classical workflow would be to create a FlexTable, to add headers rows 
 #' (see \code{\link{addHeaderRow}}) and eventually footers 
 #' rows (see \code{\link{addFooterRow}}).
 #' 
-#' Additionnal texts can be added with subscript syntax (see \code{\link{alterFlexTable}}).
+#' Additionnal text can be added with subscript syntax (see \code{\link{alterFlexTable}}).
 #' 
-#' Texts, paragraphs and cells properties can be modified with subscript syntax 
+#' Text, paragraphs and cells properties can be modified with subscript syntax 
 #' (see \code{\link{alterFlexTable}}).
 #' 
 #' Cells background colors can also be modified with functions \code{\link{setRowsColors}}

@@ -19,7 +19,7 @@
 #' @param par.properties paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}
 #' @param pointsize the default pointsize of plotted text in pixels, default to getOption("ReporteRs-fontsize").
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
-#' @param editable logical value - if TRUE vector graphics elements (points, texts, etc.) are editable.
+#' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{"docx"}.
 #' @examples

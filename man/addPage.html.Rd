@@ -22,7 +22,7 @@ Add a page into a \code{"html"} object.
 \details{
 A page is where content is added. This function is a key
 function ; if no page has been added into the document
-object no content (tables, plots, images, texts) can be
+object no content (tables, plots, images, text) can be
 added.
 }
 \examples{

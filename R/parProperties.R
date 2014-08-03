@@ -162,7 +162,7 @@ print.parProperties = function (x, ...){
 
 
 .jParProperties = function( robject ){
-	jparProp = .jnew(class.texts.ParProperties
+	jparProp = .jnew(class.text.ParProperties
 			, robject$text.align
 			, robject$padding.bottom, robject$padding.top
 			, robject$padding.left, robject$padding.right )

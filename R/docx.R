@@ -11,7 +11,7 @@
 #' 
 #' \itemize{
 #'   \item \code{\link{addTitle.docx}} add titles
-#'   \item \code{\link{addParagraph.docx}} add texts
+#'   \item \code{\link{addParagraph.docx}} add text
 #'   \item \code{\link{addPlot.docx}} add plots
 #'   \item \code{\link{addTable.docx}} add tables
 #'   \item \code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}

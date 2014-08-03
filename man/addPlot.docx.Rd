@@ -41,7 +41,7 @@
   to getOption("ReporteRs-default-font").}
 
   \item{editable}{logical value - if TRUE vector graphics
-  elements (points, texts, etc.) are editable.}
+  elements (points, text, etc.) are editable.}
 
   \item{...}{arguments for \code{fun}.}
 }

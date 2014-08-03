@@ -9,7 +9,7 @@
 #' @param vector.graphic logical scalar, default to TRUE. If TRUE, vector graphics 
 #' are produced instead of PNG images. Vector graphics in pptx document are DrawingML instructions. 
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
-#' @param editable logical value - if TRUE vector graphics elements (points, texts, etc.) are editable.
+#' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
 #' @param offx optional, x position of the shape (top left position of the bounding box) in inch. See details.
 #' @param offy optional, y position of the shape (top left position of the bounding box) in inch. See details.
 #' @param width optional, width of the shape in inch. See details.

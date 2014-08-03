@@ -134,7 +134,7 @@ as.character.textProperties = function (x, ...){
 }
 
 .jTextProperties = function( robject ){
-	jTextProperties = .jnew(class.texts.TextProperties
+	jTextProperties = .jnew(class.text.TextProperties
 		, robject$font.size, robject$font.weight=="bold"
 		, robject$font.style=="italic"
 		, robject$underlined

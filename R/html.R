@@ -17,7 +17,7 @@
 #' \itemize{
 #'   \item \code{\link{addTitle.html}} add titles
 #'   \item \code{\link{addImage.html}} add external images
-#'   \item \code{\link{addParagraph.html}} add texts
+#'   \item \code{\link{addParagraph.html}} add text
 #'   \item \code{\link{addPlot.html}} add plots
 #'   \item \code{\link{addTable.html}} add tables
 #'   \item \code{\link{addFlexTable.html}} add \code{\link{FlexTable}}

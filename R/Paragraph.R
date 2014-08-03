@@ -8,7 +8,7 @@ Paragraph = function(value) {
 	if( !inherits( value, "pot" ) ){
 		stop("argument 'value' must be an object of class 'pot'")
 	}
-	paragrah = .jnew("org/lysis/reporters/texts/Paragraph")
+	paragrah = .jnew("org/lysis/reporters/text/Paragraph")
 	for( i in 1:length(value)){
 		current_value = value[[i]]
 		if( is.null( current_value$format ) ) 

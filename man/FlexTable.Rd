@@ -32,8 +32,8 @@ FlexTable(data, numrow, numcol, header.columns = TRUE, add.rownames = FALSE,
   \item{body.par.props}{default paragraphs formatting
   properties for table body}
 
-  \item{body.text.props}{default texts formatting
-  properties for table body}
+  \item{body.text.props}{default text formatting properties
+  for table body}
 
   \item{header.cell.props}{default cells formatting
   properties for table headers}
@@ -41,7 +41,7 @@ FlexTable(data, numrow, numcol, header.columns = TRUE, add.rownames = FALSE,
   \item{header.par.props}{default paragraphs formatting
   properties for table headers}
 
-  \item{header.text.props}{default texts formatting
+  \item{header.text.props}{default text formatting
   properties for table headers}
 }
 \description{
@@ -52,7 +52,7 @@ can be specified. It allows to insert headers and footers
 rows with eventually merged cells (see
 \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}).
 
-Formating can be done on cells, paragraphs and texts
+Formating can be done on cells, paragraphs and text
 (borders, colors, fonts, etc.) , see
 \code{\link{alterFlexTable}}.
 }
@@ -61,10 +61,10 @@ The classical workflow would be to create a FlexTable, to
 add headers rows (see \code{\link{addHeaderRow}}) and
 eventually footers rows (see \code{\link{addFooterRow}}).
 
-Additionnal texts can be added with subscript syntax (see
+Additionnal text can be added with subscript syntax (see
 \code{\link{alterFlexTable}}).
 
-Texts, paragraphs and cells properties can be modified with
+Text, paragraphs and cells properties can be modified with
 subscript syntax (see \code{\link{alterFlexTable}}).
 
 Cells background colors can also be modified with functions

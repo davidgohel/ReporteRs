@@ -8,7 +8,7 @@
 #' @details 
 #' A page is where content is added.
 #' This function is a key function ; if no page has been added into the document object
-#' no content (tables, plots, images, texts) can be added. 
+#' no content (tables, plots, images, text) can be added. 
 #' 
 #' @return an object of class \code{"html"}.
 #' @examples

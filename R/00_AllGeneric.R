@@ -155,12 +155,12 @@ addPageNumber = function(doc, ...){
 #'
 #' @description Add a paragraph into a document object
 #' 
-#' @details a paragraph is a set of texts that ends with an end of line(\code{'\n'} in C). 
+#' @details a paragraph is a set of text that ends with an end of line(\code{'\n'} in C). 
 #' Read \code{\link{pot}} to see how to get different font formats.
 #' Trying to insert a \code{'\n'} will have no effect. If an end of line is required
 #' , a new paragraph is required.
 #' @param doc document object
-#' @param value character vector containing texts to add to the document as paragraphs: 
+#' @param value character vector containing text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
 #' @param ... further arguments passed to other methods 
@@ -198,8 +198,8 @@ addParagraph = function(doc, value, ...){
 #' and DrawingML instructions for \code{docx} and \code{pptx} objects. 
 #' 
 #' DrawingML instructions
-#' offer advantage to provide editable graphics (forms and texts colors
-#' , texts contents, moving and resizing is disabled).
+#' offer advantage to provide editable graphics (forms and text colors
+#' , text contents, moving and resizing is disabled).
 #' @param pointsize the default pointsize of plotted text in pixels, default to 12.
 #' @param ... further arguments passed to or from other methods.. 
 #' @return a document object

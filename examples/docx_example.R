@@ -42,14 +42,14 @@ doc = addPageBreak( doc )
 ################ TEXT DEMO ################
 
 # add a title
-doc = addTitle( doc, "Texts demo", level =  1 )
-texts = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+doc = addTitle( doc, "Text demo", level =  1 )
+sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
   , "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
   , "Quisque dictum tristique ligula."
 )
 
 # add simple text
-doc = addParagraph( doc, value = texts, stylename="BulletList" )
+doc = addParagraph( doc, value = sometext, stylename="BulletList" )
 
 # Add "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text

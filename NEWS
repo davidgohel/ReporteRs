@@ -174,7 +174,7 @@ ReporteRs 0.2
 ==================================================================
 BUG FIXES
 ------------------------------------------------------------------
-* Title texts can now have accents and '&' and '>' and '<'. 
+* Title text can now have accents and '&' and '>' and '<'. 
   (reported by Jean-Francois Collin) 
 
 * namespace of java codes have been changed to 'org.lysis'.

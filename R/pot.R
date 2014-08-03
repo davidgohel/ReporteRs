@@ -6,7 +6,7 @@
 #' @param value text value or a value that has a \code{format} method returning character value.
 #' @param format formatting properties (an object of class \code{textProperties}).
 #' @details a pot (piece of text) is a convenient way to define a paragraph 
-#' of text where some texts are not all formated the same.
+#' of text where some text are not all formated the same.
 #' @export
 #' @examples
 #' #START_TAG_TEST

@@ -17,8 +17,8 @@ addPlot(doc, fun, pointsize = 12, vector.graphic = F, ...)
   objects.
 
   DrawingML instructions offer advantage to provide
-  editable graphics (forms and texts colors , texts
-  contents, moving and resizing is disabled).}
+  editable graphics (forms and text colors , text contents,
+  moving and resizing is disabled).}
 
   \item{pointsize}{the default pointsize of plotted text in
   pixels, default to 12.}

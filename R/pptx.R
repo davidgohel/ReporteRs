@@ -14,7 +14,7 @@
 #' 
 #' \itemize{
 #'   \item \code{\link{addTitle.pptx}} add titles
-#'   \item \code{\link{addParagraph.pptx}} add texts
+#'   \item \code{\link{addParagraph.pptx}} add text
 #'   \item \code{\link{addPlot.pptx}} add plots
 #'   \item \code{\link{addTable.pptx}} add tables
 #'   \item \code{\link{addFlexTable.pptx}} add \code{\link{FlexTable}}
