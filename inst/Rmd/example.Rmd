@@ -54,7 +54,7 @@ my_dyn_lattice = xyplot( mpg ~ wt | cyl.f * gear.f, layout = c(3,1)
 
 ```
 
-knitr let me add FlexTable, dynamic graphics and texts.
+knitr let me add FlexTable, dynamic graphics and text.
 
 FlexTable example
 =================
