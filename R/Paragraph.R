@@ -5,11 +5,11 @@
 #' @param value a pot object
 #' @export
 Paragraph = function(value) {
-	if( !inherits( value, "pot" ) ){
+	if( !missing( value ) && !inherits( value, "pot" ) ){
 		stop("argument 'value' must be an object of class 'pot'")
 	}
-	paragrah = .jnew("org/lysis/reporters/text/Paragraph")
-	for( i in 1:length(value)){
+	paragrah = .jnew(class.Paragraph)
+	if( !missing( value ) ) for( i in 1:length(value)){
 		current_value = value[[i]]
 		if( is.null( current_value$format ) ) 
 			.jcall( paragrah, "V", "addText", current_value$value )

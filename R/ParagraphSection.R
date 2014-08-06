@@ -16,7 +16,7 @@ ParagraphSection = function(value, par.properties ) {
 	
 	jparProp = .jParProperties(par.properties)
 	
-	paragraphsSection = .jnew("org/lysis/reporters/text/ParagraphsSection", jparProp)
+	paragraphsSection = .jnew(class.ParagraphSet, jparProp)
 	for( i in 1:length(value)){
 		current_value = Paragraph(value[[i]])
 		.jcall( paragraphsSection, "V", "addParagraph", current_value$jobj )

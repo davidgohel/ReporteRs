@@ -33,9 +33,8 @@
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph}}, \code{\link{bookmark}}
 #' @method addParagraph docx
 #' @S3method addParagraph docx
-
 addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
-
+	
 	if( missing( stylename )) {
 		stop("argument 'stylename' is missing")
 	} else if( !is.element( stylename , styles( doc ) ) ){
@@ -53,21 +52,24 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
-	basedoc.j = .jcall( doc$obj, paste0("L", class.docx4j.WordprocessingMLPackage, ";"), "getBaseDocument" )
-	paragrah = .jnew(class.docx4r.POT, basedoc.j, stylename )
+
+	parset = .jnew( class.ParagraphSet, .jParProperties(parProperties()) )
+	
 	for( pot_index in 1:length( value ) ){
-		.jcall( paragrah, "V", "addP")
+		paragrah = .jnew(class.Paragraph )
 		pot_value = value[[pot_index]]
 		for( i in 1:length(pot_value)){
-			if( is.null( pot_value[[i]]$format ) ) .jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-			else .jcall( paragrah, "V", "addPot", 
-				pot_value[[i]]$value, 
-				.jTextProperties( pot_value[[i]]$format) )
+			if( is.null( pot_value[[i]]$format ) ) 
+				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
+			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
+						.jTextProperties( pot_value[[i]]$format) )
 		}
+		.jcall( parset, "V", "addParagraph", paragrah )
 	}
+	
 	if( missing( bookmark ) )
-		.jcall( doc$obj, "V", "add" , paragrah)
-	else .jcall( doc$obj, "V", "insert", bookmark, paragrah )
+		.jcall( doc$obj, "V", "add" , parset, stylename)
+	else .jcall( doc$obj, "V", "add", parset, stylename, bookmark )
 	
 	doc
 }

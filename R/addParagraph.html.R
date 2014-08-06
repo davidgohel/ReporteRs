@@ -7,11 +7,11 @@
 #' @param value character vector containing text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
-#' @param stylename value of the named style to apply to paragraphs in the html document.
-#' See http://getbootstrap.com/css and look for 'class' examples.
 #' @param parent.type a character value ; parent tag for added paragraph. optional. If 'div', paragraph is normal 
 #' ; if 'ol', paragraph will be an ordered list ; if 'ul', paragraph will be an unordered list
 #' ; if 'pre', paragraph will be a preformatted text area.
+#' @param par.properties paragraph formatting properties to apply to paragraphs of text. 
+#' An object of class \code{\link{parProperties}}
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{"html"}.
 #' @examples
@@ -33,7 +33,8 @@
 #' @method addParagraph html
 #' @S3method addParagraph html
 
-addParagraph.html = function(doc, value, stylename = "text-primary", parent.type = "div", ... ) {
+addParagraph.html = function(doc, value, 
+		parent.type = "div", par.properties = parProperties(), ... ) {
 
 	if( inherits( value, "character" ) ){
 		x = lapply( value, function(x) pot(value = x) )
@@ -52,22 +53,22 @@ addParagraph.html = function(doc, value, stylename = "text-primary", parent.type
 		stop("argument 'parent.type' must be of the of following values: div, ul, ol or pre.")
 	}
 	
-	paragrah = .jnew(class.html4r.POTsList, parent.type, stylename )
-	
+	parset = .jnew( class.ParagraphSet, .jParProperties( par.properties ) )
+	.jcall( parset, "V", "setTag", parent.type )
 	for( pot_index in 1:length( value ) ){
-		jpot = .jnew(class.html4r.POT, parent.type )
+		paragrah = .jnew(class.Paragraph )
 		pot_value = value[[pot_index]]
 		for( i in 1:length(pot_value)){
-			if( is.null( pot_value[[i]]$format ) ) .jcall( jpot, "V", "addText", pot_value[[i]]$value )
-			else .jcall( jpot, "V", "addPot", pot_value[[i]]$value
-						, .jTextProperties( pot_value[[i]]$format)
-				)
+			if( is.null( pot_value[[i]]$format ) ) 
+				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
+			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
+						.jTextProperties( pot_value[[i]]$format) )
 		}
-		.jcall( paragrah, "V", "addP" , jpot)
-		
+		.jcall( parset, "V", "addParagraph", paragrah )
 	}
 	
-	out = .jcall( doc$current_slide, "I", "add" , paragrah)
+	
+	out = .jcall( doc$current_slide, "I", "add" , parset )
 	if( out != 1 ){
 		stop( "Problem while trying to add paragrahs." )
 	}	

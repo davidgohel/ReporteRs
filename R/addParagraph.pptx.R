@@ -68,15 +68,28 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height, par.properti
 	
 	
 	slide = doc$current_slide 
-	paragrahSection = ParagraphSection (value, par.properties )
-	paragrah = .jnew(class.pptx4r.Paragraphs)
-	.jcall( paragrah, "V", "setTextBody", paragrahSection$jobj)
+	
+	
+	parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
+	
+	for( pot_index in 1:length( value ) ){
+		paragrah = .jnew(class.Paragraph )
+		pot_value = value[[pot_index]]
+		for( i in 1:length(pot_value)){
+			if( is.null( pot_value[[i]]$format ) ) 
+				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
+			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
+						.jTextProperties( pot_value[[i]]$format) )
+		}
+		.jcall( parset, "V", "addParagraph", paragrah )
+	}
+	
 	
 	if( !missing( offx )){
-		out = .jcall( slide, "I", "add", paragrah
+		out = .jcall( slide, "I", "add", parset
 				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
 	} else {
-		out = .jcall( slide, "I", "add" , paragrah)
+		out = .jcall( slide, "I", "add" , parset)
 	}	
 	
 	if( isSlideError( out ) ){
