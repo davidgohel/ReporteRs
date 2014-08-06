@@ -72,13 +72,18 @@
 #' @S3method addTOC docx
 
 addTOC.docx = function(doc, stylename, ... ) {
+	
 	if( missing( stylename ) ){
-		.jcall( doc$obj, "V", "addTableOfContents" )
+		jobject = .jnew(class.TOC )
+		.jcall( doc$obj, "V", "add", jobject )
 	} else {
-		if( !is.element( stylename , styles( doc ) ) ){
+		if( !is.element( stylename , styles( doc ) ) )
 			stop(paste("Style {", stylename, "} does not exists.", sep = "") )
+		else {
+			sep = .jcall( doc$obj, "S", "getListSeparator" )
+			jobject = .jnew(class.TOC , stylename, sep )
+			.jcall( doc$obj, "V", "add", jobject )
 		}
-		else .jcall( doc$obj, "V", "addTableOfContents", stylename )
 	}
 	doc
 	}

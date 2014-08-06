@@ -29,16 +29,13 @@
 addImage.docx = function(doc, filename, bookmark,
 	par.properties = parProperties(text.align = "center", padding = 5 ), ... ) {
 	
-	# Send the graph to java that will 'encode64ize' and place it in a docx4J object
 	jimg = .jnew(class.Image , filename )
 	
 	if( missing( bookmark ) )
-		.jcall( doc$obj, "V", "addImage", jimg
-				, .jParProperties( par.properties )
-		)
-	else .jcall( doc$obj, "V", "insertImage", bookmark, jimg
-				, .jParProperties( par.properties )
-		)
+		.jcall( doc$obj, "V", "add", jimg
+				, .jParProperties( par.properties ) )
+	else .jcall( doc$obj, "V", "add", jimg, 
+				.jParProperties( par.properties ), bookmark )
 	
 	doc
 }

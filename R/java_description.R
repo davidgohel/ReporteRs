@@ -31,6 +31,8 @@ class.pptx4r.SlideContent = "org/lysis/reporters/docs/SlideContent"
 class.Image = "org/lysis/reporters/img/Image"
 class.Paragraph = "org/lysis/reporters/text/Paragraph"
 class.ParagraphSet = "org/lysis/reporters/text/ParagraphSet"
+class.TOC = "org/lysis/reporters/text/TOC"
+class.DrawingML = "org/lysis/reporters/img/DrawingML"
 
 # fonts
 class.fontMetric = "org/lysis/reporters/graphicaldevices/fonts/FontMetric"

@@ -43,9 +43,9 @@ addRScript.docx = function(doc, rscript, file, text, bookmark, ... ) {
 	} 
 	
 	if( missing( bookmark ) )
-		out = .jcall( doc$obj, "V", "addRScript" , rscript$jobj)
+		out = .jcall( doc$obj, "V", "add" , rscript$jobj)
 	else
-		out = .jcall( doc$obj, "V", "addRScript" , bookmark, rscript$jobj)
+		out = .jcall( doc$obj, "V", "add", rscript$jobj, bookmark)
 	
 	doc
 }

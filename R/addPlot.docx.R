@@ -97,22 +97,22 @@ addPlot.docx = function(doc, fun
 		plotfiles = list.files( dirname , full.names = T )
 
 		if( missing( bookmark ) ){
-			
-			.jcall( doc$obj, "V", "addDML", .jarray( plotfiles ), .jarray(dims)
-					, par.properties$text.align
-					, par.properties$padding.bottom
-					, par.properties$padding.top
-					, par.properties$padding.left
-					, par.properties$padding.right
-					)
+			for( fi in plotfiles ){
+				dml.object = .jnew( class.DrawingML, fi )
+				.jcall( dml.object, "V", "setExt", 
+						dims[1], dims[2] )
+
+				.jcall( doc$obj, "V", "add", 
+						dml.object, .jParProperties(par.properties) )
+			}
 		} else {
-			.jcall( doc$obj, "V", "insertDML", bookmark, .jarray( plotfiles ), .jarray(dims) 
-					, par.properties$text.align
-					, par.properties$padding.bottom
-					, par.properties$padding.top
-					, par.properties$padding.left
-					, par.properties$padding.right
-					)
+			if( length( plotfiles ) > 1 ) 
+				warning("only one graph can be add to a bookmark")
+			dml.object = .jnew( class.DrawingML, plotfiles[1] )
+			.jcall( dml.object, "V", "setExt", 
+					dims[1], dims[2] )
+			.jcall( doc$obj, "V", "add", 
+						dml.object, .jParProperties(par.properties), bookmark )
 		}
 	}
 
