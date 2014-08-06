@@ -60,15 +60,9 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 		pot_value = value[[pot_index]]
 		for( i in 1:length(pot_value)){
 			if( is.null( pot_value[[i]]$format ) ) .jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-			else .jcall( paragrah, "V", "addPot", pot_value[[i]]$value
-						, pot_value[[i]]$format$font.size
-						, pot_value[[i]]$format$font.weight=="bold"
-						, pot_value[[i]]$format$font.style=="italic"
-						, pot_value[[i]]$format$underlined
-						, pot_value[[i]]$format$color
-						, pot_value[[i]]$format$font.family
-						, pot_value[[i]]$format$vertical.align
-				)
+			else .jcall( paragrah, "V", "addPot", 
+				pot_value[[i]]$value, 
+				.jTextProperties( pot_value[[i]]$format) )
 		}
 	}
 	if( missing( bookmark ) )

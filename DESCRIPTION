@@ -18,7 +18,7 @@ Copyright: See file COPYRIGHTS.
 Depends:
     R (>= 3.0),ReporteRsjars
 Imports:
-    rJava,base64
+    rJava
 Suggests:
     ggplot2
 SystemRequirements: java (>= 1.6)

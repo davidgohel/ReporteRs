@@ -49,19 +49,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		fun_res = try( fun(...), silent = T )
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
-		
-		jimg = .jnew(class.html4r.ImagesList, as.integer( width*72.2 ), as.integer( height*72.2 ) )
-		
-		for( i in 1:length( plotfiles ) ){
-			.tempfile = tempfile()
-			base64::encode(plotfiles[i], .tempfile)
-			.jcall( jimg, "V", "addImage", as.character(paste(readLines(.tempfile), collapse = "\n")) )
-			unlink(.tempfile)
-		}
-		out = .jcall( doc$current_slide, "I", "add", jimg )
-		if( out != 1 ){
-			stop( "Problem while trying to add plot." )
-		}
+		doc = addImage( doc, plotfiles )
 	} else {
 		filename = file.path( dirname, "plot", fsep = "/" )
 		env = raphael( file = filename,width=width*72.2

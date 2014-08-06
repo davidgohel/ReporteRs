@@ -53,9 +53,9 @@ addPlot.docx = function(doc, fun
 	if( !vector.graphic ){
 		
 		filename = paste( dirname, "/plot%03d.png" ,sep = "" )
-		grDevices::png (filename = filename
-				, width = width, height = height, units = 'in'
-				, pointsize = pointsize, res = 300
+		grDevices::png (filename = filename, 
+				width = width, height = height, 
+				units = 'in', pointsize = pointsize, res = 300
 		)
 		
 		fun(...)
@@ -63,24 +63,15 @@ addPlot.docx = function(doc, fun
 	
 		plotfiles = list.files( dirname , full.names = T )
 
-		dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
-		
-		# Send the graph to java that will 'encode64ize' and place it in a docx4J object
-		if( missing( bookmark ) )
-			.jcall( doc$obj, "V", "addImage", .jarray( plotfiles ), .jarray(dims)
-					, par.properties$text.align
-					, par.properties$padding.bottom
-					, par.properties$padding.top
-					, par.properties$padding.left
-					, par.properties$padding.right
-			)
-		else .jcall( doc$obj, "V", "insertImage", bookmark, .jarray( plotfiles ), .jarray(dims)
-					, par.properties$text.align
-					, par.properties$padding.bottom
-					, par.properties$padding.top
-					, par.properties$padding.left
-					, par.properties$padding.right
-			)
+		for( fi in seq_along( plotfiles ) ){
+			if( !missing( bookmark ) && fi== 1 )
+				doc = addImage( doc, filename = plotfiles[fi], 
+						bookmark = bookmark )
+			else if( missing( bookmark ) ) doc = addImage( doc, filename = plotfiles[fi] )
+			else stop("bookmark can only be used when one single graph is inserted.")
+		}
+	
+
 	} else {
 		# one important and painful point is that shape ids must be unique 
 		# in the whole document

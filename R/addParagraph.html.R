@@ -60,13 +60,7 @@ addParagraph.html = function(doc, value, stylename = "text-primary", parent.type
 		for( i in 1:length(pot_value)){
 			if( is.null( pot_value[[i]]$format ) ) .jcall( jpot, "V", "addText", pot_value[[i]]$value )
 			else .jcall( jpot, "V", "addPot", pot_value[[i]]$value
-						, pot_value[[i]]$format$font.size
-						, pot_value[[i]]$format$font.weight=="bold"
-						, pot_value[[i]]$format$font.style=="italic"
-						, pot_value[[i]]$format$underlined
-						, pot_value[[i]]$format$color
-						, pot_value[[i]]$format$font.family
-						, pot_value[[i]]$format$vertical.align
+						, .jTextProperties( pot_value[[i]]$format)
 				)
 		}
 		.jcall( paragrah, "V", "addP" , jpot)

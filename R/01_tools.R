@@ -1,6 +1,5 @@
 #' @import rJava
 #' @import ReporteRsjars
-#' @import base64
 .onLoad= function(libname, pkgname){
 	.jpackage( pkgname, lib.loc = libname )
 	options("ReporteRs-default-font"="Helvetica")

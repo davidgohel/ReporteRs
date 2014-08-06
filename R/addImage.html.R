@@ -30,19 +30,14 @@
 addImage.html = function(doc, filename, width, height, ... ) {
 
 	slide = doc$current_slide 
-	
-	jimg = .jnew(class.html4r.ImagesList, as.integer(width), as.integer( height ) )
-	
+
 	for( i in 1:length( filename ) ){
-		.tempfile = tempfile()
-		base64::encode(filename[i], .tempfile)
-		.jcall( jimg, "V", "addImage", as.character(paste(readLines(.tempfile), collapse = "\n")) )
-		unlink(.tempfile)
+		jimg = .jnew(class.Image , filename[i] )
+		out = .jcall( slide, "I", "add", jimg )
+		if( out != 1 )
+			stop( "Problem while trying to add image(s)." )
 	}
-	out = .jcall( slide, "I", "add", jimg )
-	if( out != 1 ){
-		stop( "Problem while trying to add image(s)." )
-	}
+	
 	
 	doc
 }

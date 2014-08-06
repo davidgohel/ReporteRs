@@ -1,8 +1,8 @@
 \name{addImage.docx}
 \alias{addImage.docx}
-\title{Insert external images into a docx object}
+\title{Add external image into a docx object}
 \usage{
-\method{addImage}{docx}(doc, filename, width = 6, height = 6, bookmark,
+\method{addImage}{docx}(doc, filename, bookmark,
   par.properties = parProperties(text.align = "center", padding = 5), ...)
 }
 \arguments{
@@ -10,13 +10,7 @@
   image has to be added}
 
   \item{filename}{\code{"character"} value, complete
-  filenamed of the external images}
-
-  \item{width}{images width in inches (default value is
-  6).}
-
-  \item{height}{images height in inches (default value is
-  6).}
+  filename of the external image}
 
   \item{bookmark}{a character value ; id of the Word
   bookmark to replace by the image. optional. if missing,
