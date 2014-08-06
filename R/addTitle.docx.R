@@ -53,7 +53,7 @@ addTitle.docx = function( doc, value, level = 1, ... ) {
 	if( length( level ) != 1 )
 		stop("level must be an integer vector of length 1.")
 	
-	doc = addParagraph(doc, value, doc$header.styles[level] );
+	doc = addParagraph(doc = doc, value, stylename = doc$header.styles[level] );
 	doc
 }
 

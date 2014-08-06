@@ -4,7 +4,7 @@
 #' Insert paragraph(s) of text into a \code{pptx} object
 #' 
 #' @param doc Object of class \code{"pptx"} where paragraph has to be added
-#' @param value character vector containing text to add to the document as paragraphs: 
+#' @param value text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
 #' @param offx optional, x position of the shape (top left position of the bounding box) 

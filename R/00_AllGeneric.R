@@ -160,7 +160,7 @@ addPageNumber = function(doc, ...){
 #' Trying to insert a \code{'\n'} will have no effect. If an end of line is required
 #' , a new paragraph is required.
 #' @param doc document object
-#' @param value character vector containing text to add to the document as paragraphs: 
+#' @param value text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
 #' @param ... further arguments passed to other methods 
