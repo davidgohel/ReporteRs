@@ -26,6 +26,7 @@
 #' 			are character vectors specifying cells font colors.
 #'		Each element of the list is a vector of length \code{nrow(data)}.
 #' @param row.names logical value - should the row.names be included in the table. 
+#' @param par.properties paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
 #' @param ... addTable arguments - see \code{\link{addTable}}. 
 #' @return an object of class \code{"html"}.
 #' @examples
@@ -50,9 +51,9 @@ addTable.html = function(doc, data, layout.properties
 	, header.labels, groupedheader.row = list()
 	, span.columns = character(0), col.types
 	, columns.bg.colors = list(), columns.font.colors = list()
-	, row.names = FALSE
+	, row.names = FALSE	, par.properties = parProperties(text.align = "left")
 	, ...) {
-			
+				
 	if( is.matrix( data )){
 		.oldnames = names( data )
 		data = as.data.frame( data )
@@ -61,7 +62,6 @@ addTable.html = function(doc, data, layout.properties
 	
 	if( missing(header.labels) ){
 		header.labels = names(data)
-		#names( header.labels ) = names(data)
 	}
 	
 	if( missing(layout.properties) )
@@ -72,32 +72,95 @@ addTable.html = function(doc, data, layout.properties
 	if( missing( col.types ) ){
 		col.types = getDefaultColTypes( data )
 	}
+	nbcol = ncol( data ) + as.integer( row.names )
 	
-	.jformats.object = table.format.2java( layout.properties, type = "html" )
-	obj = .jnew(class.html4r.DataTable, .jformats.object  )
-	setData2Java( obj, data, header.labels, col.types, groupedheader.row, columns.bg.colors, columns.font.colors, row.names)
+	if( row.names ){
+		col.types = c("character", col.types )
+	}
 	
-	for(j in span.columns ){
-		 instructions = list()
-		 current.col = data[, j]
-		 groups = cumsum( c(TRUE, current.col[-length(current.col)] != current.col[-1] ) )
-		 groups.counts = tapply( groups, groups, length )
-		 
-		 for(i in 1:length( groups.counts )){
-		   if( groups.counts[i] == 1 ) 
-			   instructions[[i]] = 1
-		   else {
-		     instructions[[i]] = c(groups.counts[i] , rep(0, groups.counts[i]-1 ) )
-		   }
-		 }
-		.jcall( obj , "V", "setMergeInstructions", j, .jarray( as.integer( unlist( instructions ) ) ) )
+	for( j in 1:ncol( data ) ){
+		if( is.factor(data[, j] ) ) tempdata = as.character( data[, j] )
+		else if( is.logical(data[, j] ) ) tempdata = ifelse( data[, j], "TRUE", "FALSE" )
+		else tempdata = data[, j]
+		
+		if( col.types[j] == "percent" ){
+			format_str = paste( "%0.", layout.properties$fraction.percent.digit, "f" )
+			data[, j] = sprintf( format_str, data[, j] * 100 )
+		} else if( col.types[j] == "double" ){
+			format_str = paste( "%0.", layout.properties$fraction.double.digit, "f" )
+			data[, j] = sprintf( format_str, data[, j] )
+		} else if( col.types[j] == "integer" ){
+			data[, j] = sprintf( "%0.0f", data[, j] )			
+		} else if( col.types[j] == "date" || col.types[j] == "datetime" ){
+			data[, j] = format( tempdata, "%Y-%m-%d" )
+		}
 	}
-
-	out = .jcall( doc$current_slide, "I", "add", obj )
-	if( out != 1 ){
-		stop( "Problem while trying to add table." )
+	
+	ft = FlexTable( data = data, header.columns = FALSE, add.rownames = row.names )
+	for(j in span.columns ) 
+		ft = spanFlexTableRows( ft, j=j, runs = as.character( data[,j] ) )
+	
+	for( j in 1:nbcol ){
+		if( col.types[j] == "percent" ){
+			ft[,j ] = layout.properties$percent.text
+			ft[,j ] = layout.properties$percent.par
+			ft[,j ] = layout.properties$percent.cell		
+		}
+		else if( col.types[j] == "double" ){
+			ft[,j ] = layout.properties$double.text
+			ft[,j ] = layout.properties$double.par
+			ft[,j ] = layout.properties$double.cell
+		}
+		else if( col.types[j] == "integer" ){
+			ft[,j ] = layout.properties$integer.text
+			ft[,j ] = layout.properties$integer.par
+			ft[,j ] = layout.properties$integer.cell
+		}
+		else if( col.types[j] == "character" ){
+			ft[,j ] = layout.properties$character.text
+			ft[,j ] = layout.properties$character.par
+			ft[,j ] = layout.properties$character.cell
+		}
+		else if( col.types[j] == "date" ){
+			ft[,j ] = layout.properties$date.text
+			ft[,j ] = layout.properties$date.par
+			ft[,j ] = layout.properties$date.cell
+		}
+		else if( col.types[j] == "datetime" ){
+			ft[,j ] = layout.properties$datetime.text
+			ft[,j ] = layout.properties$datetime.par
+			ft[,j ] = layout.properties$datetime.cell
+		}
+		else if( col.types[j] == "logical" ){
+			ft[,j ] = layout.properties$logical.text
+			ft[,j ] = layout.properties$logical.par
+			ft[,j ] = layout.properties$logical.cell
+		}
+		
+		
 	}
-
+	if( length( groupedheader.row ) > 0 ){
+		ft = addHeaderRow( ft
+				, value = groupedheader.row$values
+				, colspan = groupedheader.row$colspan
+		)
+	}
+	ft = addHeaderRow( ft, value = header.labels )
+	
+	if( length( groupedheader.row ) > 0 ){
+		ft[1,, to = "header"] = layout.properties$groupedheader.text
+		ft[2,, to = "header"] = layout.properties$header.text
+		ft[1,, to = "header"] = layout.properties$groupedheader.par
+		ft[2,, to = "header"] = layout.properties$header.par
+		ft[1,, to = "header"] = layout.properties$groupedheader.cell
+		ft[2,, to = "header"] = layout.properties$header.cell
+	} else {
+		ft[1,, to = "header"] = layout.properties$header.text
+		ft[1,, to = "header"] = layout.properties$header.par
+		ft[1,, to = "header"] = layout.properties$header.cell
+	}
+	doc = addFlexTable( doc, flextable = ft, par.properties = par.properties )
+	
 	doc
 }
 

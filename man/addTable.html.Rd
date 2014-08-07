@@ -5,7 +5,8 @@
 \method{addTable}{html}(doc, data, layout.properties, header.labels,
   groupedheader.row = list(), span.columns = character(0), col.types,
   columns.bg.colors = list(), columns.font.colors = list(),
-  row.names = FALSE, ...)
+  row.names = FALSE, par.properties = parProperties(text.align = "left"),
+  ...)
 }
 \arguments{
   \item{doc}{the \code{html} to use}
@@ -58,6 +59,10 @@
 
   \item{row.names}{logical value - should the row.names be
   included in the table.}
+
+  \item{par.properties}{paragraph formatting properties of
+  the paragraph that contains the table. An object of class
+  \code{\link{parProperties}}}
 
   \item{...}{addTable arguments - see
   \code{\link{addTable}}.}

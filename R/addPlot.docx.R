@@ -99,18 +99,17 @@ addPlot.docx = function(doc, fun
 		if( missing( bookmark ) ){
 			for( fi in plotfiles ){
 				dml.object = .jnew( class.DrawingML, fi )
-				.jcall( dml.object, "V", "setExt", 
-						dims[1], dims[2] )
-
-				.jcall( doc$obj, "V", "add", 
-						dml.object, .jParProperties(par.properties) )
+				.jcall( dml.object, "V", "setWidth", as.integer( dims[1] ) )
+				.jcall( dml.object, "V", "setHeight", as.integer( dims[2] ) )
+				
+				.jcall( doc$obj, "V", "add", dml.object, .jParProperties(par.properties) )
 			}
 		} else {
 			if( length( plotfiles ) > 1 ) 
 				warning("only one graph can be add to a bookmark")
 			dml.object = .jnew( class.DrawingML, plotfiles[1] )
-			.jcall( dml.object, "V", "setExt", 
-					dims[1], dims[2] )
+			.jcall( dml.object, "V", "setWidth", as.integer( dims[1] ) )
+			.jcall( dml.object, "V", "setHeight", as.integer( dims[2] ) )
 			.jcall( doc$obj, "V", "add", 
 						dml.object, .jParProperties(par.properties), bookmark )
 		}

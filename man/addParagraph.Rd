@@ -7,10 +7,9 @@ addParagraph(doc, value, ...)
 \arguments{
   \item{doc}{document object}
 
-  \item{value}{character vector containing text to add to
-  the document as paragraphs: an object of class
-  \code{\link{pot}} or \code{\link{set_of_paragraphs}} or a
-  character vector.}
+  \item{value}{text to add to the document as paragraphs:
+  an object of class \code{\link{pot}} or
+  \code{\link{set_of_paragraphs}} or a character vector.}
 
   \item{...}{further arguments passed to other methods}
 }

@@ -153,16 +153,10 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	plotfiles = list.files( dirname , full.names = T )
 
 	for( i in seq_along( plotfiles ) ){
+		dml.object = .jnew( class.DrawingML, plotfiles[i] )
 		if( check.dims < 4 ){
-			dims = 
-			
-			dml.object = .jnew( class.DrawingML, plotfiles[i] )
-			.jcall( dml.object, "V", "setExt", 
-					as.integer(  width * 72.2 * 12700 ), 
-					as.integer( height * 72.2 * 12700 ) )
 			out = .jcall( slide, "I", "add", dml.object )
 		} else {
-			dml.object = .jnew( class.DrawingML, plotfiles[i] )
 			out = .jcall( slide, "I", "add", dml.object, width, height, offx, offy )
 		}
 		if( isSlideError( out ) ){

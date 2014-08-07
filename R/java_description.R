@@ -15,10 +15,10 @@ class.FlexRow = "org/lysis/reporters/tables/FlexRow"
 class.FlexCell = "org/lysis/reporters/tables/FlexCell"
 
 # format properties
-class.tables.BorderProperties = "org/lysis/reporters/tables/BorderProperties"
-class.tables.CellProperties = "org/lysis/reporters/tables/CellProperties"
-class.text.ParProperties = "org/lysis/reporters/text/ParProperties"
-class.text.TextProperties = "org/lysis/reporters/text/TextProperties"
+class.tables.BorderProperties = "org/lysis/reporters/formats/BorderProperties"
+class.tables.CellProperties = "org/lysis/reporters/formats/CellProperties"
+class.text.ParProperties = "org/lysis/reporters/formats/ParProperties"
+class.text.TextProperties = "org/lysis/reporters/formats/TextProperties"
 
 # document objects
 class.docx4r.document = "org/lysis/reporters/docs/docx4R"

@@ -9,10 +9,9 @@
   \item{doc}{Object of class \code{"html"} where paragraph
   has to be added}
 
-  \item{value}{character vector containing text to add to
-  the document as paragraphs: an object of class
-  \code{\link{pot}} or \code{\link{set_of_paragraphs}} or a
-  character vector.}
+  \item{value}{text to add to the document as paragraphs:
+  an object of class \code{\link{pot}} or
+  \code{\link{set_of_paragraphs}} or a character vector.}
 
   \item{parent.type}{a character value ; parent tag for
   added paragraph. optional. If 'div', paragraph is normal

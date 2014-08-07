@@ -2,7 +2,8 @@
 \alias{addRScript.docx}
 \title{Add R script into a docx object}
 \usage{
-\method{addRScript}{docx}(doc, rscript, file, text, bookmark, ...)
+\method{addRScript}{docx}(doc, rscript, file, text, bookmark,
+  par.properties = parProperties(), ...)
 }
 \arguments{
   \item{doc}{Object of class \code{"docx"} where
@@ -16,6 +17,10 @@
 
   \item{rscript}{an object of class \code{RScript}. Not
   used if file or text is provided.}
+
+  \item{par.properties}{paragraph formatting properties of
+  the paragraphs that contain rscript. An object of class
+  \code{\link{parProperties}}}
 
   \item{bookmark}{a character value ; id of the Word
   bookmark to replace by the script. optional. See

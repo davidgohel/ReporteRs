@@ -9,6 +9,7 @@
 #' Not used if file or rscript is provided.
 #' @param rscript an object of class \code{RScript}. 
 #' Not used if file or text is provided.
+#' @param par.properties paragraph formatting properties of the paragraphs that contain rscript. An object of class \code{\link{parProperties}}
 #' @param bookmark a character value ; id of the Word bookmark to 
 #' replace by the script. optional. See \code{\link{bookmark}}.
 #' @param ... further arguments, not used. 
@@ -34,7 +35,7 @@
 #' @seealso \code{\link{docx}}, \code{\link{addRScript}}, \code{\link{bookmark}}
 #' @method addRScript docx
 #' @S3method addRScript docx
-addRScript.docx = function(doc, rscript, file, text, bookmark, ... ) {
+addRScript.docx = function(doc, rscript, file, text, bookmark, par.properties = parProperties(), ... ) {
 	
 	if( !missing ( file ) ){
 		rscript = RScript( file = file, ... )
@@ -42,10 +43,15 @@ addRScript.docx = function(doc, rscript, file, text, bookmark, ... ) {
 		rscript = RScript( text = text, ... )
 	} 
 	
-	if( missing( bookmark ) )
-		out = .jcall( doc$obj, "V", "add" , rscript$jobj)
-	else
-		out = .jcall( doc$obj, "V", "add", rscript$jobj, bookmark)
+	args = list( obj = doc$obj, 
+			returnSig = "V", method = "add",
+			rscript$jobj,
+			.jParProperties(par.properties)
+			)
+
+	if( !missing( bookmark ) ) args[[length(args) +1 ]] = bookmark
+	
+	do.call( .jcall, args )
 	
 	doc
 }

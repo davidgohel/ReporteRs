@@ -5,8 +5,8 @@
 \method{addTable}{docx}(doc, data, layout.properties, header.labels,
   groupedheader.row = list(), span.columns = character(0), col.types,
   columns.bg.colors = list(), columns.font.colors = list(),
-  row.names = FALSE, par.properties = parProperties(text.align = "left",
-  padding = 0), bookmark, ...)
+  row.names = FALSE, par.properties = parProperties(text.align = "left"),
+  bookmark, ...)
 }
 \arguments{
   \item{doc}{the \code{docx} to use}

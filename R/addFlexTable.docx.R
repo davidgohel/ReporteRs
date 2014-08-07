@@ -34,7 +34,7 @@ addFlexTable.docx = function(doc, flextable
 		
 	if( missing( bookmark ) )
 		.jcall( doc$obj, "V", "add", flextable$jobj, .jParProperties(par.properties) )
-	else .jcall( doc$obj, "V", "add", bookmark, flextable$jobj, .jParProperties(par.properties) )
+	else .jcall( doc$obj, "V", "add", flextable$jobj, .jParProperties(par.properties), bookmark )
 
 	doc
 }

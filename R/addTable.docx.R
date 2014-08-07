@@ -54,7 +54,7 @@ addTable.docx = function(doc, data, layout.properties
 	, span.columns = character(0), col.types
 	, columns.bg.colors = list(), columns.font.colors = list()
 	, row.names = FALSE
-	, par.properties = parProperties(text.align = "left", padding = 0 )
+	, par.properties = parProperties(text.align = "left")
 	, bookmark
 	, ...) {
 	

@@ -9,10 +9,9 @@
   \item{doc}{Object of class \code{"pptx"} where paragraph
   has to be added}
 
-  \item{value}{character vector containing text to add to
-  the document as paragraphs: an object of class
-  \code{\link{pot}} or \code{\link{set_of_paragraphs}} or a
-  character vector.}
+  \item{value}{text to add to the document as paragraphs:
+  an object of class \code{\link{pot}} or
+  \code{\link{set_of_paragraphs}} or a character vector.}
 
   \item{offx}{optional, x position of the shape (top left
   position of the bounding box) in inch. See details.}
