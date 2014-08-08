@@ -2,15 +2,16 @@
 \alias{cellProperties}
 \title{Cell formatting properties}
 \usage{
-cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
-  border.bottom.width = 1, border.left.color = "black",
-  border.left.style = "solid", border.left.width = 1,
-  border.top.color = "black", border.top.style = "solid",
-  border.top.width = 1, border.right.color = "black",
-  border.right.style = "solid", border.right.width = 1,
-  vertical.align = "middle", padding.bottom = 1, padding.top = 1,
-  padding.left = 1, padding.right = 1, background.color = "white",
-  padding, border.width, border.style, border.color)
+cellProperties(padding, border.width, border.style, border.color, border.bottom,
+  border.left, border.top, border.right, border.bottom.color = "black",
+  border.bottom.style = "solid", border.bottom.width = 1,
+  border.left.color = "black", border.left.style = "solid",
+  border.left.width = 1, border.top.color = "black",
+  border.top.style = "solid", border.top.width = 1,
+  border.right.color = "black", border.right.style = "solid",
+  border.right.width = 1, vertical.align = "middle", padding.bottom = 1,
+  padding.top = 1, padding.left = 1, padding.right = 1,
+  background.color = "white")
 }
 \arguments{
   \item{padding}{cell padding - 0 or positive integer
@@ -36,6 +37,18 @@ cellProperties(border.bottom.color = "black", border.bottom.style = "solid",
   arguments \code{border.bottom.color} ,
   \code{border.top.color}, \code{border.left.color},
   \code{border.right.color}.}
+
+  \item{border.bottom}{\code{borderProperties} for bottom
+  border. overwrite all border.bottom.* if specified.}
+
+  \item{border.left}{\code{borderProperties} for left
+  border. overwrite all border.left.* if specified.}
+
+  \item{border.top}{\code{borderProperties} for top border.
+  overwrite all border.top.* if specified.}
+
+  \item{border.right}{\code{borderProperties} for right
+  border. overwrite all border.right.* if specified.}
 
   \item{border.bottom.color}{border bottom color - a single
   character value specifying a valid color (e.g. "#000000"
@@ -132,12 +145,13 @@ cellProp02 = cellProperties(border.left.width = 0, border.right.width = 0
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{cellProperties}}, \code{\link{parProperties}},
-\code{\link{textProperties}} ,
+\code{\link{cellProperties}}, \code{\link{parProperties}} ,
+\code{\link{textProperties}},
+\code{\link{borderProperties}} ,
 \code{\link{chprop.cellProperties}},
-\code{\link{chprop.parProperties}},
-\code{\link{chprop.textProperties}} ,
-\code{\link{FlexTable}}, \code{\link{tableProperties}},
-\code{\link{addTable}}
+\code{\link{chprop.parProperties}} ,
+\code{\link{chprop.textProperties}},
+\code{\link{chprop.borderProperties}} ,
+\code{\link{FlexTable}}
 }
 

@@ -45,14 +45,74 @@ borderProperties = function( color = "black", style = "solid", width = 1 ){
 	class( out ) = "borderProperties"
 	out
 }
-as.jborderProperties = function( object ){
-	jborderProperties(borderColor = object$color, borderStyle = object$style, borderWidth = object$width)
+
+
+#' @title Modify border formatting properties 
+#'
+#' @description Modify an object of class \code{borderProperties}.  
+#' @param object \code{borderProperties} object to modify
+#' @inheritParams borderProperties
+#' @param ... further arguments - not used 
+#' @return a \code{borderProperties} object
+#' @examples
+#' x = borderProperties()
+#' chprop(color="orange", style="dashed", width=1)
+#' chprop(width=5)
+#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, 
+#' \code{\link{textProperties}}, \code{\link{borderProperties}}, 
+#' \code{\link{FlexTable}}
+#' @method chprop borderProperties
+#' @S3method chprop borderProperties
+chprop.borderProperties <- function(object, color, style, width ) {
+	
+	if( !missing( color ) ){
+		if( length( color ) != 1 ) stop("color must be a single character value")
+		if( !is.character( color ) ) {
+			stop("color must be a character value.")
+		} else if( !is.color(color) ){
+			stop("color must be a valid color.")
+		}
+		object$color = color
+	}
+	if( !missing( style ) ){
+		if( length( style ) != 1 ) stop("style must be a single character value")
+		if( !is.character( style ) ) {
+			stop("style must be a character value.")
+		}
+		if( !is.element( style, ReporteRs.border.styles ) )
+			stop("style must be a character value (", paste( ReporteRs.border.styles, collapse = "|") ,").")
+		
+		object$style = style
+	}
+	if( !missing( width ) ){
+		if( length( width ) != 1 ) stop("width must be a single integer value")
+		
+		if( is.numeric( width ) ) {
+			if( as.integer( width ) < 0 || !is.finite( as.integer( width ) ) ) 
+				stop("invalid width : ", width )
+		} else {
+			stop("width must be a single integer value >= 0")
+		}
+		object$width = width
+	}
+	
+	object					
 }
 
-jborderProperties = function( borderColor, borderStyle, borderWidth ){
-	.jnew(class.tables.BorderProperties
-			, as.character(borderColor), as.character(borderStyle)
-			, as.integer( borderWidth )
-	)
+
+#' @method print borderProperties
+#' @S3method print borderProperties
+print.borderProperties = function (x, ...){
+	cat( "borderProperties{color:", x$color, ";" )
+	cat( "style:", x$style, ";" )
+	cat( "width:", x$width, ";" )
+	cat( "}" )
+}
+
+
+.jborderProperties = function( object ){
+	.jnew(class.tables.BorderProperties, 
+			as.character(object$color), 
+			as.character(object$style), as.integer( object$width ) )	
 }
 

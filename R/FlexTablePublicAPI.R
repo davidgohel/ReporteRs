@@ -407,24 +407,24 @@ setFlexTableBorders = function (object
 	
 	if( body )
 		.jcall( object$jobj , "V", "setBodyBorders"
-				, as.jborderProperties( inner.vertical )
-				, as.jborderProperties( inner.horizontal )
-				, as.jborderProperties( outer.vertical )
-				, as.jborderProperties( outer.horizontal )
+				, .jborderProperties( inner.vertical )
+				, .jborderProperties( inner.horizontal )
+				, .jborderProperties( outer.vertical )
+				, .jborderProperties( outer.horizontal )
 		)
 	if( header )
 		.jcall( object$jobj , "V", "setHeaderBorders"
-				, as.jborderProperties( inner.vertical )
-				, as.jborderProperties( inner.horizontal )
-				, as.jborderProperties( outer.vertical )
-				, as.jborderProperties( outer.horizontal )
+				, .jborderProperties( inner.vertical )
+				, .jborderProperties( inner.horizontal )
+				, .jborderProperties( outer.vertical )
+				, .jborderProperties( outer.horizontal )
 		)
 	if( footer )
 		.jcall( object$jobj , "V", "setFooterBorders"
-				, as.jborderProperties( inner.vertical )
-				, as.jborderProperties( inner.horizontal )
-				, as.jborderProperties( outer.vertical )
-				, as.jborderProperties( outer.horizontal )
+				, .jborderProperties( inner.vertical )
+				, .jborderProperties( inner.horizontal )
+				, .jborderProperties( outer.vertical )
+				, .jborderProperties( outer.horizontal )
 		)	
 	object
 }

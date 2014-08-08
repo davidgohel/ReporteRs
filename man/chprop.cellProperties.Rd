@@ -2,61 +2,28 @@
 \alias{chprop.cellProperties}
 \title{Modify a cell formatting properties object}
 \usage{
-\method{chprop}{cellProperties}(object, border.bottom.color,
-  border.bottom.style, border.bottom.width, border.left.color,
-  border.left.style, border.left.width, border.top.color, border.top.style,
-  border.top.width, border.right.color, border.right.style, border.right.width,
-  vertical.align, padding.bottom, padding.top, padding.left, padding.right,
-  background.color, padding, border.width, border.style, border.color, ...)
+\method{chprop}{cellProperties}(object, border.bottom, border.left, border.top,
+  border.right, padding, vertical.align, padding.bottom, padding.top,
+  padding.left, padding.right, background.color, ...)
 }
 \arguments{
   \item{object}{\code{cellProperties} object to modify}
 
-  \item{...}{further arguments - not used}
+  \item{border.bottom}{\code{borderProperties} for bottom
+  border}
 
-  \item{border.bottom.color}{border bottom color - a single
-  character value specifying a valid color (e.g. "#000000"
-  or "black").}
+  \item{border.left}{\code{borderProperties} for left
+  border}
 
-  \item{border.bottom.style}{border bottom style - a single
-  character value, expected value is one of "none",
-  "solid", "dotted", "dashed".}
+  \item{border.top}{\code{borderProperties} for top border}
 
-  \item{border.bottom.width}{border bottom width - 0 or
-  positive integer value}
+  \item{border.right}{\code{borderProperties} for right
+  border}
 
-  \item{border.left.color}{border left color - a single
-  character value specifying a valid color (e.g. "#000000"
-  or "black").}
-
-  \item{border.left.style}{border left style - a single
-  character value, expected value is one of "none",
-  "solid", "dotted", "dashed".}
-
-  \item{border.left.width}{border left width - 0 or
-  positive integer value}
-
-  \item{border.top.color}{border top color - a single
-  character value specifying a valid color (e.g. "#000000"
-  or "black").}
-
-  \item{border.top.style}{border top style - a single
-  character value, expected value is one of "none",
-  "solid", "dotted", "dashed".}
-
-  \item{border.top.width}{border top width - 0 or positive
-  integer value}
-
-  \item{border.right.color}{border right color - a single
-  character value specifying a valid color (e.g. "#000000"
-  or "black").}
-
-  \item{border.right.style}{border right style - a single
-  character value, expected value is one of "none",
-  "solid", "dotted", "dashed".}
-
-  \item{border.right.width}{border right width - 0 or
-  positive integer value}
+  \item{padding}{cell padding - 0 or positive integer
+  value. Argument \code{padding} overwrites arguments
+  \code{padding.bottom}, \code{padding.top},
+  \code{padding.left}, \code{padding.right}.}
 
   \item{vertical.align}{cell content vertical alignment - a
   single character value , expected value is one of
@@ -78,29 +45,7 @@
   character value specifying a valid color (e.g. "#000000"
   or "black").}
 
-  \item{padding}{cell padding - 0 or positive integer
-  value. Argument \code{padding} overwrites arguments
-  \code{padding.bottom}, \code{padding.top},
-  \code{padding.left}, \code{padding.right}.}
-
-  \item{border.width}{border width - 0 or positive integer
-  value. Argument \code{border.width} overwrites arguments
-  \code{border.bottom.width}, \code{border.top.width} ,
-  \code{border.left.width}, \code{border.right.width}.}
-
-  \item{border.style}{border style - a single character
-  value, expected value is one of "none" , "solid",
-  "dotted", "dashed". Argument \code{border.style}
-  overwrites arguments \code{border.bottom.style},
-  \code{border.top.style}, \code{border.left.style} ,
-  \code{border.right.style}.}
-
-  \item{border.color}{border color - a single character
-  value specifying a valid color (e.g. "#000000" or
-  "black").  Argument \code{border.color} overwrites
-  arguments \code{border.bottom.color} ,
-  \code{border.top.color}, \code{border.left.color},
-  \code{border.right.color}.}
+  \item{...}{further arguments - not used}
 }
 \value{
 a \code{cellProperties} object

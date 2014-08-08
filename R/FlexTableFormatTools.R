@@ -44,7 +44,7 @@ chBodyBorderProperties = function( x, i, j, side, value ){
 		stop("value is not a borderProperties object")
 	}
 	
-	jborderProp = as.jborderProperties( value )
+	jborderProp = .jborderProperties( value )
 	.jcall( x$jobj, "V", "setBodyBorderProperties"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
@@ -99,7 +99,7 @@ chHeaderBorderProperties = function( x, i, j, side, value ){
 		stop("value is not a borderProperties object")
 	}	
 	
-	jborderProp = as.jborderProperties( value )
+	jborderProp = .jborderProperties( value )
 	.jcall( x$jobj, "V", "setHeaderBorderProperties"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
@@ -154,7 +154,7 @@ chFooterBorderProperties = function( x, i, j, side, value ){
 		stop("value is not a borderProperties object")
 	}	
 	
-	jborderProp = as.jborderProperties( value )
+	jborderProp = .jborderProperties( value )
 	.jcall( x$jobj, "V", "setFooterBorderProperties"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
