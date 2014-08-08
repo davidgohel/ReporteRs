@@ -4,7 +4,7 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 		stop("argument textProperties must be a textProperties object.")
 	
 	jtext.properties = .jTextProperties( textProperties )
-	
+
 	if( byrow ){
 		.jcall( object$jobj, "V", "addBodyText"
 				, .jarray( as.integer( i - 1 ) )
@@ -84,7 +84,7 @@ addFlexBodyPot = function( x, i, j, value, newpar ){
 	
 	.jcall( x$jobj, "V", "addBodyText"
 			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
-			.jparagraph( value ), as.logical(newpar)  )
+			.jpot( value ), as.logical(newpar)  )
 	x
 }
 
@@ -92,7 +92,7 @@ addFlexHeaderPot = function( x, i, j, value, newpar ){
 	
 	.jcall( x$jobj, "V", "addHeaderText"
 			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
-			.jparagraph( value ), as.logical(newpar)  )
+			.jpot( value ), as.logical(newpar)  )
 	x
 }
 
@@ -100,7 +100,7 @@ addFlexFooterPot = function( x, i, j, value, newpar ){
 	
 	.jcall( x$jobj, "V", "addFooterText"
 			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
-			.jparagraph( value ), as.logical(newpar)  )
+			.jpot( value ), as.logical(newpar)  )
 	
 	x
 }

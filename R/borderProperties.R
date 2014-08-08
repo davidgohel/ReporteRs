@@ -56,14 +56,14 @@ borderProperties = function( color = "black", style = "solid", width = 1 ){
 #' @return a \code{borderProperties} object
 #' @examples
 #' x = borderProperties()
-#' chprop(color="orange", style="dashed", width=1)
-#' chprop(width=5)
+#' chprop(x, color="orange", style="dashed", width=1)
+#' chprop(x, width=5)
 #' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, 
 #' \code{\link{textProperties}}, \code{\link{borderProperties}}, 
 #' \code{\link{FlexTable}}
 #' @method chprop borderProperties
 #' @S3method chprop borderProperties
-chprop.borderProperties <- function(object, color, style, width ) {
+chprop.borderProperties <- function(object, color, style, width, ... ) {
 	
 	if( !missing( color ) ){
 		if( length( color ) != 1 ) stop("color must be a single character value")
@@ -108,7 +108,13 @@ print.borderProperties = function (x, ...){
 	cat( "width:", x$width, ";" )
 	cat( "}" )
 }
-
+#' @method as.character borderProperties
+#' @S3method as.character borderProperties
+as.character.borderProperties = function (x, ...){
+	paste( "borderProperties{color:", x$color, ";",
+			"style:", x$style, ";", "width:", x$width, ";}", sep = "" )
+	
+}
 
 .jborderProperties = function( object ){
 	.jnew(class.tables.BorderProperties, 

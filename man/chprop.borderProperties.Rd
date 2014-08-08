@@ -2,7 +2,7 @@
 \alias{chprop.borderProperties}
 \title{Modify border formatting properties}
 \usage{
-\method{chprop}{borderProperties}(object, color, style, width)
+\method{chprop}{borderProperties}(object, color, style, width, ...)
 }
 \arguments{
   \item{object}{\code{borderProperties} object to modify}
@@ -25,8 +25,8 @@ Modify an object of class \code{borderProperties}.
 }
 \examples{
 x = borderProperties()
-chprop(color="orange", style="dashed", width=1)
-chprop(width=5)
+chprop(x, color="orange", style="dashed", width=1)
+chprop(x, width=5)
 }
 \seealso{
 \code{\link{cellProperties}}, \code{\link{parProperties}},

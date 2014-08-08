@@ -640,7 +640,7 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 	overlaps = intersect(merged.rows, merged.cols)
 	if( length( overlaps ) > 0 )
 		stop("span overlappings, some merged cells are already merged with other cells.")
-	
+
 	for( colid in j ){
 		.jcall( object$jobj , "V", "setRowSpanInstructions"
 				, as.integer( colid - 1 )

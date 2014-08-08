@@ -13,7 +13,6 @@ get.light.tableProperties()
 \seealso{
 \code{\link{addTable}} ,
 \code{\link{get.default.tableProperties}} ,
-\code{\link{get.greenheader.tableProperties}} ,
-\code{\link{get.darker.tableProperties}}
+\code{\link{get.greenheader.tableProperties}}
 }
 

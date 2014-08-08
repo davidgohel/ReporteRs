@@ -155,7 +155,7 @@ RScript = function( file, text
 	jRScript = .jnew(class.RScript, jparProp)
 	
 	for( i in 1:length(pot.list)){
-		.jcall( jRScript, "V", "addParagraph", .jparagraph(pot.list[[i]]) )
+		.jcall( jRScript, "V", "addParagraph", .jpot(pot.list[[i]]) )
 	}
 	
 	out = list()

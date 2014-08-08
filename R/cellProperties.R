@@ -402,10 +402,10 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 #' @method print cellProperties
 #' @S3method print cellProperties
 print.cellProperties = function (x, ...){
-	cat( "cellProperties{border.bottom:", x$border.bottom, ";" )
-	cat( "border.top:", x$border.top, ";" )
-	cat( "border.left:", x$border.left, ";" )
-	cat( "border.right:", x$border.right, ";\n" )
+	cat( "cellProperties{border.bottom:", as.character(x$border.bottom), ";" )
+	cat( "border.top:", as.character(x$border.top), ";" )
+	cat( "border.left:", as.character(x$border.left), ";" )
+	cat( "border.right:", as.character(x$border.right), ";\n" )
 	cat( "vertical.align: {", x$vertical.align, "}\n" )
 	cat( "padding.bottom: {", x$padding.bottom, "}\n" )
 	cat( "padding.top: {", x$padding.top, "}\n" )
