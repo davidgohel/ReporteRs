@@ -1,12 +1,5 @@
-class.docx4r.DataTable = "org/lysis/reporters/docx4r/elements/DataTable"
-class.html4r.DataTable = "org/lysis/reporters/html4r/elements/DataTable"
-class.pptx4r.DataTable = "org/lysis/reporters/pptx4r/elements/DataTable"
-class.docx4r.TableLayoutDOCX = "org/lysis/reporters/tables/TableLayoutDOCX"
-class.html4r.TableLayoutHTML = "org/lysis/reporters/tables/TableLayoutHTML"
-class.pptx4r.TableLayoutPPTX = "org/lysis/reporters/tables/TableLayoutPPTX"
 class.html4r.RAPHAELGraphics = "org/lysis/reporters/html4r/elements/RAPHAELGraphics"
 class.html4r.Title = "org/lysis/reporters/html4r/elements/Title"
-class.pptx4r.DMLGraphics = "org/lysis/reporters/pptx4r/elements/DMLGraphics"
 class.pptx4r.SlideLayout = "org/lysis/reporters/pptx4r/elements/layouts/SlideLayout"
 
 # FlexTable
@@ -33,7 +26,7 @@ class.Paragraph = "org/lysis/reporters/text/Paragraph"
 class.ParagraphSet = "org/lysis/reporters/text/ParagraphSet"
 class.TOC = "org/lysis/reporters/text/TOC"
 class.DrawingML = "org/lysis/reporters/img/DrawingML"
-
+class.RScript = "org/lysis/reporters/text/RScript"
 # fonts
 class.fontMetric = "org/lysis/reporters/graphicaldevices/fonts/FontMetric"
 class.fontInfo = "org/lysis/reporters/graphicaldevices/fonts/FontInfo"

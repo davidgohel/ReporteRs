@@ -152,7 +152,7 @@ RScript = function( file, text
 	
 	jparProp = .jParProperties(par.properties)
 	
-	jRScript = .jnew("org/lysis/reporters/text/RScript", jparProp)
+	jRScript = .jnew(class.RScript, jparProp)
 	
 	for( i in 1:length(pot.list)){
 		.jcall( jRScript, "V", "addParagraph", .jparagraph(pot.list[[i]]) )
