@@ -82,30 +82,25 @@ addFlexFooterContent = function (object, i, j, value, textProperties, newpar = F
 
 addFlexBodyPot = function( x, i, j, value, newpar ){
 	
-	ps = Paragraph( value )
 	.jcall( x$jobj, "V", "addBodyText"
 			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
-			ps$jobj, as.logical(newpar)  )
-	
+			.jparagraph( value ), as.logical(newpar)  )
 	x
 }
 
 addFlexHeaderPot = function( x, i, j, value, newpar ){
 	
-	ps = Paragraph( value )
 	.jcall( x$jobj, "V", "addHeaderText"
 			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
-			ps$jobj, as.logical(newpar)  )
-	
+			.jparagraph( value ), as.logical(newpar)  )
 	x
 }
 
 addFlexFooterPot = function( x, i, j, value, newpar ){
 	
-	ps = Paragraph( value )
 	.jcall( x$jobj, "V", "addFooterText"
 			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
-			ps$jobj, as.logical(newpar)  )
+			.jparagraph( value ), as.logical(newpar)  )
 	
 	x
 }

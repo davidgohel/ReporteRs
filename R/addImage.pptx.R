@@ -53,15 +53,15 @@ addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
 	jimg = .jnew(class.Image , filename )
 	
 	if( check.dims > 3 ){
-		out = .jcall( slide, "I", "addPicture", jimg
+		out = .jcall( slide, "I", "add", jimg
 				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
 	} else if( !missing(offx) && !missing(offy) && missing(width) && missing(height) ){
-		out = .jcall( slide, "I", "addPicture", jimg
+		out = .jcall( slide, "I", "add", jimg
 				, as.double( offx ), as.double( offy ) )
 	}  else if( check.dims < 1 ){
-		out = .jcall( slide, "I", "addPicture", jimg )
+		out = .jcall( slide, "I", "add", jimg )
 	} else {
-		out = .jcall( slide, "I", "addPicture", jimg )
+		out = .jcall( slide, "I", "add", jimg )
 	}
 	
 	if( isSlideError( out ) ){

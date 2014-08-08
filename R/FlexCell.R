@@ -38,11 +38,22 @@ FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("argument value must be a character vector or an object of class 'set_of_paragraphs'.")
 	
-	paragraphsSection = ParagraphSection(value, par.properties = par.properties )
+	parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
+	for( pot_index in 1:length( value ) ){
+		paragrah = .jnew(class.Paragraph )
+		pot_value = value[[pot_index]]
+		for( i in 1:length(pot_value)){
+			if( is.null( pot_value[[i]]$format ) ) 
+				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
+			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
+						.jTextProperties( pot_value[[i]]$format) )
+		}
+		.jcall( parset, "V", "addParagraph", paragrah )
+	}
 	
 	jcellProp = .jCellProperties(cell.properties)
 
-	flexCell = .jnew(class.FlexCell, paragraphsSection$jobj, jcellProp)
+	flexCell = .jnew(class.FlexCell, parset, jcellProp)
 	.jcall( flexCell, "V", "setColspan", as.integer( colspan ) )
 	
 	.Object = list()

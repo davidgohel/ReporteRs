@@ -105,6 +105,23 @@ as.character.pot = function (x, ...){
 #' @method as.html pot
 #' @S3method as.html pot
 as.html.pot = function( object, ... ) {
-	par = Paragraph(object)
+	par = .jparagraph( object )
 	.jcall( par$jobj, "S", "getHTML" )	
+}
+
+.jparagraph = function( object ){
+	if( !missing( value ) && !inherits( value, "pot" ) ){
+		stop("argument 'value' must be an object of class 'pot'")
+	}
+	paragrah = .jnew(class.Paragraph)
+	if( !missing( value ) ) for( i in 1:length(value)){
+			current_value = value[[i]]
+			if( is.null( current_value$format ) ) 
+				.jcall( paragrah, "V", "addText", current_value$value )
+			else {
+				jtext.properties = .jTextProperties( current_value$format )
+				.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
+			}
+		}
+	paragrah
 }

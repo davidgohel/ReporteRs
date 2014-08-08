@@ -155,8 +155,7 @@ RScript = function( file, text
 	jRScript = .jnew("org/lysis/reporters/text/RScript", jparProp)
 	
 	for( i in 1:length(pot.list)){
-		current_value = Paragraph(pot.list[[i]])
-		.jcall( jRScript, "V", "addParagraph", current_value$jobj )
+		.jcall( jRScript, "V", "addParagraph", .jparagraph(pot.list[[i]]) )
 	}
 	
 	out = list()

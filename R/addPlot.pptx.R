@@ -199,16 +199,15 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 	dev.off()
 	plotfiles = list.files( dirname , full.names = T )
 	for( i in seq_along( plotfiles ) ){
-		if( check.dims < 4 ){
-			out = .jcall( slide, "I", "addPicture", plotfiles[i] )
+		if( check.dims > 3 ){
+			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy, 
+					width=width, height=height )
+		} else if( !missing(offx) && !missing(offy) && missing(width) && missing(height) ){
+			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy )
+		}  else if( check.dims < 1 ){
+			doc = addImage( doc, plotfiles[i] )
 		} else {
-			out = .jcall( slide, "I", "addPicture", plotfiles[i]
-				, as.double( offx[i] ), as.double( offy[i] )
-				, as.double( width[i] ), as.double( height[i] )
-				)
-		}
-		if( isSlideError( out ) ){
-			stop( getSlideErrorString( out , "png") )
+			doc = addImage( doc, plotfiles[i] )
 		}
 	}
 	
