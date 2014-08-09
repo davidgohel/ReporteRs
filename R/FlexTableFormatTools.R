@@ -58,9 +58,10 @@ chHeaderTextProperties = function( x, i, j, value ){
 	if( !inherits( value , "textProperties" ) ){
 		stop("value is not a textProperties object")
 	}
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
 	
 	jtextProp = .jTextProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setHeaderTextProperties"
+	jflexcell = .jcall( metarows, "V", "set"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jtextProp  )
@@ -72,9 +73,10 @@ chHeaderCellProperties = function( x, i, j, value ){
 	if( !inherits( value , "cellProperties" ) ){
 		stop("value is not a cellProperties object")
 	}
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
 	
 	jcellProp = .jCellProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setHeaderCellProperties"
+	jflexcell = .jcall( metarows, "V", "set"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jcellProp  )
@@ -86,21 +88,24 @@ chHeaderParProperties = function( x, i, j, value ){
 	if( !inherits( value , "parProperties" ) ){
 		stop("value is not a parProperties object")
 	}
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
 	
 	jparProp = .jParProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setHeaderParProperties"
+	jflexcell = .jcall( metarows, "V", "set"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jparProp  )
 	x
 }
+
 chHeaderBorderProperties = function( x, i, j, side, value ){
 	if( !inherits( value , "borderProperties" ) ){
 		stop("value is not a borderProperties object")
-	}	
+	}
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
 	
 	jborderProp = .jborderProperties( value )
-	.jcall( x$jobj, "V", "setHeaderBorderProperties"
+	.jcall( metarows, "V", "set"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jborderProp, side )
@@ -113,9 +118,10 @@ chFooterTextProperties = function( x, i, j, value ){
 	if( !inherits( value , "textProperties" ) ){
 		stop("value is not a textProperties object")
 	}
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
 	
 	jtextProp = .jTextProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setFooterTextProperties"
+	jflexcell = .jcall( metarows, "V", "set"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jtextProp  )
@@ -127,9 +133,10 @@ chFooterCellProperties = function( x, i, j, value ){
 	if( !inherits( value , "cellProperties" ) ){
 		stop("value is not a cellProperties object")
 	}
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
 	
 	jcellProp = .jCellProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setFooterCellProperties"
+	jflexcell = .jcall( metarows, "V", "set"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jcellProp  )
@@ -141,9 +148,10 @@ chFooterParProperties = function( x, i, j, value ){
 	if( !inherits( value , "parProperties" ) ){
 		stop("value is not a parProperties object")
 	}
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
 	
 	jparProp = .jParProperties( value )
-	jflexcell = .jcall( x$jobj, "V", "setFooterParProperties"
+	jflexcell = .jcall( metarows, "V", "set"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jparProp  )
@@ -153,13 +161,13 @@ chFooterBorderProperties = function( x, i, j, side, value ){
 	if( !inherits( value , "borderProperties" ) ){
 		stop("value is not a borderProperties object")
 	}	
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
 	
 	jborderProp = .jborderProperties( value )
-	.jcall( x$jobj, "V", "setFooterBorderProperties"
+	.jcall( metarows, "V", "set"
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jborderProp, side )
-	
 	x
 }
 

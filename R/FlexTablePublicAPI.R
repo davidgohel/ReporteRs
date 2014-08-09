@@ -70,7 +70,12 @@ addHeaderRow = function( x, value, colspan, text.properties, par.properties, cel
 	.weights = weight.FlexRow( value )
 	if( .weights == x$numcol - 1 ) warning("Did you forget the rownames header?")
 	if( .weights != x$numcol ) stop("The 'FlexRow' object has not the correct number of elements or the sum of colspan is different from the number of columns of the dataset.")
-	.jcall( x$jobj, "V", "addHeader", value$jobj )
+	
+	
+	headers = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
+	.jcall( headers, "V", "add", value$jobj )
+	
+	#.jcall( x$jobj, "V", "addHeader", value$jobj )
 	
 	x
 }
@@ -134,7 +139,13 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 	
 	.weights = weight.FlexRow( value )
 	if( .weights != x$numcol ) stop("The 'FlexRow' object has not the correct number of elements or the sum of colspan is different from the number of columns of the dataset.")
-	.jcall( x$jobj, "V", "addFooter", value$jobj )
+	
+	
+	footer = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
+	.jcall( footer, "V", "add", value$jobj )
+	
+	
+#	.jcall( x$jobj, "V", "addFooter", value$jobj )
 	
 	x
 }
@@ -218,6 +229,14 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 	if( !missing(i) ) args.get.indexes$i = i
 	if( !missing(j) ) args.get.indexes$j = j
 	args.get.indexes$partname = to
+	
+	if( to == "header" ){
+		headers = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
+	} else if( to == "footer" ){
+		footers = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
+	} else if( to == "body" ){
+	}
+	
 	if( to == "header" ){
 		args.get.indexes$numrow = .jcall( x$jobj, "I", "headerSize" )
 	} else if( to == "footer" ){
@@ -292,13 +311,13 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 						, text.properties, newpar = newpar, byrow = byrow)
 				}, 
 				header = {
-					x = addFlexHeaderContent (object = x, i = i, j = j
-						, value = rep( value, length(i)*length(j) )
+					x = addContentToMetaRows (object = x, i = i, j = j
+						, value = rep( value, length(i)*length(j) ), to = "header"
 						, text.properties, newpar = newpar, byrow = byrow)
 				}, 
 				footer =  {
-					x = addFlexFooterContent (object = x, i = i, j = j
-						, value = rep( value, length(i)*length(j) )
+					x = addContentToMetaRows (object = x, i = i, j = j
+						, value = rep( value, length(i)*length(j) ), to = "footer"
 						, text.properties, newpar = newpar, byrow = byrow)
 				}, stop("to should be one of 'body', 'header', 'footer'.")
 		)
@@ -308,10 +327,10 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 					x = addFlexBodyPot (x = x, i = i, j = j, value = value, newpar = newpar)
 				}, 
 				header = {
-					x = addFlexHeaderPot (x = x, i = i, j = j, value = value, newpar = newpar)
+					x = addPotToMetaRows (x = x, i = i, j = j, value = value, to = "header", newpar = newpar)
 				}, 
 				footer =  {
-					x = addFlexFooterPot (x = x, i = i, j = j, value = value, newpar = newpar)
+					x = addPotToMetaRows (x = x, i = i, j = j, value = value, to = "footer", newpar = newpar)
 				}, stop("to should be one of 'body', 'header', 'footer'.")
 		)		
 		
@@ -338,11 +357,13 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 							text.properties, newpar = newpar, byrow = byrow )
 				}, 
 				header = {
-					x = addFlexHeaderContent (object = x, i = i, j = j, value = value, 
+					x = addContentToMetaRows (object = x, i = i, j = j, 
+							value = value, to = "header", 
 							text.properties, newpar = newpar, byrow = byrow )
 				}, 
 				footer =  {
-					x = addFlexFooterContent (object = x, i = i, j = j, value = value, 
+					x = addContentToMetaRows (object = x, i = i, j = j, 
+							value = value, to = "footer",  
 							text.properties, newpar = newpar, byrow = byrow )
 				}, stop("to should be one of 'body', 'header', 'footer'.")
 		)
@@ -412,20 +433,24 @@ setFlexTableBorders = function (object
 				, .jborderProperties( outer.vertical )
 				, .jborderProperties( outer.horizontal )
 		)
-	if( header )
-		.jcall( object$jobj , "V", "setHeaderBorders"
+	if( header ){
+		headers = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
+		.jcall( headers , "V", "setBorderGrid"
 				, .jborderProperties( inner.vertical )
 				, .jborderProperties( inner.horizontal )
 				, .jborderProperties( outer.vertical )
 				, .jborderProperties( outer.horizontal )
 		)
-	if( footer )
-		.jcall( object$jobj , "V", "setFooterBorders"
+	}
+	if( footer ){
+		footers = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
+		.jcall( footers , "V", "setBorderGrid"
 				, .jborderProperties( inner.vertical )
 				, .jborderProperties( inner.horizontal )
 				, .jborderProperties( outer.vertical )
 				, .jborderProperties( outer.horizontal )
-		)	
+		)
+	}
 	object
 }
 
