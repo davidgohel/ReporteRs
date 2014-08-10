@@ -13,10 +13,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"pptx"}.
+an object of class \code{\link{pptx}}.
 }
 \description{
-Add a title into a \code{"pptx"} object.
+Add a title into a \code{\link{pptx}} object.
 }
 \examples{
 #START_TAG_TEST

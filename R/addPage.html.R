@@ -42,11 +42,14 @@ addPage.html = function( doc, title, ... ) {
 	
 	.jcall( slide , "V", "addJavascript", "js/jquery.min.js" )
 	.jcall( slide , "V", "addJavascript", "js/bootstrap.min.js" )
+	.jcall( slide , "V", "addJavascript", "js/docs.min.js" )
+	
 	.jcall( slide , "V", "addJavascript", "js/raphael-min.js" )
 	.jcall( slide , "V", "addJavascript", "js/g.raphael-min.js" )
 	
 	.jcall( slide , "V", "addStylesheet", "css/bootstrap.min.css" )
-	.jcall( slide , "V", "addStylesheet", "css/html4r.css" )
+	.jcall( slide , "V", "addStylesheet", "css/docs.min.css" )
+	.jcall( slide , "V", "addStylesheet", "css/bootstrap-theme.css" )
 	
 	.jcall( doc$obj , "V", "addNewPage", title, slide )
 	doc$current_slide = slide

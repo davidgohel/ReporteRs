@@ -1,18 +1,17 @@
-#' @title Insert a FlexTable into a docx object
+#' @title Insert a FlexTable into an html object
 #'
-#' @description Insert a FlexTable into a docx object
+#' @description Insert a FlexTable into a \code{\link{html}} object
 #' 
-#' @param doc html object
+#' @param doc \code{\link{html}} object
 #' @param flextable the \code{FlexTable} object
 #' @param ... further arguments - not used
-#' @return a docx object
+#' @return a \code{\link{html}} object
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{html}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{addTable.html}}
 #' @examples
 #' #START_TAG_TEST
-#' doc.dirname = "addTable_example"
+#' doc.dirname = "addFlexTable_example"
 #' @example examples/html.R
 #' @example examples/addPage.R
 #' @example examples/addTitle1Level1.R

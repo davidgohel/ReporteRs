@@ -12,10 +12,10 @@ pptx(title, template)
   the filename of the pptx file used as a template.}
 }
 \value{
-an object of class \code{"pptx"}.
+an object of class \code{\link{pptx}}.
 }
 \description{
-Create a \code{"pptx"} object
+Create a \code{\link{pptx}} object
 }
 \details{
 To send R output in a pptx document, a slide (see
@@ -23,7 +23,7 @@ To send R output in a pptx document, a slide (see
 first (because output is beeing written in slides).
 
 Several methods can used to send R output into an object of
-class \code{"pptx"}.
+class \code{\link{pptx}}.
 
 \itemize{ \item \code{\link{addTitle.pptx}} add titles
 \item \code{\link{addParagraph.pptx}} add text \item

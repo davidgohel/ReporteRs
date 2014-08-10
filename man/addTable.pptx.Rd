@@ -64,7 +64,7 @@
   \code{\link{addTable}}.}
 }
 \value{
-an object of class \code{"pptx"}.
+an object of class \code{\link{pptx}}.
 }
 \description{
 Insert a table into the \code{pptx} object.

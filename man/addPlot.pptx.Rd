@@ -45,7 +45,7 @@
   \item{...}{arguments for \code{fun}.}
 }
 \value{
-an object of class \code{"pptx"}.
+an object of class \code{\link{pptx}}.
 }
 \description{
 Add a plot to the current slide of an existing \code{pptx}

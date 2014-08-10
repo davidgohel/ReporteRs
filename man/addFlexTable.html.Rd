@@ -1,25 +1,25 @@
 \name{addFlexTable.html}
 \alias{addFlexTable.html}
-\title{Insert a FlexTable into a docx object}
+\title{Insert a FlexTable into an html object}
 \usage{
 \method{addFlexTable}{html}(doc, flextable, ...)
 }
 \arguments{
-  \item{doc}{html object}
+  \item{doc}{\code{\link{html}} object}
 
   \item{flextable}{the \code{FlexTable} object}
 
   \item{...}{further arguments - not used}
 }
 \value{
-a docx object
+a \code{\link{html}} object
 }
 \description{
-Insert a FlexTable into a docx object
+Insert a FlexTable into a \code{\link{html}} object
 }
 \examples{
 #START_TAG_TEST
-doc.dirname = "addTable_example"
+doc.dirname = "addFlexTable_example"
 
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
@@ -113,7 +113,6 @@ writeDoc( doc, directory = doc.dirname )
 \seealso{
 \code{\link{FlexTable}}, \code{\link{html}} ,
 \code{\link{addFlexTable.pptx}},
-\code{\link{addFlexTable.docx}} ,
-\code{\link{addTable.html}}
+\code{\link{addFlexTable.docx}}
 }
 

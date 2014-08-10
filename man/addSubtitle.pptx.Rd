@@ -13,10 +13,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"pptx"}.
+an object of class \code{\link{pptx}}.
 }
 \description{
-Add a addSubtitle shape into a \code{"pptx"} object.
+Add a addSubtitle shape into a \code{\link{pptx}} object.
 }
 \details{
 Subtitle shape only exist in slide of type 'Title Slide'.

@@ -26,10 +26,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"pptx"}.
+an object of class \code{\link{pptx}}.
 }
 \description{
-Add an external image into a \code{"pptx"} object.
+Add an external image into a \code{\link{pptx}} object.
 }
 \details{
 Image is added to the next free 'content' shape of the

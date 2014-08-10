@@ -14,7 +14,7 @@
   \item{...}{further arguments, not used.}
 }
 \description{
-Write the \code{"pptx"} object in a '.pptx' file.
+Write the \code{\link{pptx}} object in a '.pptx' file.
 }
 \examples{
 #START_TAG_TEST

@@ -17,10 +17,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"pptx"}.
+an object of class \code{\link{pptx}}.
 }
 \description{
-Add a slide into a \code{"pptx"} object.
+Add a slide into a \code{\link{pptx}} object.
 }
 \details{
 This function is a key function ; if no slide has been
