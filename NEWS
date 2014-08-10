@@ -1,8 +1,17 @@
+ReporteRs 0.6.0
+==================================================================
+ENHANCEMENT
+------------------------------------------------------------------
+* New function AddSection for docx document. It lets you add 
+  horizontal page sections and sections with 2 or more columns.
+
+* java refactoring.
+  
 ReporteRs 0.5.9
 ==================================================================
 ENHANCEMENT
 ------------------------------------------------------------------
-*  borderProperties are now supported when formatting FlexTable
+* BorderProperties are now supported when formatting FlexTable
   
 ReporteRs 0.5.8
 ==================================================================

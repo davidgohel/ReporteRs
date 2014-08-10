@@ -2,7 +2,8 @@
 \alias{addTable.pptx}
 \title{Insert a table into an pptx object}
 \usage{
-\method{addTable}{pptx}(doc, data, layout.properties, header.labels,
+\method{addTable}{pptx}(doc, data,
+  layout.properties = get.default.tableProperties(), header.labels,
   groupedheader.row = list(), span.columns = character(0), col.types,
   columns.bg.colors = list(), columns.font.colors = list(),
   row.names = FALSE, ...)

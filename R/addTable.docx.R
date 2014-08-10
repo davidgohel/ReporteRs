@@ -49,7 +49,7 @@
 #' , \code{\link{addFlexTable}}, \code{\link{FlexTable}}, \code{\link{bookmark}}
 #' @method addTable docx
 #' @S3method addTable docx
-addTable.docx = function(doc, data, layout.properties
+addTable.docx = function(doc, data, layout.properties = get.default.tableProperties()
 	, header.labels, groupedheader.row = list()
 	, span.columns = character(0), col.types
 	, columns.bg.colors = list(), columns.font.colors = list()
@@ -58,111 +58,21 @@ addTable.docx = function(doc, data, layout.properties
 	, bookmark
 	, ...) {
 	
-	if( is.matrix( data )){
-		.oldnames = names( data )
-		data = as.data.frame( data )
-		names( data ) = .oldnames
+	args = list( data = data, layout.properties = layout.properties,
+			groupedheader.row = groupedheader.row, 
+			span.columns = span.columns,
+			columns.bg.colors = columns.bg.colors,
+			columns.font.colors = columns.font.colors,
+			row.names = row.names)
+	
+	if( !missing(header.labels) ){
+		args$header.labels = header.labels
 	}
-	
-	if( missing(header.labels) ){
-		header.labels = names(data)
-	}
-	
-	if( missing(layout.properties) )
-		layout.properties = get.default.tableProperties()
-	
-	if( nrow( data ) < 2 ) span.columns = character(0)
-	
 	if( missing( col.types ) ){
-		col.types = getDefaultColTypes( data )
-	}
-	nbcol = ncol( data ) + as.integer( row.names )
+		args$col.types = getDefaultColTypes( data )
+	} else args$col.types = col.types
 	
-	if( row.names ){
-		col.types = c("character", col.types )
-	}
-	
-	for( j in 1:ncol( data ) ){
-		if( is.factor(data[, j] ) ) tempdata = as.character( data[, j] )
-		else if( is.logical(data[, j] ) ) tempdata = ifelse( data[, j], "TRUE", "FALSE" )
-		else tempdata = data[, j]
-		
-		if( col.types[j] == "percent" ){
-			format_str = paste( "%0.", layout.properties$fraction.percent.digit, "f" )
-			data[, j] = sprintf( format_str, data[, j] * 100 )
-		} else if( col.types[j] == "double" ){
-			format_str = paste( "%0.", layout.properties$fraction.double.digit, "f" )
-			data[, j] = sprintf( format_str, data[, j] )
-		} else if( col.types[j] == "integer" ){
-			data[, j] = sprintf( "%0.0f", data[, j] )			
-		} else if( col.types[j] == "date" || col.types[j] == "datetime" ){
-			data[, j] = format( tempdata, "%Y-%m-%d" )
-		}
-	}
-	
-	ft = FlexTable( data = data, header.columns = FALSE, add.rownames = row.names )
-	for(j in span.columns ) 
-		ft = spanFlexTableRows( ft, j=j, runs = as.character( data[,j] ) )
-	
-	for( j in 1:nbcol ){
-		if( col.types[j] == "percent" ){
-			ft[,j ] = layout.properties$percent.text
-			ft[,j ] = layout.properties$percent.par
-			ft[,j ] = layout.properties$percent.cell		
-		}
-		else if( col.types[j] == "double" ){
-			ft[,j ] = layout.properties$double.text
-			ft[,j ] = layout.properties$double.par
-			ft[,j ] = layout.properties$double.cell
-		}
-		else if( col.types[j] == "integer" ){
-			ft[,j ] = layout.properties$integer.text
-			ft[,j ] = layout.properties$integer.par
-			ft[,j ] = layout.properties$integer.cell
-		}
-		else if( col.types[j] == "character" ){
-			ft[,j ] = layout.properties$character.text
-			ft[,j ] = layout.properties$character.par
-			ft[,j ] = layout.properties$character.cell
-		}
-		else if( col.types[j] == "date" ){
-			ft[,j ] = layout.properties$date.text
-			ft[,j ] = layout.properties$date.par
-			ft[,j ] = layout.properties$date.cell
-		}
-		else if( col.types[j] == "datetime" ){
-			ft[,j ] = layout.properties$datetime.text
-			ft[,j ] = layout.properties$datetime.par
-			ft[,j ] = layout.properties$datetime.cell
-		}
-		else if( col.types[j] == "logical" ){
-			ft[,j ] = layout.properties$logical.text
-			ft[,j ] = layout.properties$logical.par
-			ft[,j ] = layout.properties$logical.cell
-		}
-
-		
-	}
-	if( length( groupedheader.row ) > 0 ){
-		ft = addHeaderRow( ft
-				, value = groupedheader.row$values
-				, colspan = groupedheader.row$colspan
-		)
-	}
-	ft = addHeaderRow( ft, value = header.labels )
-	
-	if( length( groupedheader.row ) > 0 ){
-		ft[1,, to = "header"] = layout.properties$groupedheader.text
-		ft[2,, to = "header"] = layout.properties$header.text
-		ft[1,, to = "header"] = layout.properties$groupedheader.par
-		ft[2,, to = "header"] = layout.properties$header.par
-		ft[1,, to = "header"] = layout.properties$groupedheader.cell
-		ft[2,, to = "header"] = layout.properties$header.cell
-	} else {
-		ft[1,, to = "header"] = layout.properties$header.text
-		ft[1,, to = "header"] = layout.properties$header.par
-		ft[1,, to = "header"] = layout.properties$header.cell
-	}
+	ft = do.call( getOldTable, args )
 	
 	if( missing( bookmark ) )
 		doc = addFlexTable( doc, flextable = ft, par.properties = par.properties )

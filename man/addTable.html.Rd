@@ -2,7 +2,8 @@
 \alias{addTable.html}
 \title{Insert a table into an html object}
 \usage{
-\method{addTable}{html}(doc, data, layout.properties, header.labels,
+\method{addTable}{html}(doc, data,
+  layout.properties = get.default.tableProperties(), header.labels,
   groupedheader.row = list(), span.columns = character(0), col.types,
   columns.bg.colors = list(), columns.font.colors = list(),
   row.names = FALSE, par.properties = parProperties(text.align = "left"),

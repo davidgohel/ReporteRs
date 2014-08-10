@@ -2,7 +2,8 @@
 \alias{addTable.docx}
 \title{Insert a table into a docx object}
 \usage{
-\method{addTable}{docx}(doc, data, layout.properties, header.labels,
+\method{addTable}{docx}(doc, data,
+  layout.properties = get.default.tableProperties(), header.labels,
   groupedheader.row = list(), span.columns = character(0), col.types,
   columns.bg.colors = list(), columns.font.colors = list(),
   row.names = FALSE, par.properties = parProperties(text.align = "left"),
