@@ -6,8 +6,8 @@
   par.properties = parProperties(), ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"pptx"} where paragraph
-  has to be added}
+  \item{doc}{\code{\link{pptx}} object where paragraph has
+  to be added}
 
   \item{value}{text to add to the document as paragraphs:
   an object of class \code{\link{pot}} or

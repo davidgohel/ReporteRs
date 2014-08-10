@@ -4,7 +4,10 @@
 #' Add a plot into the \code{docx} object.
 #' 
 #' @param doc the \code{docx} to use
-#' @param fun plot function
+#' @param fun plot function. The function will be executed to produce graphics. 
+#' For \code{grid} or \code{lattice} or \code{ggplot} object, the function 
+#' should just be print and an extra argument x should specify the object 
+#' to plot. For traditionnal plots, the function should contain plot instructions. See examples.
 #' @param width plot width in inches (default value is 6).
 #' @param height plot height in inches (default value is 6).
 #' @param vector.graphic logical scalar, default to FALSE. 
@@ -21,7 +24,7 @@
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
 #' @param ... arguments for \code{fun}.
-#' @return an object of class \code{"docx"}.
+#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addPlot_example.docx"

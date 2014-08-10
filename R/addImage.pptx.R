@@ -1,8 +1,8 @@
 #' @title Insert an external image into a pptx object
 #'
-#' @description Add an external image into a \code{"pptx"} object.
+#' @description Add an external image into a \code{\link{pptx}} object.
 #' 
-#' @param doc Object of class \code{"pptx"} where external image has to be added
+#' @param doc \code{\link{pptx}} object where external image has to be added
 #' @param filename \code{"character"} value, complete filename of the external image
 #' @param offx optional, x position of the shape (top left position of the bounding box) in inch. See details.
 #' @param offy optional, y position of the shape (top left position of the bounding box) in inch See details.
@@ -20,7 +20,7 @@
 #' 
 #' If arguments offx, offy, width, height are provided, they become position and 
 #' dimensions of the new shape.
-#' @return an object of class \code{"pptx"}.
+#' @return an object of class \code{\link{pptx}}.
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 

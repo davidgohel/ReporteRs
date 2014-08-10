@@ -9,10 +9,10 @@ html(title = "untitled")
   document (in the doc properties).}
 }
 \value{
-an object of class \code{"html"}.
+an object of class \code{\link{html}}.
 }
 \description{
-Create a \code{"html"} object
+Create a \code{\link{html}} object
 }
 \details{
 \code{html} objects are experimental ; codes and api will
@@ -23,7 +23,7 @@ To send R output in an html document, a page (see
 first (because output is beeing written in pages).
 
 Several methods can used to send R output into an object of
-class \code{"html"}.
+class \code{\link{html}}.
 
 \itemize{ \item \code{\link{addTitle.html}} add titles
 \item \code{\link{addImage.html}} add external images \item

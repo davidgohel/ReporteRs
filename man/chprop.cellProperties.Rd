@@ -9,16 +9,17 @@
 \arguments{
   \item{object}{\code{cellProperties} object to modify}
 
-  \item{border.bottom}{\code{borderProperties} for bottom
+  \item{border.bottom}{\code{\link{borderProperties}} for
+  bottom border}
+
+  \item{border.left}{\code{\link{borderProperties}} for
+  left border}
+
+  \item{border.top}{\code{\link{borderProperties}} for top
   border}
 
-  \item{border.left}{\code{borderProperties} for left
-  border}
-
-  \item{border.top}{\code{borderProperties} for top border}
-
-  \item{border.right}{\code{borderProperties} for right
-  border}
+  \item{border.right}{\code{\link{borderProperties}} for
+  right border}
 
   \item{padding}{cell padding - 0 or positive integer
   value. Argument \code{padding} overwrites arguments

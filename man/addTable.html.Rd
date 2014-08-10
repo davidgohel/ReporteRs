@@ -69,7 +69,7 @@
   \code{\link{addTable}}.}
 }
 \value{
-an object of class \code{"html"}.
+an object of class \code{\link{html}}.
 }
 \description{
 Insert a table into the \code{html} object.

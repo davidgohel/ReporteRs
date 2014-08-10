@@ -5,8 +5,8 @@
 \method{addPage}{html}(doc, title, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"html"} where page has
-  to be added}
+  \item{doc}{\code{\link{html}} object where page has to be
+  added}
 
   \item{title}{\code{"character"} value: title of the HTML
   page.}
@@ -14,10 +14,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+an object of class \code{\link{html}}.
 }
 \description{
-Add a page into a \code{"html"} object.
+Add a page into a \code{\link{html}} object.
 }
 \details{
 A page is where content is added. This function is a key

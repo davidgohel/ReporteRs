@@ -5,7 +5,7 @@
 \method{addDate}{pptx}(doc, value, str.format = "\%Y-\%m-\%d", ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"pptx"}}
+  \item{doc}{\code{\link{pptx}} object}
 
   \item{value}{character value to add into the date shape
   of the current slide. optionnal. If missing current date

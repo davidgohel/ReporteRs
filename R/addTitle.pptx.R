@@ -1,12 +1,12 @@
 #' @title Insert a title into a pptx object
 #'
-#' @description Add a title into a \code{"pptx"} object.
+#' @description Add a title into a \code{\link{pptx}} object.
 #' 
-#' @param doc Object of class \code{"pptx"}
+#' @param doc \code{\link{pptx}} object
 #' @param value \code{"character"} value to use as title text
 #' @param ... further arguments, not used. 
 #' 
-#' @return an object of class \code{"pptx"}.
+#' @return an object of class \code{\link{pptx}}.
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 

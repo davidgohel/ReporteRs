@@ -2,11 +2,11 @@
 #'
 #' @description Insert a page number shape into the current slide of a \code{pptx} object.
 #' 
-#' @param doc Object of class \code{"pptx"}
+#' @param doc \code{\link{pptx}} object
 #' @param value character value to add into the page number shape of the current slide. 
 #' optionnal. If missing current slide number will be used.
 #' @param ... further arguments, not used. 
-#' @return a \code{pptx} document object
+#' @return a \code{\link{pptx}} document object
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 
@@ -29,11 +29,9 @@
 #' writeDoc( doc, "addPageNumber_example.pptx" )
 #' #STOP_TAG_TEST
 #' @export
-#' @seealso \code{\link{pptx}}, \code{\link{addDate.pptx}}
-#' , \code{\link{addPageNumber}} 
+#' @seealso \code{\link{addPageNumber}}, \code{\link{addDate.pptx}}
 #' @method addPageNumber pptx
 #' @S3method addPageNumber pptx
-
 addPageNumber.pptx = function(doc, value, ... ) {
 	
 	

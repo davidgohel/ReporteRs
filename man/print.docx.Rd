@@ -1,16 +1,17 @@
 \name{print.docx}
 \alias{print.docx}
-\title{print informations about an object of class \code{"docx"}.}
+\title{print informations about an object of class \code{\link{docx}}.}
 \usage{
 \method{print}{docx}(x, ...)
 }
 \arguments{
-  \item{x}{an object of class \code{"docx"}}
+  \item{x}{an object of class \code{\link{docx}}}
 
   \item{...}{further arguments, not used.}
 }
 \description{
-print informations about an object of class \code{"docx"}.
+print informations about an object of class
+\code{\link{docx}}.
 }
 \examples{
 #START_TAG_TEST

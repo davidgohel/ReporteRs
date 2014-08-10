@@ -3,7 +3,7 @@
 #' @description
 #' Insert paragraph(s) of text into a \code{docx} object
 #' 
-#' @param doc Object of class \code{"docx"} where paragraph has to be added
+#' @param doc Object of class \code{\link{docx}} where paragraph has to be added
 #' @param value text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
@@ -13,7 +13,7 @@
 #' @param bookmark a character value ; id of the Word bookmark to 
 #' replace by the table. optional. See \code{\link{bookmark}}.
 #' @param ... further arguments, not used. 
-#' @return an object of class \code{"docx"}.
+#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addParagraph_example.docx"

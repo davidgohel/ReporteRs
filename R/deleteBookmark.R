@@ -2,7 +2,7 @@
 #'
 #' @description delete a bookmark into a docx object
 #' 
-#' @param doc Object of class \code{"docx"}
+#' @param doc Object of class \code{\link{docx}}
 #' @param bookmark a character vector specifying bookmark id to delete
 #' @export
 #' @seealso \code{\link{docx}}
@@ -30,7 +30,7 @@ deleteBookmark = function( doc, bookmark ){
 #'
 #' @description delete first content after a bookmark into a docx object
 #' 
-#' @param doc Object of class \code{"docx"}
+#' @param doc Object of class \code{\link{docx}}
 #' @param bookmark a character vector specifying bookmark id to delete
 #' @export
 #' @seealso \code{\link{docx}}

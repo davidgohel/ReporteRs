@@ -5,16 +5,16 @@
 \method{addColumnBreak}{docx}(doc, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"docx"} where column
-  break has to be added}
+  \item{doc}{Object of class \code{\link{docx}} where
+  column break has to be added}
 
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
-Insert a page break into a \code{"docx"} section.
+Insert a page break into a \code{\link{docx}} section.
 }
 \examples{
 #START_TAG_TEST

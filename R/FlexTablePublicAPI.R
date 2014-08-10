@@ -387,10 +387,10 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' , outer vectical and horizontal. 
 #' 
 #' @param object a \code{FlexTable} object
-#' @param inner.horizontal a \code{borderProperties} object
-#' @param inner.vertical a \code{borderProperties} object
-#' @param outer.horizontal a \code{borderProperties} object
-#' @param outer.vertical a \code{borderProperties} object
+#' @param inner.horizontal a \code{\link{borderProperties}} object
+#' @param inner.vertical a \code{\link{borderProperties}} object
+#' @param outer.horizontal a \code{\link{borderProperties}} object
+#' @param outer.vertical a \code{\link{borderProperties}} object
 #' @param body a logical value (default to TRUE), specifies 
 #' to apply scheme to table body
 #' @param header a logical value (default to TRUE), specifies 

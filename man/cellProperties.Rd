@@ -38,17 +38,18 @@ cellProperties(padding, border.width, border.style, border.color, border.bottom,
   \code{border.top.color}, \code{border.left.color},
   \code{border.right.color}.}
 
-  \item{border.bottom}{\code{borderProperties} for bottom
-  border. overwrite all border.bottom.* if specified.}
+  \item{border.bottom}{\code{\link{borderProperties}} for
+  bottom border. overwrite all border.bottom.* if
+  specified.}
 
-  \item{border.left}{\code{borderProperties} for left
-  border. overwrite all border.left.* if specified.}
+  \item{border.left}{\code{\link{borderProperties}} for
+  left border. overwrite all border.left.* if specified.}
 
-  \item{border.top}{\code{borderProperties} for top border.
-  overwrite all border.top.* if specified.}
+  \item{border.top}{\code{\link{borderProperties}} for top
+  border. overwrite all border.top.* if specified.}
 
-  \item{border.right}{\code{borderProperties} for right
-  border. overwrite all border.right.* if specified.}
+  \item{border.right}{\code{\link{borderProperties}} for
+  right border. overwrite all border.right.* if specified.}
 
   \item{border.bottom.color}{border bottom color - a single
   character value specifying a valid color (e.g. "#000000"

@@ -32,7 +32,7 @@
 #'   	If not provided, table will be added at the end of the document.
 #' @param row.names logical value - should the row.names be included in the table. 
 #' @param ... addTable arguments - see \code{\link{addTable}}. 
-#' @return an object of class \code{"docx"}.
+#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addTable_example.docx"

@@ -1,16 +1,16 @@
 #' @title Create Microsoft PowerPoint document object representation
 #'
 #' @description
-#' Create a \code{"pptx"} object
+#' Create a \code{\link{pptx}} object
 #' 
 #' @param title \code{"character"} value: title of the document (in the doc properties).
 #' @param template \code{"character"} value, it represents the filename of the pptx file used as a template.
-#' @return an object of class \code{"pptx"}.
+#' @return an object of class \code{\link{pptx}}.
 #' @details
 #' To send R output in a pptx document, a slide (see \code{\link{addSlide.pptx}}
 #' have to be added to the object first (because output is beeing written in slides).
 #' 
-#' Several methods can used to send R output into an object of class \code{"pptx"}.
+#' Several methods can used to send R output into an object of class \code{\link{pptx}}.
 #' 
 #' \itemize{
 #'   \item \code{\link{addTitle.pptx}} add titles

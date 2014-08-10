@@ -24,7 +24,7 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
 Add a slide into a \code{"pptx"} object.

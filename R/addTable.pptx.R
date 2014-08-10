@@ -44,7 +44,7 @@
 #' @example examples/optionsDemoAddTable.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @return an object of class \code{"pptx"}.
+#' @return an object of class \code{\link{pptx}}.
 #' @seealso \code{\link{pptx}}, \code{\link{addTable}}
 #' , \code{\link{tableProperties}}, \code{\link{addFlexTable.pptx}}
 #' , \code{\link{FlexTable}}

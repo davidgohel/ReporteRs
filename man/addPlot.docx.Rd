@@ -10,7 +10,12 @@
 \arguments{
   \item{doc}{the \code{docx} to use}
 
-  \item{fun}{plot function}
+  \item{fun}{plot function. The function will be executed
+  to produce graphics. For \code{grid} or \code{lattice} or
+  \code{ggplot} object, the function should just be print
+  and an extra argument x should specify the object to
+  plot. For traditionnal plots, the function should contain
+  plot instructions. See examples.}
 
   \item{width}{plot width in inches (default value is 6).}
 
@@ -46,7 +51,7 @@
   \item{...}{arguments for \code{fun}.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
 Add a plot into the \code{docx} object.

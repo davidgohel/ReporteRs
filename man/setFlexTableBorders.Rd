@@ -11,13 +11,17 @@ setFlexTableBorders(object, inner.vertical = borderProperties(),
 \arguments{
   \item{object}{a \code{FlexTable} object}
 
-  \item{inner.horizontal}{a \code{borderProperties} object}
+  \item{inner.horizontal}{a \code{\link{borderProperties}}
+  object}
 
-  \item{inner.vertical}{a \code{borderProperties} object}
+  \item{inner.vertical}{a \code{\link{borderProperties}}
+  object}
 
-  \item{outer.horizontal}{a \code{borderProperties} object}
+  \item{outer.horizontal}{a \code{\link{borderProperties}}
+  object}
 
-  \item{outer.vertical}{a \code{borderProperties} object}
+  \item{outer.vertical}{a \code{\link{borderProperties}}
+  object}
 
   \item{body}{a logical value (default to TRUE), specifies
   to apply scheme to table body}

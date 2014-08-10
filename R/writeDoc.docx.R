@@ -1,8 +1,8 @@
 #' @title Write a docx object in a docx file
 #'
-#' @description Write the \code{"docx"} object in a '.docx' file.
+#' @description Write the \code{\link{docx}} object in a '.docx' file.
 #' 
-#' @param doc Object of class \code{"docx"} that has to be written.
+#' @param doc Object of class \code{\link{docx}} that has to be written.
 #' @param file single character value, name of the file to write.
 #' @param ... further arguments, not used. 
 #' 

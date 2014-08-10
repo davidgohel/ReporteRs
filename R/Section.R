@@ -1,6 +1,6 @@
 #' @title Insert a slide into a pptx object
 #'
-#' @description Add a slide into a \code{"pptx"} object.
+#' @description Add a slide into a \code{\link{pptx}} object.
 #' 
 #' @param doc Object of class \code{\link{docx}} where section has to be added
 #' @param landscape logical value. Specify TRUE to get a section with horizontal page.
@@ -12,7 +12,7 @@
 #' This function is a key function ; if no slide has been added into the document object
 #' no content (tables, plots, images, text) can be added. 
 #' 
-#' @return an object of class \code{"docx"}.
+#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addSection.docx"
@@ -33,11 +33,11 @@ addSection.docx = function(doc, landscape = FALSE, ncol = 1, space_between = 0.3
 
 #' @title Insert a column break into a docx section
 #'
-#' @description Insert a page break into a \code{"docx"} section.
+#' @description Insert a page break into a \code{\link{docx}} section.
 #' 
-#' @param doc Object of class \code{"docx"} where column break has to be added
+#' @param doc Object of class \code{\link{docx}} where column break has to be added
 #' @param ... further arguments, not used. 
-#' @return an object of class \code{"docx"}.
+#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addColumnBreak.docx"

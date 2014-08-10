@@ -1,8 +1,8 @@
 #' @title Insert a slide into a pptx object
 #'
-#' @description Add a slide into a \code{"pptx"} object.
+#' @description Add a slide into a \code{\link{pptx}} object.
 #' 
-#' @param doc Object of class \code{"pptx"} where slide has to be added
+#' @param doc \code{\link{pptx}} object where slide has to be added
 #' @param slide.layout layout name of the slide to create. See \code{\link{slide.layouts.pptx}}
 #' @param bookmark \code{"integer"} page number to specify where slide has to be replaced with a new empty one.
 #' @param ... further arguments, not used. 
@@ -29,7 +29,7 @@
 #' 
 #' Also when using addPlot, plot dimensions will be the shape dimensions. It means that if you want to change plot dimensions
 #' , this has to be done in the PowerPoint template used when creating the \code{pptx} object. 
-#' @return an object of class \code{"pptx"}.
+#' @return an object of class \code{\link{pptx}}.
 #' @examples 
 #' #START_TAG_TEST
 #' # Create a new document 

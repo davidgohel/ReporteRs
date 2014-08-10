@@ -1,8 +1,8 @@
 #' @title Add R script into a docx object
 #'
-#' @description Add R script into a \code{"docx"} object.
+#' @description Add R script into a \code{\link{docx}} object.
 #' 
-#' @param doc Object of class \code{"docx"} where expressions have to be added
+#' @param doc Object of class \code{\link{docx}} where expressions have to be added
 #' @param file R script file. Not used if text or 
 #' rscript is provided.
 #' @param text character vector. The text to parse. 
@@ -15,7 +15,7 @@
 #' @param ... further arguments, not used. 
 #' @details 
 #' You have to one of the following argument: file or text or rscript. 
-#' @return an object of class \code{"docx"}.
+#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addRScript_example.docx"

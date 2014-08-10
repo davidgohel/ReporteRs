@@ -13,8 +13,8 @@
 #' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
 #' #STOP_TAG_TEST
-#' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
-#' , \code{\link{pptx}}, \code{\link{docx}}, \code{\link{html}}
+#' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
+#' , \code{\link{+.pot}}
 pot = function( value ="", format = textProperties() ){
 
 	value = format( value )
@@ -72,7 +72,7 @@ as.character.pot = function (x, ...){
 #' @examples
 #' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
-#' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{pptx}}, \code{\link{docx}}
+#' @seealso \code{\link{addParagraph}}
 #' @method + pot
 #' @S3method + pot
 #' @rdname pot-add

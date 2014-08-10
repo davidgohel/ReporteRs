@@ -5,7 +5,7 @@
 \method{addTitle}{docx}(doc, value, level = 1, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"docx"}}
+  \item{doc}{Object of class \code{\link{docx}}}
 
   \item{value}{\code{"character"} value to use as title
   text}
@@ -17,10 +17,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
-Add a title into a \code{"docx"} object.
+Add a title into a \code{\link{docx}} object.
 }
 \details{
 In MS Word, you can use whatever style you want as title

@@ -76,7 +76,7 @@
   \code{\link{addTable}}.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
 Insert a table into the \code{docx} object.

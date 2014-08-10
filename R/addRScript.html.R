@@ -1,8 +1,8 @@
 #' @title Add R script into a html object
 #'
-#' @description Add R script into a \code{"html"} object.
+#' @description Add R script into a \code{\link{html}} object.
 #' 
-#' @param doc Object of class \code{"html"} where expressions have to be added
+#' @param doc \code{\link{html}} object where expressions have to be added
 #' @param file R script file. Not used if text or 
 #' rscript is provided.
 #' @param text character vector. The text to parse. 
@@ -12,7 +12,7 @@
 #' @param ... further arguments, not used. 
 #' @details 
 #' You have to one of the following argument: file or text or rscript. 
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{\link{html}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.dirname = "addRScript_example"

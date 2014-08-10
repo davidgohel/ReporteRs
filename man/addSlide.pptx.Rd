@@ -5,8 +5,8 @@
 \method{addSlide}{pptx}(doc, slide.layout, bookmark, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"pptx"} where slide has
-  to be added}
+  \item{doc}{\code{\link{pptx}} object where slide has to
+  be added}
 
   \item{slide.layout}{layout name of the slide to create.
   See \code{\link{slide.layouts.pptx}}}

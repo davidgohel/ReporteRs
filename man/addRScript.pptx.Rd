@@ -5,8 +5,8 @@
 \method{addRScript}{pptx}(doc, rscript, file, text, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"pptx"} where
-  expressions have to be added}
+  \item{doc}{\code{\link{pptx}} object where expressions
+  have to be added}
 
   \item{file}{R script file. Not used if text or rscript is
   provided.}

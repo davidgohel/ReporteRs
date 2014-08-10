@@ -5,7 +5,7 @@
 \method{addTitle}{html}(doc, value, level = 1, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"html"}}
+  \item{doc}{\code{\link{html}} object}
 
   \item{value}{\code{"character"} value to use as title
   text}
@@ -17,10 +17,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+an object of class \code{\link{html}}.
 }
 \description{
-Add a title into a \code{"html"} object.
+Add a title into a \code{\link{html}} object.
 }
 \examples{
 #START_TAG_TEST

@@ -3,7 +3,7 @@
 #' @description
 #' Insert paragraph(s) of text into a \code{pptx} object
 #' 
-#' @param doc Object of class \code{"pptx"} where paragraph has to be added
+#' @param doc \code{\link{pptx}} object where paragraph is added
 #' @param value text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
@@ -15,7 +15,7 @@
 #' @param height optional, height of the shape in inch. See details.
 #' @param par.properties a parProperties object
 #' @param ... further arguments, not used. 
-#' @return an object of class \code{"pptx"}.
+#' @return an object of class \code{\link{pptx}}.
 #' @details
 #' If arguments offx, offy, width, height are missing, position and dimensions
 #' will be defined by the width and height of the next available shape of the slide. This 

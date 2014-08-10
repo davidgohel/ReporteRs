@@ -5,7 +5,7 @@
 deleteBookmark(doc, bookmark)
 }
 \arguments{
-  \item{doc}{Object of class \code{"docx"}}
+  \item{doc}{Object of class \code{\link{docx}}}
 
   \item{bookmark}{a character vector specifying bookmark id
   to delete}

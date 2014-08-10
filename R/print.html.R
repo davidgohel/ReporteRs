@@ -1,9 +1,9 @@
-#' @title print informations about an object of class \code{"html"}.
+#' @title print informations about an object of class \code{\link{html}}.
 #'
 #' @description
-#' print informations about an object of class \code{"html"}.
+#' print informations about an object of class \code{\link{html}}.
 #' 
-#' @param x an object of class \code{"html"}
+#' @param x an object of class \code{\link{html}}
 #' @param ... further arguments, not used. 
 #' @examples
 #' #START_TAG_TEST

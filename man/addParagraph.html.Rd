@@ -6,8 +6,8 @@
   par.properties = parProperties(), ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"html"} where paragraph
-  has to be added}
+  \item{doc}{\code{\link{html}} object where paragraph has
+  to be added}
 
   \item{value}{text to add to the document as paragraphs:
   an object of class \code{\link{pot}} or
@@ -26,7 +26,7 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+an object of class \code{\link{html}}.
 }
 \description{
 Insert paragraph(s) of text into a \code{html} object

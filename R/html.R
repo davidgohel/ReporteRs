@@ -1,10 +1,10 @@
 #' @title Create an HTML document object representation
 #'
 #' @description
-#' Create a \code{"html"} object
+#' Create a \code{\link{html}} object
 #' 
 #' @param title \code{"character"} value: title of the document (in the doc properties).
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{\link{html}}.
 #' @details
 #' 
 #' \code{html} objects are experimental ; codes and api will probably change later.
@@ -12,7 +12,7 @@
 #' To send R output in an html document, a page (see \code{\link{addPage.html}}
 #' have to be added to the object first (because output is beeing written in pages).
 #' 
-#' Several methods can used to send R output into an object of class \code{"html"}.
+#' Several methods can used to send R output into an object of class \code{\link{html}}.
 #'  
 #' \itemize{
 #'   \item \code{\link{addTitle.html}} add titles

@@ -5,7 +5,8 @@
 \method{chprop}{borderProperties}(object, color, style, width, ...)
 }
 \arguments{
-  \item{object}{\code{borderProperties} object to modify}
+  \item{object}{\code{\link{borderProperties}} object to
+  modify}
 
   \item{...}{further arguments - not used}
 
@@ -18,10 +19,10 @@
   \item{width}{border width - an integer value : 0>= value}
 }
 \value{
-a \code{borderProperties} object
+a \code{\link{borderProperties}} object
 }
 \description{
-Modify an object of class \code{borderProperties}.
+Modify an object of class \code{\link{borderProperties}}.
 }
 \examples{
 x = borderProperties()
@@ -30,7 +31,6 @@ chprop(x, width=5)
 }
 \seealso{
 \code{\link{cellProperties}}, \code{\link{parProperties}},
-\code{\link{textProperties}},
-\code{\link{borderProperties}}, \code{\link{FlexTable}}
+\code{\link{textProperties}}, \code{\link{FlexTable}}
 }
 

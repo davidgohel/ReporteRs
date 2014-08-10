@@ -28,7 +28,7 @@
 #' @param row.names logical value - should the row.names be included in the table. 
 #' @param par.properties paragraph formatting properties of the paragraph that contains the table. An object of class \code{\link{parProperties}}
 #' @param ... addTable arguments - see \code{\link{addTable}}. 
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{\link{html}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.dirname = "addTable_example"

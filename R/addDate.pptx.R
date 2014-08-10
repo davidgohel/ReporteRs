@@ -2,7 +2,7 @@
 #'
 #' @description Insert a date into the current slide of a \code{pptx} object.
 #' 
-#' @param doc Object of class \code{"pptx"}
+#' @param doc \code{\link{pptx}} object
 #' @param value character value to add into the date 
 #' shape of the current slide. optionnal. If missing 
 #' current date will be used.

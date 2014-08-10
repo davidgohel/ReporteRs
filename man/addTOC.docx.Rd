@@ -5,8 +5,8 @@
 \method{addTOC}{docx}(doc, stylename, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"docx"} where table of
-  content has to be added}
+  \item{doc}{Object of class \code{\link{docx}} where table
+  of content has to be added}
 
   \item{stylename}{optional. Stylename in the document that
   will be used to build entries of the TOC.}
@@ -14,10 +14,11 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
-Insert a table of contents into a \code{"docx"} object.
+Insert a table of contents into a \code{\link{docx}}
+object.
 }
 \details{
 If stylename is not used, a classical table of content will

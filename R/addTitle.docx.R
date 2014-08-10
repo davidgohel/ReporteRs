@@ -1,8 +1,8 @@
 #' @title Insert a title into a docx object
 #'
-#' @description Add a title into a \code{"docx"} object.
+#' @description Add a title into a \code{\link{docx}} object.
 #' 
-#' @param doc Object of class \code{"docx"}
+#' @param doc Object of class \code{\link{docx}}
 #' @param value \code{"character"} value to use as title text
 #' @param level \code{"integer"} positive value to use as 
 #' heading level. 1 for title1, 2 for title2, etc. Default to 1.
@@ -21,7 +21,7 @@
 #' You have to use function \code{\link{declareTitlesStyles.docx}} to indicate 
 #' which available styles are meant to be used as titles styles. A side effect is that you 
 #' will be able then to add a table of content in your Word document.
-#' @return an object of class \code{"docx"}.
+#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 

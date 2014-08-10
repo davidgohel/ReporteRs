@@ -6,7 +6,7 @@
   par.properties = parProperties(), ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"docx"} where
+  \item{doc}{Object of class \code{\link{docx}} where
   expressions have to be added}
 
   \item{file}{R script file. Not used if text or rscript is
@@ -29,10 +29,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
-Add R script into a \code{"docx"} object.
+Add R script into a \code{\link{docx}} object.
 }
 \details{
 You have to one of the following argument: file or text or

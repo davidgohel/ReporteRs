@@ -5,7 +5,7 @@
 \method{writeDoc}{pptx}(doc, file, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"pptx"} that has to be
+  \item{doc}{\code{\link{pptx}} object that has to be
   written.}
 
   \item{file}{single character value, name of the file to

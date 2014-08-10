@@ -16,10 +16,10 @@
 #' (e.g. "#000000" or "black").
 #'  Argument \code{border.color} overwrites arguments \code{border.bottom.color}
 #' , \code{border.top.color}, \code{border.left.color}, \code{border.right.color}.
-#' @param border.bottom \code{borderProperties} for bottom border. overwrite all border.bottom.* if specified.
-#' @param border.left \code{borderProperties} for left border. overwrite all border.left.* if specified.
-#' @param border.top \code{borderProperties} for top border. overwrite all border.top.* if specified.
-#' @param border.right \code{borderProperties} for right border. overwrite all border.right.* if specified.
+#' @param border.bottom \code{\link{borderProperties}} for bottom border. overwrite all border.bottom.* if specified.
+#' @param border.left \code{\link{borderProperties}} for left border. overwrite all border.left.* if specified.
+#' @param border.top \code{\link{borderProperties}} for top border. overwrite all border.top.* if specified.
+#' @param border.right \code{\link{borderProperties}} for right border. overwrite all border.right.* if specified.
 #' @param border.bottom.color border bottom color - a single character value specifying 
 #' a valid color (e.g. "#000000" or "black").
 #' @param border.bottom.style border bottom style - a single character value, expected 
@@ -281,10 +281,10 @@ out
 #'
 #' @description Modify an object of class \code{cellProperties}.  
 #' @param object \code{cellProperties} object to modify
-#' @param border.bottom \code{borderProperties} for bottom border 
-#' @param border.left \code{borderProperties} for left border 
-#' @param border.top \code{borderProperties} for top border 
-#' @param border.right \code{borderProperties} for right border 
+#' @param border.bottom \code{\link{borderProperties}} for bottom border 
+#' @param border.left \code{\link{borderProperties}} for left border 
+#' @param border.top \code{\link{borderProperties}} for top border 
+#' @param border.right \code{\link{borderProperties}} for right border 
 #' @param padding cell padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
 #' @param vertical.align cell content vertical alignment - a single character value

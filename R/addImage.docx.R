@@ -1,15 +1,15 @@
 #' @title Add external image into a docx object
 #'
-#' @description Add external images into a \code{"docx"} object.
+#' @description Add external images into a \code{\link{docx}} object.
 #' 
-#' @param doc Object of class \code{"docx"} where external image has to be added
+#' @param doc Object of class \code{\link{docx}} where external image has to be added
 #' @param filename \code{"character"} value, complete filename of the external image
 #' @param bookmark a character value ; id of the Word bookmark to replace by the image. 
 #' optional. if missing, image is added at the end of the document. See \code{\link{bookmark}}.
 #' @param par.properties paragraph formatting properties of the paragraph that contains images. 
 #' An object of class \code{\link{parProperties}}
 #' @param ... further arguments, not used. 
-#' @return an object of class \code{"docx"}.
+#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 

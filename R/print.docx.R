@@ -1,9 +1,9 @@
-#' @title print informations about an object of class \code{"docx"}.
+#' @title print informations about an object of class \code{\link{docx}}.
 #'
 #' @description
-#' print informations about an object of class \code{"docx"}.
+#' print informations about an object of class \code{\link{docx}}.
 #' 
-#' @param x an object of class \code{"docx"}
+#' @param x an object of class \code{\link{docx}}
 #' @param ... further arguments, not used. 
 #' @examples
 #' #START_TAG_TEST

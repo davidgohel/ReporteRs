@@ -2,7 +2,7 @@
 #'
 #' @description Insert a footer shape into the current slide of a \code{pptx} object.
 #' 
-#' @param doc Object of class \code{"pptx"}
+#' @param doc \code{\link{pptx}} object
 #' @param value character value to add into the footer shape of the current slide. 
 #' @param ... further arguments, not used. 
 #' @return a document object

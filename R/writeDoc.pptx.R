@@ -1,8 +1,8 @@
 #' @title Write a pptx object in a pptx file
 #'
-#' @description Write the \code{"pptx"} object in a '.pptx' file.
+#' @description Write the \code{\link{pptx}} object in a '.pptx' file.
 #' 
-#' @param doc Object of class \code{"pptx"} that has to be written.
+#' @param doc \code{\link{pptx}} object that has to be written.
 #' @param file single character value, name of the file to write.
 #' @param ... further arguments, not used. 
 #' 

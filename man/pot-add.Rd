@@ -28,9 +28,6 @@ pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 	, textProperties(font.weight="bold") )
 }
 \seealso{
-\code{\link{addParagraph}},
-\code{\link{addParagraph.docx}},
-\code{\link{addParagraph.pptx}}, \code{\link{pptx}},
-\code{\link{docx}}
+\code{\link{addParagraph}}
 }
 

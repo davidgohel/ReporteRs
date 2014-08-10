@@ -1,9 +1,9 @@
-#' @title print informations about an object of class \code{"pptx"}.
+#' @title print informations about an object of class \code{\link{pptx}}.
 #'
 #' @description
-#' print informations about an object of class \code{"pptx"}.
+#' print informations about an object of class \code{\link{pptx}}.
 #' 
-#' @param x an object of class \code{"pptx"}
+#' @param x an object of class \code{\link{pptx}}
 #' @param ... further arguments, not used. 
 #' @examples
 #' #START_TAG_TEST

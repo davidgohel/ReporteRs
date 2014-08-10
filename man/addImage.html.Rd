@@ -5,8 +5,8 @@
 \method{addImage}{html}(doc, filename, width, height, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"html"} where external
-  image has to be added}
+  \item{doc}{\code{\link{html}} object where external image
+  has to be added}
 
   \item{filename}{\code{"character"} value, complete
   filename of the external image}
@@ -18,10 +18,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+an object of class \code{\link{html}}.
 }
 \description{
-Add an external image into a \code{"html"} object.
+Add an external image into a \code{\link{html}} object.
 }
 \examples{
 #START_TAG_TEST

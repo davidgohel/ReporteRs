@@ -1,8 +1,8 @@
 #' @title Write a html object in a html file
 #'
-#' @description Write the \code{"html"} object in '.html' files located in a specified directory.
+#' @description Write the \code{\link{html}} object in '.html' files located in a specified directory.
 #' 
-#' @param doc Object of class \code{"html"} that has to be written.
+#' @param doc \code{\link{html}} object that has to be written.
 #' @param directory single character value, name of the directory that will contain generated html pages.
 #' @param ... further arguments, not used. 
 #' @return the function a character vector containing generated html documents filenames.

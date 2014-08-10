@@ -5,7 +5,7 @@
 \method{addSubtitle}{pptx}(doc, value, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"pptx"}}
+  \item{doc}{\code{\link{pptx}} object}
 
   \item{value}{\code{"character"} value to use as subtitle
   text}

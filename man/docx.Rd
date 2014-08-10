@@ -12,23 +12,24 @@ docx(title = "untitled", template)
   the filename of the docx file used as a template.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
-Create a \code{"docx"} object
+Create a \code{\link{docx}} object
 }
 \details{
 Several methods can used to send R output into an object of
-class \code{"docx"}.
+class \code{\link{docx}}.
 
 \itemize{ \item \code{\link{addTitle.docx}} add titles
 \item \code{\link{addParagraph.docx}} add text \item
 \code{\link{addPlot.docx}} add plots \item
-\code{\link{addTable.docx}} add tables \item
-\code{\link{addFlexTable.docx}} add \code{\link{FlexTable}}
-\item \code{\link{addImage.docx}} add external images \item
-\code{\link{addTOC.docx}} add table of content \item
-\code{\link{addPageBreak.docx}} add page break }
+\code{\link{addFlexTable.docx}} add tables. See
+\code{\link{FlexTable}} \item \code{\link{addImage.docx}}
+add external images \item \code{\link{addTOC.docx}} add
+table of content \item \code{\link{addPageBreak.docx}} add
+page break \item \code{\link{addSection.docx}} add section
+}
 
 R outputs (tables, plots, paragraphs and images) can be
 inserted (and not added at the end) in a document if a
@@ -167,9 +168,10 @@ XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \seealso{
 \code{\link{addTitle.docx}}, \code{\link{addImage.docx}},
-\code{\link{addParagraph.docx}} ,
-\code{\link{addPlot.docx}}, \code{\link{addTable.docx}},
-\code{\link{addTOC.docx}} , \code{\link{styles.docx}},
+\code{\link{addParagraph.docx}},
+\code{\link{addFlexTable.docx}},
+\code{\link{addPlot.docx}}, \code{\link{addSection.docx}},
+\code{\link{addTOC.docx}}, \code{\link{styles.docx}},
 \code{\link{writeDoc.docx}}, \code{\link{bookmark}}
 }
 

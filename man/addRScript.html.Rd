@@ -5,8 +5,8 @@
 \method{addRScript}{html}(doc, rscript, file, text, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"html"} where
-  expressions have to be added}
+  \item{doc}{\code{\link{html}} object where expressions
+  have to be added}
 
   \item{file}{R script file. Not used if text or rscript is
   provided.}
@@ -20,10 +20,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"html"}.
+an object of class \code{\link{html}}.
 }
 \description{
-Add R script into a \code{"html"} object.
+Add R script into a \code{\link{html}} object.
 }
 \details{
 You have to one of the following argument: file or text or

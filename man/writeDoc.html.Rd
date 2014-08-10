@@ -5,7 +5,7 @@
 \method{writeDoc}{html}(doc, directory, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"html"} that has to be
+  \item{doc}{\code{\link{html}} object that has to be
   written.}
 
   \item{directory}{single character value, name of the
@@ -18,8 +18,8 @@ the function a character vector containing generated html
 documents filenames.
 }
 \description{
-Write the \code{"html"} object in '.html' files located in
-a specified directory.
+Write the \code{\link{html}} object in '.html' files
+located in a specified directory.
 }
 \examples{
 #START_TAG_TEST

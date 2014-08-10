@@ -49,17 +49,17 @@ borderProperties = function( color = "black", style = "solid", width = 1 ){
 
 #' @title Modify border formatting properties 
 #'
-#' @description Modify an object of class \code{borderProperties}.  
-#' @param object \code{borderProperties} object to modify
+#' @description Modify an object of class \code{\link{borderProperties}}.  
+#' @param object \code{\link{borderProperties}} object to modify
 #' @inheritParams borderProperties
 #' @param ... further arguments - not used 
-#' @return a \code{borderProperties} object
+#' @return a \code{\link{borderProperties}} object
 #' @examples
 #' x = borderProperties()
 #' chprop(x, color="orange", style="dashed", width=1)
 #' chprop(x, width=5)
 #' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, 
-#' \code{\link{textProperties}}, \code{\link{borderProperties}}, 
+#' \code{\link{textProperties}}, 
 #' \code{\link{FlexTable}}
 #' @method chprop borderProperties
 #' @S3method chprop borderProperties

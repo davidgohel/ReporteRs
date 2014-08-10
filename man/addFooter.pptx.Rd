@@ -5,7 +5,7 @@
 \method{addFooter}{pptx}(doc, value, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"pptx"}}
+  \item{doc}{\code{\link{pptx}} object}
 
   \item{value}{character value to add into the footer shape
   of the current slide.}

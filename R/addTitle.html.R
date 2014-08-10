@@ -1,13 +1,13 @@
 #' @title Insert a title into a html object
 #'
-#' @description Add a title into a \code{"html"} object.
+#' @description Add a title into a \code{\link{html}} object.
 #' 
-#' @param doc Object of class \code{"html"}
+#' @param doc \code{\link{html}} object
 #' @param value \code{"character"} value to use as title text
 #' @param level \code{"integer"} positive value to use as 
 #' heading level. 1 for title1, 2 for title2, etc. Default to 1.
 #' @param ... further arguments, not used. 
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{\link{html}}.
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 

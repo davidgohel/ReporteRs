@@ -1,8 +1,8 @@
 #' @title Insert a page into an html object
 #'
-#' @description Add a page into a \code{"html"} object.
+#' @description Add a page into a \code{\link{html}} object.
 #' 
-#' @param doc Object of class \code{"html"} where page has to be added
+#' @param doc \code{\link{html}} object where page has to be added
 #' @param title \code{"character"} value: title of the HTML page.
 #' @param ... further arguments, not used. 
 #' @details 
@@ -10,7 +10,7 @@
 #' This function is a key function ; if no page has been added into the document object
 #' no content (tables, plots, images, text) can be added. 
 #' 
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{\link{html}}.
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 

@@ -5,8 +5,8 @@
 \method{addParagraph}{docx}(doc, value, stylename, bookmark, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"docx"} where paragraph
-  has to be added}
+  \item{doc}{Object of class \code{\link{docx}} where
+  paragraph has to be added}
 
   \item{value}{text to add to the document as paragraphs:
   an object of class \code{\link{pot}} or
@@ -25,7 +25,7 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
 Insert paragraph(s) of text into a \code{docx} object

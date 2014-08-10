@@ -7,9 +7,14 @@
   offy, width, height, ...)
 }
 \arguments{
-  \item{doc}{the \code{pptx} to use}
+  \item{doc}{\code{\link{pptx}} object}
 
-  \item{fun}{plot function}
+  \item{fun}{plot function. The function will be executed
+  to produce graphics. For \code{grid} or \code{lattice} or
+  \code{ggplot} object, the function should just be print
+  and an extra argument x should specify the object to
+  plot. For traditionnal plots, the function should contain
+  plot instructions. See examples.}
 
   \item{pointsize}{the default pointsize of plotted text,
   interpreted as big points (1/72 inch) at res ppi.}

@@ -3,8 +3,11 @@
 #' @description
 #' Add a plot to the current slide of an existing \code{pptx} object.
 #' 
-#' @param doc the \code{pptx} to use
-#' @param fun plot function
+#' @param doc \code{\link{pptx}} object
+#' @param fun plot function. The function will be executed to produce graphics. 
+#' For \code{grid} or \code{lattice} or \code{ggplot} object, the function 
+#' should just be print and an extra argument x should specify the object 
+#' to plot. For traditionnal plots, the function should contain plot instructions. See examples.
 #' @param pointsize the default pointsize of plotted text, interpreted as big points (1/72 inch) at res ppi.
 #' @param vector.graphic logical scalar, default to TRUE. If TRUE, vector graphics 
 #' are produced instead of PNG images. Vector graphics in pptx document are DrawingML instructions. 
@@ -15,7 +18,7 @@
 #' @param width optional, width of the shape in inch. See details.
 #' @param height optional, height of the shape in inch. See details.
 #' @param ... arguments for \code{fun}.
-#' @return an object of class \code{"pptx"}.
+#' @return an object of class \code{\link{pptx}}.
 #' @details
 #' If arguments offx, offy, width, height are missing, position and dimensions
 #' will be defined by the width and height of the next available shape of the slide. This 

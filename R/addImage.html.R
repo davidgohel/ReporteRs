@@ -1,13 +1,13 @@
 #' @title Insert an external image into a html object
 #'
-#' @description Add an external image into a \code{"html"} object.
+#' @description Add an external image into a \code{\link{html}} object.
 #' 
-#' @param doc Object of class \code{"html"} where external image has to be added
+#' @param doc \code{\link{html}} object where external image has to be added
 #' @param filename \code{"character"} value, complete filename of the external image
 #' @param width image width in pixel
 #' @param height image height in pixel
 #' @param ... further arguments, not used. 
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{\link{html}}.
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 

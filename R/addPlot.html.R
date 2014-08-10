@@ -4,7 +4,10 @@
 #' Add a plot into the \code{html} object.
 #' 
 #' @param doc Object of class \code{html} where paragraph has to be added
-#' @param fun plot function
+#' @param fun plot function. The function will be executed to produce graphics. 
+#' For \code{grid} or \code{lattice} or \code{ggplot} object, the function 
+#' should just be print and an extra argument x should specify the object 
+#' to plot. For traditionnal plots, the function should contain plot instructions. See examples.
 #' @param width plot width in inches (default value is 6).
 #' @param height plot height in inches (default value is 6).
 #' @param vector.graphic logical scalar, default to FALSE. If TRUE, vector graphics 
@@ -13,7 +16,7 @@
 #' @param pointsize the default pointsize of plotted text in pixels, default to 12.
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param ... arguments for \code{fun}.
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{\link{html}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.dirname = "addPlot_example"
@@ -27,7 +30,7 @@
 #' @example examples/addLMPlot.R
 #' @example examples/writeDoc_directory.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{html}}, \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
+#' @seealso \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
 #' @method addPlot html
 #' @S3method addPlot html
 addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vector.graphic = T, width=6, height=6, fontname = getOption("ReporteRs-default-font"), ... ) {

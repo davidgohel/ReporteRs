@@ -5,8 +5,8 @@
 \method{addImage}{pptx}(doc, filename, offx, offy, width, height, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"pptx"} where external
-  image has to be added}
+  \item{doc}{\code{\link{pptx}} object where external image
+  has to be added}
 
   \item{filename}{\code{"character"} value, complete
   filename of the external image}

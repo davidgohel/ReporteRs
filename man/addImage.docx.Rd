@@ -6,8 +6,8 @@
   par.properties = parProperties(text.align = "center", padding = 5), ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"docx"} where external
-  image has to be added}
+  \item{doc}{Object of class \code{\link{docx}} where
+  external image has to be added}
 
   \item{filename}{\code{"character"} value, complete
   filename of the external image}
@@ -24,10 +24,10 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
-Add external images into a \code{"docx"} object.
+Add external images into a \code{\link{docx}} object.
 }
 \examples{
 #START_TAG_TEST

@@ -3,7 +3,7 @@
 #' @description
 #' Insert paragraph(s) of text into a \code{html} object
 #' 
-#' @param doc Object of class \code{"html"} where paragraph has to be added
+#' @param doc \code{\link{html}} object where paragraph has to be added
 #' @param value text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
@@ -13,7 +13,7 @@
 #' @param par.properties paragraph formatting properties to apply to paragraphs of text. 
 #' An object of class \code{\link{parProperties}}
 #' @param ... further arguments, not used. 
-#' @return an object of class \code{"html"}.
+#' @return an object of class \code{\link{html}}.
 #' @examples
 #' #START_TAG_TEST
 #' doc.dirname = "addParagraph_example"

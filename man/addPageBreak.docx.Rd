@@ -5,16 +5,16 @@
 \method{addPageBreak}{docx}(doc, ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{"docx"} where page break
-  has to be added}
+  \item{doc}{Object of class \code{\link{docx}} where page
+  break has to be added}
 
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{"docx"}.
+an object of class \code{\link{docx}}.
 }
 \description{
-Insert a page break into a \code{"docx"} object.
+Insert a page break into a \code{\link{docx}} object.
 }
 \examples{
 #START_TAG_TEST
