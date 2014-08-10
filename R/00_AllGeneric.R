@@ -1,6 +1,26 @@
+#' @title Add a column break into a section
+#'
+#' @description Add a column break into a section
+#' 
+#' @param doc document object
+#' @param ... further arguments passed to other methods 
+#' @return a document object
+#' @details 
+#' \code{addColumnBreak} only works with docx documents. 
+#' 
+#' See \code{\link{addColumnBreak.docx}} for examples. 
+#' @export
+#' @seealso \code{\link{docx}}, \code{\link{addColumnBreak.docx}}
+addColumnBreak = function(doc, ...){
+	checkHasSlide(doc)
+	UseMethod("addColumnBreak")
+}
+
+
+
 #' @title Insert a date into a document object
 #'
-#' @description Insert a date into a document object
+#' @description Insert a column break
 #' 
 #' @param doc document object
 #' @param ... further arguments passed to other methods 
@@ -226,6 +246,21 @@ addPlot = function(doc, fun, pointsize = 12, vector.graphic = F, ...){
 	
 	checkHasSlide(doc)
 	UseMethod("addPlot")
+}
+
+#' @title Add a section into a document object
+#'
+#' @description Add a section into a document object
+#' 
+#' @param doc document object
+#' @param ... further arguments passed to other methods 
+#' @return a document object
+#' @details 
+#' \code{addSection} only works with docx documents. See \code{\link{addSection.docx}} for examples.
+#' @export
+#' @seealso \code{\link{docx}}, \code{\link{addSection.docx}}
+addSection = function(doc, ...){
+	UseMethod("addSection")
 }
 
 #' @title Add a slide into a document object

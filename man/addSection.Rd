@@ -1,0 +1,25 @@
+\name{addSection}
+\alias{addSection}
+\title{Add a section into a document object}
+\usage{
+addSection(doc, ...)
+}
+\arguments{
+  \item{doc}{document object}
+
+  \item{...}{further arguments passed to other methods}
+}
+\value{
+a document object
+}
+\description{
+Add a section into a document object
+}
+\details{
+\code{addSection} only works with docx documents. See
+\code{\link{addSection.docx}} for examples.
+}
+\seealso{
+\code{\link{docx}}, \code{\link{addSection.docx}}
+}
+

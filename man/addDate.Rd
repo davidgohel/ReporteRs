@@ -13,7 +13,7 @@ addDate(doc, ...)
 a document object
 }
 \description{
-Insert a date into a document object
+Insert a column break
 }
 \details{
 addDate only works for pptx documents. See
