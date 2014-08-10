@@ -15,7 +15,8 @@ these components are included below):
 	http://g.raphaeljs.com/
 	
 - docx4j (which use Apache XML Graphics Commons, Apache Commons IO, Apache 
-         Commons Lang, Apache Commons Logging and Apache Log4j and  SLF4J)
+         Commons Lang, Apache Commons Logging, Apache Log4j, SLF4J, 
+         Apache Commons Codec and Apache Commons Imaging)
 	http://www.docx4java.org
 	Theses jars are located in package ReporteRsjars.
 
