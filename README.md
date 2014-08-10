@@ -9,7 +9,7 @@ Features
 --------
 * Create docx, pptx or html files with only a few lines of R code.
 * Add tables, plots, text or tables of contents into Word, PowerPoint and html documents.
-* Customize formatting of R output.
+* Customize formatting of R outputs.
 * Take advantage of the benefits of reproducible research.
 
 Installation
@@ -24,7 +24,6 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 
     if( !require( rJava ) ) install.packages("rJava")
     if( !require( ggplot2 ) ) install.packages("ggplot2")
-    if( !require( base64 ) ) install.packages("base64")
 
 ### CRAN
 
@@ -39,7 +38,8 @@ Get the latest release:
     devtools::install_github('ReporteRs', 'davidgohel')
 
 Get the latest binary packages: 
-[ReporteRsjars](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.1 "ReporteRsjars") - [ReporteRs](https://github.com/davidgohel/ReporteRs/releases/tag/v0.5.7 "ReporteRs")
+[ReporteRsjars 0.2](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.2 "ReporteRsjars") and 
+[ReporteRs 0.6.0](https://github.com/davidgohel/ReporteRs/releases/tag/v0.6.0 "ReporteRs")
 
 	
 Getting Started
@@ -52,8 +52,7 @@ Getting Started
     example(html) #run a complete and detailed html example
     
     ?ReporteRs
-    ?addTable
-    ?FlexTable
+    ?addFlexTable
     ?addPlot
     ?addParagraph
     ?docx
