@@ -250,9 +250,8 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 	
 	if( missing(text.properties) && to == "body" )
 		text.properties = x$body.text.props
-	else text.properties = x$header.text.props
-	
-
+	else if( missing(text.properties) )
+		text.properties = x$header.text.props
 	
 	if( inherits(value, "textProperties" ) ){
 		switch(to,
@@ -350,7 +349,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 			stop("value has length ", length(value), " and selection length is ", length(i)*length(j))
 		else if( ( is.matrix( value ) || is.data.frame( value ) ) && length(i)*length(j) != prod(dim(value)) )
 			stop("value has ", prod(dim(value)), " elements and selection length is ", length(i)*length(j))
-		
+
 		switch(to,
 				body = {
 					x = addFlexCellContent (object = x, i = i, j = j, value = value, 
