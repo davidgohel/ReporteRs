@@ -2,8 +2,18 @@ Package: ReporteRs
 Type: Package
 Title: Microsoft Word, Microsoft Powerpoint and HTML documents generation from R
 Version: 0.6.0
-Date: 2014-08-03
-Author: David Gohel <david.gohel@lysis-consultants.fr>
+Date: 2014-08-12
+Authors@R: c(
+    person("David", "Gohel", role = c("aut", "cre"),
+      email = "david.gohel@lysis-consultants.fr"),
+    person("Bootstrap", role = c("ctb", "cph"),
+      comment = "Bootstrap development team"),
+    person("Dmitry Baranovskiy", role = c("ctb", "cph"),
+      comment = "raphael and g.raphael javascript libraries" ) )
+Author: David Gohel [aut, cre],
+  Bootstrap [ctb, cph] (Bootstrap development team),
+  Dmitry Baranovskiy [ctb, cph] (raphael and g.raphael javascript
+    libraries)
 Maintainer: David Gohel <david.gohel@lysis-consultants.fr>
 Description: An R package for creating Microsoft Word document (>=2007),
     Microsoft Powerpoint document (>=2007) and HTML documents from R. There are
@@ -22,5 +32,5 @@ Imports:
 Suggests:
     ggplot2
 SystemRequirements: java (>= 1.6)
-URL: http://davidgohel.github.io/ReporteRs/index.html
+URL: http://davidgohel.github.io/ReporteRs/index.html, http://groups.google.com/group/reporters-package
 BugReports: https://github.com/davidgohel/ReporteRs/issues

@@ -1,5 +1,8 @@
 doc = addSection(doc, landscape = TRUE, ncol = 2 ) 
-doc = addPlot( doc = doc, fun = function() barplot( 1:8, col = 1:8 ), width = 3, height = 3, pointsize = 5)
+doc = addPlot( doc = doc, fun = function() {
+		barplot( 1:8, col = 1:8 )
+	}, width = 3, height = 3, pointsize = 5)
+
 doc = addColumnBreak(doc ) 
 doc = addFlexTable(doc, FlexTable(head(iris) ) )
 
