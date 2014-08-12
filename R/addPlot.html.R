@@ -52,7 +52,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		fun_res = try( fun(...), silent = T )
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
-		doc = addImage( doc, plotfiles )
+		doc = addImage( doc, plotfiles, width = width*72, height = height*72 )
 	} else {
 		filename = file.path( dirname, "plot", fsep = "/" )
 		env = raphael( file = filename,width=width*72.2

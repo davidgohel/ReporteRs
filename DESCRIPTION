@@ -5,14 +5,17 @@ Version: 0.6.0
 Date: 2014-08-12
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
-      email = "david.gohel@lysis-consultants.fr"),
+    email = "david.gohel@lysis-consultants.fr"),
     person("Bootstrap", role = c("ctb", "cph"),
-      comment = "Bootstrap development team"),
+    comment = "Bootstrap development team"),
+    person("jQuery", role = c("ctb", "cph"),
+    comment = "The jQuery Foundation"),
     person("Dmitry Baranovskiy", role = c("ctb", "cph"),
-      comment = "raphael and g.raphael javascript libraries" ) )
+    comment = "raphael and g.raphael javascript libraries" ) )
 Author: David Gohel [aut, cre],
-  Bootstrap [ctb, cph] (Bootstrap development team),
-  Dmitry Baranovskiy [ctb, cph] (raphael and g.raphael javascript
+    Bootstrap [ctb, cph] (Bootstrap development team),
+    jQuery [ctb, cph] (The jQuery Foundation),
+    Dmitry Baranovskiy [ctb, cph] (raphael and g.raphael javascript
     libraries)
 Maintainer: David Gohel <david.gohel@lysis-consultants.fr>
 Description: An R package for creating Microsoft Word document (>=2007),
@@ -32,5 +35,6 @@ Imports:
 Suggests:
     ggplot2
 SystemRequirements: java (>= 1.6)
-URL: http://davidgohel.github.io/ReporteRs/index.html, http://groups.google.com/group/reporters-package
+URL: http://davidgohel.github.io/ReporteRs/index.html,
+    http://groups.google.com/group/reporters-package
 BugReports: https://github.com/davidgohel/ReporteRs/issues
