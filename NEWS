@@ -6,6 +6,8 @@ DEBUG
   border.*.style, border.*.width and border.*.color for backward 
   compatibility.
 
+* fixes for bugs related to FlexTable that appeared during 
+  java refactoring (setFlexTableBorders).
 
 ReporteRs 0.6.0
 ==================================================================
