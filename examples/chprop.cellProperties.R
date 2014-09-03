@@ -18,7 +18,7 @@ cellProp13 = chprop( cellProp, padding.left = 5 )
 cellProp14 = chprop( cellProp, padding.right = 5 )
 cellProp15 = chprop( cellProp, padding = 5 )
 
-cellProp16 = chprop( cellProp, border.bottom.style = "dotted" )
+cellProp16 = chprop( cellProp, border.bottom = borderProperties( style = "dotted" ) )
 cellProp17 = chprop( cellProp, border.left.style = "dotted" )
 cellProp18 = chprop( cellProp, border.top.style = "dotted" )
 cellProp19 = chprop( cellProp, border.right.style = "dotted" )

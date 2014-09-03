@@ -1,3 +1,12 @@
+ReporteRs 0.6.1
+==================================================================
+DEBUG
+------------------------------------------------------------------
+* Reintroducing in function chprop.cellProperties arguments 
+  border.*.style, border.*.width and border.*.color for backward 
+  compatibility.
+
+
 ReporteRs 0.6.0
 ==================================================================
 ENHANCEMENT

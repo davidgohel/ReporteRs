@@ -3,28 +3,77 @@
 \title{Modify a cell formatting properties object}
 \usage{
 \method{chprop}{cellProperties}(object, border.bottom, border.left, border.top,
-  border.right, padding, vertical.align, padding.bottom, padding.top,
-  padding.left, padding.right, background.color, ...)
+  border.right, padding, border.bottom.color, border.bottom.style,
+  border.bottom.width, border.left.color, border.left.style, border.left.width,
+  border.top.color, border.top.style, border.top.width, border.right.color,
+  border.right.style, border.right.width, vertical.align, padding.bottom,
+  padding.top, padding.left, padding.right, background.color, ...)
 }
 \arguments{
   \item{object}{\code{cellProperties} object to modify}
 
   \item{border.bottom}{\code{\link{borderProperties}} for
-  bottom border}
+  bottom border. Overwrite all border.bottom.* argument
+  values.}
 
   \item{border.left}{\code{\link{borderProperties}} for
-  left border}
+  left border. Overwrite all border.left.* argument
+  values.}
 
   \item{border.top}{\code{\link{borderProperties}} for top
-  border}
+  border. Overwrite all border.top.* argument values.}
 
   \item{border.right}{\code{\link{borderProperties}} for
-  right border}
+  right border. Overwrite all border.right.* argument
+  values.}
 
   \item{padding}{cell padding - 0 or positive integer
   value. Argument \code{padding} overwrites arguments
   \code{padding.bottom}, \code{padding.top},
   \code{padding.left}, \code{padding.right}.}
+
+  \item{border.bottom.color}{border bottom color - a single
+  character value specifying a}
+
+  \item{border.bottom.style}{border bottom style - a single
+  character value, expected value is one of "none",
+  "solid", "dotted", "dashed".}
+
+  \item{border.bottom.width}{border bottom width - 0 or
+  positive integer value}
+
+  \item{border.left.color}{border left color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{border.left.style}{border left style - a single
+  character value, expected value is one of "none",
+  "solid", "dotted", "dashed".}
+
+  \item{border.left.width}{border left width - 0 or
+  positive integer value}
+
+  \item{border.top.color}{border top color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{border.top.style}{border top style - a single
+  character value, expected value is one of "none",
+  "solid", "dotted", "dashed".}
+
+  \item{border.top.width}{border top width - 0 or positive
+  integer value}
+
+  \item{border.right.color}{border right color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{border.right.style}{border right style - a single
+  character value, expected value is one of "none",
+  "solid", "dotted", "dashed".}
+
+  \item{border.right.width}{border right width - 0 or
+  positive integer value}
 
   \item{vertical.align}{cell content vertical alignment - a
   single character value , expected value is one of
@@ -76,7 +125,7 @@ cellProp13 = chprop( cellProp, padding.left = 5 )
 cellProp14 = chprop( cellProp, padding.right = 5 )
 cellProp15 = chprop( cellProp, padding = 5 )
 
-cellProp16 = chprop( cellProp, border.bottom.style = "dotted" )
+cellProp16 = chprop( cellProp, border.bottom = borderProperties( style = "dotted" ) )
 cellProp17 = chprop( cellProp, border.left.style = "dotted" )
 cellProp18 = chprop( cellProp, border.top.style = "dotted" )
 cellProp19 = chprop( cellProp, border.right.style = "dotted" )

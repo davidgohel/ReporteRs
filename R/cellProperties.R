@@ -281,12 +281,31 @@ out
 #'
 #' @description Modify an object of class \code{cellProperties}.  
 #' @param object \code{cellProperties} object to modify
-#' @param border.bottom \code{\link{borderProperties}} for bottom border 
-#' @param border.left \code{\link{borderProperties}} for left border 
-#' @param border.top \code{\link{borderProperties}} for top border 
-#' @param border.right \code{\link{borderProperties}} for right border 
+#' @param border.bottom \code{\link{borderProperties}} for bottom border. Overwrite all border.bottom.* argument values.
+#' @param border.left \code{\link{borderProperties}} for left border. Overwrite all border.left.* argument values.
+#' @param border.top \code{\link{borderProperties}} for top border. Overwrite all border.top.* argument values.
+#' @param border.right \code{\link{borderProperties}} for right border. Overwrite all border.right.* argument values.
 #' @param padding cell padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
+#' @param border.bottom.color border bottom color - a single character value specifying a 
+#' @param border.bottom.style border bottom style - a single character value, expected 
+#' value is one of "none", "solid", "dotted", "dashed".
+#' @param border.bottom.width border bottom width - 0 or positive integer value
+#' @param border.left.color border left color - a single character value specifying a 
+#' valid color (e.g. "#000000" or "black").
+#' @param border.left.style border left style - a single character value, expected 
+#' value is one of "none", "solid", "dotted", "dashed".
+#' @param border.left.width border left width - 0 or positive integer value
+#' @param border.top.color border top color - a single character value specifying a 
+#' valid color (e.g. "#000000" or "black").
+#' @param border.top.style border top style - a single character value, expected 
+#' value is one of "none", "solid", "dotted", "dashed".
+#' @param border.top.width border top width - 0 or positive integer value
+#' @param border.right.color border right color - a single character value specifying a 
+#' valid color (e.g. "#000000" or "black").
+#' @param border.right.style border right style - a single character value, expected 
+#' value is one of "none", "solid", "dotted", "dashed".
+#' @param border.right.width border right width - 0 or positive integer value
 #' @param vertical.align cell content vertical alignment - a single character value
 #' , expected value is one of "center" or "top" or "bottom"
 #' @param padding.bottom cell bottom padding - 0 or positive integer value.
@@ -310,7 +329,12 @@ chprop.cellProperties <- function(object
 	, border.bottom
 	, border.left
 	, border.top
-	, border.right, padding
+	, border.right
+	, padding
+	, border.bottom.color, border.bottom.style, border.bottom.width 
+	, border.left.color, border.left.style, border.left.width
+	, border.top.color, border.top.style, border.top.width
+	, border.right.color, border.right.style, border.right.width
 	, vertical.align
 	, padding.bottom
 	, padding.top
@@ -320,6 +344,88 @@ chprop.cellProperties <- function(object
 	, ...) {
 	
 vertical.align.styles = c( "top", "middle", "bottom" )
+
+
+
+	if( !missing( border.bottom.style ) ){
+		if( is.character( border.bottom.style ) ){
+			match.arg( border.bottom.style, choices = ReporteRs.border.styles, several.ok = F )
+			object$border.bottom$style = border.bottom.style
+		} else stop("border.bottom.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
+	}
+	
+	if( !missing( border.bottom.width ) ){
+		if( is.numeric( border.bottom.width ) ){
+			object$border.bottom$width = as.integer(border.bottom.width)
+		} else stop("border.bottom.width must be an integer scalar.")
+	}
+	
+	if( !missing( border.bottom.color ) ){
+		if( is.color( border.bottom.color ) ){
+			object$border.bottom$color = getHexColorCode( border.bottom.color )
+		} else stop("border.bottom.color must be a valid color.")
+	}
+	
+	
+	if( !missing( border.top.style ) ){
+		if( is.character( border.top.style ) ){
+			match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = F )
+			object$border.top$style = border.top.style
+		} else stop("border.top.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
+	}
+	
+	if( !missing( border.top.width ) ){
+		if( is.numeric( border.top.width ) ){
+			object$border.top$width = as.integer(border.top.width)
+		} else stop("border.top.width must be an integer scalar.")
+	}
+	
+	if( !missing( border.top.color ) ){
+		if( is.color( border.top.color ) ){
+			object$border.top$color = getHexColorCode( border.top.color )
+		} else stop("border.top.color must be a valid color.")
+	}
+	
+	
+	if( !missing( border.left.style ) ){
+		if( is.character( border.left.style ) ){
+			match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = F )
+			object$border.left$style = border.left.style
+		} else stop("border.left.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
+	}
+	
+	if( !missing( border.left.width ) ){
+		if( is.numeric( border.left.width ) ){
+			object$border.left$width = as.integer(border.left.width)
+		} else stop("border.left.width must be an integer scalar.")
+	}
+	
+	if( !missing( border.left.color ) ){
+		if( is.color( border.left.color ) ){
+			object$border.left$color = getHexColorCode( border.left.color )
+		} else stop("border.left.color must be a valid color.")
+	}
+	
+	
+	if( !missing( border.right.style ) ){
+		if( is.character( border.right.style ) ){
+			match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = F )
+			object$border.right$style = border.right.style
+		} else stop("border.right.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
+	}
+	
+	if( !missing( border.right.width ) ){
+		if( is.numeric( border.right.width ) ){
+			object$border.right$width = as.integer(border.right.width)
+		} else stop("border.right.width must be an integer scalar.")
+	}
+	
+	if( !missing( border.right.color ) ){
+		if( is.color( border.right.color ) ){
+			object$border.right$color = getHexColorCode( border.right.color )
+		} else stop("border.right.color must be a valid color.")
+	}
+
 
 	if( !missing( border.bottom ) ){
 		if( inherits( border.bottom, "borderProperties" ) ) {
