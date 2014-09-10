@@ -13,7 +13,7 @@ is.color = function(x) {
 	out = sapply(x, function( x ) {
 				tryCatch( is.matrix( col2rgb( x ) ), error = function( e ) F )
 			})
-	if(any( is.na( names(xx) ) ) ) out[is.na( names(xx) )] = FALSE
+	if(any( is.na( names(out) ) ) ) out[is.na( names(out) )] = FALSE
 	out
 }
 

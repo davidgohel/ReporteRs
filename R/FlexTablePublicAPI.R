@@ -291,15 +291,15 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 		)		
 	} else if( inherits(value, "cellProperties" ) ){
 		switch(to,
-			body = {
-				x = chBodyCellProperties( x=x, i=i, j=j, value=value )
-			}, 
-			header = {
-				x = chHeaderCellProperties( x=x, i=i, j=j, value=value )
-			}, 
-			footer =  {
-				x = chFooterCellProperties( x=x, i=i, j=j, value=value )
-			}, stop("to should be one of 'body', 'header', 'footer'.")
+				body = {
+					x = chBodyCellProperties( x=x, i=i, j=j, value=value )
+				}, 
+				header = {
+					x = chHeaderCellProperties( x=x, i=i, j=j, value=value )
+				}, 
+				footer =  {
+					x = chFooterCellProperties( x=x, i=i, j=j, value=value )
+				}, stop("to should be one of 'body', 'header', 'footer'.")
 		)		
 	} else if( is.character( value ) && length( value ) == 1 ){
 		
@@ -584,6 +584,74 @@ setColumnsColors = function (object, j, colors){
 	
 	object
 }
+
+#' @title applies background colors to cells of a FlexTable
+#'
+#' @description applies background colors to cells of a FlexTable
+#' 
+#' @param object a \code{FlexTable} object
+#' @param i vector (integer index, row.names values or boolean vector) for rows selection. 
+#' @param j vector (integer index, col.names values or boolean vector) for columns selection. 
+#' @param colors background colors to apply (e.g. "#000000" or "black"). a character vector 
+#' of colors with as many elements as defined by the selection. 
+#' @param to specify on which part of the FlexTable to apply colors, must be one of the following 
+#' values "body" (default) or "header" or "footer"
+#' @examples 
+#' #START_TAG_TEST
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{FlexTable}}, \code{\link{is.color}}
+#' @export 
+setFlexTableBackgroundColors = function (object, i, j, colors, to = "body"){
+	if( !inherits(object, "FlexTable") )
+		stop("argument object must be a FlexTable object.")
+	
+	args.get.indexes = list(object = object)
+	if( !missing(i) ) args.get.indexes$i = i
+	if( !missing(j) ) args.get.indexes$j = j
+	args.get.indexes$partname = to
+	
+	if( to == "header" ){
+		headers = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
+	} else if( to == "footer" ){
+		footers = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
+	} else if( to == "body" ){
+	}
+	
+	if( to == "header" ){
+		args.get.indexes$numrow = .jcall( object$jobj, "I", "headerSize" )
+	} else if( to == "footer" ){
+		args.get.indexes$numrow = .jcall( object$jobj, "I", "footerSize" )
+	} else if( to == "body" ){
+		args.get.indexes$numrow = object$numrow
+	}
+	indexes = do.call(getncheckid, args.get.indexes)
+	i = indexes$i
+	j = indexes$j
+	
+	
+	if( !is.character( colors ) ) {
+		stop("colors must be a character value.")
+	} else if( any( !is.color(colors) ) ){
+		stop("colors must be valid colors.")
+	}
+	if( length( colors ) == 1 ) colors = rep(colors, length(j)*length(i) )
+	if( length( colors ) != length(j)*length(i) ) stop("expected ", length(j)*length(i) , " colors")
+	
+	switch(to,
+		body = {
+			object = chBodyBackgroundColor( x=object, i=i, j=j, value=colors )
+		}, 
+		header = {
+			object = chHeaderBackgroundColor( x=object, i=i, j=j, value=colors )
+		}, 
+		footer =  {
+			object = chFooterBackgroundColor( x=object, i=i, j=j, value=colors )
+		}, stop("to should be one of 'body', 'header', 'footer'.")
+	)
+		
+	object
+}
+
 
 #' @title Span rows within columns
 #'

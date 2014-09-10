@@ -11,6 +11,20 @@ chBodyCellProperties = function( x, i, j, value ){
 	x
 }
 
+chBodyBackgroundColor = function( x, i, j, value ){
+	
+	if( !all( is.color( value ) ) ) {
+		stop("value contains elements that are not valid colors")
+	}
+	
+	jflexcell = .jcall( x$jobj, "V", "setBackgroundColors"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, .jarray( as.character( value ) )  )
+	
+	x
+}
+
 chBodyParProperties = function( x, i, j, value ){
 	if( !inherits( value , "parProperties" ) ){
 		stop("value is not a parProperties object")
@@ -82,6 +96,20 @@ chHeaderCellProperties = function( x, i, j, value ){
 			, jcellProp  )
 	x
 }
+chHeaderBackgroundColor = function( x, i, j, value ){
+	
+	if( !all( is.color( value ) ) ) {
+		stop("value contains elements that are not valid colors")
+	}
+	
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
+	
+	jflexcell = .jcall( metarows, "V", "setBackgroundColors"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, .jarray( as.character( value ) )  )
+	x
+}
 
 chHeaderParProperties = function( x, i, j, value ){
 	
@@ -140,6 +168,20 @@ chFooterCellProperties = function( x, i, j, value ){
 			, .jarray( as.integer( i-1 ) )
 			, .jarray( as.integer( j-1 ) )
 			, jcellProp  )
+	x
+}
+chFooterBackgroundColor = function( x, i, j, value ){
+	
+	if( !all( is.color( value ) ) ) {
+		stop("value contains elements that are not valid colors")
+	}
+	
+	metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
+	
+	jflexcell = .jcall( metarows, "V", "setBackgroundColors"
+			, .jarray( as.integer( i-1 ) )
+			, .jarray( as.integer( j-1 ) )
+			, .jarray( as.character( value ) )  )
 	x
 }
 
