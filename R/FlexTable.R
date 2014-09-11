@@ -3,8 +3,11 @@
 #' @description Create an object of class \code{FlexTable}.
 #' 
 #' FlexTable can be manipulated so that almost any formatting can be specified.
-#' It allows to insert headers and footers rows with eventually merged cells 
-#' (see \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}).
+#' 
+#' An API is available to let you manipulate (format, add text, merge cells, etc.) 
+#' your FlexTable. A FlexTable is made of 3 parts: header, body and footer. To insert 
+#' headers and footers rows with eventually merged cells, see 
+#' \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}.
 #' 
 #' Formating can be done on cells, paragraphs and text (borders, colors, fonts, etc.)
 #' , see \code{\link{alterFlexTable}}.
@@ -21,31 +24,92 @@
 #' @param header.cell.props default cells formatting properties for table headers
 #' @param header.par.props default paragraphs formatting properties for table headers
 #' @param header.text.props default text formatting properties for table headers
-#' @note The classical workflow would be to create a FlexTable, to add headers rows 
+#' @details 
+#' 
+#' The classical workflow would be to create a FlexTable, to add headers rows 
 #' (see \code{\link{addHeaderRow}}) and eventually footers 
 #' rows (see \code{\link{addFooterRow}}).
 #' 
-#' Additionnal text can be added with subscript syntax (see \code{\link{alterFlexTable}}).
 #' 
-#' Text, paragraphs and cells properties can be modified with subscript syntax 
+#' A FlexTable lets you add text in cells and modify cells, paragraphs and text 
+#' properties. Text can be added with operator \code{[<-}.
+#' Text, paragraphs and cells properties can be also modified with operator \code{[<-}.  
 #' (see \code{\link{alterFlexTable}}).
 #' 
-#' Cells background colors can also be modified with functions \code{\link{setRowsColors}}
-#' , \code{\link{setColumnsColors}} and \code{\link{setZebraStyle}}.
 #' 
-#' Merging cells can be done with functions \code{\link{spanFlexTableRows}} and \code{\link{spanFlexTableColumns}}.
+#' Below list of functions to use with \code{FlexTable} objects:
+#' 
+#' 
+#' \strong{Text formatting}
+#' 
+#' Apply a \code{\link{textProperties}} object to a subset of the 
+#' FlexTable. Use the operator \code{[<-}. The \code{textProperties} 
+#' object will be used to format all text from selected cells. See 
+#' \code{\link{alterFlexTable}}.
+#' 
+#' \strong{Text adding}
+#' 
+#' Add text with operator \code{[<-}. Text can be added just after 
+#' the last text in the cell or as a new paragraph. Format can also 
+#' be specified. Text can also be a \code{\link{pot}} object if the 
+#' text format is complex.
+#'   
+#' \strong{Paragraph formatting}
+#' 
+#' Apply a \code{\link{parProperties}} object to a subset of the 
+#' FlexTable. Use the operator \code{[<-}. The \code{parProperties} 
+#' object will be used to format all paragraphs from selected cells. See 
+#' \code{\link{alterFlexTable}}.
+#' 
+#' \strong{Cell formatting}
+#' 
+#' Apply a \code{\link{cellProperties}} object to a subset of the 
+#' FlexTable. Use the operator \code{[<-}. The \code{cellProperties} 
+#' object will be used to format selected cells. See \code{\link{alterFlexTable}}.
+#' 
+#' \strong{Borders}
+#' 
+#' Apply borders scheme to a FlexTable with function \code{\link{setFlexTableBorders}}.
+#' 
+#' Set a border to a selection in a FlexTable with the operator \code{[<-} and an object 
+#' of class \code{\link{borderProperties}}. Don't forget to specify argument \code{side}. 
+#' See \code{\link{alterFlexTable}}.
+#' 
+#' 
+#' \strong{Cell background colors}
+#' 
+#' Applies background colors to cells. See \code{\link{setFlexTableBackgroundColors}}.
+#' 
+#' Alternate row colors (zebra striping) with function \code{\link{setZebraStyle}}.
+#' 
+#' Applies background colors to rows with function \code{\link{setRowsColors}}.
+#' 
+#' Applies background colors to columns with function \code{\link{setColumnsColors}}.
+#' 
+#' 
+#' \strong{Cell merge}
+#' 
+#' Span rows within columns with function \code{\link{spanFlexTableRows}}.
+#' 
+#' Span columns within rows with function \code{\link{spanFlexTableColumns}}.
+#' 
+#' \strong{Columns widths}
+#' 
+#' Set columns widths with function \code{\link{setFlexTableWidths}}.
+#' 
 #' @export
 #' @examples
 #' #START_TAG_TEST
 #' @example examples/FlexTableExample.R
 #' @example examples/agg.mtcars.FlexTable.R
-#' @example examples/agg.mtcars.FlexTable.R
+#' @example examples/setFlexTableBackgroundColors.R
 #' @example examples/FlexTableAPIFullDemo.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
+#' , \code{\link{setFlexTableBackgroundColors}}, \code{\link{pot}}
 #' , \code{\link{addFlexTable}}, \code{\link{addFlexTable.docx}}
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 FlexTable = function(data, numrow, numcol

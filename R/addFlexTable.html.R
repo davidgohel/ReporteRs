@@ -20,12 +20,14 @@
 #' @example examples/addTitle2Level1.R
 #' @example examples/agg.mtcars.FlexTable.R
 #' @example examples/addFlexTable.R
+#' @example examples/addTitle3Level1.R
+#' @example examples/setFlexTableBackgroundColors.R
+#' @example examples/addFlexTable.R
 #' @example examples/writeDoc_directory.R
 #' @example examples/STOP_TAG_TEST.R
 #' @method addFlexTable html
 #' @S3method addFlexTable html
 addFlexTable.html = function(doc, flextable, ... ) {
-			
 	
 	out = .jcall( doc$current_slide, "I", "add", flextable$jobj )
 	if( out != 1 ){

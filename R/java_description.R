@@ -6,6 +6,7 @@ class.pptx4r.SlideLayout = "org/lysis/reporters/pptx4r/elements/layouts/SlideLay
 class.FlexTable = "org/lysis/reporters/tables/FlexTable"
 class.FlexRow = "org/lysis/reporters/tables/FlexRow"
 class.FlexCell = "org/lysis/reporters/tables/FlexCell"
+class.MetaRows = "org/lysis/reporters/tables/MetaRows"
 
 # format properties
 class.tables.BorderProperties = "org/lysis/reporters/formats/BorderProperties"

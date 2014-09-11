@@ -48,33 +48,97 @@ FlexTable(data, numrow, numcol, header.columns = TRUE, add.rownames = FALSE,
 Create an object of class \code{FlexTable}.
 
 FlexTable can be manipulated so that almost any formatting
-can be specified. It allows to insert headers and footers
-rows with eventually merged cells (see
-\code{\link{addHeaderRow}} and \code{\link{addFooterRow}}).
+can be specified.
+
+An API is available to let you manipulate (format, add
+text, merge cells, etc.) your FlexTable. A FlexTable is
+made of 3 parts: header, body and footer. To insert headers
+and footers rows with eventually merged cells, see
+\code{\link{addHeaderRow}} and \code{\link{addFooterRow}}.
 
 Formating can be done on cells, paragraphs and text
 (borders, colors, fonts, etc.) , see
 \code{\link{alterFlexTable}}.
 }
-\note{
+\details{
 The classical workflow would be to create a FlexTable, to
 add headers rows (see \code{\link{addHeaderRow}}) and
 eventually footers rows (see \code{\link{addFooterRow}}).
 
-Additionnal text can be added with subscript syntax (see
+A FlexTable lets you add text in cells and modify cells,
+paragraphs and text properties. Text can be added with
+operator \code{[<-}. Text, paragraphs and cells properties
+can be also modified with operator \code{[<-}. (see
 \code{\link{alterFlexTable}}).
 
-Text, paragraphs and cells properties can be modified with
-subscript syntax (see \code{\link{alterFlexTable}}).
+Below list of functions to use with \code{FlexTable}
+objects:
 
-Cells background colors can also be modified with functions
-\code{\link{setRowsColors}} ,
-\code{\link{setColumnsColors}} and
+\strong{Text formatting}
+
+Apply a \code{\link{textProperties}} object to a subset of
+the FlexTable. Use the operator \code{[<-}. The
+\code{textProperties} object will be used to format all
+text from selected cells. See \code{\link{alterFlexTable}}.
+
+\strong{Text adding}
+
+Add text with operator \code{[<-}. Text can be added just
+after the last text in the cell or as a new paragraph.
+Format can also be specified. Text can also be a
+\code{\link{pot}} object if the text format is complex.
+
+\strong{Paragraph formatting}
+
+Apply a \code{\link{parProperties}} object to a subset of
+the FlexTable. Use the operator \code{[<-}. The
+\code{parProperties} object will be used to format all
+paragraphs from selected cells. See
+\code{\link{alterFlexTable}}.
+
+\strong{Cell formatting}
+
+Apply a \code{\link{cellProperties}} object to a subset of
+the FlexTable. Use the operator \code{[<-}. The
+\code{cellProperties} object will be used to format
+selected cells. See \code{\link{alterFlexTable}}.
+
+\strong{Borders}
+
+Apply borders scheme to a FlexTable with function
+\code{\link{setFlexTableBorders}}.
+
+Set a border to a selection in a FlexTable with the
+operator \code{[<-} and an object of class
+\code{\link{borderProperties}}. Don't forget to specify
+argument \code{side}. See \code{\link{alterFlexTable}}.
+
+\strong{Cell background colors}
+
+Applies background colors to cells. See
+\code{\link{setFlexTableBackgroundColors}}.
+
+Alternate row colors (zebra striping) with function
 \code{\link{setZebraStyle}}.
 
-Merging cells can be done with functions
-\code{\link{spanFlexTableRows}} and
+Applies background colors to rows with function
+\code{\link{setRowsColors}}.
+
+Applies background colors to columns with function
+\code{\link{setColumnsColors}}.
+
+\strong{Cell merge}
+
+Span rows within columns with function
+\code{\link{spanFlexTableRows}}.
+
+Span columns within rows with function
 \code{\link{spanFlexTableColumns}}.
+
+\strong{Columns widths}
+
+Set columns widths with function
+\code{\link{setFlexTableWidths}}.
 }
 \examples{
 #START_TAG_TEST
@@ -144,50 +208,34 @@ MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
 		, outer.vertical = borderProperties( width = 2, color = "#666666" )
 		, outer.horizontal = borderProperties( width = 2, color = "#666666" )
 )
-#####################################################################
+data = cor( cor(mtcars) )
 
-# set default font size to 10
-options( "ReporteRs-fontsize" = 10 )
+mycolors = brewer.pal(name = "RdYlGn", n = 8 )[cut( data ,
+	breaks=c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1),
+	include.lowest=TRUE,
+	label = F
+) ]
 
-# a summary of mtcars
-dataset = aggregate( mtcars[, c("disp", "mpg", "wt")]
-		, by = mtcars[, c("cyl", "gear", "carb")]
-		, FUN = mean )
-dataset = dataset[ order(dataset$cyl, dataset$gear, dataset$carb), ]
+MyFTable = FlexTable( round(data, 3), add.rownames = TRUE )
 
+# set computed colors
+MyFTable = setFlexTableBackgroundColors( MyFTable, 
+	j = seq_len(ncol(data)) + 1, 
+	colors = mycolors )
 
-# set cell padding defaut to 2
-baseCellProp = cellProperties( padding = 2 )
+# cosmetics
+MyFTable = setFlexTableBackgroundColors( MyFTable, i = 1, 
+	colors = "black", to = "header" )
+MyFTable[1, , to = "header"] = textBold(color="white")
 
-# Create a FlexTable with data.frame dataset
-MyFTable = FlexTable( data = dataset
-		, body.cell.props = baseCellProp
-		, header.cell.props = baseCellProp
-		, header.par.props = parProperties(text.align = "right" )
-)
+MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, colors = "black" )
+MyFTable[,1] = textBold(color="white")
 
-# set columns widths (in inches)
-MyFTable = setFlexTableWidths( MyFTable, widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
-
-# span successive identical cells within column 1, 2 and 3
-MyFTable = spanFlexTableRows( MyFTable, j = 1, runs = as.character( dataset$cyl ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 2, runs = as.character( dataset$gear ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 3, runs = as.character( dataset$carb ) )
-
-# overwrites some text formatting properties
-MyFTable[dataset$wt < 3, 6] = textProperties( color="#003366")
-MyFTable[dataset$mpg < 20, 5] = textProperties( color="#993300")
-
-# overwrites some paragraph formatting properties
-MyFTable[, 1:3] = parProperties(text.align = "center")
-MyFTable[, 4:6] = parProperties(text.align = "right")
-
-# applies a border grid on table
-MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
-		, inner.vertical = borderProperties( color = "#666666" )
-		, inner.horizontal = borderProperties( color = "#666666" )
-		, outer.vertical = borderProperties( width = 2, color = "#666666" )
-		, outer.horizontal = borderProperties( width = 2, color = "#666666" )
+MyFTable = setFlexTableBorders( MyFTable
+	, inner.vertical = borderProperties( style = "dashed", color = "white" )
+	, inner.horizontal = borderProperties( style = "dashed", color = "white"  )
+	, outer.vertical = borderProperties( width = 2, color = "white"  )
+	, outer.horizontal = borderProperties( width = 2, color = "white"  )
 )
 
 
@@ -224,7 +272,8 @@ iris_ft = setFlexTableBorders( iris_ft,
 \code{\link{spanFlexTableColumns}} ,
 \code{\link{setRowsColors}},
 \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
-, \code{\link{addFlexTable}},
+, \code{\link{setFlexTableBackgroundColors}},
+\code{\link{pot}} , \code{\link{addFlexTable}},
 \code{\link{addFlexTable.docx}} ,
 \code{\link{addFlexTable.pptx}},
 \code{\link{addFlexTable.html}}

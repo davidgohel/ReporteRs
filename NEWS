@@ -1,5 +1,12 @@
 ReporteRs 0.6.1
 ==================================================================
+ENHANCEMENT
+------------------------------------------------------------------
+* new function setFlexTableBackgroundColors enable coloring of 
+  cell background of a FlexTable.
+
+* work on the documentation of FlexTable and alterFlexTable
+
 DEBUG
 ------------------------------------------------------------------
 * Reintroducing in function chprop.cellProperties arguments 

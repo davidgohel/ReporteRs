@@ -21,16 +21,6 @@ MyFTable = setFlexTableWidths( MyFTable, widths = c(1,1,1,1,3))
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addHeaderRow}}, \code{\link{addFooterRow}},
-\code{\link{setFlexTableWidths}} ,
-\code{\link{alterFlexTable}}, \code{\link{FlexTable}} ,
-\code{\link{spanFlexTableRows}},
-\code{\link{spanFlexTableColumns}} ,
-\code{\link{setRowsColors}},
-\code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
-, \code{\link{addFlexTable}},
-\code{\link{addFlexTable.docx}} ,
-\code{\link{addFlexTable.pptx}},
-\code{\link{addFlexTable.html}}
+\code{\link{FlexTable}}
 }
 

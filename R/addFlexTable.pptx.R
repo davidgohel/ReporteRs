@@ -34,6 +34,10 @@
 #' @example examples/agg.mtcars.FlexTable.R
 #' @example examples/addFlexTable.R
 #' @example examples/addFlexTable_posdim.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle3Level1.R
+#' @example examples/setFlexTableBackgroundColors.R
+#' @example examples/addFlexTable.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @method addFlexTable pptx

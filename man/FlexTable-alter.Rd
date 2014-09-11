@@ -16,58 +16,71 @@
   class \code{\link{textProperties}}.}
 
   \item{text.properties}{formatting properties (an object
-  of class \code{textProperties}).}
+  of class \code{textProperties}). Used only when
+  \code{value} is a \code{data.frame}, a \code{maxtrix} or
+  a vector. It will be used to format added text.}
 
   \item{newpar}{logical value specifying wether or not the
-  content should be added as a new paragraph}
+  content should be added as a new paragraph (therefore
+  added on a new line).}
 
-  \item{byrow}{logical. If FALSE (the default) content is
-  added by columns , otherwise content is added by rows.}
+  \item{byrow}{logical. If \code{FALSE} (the default)
+  content is added by columns , otherwise content is added
+  by rows.}
 
   \item{to}{specify on which part of the FlexTable to apply
   the \code{value}, must be one of the following values
-  "body" (default) or "header" or "footer"}
+  \dQuote{body} (default) or \dQuote{header} or
+  \dQuote{footer}}
 
   \item{side}{used only when value is a
   \code{\link{borderProperties}}, specify on which side to
-  apply the properties. It must be one of "bottom", "top",
-  "left", "right".}
+  apply the properties. It must be one of \dQuote{bottom},
+  \dQuote{top}, \dQuote{left}, \dQuote{right}.}
 
   \item{value}{see details.}
 }
 \description{
-add text or format a FlexTable object
+add text or format a FlexTable object.
 }
 \details{
-To modify content formatting properties, value should be an
-object of class \code{\link{cellProperties}} or an object
-of class \code{\link{parProperties}} or an object of class
-\code{\link{textProperties}} or an object of class
-\code{\link{borderProperties}}.
-
-To add content, there are two options:
-
-* First option: value should be a \code{data.frame} or a
-\code{matrix} or a \code{vector} with as many elements as
-defined by the selection. \code{text.properties} can be
-used to specify how to format added values.
-
-* Second option: value is a \code{\link{pot}} object, its
-value will be added in all cells defined by the selection.
-
-Use \code{ft_object[1:4, 2:3] <- ...} to perform the
+Use \code{ft_object[1:4, 2:3] <- value} to perform the
 operation on the body subset of of the FlexTable.
 
-Use \code{ft_object[1, 2, to = "header"] <- ... } to
+Use \code{ft_object[] <- value} to perform the operation on
+the whole part (body, header or footer) of the FlexTable.
+
+Use \code{ft_object[1, 2, to = "header"] <- value} to
 perform the operation on the header subset of the
 FlexTable.
 
-Use \code{ft_object[1, 2, , to = "footer"] <- ... } to
+Use \code{ft_object[1, 2, , to = "footer"] <- value} to
 perform the operation on the footer subset of the
 FlexTable.
 
-Use \code{ft_object[] <- ... } to perform the operation on
-the whole part (body, header or footer) of the FlexTable.
+To \strong{format content}, argument \code{value} (the
+right side of the \code{<-}) should be one of the
+following: \itemize{ \item{\emph{for table cells: }}{an
+object of class \code{\link{cellProperties}}}
+\item{\emph{for paragraphs contained in table cells: }}{an
+object of class \code{\link{parProperties}}}
+\item{\emph{for text contained in table cells: }}{an object
+of class \code{\link{textProperties}}} \item{\emph{for
+borders of table cells: }}{an object of class
+\code{\link{borderProperties}}} }
+
+To \strong{add content}, there are two options:
+
+\itemize{ \item{\emph{option 1: }}{value should be a
+\code{data.frame} or a \code{matrix} or a \code{vector}
+with as many elements as defined by the selection.}
+\item{\emph{option 2: }}{value is a \code{\link{pot}}
+object, its value will be added in all cells defined by the
+selection.} }
+
+If dealing with \code{borderProperties} objects, use also
+argument \code{side} to specify on which side of cells to
+apply border properties.
 }
 \examples{
 #START_TAG_TEST
@@ -114,16 +127,8 @@ iris_ft = setFlexTableBorders( iris_ft,
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addHeaderRow}}, \code{\link{addFooterRow}} ,
-\code{\link{FlexTable}}, \code{\link{setFlexTableBorders}}
-, \code{\link{spanFlexTableRows}},
-\code{\link{spanFlexTableColumns}} ,
-\code{\link{setRowsColors}},
-\code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
-, \code{\link{addFlexTable}},
-\code{\link{addFlexTable.docx}} ,
-\code{\link{addFlexTable.pptx}},
-\code{\link{addFlexTable.html}} ,
-\code{\link{borderProperties}}
+\code{\link{FlexTable}}, \code{\link{borderProperties}} ,
+\code{\link{cellProperties}}, \code{\link{parProperties}} ,
+\code{\link{textProperties}}
 }
 
