@@ -35,9 +35,9 @@
 #' @S3method addParagraph docx
 addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 	
-	if( missing( stylename )) {
+	if( missing( stylename ) && missing(bookmark) ) {
 		stop("argument 'stylename' is missing")
-	} else if( !is.element( stylename , styles( doc ) ) ){
+	} else if( !missing(stylename) && !is.element( stylename , styles( doc ) ) ){
 		stop(paste("Style {", stylename, "} does not exists.", sep = "") )
 	}
 	
@@ -69,7 +69,11 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 	
 	if( missing( bookmark ) )
 		.jcall( doc$obj, "V", "add" , parset, stylename)
-	else .jcall( doc$obj, "V", "add", parset, stylename, bookmark )
+	else {
+		if(missing( stylename )) 
+			.jcall( doc$obj, "V", "replacePar", parset, bookmark )
+		else .jcall( doc$obj, "V", "add", parset, stylename, bookmark )
+	}
 	
 	doc
 }

@@ -1,10 +1,11 @@
 data = cor( cor(mtcars) )
 
-mycolors = brewer.pal(name = "RdYlGn", n = 8 )[cut( data ,
-	breaks=c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1),
-	include.lowest=TRUE,
-	label = F
-) ]
+pal = c( "#D73027", "#F46D43", "#FDAE61", "#FEE08B", 
+	"#D9EF8B", "#A6D96A", "#66BD63", "#1A9850" )
+mycut = cut( data, 
+	breaks = c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1),
+	include.lowest = TRUE, label = FALSE )
+mycolors = pal[ mycut ]
 
 MyFTable = FlexTable( round(data, 3), add.rownames = TRUE )
 

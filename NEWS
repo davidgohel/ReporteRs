@@ -3,9 +3,12 @@ ReporteRs 0.6.1
 ENHANCEMENT
 ------------------------------------------------------------------
 * new function setFlexTableBackgroundColors enable coloring of 
-  cell background of a FlexTable.
+  cell background of a FlexTable. (suggested by Jean-Francois Collin)
 
 * work on the documentation of FlexTable and alterFlexTable
+
+* let addParagraph.docx have no stylename argument when bookmark 
+  argument is used. (suggested by Günter Lutz)
 
 DEBUG
 ------------------------------------------------------------------
