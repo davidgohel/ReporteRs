@@ -1,3 +1,18 @@
+ReporteRs 0.6.2
+==================================================================
+DEBUG
+------------------------------------------------------------------
+* addSection minor debug
+
+
+ENHANCEMENT
+------------------------------------------------------------------
+* new function vanilla.table
+
+* add an argument runs to function spanFlexTableColumns to span 
+  successive columns. (suggested by David Hajage)
+
+
 ReporteRs 0.6.1
 ==================================================================
 ENHANCEMENT

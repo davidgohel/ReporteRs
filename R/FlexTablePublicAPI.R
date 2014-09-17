@@ -673,7 +673,7 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 						} ) )
 		if( sum( weights ) != object$numrow )
 			stop("row spanning not possible, runs has wrong dimension")
-		for( colid in j  )object$rowspan[, colid ] = weights
+		for( colid in j  ) object$rowspan[, colid ] = weights
 		
 	} else {
 		
@@ -722,31 +722,49 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection. 
 #' @param from index of the first column to span (its content will be the visible one).  
 #' @param to index of the last column to span.  
+#' @param runs a vector of size \code{numcol} of FlexTable. If provided, successive 
+#' runs of equal values will indicate to merge corresponding columns.  
 #' @examples 
 #' #START_TAG_TEST
 #' @example examples/FlexTable.pbc.header.R
-#' @example examples/spanFlexTableRows.R
+#' @example examples/spanFlexTableColumns.R
 #' @example examples/STOP_TAG_TEST.R
 #' @export
 #' @seealso \code{\link{spanFlexTableRows}}, \code{\link{FlexTable}}
 #' @export 
-spanFlexTableColumns = function (object, i, from, to){
+spanFlexTableColumns = function (object, i, from, to, runs ){
 	
 	if( !inherits(object, "FlexTable") )
 		stop("argument object must be a FlexTable object.")
+	args.get.indexes = list(object = object)
 	
-	if( missing(i) && is.numeric (i) && length(i) != 1 ) {
-		stop("invalid argument i, it must be a unique positive integer.")
-	} 
-	if( missing( from ) || missing( to ) ) {
+	if( !missing(i) ) args.get.indexes$i = i
+	args.get.indexes$partname = "body"
+	args.get.indexes$numrow = object$numrow
+	indexes = do.call(getncheckid, args.get.indexes)
+	rowid = indexes$i
+	if( !missing( runs ) ){
+		if( is.factor( runs) ) runs = as.character( runs )
+		if( !is.vector( runs ) ) stop("argument runs must be a vector.")
+		.rle = rle( runs )
+		weights = unlist( lapply( .rle$lengths
+			, function(x) {
+				if( x < 2 )
+					return(1)
+				else
+					return( c(x, rep(0, x-1 ) ) )
+			} ) )
+		if( sum( weights ) != object$numcol )
+			stop("column spanning not possible, runs has wrong dimension")
+		object$colspan[rowid, ] = matrix( rep( weights, each = length(rowid)), nrow = length(rowid), byrow = F )
+	} else if( missing( from ) || missing( to ) ) {
 		stop("argument from and to cannot be missing.")
+	} else {
+		.seq = seq( from, to, by = 1 )
+		object$colspan[rowid, .seq] = t( apply( object$colspan[rowid, , drop = F], 1 , function( x, .seq ){
+				x[.seq] = c( length(.seq), integer(length(.seq) - 1) )
+			}, .seq = .seq ) )
 	}
-	.seq = seq( from, to, by = 1 )
-	
-	colspan = object$colspan[i,]
-	colspan[.seq] = c( length(.seq), integer(length(.seq) - 1) )
-	if( sum( colspan ) != object$numcol ) stop("col spanning not possible")
-	else object$colspan[i, ] = colspan
 	
 	merged.rows = which( object$rowspan != 1 )
 	merged.cols = which( object$colspan != 1 )
@@ -754,12 +772,13 @@ spanFlexTableColumns = function (object, i, from, to){
 	if( length( overlaps ) > 0 )
 		stop("span overlappings, some merged cells are already merged with other cells.")
 	
-	.jcall( object$jobj , "V", "setColSpanInstructions"
-			, as.integer( i - 1 )
-			, .jarray( as.integer( object$colspan[i, ] ) )
-	)
-	
-	
+	for(i in rowid){
+		.jcall( object$jobj , "V", "setColSpanInstructions"
+				, as.integer( i - 1 )
+				, .jarray( as.integer( object$colspan[i, ] ) )
+		)
+	}
+
 	object
 }
 

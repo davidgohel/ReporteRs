@@ -2,7 +2,7 @@
 \alias{spanFlexTableColumns}
 \title{Span columns within rows}
 \usage{
-spanFlexTableColumns(object, i, from, to)
+spanFlexTableColumns(object, i, from, to, runs)
 }
 \arguments{
   \item{object}{a \code{FlexTable} object}
@@ -14,6 +14,10 @@ spanFlexTableColumns(object, i, from, to)
   content will be the visible one).}
 
   \item{to}{index of the last column to span.}
+
+  \item{runs}{a vector of size \code{numcol} of FlexTable.
+  If provided, successive runs of equal values will
+  indicate to merge corresponding columns.}
 }
 \description{
 Span columns within rows.
@@ -27,12 +31,11 @@ merged cells are forbidden.
 data(pbc_summary)
 
 MyFTable = FlexTable( data = pbc_summary[, 1:4] )
-# merge line 7 to 11 in column 1
-MyFTable = spanFlexTableRows( MyFTable, j = 3, from = 5, to = 7 )
-# merge cells in column 1 (trt) when successive values of trt are identical
-MyFTable = spanFlexTableRows( MyFTable, j=1, runs = as.character( pbc_summary$trt ) )
-# merge cells in column 2 (sex) when successive values of sex are identical
-MyFTable = spanFlexTableRows( MyFTable, j=2, runs = as.character( pbc_summary$sex ) )
+# merge column 2 to 4 in line 3
+MyFTable = spanFlexTableColumns( MyFTable, i = 3, from = 2, to = 4 )
+
+# merge cells in rows 1 to 6 when successive values of runs are identical
+MyFTable = spanFlexTableColumns( MyFTable, i = 4:6, runs = c( "a", "b", "b", "c") )
 #STOP_TAG_TEST
 }
 \seealso{
