@@ -12,14 +12,11 @@
 #' This can be usefull to check available shapes.
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' 
-#' slide.layouts(doc)
-#' 
-#' # plot the layout "Two Content"
-#' slide.layouts(doc, layout = "Two Content" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addFlexTable_example.pptx"
+#' @example examples/pptx.R
+#' @example examples/slide.layouts_1.R
+#' @example examples/slide.layouts_2.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}
 #' @method slide.layouts pptx
 #' @S3method slide.layouts pptx
