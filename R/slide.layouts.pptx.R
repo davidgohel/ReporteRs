@@ -23,13 +23,16 @@
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}
 #' @method slide.layouts pptx
 #' @S3method slide.layouts pptx
-
 slide.layouts.pptx = function( doc, layout, ... ) {
 	layout.names = .jcall( doc$obj, "[S", "getStyleNames" )
 	if( !missing( layout ) ){
-		if( !is.character(layout) ) stop("layout must be a single string value.")
-		if( length(layout) != 1 ) stop("layout must be a single string value.")
-		if( !is.element(layout, layout.names)) stop("layout does not exists in layout names of the template pptx file.")
+		if( !is.character(layout) ) stop("argument 'layout' must be a single string value.")
+		if( length(layout) != 1 ) stop("argument 'layout' must be a single string value.")
+		if( !is.element(layout, layout.names)) {
+			stop(shQuote(layout), 
+			" does not exists in the of available layout names of the template pptx file. ",
+			"Use slide.layouts(", deparse(substitute(doc)), ") to list them."	)
+		}
 		plotSlideLayout( doc, layout )
 	}
 	layout.names

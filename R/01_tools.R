@@ -56,91 +56,58 @@ getSlideErrorString = function( value, shape ){
 	else return("")
 }
 
-get_poly_coord = function( x, height ){
-	
-	if( inherits(x, "try-error") || all( x$dim[1:2]< 1 ) ) 
-		return (NULL)
-	
-	position_left_top = x$dim[1:2]
-	size = x$dim[3:4]
-	out = list()
-	
-	out$x = c( position_left_top[1], position_left_top[1] + size[1], position_left_top[1] + size[1], position_left_top[1], NA )
-	
-	newposytopleft = height - position_left_top[2]
-	out$y = c( newposytopleft, newposytopleft, newposytopleft - size[2], newposytopleft - size[2], NA )
-	
-	out
-}
 
-get_text_coord = function( x, height ){
-	
-	if( inherits(x, "try-error") || all( x$dim[1:2]< 1 ) ) 
-		return (NULL)
-	position_left_top = x$dim[1:2]
-	size = x$dim[3:4]
-	out = list()
-	out$x = position_left_top[1] + size[1] * 0.5
-	newposytopleft = height - position_left_top[2]
-	
-	out$y = newposytopleft - size[2] * 0.5
-	if( is.element("text", names( x ) ) ) out$labels = x$text
-	out
-}
 
 plotSlideLayout = function( doc, layout.name ){
-	
-	SlideLayout = .jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", as.character(layout.name) )
-	maxid = .jcall( SlideLayout, "I", "getContentSize")
-	content_shapes = list()
-	content_size = .jcall( SlideLayout, "I", "getContentSize" )
-	if( content_size > 0 )
-		for(i in 0:( maxid - 1 ) ){
-			content_shapes[[i+1]] = list( 
-					text = "content"
-					, dim = .jcall( SlideLayout
-							, "[I", "getContentDimensions"
-							, as.integer(i) ) / 12700 
-			)
-		}
-	
-	meta_shapes = list()
-	metas = c(TITLE = 0, FOOTER = 1, SLIDENUMBER = 2
-			, DATE = 3, SUBTITLE = 4, CRTTITLE = 5)
-	nummeta = 0
-	for(i in 1:length(metas)){
-		if( .jcall( SlideLayout, "Z", "contains", as.integer(metas[i]) ) ){
-			nummeta = nummeta + 1
-			meta_shapes[[nummeta]] = list( 
-					text = names(metas)[i]
-					, dim = .jcall( SlideLayout, "[I", "getMetaDimensions", as.integer(metas[i]) ) / 12700
-					)
-		}
-	}
 
-	dimensions = .jcall( doc$obj, "[I", "readSlideDimensions" ) / 12700
+	layout_description = .jcall( doc$obj, paste0("L", class.pptx4r.LayoutDescription, ";"), "getLayoutProperties", layout.name )
+	dimensions = .jcall( doc$obj, "[I", "readSlideDimensions" )
 	
-	coords_poly_meta = lapply( meta_shapes, get_poly_coord, height = dimensions[2] )
-	coords_poly_meta = coords_poly_meta[ !sapply( coords_poly_meta, is.null ) ]
+	content_dims = matrix( .jcall( layout_description, "[I", "getContentDimensions" ), 
+		ncol = 4, byrow = T, 
+		dimnames = list(NULL, c( "offxs", "offys", "widths", "heights" ) ) 
+	)
 	
-	coords_text_meta = lapply( meta_shapes, get_text_coord, height = dimensions[2] )
-	coords_text_meta = coords_text_meta[ !sapply( coords_text_meta, is.null ) ]
+	header_dims = matrix( .jcall( layout_description, "[I", "getHeaderDimensions" ), 
+		ncol = 5, byrow = T, 
+		dimnames = list(NULL, c( "name", "offxs", "offys", "widths", "heights") )
+	)
 	
-	if( content_size > 0 ){
-		coords_poly_content = lapply( content_shapes, get_poly_coord, height = dimensions[2] )
-		coords_text_content = lapply( content_shapes, get_text_coord, height = dimensions[2] )
-	}
+	if( nrow(header_dims) > 0 ){
+		metas = c(TITLE = 0, FOOTER = 1, SLIDENUMBER = 2
+				, DATE = 3, SUBTITLE = 4, CRTTITLE = 5)
+		header_names = names( metas )[ match( header_dims[,"name"], metas ) ]
+	} else header_names = character(0)
+		
+	if( nrow(content_dims) > 0 )
+		body_names = paste("BODY", sprintf("%02.0f", 1:nrow(content_dims) ) )
+	else body_names = character(0)
+		
+	polygons_info = rbind( header_dims[, -1], content_dims )
 	
-	plot( x = c(0, dimensions[1]) , y = c(0, dimensions[2]), type = "n", axes = F, xlab = "", ylab = "", main = "" )
-	if( content_size > 0 ){
-		lapply( coords_poly_content, function(x) polygon( x$x, x$y ) )
-		for(i in 1:length( coords_text_content ))
-			text( coords_text_content[[i]]$x, coords_text_content[[i]]$y, labels=paste("shape", i) )
-	}
-	lapply( coords_poly_meta, function(x) polygon( x$x, x$y ) )
-	for(i in 1:length( coords_text_meta ))
-		text( x = coords_text_meta[[i]]$x, y = coords_text_meta[[i]]$y, labels=coords_text_meta[[i]]$labels )
+	position_left = polygons_info[,"offxs"]
+	position_right = polygons_info[,"offxs"] + polygons_info[,"widths"]
+	position_top = dimensions[2] - polygons_info[,"offys"] 
+	position_bottom = dimensions[2] - (polygons_info[,"offys"] + polygons_info[,"heights"])
 	
+	positions = matrix( c( position_left, 
+			position_right, position_top, 
+			position_bottom
+		), ncol = 4 )
+	x = as.vector( apply( positions, 1, function( x ) c( x[1], x[1], x[2], x[2], NA ) ) )
+	y = as.vector( apply( positions, 1, function( x ) c( x[4], x[3], x[3], x[4], NA ) ) )
+	
+	plot( x = c(0, dimensions[1]) , y = c(0, dimensions[2]), 
+			type = "n", axes = F, 
+			xaxs = "i", yaxs = "i", 
+			xlab = "", ylab = "", main = "" )
+	box()
+	polygon(x, y )
+	
+	text( x = (position_left + position_right)/2, 
+		y = (position_top + position_bottom)/2 ,
+		labels = c( header_names, body_names )
+		)
 	invisible()
 }
 
@@ -301,6 +268,7 @@ getOldTable = function( data, layout.properties
 		}
 	}
 	
+
 	ft = FlexTable( data = data, header.columns = FALSE, add.rownames = row.names )
 	for(j in span.columns ) 
 		ft = spanFlexTableRows( ft, j=j, runs = as.character( data[,j] ) )

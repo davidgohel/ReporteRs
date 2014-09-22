@@ -1,6 +1,7 @@
 class.html4r.RAPHAELGraphics = "org/lysis/reporters/html4r/elements/RAPHAELGraphics"
 class.html4r.Title = "org/lysis/reporters/html4r/elements/Title"
-class.pptx4r.SlideLayout = "org/lysis/reporters/pptx4r/elements/layouts/SlideLayout"
+class.pptx4r.LayoutDescription = "org/lysis/reporters/pptx4r/elements/template/LayoutDescription"
+class.pptx4r.SlidePart = "org/docx4j/openpackaging/parts/PresentationML/SlidePart"
 
 # FlexTable
 class.FlexTable = "org/lysis/reporters/tables/FlexTable"

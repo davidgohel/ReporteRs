@@ -95,22 +95,23 @@ addPlot.pptx = function(doc, fun, pointsize = 11
 	doc
 }
 
+
 get.graph.dims = function( doc ){
 	slide = doc$current_slide 
-	id = .jcall( slide, "I", "getNextIndex"  )
+	id = .jcall( slide, "I", "getNextShapeIndex"  )
 	maxid = .jcall( slide, "I", "getmax_shape"  )
 	if( maxid-id < 1 ) stop( getSlideErrorString( shape_errors["NOROOMLEFT"] , "plot") )
-	
 	widths = double( maxid-id )
 	heights = double( maxid-id )
 	offxs = double( maxid-id )
 	offys = double( maxid-id )
 	j=0
+
 	LayoutName = .jcall( slide, "S", "getLayoutName" )
-	SlideLayout = .jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", LayoutName )
+	layout_description = .jcall( doc$obj, paste0("L", class.pptx4r.LayoutDescription, ";"), "getLayoutProperties", LayoutName )
 	
 	for(i in seq(id,maxid-1, by=1) ){
-		dims = .jcall( SlideLayout, "[I", "getContentDimensions", as.integer(i) )
+		dims = .jcall( layout_description, "[I", "getContentDimensions", as.integer(i) )
 		j = j + 1
 		widths[j] = dims[3] / 914400
 		heights[j] = dims[4] / 914400

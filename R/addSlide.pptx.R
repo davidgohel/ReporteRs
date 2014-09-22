@@ -67,14 +67,35 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 	if( length( doc$styles ) == 0 ){
 		stop("You must defined layout in your pptx template.")				
 	}
+	
 	if( !is.element( slide.layout, doc$styles ) ){
 		stop("Slide layout '", slide.layout, "' does not exist in defined layouts.")				
 	}
-	if( missing( bookmark ) )
-		slide = .jnew(class.pptx4r.SlideContent, slide.layout, doc$obj )
-	else {
-		slide = .jnew(class.pptx4r.SlideContent, slide.layout, doc$obj, as.integer(bookmark) )		
+	
+	layout.description = .jcall( doc$obj, 
+		paste0("L", class.pptx4r.LayoutDescription, ";"), 
+		"getLayoutProperties", 
+		as.character(slide.layout)
+		)
+	if( missing( bookmark ) ) {
+		slide.part = .jcall( doc$obj, 
+			paste0("L", class.pptx4r.SlidePart, ";"), 
+			"getNewSlide", 
+			as.character(slide.layout)
+			)
+		slideindex = .jcall( doc$obj, "I", "getSlideNumber" )
+			
+	} else {
+		slide.part = .jcall( doc$obj, 
+			paste0("L", class.pptx4r.SlidePart, ";"), 
+			"getAndReInitExistingSlide", 
+			as.character(slide.layout), as.integer(bookmark)
+			)
+		slideindex = as.integer(bookmark)
 	}
+	slide = .jnew(class.pptx4r.SlideContent, slide.part, doc$obj, layout.description)
+	slideindex = .jcall( slide, "V", "setSlideIndex", slideindex )
+
 	doc$current_slide = slide
 	
 	# start plot element id after the max number of shape into the pptx
