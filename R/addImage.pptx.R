@@ -51,7 +51,7 @@ addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
 	if( !missing(height) && !is.numeric( height ) ) stop("arguments height must be a numeric vector")
 	
 	jimg = .jnew(class.Image , filename )
-	
+
 	if( check.dims > 3 ){
 		out = .jcall( slide, "I", "add", jimg
 				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
@@ -61,12 +61,13 @@ addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
 	}  else if( check.dims < 1 ){
 		out = .jcall( slide, "I", "add", jimg )
 	} else {
+		warning("arguments width and height ignored.")
 		out = .jcall( slide, "I", "add", jimg )
 	}
 	
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "image") )
 	}
-	
+
 	doc
 }
