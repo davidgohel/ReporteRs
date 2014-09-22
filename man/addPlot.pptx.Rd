@@ -83,7 +83,7 @@ doc = addPlot( doc, fun = plot
 doc = addPlot( doc, fun = plot
   , x = rnorm( 100 ), y = rnorm (100 ), col = "red"
   , main = "small shape", pointsize=5
-  , offx = 3, offy = 3, width = 3, height = 3
+  , offx = 7, offy = 0, width = 3, height = 2
 )
 
 # add a slide with layout "Title and Content"

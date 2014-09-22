@@ -114,11 +114,11 @@
 #' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
 FlexTable = function(data, numrow, numcol
 	, header.columns = TRUE, add.rownames = FALSE
-	, body.cell.props = cellProperties()
-	, body.par.props = parProperties()
+	, body.cell.props = cellProperties(padding=1)
+	, body.par.props = parProperties(padding=0)
 	, body.text.props = textProperties()
-	, header.cell.props = cellProperties()
-	, header.par.props = parProperties()
+	, header.cell.props = cellProperties(padding=1)
+	, header.par.props = parProperties(padding=0)
 	, header.text.props = textProperties( font.weight= "bold" )
 ){
 	miss_data = missing( data )

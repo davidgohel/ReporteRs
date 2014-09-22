@@ -57,7 +57,7 @@ doc = pptx( title = "title" )
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-doc = addTitle( doc, "Title example 1", level = 1 )
+doc = addTitle( doc, "Title example 1" )
 
 # Add "Hello World" into the document doc
 doc = addParagraph(doc, "Hello Word" )
@@ -66,7 +66,7 @@ doc = addParagraph(doc, "Hello Word" )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
 
-doc = addTitle( doc, "Title example 2", level = 1 )
+doc = addTitle( doc, "Title example 2" )
 
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
@@ -90,7 +90,7 @@ doc = addParagraph(doc, my.pars, offx = 3, offy = 3, width = 2, height = 0.5
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
 
-doc = addTitle( doc, "Title example 3", level = 1 )
+doc = addTitle( doc, "Title example 3" )
 
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 

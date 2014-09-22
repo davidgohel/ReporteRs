@@ -132,7 +132,7 @@ MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
 doc = addFlexTable( doc, MyFTable )
 
 # add MyFTable into document 
-doc = addFlexTable( doc, MyFTable, offx = 7, offy = 5, width = 3, height = 3)
+doc = addFlexTable( doc, MyFTable, offx = 7, offy = 2, width = 3, height = 3)
 
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
@@ -157,10 +157,10 @@ MyFTable = setFlexTableBackgroundColors( MyFTable,
 
 # cosmetics
 MyFTable = setFlexTableBackgroundColors( MyFTable, i = 1, 
-	colors = "black", to = "header" )
+	colors = "gray", to = "header" )
 MyFTable[1, , to = "header"] = textBold(color="white")
 
-MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, colors = "black" )
+MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, colors = "gray" )
 MyFTable[,1] = textBold(color="white")
 
 MyFTable = setFlexTableBorders( MyFTable

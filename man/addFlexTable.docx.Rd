@@ -134,10 +134,10 @@ MyFTable = setFlexTableBackgroundColors( MyFTable,
 
 # cosmetics
 MyFTable = setFlexTableBackgroundColors( MyFTable, i = 1, 
-	colors = "black", to = "header" )
+	colors = "gray", to = "header" )
 MyFTable[1, , to = "header"] = textBold(color="white")
 
-MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, colors = "black" )
+MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, colors = "gray" )
 MyFTable[,1] = textBold(color="white")
 
 MyFTable = setFlexTableBorders( MyFTable
