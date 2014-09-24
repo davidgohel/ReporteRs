@@ -70,13 +70,23 @@ pptx = function( title, template){
 		stop( "an error occured - code[", names(error_codes)[which( error_codes == basedoc.return )], "].")
 	}
 	
+	layout.labels = .jcall( obj, "[S", "getStyleNames" )
+	are.layout.valid = regexpr("^[0-9a-zA-Z ]+$", layout.labels )
+	
+	if( any( are.layout.valid < 0 ) ){
+		w.inv_templ = which( are.layout.valid < 0 )
+		inv_templ = paste( shQuote(layout.labels[w.inv_templ]), collapse = ", " )
+		stop("Following layout names are invalid, they should only contain spaces, letters (from a to z) and numeric values :\n", inv_templ)
+	}
+	
 	.Object = list( obj = obj
-		, title = title
-		, basefile = template
-		, styles = .jcall( obj, "[S", "getStyleNames" ) 
-		, plot_first_id = 0L
-		, current_slide = NULL
-		)
+			, title = title
+			, basefile = template
+			, styles = layout.labels
+			, plot_first_id = 0L
+			, current_slide = NULL
+	)
+	
 	class( .Object ) = "pptx"
 	
 	.Object
