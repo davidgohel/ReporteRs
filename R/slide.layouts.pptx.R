@@ -21,11 +21,19 @@
 #' @method slide.layouts pptx
 #' @S3method slide.layouts pptx
 slide.layouts.pptx = function( doc, layout, ... ) {
-	layout.names = .jcall( doc$obj, "[S", "getStyleNames" )
+	
+	if( length( doc$styles ) == 0 ){
+		stop("You must defined layout in your pptx template.")				
+	}
+	
+	if( !is.element( layout, doc$styles ) ){
+		stop("Slide layout '", layout, "' does not exist in defined layouts.")				
+	}
+	
 	if( !missing( layout ) ){
 		if( !is.character(layout) ) stop("argument 'layout' must be a single string value.")
 		if( length(layout) != 1 ) stop("argument 'layout' must be a single string value.")
-		if( !is.element(layout, layout.names)) {
+		if( !is.element(layout, doc$styles)) {
 			stop(shQuote(layout), 
 			" does not exists in the of available layout names of the template pptx file. ",
 			"Use slide.layouts(", deparse(substitute(doc)), ") to list them."	)
