@@ -60,6 +60,10 @@ dimensions. It means that if you want to change plot
 dimensions , this has to be done in the PowerPoint template
 used when creating the \code{pptx} object.
 }
+\note{
+The layout names must only contain letters (upper or lower
+case) from 'a' to 'z', numbers (from 0 to 9) and spaces.
+}
 \examples{
 #START_TAG_TEST
 # Create a new document
