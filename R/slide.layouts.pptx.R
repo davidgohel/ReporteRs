@@ -40,5 +40,5 @@ slide.layouts.pptx = function( doc, layout, ... ) {
 		}
 		plotSlideLayout( doc, layout )
 	}
-	layout.names
+	doc$styles
 }
