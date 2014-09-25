@@ -26,11 +26,11 @@ slide.layouts.pptx = function( doc, layout, ... ) {
 		stop("You must defined layout in your pptx template.")				
 	}
 	
-	if( !is.element( layout, doc$styles ) ){
-		stop("Slide layout '", layout, "' does not exist in defined layouts.")				
-	}
 	
 	if( !missing( layout ) ){
+		if( !is.element( layout, doc$styles ) ){
+			stop("Slide layout '", layout, "' does not exist in defined layouts.")				
+		}
 		if( !is.character(layout) ) stop("argument 'layout' must be a single string value.")
 		if( length(layout) != 1 ) stop("argument 'layout' must be a single string value.")
 		if( !is.element(layout, doc$styles)) {
