@@ -3,7 +3,8 @@
 \title{Paragraph formatting properties}
 \usage{
 parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
-  padding.left = 1, padding.right = 1, padding)
+  padding.left = 1, padding.right = 1, padding, list.style = "none",
+  level = 1)
 }
 \arguments{
   \item{text.align}{text alignment - a single character
@@ -26,6 +27,13 @@ parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
   value. Argument \code{padding} overwrites arguments
   \code{padding.bottom}, \code{padding.top},
   \code{padding.left}, \code{padding.right}.}
+
+  \item{list.style}{list style - a single character value,
+  expected value is one of 'none' (default), 'unordered',
+  'ordered'.}
+
+  \item{level}{list level if argument \code{list} is not
+  'none'.}
 }
 \value{
 a \code{parProperties} object

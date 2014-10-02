@@ -3,7 +3,7 @@
 \title{Modify paragraph formatting properties}
 \usage{
 \method{chprop}{parProperties}(object, text.align, padding.bottom, padding.top,
-  padding.left, padding.right, padding, ...)
+  padding.left, padding.right, padding, list.style, level, ...)
 }
 \arguments{
   \item{object}{\code{parProperties} object to modify}
@@ -30,6 +30,13 @@
   value. Argument \code{padding} overwrites arguments
   \code{padding.bottom}, \code{padding.top},
   \code{padding.left}, \code{padding.right}.}
+
+  \item{list.style}{list style - a single character value,
+  expected value is one of 'none' (default), 'unordered',
+  'ordered'.}
+
+  \item{level}{list level if argument \code{list} is not
+  'none'.}
 }
 \value{
 a \code{parProperties} object
