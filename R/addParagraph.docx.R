@@ -33,12 +33,14 @@
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph}}, \code{\link{bookmark}}
 #' @method addParagraph docx
 #' @S3method addParagraph docx
-addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
+addParagraph.docx = function(doc, value, stylename, bookmark, par.properties, restart.numbering = FALSE, ... ) {
 	
-	if( missing( stylename ) && missing(bookmark) ) {
-		stop("argument 'stylename' is missing")
-	} else if( !missing(stylename) && !is.element( stylename , styles( doc ) ) ){
-		stop(paste("Style {", stylename, "} does not exists.", sep = "") )
+	if( missing( par.properties ) ){
+		if( missing( stylename ) && missing(bookmark) ) {
+			stop("argument 'stylename' is missing")
+		} else if( !missing(stylename) && !is.element( stylename , styles( doc ) ) ){
+			stop(paste("Style {", stylename, "} does not exists.", sep = "") )
+		}
 	}
 	
 	if( inherits( value, "character" ) ){
@@ -52,8 +54,9 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
-
-	parset = .jnew( class.ParagraphSet, .jParProperties(parProperties()) )
+	if( missing( par.properties ) )
+		parset = .jnew( class.ParagraphSet, .jParProperties(parProperties()) )
+	else parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
 	
 	for( pot_index in 1:length( value ) ){
 		paragrah = .jnew(class.Paragraph )
@@ -67,9 +70,16 @@ addParagraph.docx = function(doc, value, stylename, bookmark, ... ) {
 		.jcall( parset, "V", "addParagraph", paragrah )
 	}
 	
-	if( missing( bookmark ) )
-		.jcall( doc$obj, "V", "add" , parset, stylename)
-	else {
+	if( restart.numbering ){
+		.jcall( doc$obj, "V", "restartNumbering" )
+	}
+	
+	if( missing( bookmark ) ){
+		if( missing( par.properties )) 
+			.jcall( doc$obj, "V", "add" , parset, stylename)
+		else .jcall( doc$obj, "V", "add" , parset, .jParProperties(par.properties) )
+		
+	} else {
 		if(missing( stylename )) 
 			.jcall( doc$obj, "V", "replacePar", parset, bookmark )
 		else .jcall( doc$obj, "V", "add", parset, stylename, bookmark )
