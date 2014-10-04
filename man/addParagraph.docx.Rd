@@ -2,7 +2,8 @@
 \alias{addParagraph.docx}
 \title{Insert a paragraph into a docx object}
 \usage{
-\method{addParagraph}{docx}(doc, value, stylename, bookmark, ...)
+\method{addParagraph}{docx}(doc, value, stylename, bookmark,
+  par.properties = parProperties(), restart.numbering = FALSE, ...)
 }
 \arguments{
   \item{doc}{Object of class \code{\link{docx}} where
@@ -21,6 +22,13 @@
   \item{bookmark}{a character value ; id of the Word
   bookmark to replace by the table. optional. See
   \code{\link{bookmark}}.}
+
+  \item{par.properties}{\code{parProperties} to apply to
+  paragraphs in the docx document, only used if
+  \code{stylename} if missing.}
+
+  \item{restart.numbering}{boolean value. If \code{TRUE},
+  next numbered list counter will be set to 1.}
 
   \item{...}{further arguments, not used.}
 }
