@@ -14,6 +14,8 @@
 #' @param width optional, width of the shape in inch. See details.
 #' @param height optional, height of the shape in inch. See details.
 #' @param par.properties a parProperties object
+#' @param append boolean default to FALSE. If TRUE, paragraphs will be 
+#' appened in the current shape instead of beeing sent into a new shape. 
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{pptx}}.
 #' @details
@@ -49,7 +51,8 @@
 #' @seealso \code{\link{pptx}}, \code{\link{addParagraph}}
 #' @method addParagraph pptx
 #' @S3method addParagraph pptx
-addParagraph.pptx = function(doc, value, offx, offy, width, height, par.properties = parProperties(), append= F, ... ) {
+addParagraph.pptx = function(doc, value, offx, offy, width, height, 
+		par.properties = parProperties(), append = FALSE, ... ) {
 	
 	if( inherits( value, "character" ) ){
 		x = lapply( value, function(x) pot(value = x) )

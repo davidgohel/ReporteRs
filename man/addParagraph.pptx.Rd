@@ -3,7 +3,7 @@
 \title{Insert a paragraph into a pptx object}
 \usage{
 \method{addParagraph}{pptx}(doc, value, offx, offy, width, height,
-  par.properties = parProperties(), ...)
+  par.properties = parProperties(), append = FALSE, ...)
 }
 \arguments{
   \item{doc}{\code{\link{pptx}} object where paragraph is
@@ -26,6 +26,10 @@
   details.}
 
   \item{par.properties}{a parProperties object}
+
+  \item{append}{boolean default to FALSE. If TRUE,
+  paragraphs will be appened in the current shape instead
+  of beeing sent into a new shape.}
 
   \item{...}{further arguments, not used.}
 }
