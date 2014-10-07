@@ -49,7 +49,7 @@
 #' @seealso \code{\link{pptx}}, \code{\link{addParagraph}}
 #' @method addParagraph pptx
 #' @S3method addParagraph pptx
-addParagraph.pptx = function(doc, value, offx, offy, width, height, par.properties = parProperties(), ... ) {
+addParagraph.pptx = function(doc, value, offx, offy, width, height, par.properties = parProperties(), append= F, ... ) {
 	
 	if( inherits( value, "character" ) ){
 		x = lapply( value, function(x) pot(value = x) )
@@ -89,7 +89,9 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height, par.properti
 		out = .jcall( slide, "I", "add", parset
 				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
 	} else {
-		out = .jcall( slide, "I", "add" , parset)
+		if( append )
+			out = .jcall( slide, "I", "append" , parset)
+		else out = .jcall( slide, "I", "add" , parset)
 	}	
 	
 	if( isSlideError( out ) ){
