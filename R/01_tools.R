@@ -396,5 +396,25 @@ getOldTable = function( data, layout.properties
 	ft
 	
 }
-	
-	
+
+list.settings = list( ordered = list(
+		list( format = "decimal", Pattern = "%1." ), 
+		list( format = "decimal", Pattern = "%1.%2." ), 
+		list( format = "decimal", Pattern = "%1.%2.%3." ), 
+		list( format = "decimal", Pattern = "%1.%2.%3.%4." ), 
+		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5." ), 
+		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5.%6." ), 
+		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5.%6.%7." ), 
+		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5.%6.%7.%8." ), 
+		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5.%6.%7.%8.%9." )
+	), unordered = list(
+		list( Pattern = "&#x25CF;" ), 
+		list( Pattern = "&#x25CC;" ), 
+		list( Pattern = "&#x25A0;" ), 
+		list( Pattern = "&#x25A1;" ), 
+		list( Pattern = "&#x25C6;" ), 
+		list( Pattern = "&#x25C7;" ), 
+		list( Pattern = "&#x2605;" ), 
+		list( Pattern = "&#x2606;" ), 
+		list( Pattern = "&#x25B6;" )
+	) )

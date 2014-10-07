@@ -50,7 +50,7 @@
 #' 
 #' example:
 #' 
-#' options(ReporteRs-fontsize=10, ReporteRs-default-font="Arial")
+#' options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Arial")
 #' 
 #' @name ReporteRs-package
 #' @aliases ReporteRs
