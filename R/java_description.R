@@ -11,7 +11,7 @@ class.MetaRows = "org/lysis/reporters/tables/MetaRows"
 
 # Lists
 class.NumberingDefinition = "org.lysis.reporters.lists.NumberingDefinition"
-class.NumberingSettings = "org.lysis.reporters.lists.NumberingSettings"
+class.ListDefinition = "org.lysis.reporters.lists.ListDefinition"
 
 
 # format properties

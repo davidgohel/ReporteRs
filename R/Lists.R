@@ -36,13 +36,13 @@ list.format = function( ol.left = cumsum( rep( 0.2, 9 ) ),
 	ul.hanging = as.double( ul.hanging )
 	
 	
-	orderedSettings = .jnew(class.NumberingSettings, as.integer(0) )
+	orderedSettings = .jnew(class.ListDefinition, as.integer(0) )
 	for( i in seq_along( ol.left ) ){
 		.jcall( orderedSettings, "Z", "addLevel", as.double( ol.left[i] ), 
 				as.double( ol.hanging[i] ), as.character( ol.text.align[i] ), 
 				as.character( ol.format[i] ), as.character( ol.pattern[i] ) )
 	}
-	unorderedSettings = .jnew(class.NumberingSettings, as.integer(1) )
+	unorderedSettings = .jnew(class.ListDefinition, as.integer(1) )
 	for( i in seq_along( ul.left ) ){
 		.jcall( unorderedSettings, "Z", "addLevel", as.double( ul.left[i] ), 
 				as.double( ul.hanging[i] ), as.character( ul.text.align[i] ), 
