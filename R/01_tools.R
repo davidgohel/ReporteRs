@@ -6,10 +6,25 @@
 	options("ReporteRs-locale.language"="en")
 	options("ReporteRs-locale.region"="US")
 	options("ReporteRs-fontsize"=11L)
+	
+	options("ReporteRs-list-definition"= list( ol.left = cumsum( rep( 0.2, 9 ) ), 
+		ol.hanging = rep( 0.2, 9 ), 
+		ol.text.align = rep( "", 9 ), 
+		ol.format = rep( "decimal", 9 ), 
+		ol.pattern = paste0( "%", 1:9, "." ), 
+		ul.left = cumsum( rep( 0.2, 9 ) ), 
+		ul.hanging = rep( 0.2, 9 ), 
+		ul.text.align = rep( "left", 9 ), 
+		ul.format = c( "disc", "circle", "square", 
+				"disc", "circle", "square", 
+				"disc", "circle", "square" ), 
+		ul.pattern = paste0( "%", 1:9, " " )
+		)
+	)
 	invisible()
 }
 
-getDefaultColTypes = function( data ){
+getDefaultColTypes = function( data ){justify
 	lapply( data , function(x) {
 		out = class(x)
 		if( is.factor( out ) ) out = "character"
@@ -394,27 +409,5 @@ getOldTable = function( data, layout.properties
 		
 	}
 	ft
-	
 }
 
-list.settings = list( ordered = list(
-		list( format = "decimal", Pattern = "%1." ), 
-		list( format = "decimal", Pattern = "%1.%2." ), 
-		list( format = "decimal", Pattern = "%1.%2.%3." ), 
-		list( format = "decimal", Pattern = "%1.%2.%3.%4." ), 
-		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5." ), 
-		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5.%6." ), 
-		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5.%6.%7." ), 
-		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5.%6.%7.%8." ), 
-		list( format = "decimal", Pattern = "%1.%2.%3.%4.%5.%6.%7.%8.%9." )
-	), unordered = list(
-		list( Pattern = "&#x25CF;" ), 
-		list( Pattern = "&#x25CC;" ), 
-		list( Pattern = "&#x25A0;" ), 
-		list( Pattern = "&#x25A1;" ), 
-		list( Pattern = "&#x25C6;" ), 
-		list( Pattern = "&#x25C7;" ), 
-		list( Pattern = "&#x2605;" ), 
-		list( Pattern = "&#x2606;" ), 
-		list( Pattern = "&#x25B6;" )
-	) )

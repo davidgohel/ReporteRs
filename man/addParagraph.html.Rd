@@ -3,7 +3,7 @@
 \title{Insert a paragraph into an html object}
 \usage{
 \method{addParagraph}{html}(doc, value, parent.type = "div",
-  par.properties = parProperties(), ...)
+  par.properties = parProperties(), restart.numbering = FALSE, ...)
 }
 \arguments{
   \item{doc}{\code{\link{html}} object where paragraph has
@@ -22,6 +22,9 @@
   \item{par.properties}{paragraph formatting properties to
   apply to paragraphs of text. An object of class
   \code{\link{parProperties}}}
+
+  \item{restart.numbering}{boolean value. If \code{TRUE},
+  next numbered list counter will be set to 1.}
 
   \item{...}{further arguments, not used.}
 }

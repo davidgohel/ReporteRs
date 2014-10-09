@@ -55,8 +55,8 @@ objects). Default to "US". }
 
 example:
 
-options(ReporteRs-fontsize=10,
-ReporteRs-default-font="Arial")
+options("ReporteRs-fontsize"=10,
+"ReporteRs-default-font"="Arial")
 }
 \author{
 David Gohel \email{david.gohel@lysis-consultants.fr}

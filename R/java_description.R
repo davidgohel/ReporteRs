@@ -9,6 +9,11 @@ class.FlexRow = "org/lysis/reporters/tables/FlexRow"
 class.FlexCell = "org/lysis/reporters/tables/FlexCell"
 class.MetaRows = "org/lysis/reporters/tables/MetaRows"
 
+# Lists
+class.NumberingDefinition = "org.lysis.reporters.lists.NumberingDefinition"
+class.NumberingSettings = "org.lysis.reporters.lists.NumberingSettings"
+
+
 # format properties
 class.tables.BorderProperties = "org/lysis/reporters/formats/BorderProperties"
 class.tables.CellProperties = "org/lysis/reporters/formats/CellProperties"

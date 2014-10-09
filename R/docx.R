@@ -50,9 +50,10 @@ docx = function( title = "untitled", template){
 	if( !file.exists( template ) || .reg < 1 )
 		stop(template , " is not a valid file.")
 	
+	lidef = do.call( listitem.definition, getOption("ReporteRs-list-definition") )
 	# java calls
 	obj = .jnew( class.docx4r.document )
-	.jcall( obj, "V", "setBaseDocument", template )
+	.jcall( obj, "V", "setBaseDocument", template, lidef )
 	.sysenv = Sys.getenv(c("USERDOMAIN","COMPUTERNAME","USERNAME"))
 	
 	.jcall( obj, "V", "setDocPropertyTitle", title )

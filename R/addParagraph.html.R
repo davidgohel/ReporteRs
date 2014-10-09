@@ -12,6 +12,8 @@
 #' ; if 'pre', paragraph will be a preformatted text area.
 #' @param par.properties paragraph formatting properties to apply to paragraphs of text. 
 #' An object of class \code{\link{parProperties}}
+#' @param restart.numbering boolean value. If \code{TRUE}, next numbered 
+#' list counter will be set to 1.
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{html}}.
 #' @examples
@@ -34,7 +36,8 @@
 #' @S3method addParagraph html
 
 addParagraph.html = function(doc, value, 
-		parent.type = "div", par.properties = parProperties(), ... ) {
+		parent.type = "div", par.properties = parProperties(), 
+		restart.numbering = FALSE, ... ) {
 
 	if( inherits( value, "character" ) ){
 		x = lapply( value, function(x) pot(value = x) )
@@ -67,6 +70,9 @@ addParagraph.html = function(doc, value,
 		.jcall( parset, "V", "addParagraph", paragrah )
 	}
 	
+	if( restart.numbering ){
+		.jcall( doc$current_slide, "V", "restartNumbering" )
+	}
 	
 	out = .jcall( doc$current_slide, "I", "add" , parset )
 	if( out != 1 ){
