@@ -15,7 +15,7 @@
 #' is one of 'left', 'right', 'center', 'justify'.
 #' @param ul.symbol symbol
 #' @export
-listitem.definition = function( ol.left = cumsum( rep( 0.2, 9 ) ), 
+list.format = function( ol.left = cumsum( rep( 0.2, 9 ) ), 
 		ol.hanging = rep( 0.2, 9 ), 
 		ol.text.align = rep( "justify", 9 ), 
 		ol.format = rep( "decimal", 9 ), 
