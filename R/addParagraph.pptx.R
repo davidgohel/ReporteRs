@@ -14,6 +14,8 @@
 #' @param width optional, width of the shape in inch. See details.
 #' @param height optional, height of the shape in inch. See details.
 #' @param par.properties a parProperties object
+#' @param restart.numbering boolean value. If \code{TRUE}, next numbered 
+#' list counter will be set to 1.
 #' @param append boolean default to FALSE. If TRUE, paragraphs will be 
 #' appened in the current shape instead of beeing sent into a new shape. 
 #' @param ... further arguments, not used. 
@@ -52,7 +54,30 @@
 #' @method addParagraph pptx
 #' @S3method addParagraph pptx
 addParagraph.pptx = function(doc, value, offx, offy, width, height, 
-		par.properties = parProperties(), append = FALSE, ... ) {
+		par.properties = parProperties(), 
+		append = FALSE, 
+		restart.numbering = FALSE, ... ) {
+	
+	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
+	if( check.dims > 0 && check.dims < 4 ) {
+		if( missing( offx ) ) warning("arguments offx, offy, width and height must all be specified: offx is missing")
+		if( missing( offy ) ) warning("arguments offx, offy, width and height must all be specified: offy is missing")
+		if( missing( width ) ) warning("arguments offx, offy, width and height must all be specified: width is missing")
+		if( missing( height ) ) warning("arguments offx, offy, width and height must all be specified: height is missing")
+	}
+	if( check.dims > 3 ) {
+		if( !is.numeric( offx ) ) stop("arguments offx must be a numeric value")
+		if( !is.numeric( offy ) ) stop("arguments offy must be a numeric value")
+		if( !is.numeric( width ) ) stop("arguments width must be a numeric value")
+		if( !is.numeric( height ) ) stop("arguments height must be a numeric value")
+		
+		if( length( offx ) != length( offy ) 
+				|| length( offx ) != length( width )
+				|| length( offx ) != length( height ) || length( offx )!= 1 ){
+			stop("arguments offx, offy, width and height must be numeric of length 1")
+		}
+	}
+	
 	
 	if( inherits( value, "character" ) ){
 		x = lapply( value, function(x) pot(value = x) )
@@ -72,29 +97,28 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height,
 	
 	slide = doc$current_slide 
 	
-	
 	parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
 	
 	for( pot_index in 1:length( value ) ){
-		paragrah = .jnew(class.Paragraph )
+		jpar_object = .jnew(class.Paragraph )
 		pot_value = value[[pot_index]]
 		for( i in 1:length(pot_value)){
 			if( is.null( pot_value[[i]]$format ) ) 
-				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
+				.jcall( jpar_object, "V", "addText", pot_value[[i]]$value )
+			else .jcall( jpar_object, "V", "addText", pot_value[[i]]$value, 
 						.jTextProperties( pot_value[[i]]$format) )
 		}
-		.jcall( parset, "V", "addParagraph", paragrah )
+		.jcall( parset, "V", "addParagraph", jpar_object )
 	}
 	
-	
-	if( !missing( offx )){
+	if( check.dims > 3 ){
 		out = .jcall( slide, "I", "add", parset
-				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
+				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ), 
+				as.logical(restart.numbering) )
 	} else {
 		if( append )
-			out = .jcall( slide, "I", "append" , parset)
-		else out = .jcall( slide, "I", "add" , parset)
+			out = .jcall( slide, "I", "append" , parset, as.logical(restart.numbering))
+		else out = .jcall( slide, "I", "add" , parset, as.logical(restart.numbering))
 	}	
 	
 	if( isSlideError( out ) ){

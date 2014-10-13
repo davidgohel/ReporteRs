@@ -8,10 +8,6 @@
 #' @param space_between width in inches of the space between columns of the section.
 #' @param columns.only logical value, if set to TRUE, no break page will (continuous section).
 #' @param ... further arguments, not used. 
-#' @details 
-#' This function is a key function ; if no slide has been added into the document object
-#' no content (tables, plots, images, text) can be added. 
-#' 
 #' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
