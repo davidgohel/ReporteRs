@@ -9,12 +9,10 @@
 	
 	options("ReporteRs-list-definition"= list( ol.left = cumsum( rep( 0.2, 9 ) ), 
 		ol.hanging = rep( 0.2, 9 ), 
-		ol.text.align = rep( "", 9 ), 
 		ol.format = rep( "decimal", 9 ), 
 		ol.pattern = paste0( "%", 1:9, "." ), 
 		ul.left = cumsum( rep( 0.2, 9 ) ), 
 		ul.hanging = rep( 0.2, 9 ), 
-		ul.text.align = rep( "left", 9 ), 
 		ul.format = c( "disc", "circle", "square", 
 				"disc", "circle", "square", 
 				"disc", "circle", "square" ), 
@@ -24,7 +22,7 @@
 	invisible()
 }
 
-getDefaultColTypes = function( data ){justify
+getDefaultColTypes = function( data ){
 	lapply( data , function(x) {
 		out = class(x)
 		if( is.factor( out ) ) out = "character"

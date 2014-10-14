@@ -3,7 +3,8 @@
 \title{Insert a paragraph into a pptx object}
 \usage{
 \method{addParagraph}{pptx}(doc, value, offx, offy, width, height,
-  par.properties = parProperties(), append = FALSE, ...)
+  par.properties = parProperties(), append = FALSE,
+  restart.numbering = FALSE, ...)
 }
 \arguments{
   \item{doc}{\code{\link{pptx}} object where paragraph is
@@ -26,6 +27,9 @@
   details.}
 
   \item{par.properties}{a parProperties object}
+
+  \item{restart.numbering}{boolean value. If \code{TRUE},
+  next numbered list counter will be set to 1.}
 
   \item{append}{boolean default to FALSE. If TRUE,
   paragraphs will be appened in the current shape instead
@@ -110,6 +114,49 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 # Add my.pars into the document doc
 doc = addParagraph(doc, my.pars
 		, par.properties=parProperties(text.align="center", padding=24) )
+
+# add a slide with layout "Title and Content"
+doc = addSlide( doc, slide.layout = "Title and Content" )
+
+doc = addTitle( doc, "Title example 1" )
+# define some text
+text1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+text2 = "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
+text3 = "Quisque dictum tristique ligula."
+
+# define parProperties with list properties
+ordered.list.level1 = parProperties(list.style = "ordered", level = 1 )
+ordered.list.level2 = parProperties(list.style = "ordered", level = 2 )
+
+# define parProperties with list properties
+unordered.list.level1 = parProperties(list.style = "unordered", level = 1 )
+unordered.list.level2 = parProperties(list.style = "unordered", level = 2 )
+
+# add ordered list items 
+doc = addParagraph( doc, value = text1, 
+	par.properties = ordered.list.level1 )
+doc = addParagraph( doc, value = text2, append = TRUE, 
+	par.properties = ordered.list.level2 )
+
+doc = addParagraph(doc, "This paragraph has no list attribute", append = TRUE )
+
+# add ordered list items without restart renumbering
+doc = addParagraph( doc, value = c( text1, text2, text3), append = TRUE, 
+	par.properties = ordered.list.level1 )
+
+# add ordered list items and restart renumbering
+doc = addParagraph( doc, value = c( text1, text2, text3), 
+	append = TRUE, restart.numbering = TRUE, 
+	par.properties = ordered.list.level1 )
+
+# add unordered list items
+doc = addParagraph( doc, value = text1, 
+		append = TRUE, 
+		par.properties = unordered.list.level1 )
+doc = addParagraph( doc, value = text2, 
+		append = TRUE, 
+		par.properties = unordered.list.level2 )
+
 
 # Write the object
 writeDoc( doc, file = doc.filename )

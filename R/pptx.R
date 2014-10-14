@@ -69,7 +69,7 @@ pptx = function( title, template){
 	if( basedoc.return != error_codes["NO_ERROR"] ){
 		stop( "an error occured - code[", names(error_codes)[which( error_codes == basedoc.return )], "].")
 	}
-	lidef = do.call( list.format, getOption("ReporteRs-list-definition") )
+	lidef = do.call( list.settings, getOption("ReporteRs-list-definition") )
 	.jcall( obj, "V", "setNumberingDefinition", lidef )
 	layout.labels = .jcall( obj, "[S", "getStyleNames" )
 	are.layout.valid = regexpr("^[0-9a-zA-Z ]+$", layout.labels )

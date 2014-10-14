@@ -48,6 +48,9 @@
 #' @example examples/pot2_example.R
 #' @example examples/set_of_paragraphs_example.R
 #' @example examples/addParagraph_parProperties.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle1NoLevel.R
+#' @example examples/lists_slide.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addParagraph}}

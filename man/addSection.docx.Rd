@@ -29,11 +29,6 @@ an object of class \code{\link{docx}}.
 \description{
 Add a slide into a \code{\link{pptx}} object.
 }
-\details{
-This function is a key function ; if no slide has been
-added into the document object no content (tables, plots,
-images, text) can be added.
-}
 \examples{
 #START_TAG_TEST
 doc.filename = "addSection.docx"

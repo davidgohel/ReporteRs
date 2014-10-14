@@ -32,6 +32,8 @@
 #' @example examples/pot2_example.R
 #' @example examples/set_of_paragraphs_example.R
 #' @example examples/addParagraph_sop_docx.R
+#' @example examples/addTitle4Level1.R
+#' @example examples/lists_doc.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph}}, \code{\link{bookmark}}
