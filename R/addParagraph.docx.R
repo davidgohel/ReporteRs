@@ -50,6 +50,7 @@ addParagraph.docx = function(doc, value, stylename, bookmark,
 	if( missing( value ) ){
 		stop("argument value is missing." )
 	} else if( inherits( value, "character" ) ){
+		value = gsub("(\\n|\\r)", "", value )
 		x = lapply( value, function(x) pot(value = x) )
 		value = do.call( "set_of_paragraphs", x )
 	}

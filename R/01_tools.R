@@ -7,16 +7,14 @@
 	options("ReporteRs-locale.region"="US")
 	options("ReporteRs-fontsize"=11L)
 	
-	options("ReporteRs-list-definition"= list( ol.left = cumsum( rep( 0.2, 9 ) ), 
-		ol.hanging = rep( 0.2, 9 ), 
+	options("ReporteRs-list-definition"= list( 		
+		ol.left = seq( from = 0, by = 0.4, length.out = 9), 
+		ol.hanging = rep( 0.4, 9 ), 
 		ol.format = rep( "decimal", 9 ), 
 		ol.pattern = paste0( "%", 1:9, "." ), 
-		ul.left = cumsum( rep( 0.2, 9 ) ), 
-		ul.hanging = rep( 0.2, 9 ), 
-		ul.format = c( "disc", "circle", "square", 
-				"disc", "circle", "square", 
-				"disc", "circle", "square" ), 
-		ul.pattern = paste0( "%", 1:9, " " )
+		ul.left = seq( from = 0, by = 0.4, length.out = 9), 
+		ul.hanging = rep( 0.4, 9 ), 
+		ul.format = c( "disc", "circle", "square", "disc", "circle", "square", "disc", "circle", "square" ) 
 		)
 	)
 	invisible()

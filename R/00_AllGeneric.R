@@ -201,6 +201,7 @@ addParagraph = function(doc, value, ...){
 		warning("value is empty.")
 		return( doc )
 	}
+	
 	UseMethod("addParagraph")
 }
 

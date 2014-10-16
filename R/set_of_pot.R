@@ -24,8 +24,15 @@ set_of_paragraphs = function( ... ){
 		if( !all( sapply( .Object , inherits, c("pot", "character") ) ) )
 			stop("set_of_paragraphs can only contains pot objects.")
 		# cast characters as pot if any
-		.Object = lapply( .Object, function( x ) if( inherits(x, "character") ) pot(x) else x )
+		.Object = lapply( .Object, 
+				function( x ) {
+					if( inherits(x, "character") ) {
+						pot( gsub("(\\n|\\r)", "", x ) )
+					} else x 
+				}
+			)
 	} else .Object = list()
+
 	
 	class( .Object ) = c("set_of_paragraphs")
 	.Object
