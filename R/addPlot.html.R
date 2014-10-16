@@ -41,12 +41,14 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 	dirname = tempfile( )
 	dir.create( dirname )
 	
+	pixelsize = FontMetric( fontname, pointsize )$info[3]
+
 	if( !vector.graphic ){
 	
 		filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 		grDevices::png (filename = filename
 				, width = width, height = height, units = 'in'
-				, pointsize = pointsize, res = 300
+				, pointsize = pixelsize, res = 300
 		)
 		
 		fun_res = try( fun(...), silent = T )
@@ -57,7 +59,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		filename = file.path( dirname, "plot", fsep = "/" )
 		env = raphael( file = filename,width=width*72.2
 			, height = height*72.2
-			, ps=pointsize, fontname = fontname
+			, ps=pixelsize, fontname = fontname
 			, canvas_id = as.integer(doc$canvas_id) )
 		fun(...)
 		last_canvas_id = .C("get_current_canvas_id", (dev.cur()-1L), 0L)[[2]]
@@ -95,7 +97,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 #' @param fun plot function
 #' @param width plot width in inches (default value is 6).
 #' @param height plot height in inches (default value is 6).
-#' @param pointsize the default pointsize of plotted text in pixels, default to 12.
+#' @param pointsize the default pointsize of plotted text in points, default to 12.
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param canvas_id canvas id - an integer - unique id in the web page
 #' @param ... arguments for \code{fun}.
@@ -116,6 +118,7 @@ raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize")
 	
 	dirname = tempfile( )
 	dir.create( dirname )
+	pointsize = FontMetric( fontname, pointsize )$info[3]
 	
 	filename = file.path( dirname, "plot", fsep = "/" )
 	env = raphael( file = filename,width=width*72.2

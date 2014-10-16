@@ -11,8 +11,8 @@ textProperties(color = "black", font.size = getOption("ReporteRs-fontsize"),
   \item{color}{font color - a single character value
   specifying a valid color (e.g. "#000000" or "black").}
 
-  \item{font.size}{font size - 0 or positive integer
-  value.}
+  \item{font.size}{font size (in point) - 0 or positive
+  integer value.}
 
   \item{font.weight}{single character value specifying font
   weight (expected value is \code{normal} or \code{bold}).}

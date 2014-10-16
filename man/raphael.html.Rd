@@ -15,7 +15,7 @@ raphael.html(fun, pointsize = getOption("ReporteRs-fontsize"), width = 6,
   6).}
 
   \item{pointsize}{the default pointsize of plotted text in
-  pixels, default to 12.}
+  points, default to 12.}
 
   \item{fontname}{the default font family to use, default
   to getOption("ReporteRs-default-font").}

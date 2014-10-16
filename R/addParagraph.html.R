@@ -7,9 +7,6 @@
 #' @param value text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
-#' @param parent.type a character value ; parent tag for added paragraph. optional. If 'div', paragraph is normal 
-#' ; if 'ol', paragraph will be an ordered list ; if 'ul', paragraph will be an unordered list
-#' ; if 'pre', paragraph will be a preformatted text area.
 #' @param par.properties \code{\link{parProperties}} to apply to paragraphs.
 #' @param restart.numbering boolean value. If \code{TRUE}, next numbered 
 #' list counter will be set to 1.
@@ -36,7 +33,7 @@
 #' @S3method addParagraph html
 
 addParagraph.html = function(doc, value, 
-		parent.type = "div", par.properties = parProperties(), 
+		par.properties = parProperties(), 
 		restart.numbering = FALSE, ... ) {
 
 	if( inherits( value, "character" ) ){
@@ -51,14 +48,9 @@ addParagraph.html = function(doc, value,
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
-	
-	parent.types = c("div", "ul", "ol", "pre")
-	if( !is.element( parent.type, parent.types ) ) {
-		stop("argument 'parent.type' must be of the of following values: div, ul, ol or pre.")
-	}
+
 	
 	parset = .jnew( class.ParagraphSet, .jParProperties( par.properties ) )
-	.jcall( parset, "V", "setTag", parent.type )
 	for( pot_index in 1:length( value ) ){
 		paragrah = .jnew(class.Paragraph )
 		pot_value = value[[pot_index]]

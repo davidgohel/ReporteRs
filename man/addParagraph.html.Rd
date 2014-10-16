@@ -2,8 +2,8 @@
 \alias{addParagraph.html}
 \title{Insert a paragraph into an html object}
 \usage{
-\method{addParagraph}{html}(doc, value, parent.type = "div",
-  par.properties = parProperties(), restart.numbering = FALSE, ...)
+\method{addParagraph}{html}(doc, value, par.properties = parProperties(),
+  restart.numbering = FALSE, ...)
 }
 \arguments{
   \item{doc}{\code{\link{html}} object where paragraph has
@@ -12,12 +12,6 @@
   \item{value}{text to add to the document as paragraphs:
   an object of class \code{\link{pot}} or
   \code{\link{set_of_paragraphs}} or a character vector.}
-
-  \item{parent.type}{a character value ; parent tag for
-  added paragraph. optional. If 'div', paragraph is normal
-  ; if 'ol', paragraph will be an ordered list ; if 'ul',
-  paragraph will be an unordered list ; if 'pre', paragraph
-  will be a preformatted text area.}
 
   \item{par.properties}{\code{\link{parProperties}} to
   apply to paragraphs.}

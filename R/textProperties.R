@@ -5,7 +5,7 @@
 #' 
 #' @param color font color - a single character value specifying 
 #' a valid color (e.g. "#000000" or "black").
-#' @param font.size font size - 0 or positive integer value.
+#' @param font.size font size (in point) - 0 or positive integer value.
 #' @param font.weight single character value specifying font weight 
 #' (expected value is \code{normal} or \code{bold}).
 #' @param font.style single character value specifying font style
