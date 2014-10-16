@@ -51,7 +51,7 @@ doc = pptx( title = "title" )
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-doc = addTitle( doc, "Title example 1", level = 1 )
+doc = addTitle( doc, "Title example 1" )
 #####################################################################
 
 # set default font size to 10
@@ -81,7 +81,7 @@ doc = addFlexTable( doc, MyFTable )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
 
-doc = addTitle( doc, "Title example 2", level = 1 )
+doc = addTitle( doc, "Title example 2" )
 #####################################################################
 
 # set default font size to 10
@@ -138,7 +138,7 @@ doc = addFlexTable( doc, MyFTable, offx = 7, offy = 2, width = 3, height = 3)
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
 
-doc = addTitle( doc, "Title example 3", level = 1 )
+doc = addTitle( doc, "Title example 3" )
 data = cor( cor(mtcars) )
 
 pal = c( "#D73027", "#F46D43", "#FDAE61", "#FEE08B", 

@@ -26,14 +26,17 @@
   \item{height}{optional, height of the shape in inch. See
   details.}
 
-  \item{par.properties}{a parProperties object}
+  \item{par.properties}{\code{\link{parProperties}} to
+  apply to paragraphs.}
 
   \item{restart.numbering}{boolean value. If \code{TRUE},
   next numbered list counter will be set to 1.}
 
   \item{append}{boolean default to FALSE. If TRUE,
   paragraphs will be appened in the current shape instead
-  of beeing sent into a new shape.}
+  of beeing sent into a new shape. Paragraphs can only be
+  appended on shape containing paragraphs (i.e. you can not
+  add paragraphs after a FlexTable).}
 
   \item{...}{further arguments, not used.}
 }

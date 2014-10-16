@@ -19,9 +19,8 @@
   paragraph will be an unordered list ; if 'pre', paragraph
   will be a preformatted text area.}
 
-  \item{par.properties}{paragraph formatting properties to
-  apply to paragraphs of text. An object of class
-  \code{\link{parProperties}}}
+  \item{par.properties}{\code{\link{parProperties}} to
+  apply to paragraphs.}
 
   \item{restart.numbering}{boolean value. If \code{TRUE},
   next numbered list counter will be set to 1.}
@@ -109,7 +108,6 @@ writeDoc( doc, directory = doc.dirname )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addTitle.docx}} ,
-\code{\link{addTOC.docx}}, \code{\link{addParagraph}}
+\code{\link{html}}, \code{\link{addParagraph}}
 }
 

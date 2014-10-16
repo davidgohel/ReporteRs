@@ -8,8 +8,6 @@
 \arguments{
   \item{object}{\code{parProperties} object to modify}
 
-  \item{...}{further arguments - not used}
-
   \item{text.align}{text alignment - a single character
   value, expected value is one of 'left', 'right',
   'center', 'justify'.}
@@ -37,6 +35,8 @@
 
   \item{level}{list level if argument \code{list} is not
   'none'.}
+
+  \item{...}{further arguments - not used}
 }
 \value{
 a \code{parProperties} object

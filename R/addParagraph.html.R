@@ -10,8 +10,7 @@
 #' @param parent.type a character value ; parent tag for added paragraph. optional. If 'div', paragraph is normal 
 #' ; if 'ol', paragraph will be an ordered list ; if 'ul', paragraph will be an unordered list
 #' ; if 'pre', paragraph will be a preformatted text area.
-#' @param par.properties paragraph formatting properties to apply to paragraphs of text. 
-#' An object of class \code{\link{parProperties}}
+#' @param par.properties \code{\link{parProperties}} to apply to paragraphs.
 #' @param restart.numbering boolean value. If \code{TRUE}, next numbered 
 #' list counter will be set to 1.
 #' @param ... further arguments, not used. 
@@ -32,8 +31,7 @@
 #' @example examples/lists_doc.R
 #' @example examples/writeDoc_directory.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}
-#' , \code{\link{addTOC.docx}}, \code{\link{addParagraph}}
+#' @seealso \code{\link{html}}, \code{\link{addParagraph}}
 #' @method addParagraph html
 #' @S3method addParagraph html
 

@@ -23,9 +23,9 @@
   bookmark to replace by the table. optional. See
   \code{\link{bookmark}}.}
 
-  \item{par.properties}{\code{parProperties} to apply to
-  paragraphs in the docx document, only used if
-  \code{stylename} if missing.}
+  \item{par.properties}{\code{\link{parProperties}} to
+  apply to paragraphs, only used if \code{stylename} if
+  missing.}
 
   \item{restart.numbering}{boolean value. If \code{TRUE},
   next numbered list counter will be set to 1.}

@@ -14,6 +14,8 @@
 #'   \item \code{padding.top} 1
 #'   \item \code{padding.left} 1
 #'   \item \code{padding.right} 1
+#'   \item \code{list.style} 'none'
+#'   \item \code{level} 1
 #' }
 #' @param text.align text alignment - a single character value, expected value 
 #' is one of 'left', 'right', 'center', 'justify'.
@@ -24,15 +26,17 @@
 #' @param padding paragraph padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
 #' @param list.style list style - a single character value, expected value 
-#' is one of 'none' (default), 'unordered', 'ordered'.
-#' @param level list level if argument \code{list} is not 'none'.
+#' is one of 'none' (default), 'unordered', 'ordered'. This will not have any effect if used 
+#' in a FlexTable.
+#' @param level list level if argument \code{list} is not 'none'. This will not have any effect 
+#' if used in a FlexTable.
 #' @return a \code{parProperties} object
 #' @export
 #' @examples
 #' #START_TAG_TEST
 #' @example examples/parProperties.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, \code{\link{textProperties}}
+#' @seealso \code{\link{cellProperties}}, \code{\link{textProperties}}
 #' , \code{\link{chprop.parProperties}}, \code{\link{chprop.textProperties}}
 #' , \code{\link{FlexTable}}, \code{\link{tableProperties}}, \code{\link{addTable}}
 #' , \code{\link{addPlot.docx}}
@@ -85,7 +89,8 @@ parProperties = function(text.align = "left"
 	} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered').")
 	
 	if( is.numeric( level ) ) {
-		if( as.integer( level ) < 0 || !is.finite( as.integer( level ) ) ) stop("invalid level value: ", level)
+		if( as.integer( level ) < 0 || !is.finite( as.integer( level ) ) || as.integer( level ) > 9 ) 
+			stop("invalid level value: ", level)
 		out$level = as.integer( level )
 	} else stop("level must be a positive integer value (1 to 9).")
 	
@@ -99,7 +104,17 @@ parProperties = function(text.align = "left"
 #'
 #' @description Modify an object of class \code{parProperties}.  
 #' @param object \code{parProperties} object to modify
-#' @inheritParams parProperties
+#' @param text.align text alignment - a single character value, expected value 
+#' is one of 'left', 'right', 'center', 'justify'.
+#' @param padding.bottom paragraph bottom padding - 0 or positive integer value.
+#' @param padding.top paragraph top padding - 0 or positive integer value.
+#' @param padding.left paragraph left padding - 0 or positive integer value.
+#' @param padding.right paragraph right padding - 0 or positive integer value.
+#' @param padding paragraph padding - 0 or positive integer value. Argument \code{padding} overwrites
+#' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
+#' @param list.style list style - a single character value, expected value 
+#' is one of 'none' (default), 'unordered', 'ordered'.
+#' @param level list level if argument \code{list} is not 'none'.
 #' @param ... further arguments - not used 
 #' @return a \code{parProperties} object
 #' @examples
@@ -170,12 +185,14 @@ chprop.parProperties <- function(object, text.align
 	}
 	if( !missing( level ) ){
 		if( is.numeric( level ) ) {
-			if( as.integer( level ) < 0 || !is.finite( as.integer( level ) ) ) stop("invalid level value: ", level)
+			if( as.integer( level ) < 0 || !is.finite( as.integer( level ) ) || as.integer( level ) > 9 ) 
+				stop("invalid level value: ", level)
 			object$level = as.integer( level )
 		} else stop("level must be a positive integer value (1 to 9).")
 		
 	}
 	
+		
 	object					
 }
 

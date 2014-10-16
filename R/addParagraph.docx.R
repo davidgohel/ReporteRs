@@ -12,8 +12,8 @@
 #' \code{docx} object. see \code{\link{styles.docx}}.
 #' @param bookmark a character value ; id of the Word bookmark to 
 #' replace by the table. optional. See \code{\link{bookmark}}.
-#' @param par.properties \code{parProperties} to apply to paragraphs in the 
-#' docx document, only used if \code{stylename} if missing.
+#' @param par.properties \code{\link{parProperties}} to apply to paragraphs, only used 
+#' if \code{stylename} if missing.
 #' @param restart.numbering boolean value. If \code{TRUE}, next numbered 
 #' list counter will be set to 1.
 #' @param ... further arguments, not used. 

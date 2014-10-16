@@ -26,16 +26,16 @@
 #' doc.filename = "addFlexTable_example.pptx"
 #' @example examples/pptx.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle1Level1.R
+#' @example examples/addTitle1NoLevel.R
 #' @example examples/FlexTableExample.R
 #' @example examples/addFlexTable.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle2Level1.R
+#' @example examples/addTitle2NoLevel.R
 #' @example examples/agg.mtcars.FlexTable.R
 #' @example examples/addFlexTable.R
 #' @example examples/addFlexTable_posdim.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle3Level1.R
+#' @example examples/addTitle3NoLevel.R
 #' @example examples/setFlexTableBackgroundColors.R
 #' @example examples/addFlexTable.R
 #' @example examples/writeDoc_file.R

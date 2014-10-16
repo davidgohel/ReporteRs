@@ -30,10 +30,12 @@ parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
 
   \item{list.style}{list style - a single character value,
   expected value is one of 'none' (default), 'unordered',
-  'ordered'.}
+  'ordered'. This will not have any effect if used in a
+  FlexTable.}
 
   \item{level}{list level if argument \code{list} is not
-  'none'.}
+  'none'. This will not have any effect if used in a
+  FlexTable.}
 }
 \value{
 a \code{parProperties} object
@@ -50,7 +52,8 @@ into a docx object or when adding content in a FlexTable.
 Default values are: \itemize{ \item \code{text.align}
 "left" \item \code{padding.bottom} 1 \item
 \code{padding.top} 1 \item \code{padding.left} 1 \item
-\code{padding.right} 1 }
+\code{padding.right} 1 \item \code{list.style} 'none' \item
+\code{level} 1 }
 }
 \examples{
 #START_TAG_TEST
@@ -60,9 +63,8 @@ parProperties( text.align = "center", padding.top = 5
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{cellProperties}}, \code{\link{parProperties}},
-\code{\link{textProperties}} ,
-\code{\link{chprop.parProperties}},
+\code{\link{cellProperties}}, \code{\link{textProperties}}
+, \code{\link{chprop.parProperties}},
 \code{\link{chprop.textProperties}} ,
 \code{\link{FlexTable}}, \code{\link{tableProperties}},
 \code{\link{addTable}} , \code{\link{addPlot.docx}}
