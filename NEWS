@@ -3,7 +3,11 @@ ReporteRs 0.6.5
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* ordered and unordered list item 
+* ordered and unordered list item. See > ?parProperties 
+  and > ?list.settings.
+ 
+* addParagraph.pptx has a new argument append to append in an 
+  existing shape
 
 ReporteRs 0.6.4
 ==================================================================
