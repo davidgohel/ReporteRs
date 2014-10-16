@@ -3,9 +3,10 @@ ReporteRs
 ReporteRs is a R package for creating Microsoft Word, Microsoft Powerpoint and HTML documents from R.
 
 Usefull links: 
-[**Documentation**](http://davidgohel.github.io/ReporteRs/index.html) &diams;
-[**Mailing list**](http://groups.google.com/forum/#!forum/reporters-package "if you have questions, use the mailing list - to subscribe, send a mail to reporters-package+subscribe@googlegroups.com") &diams; 
-[**Bug report**](http://github.com/davidgohel/ReporteRs/issues "please provide a reproducible example")
+
+* Help pages: [**Documentation**](http://davidgohel.github.io/ReporteRs/index.html) 
+* if you have questions, use the mailing list: [**Mailing list**](http://groups.google.com/forum/#!forum/reporters-package "if you have questions, use the mailing list")  
+* Report a bug: [**Bug report**](http://github.com/davidgohel/ReporteRs/issues "please provide a reproducible example")
 
 Features
 --------
