@@ -3,8 +3,13 @@
 #' @description
 #' Create a \code{\link{docx}} object
 #' 
-#' @param title \code{"character"} value: title of the document (in the doc properties).
-#' @param template \code{"character"} value, it represents the filename of the docx file used as a template.
+#' @param title \code{"character"} value: title of the 
+#' document (in the doc properties).
+#' @param template \code{"character"} value, it represents 
+#' the filename of the docx file used as a template.
+#' @param list.definition a list definition to specify how ordered and unordered 
+#' lists have to be formated. See \code{\link{list.settings}}. Default to 
+#' \code{getOption("ReporteRs-list-definition")}.
 #' @return an object of class \code{\link{docx}}.
 #' @details
 #' Several methods can used to send R output into an object of class \code{\link{docx}}.
@@ -40,7 +45,7 @@
 #' \code{\link{styles.docx}}, 
 #' \code{\link{writeDoc.docx}}, 
 #' \code{\link{bookmark}}
-docx = function( title = "untitled", template){
+docx = function( title = "untitled", template, list.definition = getOption("ReporteRs-list-definition") ){
 	
 	# docx base file mngt
 	if( missing( template ) )
@@ -50,7 +55,7 @@ docx = function( title = "untitled", template){
 	if( !file.exists( template ) || .reg < 1 )
 		stop(template , " is not a valid file.")
 	
-	lidef = do.call( list.settings, getOption("ReporteRs-list-definition") )
+	lidef = do.call( list.settings, list.definition )
 	# java calls
 	obj = .jnew( class.docx4r.document )
 	.jcall( obj, "V", "setBaseDocument", template, lidef )

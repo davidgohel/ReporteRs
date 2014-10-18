@@ -2,7 +2,8 @@
 \alias{pptx}
 \title{Create Microsoft PowerPoint document object representation}
 \usage{
-pptx(title, template)
+pptx(title, template,
+  list.definition = getOption("ReporteRs-list-definition"))
 }
 \arguments{
   \item{title}{\code{"character"} value: title of the
@@ -10,6 +11,11 @@ pptx(title, template)
 
   \item{template}{\code{"character"} value, it represents
   the filename of the pptx file used as a template.}
+
+  \item{list.definition}{a list definition to specify how
+  ordered and unordered lists have to be formated. See
+  \code{\link{list.settings}}. Default to
+  \code{getOption("ReporteRs-list-definition")}.}
 }
 \value{
 an object of class \code{\link{pptx}}.

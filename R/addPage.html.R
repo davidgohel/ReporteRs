@@ -4,6 +4,9 @@
 #' 
 #' @param doc \code{\link{html}} object where page has to be added
 #' @param title \code{"character"} value: title of the HTML page.
+#' @param list.definition a list definition to specify how ordered and unordered 
+#' lists have to be formated. See \code{\link{list.settings}}. Default to 
+#' \code{getOption("ReporteRs-list-definition")}.
 #' @param ... further arguments, not used. 
 #' @details 
 #' A page is where content is added.
@@ -29,7 +32,7 @@
 #' @seealso \code{\link{html}}, \code{\link{addPage}}
 #' @method addPage html
 #' @S3method addPage html
-addPage.html = function( doc, title, ... ) {
+addPage.html = function( doc, title, list.definition = getOption("ReporteRs-list-definition"), ... ) {
 	
 	if( missing( title ) )
 		stop("title is missing.")
@@ -38,7 +41,7 @@ addPage.html = function( doc, title, ... ) {
 	if( length( title ) != 1 )
 		stop("title must be a character vector of length 1.")
 	
-	lidef = do.call( list.settings, getOption("ReporteRs-list-definition") )
+	lidef = do.call( list.settings, list.definition )
 	
 	slide = .jnew(class.html4r.HTMLPageContent, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1"), lidef )
 	

@@ -12,7 +12,8 @@
 #' or 'lowerRoman' or 'upperLetter' or 'lowerLetter'. Length must be 9 as there are 9 elements 
 #' to define (from level1 to level9).
 #' @param ol.pattern numbering pattern for ordered levels. A level numbering has the following 
-#' syntax: %1 (numbering of level1), %2 (numbering of level2), ..., %9 (numbering of level9).
+#' syntax: \code{"\%1"} (numbering of level1), \code{"\%2"} (numbering of level2), ..., 
+#' \code{"\%9"} (numbering of level9).
 #' @param ul.left left indent values for each level of an unordered list. Length must be 9 as 
 #' there are 9 elements to define (from level1 to level9). Length must be 9 as 
 #' there are 9 elements to define (from level1 to level9).
@@ -22,7 +23,30 @@
 #' @param ul.format type of bullet for unordered levels, values can be 'disc' or 'circle' or 'square'. 
 #' Length must be 9 as there are 9 elements to define (from level1 to level9).
 #' @details 
-#' Theses settings are used to configure formatting of list in documents. 
+#' List settings are used to configure formatting of list in documents. 
+#' 
+#' It can be set in R session options or as a parameter in \code{\link{docx}} or 
+#' \code{\link{pptx}} or \code{\link{addPage.html}}. 
+#' @examples 
+#' numbering.pattern = c( "%1.", "%1. %2.", "%1. %2. %3.", 
+#'   "%4.", "%5.", "%6.", "%7.", "%8.", "%9." )
+#' 
+#' ordered.formats = rep( c( "decimal", "upperRoman", "upperLetter"), 3 )
+#' 
+#' unordered.formats = rep( c( "square", "disc", "circle"), 3 )
+#' 
+#' left.indent = seq( from = 0, by = 0.5, length.out = 9)
+#' 
+#' options("ReporteRs-list-definition" = list( 
+#'   ol.left = left.indent, 
+#'   ol.hanging = rep( 0.4, 9 ), 
+#'   ol.format = ordered.formats, 
+#' 	ol.pattern = numbering.pattern, 
+#' 	ul.left = left.indent, 
+#' 	ul.hanging = rep( 0.4, 9 ), 
+#' 	ul.format = unordered.formats
+#' 	)
+#' )
 #' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
 #' @name doc-list-settings
 #' @aliases list.settings

@@ -2,7 +2,8 @@
 \alias{addPage.html}
 \title{Insert a page into an html object}
 \usage{
-\method{addPage}{html}(doc, title, ...)
+\method{addPage}{html}(doc, title,
+  list.definition = getOption("ReporteRs-list-definition"), ...)
 }
 \arguments{
   \item{doc}{\code{\link{html}} object where page has to be
@@ -10,6 +11,11 @@
 
   \item{title}{\code{"character"} value: title of the HTML
   page.}
+
+  \item{list.definition}{a list definition to specify how
+  ordered and unordered lists have to be formated. See
+  \code{\link{list.settings}}. Default to
+  \code{getOption("ReporteRs-list-definition")}.}
 
   \item{...}{further arguments, not used.}
 }
