@@ -36,10 +36,8 @@
 #' @example examples/textProperties.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}
-#' , \code{\link{chprop.parProperties}}, \code{\link{chprop.textProperties}}
-#' , \code{\link{chprop.cellProperties}}
-#' , \code{\link{FlexTable}}, \code{\link{tableProperties}}, \code{\link{addTable}}
-#' , \code{\link{pot}}
+#' , \code{\link{chprop.textProperties}}, \code{\link{pot}}
+#' , \code{\link{alterFlexTable}}
 textProperties = function( color = "black", font.size = getOption("ReporteRs-fontsize")
 		, font.weight = "normal", font.style = "normal", underlined = FALSE
 		, font.family = getOption("ReporteRs-default-font")
@@ -194,9 +192,7 @@ as.character.textProperties = function (x, ...){
 #' #START_TAG_TEST
 #' @example examples/chprop.textProperties.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, \code{\link{textProperties}}
-#' , \code{\link{chprop.cellProperties}}, \code{\link{chprop.parProperties}}
-#' , \code{\link{FlexTable}}, \code{\link{tableProperties}}, \code{\link{pot}}
+#' @seealso \code{\link{textProperties}}
 #' @method chprop textProperties
 #' @S3method chprop textProperties
 chprop.textProperties <- function(object, color, font.size

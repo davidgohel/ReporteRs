@@ -139,11 +139,6 @@ cellProp23 = chprop( cellProp, background.color = "#517281"
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{cellProperties}}, \code{\link{parProperties}},
-\code{\link{textProperties}} ,
-\code{\link{chprop.parProperties}},
-\code{\link{chprop.textProperties}} ,
-\code{\link{FlexTable}}, \code{\link{tableProperties}},
-\code{\link{addTable}}
+\code{\link{cellProperties}}
 }
 

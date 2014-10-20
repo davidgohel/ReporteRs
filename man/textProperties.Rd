@@ -61,10 +61,7 @@ textProperties(shading.color = "red" )
 }
 \seealso{
 \code{\link{cellProperties}}, \code{\link{parProperties}} ,
-\code{\link{chprop.parProperties}},
-\code{\link{chprop.textProperties}} ,
-\code{\link{chprop.cellProperties}} ,
-\code{\link{FlexTable}}, \code{\link{tableProperties}},
-\code{\link{addTable}} , \code{\link{pot}}
+\code{\link{chprop.textProperties}}, \code{\link{pot}} ,
+\code{\link{alterFlexTable}}
 }
 

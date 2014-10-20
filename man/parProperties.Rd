@@ -81,10 +81,7 @@ parProperties( text.align = "center", padding.top = 5
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{cellProperties}}, \code{\link{textProperties}}
-, \code{\link{chprop.parProperties}},
-\code{\link{chprop.textProperties}} ,
-\code{\link{FlexTable}}, \code{\link{tableProperties}},
-\code{\link{addTable}} , \code{\link{addPlot.docx}}
+\code{\link{chprop.parProperties}},
+\code{\link{alterFlexTable}} , \code{\link{addParagraph}}
 }
 

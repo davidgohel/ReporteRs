@@ -30,7 +30,6 @@ chprop(x, color="orange", style="dashed", width=1)
 chprop(x, width=5)
 }
 \seealso{
-\code{\link{cellProperties}}, \code{\link{parProperties}},
-\code{\link{textProperties}}, \code{\link{FlexTable}}
+\code{\link{borderProperties}}
 }
 

@@ -76,10 +76,6 @@ parProp06 = chprop( parProp, padding = 2, text.align = "center" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{cellProperties}}, \code{\link{parProperties}},
-\code{\link{textProperties}} ,
-\code{\link{chprop.cellProperties}},
-\code{\link{chprop.textProperties}} ,
-\code{\link{FlexTable}}, \code{\link{tableProperties}}
+\code{\link{parProperties}}
 }
 

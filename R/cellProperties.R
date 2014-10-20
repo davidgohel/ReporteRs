@@ -320,9 +320,7 @@ out
 #' #START_TAG_TEST
 #' @example examples/chprop.cellProperties.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, \code{\link{textProperties}}
-#' , \code{\link{chprop.parProperties}}, \code{\link{chprop.textProperties}}
-#' , \code{\link{FlexTable}}, \code{\link{tableProperties}}, \code{\link{addTable}}
+#' @seealso \code{\link{cellProperties}}
 #' @method chprop cellProperties
 #' @S3method chprop cellProperties
 chprop.cellProperties <- function(object

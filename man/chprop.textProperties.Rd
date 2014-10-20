@@ -60,11 +60,6 @@ textProp08 = chprop( textProp, font.size = 12, font.weight = "bold", shading.col
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{cellProperties}}, \code{\link{parProperties}},
-\code{\link{textProperties}} ,
-\code{\link{chprop.cellProperties}},
-\code{\link{chprop.parProperties}} ,
-\code{\link{FlexTable}}, \code{\link{tableProperties}},
-\code{\link{pot}}
+\code{\link{textProperties}}
 }
 

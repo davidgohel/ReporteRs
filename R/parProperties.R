@@ -42,10 +42,8 @@
 #' #START_TAG_TEST
 #' @example examples/parProperties.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{textProperties}}
-#' , \code{\link{chprop.parProperties}}, \code{\link{chprop.textProperties}}
-#' , \code{\link{FlexTable}}, \code{\link{tableProperties}}, \code{\link{addTable}}
-#' , \code{\link{addPlot.docx}}
+#' @seealso \code{\link{chprop.parProperties}}, \code{\link{alterFlexTable}}
+#' , \code{\link{addParagraph}}
 parProperties = function(text.align = "left",
 		padding.bottom = 1, padding.top = 1,
 		padding.left = 1, padding.right = 1, padding, list.style = "none", level = 1,
@@ -171,9 +169,7 @@ parProperties = function(text.align = "left",
 #' #START_TAG_TEST
 #' @example examples/chprop.parProperties.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, \code{\link{textProperties}}
-#' , \code{\link{chprop.cellProperties}}, \code{\link{chprop.textProperties}}
-#' , \code{\link{FlexTable}}, \code{\link{tableProperties}}
+#' @seealso \code{\link{parProperties}}
 #' @method chprop parProperties
 #' @S3method chprop parProperties
 chprop.parProperties <- function(object, text.align

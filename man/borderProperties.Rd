@@ -22,6 +22,8 @@ borderProperties(color="orange", style="solid", width=1)
 borderProperties(color="gray", style="dotted", width=1)
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{setFlexTableBorders}}
+\code{\link{chprop.borderProperties}},
+\code{\link{alterFlexTable}},
+\code{\link{setFlexTableBorders}}
 }
 
