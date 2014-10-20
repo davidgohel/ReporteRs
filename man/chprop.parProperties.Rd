@@ -37,6 +37,23 @@
   \item{level}{list level if argument \code{list} is not
   'none'.}
 
+  \item{border.bottom}{\code{\link{borderProperties}} for
+  bottom border. overwrite all border.bottom.* if
+  specified.}
+
+  \item{border.left}{\code{\link{borderProperties}} for
+  left border. overwrite all border.left.* if specified.}
+
+  \item{border.top}{\code{\link{borderProperties}} for top
+  border. overwrite all border.top.* if specified.}
+
+  \item{border.right}{\code{\link{borderProperties}} for
+  right border. overwrite all border.right.* if specified.}
+
+  \item{shading.color}{shading color - a single character
+  value specifying a valid color (e.g. "#000000" or
+  "black").}
+
   \item{...}{further arguments - not used}
 }
 \value{

@@ -159,6 +159,12 @@ parProperties = function(text.align = "left",
 #' @param list.style list style - a single character value, expected value 
 #' is one of 'none' (default), 'unordered', 'ordered'.
 #' @param level list level if argument \code{list} is not 'none'.
+#' @param border.bottom \code{\link{borderProperties}} for bottom border. overwrite all border.bottom.* if specified.
+#' @param border.left \code{\link{borderProperties}} for left border. overwrite all border.left.* if specified.
+#' @param border.top \code{\link{borderProperties}} for top border. overwrite all border.top.* if specified.
+#' @param border.right \code{\link{borderProperties}} for right border. overwrite all border.right.* if specified.
+#' @param shading.color shading color - a single character value specifying 
+#' a valid color (e.g. "#000000" or "black").
 #' @param ... further arguments - not used 
 #' @return a \code{parProperties} object
 #' @examples
