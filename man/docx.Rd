@@ -111,7 +111,7 @@ doc = addParagraph( doc, value = sometext, stylename="BulletList" )
 # format some of the pieces of text
 pot1 = pot("My tailor"
         , textProperties(color="red", font.size = 12 ) ) + " is " + pot("rich"
-        , textProperties(font.weight="bold") )
+        , textProperties(shading.color = "red", font.weight="bold") )
 pot2 = pot("Cats"
   , textProperties(color="red", font.size = 12)
   ) + " and " + pot("Dogs"
