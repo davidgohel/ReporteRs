@@ -16,6 +16,8 @@
 #' @param vertical.align single character value specifying font vertical alignments.
 #' Expected value is one of the following : default \code{'baseline'} 
 #' or \code{'subscript'} or \code{'superscript'}
+#' @param shading.color shading color - a single character value specifying 
+#' a valid color (e.g. "#000000" or "black").
 #' @return a \code{textProperties} object
 #' @export
 #' @details 
@@ -31,7 +33,7 @@
 #' }
 #' @examples
 #' #START_TAG_TEST
-#' @example examples/parProperties.R
+#' @example examples/textProperties.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}
 #' , \code{\link{chprop.parProperties}}, \code{\link{chprop.textProperties}}
@@ -41,7 +43,7 @@
 textProperties = function( color = "black", font.size = getOption("ReporteRs-fontsize")
 		, font.weight = "normal", font.style = "normal", underlined = FALSE
 		, font.family = getOption("ReporteRs-default-font")
-		, vertical.align = "baseline"){
+		, vertical.align = "baseline", shading.color){
 	
 	out = list( "color" = "black"
 			, "font.size" = 12
@@ -86,6 +88,11 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 		else out$vertical.align = "baseline"
 	} else stop("vertical.align must be a character scalar ('baseline' | 'subscript' | 'superscript').")
 	
+	if( !missing(shading.color) ){
+		if( !is.color( shading.color ) )
+			stop("shading.color must be a valid color." )
+		else out$shading.color = getHexColorCode( shading.color )
+	} 
 	
 	class( out ) = "textProperties"
 	
@@ -105,12 +112,18 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 #' @method print textProperties
 #' @S3method print textProperties
 print.textProperties = function (x, ...){
+
+	if( !is.null( x$shading.color ) )
+		shading.color = paste0("background-color:", x$shading.color, ";")
+	else shading.color = ""
+	
 	cat( "{color:" , x$color, ";" )
 	cat( "font-size:" , x$font.size, ";" )
 	cat( "font-weight:" , x$font.weight, ";" )
 	cat( "font-style:" , x$font.style, ";" )
 	cat( "underlined:" , x$underlined, ";" )
 	cat( "font-family:" , x$font.family, ";" )
+	cat( shading.color )
 	cat( "vertical.align:" , x$vertical.align, ";}" )
 }
 
@@ -122,12 +135,18 @@ as.character.textProperties = function (x, ...){
 	else if( x$vertical.align == "subscript" ) v.al = "vertical-align:sub;"
 	else if( x$vertical.align == "superscript" ) v.al = "vertical-align:super;"
 	else v.al = ""
+
+	if( !is.null( x$shading.color ) )
+		shading.color = paste0("background-color:", x$shading.color, ";")
+	else shading.color = ""
+
 	paste0( "{color:" , x$color, ";"
 		, "font-size:" , x$font.size, ";"
 		, "font-weight:" , x$font.weight, ";"
 		, "font-style:" , x$font.style, ";"
 		, "underlined:" , x$underlined, ";"
 		, "font-family:" , x$font.family, ";" 
+		, shading.color
 		, v.al
 		, "}" 
 		)
@@ -142,6 +161,9 @@ as.character.textProperties = function (x, ...){
 		, robject$font.family 
 		, robject$vertical.align 
 		)
+	if( !is.null( robject$shading.color ) )
+		.jcall( jTextProperties, "V", "setShadingColor", robject$shading.color )
+		
 	jTextProperties
 }
 
@@ -151,7 +173,21 @@ as.character.textProperties = function (x, ...){
 #'
 #' @description Modify an object of class \code{textProperties}.  
 #' @param object \code{textProperties} object to modify
-#' @inheritParams textProperties
+#' @param color font color - a single character value specifying 
+#' a valid color (e.g. "#000000" or "black").
+#' @param font.size font size (in point) - 0 or positive integer value.
+#' @param font.weight single character value specifying font weight 
+#' (expected value is \code{normal} or \code{bold}).
+#' @param font.style single character value specifying font style
+#' (expected value is \code{normal} or \code{italic}).
+#' @param underlined single logical value specifying if the font is underlined.
+#' @param font.family single character value specifying font name (it has to be 
+#' an existing font in the OS).
+#' @param vertical.align single character value specifying font vertical alignments.
+#' Expected value is one of the following : default \code{'baseline'} 
+#' or \code{'subscript'} or \code{'superscript'}
+#' @param shading.color shading color - a single character value specifying 
+#' a valid color (e.g. "#000000" or "black").
 #' @param ... further arguments - not used 
 #' @return a \code{textProperties} object
 #' @examples
@@ -165,7 +201,7 @@ as.character.textProperties = function (x, ...){
 #' @S3method chprop textProperties
 chprop.textProperties <- function(object, color, font.size
 		, font.weight, font.style, underlined
-		, font.family, vertical.align, ...) {
+		, font.family, vertical.align, shading.color, ...) {
 	
 	if( !missing( font.size ) ){
 		if( is.numeric( font.size ) ) {
@@ -215,6 +251,12 @@ chprop.textProperties <- function(object, color, font.size
 			else object$vertical.align = "baseline"
 		} else stop("vertical.align must be a character scalar ('baseline' | 'subscript' | 'superscript').")
 	}
-
+	
+	if( !missing(shading.color) ){
+		if( !is.color( shading.color ) )
+			stop("shading.color must be a valid color." )
+		else object$shading.color = getHexColorCode( shading.color )
+	}
+	
 	object					
 }
