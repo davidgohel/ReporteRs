@@ -75,6 +75,13 @@ pot2 = pot("Cats"
 				, textProperties(color="blue" ) )
 doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 
+doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), 
+		par.properties = parProperties(shading.color = "#CCCCCC") )
+
+doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), 
+		par.properties = parProperties(border.left = borderProperties(width = 10, 
+						color = "gray")) )
+
 ################ PLOT DEMO ################
 doc = addTitle( doc, "Plot demo", level = 1 )
 

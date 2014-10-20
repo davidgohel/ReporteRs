@@ -4,7 +4,8 @@
 \usage{
 parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
   padding.left = 1, padding.right = 1, padding, list.style = "none",
-  level = 1)
+  level = 1, border.bottom = borderNone(), border.left = borderNone(),
+  border.top = borderNone(), border.right = borderNone(), shading.color)
 }
 \arguments{
   \item{text.align}{text alignment - a single character
@@ -36,6 +37,23 @@ parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
   \item{level}{list level if argument \code{list} is not
   'none'. This will not have any effect if used in a
   FlexTable.}
+
+  \item{border.bottom}{\code{\link{borderProperties}} for
+  bottom border. overwrite all border.bottom.* if
+  specified.}
+
+  \item{border.left}{\code{\link{borderProperties}} for
+  left border. overwrite all border.left.* if specified.}
+
+  \item{border.top}{\code{\link{borderProperties}} for top
+  border. overwrite all border.top.* if specified.}
+
+  \item{border.right}{\code{\link{borderProperties}} for
+  right border. overwrite all border.right.* if specified.}
+
+  \item{shading.color}{shading color - a single character
+  value specifying a valid color (e.g. "#000000" or
+  "black").}
 }
 \value{
 a \code{parProperties} object

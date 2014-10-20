@@ -62,6 +62,13 @@ pot2 = pot("Cats"
     , textProperties(color="blue", font.size = 12) )
 doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), stylename="Normal" )
 
+doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), 
+	par.properties = parProperties(shading.color = "#CCCCCC") )
+
+doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), 
+	par.properties = parProperties(border.left = borderProperties(width = 10, 
+					color = "gray")) )
+
 ################ PLOT DEMO ################
 
 myplot = qplot(Sepal.Length, Petal.Length

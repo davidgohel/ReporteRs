@@ -13,7 +13,8 @@
 #' in inch. See details.
 #' @param width optional, width of the shape in inch. See details.
 #' @param height optional, height of the shape in inch. See details.
-#' @param par.properties \code{\link{parProperties}} to apply to paragraphs.
+#' @param par.properties \code{\link{parProperties}} to apply to paragraphs. Shading 
+#' and border settings will have no effect.
 #' @param restart.numbering boolean value. If \code{TRUE}, next numbered 
 #' list counter will be set to 1.
 #' @param append boolean default to FALSE. If TRUE, paragraphs will be 
@@ -116,7 +117,7 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height,
 		}
 		.jcall( parset, "V", "addParagraph", jpar_object )
 	}
-	
+
 	if( check.dims > 3 ){
 		out = .jcall( slide, "I", "add", parset
 				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ), 

@@ -27,7 +27,8 @@
   details.}
 
   \item{par.properties}{\code{\link{parProperties}} to
-  apply to paragraphs.}
+  apply to paragraphs. Shading and border settings will
+  have no effect.}
 
   \item{restart.numbering}{boolean value. If \code{TRUE},
   next numbered list counter will be set to 1.}

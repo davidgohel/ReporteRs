@@ -30,6 +30,12 @@
 #' in a FlexTable.
 #' @param level list level if argument \code{list} is not 'none'. This will not have any effect 
 #' if used in a FlexTable.
+#' @param border.bottom \code{\link{borderProperties}} for bottom border. overwrite all border.bottom.* if specified.
+#' @param border.left \code{\link{borderProperties}} for left border. overwrite all border.left.* if specified.
+#' @param border.top \code{\link{borderProperties}} for top border. overwrite all border.top.* if specified.
+#' @param border.right \code{\link{borderProperties}} for right border. overwrite all border.right.* if specified.
+#' @param shading.color shading color - a single character value specifying 
+#' a valid color (e.g. "#000000" or "black").
 #' @return a \code{parProperties} object
 #' @export
 #' @examples
@@ -40,13 +46,20 @@
 #' , \code{\link{chprop.parProperties}}, \code{\link{chprop.textProperties}}
 #' , \code{\link{FlexTable}}, \code{\link{tableProperties}}, \code{\link{addTable}}
 #' , \code{\link{addPlot.docx}}
-parProperties = function(text.align = "left"
-		, padding.bottom = 1, padding.top = 1
-		, padding.left = 1, padding.right = 1, padding, list.style = "none", level = 1) {
+parProperties = function(text.align = "left",
+		padding.bottom = 1, padding.top = 1,
+		padding.left = 1, padding.right = 1, padding, list.style = "none", level = 1,
+		border.bottom = borderNone(), border.left = borderNone(), 
+		border.top = borderNone(), border.right = borderNone(),
+		shading.color) {
 	
-	out = list( "text.align" = "left"
-			, "padding.bottom" = 1, "padding.top" = 1
-			, "padding.left" = 1, "padding.right" = 1, list = "none", level = 1)
+	out = list( "text.align" = "left",
+			"padding.bottom" = 1, "padding.top" = 1,
+			"padding.left" = 1, "padding.right" = 1, 
+			list = "none", level = 1,
+			border.bottom = borderNone(), border.left = borderNone(), 
+			border.top = borderNone(), border.right = borderNone()
+			)
 	
 	if( !missing( padding ) ){
 		if( is.numeric( padding ) ) {
@@ -95,6 +108,37 @@ parProperties = function(text.align = "left"
 	} else stop("level must be a positive integer value (1 to 9).")
 	
 	
+
+	if( inherits( border.bottom, "borderProperties" ) ) {
+		out$border.bottom = border.bottom
+	} else {
+		stop("border.bottom must be a borderProperties object.")
+	}
+
+	if( inherits( border.top, "borderProperties" ) ) {
+		out$border.top = border.top
+	} else {
+		stop("border.top must be a borderProperties object.")
+	}
+
+	if( inherits( border.left, "borderProperties" ) ) {
+		out$border.left = border.left
+	} else {
+		stop("border.left must be a borderProperties object.")
+	}
+
+	if( inherits( border.right, "borderProperties" ) ) {
+		out$border.right = border.right
+	} else {
+		stop("border.right must be a borderProperties object.")
+	}
+	
+	if( !missing(shading.color) ){
+		if( !is.color( shading.color ) )
+			stop("shading.color must be a valid color." )
+		else out$shading.color = getHexColorCode( shading.color )
+	}
+	
 	class( out ) = "parProperties"
 	
 	out
@@ -128,7 +172,8 @@ parProperties = function(text.align = "left"
 #' @S3method chprop parProperties
 chprop.parProperties <- function(object, text.align
 		, padding.bottom, padding.top
-		, padding.left, padding.right, padding, list.style, level, ...) {
+		, padding.left, padding.right, padding, list.style, level, 
+		border.bottom, border.left, border.top, border.right, shading.color, ...) {
 	
 	if( !missing( padding ) ){
 		if( is.numeric( padding ) ) {
@@ -191,8 +236,45 @@ chprop.parProperties <- function(object, text.align
 		} else stop("level must be a positive integer value (1 to 9).")
 		
 	}
+
+	if( !missing( border.bottom ) ){
+		if( inherits( border.bottom, "borderProperties" ) ) {
+			object$border.bottom = border.bottom
+		} else {
+			stop("border.bottom must be a borderProperties object.")
+		}
+	}
 	
-		
+	if( !missing( border.top ) ){
+		if( inherits( border.top, "borderProperties" ) ) {
+			object$border.top = border.top
+		} else {
+			stop("border.top must be a borderProperties object.")
+		}
+	}
+	
+	if( !missing( border.left ) ){
+		if( inherits( border.left, "borderProperties" ) ) {
+			object$border.left = border.left
+		} else {
+			stop("border.left must be a borderProperties object.")
+		}
+	}
+	
+	if( !missing( border.right ) ){
+		if( inherits( border.right, "borderProperties" ) ) {
+			object$border.right = border.right
+		} else {
+			stop("border.right must be a borderProperties object.")
+		}
+	}
+	
+	if( !missing(shading.color) ){
+		if( !is.color( shading.color ) )
+			stop("shading.color must be a valid color." )
+		else object$shading.color = getHexColorCode( shading.color )
+	}
+	
 	object					
 }
 
@@ -207,15 +289,32 @@ print.parProperties = function (x, ...){
 	cat( "padding.right:", x$padding.right, ";" )
 	cat( "list.style:", x$list.style, ";" )
 	cat( "level:", x$level, ";}\n" )
+	cat( "border.bottom:", as.character(x$border.bottom), ";" )
+	cat( "border.top:", as.character(x$border.top), ";" )
+	cat( "border.left:", as.character(x$border.left), ";" )
+	cat( "border.right:", as.character(x$border.right), ";" )
+	
+	if( !is.null( x$shading.color ) )
+		shading.color = paste0("shading.color:", x$shading.color, ";")
+	else shading.color = ""
+	
+	cat( shading.color, "\n" )
 }
 
 
 .jParProperties = function( robject ){
-	jparProp = .jnew(class.text.ParProperties
-			, robject$text.align
-			, robject$padding.bottom, robject$padding.top
-			, robject$padding.left, robject$padding.right, 
-			robject$list.style, robject$level )
-	
+	jparProp = .jnew(class.text.ParProperties,
+			robject$text.align,
+			robject$padding.bottom, robject$padding.top,
+			robject$padding.left, robject$padding.right, 
+			robject$list.style, robject$level,
+			.jborderProperties(robject$border.bottom ),
+			.jborderProperties(robject$border.left ),
+			.jborderProperties(robject$border.top ),
+			.jborderProperties(robject$border.right )
+			)
+	if( !is.null( robject$shading.color ) )
+		.jcall( jparProp, "V", "setShadingColor", robject$shading.color )
+			
 	jparProp
 }

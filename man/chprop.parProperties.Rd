@@ -3,7 +3,8 @@
 \title{Modify paragraph formatting properties}
 \usage{
 \method{chprop}{parProperties}(object, text.align, padding.bottom, padding.top,
-  padding.left, padding.right, padding, list.style, level, ...)
+  padding.left, padding.right, padding, list.style, level, border.bottom,
+  border.left, border.top, border.right, shading.color, ...)
 }
 \arguments{
   \item{object}{\code{parProperties} object to modify}
