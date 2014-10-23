@@ -31,8 +31,8 @@ parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
 
   \item{list.style}{list style - a single character value,
   expected value is one of 'none' (default), 'unordered',
-  'ordered'. This will not have any effect if used in a
-  FlexTable.}
+  'ordered', 'blockquote'. This will not have any effect if
+  used in a FlexTable.}
 
   \item{level}{list level if argument \code{list} is not
   'none'. This will not have any effect if used in a

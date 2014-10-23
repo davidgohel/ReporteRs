@@ -26,7 +26,7 @@
 #' @param padding paragraph padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
 #' @param list.style list style - a single character value, expected value 
-#' is one of 'none' (default), 'unordered', 'ordered'. This will not have any effect 
+#' is one of 'none' (default), 'unordered', 'ordered', 'blockquote'. This will not have any effect 
 #' if used in a FlexTable.
 #' @param level list level if argument \code{list} is not 'none'. This will not have any effect 
 #' if used in a FlexTable.
@@ -99,9 +99,9 @@ parProperties = function(text.align = "left",
 	
 	
 	if( is.character( list.style ) ) {
-		match.arg( list.style, choices = c('none', 'ordered', 'unordered' ), several.ok = F )
+		match.arg( list.style, choices = c('none', 'ordered', 'unordered', 'blockquote' ), several.ok = F )
 		out$list.style = list.style
-	} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered' ).")
+	} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered', 'blockquote' ).")
 	
 	if( is.numeric( level ) ) {
 		if( as.integer( level ) < 0 || !is.finite( as.integer( level ) ) || as.integer( level ) > 9 ) 
@@ -159,7 +159,7 @@ parProperties = function(text.align = "left",
 #' @param padding paragraph padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
 #' @param list.style list style - a single character value, expected value 
-#' is one of 'none' (default), 'unordered', 'ordered'.
+#' is one of 'none' (default), 'unordered', 'ordered', 'blockquote'.
 #' @param level list level if argument \code{list} is not 'none'.
 #' @param border.bottom \code{\link{borderProperties}} for bottom border. overwrite all border.bottom.* if specified.
 #' @param border.left \code{\link{borderProperties}} for left border. overwrite all border.left.* if specified.
@@ -255,9 +255,9 @@ chprop.parProperties <- function(object, text.align
 	
 	if( !missing( list.style ) ){
 		if( is.character( list.style ) ) {
-			match.arg( list.style, choices = c('none', 'ordered', 'unordered'), several.ok = F )
+			match.arg( list.style, choices = c('none', 'ordered', 'unordered', 'blockquote'), several.ok = F )
 			object$list.style = list.style
-		} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered').")
+		} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered' | 'blockquote').")
 	}
 	if( !missing( level ) ){
 		if( is.numeric( level ) ) {

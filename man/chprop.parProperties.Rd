@@ -32,7 +32,7 @@
 
   \item{list.style}{list style - a single character value,
   expected value is one of 'none' (default), 'unordered',
-  'ordered'.}
+  'ordered', 'blockquote'.}
 
   \item{level}{list level if argument \code{list} is not
   'none'.}
