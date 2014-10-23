@@ -26,8 +26,8 @@
 #' @param padding paragraph padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
 #' @param list.style list style - a single character value, expected value 
-#' is one of 'none' (default), 'unordered', 'ordered'. This will not have any effect if used 
-#' in a FlexTable.
+#' is one of 'none' (default), 'unordered', 'ordered'. This will not have any effect 
+#' if used in a FlexTable.
 #' @param level list level if argument \code{list} is not 'none'. This will not have any effect 
 #' if used in a FlexTable.
 #' @param border.bottom \code{\link{borderProperties}} for bottom border. overwrite all border.bottom.* if specified.
@@ -46,7 +46,8 @@
 #' , \code{\link{addParagraph}}
 parProperties = function(text.align = "left",
 		padding.bottom = 1, padding.top = 1,
-		padding.left = 1, padding.right = 1, padding, list.style = "none", level = 1,
+		padding.left = 1, padding.right = 1, padding, 
+		list.style = "none", level = 1,
 		border.bottom = borderNone(), border.left = borderNone(), 
 		border.top = borderNone(), border.right = borderNone(),
 		shading.color) {
@@ -54,6 +55,8 @@ parProperties = function(text.align = "left",
 	out = list( "text.align" = "left",
 			"padding.bottom" = 1, "padding.top" = 1,
 			"padding.left" = 1, "padding.right" = 1, 
+			"margin.bottom" = 0, "margin.top" = 0,
+			"margin.left" = 0, "margin.right" = 0, 
 			list = "none", level = 1,
 			border.bottom = borderNone(), border.left = borderNone(), 
 			border.top = borderNone(), border.right = borderNone()
@@ -94,10 +97,11 @@ parProperties = function(text.align = "left",
 		out$padding.right = as.integer( padding.right )
 	} else stop("padding.right must be a numeric scalar (pixel unit).")
 	
+	
 	if( is.character( list.style ) ) {
-		match.arg( list.style, choices = c('none', 'ordered', 'unordered'), several.ok = F )
+		match.arg( list.style, choices = c('none', 'ordered', 'unordered' ), several.ok = F )
 		out$list.style = list.style
-	} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered').")
+	} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered' ).")
 	
 	if( is.numeric( level ) ) {
 		if( as.integer( level ) < 0 || !is.finite( as.integer( level ) ) || as.integer( level ) > 9 ) 
@@ -174,7 +178,8 @@ parProperties = function(text.align = "left",
 #' @S3method chprop parProperties
 chprop.parProperties <- function(object, text.align
 		, padding.bottom, padding.top
-		, padding.left, padding.right, padding, list.style, level, 
+		, padding.left, padding.right, 
+		padding, list.style, level, 
 		border.bottom, border.left, border.top, border.right, shading.color, ...) {
 	
 	if( !missing( padding ) ){
@@ -222,6 +227,30 @@ chprop.parProperties <- function(object, text.align
 		} else stop("padding.right must be a numeric scalar (pixel unit).")
 	}
 	
+#	if( !missing( margin.bottom ) )
+#		if( is.numeric( margin.bottom ) ) {
+#			if( as.integer( margin.bottom ) < 0 || !is.finite( as.integer( margin.bottom ) ) ) stop("invalid margin.bottom : ", margin.bottom)
+#			object$margin.bottom = as.integer( margin.bottom )
+#		} else stop("margin.bottom must be a numeric scalar (pixel unit).")
+#	
+#	if( !missing( margin.top ) )
+#		if( is.numeric( margin.top ) ) {
+#			if( as.integer( margin.top ) < 0 || !is.finite( as.integer( margin.top ) ) ) stop("invalid margin.top : ", margin.top)
+#			object$margin.top = as.integer( margin.top )
+#		} else stop("margin.top must be a numeric scalar (pixel unit).")
+#
+#	if( !missing( margin.left ) )
+#		if( is.numeric( margin.left ) ) {
+#			if( as.integer( margin.left ) < 0 || !is.finite( as.integer( margin.left ) ) ) stop("invalid margin.left : ", margin.left)
+#			object$margin.left = as.integer( margin.left )
+#		} else stop("margin.left must be a numeric scalar (pixel unit).")
+#	
+#	if( !missing( margin.right ) )
+#		if( is.numeric( margin.right ) ) {
+#			if( as.integer( margin.right ) < 0 || !is.finite( as.integer( margin.right ) ) ) stop("invalid margin.right : ", margin.right)
+#			object$margin.right = as.integer( margin.right )
+#		} else stop("margin.right must be a numeric scalar (pixel unit).")
+#	
 	
 	
 	if( !missing( list.style ) ){
@@ -288,7 +317,7 @@ print.parProperties = function (x, ...){
 	cat( "padding-bottom:" , x$padding.bottom, ";" )
 	cat( "padding-top:", x$padding.top, ";" )
 	cat( "padding-left:", x$padding.left, ";" )
-	cat( "padding.right:", x$padding.right, ";" )
+	cat( "padding-right:", x$padding.right, ";" )
 	cat( "list.style:", x$list.style, ";" )
 	cat( "level:", x$level, ";}\n" )
 	cat( "border.bottom:", as.character(x$border.bottom), ";" )
@@ -309,6 +338,8 @@ print.parProperties = function (x, ...){
 			robject$text.align,
 			robject$padding.bottom, robject$padding.top,
 			robject$padding.left, robject$padding.right, 
+			0L, 0L,
+			0L, 0L, 
 			robject$list.style, robject$level,
 			.jborderProperties(robject$border.bottom ),
 			.jborderProperties(robject$border.left ),
