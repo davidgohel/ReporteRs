@@ -55,10 +55,24 @@ addParagraph.html = function(doc, value,
 		paragrah = .jnew(class.Paragraph )
 		pot_value = value[[pot_index]]
 		for( i in 1:length(pot_value)){
-			if( is.null( pot_value[[i]]$format ) ) 
-				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
-						.jTextProperties( pot_value[[i]]$format) )
+			
+			current_value = pot_value[[i]]
+			if( is.null( current_value$format ) ) {
+				if( is.null( current_value$hyperlink ) )
+					.jcall( paragrah, "V", "addText", current_value$value )
+				else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
+			} else {
+				jtext.properties = .jTextProperties( current_value$format )
+				if( is.null( current_value$hyperlink ) )
+					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
+				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
+			}
+#			
+#			
+#			if( is.null( pot_value[[i]]$format ) ) 
+#				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
+#			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
+#						.jTextProperties( pot_value[[i]]$format) )
 		}
 		.jcall( parset, "V", "addParagraph", paragrah )
 	}
