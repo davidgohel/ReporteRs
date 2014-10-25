@@ -78,3 +78,19 @@ Footnote = function( value, par.properties = parProperties(), index.text.propert
 	parset
 }
 
+
+#' @method str Footnote
+#' @S3method str Footnote
+str.Footnote = function(object, ...){
+	
+	print( object )
+	
+	invisible()
+}
+#' @method print Footnote
+#' @S3method print Footnote
+print.Footnote = function (x, ...){
+	for(i in seq_along(x$value)){
+		print(x$value[i])
+	}
+}
