@@ -79,6 +79,11 @@ addParagraph.docx = function(doc, value, stylename, bookmark,
 					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
 				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
 			}
+			if( !is.null( current_value$footnote ) ) {
+				jfn = .jFootnote(current_value$footnote)
+				.jcall( jfn, "V", "setBaseDocument", doc$obj)
+				.jcall( paragrah, "V", "addFootnoteToLastEntry", jfn )
+			}
 		}
 		.jcall( parset, "V", "addParagraph", paragrah )
 	}

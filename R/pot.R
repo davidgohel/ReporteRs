@@ -6,6 +6,7 @@
 #' @param value text value or a value that has a \code{format} method returning character value.
 #' @param format formatting properties (an object of class \code{textProperties}).
 #' @param hyperlink a valid url to use as hyperlink when clicking on \code{value}.
+#' @param footnote a \code{\link{Footnote}} object.
 #' @details a pot (piece of text) is a convenient way to define a paragraph 
 #' of text where some text are not all formated the same.
 #' @export
@@ -16,7 +17,7 @@
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
 #' , \code{\link{+.pot}}
-pot = function( value ="", format = textProperties(), hyperlink ){
+pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 
 	value = format( value )
 	if( !is.character( value ) ){
@@ -26,8 +27,7 @@ pot = function( value ="", format = textProperties(), hyperlink ){
 	if( length( value ) != 1 ){
 		stop("length of value must be 1.")
 	} 
-	
-	
+		
 	.Object = list()
 	.Object[[1]] = list()
 	.Object[[1]]$value = value
@@ -43,7 +43,11 @@ pot = function( value ="", format = textProperties(), hyperlink ){
 		.Object[[1]]$hyperlink = hyperlink
 	}
 	
-	
+	if( !missing( footnote )){
+		if( !inherits(footnote, "Footnote") )
+			stop("footnote must be a Footnote object.")
+		.Object[[1]]$footnote = footnote
+	}
 	
 	class( .Object ) = c("pot")
 	.Object
@@ -138,7 +142,9 @@ as.html.pot = function( object, ... ) {
 					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
 				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
 			}
-
+			if( !is.null( current_value$footnote ) ) {
+				.jcall( paragrah, "V", "addFootnoteToLastEntry", .jFootnote(current_value$footnote ) )
+			}
 		}
 	paragrah
 }
