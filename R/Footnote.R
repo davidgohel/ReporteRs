@@ -1,14 +1,25 @@
 #' @title Create a Footnote
 #'
 #' @description
-#' Footnote
+#' A footnote is a a set of paragraphs placed at the bottom of a page if 
+#' document object is a \code{\link{docx}} object or used as a tooltip 
+#' if document object is an \code{\link{html}} object. 
+#' 
+#' If in a \code{docx} object, footnote will be flagged by a number immediately 
+#' following the portion of the text the note is in reference to.
 #' 
 #' @param value text to add to the document as paragraphs: 
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
 #' @param par.properties \code{\link{parProperties}} to apply to paragraphs. 
-#' @param index.text.properties \code{\link{textProperties}} to apply to note index symbol. 
+#' @param index.text.properties \code{\link{textProperties}} to apply to note 
+#' index symbol (only for \code{docx} object). 
 #' @return an object of class \code{\link{Footnote}}.
+#' @examples
+#' #START_TAG_TEST
+#' @example examples/FootnoteDocxExample.R
+#' @example examples/FootnoteHTMLExample.R
+#' @example examples/STOP_TAG_TEST.R
 #' @export 
 Footnote = function( value, par.properties = parProperties(), index.text.properties = textProperties(vertical.align = "superscript") ) {
 	
