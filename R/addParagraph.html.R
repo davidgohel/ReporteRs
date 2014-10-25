@@ -48,8 +48,6 @@ addParagraph.html = function(doc, value,
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
-
-	
 	parset = .jnew( class.ParagraphSet, .jParProperties( par.properties ) )
 	for( pot_index in 1:length( value ) ){
 		paragrah = .jnew(class.Paragraph )
@@ -66,6 +64,10 @@ addParagraph.html = function(doc, value,
 				if( is.null( current_value$hyperlink ) )
 					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
 				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
+			}
+			if( !is.null( current_value$footnote ) ) {
+				jfn = .jFootnote(current_value$footnote)
+				.jcall( paragrah, "V", "addFootnoteToLastEntry", jfn )
 			}
 #			
 #			

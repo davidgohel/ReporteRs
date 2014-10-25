@@ -7,6 +7,7 @@ ENHANCEMENT
 
 * add hyperlink option to pot objects
 
+* add footnote option to pot objects (for docx and html objects)
 
 ReporteRs 0.6.5
 ==================================================================
