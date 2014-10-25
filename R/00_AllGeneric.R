@@ -98,12 +98,12 @@ addFooter = function(doc, ...){
 #' , \code{\link{html}}, \code{\link{addImage.html}}
 addImage = function(doc, filename, ...){
 	checkHasSlide(doc)
+	if( missing( filename ) )
+		stop("filename cannot be missing")
 	if( !inherits( filename, "character" ) )
 		stop("filename must be a single character value")
 	if( length( filename ) != 1 )
 		stop("filename must be a single character value")		
-	if( missing( filename ) )
-		stop("filename cannot be missing")
 	if( !file.exists( filename ) )
 		stop( filename, " does not exist")
 	

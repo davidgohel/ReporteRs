@@ -2,7 +2,7 @@
 \alias{pot}
 \title{Piece of Text (formated text)}
 \usage{
-pot(value = "", format = textProperties())
+pot(value = "", format = textProperties(), hyperlink)
 }
 \arguments{
   \item{value}{text value or a value that has a
@@ -10,6 +10,9 @@ pot(value = "", format = textProperties())
 
   \item{format}{formatting properties (an object of class
   \code{textProperties}).}
+
+  \item{hyperlink}{a valid url to use as hyperlink when
+  clicking on \code{value}.}
 }
 \description{
 Create an object with a text to display and its formatting
