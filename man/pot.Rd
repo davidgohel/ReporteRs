@@ -24,16 +24,28 @@ properties.
 a pot (piece of text) is a convenient way to define a
 paragraph of text where some text are not all formated the
 same.
+
+A pot can be associated with an hyperlink.
+
+A pot can be associated with a Footnote. Note that
+footnotes can not be inserted in a \code{pptx} object.
 }
 \examples{
 #START_TAG_TEST
-pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-	, textProperties(font.weight="bold") )
+
+# "My tailor is rich" with formatting on some words
+pot1 = pot("My tailor", textProperties(color = "red" ) 
+  ) + " is " + pot("rich", textProperties(shading.color = "red", font.weight = "bold" ) )
+
+# "Cats and dogs" with formatting on some words
+pot2 = pot("Cats", textProperties(color = "red" ) 
+  ) + " and " + pot("dogs", textProperties( color = "blue" ), hyperlink = "http://www.wikipedia.org/" )
 #STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addParagraph.docx}},
 \code{\link{addParagraph.pptx}},
-\code{\link{addParagraph.html}} , \code{\link{+.pot}}
+\code{\link{addParagraph.html}}, \code{\link{Footnote}} ,
+\code{\link{+.pot}}
 }
 

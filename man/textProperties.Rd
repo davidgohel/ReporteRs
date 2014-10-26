@@ -54,9 +54,15 @@ Default values are: \itemize{ \item \code{color} "black"
 \examples{
 #START_TAG_TEST
 textProperties( font.size = 12 )
-textProperties(color="red", font.weight = "bold", font.style = "italic" 
-  , underlined = TRUE, font.family = "Courier New" )
-textProperties(shading.color = "red" )
+
+textProperties(color="red", 
+  font.weight = "bold", 
+  font.style = "italic",  
+  underlined = TRUE,  
+  font.family = "Courier New" 
+)
+
+textProperties( shading.color = "red" )
 #STOP_TAG_TEST
 }
 \seealso{

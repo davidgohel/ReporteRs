@@ -104,4 +104,7 @@ doc.dirname = "Footnote"
 writeDoc( doc, directory = doc.dirname )
 #STOP_TAG_TEST
 }
+\seealso{
+\code{\link{docx}}, \code{\link{html}}, \code{\link{pot}}
+}
 

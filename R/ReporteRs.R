@@ -5,7 +5,7 @@
 #' Package: \tab ReporteRs\cr
 #' Type: \tab Package\cr
 #' Version: \tab 0.6.6\cr
-#' Date: \tab 2014-10-21\cr
+#' Date: \tab 2014-10-26\cr
 #' License: \tab GPL (>= 3)\cr
 #' LazyLoad: \tab yes\cr
 #' }
@@ -30,28 +30,42 @@
 #'   \item \code{\link{writeDoc}} Write the document into a file or a directory
 #' }
 #' 
+#' \code{ReporteRs} comes with an object of class \code{\link{pot}} to let you 
+#' handle text output and format. You can associate a text with formats (font 
+#' size, font color, etc.), with an hyperlink or with a \code{\link{Footnote}} 
+#' as a reference note. 
+#' 
+#' \code{ReporteRs} comes also with an object of class \code{\link{FlexTable}} 
+#' that let you design and format tabular outputs.
+#' 
+#' 
 #' Note that html is experimental. 
 #' 
 #' Default values:
 #' 
 #' With ReporteRs, some options can be used to reduce usage of some parameters:
 #' \itemize{
-#'   \item \code{ReporteRs-default-font} Default font family to use (default to "Helvetica").
+#'   \item \code{"ReporteRs-default-font"} Default font family to use (default to "Helvetica").
 #' This will be used as default values for argument \code{fontname} of \code{\link{addPlot}}
-#' and argument \code{font.family} of \code{\link{pot}}.
+#' and argument \code{font.family} of \code{\link{pot}}. 
 #' 
-#'   \item \code{ReporteRs-fontsize} Default font size to use (default to 11).
+#' Note that if you do not have \code{Helvetica} font, this options must be set to an 
+#' available font. 
+#' 
+#' 
+#'   \item \code{"ReporteRs-fontsize"} Default font size to use (default to 11).
 #' This will be used as default values for argument \code{pointsize} of \code{\link{addPlot}}
 #' and argument \code{font.size} of \code{\link{pot}}.
-#' 
-#'   \item \code{ReporteRs-locale.language} language encoding (for html objects). Default to "en".
-#'   \item \code{ReporteRs-locale.region} region encoding (for html objects). Default to "US".
+#' 	 \item \code{"ReporteRs-list-definition"} see \code{\link{list.settings}}.
+#'   \item \code{"ReporteRs-locale.language"} language encoding (for html objects). Default to "en".
+#'   \item \code{"ReporteRs-locale.region"} region encoding (for html objects). Default to "US".
 #' }
 #' 
-#' example:
-#' 
+#' @examples
+#' #START_TAG_TEST
 #' options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Arial")
-#' 
+#' @example examples/options.listdefinitions.R
+#' @example examples/STOP_TAG_TEST.R
 #' @name ReporteRs-package
 #' @aliases ReporteRs
 #' @title ReporteRs: a package to create document from R

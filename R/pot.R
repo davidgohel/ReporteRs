@@ -9,13 +9,19 @@
 #' @param footnote a \code{\link{Footnote}} object.
 #' @details a pot (piece of text) is a convenient way to define a paragraph 
 #' of text where some text are not all formated the same.
+#' 
+#' A pot can be associated with an hyperlink.
+#' 
+#' A pot can be associated with a Footnote. Note that footnotes can not be inserted in 
+#' a \code{pptx} object. 
 #' @export
 #' @examples
 #' #START_TAG_TEST
-#' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-#' 	, textProperties(font.weight="bold") )
-#' #STOP_TAG_TEST
-#' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
+#' @example examples/pot1_example.R
+#' @example examples/pot2_example.R
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}},
+#'  \code{\link{addParagraph.html}}, \code{\link{Footnote}}
 #' , \code{\link{+.pot}}
 pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 
@@ -31,6 +37,7 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 	.Object = list()
 	.Object[[1]] = list()
 	.Object[[1]]$value = value
+	
 	if( !missing(format) ){
 		if( !inherits(format, "textProperties") )
 			stop("argument format must be a textProperties object.")

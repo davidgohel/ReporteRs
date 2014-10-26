@@ -1,10 +1,10 @@
 require( ggplot2 )
 
-# Word document to write
+# directory for html pages
 html_directory = "html_example"
 
-# set default font size to 10
-options( "ReporteRs-fontsize" = 10 )
+# set default font size to 11
+options( "ReporteRs-fontsize" = 11 )
 
 # Create a new document
 doc = html( title = "document title" )
@@ -18,8 +18,8 @@ doc = addPage( doc, title = "HTML demo" )
 # add a title
 doc = addTitle( doc, "Text demo", level = 1 )
 sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-		, "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
-		, "Quisque dictum tristique ligula."
+  	, "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
+    , "Quisque dictum tristique ligula."
 )
 
 # add simple text
@@ -28,27 +28,37 @@ doc = addParagraph( doc, value = sometext )
 # Add "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text
 pot1 = pot("My tailor"
-				, textProperties(color="red" ) ) + " is " + pot("rich"
-				, textProperties(font.weight="bold") )
+	, textProperties(color="red", shading.color = "#CCCCCC" ) ) + " is " + pot("rich"
+	, textProperties(font.weight="bold") )
 pot2 = pot("Cats"
-				, textProperties(color="red" )
-		) + " and " + pot("Dogs"
-				, textProperties(color="blue" ) )
+	, textProperties(color="red" )
+	) + " and " + pot("Dogs"
+	, textProperties(color="blue" ) )
 doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 
-doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), 
-		par.properties = parProperties(shading.color = "#CCCCCC") )
+doc = addParagraph(doc, "Silentium tractibus per minimis ne excita 
+ut temptentur generalibus quam primordiis per clades post delictis 
+iuge exitium silentium per et.", 
+	par.properties = parProperties( padding.left = 250, padding.right = 250) )
 
-doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), 
-		par.properties = parProperties(border.left = borderProperties(width = 10, 
-						color = "gray")) )
+
+doc = addParagraph(doc, pot("Gallus necem refert singula modum quae 
+est quae quorum leo quae non cadaveribus ut quod.", format = textItalic( ) ), 
+	par.properties = parProperties(list.style = "blockquote") )
+
+
+ordered.list.level1 = parProperties(list.style = "ordered", level = 1 )
+ordered.list.level2 = parProperties(list.style = "ordered", level = 2 )
+
+doc = addParagraph( doc, value = sometext, par.properties = ordered.list.level1 )
+doc = addParagraph( doc, value = sometext, par.properties = ordered.list.level2 )
 
 ################ PLOT DEMO ################
 doc = addTitle( doc, "Plot demo", level = 1 )
 
 myplot = qplot(Sepal.Length, Petal.Length
-		, data = iris, color = Species
-		, size = Petal.Width, alpha = I(0.7)
+	, data = iris, color = Species
+	, size = Petal.Width, alpha = I(0.7)
 )
 # Add titles and then 'myplot'
 doc = addPlot( doc, function( ) print( myplot ) )
@@ -66,8 +76,8 @@ doc = addTitle( doc, "FlexTable example", level = 1 )
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body cells
 MyFTable = FlexTable( data = mtcars, add.rownames = TRUE
-		, body.cell.props = cellProperties( border.color = "#EDBD3E")
-		, header.cell.props = cellProperties( background.color = "#5B7778" )
+	, body.cell.props = cellProperties( border.color = "#EDBD3E")
+	, header.cell.props = cellProperties( background.color = "#5B7778" )
 )
 # zebra stripes - alternate colored backgrounds on table rows
 MyFTable = setZebraStyle( MyFTable, odd = "#D1E6E7", even = "#93A8A9" )
@@ -75,15 +85,14 @@ MyFTable = setFlexTableWidths( MyFTable, widths = c(2,rep(.7,11)))
 
 # applies a border grid on table
 MyFTable = setFlexTableBorders(MyFTable
-		, inner.vertical = borderProperties( color="#EDBD3E", style="dotted" )
-		, inner.horizontal = borderProperties( color = "#EDBD3E", style = "none" )
-		, outer.vertical = borderProperties( color = "#EDBD3E", style = "solid" )
-		, outer.horizontal = borderProperties( color = "#EDBD3E", style = "solid" )
+	, inner.vertical = borderProperties( color="#EDBD3E", style="dotted" )
+	, inner.horizontal = borderProperties( color = "#EDBD3E", style = "none" )
+	, outer.vertical = borderProperties( color = "#EDBD3E", style = "solid" )
+	, outer.horizontal = borderProperties( color = "#EDBD3E", style = "solid" )
 )
 
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-# Write the object
+# Write the object into a directory
 writeDoc( doc, directory = html_directory )
-
