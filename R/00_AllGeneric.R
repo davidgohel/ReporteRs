@@ -115,6 +115,25 @@ addImage = function(doc, filename, ...){
 
 
 
+#' @title Add a markdown text or file
+#'
+#' @description Add markdown into a document object
+#' 
+#' @param doc document object
+#' @param file markdown file. Not used if text is provided.
+#' @param text character vector. The markdown to parse. 
+#' @param ... further arguments passed to other methods 
+#' @return a document object
+#' @export
+#' @seealso \code{\link{docx}}, \code{\link{addMarkdown.docx}}
+addMarkdown = function(doc, file, text, ...){
+	if( missing( file ) && missing( text ) )
+		stop("need a markdown file or text argument.")
+	UseMethod("addMarkdown")
+}
+
+
+
 
 
 #' @title Add a page into a document object
