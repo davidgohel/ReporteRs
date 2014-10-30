@@ -54,8 +54,9 @@ addMarkdown.html = function(doc, file, text,
 		if( elt_table[ i, "block_type"]=="p" ){
 			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], text.properties = text.properties,
 					blocktable_info = elt_table )
+			padding.left = default.par.properties$padding.left + guess.indentation(elt_table, i )*72
 			doc = addParagraph( doc, value = pars, 
-				par.properties = chprop( default.par.properties, padding.left = guess.indentation(elt_table, i )*72 ) 
+				par.properties = chprop( default.par.properties, padding.left = padding.left ) 
 				)
 		} else if( elt_table[ i, "block_type"]=="blockquotes" ){
 			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], 

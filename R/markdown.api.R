@@ -1,5 +1,5 @@
 blockquotes_reg = "^\\s*(>\\s{1})+"
-title_reg_atx = "^\\s*#{1,6}\\s+(.*)*#*"
+title_reg_atx = "^#{1,6}\\s+(.*)*#*"
 title_reg_setext_firstlevel = "^(=)+(.*)*\\s*$"
 title_reg_setext_secondlevel = "^(-)+(.*)*\\s*$"
 
@@ -106,7 +106,8 @@ get.blockmd.hr = function(  ){
 }
 
 get.blockmd.title = function( x ){
-  title_reg_atx = "^\\s*#{1,6}\\s+(.*)*#*"
+	
+  title_reg_atx = "^#{1,6}\\s{1}(.*)*#*"
   title_reg_setext_firstlevel = "^(=)+(.*)*\\s*$"
   title_reg_setext_secondlevel = "^(-)+(.*)*\\s*$"
   
@@ -122,7 +123,7 @@ get.blockmd.title = function( x ){
   } else if( length( x ) == 2 && regexpr(pattern = title_reg_setext_secondlevel, text = x[2]) > 0 ){
     x = x[1]
     level = 2
-  }
+  } else stop("error while reading title")
   
   
   x = paste( rm.trailing.blanks(x), collapse = "" )
@@ -195,15 +196,15 @@ get.blockmd.blockquotes = function( value, blank.ref = 0 ){
 get.blockmd.refnote = function( x ){
   
   pat = "\\[\\^([[:alnum:][:blank:]]+)\\]\\:"
-  if( !str_detect(string = x[1], pattern = pat ) )
+  .reg = regexpr(text = x[1], pattern = pat)
+  if( .reg < 1 )
     stop("can not detect footnote id")
   
-  reference = str_extract(string = x[1], pattern = pat )
-  reference = gsub( "^\\[\\^", "", reference )
-  reference = gsub( "\\]\\:$", "", reference )
+  reference = substring(text = x[1], first = .reg + 2, last = .reg + attr( .reg, "match.length" ) - 3 )
   
-  x[1] = str_replace( x[1], pattern = pat, replacement = "" )	
-  
+  x[1] = substring(text = x[1], 
+    first = .reg + attr( .reg, "match.length" ) + 1 )	
+
   indent = 0
   x = paste( rm.trailing.blanks(x), collapse = "" )
   out = get.blockmd.data.template( 1 )
@@ -275,13 +276,21 @@ get.blockmd.list.item = function( value, blank.ref ){
 }
 
 get.blocks = function( value ){
-  
-  reference_links = unlist( str_extract_all(string = value, pattern = reference_link_reg ) )
-  value = gsub(reference_link_reg, "", value )
-  
+
   raw_blocks = gsub("^\\s*\n*", "", value )
   raw_blocks = gsub("\n\\s+\n", "\n\n", raw_blocks )
   
+  raw_blocks = unlist( strsplit( raw_blocks, "(\n|\r)" ) )
+  
+  .which_r_rl = regexpr( text = raw_blocks, pattern = reference_link_reg ) > 0
+  reference_links = raw_blocks[.which_r_rl]
+  raw_blocks = raw_blocks[!.which_r_rl]
+  
+  .which_r_title = regexpr(pattern = title_reg_atx, text = raw_blocks) > 0
+  raw_blocks[.which_r_title] = paste0( raw_blocks[.which_r_title], "\n" )
+  
+  raw_blocks = paste(raw_blocks, collapse = "\n")
+    
   pat_break = "(\n|\r){2,}"
   raw_blocks = unlist( strsplit( raw_blocks, pat_break ) )
   blocks = strsplit( raw_blocks, "(\n|\r){1}" )
