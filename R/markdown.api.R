@@ -10,7 +10,8 @@ hr_reg = "^(\\*{1}\\s{0,1}){3,}\\s*$|^(\\-{1}\\s{0,1}){3,}\\s*$|^(\\_{1}\\s{0,1}
 
 reference_link_reg = "(( |\t)*\\[[[:alnum:]]+\\]\\:[[:blank:]]+[[:alnum:]\\s\\.\\:\\/#\\?\\=]+([[:blank:]]+(\"|'|\\()[[:alnum:][:blank:]\\s\\.\\:\\/#\\?\\=]+(\"|'|\\))){0,1})"
 
-
+auto_link_reg = "<(http|https|file|ftp){1}\\:\\/\\/[[:alnum:][:blank:]\\s\\.\\/#\\?\\=]+>"
+auto_email_reg = "<[[:alnum:].-]+@[[:alnum:].-]+>"
 # qualify blocks and leave them at unqualified if further analysis is required
 get.raw.blockmd = function( x ){
   

@@ -67,7 +67,10 @@ addMarkdown.html = function(doc, file, text,
 					level = elt_table[ i, "blockquotes_level"] )
 			doc = addParagraph( doc, value = pars, par.properties = bq.par.properties)
 		} else if( elt_table[ i, "block_type"]=="code" ){
-			doc = addRScript( doc, text = elt_table[ i, "text"], par.properties = code.par.properties )
+			.try = try( {doc = addRScript( doc, text = elt_table[ i, "text"], par.properties = code.par.properties )}, silent = FALSE )
+			if( inherits( .try , "try-error") ){
+				stop("invalid R script submitted")
+			}
 		} else if( elt_table[ i, "block_type"]=="list_item" ){
 			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], text.properties = text.properties,
 					blocktable_info = elt_table )
@@ -78,6 +81,9 @@ addMarkdown.html = function(doc, file, text,
 					)
 			)
 		} else if( elt_table[ i, "block_type"]=="h" ){
+#			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], 
+#					text.properties = text.properties,
+#					blocktable_info = elt_table )
 			doc = addTitle( doc, value = elt_table[ i, "text"], level = elt_table[ i, "level"] )
 		} else if( elt_table[ i, "block_type"]=="hr" ){
 			doc = addParagraph( doc, value = "", par.properties = chprop( default.par.properties, border.bottom = hr.border) )

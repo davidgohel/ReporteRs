@@ -540,10 +540,10 @@ addTitle = function(doc, value, ...){
 	checkHasSlide(doc)
 	
 	if( missing( value ) ) stop("value is missing.")
-	if( !is.character( value ) )
-		stop("value must be a character vector of length 1.")
-	if( length( value ) != 1 )
-		stop("value must be a character vector of length 1.")
+	if( !is.character( value ) && !inherits( value, "pot" ) )
+		stop("value must be a character vector of length 1 or a pot object.")
+	if( is.character( value ) && length( value ) != 1 )
+		stop("value must be a character vector of length 1 or a pot object.")
 	
 	UseMethod("addTitle")
 }

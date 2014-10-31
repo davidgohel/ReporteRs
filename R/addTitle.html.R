@@ -33,8 +33,9 @@ addTitle.html = function( doc, value, level = 1, ... ) {
 		stop("level must be an integer vector of length 1.")
 	if( length( level ) != 1 )
 		stop("level must be an integer vector of length 1.")
-	
-	jtitle = .jnew(class.html4r.Title, as.character(value), as.integer(level)  )
+	if( is.character( value ) )
+		jtitle = .jnew(class.html4r.Title, as.character(value), as.integer(level)  )
+	else jtitle = .jnew(class.html4r.Title, .jpot(value), as.integer(level)  )
 	out = .jcall( doc$current_slide , "I", "add", jtitle )
 	if( out != 1 ){
 		stop( "Problem while trying to add title." )
