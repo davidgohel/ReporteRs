@@ -104,28 +104,8 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height,
 	
 	slide = doc$current_slide 
 	
-	parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
+	parset = .jset_of_paragraphs(value, par.properties)
 	
-	for( pot_index in 1:length( value ) ){
-		jpar_object = .jnew(class.Paragraph )
-		pot_value = value[[pot_index]]
-		for( i in 1:length(pot_value)){
-			
-			current_value = pot_value[[i]]
-			if( is.null( current_value$format ) ) {
-				if( is.null( current_value$hyperlink ) )
-					.jcall( jpar_object, "V", "addText", current_value$value )
-				else .jcall( jpar_object, "V", "addText", current_value$value, current_value$hyperlink )
-			} else {
-				jtext.properties = .jTextProperties( current_value$format )
-				if( is.null( current_value$hyperlink ) )
-					.jcall( jpar_object, "V", "addText", current_value$value, jtext.properties )
-				else .jcall( jpar_object, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
-			}
-		}
-		.jcall( parset, "V", "addParagraph", jpar_object )
-	}
-
 	if( check.dims > 3 ){
 		out = .jcall( slide, "I", "add", parset
 				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ), 

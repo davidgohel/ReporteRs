@@ -31,7 +31,6 @@
 #' @seealso \code{\link{html}}, \code{\link{addParagraph}}
 #' @method addParagraph html
 #' @S3method addParagraph html
-
 addParagraph.html = function(doc, value, 
 		par.properties = parProperties(), 
 		restart.numbering = FALSE, ... ) {
@@ -48,36 +47,7 @@ addParagraph.html = function(doc, value,
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
-	parset = .jnew( class.ParagraphSet, .jParProperties( par.properties ) )
-	for( pot_index in 1:length( value ) ){
-		paragrah = .jnew(class.Paragraph )
-		pot_value = value[[pot_index]]
-		for( i in 1:length(pot_value)){
-			
-			current_value = pot_value[[i]]
-			if( is.null( current_value$format ) ) {
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value )
-				else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
-			} else {
-				jtext.properties = .jTextProperties( current_value$format )
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
-				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
-			}
-			if( !is.null( current_value$footnote ) ) {
-				jfn = .jFootnote(current_value$footnote)
-				.jcall( paragrah, "V", "addFootnoteToLastEntry", jfn )
-			}
-#			
-#			
-#			if( is.null( pot_value[[i]]$format ) ) 
-#				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-#			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
-#						.jTextProperties( pot_value[[i]]$format) )
-		}
-		.jcall( parset, "V", "addParagraph", paragrah )
-	}
+	parset = .jset_of_paragraphs(value, par.properties)
 	
 	if( restart.numbering ){
 		.jcall( doc$current_slide, "V", "restartNumbering" )

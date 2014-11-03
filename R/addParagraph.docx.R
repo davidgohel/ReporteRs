@@ -62,35 +62,11 @@ addParagraph.docx = function(doc, value, stylename, bookmark,
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
-	parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
-	
-	for( pot_index in 1:length( value ) ){
-		paragrah = .jnew(class.Paragraph )
-		pot_value = value[[pot_index]]
-		for( i in 1:length(pot_value)){
-			current_value = pot_value[[i]]
-			if( is.null( current_value$format ) ) {
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value )
-				else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
-			} else {
-				jtext.properties = .jTextProperties( current_value$format )
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
-				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
-			}
-			if( !is.null( current_value$footnote ) ) {
-				jfn = .jFootnote(current_value$footnote)
-				.jcall( jfn, "V", "setBaseDocument", doc$obj)
-				.jcall( paragrah, "V", "addFootnoteToLastEntry", jfn )
-			}
-		}
-		.jcall( parset, "V", "addParagraph", paragrah )
-	}
-	
+	parset = .jset_of_paragraphs(value, par.properties)
 	if( restart.numbering ){
 		.jcall( doc$obj, "V", "restartNumbering" )
 	}
+	.jcall( parset, "V", "setDOCXReference", doc$obj )
 	
 	if( missing( bookmark ) && !missing( stylename ) ){
 		.jcall( doc$obj, "V", "addWithStyle" , parset, stylename)
@@ -104,3 +80,5 @@ addParagraph.docx = function(doc, value, stylename, bookmark,
 	
 	doc
 }
+
+
