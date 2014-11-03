@@ -6,6 +6,9 @@
   text.properties = textProperties(font.size =
   getOption("ReporteRs-fontsize")),
   default.par.properties = parProperties(text.align = "justify"),
+  blockquote.par.properties = parProperties(padding.top = 0, padding.bottom =
+  0, shading.color = "#eeeeee"),
+  code.par.properties = parProperties(shading.color = "#eeeeee"),
   hr.border = borderSolid(width = 2, color = "gray10"), ...)
 }
 \arguments{
@@ -22,6 +25,12 @@
 
   \item{default.par.properties}{default
   \code{\link{parProperties}} object}
+
+  \item{blockquote.par.properties}{\code{\link{parProperties}}
+  object used for blockquote blocks.}
+
+  \item{code.par.properties}{\code{\link{parProperties}}
+  object used for code blocks.}
 
   \item{hr.border}{\code{\link{borderProperties}} object
   used for horizontal rules.}

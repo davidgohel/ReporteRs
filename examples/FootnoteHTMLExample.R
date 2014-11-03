@@ -1,25 +1,33 @@
 ## html example 
 doc = html( )
+doc = addPage( doc, "Footnote example" )
 
 par1 = pot("About this reference", textBold( ) )
 par2 = pot("Omni ab coalitos pro malivolus obsecrans graviter 
 cum perquisitor perquisitor pericula saepeque inmunibus coalitos ut.", 
 	textItalic(font.size = 8) )
 
-Footnote1 = Footnote( set_of_paragraphs( par1, par2 ), 
-	par.properties = parProperties(text.align = "justify") )
+Footnote1 = Footnote( )
+Footnote1 = addParagraph( Footnote1, set_of_paragraphs( par1, par2 ), 
+	parProperties(text.align = "justify"))
+Footnote1 = addParagraph( Footnote1, set_of_paragraphs( "list item 1", "list item 2" ), 
+	parProperties(text.align = "left", list.style = "ordered"))
+an_rscript = RScript( par.properties = parProperties(shading.color = "gray90"), 
+	text = "ls()
+x = rnorm(10)" )
+Footnote1 = addParagraph( Footnote1, an_rscript, 
+	parProperties(text.align = "left"))
 
-pot5 = pot("This is another reference" )
-Footnote2 = Footnote( pot5, 
-	par.properties = parProperties(text.align = "center") )
 
-doc = addPage( doc, "Content" )
+Footnote2 = Footnote(  )
+Footnote2 = addParagraph( Footnote2, pot("This is another reference" ), 
+	par.properties = parProperties(text.align = "center"))
 
 doc = addTitle( doc, "Title example 1", level = 1 )
 
 pot1 = "Hae duae provinciae " + pot("bello", 
-	footnote = Footnote1, format = textBold(color="blue")
-) + " quondam piratico catervis mixtae praedonum a Servilio pro consule missae sub 
+		footnote = Footnote1 ) + " quondam piratico catervis mixtae 
+praedonum a Servilio pro consule missae sub 
 iugum factae sunt vectigales. et hae quidem regiones velut in prominenti terrarum 
 lingua positae ob orbe eoo monte Amano disparantur."
 
