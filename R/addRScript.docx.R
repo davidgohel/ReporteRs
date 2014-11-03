@@ -42,6 +42,7 @@ addRScript.docx = function(doc, rscript, file, text, bookmark, par.properties = 
 	} else if( !missing ( text ) ){
 		rscript = RScript( text = text, ... )
 	} 
+	.jcall( rscript$jobj, "V", "setDOCXReference", doc$obj )
 	
 	args = list( obj = doc$obj, 
 			returnSig = "V", method = "add",

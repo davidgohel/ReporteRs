@@ -452,7 +452,7 @@ update.through.blocks = function( blocks, last.indent = 0, index = 1 ){
       if( is.blockquotes( block, blank.ref = blank.ref ) ){
         blocks[[index]] = get.blockmd.blockquotes( block, blank.ref = blank.ref )
       } else if( is.code( block, blank.ref = blank.ref ) ){
-        blocks[[index]] = get.blockmd.code( block  )
+        blocks[[index]] = get.blockmd.code( block, blank.ref = blank.ref )
       } else {
         blocks[[index]] = get.blockmd.paragraph( block )
       }
@@ -559,9 +559,8 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
 		  if( fn_obj[[i]]$fun == "addParagraph" ){
 			  fn = addParagraph( fn, fn_obj[[i]]$args$value, par.properties = fn_obj[[i]]$args$par.properties )
 		  } else if( fn_obj[[i]]$fun == "addRScript" ){
-			  fn = addRScript( fn, fn_obj[[i]]$args$value, par.properties = fn_obj[[i]]$args$par.properties )
+			  fn = addParagraph( fn, RScript(text=fn_obj[[i]]$args$value), par.properties = fn_obj[[i]]$args$par.properties )
 		  } 
-		  
 	  }
 
       pot( value = "", 
