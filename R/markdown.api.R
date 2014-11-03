@@ -393,7 +393,8 @@ set.text.format = function(textP, chunk ){
   font.weight = ifelse( attr(chunk,"spec")["bold"], "bold", "normal")
   font.style = ifelse( attr(chunk,"spec")["italic"], "italic", "normal")
   if( attr(chunk,"spec")["singlebacktick"] || attr(chunk,"spec")["doublebacktick"] )
-    chprop(textP, font.weight = font.weight, font.style = font.style, shading.color = "gray90" )
+    chprop(textP, font.weight = font.weight, color = "#c7254e", 
+			font.style = font.style, shading.color = "#f9f2f4" )
   else chprop(textP, font.weight = font.weight, font.style = font.style )
 }
 
@@ -553,12 +554,16 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
     } else if( attr(chunk,"spec")["footnote"] ){
       fnid = substring( chunk, 3, nchar(chunk) - 1 )
       fn_obj = attr(blocktable_info, "footnotes" )[[fnid]]
-      fn.pars = lapply( fn_obj, function( x ) {
-        if( x$fun == "addParagraph" ) x$args$value 
-        else NULL
-      } )
-      fn = Footnote( do.call( set_of_paragraphs , fn.pars ),
-        par.properties = parProperties() )
+      fn = Footnote( )
+	  for(i in seq_along(fn_obj) ){
+		  if( fn_obj[[i]]$fun == "addParagraph" ){
+			  fn = addParagraph( fn, fn_obj[[i]]$args$value, par.properties = fn_obj[[i]]$args$par.properties )
+		  } else if( fn_obj[[i]]$fun == "addRScript" ){
+			  fn = addRScript( fn, fn_obj[[i]]$args$value, par.properties = fn_obj[[i]]$args$par.properties )
+		  } 
+		  
+	  }
+
       pot( value = "", 
         format = chprop( text.properties, vertical.align = "superscript" ), 
         footnote = fn )

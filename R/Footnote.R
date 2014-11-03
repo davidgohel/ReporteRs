@@ -8,10 +8,6 @@
 #' If in a \code{docx} object, footnote will be flagged by a number immediately 
 #' following the portion of the text the note is in reference to.
 #' 
-#' @param value text to add to the document as paragraphs: 
-#' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
-#' or a character vector.
-#' @param par.properties \code{\link{parProperties}} to apply to paragraphs. 
 #' @param index.text.properties \code{\link{textProperties}} to apply to note 
 #' index symbol (only for \code{docx} object). 
 #' @return an object of class \code{\link{Footnote}}.
@@ -22,8 +18,38 @@
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{html}}, \code{\link{pot}}
 #' @export 
-Footnote = function( value, par.properties = parProperties(), index.text.properties = textProperties(vertical.align = "superscript") ) {
+Footnote = function( index.text.properties = textProperties(vertical.align = "superscript") ) {
 	
+	if( !inherits( index.text.properties, "textProperties" ) ){
+		stop("argument index.text.properties is not a textProperties object." )
+	}
+	
+	out = list( values = list(), text.properties = index.text.properties )
+	class( out ) = "Footnote"
+	
+	out
+}
+
+
+#' @title Insert a paragraph into a Footnote object
+#'
+#' @description
+#' Insert paragraph(s) of text into a \code{Footnote}. To create a \code{\link{Footnote}} made of
+#' several paragraphs with different \code{\link{parProperties}}, add sequentially  
+#' paragraphs with their associated \code{parProperties} objects with this function.
+#' 
+#' @param doc \code{\link{Footnote}} object where to add paragraphs. 
+#' @param value text to add to the document as paragraphs: 
+#' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
+#' or a character vector.
+#' @param par.properties \code{\link{parProperties}} to apply to paragraphs. 
+#' @param ... further arguments, not used. 
+#' @return an object of class \code{\link{Footnote}}.
+#' @seealso \code{\link{Footnote}}, \code{\link{parProperties}}, \code{\link{pot}}
+#' , \code{\link{set_of_paragraphs}}
+#' @method addParagraph Footnote
+#' @S3method addParagraph Footnote
+addParagraph.Footnote = function( doc, value, par.properties = parProperties(), ... ) {
 	if( missing( value ) ){
 		stop("argument value is missing." )
 	} else if( inherits( value, "character" ) ){
@@ -35,48 +61,37 @@ Footnote = function( value, par.properties = parProperties(), index.text.propert
 	if( inherits( value, "pot" ) ){
 		value = set_of_paragraphs( value )
 	}
-
+	
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
 	if( !inherits( par.properties, "parProperties" ) ){
 		stop("argument par.properties is not a parProperties object." )
 	}
-	if( !inherits( index.text.properties, "textProperties" ) ){
-		stop("argument index.text.properties is not a textProperties object." )
-	}
+	newid = length(doc$values) + 1
+	doc$values[[newid]] = list( value = value , par.properties = par.properties )
 	
-	out = list( value = value , par.properties = par.properties, text.properties = index.text.properties )
-	class( out ) = "Footnote"
-	
-	out
+	doc
 }
+
 
 .jFootnote = function( object ){
 	if( !missing( object ) && !inherits( object, "Footnote" ) ){
 		stop("argument 'object' must be an object of class 'Footnote'")
 	}
-	parset = .jnew( class.Footnote, .jParProperties(object$par.properties), .jTextProperties(object$text.properties) )
-	value = object$value
-	for( pot_index in 1:length( value ) ){
-		paragrah = .jnew(class.Paragraph )
-		pot_value = value[[pot_index]]
-		for( i in 1:length(pot_value)){
-			current_value = pot_value[[i]]
-			if( is.null( current_value$format ) ) {
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value )
-				else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
-			} else {
-				jtext.properties = .jTextProperties( current_value$format )
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
-				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
-			}
+	footnote = .jnew( class.Footnote, .jTextProperties(object$text.properties) )
+	values = object$values
+	for( index in 1:length( values ) ){
+		
+		if( inherits( values[[index]]$value , "RScript") ){
+			.jcall( footnote, "V", "addParagraph" , values[[index]]$value$jobj )
+		} else {
+			parset = .jset_of_paragraphs( values[[index]]$value, values[[index]]$par.properties )
+			.jcall( footnote, "V", "addParagraph" , parset )
 		}
-		.jcall( parset, "V", "addParagraph", paragrah )
+		
 	}
-	parset
+	footnote
 }
 
 
@@ -91,7 +106,7 @@ str.Footnote = function(object, ...){
 #' @method print Footnote
 #' @S3method print Footnote
 print.Footnote = function (x, ...){
-	for(i in seq_along(x$value)){
-		print(x$value[i])
+	for(i in seq_along(x$values)){
+		print(x$value[[i]]$value)
 	}
 }
