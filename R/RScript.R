@@ -160,7 +160,7 @@ RScript = function( file, text
 	
 	out = list()
 	out$jobj = jRScript
-	class( out ) = "RScript"
+	class( out ) = c( "RScript", "set_of_paragraphs")
 	out
 }
 
