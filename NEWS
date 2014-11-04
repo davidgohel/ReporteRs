@@ -1,3 +1,11 @@
+ReporteRs 0.6.7
+==================================================================
+ENHANCEMENT
+------------------------------------------------------------------
+
+* add markdown processing via function addMarkdown. Available for 
+  Word and html documents
+
 ReporteRs 0.6.6
 ==================================================================
 ENHANCEMENT

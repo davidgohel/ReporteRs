@@ -9,7 +9,7 @@ and Powerpoint pptx) and html documents.
 }
 \details{
 \tabular{ll}{ Package: \tab ReporteRs\cr Type: \tab
-Package\cr Version: \tab 0.6.6\cr Date: \tab 2014-10-26\cr
+Package\cr Version: \tab 0.6.7\cr Date: \tab 2014-11-04\cr
 License: \tab GPL (>= 3)\cr LazyLoad: \tab yes\cr }
 
 To get an r document object: \itemize{ \item
@@ -40,6 +40,9 @@ color, etc.), with an hyperlink or with a
 \code{ReporteRs} comes also with an object of class
 \code{\link{FlexTable}} that let you design and format
 tabular outputs.
+
+If many text output is needed you may consider using
+function \code{\link{addMarkdown}}.
 
 Note that html is experimental.
 
