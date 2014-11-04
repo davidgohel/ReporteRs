@@ -119,6 +119,13 @@ addImage = function(doc, filename, ...){
 #'
 #' @description Add markdown into a document object
 #' 
+#' The markdown definition used is John Gruber documented here: 
+#' \url{http://daringfireball.net/projects/markdown/syntax}.
+#' 
+#' Images are not available as \code{addImage} or \code{addPlot} is 
+#' available. Pandoc footnotes have been added (see 
+#' \url{http://johnmacfarlane.net/pandoc/README.html#footnotes}.
+#' 
 #' @param doc document object
 #' @param file markdown file. Not used if text is provided.
 #' @param text character vector. The markdown to parse. 

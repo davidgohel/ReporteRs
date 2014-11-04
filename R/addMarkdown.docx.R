@@ -15,6 +15,13 @@
 #' horizontal rules.
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{docx}}.
+#' @examples
+#' #START_TAG_TEST
+#' doc.filename = "addMarkdown_example.docx"
+#' @example examples/docx.R
+#' @example examples/addMarkdown.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}
 #' @method addMarkdown docx
 #' @S3method addMarkdown docx
@@ -38,7 +45,7 @@ addMarkdown.docx = function(doc, file, text,
 	}	
 	
 	elt_table = get.blocks( markdown )
-	
+
 	footnotes_blocks = attr(elt_table, "footnotes" )
 	footnotes = list()
 	for(i in footnotes_blocks ){

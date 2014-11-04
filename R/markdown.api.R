@@ -278,6 +278,16 @@ get.blockmd.list.item = function( value, blank.ref ){
 
 get.blocks = function( value ){
 
+  auto_link_pos = regexpr(auto_link_reg, value)
+
+  while( auto_link_pos > 0 ){
+    link = substring( value, auto_link_pos+1, auto_link_pos + attr(auto_link_pos, "match.length")-2)
+    pre = substring( value, 1, auto_link_pos -1 )
+    post = substring( value, auto_link_pos + attr(auto_link_pos, "match.length"))
+    value = paste0( pre, "[", link, "] (", link, ")", post )
+    auto_link_pos = regexpr(auto_link_reg, value)
+  }
+
   raw_blocks = gsub("^\\s*\n*", "", value )
   raw_blocks = gsub("\n\\s+\n", "\n\n", raw_blocks )
   
@@ -539,8 +549,10 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
   
   chunks = lapply( chunks, function( chunk ){
     if( attr(chunk,"spec")["inline_link"] ){
-      text = gsub( "\\[([[:alnum:][:blank:]]*)\\].*", "\\1", chunk )
-      link = gsub( ".*\\(([[:alnum:]\\s\\.\\:\\/#\\?\\=]*)\\)", "\\1", chunk )
+      test.reg = regexpr( "\\[(.*)\\]", chunk )
+	  text = substring(chunk, test.reg+1, test.reg + attr(test.reg, "match.length")-2)
+	  link.reg = regexpr("\\((http|https|file|ftp){1}\\:\\/\\/[[:alnum:][:blank:]\\s\\.\\/#\\?\\=\\-]+", chunk)
+      link = substring(chunk, link.reg+1, link.reg + attr(link.reg, "match.length")-1)
       tp = set.text.format(text.properties, chunk )
       pot( value = text, format = chprop(tp, underline = TRUE ), 
         hyperlink = link )

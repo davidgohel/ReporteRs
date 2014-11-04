@@ -15,6 +15,14 @@
 #' horizontal rules.
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{html}}.
+#' @examples
+#' #START_TAG_TEST
+#' doc.dirname = "addMarkdown_example"
+#' @example examples/html.R
+#' @example examples/addPage.R
+#' @example examples/addMarkdown.R
+#' @example examples/writeDoc_directory.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{html}}
 #' @method addMarkdown html
 #' @S3method addMarkdown html
