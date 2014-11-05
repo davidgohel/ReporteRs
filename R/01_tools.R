@@ -5,6 +5,8 @@
 	options("ReporteRs-default-font"="Helvetica")
 	options("ReporteRs-locale.language"="en")
 	options("ReporteRs-locale.region"="US")
+	options("ReporteRs-backtick-color" = "#c7254e" )
+	options("ReporteRs-backtick-shading-color" = "#f9f2f4" )
 	options("ReporteRs-fontsize"=11L)
 	
 	options("ReporteRs-list-definition"= list( 		

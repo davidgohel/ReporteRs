@@ -15,6 +15,9 @@
 #' horizontal rules.
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{docx}}.
+#' @details 
+#' You can configure backtick rendering (single or double backtick) with 
+#' options "ReporteRs-backtick-color" and "ReporteRs-backtick-shading-color".
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addMarkdown_example.docx"
@@ -28,7 +31,7 @@
 addMarkdown.docx = function(doc, file, text, 
 	text.properties = textProperties( font.size = getOption("ReporteRs-fontsize") ),
 	default.par.properties = parProperties(text.align = "justify"),
-	blockquote.par.properties = parProperties(padding.top=0, padding.bottom=0, shading.color = "#eeeeee"),
+	blockquote.par.properties = parProperties(padding = 6, shading.color = "#eeeeee"),
 	code.par.properties = parProperties(shading.color = "#eeeeee"),
 	hr.border = borderSolid(width=2, color = "gray10"), 
 	... ) {
@@ -37,11 +40,14 @@ addMarkdown.docx = function(doc, file, text,
 		if( length( file ) != 1 ) stop("file must be a single filename.")
 		if( !file.exists( file ) ) stop("file does not exist.")
 	}
-	
 	if( missing( file ) ){
 		markdown = paste( text, collapse = "\n" )
 	} else {
-		markdown = paste( scan( file = file, what = "character", sep = "\n", quiet = TRUE ), collapse = "\n" ) 
+		markdown = paste( scan( file = file, 
+						strip.white = F, 
+						blank.lines.skip = FALSE, 
+						what = "character", 
+						sep = "\n", quiet = TRUE ), collapse = "\n" ) 
 	}	
 	
 	elt_table = get.blocks( markdown )
@@ -68,8 +74,7 @@ addMarkdown.docx = function(doc, file, text,
 					blocktable_info = elt_table )
 			bq.par.properties = chprop( blockquote.par.properties, 
 					list.style = "blockquote", 
-					level = elt_table[ i, "blockquotes_level"],
-					padding.left = guess.indentation(elt_table, i )*72 )
+					level = elt_table[ i, "blockquotes_level"] )
 			doc = addParagraph( doc, value = pars, par.properties = bq.par.properties)
 		} else if( elt_table[ i, "block_type"]=="code" ){
 			doc = addRScript( doc, text = elt_table[ i, "text"], 

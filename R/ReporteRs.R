@@ -4,8 +4,8 @@
 #' \tabular{ll}{
 #' Package: \tab ReporteRs\cr
 #' Type: \tab Package\cr
-#' Version: \tab 0.6.7\cr
-#' Date: \tab 2014-11-04\cr
+#' Version: \tab 0.6.8\cr
+#' Date: \tab 2014-11-06\cr
 #' License: \tab GPL (>= 3)\cr
 #' LazyLoad: \tab yes\cr
 #' }
@@ -58,6 +58,8 @@
 #'   \item \code{"ReporteRs-fontsize"} Default font size to use (default to 11).
 #' This will be used as default values for argument \code{pointsize} of \code{\link{addPlot}}
 #' and argument \code{font.size} of \code{\link{pot}}.
+#'   \item \code{"ReporteRs-backtick-color"} backtick font color in markdown
+#'   \item \code{"ReporteRs-backtick-shading-color"} backtick shading color in markdown
 #' 	 \item \code{"ReporteRs-list-definition"} see \code{\link{list.settings}}.
 #'   \item \code{"ReporteRs-locale.language"} language encoding (for html objects). Default to "en".
 #'   \item \code{"ReporteRs-locale.region"} region encoding (for html objects). Default to "US".

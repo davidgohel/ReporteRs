@@ -6,9 +6,8 @@
   text.properties = textProperties(font.size =
   getOption("ReporteRs-fontsize")),
   default.par.properties = parProperties(text.align = "justify"),
-  blockquote.par.properties = parProperties(padding.top = 0, padding.bottom =
-  0, shading.color = "#eeeeee"),
-  code.par.properties = parProperties(shading.color = "#eeeeee"),
+  blockquote.par.properties = parProperties(padding = 6, shading.color =
+  "#eeeeee"), code.par.properties = parProperties(shading.color = "#eeeeee"),
   hr.border = borderSolid(width = 2, color = "gray10"), ...)
 }
 \arguments{
@@ -42,6 +41,11 @@ an object of class \code{\link{docx}}.
 }
 \description{
 Add markdown into a \code{\link{docx}} object.
+}
+\details{
+You can configure backtick rendering (single or double
+backtick) with options "ReporteRs-backtick-color" and
+"ReporteRs-backtick-shading-color".
 }
 \examples{
 #START_TAG_TEST

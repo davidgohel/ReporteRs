@@ -154,37 +154,38 @@ get.blockmd.code = function( value, blank.ref = 0 ){
 
 # structure blockquotes
 get.blockmd.blockquotes = function( value, blank.ref = 0 ){
-  
-  blockquotes_reg = "^\\s*(>\\s{1})+"
-  
-  trim_value = rm.trailing.blanks( value )
-  trim_value = gsub( "^\\s*(>\\s{1})+\\s*$", "", trim_value )
-  
-  bq_list = list( character(0) )
-  orig_list = list( character(0) )
-  curr_elt = 1
-  for( i in 1:length( trim_value ) ){
-    if( trim_value[i] != "" ){
-      bq_list[[curr_elt]] = append( bq_list[[curr_elt]], trim_value[i] )
-      orig_list[[curr_elt]] = append( orig_list[[curr_elt]], value[i] )
-    } else {
-      curr_elt = curr_elt + 1
-      bq_list[[curr_elt]] = character(0)
-      orig_list[[curr_elt]] = character(0)
-    }
-  }
-  
-  blocklevels = sapply( bq_list, function( x ){
-    .reg = regexpr(text = x[1], pattern = "^(>\\s{1})+" )
-    attr( .reg, "match.length" )
-  } )
-  blocklevels = blocklevels %/% 2
-  
-  bq = sapply( bq_list, function(x) {
-    x = gsub( "^\\s*(>\\s{1})+", "", x )
-    paste( x, collapse = "")
-  })
-  
+
+	blockquotes_reg = "^\\s*(>\\s{1})+"
+	
+	reg.bq = regexpr( "^\\s*(>\\s)+", value )
+	reg.blank = regexpr( "^\\s*", value )
+	
+	raw.levels = attr( reg.bq, "match.length" ) - attr( reg.blank, "match.length" )
+	raw.levels[raw.levels<0] = 0
+	raw.levels = raw.levels %/% 2
+	
+	trim_value = gsub( "^\\s*(>\\s)+", "", value )
+	
+	bq_list = list( character(0) )
+	curr_elt = 1
+	curr_lvl = raw.levels[1]
+	
+	for( i in 1:length( trim_value ) ){
+		if( reg.bq[i] > 0 && curr_lvl == raw.levels[i] ){
+			bq_list[[curr_elt]] = append( bq_list[[curr_elt]], trim_value[i] )
+			curr_lvl = raw.levels[i]
+		} else if( raw.levels[i] < 1 ){
+			bq_list[[curr_elt]] = append( bq_list[[curr_elt]], trim_value[i] )
+		} else {
+			curr_elt = curr_elt + 1
+			curr_lvl = raw.levels[i]
+			bq_list[[curr_elt]] = trim_value[i]
+		}
+		attr(bq_list[[curr_elt]], "level") = curr_lvl
+	}
+	bq = sapply( bq_list, paste, collapse = "" )
+	blocklevels = sapply( bq_list, attr, "level")
+
   .lv = length( blocklevels )
   out = get.blockmd.data.template( .lv )
   out$blockquotes_level = blocklevels
@@ -403,8 +404,10 @@ set.text.format = function(textP, chunk ){
   font.weight = ifelse( attr(chunk,"spec")["bold"], "bold", "normal")
   font.style = ifelse( attr(chunk,"spec")["italic"], "italic", "normal")
   if( attr(chunk,"spec")["singlebacktick"] || attr(chunk,"spec")["doublebacktick"] )
-    chprop(textP, font.weight = font.weight, color = "#c7254e", 
-			font.style = font.style, shading.color = "#f9f2f4" )
+    chprop(textP, font.weight = font.weight, 
+			color = getOption("ReporteRs-backtick-color"), 
+			font.style = font.style, 
+			shading.color = getOption("ReporteRs-backtick-shading-color") )
   else chprop(textP, font.weight = font.weight, font.style = font.style )
 }
 
@@ -549,20 +552,25 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
   
   chunks = lapply( chunks, function( chunk ){
     if( attr(chunk,"spec")["inline_link"] ){
-      test.reg = regexpr( "\\[(.*)\\]", chunk )
-	  text = substring(chunk, test.reg+1, test.reg + attr(test.reg, "match.length")-2)
-	  link.reg = regexpr("\\((http|https|file|ftp){1}\\:\\/\\/[[:alnum:][:blank:]\\s\\.\\/#\\?\\=\\-]+", chunk)
-      link = substring(chunk, link.reg+1, link.reg + attr(link.reg, "match.length")-1)
-      tp = set.text.format(text.properties, chunk )
-      pot( value = text, format = chprop(tp, underline = TRUE ), 
-        hyperlink = link )
+		test.reg = regexpr( "\\[(.*)\\]", chunk )
+		text = substring(chunk, test.reg+1, test.reg + attr(test.reg, "match.length")-2)
+		link.reg = regexpr("\\((http|https|file|ftp){1}\\:\\/\\/[[:alnum:][:blank:]\\s\\.\\/#\\?\\=\\-]+", chunk)
+		link = substring(chunk, link.reg+1, link.reg + attr(link.reg, "match.length")-1)
+		tp = set.text.format(text.properties, chunk )
+		pot( value = text, format = chprop(tp, underline = TRUE ), 
+		hyperlink = link )
     } else if( attr(chunk,"spec")["reference_link"] ){
-      text = gsub( "\\[([[:alnum:][:blank:]]*)\\].*", "\\1", chunk )
-      link = gsub( ".*\\[([[:alnum:][:blank:]]*)\\].*", "\\1", chunk )
-      link = attr(blocktable_info, "reference_link")[link]
-      tp = set.text.format(text.properties, chunk )
-      pot( value = text, format = chprop(tp, underline = TRUE ), 
-        hyperlink = link )
+		test.reg = regexpr( "\\[([[:alnum:][:blank:]]*)\\]", chunk )
+		text = substring(chunk, test.reg+1, test.reg + attr(test.reg, "match.length")-2)
+		newtext = substring( chunk, test.reg + attr(test.reg, "match.length"))
+		link.reg = regexpr( "\\[([[:alnum:][:blank:]]*)\\]", newtext )
+		link = substring(newtext, link.reg+1, link.reg + attr(link.reg, "match.length")-2)
+		
+		link = attr(blocktable_info, "reference_link")[link]
+		
+		tp = set.text.format(text.properties, chunk )
+		pot( value = text, format = chprop(tp, underline = TRUE ), 
+			hyperlink = link )
     } else if( attr(chunk,"spec")["footnote"] ){
       fnid = substring( chunk, 3, nchar(chunk) - 1 )
       fn_obj = attr(blocktable_info, "footnotes" )[[fnid]]
@@ -579,7 +587,8 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
         format = chprop( text.properties, vertical.align = "superscript" ), 
         footnote = fn )
     } else if( attr(chunk,"spec")["inline_img"] ){
-      pot( value = " [images not supported] " )
+      warning("inline images are not supported in this markdown implementation" )
+	  pot("")
     } else if( !any(attr(chunk,"spec")[5:8]) ){
       pot( value = as.character(chunk), format = set.text.format(text.properties, chunk ) )
     } else chunk
