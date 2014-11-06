@@ -56,36 +56,43 @@ addMarkdown.pptx = function(doc, file, text,
 	}	
 	
 	elt_table = get.blocks( markdown )
+	append = FALSE
 	
 	for(i in 1:nrow(elt_table) ){
-		
 		if( elt_table[ i, "block_type"]=="p" ){
 			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], text.properties = text.properties,
-					blocktable_info = elt_table )
-			doc = addParagraph( doc, value = pars, append = TRUE,
+					blocktable_info = elt_table, drop.footnotes = TRUE )
+			doc = addParagraph( doc, value = pars, append = append, drop.footnotes = TRUE,
 					par.properties = chprop( default.par.properties, padding.left = guess.indentation(elt_table, i )*72 ) 
 			)
+			append = TRUE
 		} else if( elt_table[ i, "block_type"]=="blockquotes" ){
-			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], text.properties = text.properties,
+			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], 
+					text.properties = text.properties, drop.footnotes = TRUE,
 					blocktable_info = elt_table )
 			bq.par.properties = chprop( blockquote.par.properties, 
 					list.style = "blockquote", 
 					level = elt_table[ i, "blockquotes_level"] )
-			doc = addParagraph( doc, value = pars, append = TRUE, par.properties = bq.par.properties)
+			doc = addParagraph( doc, value = pars, append = append, par.properties = bq.par.properties)
+			append = TRUE
 		} else if( elt_table[ i, "block_type"]=="code" ){
-			doc = addRScript( doc, text = elt_table[ i, "text"], append = TRUE,
+			doc = addRScript( doc, text = elt_table[ i, "text"], append = append,
 					par.properties = chprop( code.par.properties,
 							padding.left = guess.indentation(elt_table, i )*72 )
 			)
+			append = TRUE
 		} else if( elt_table[ i, "block_type"]=="list_item" ){
-			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], text.properties = text.properties,
+			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], 
+					drop.footnotes = TRUE, 
+					text.properties = text.properties,
 					blocktable_info = elt_table )
-			doc = addParagraph( doc, value = pars, append = TRUE, 
+			doc = addParagraph( doc, value = pars, append = append, 
 					par.properties = chprop( default.par.properties,
 							list.style = ifelse( elt_table[ i, "list_type"] == "ol", "ordered", "unordered" ),
 							level = elt_table[ i, "level"]
 					)
 			)
+			append = TRUE
 		} else if( elt_table[ i, "block_type"]=="h" ){
 			warning("titles are not supported with pptx object" )
 		} else if( elt_table[ i, "block_type"]=="hr" ){

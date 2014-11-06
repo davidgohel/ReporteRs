@@ -477,7 +477,7 @@ update.through.blocks = function( blocks, last.indent = 0, index = 1 ){
 }
 
 
-get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = textProperties() ){
+get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = textProperties(), drop.footnotes = FALSE ){
   
   Span = .jnew("org/lysis/markdown/tools/Span" , text )
   character_dataset = data.frame( text = substring(text, seq_len(nchar(text)), seq_len(nchar(text)) ),
@@ -551,7 +551,7 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
     idx = idx + cmp_rle[[1]][i]
   }
   
-  chunks = lapply( chunks, function( chunk ){
+  chunks = lapply( chunks, function( chunk, drop.footnotes ){
     if( attr(chunk,"spec")["inline_link"] ){
 		test.reg = regexpr( "\\[(.*)\\]", chunk )
 		text = substring(chunk, test.reg+1, test.reg + attr(test.reg, "match.length")-2)
@@ -581,8 +581,11 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
 
     } else if( attr(chunk,"spec")["footnote"] ){
       fnid = substring( chunk, 3, nchar(chunk) - 1 )
-	  
+	  if( drop.footnotes ){
+		  return (pot( value = "", format = text.properties))
+	  }
 	  if( is.element(fnid, names( attr(blocktable_info, "footnotes") ) ) ){
+
 		  fn_obj = attr(blocktable_info, "footnotes" )[[fnid]]
 		  fn = Footnote( )
 		  for(i in seq_along(fn_obj) ){
@@ -598,20 +601,23 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
 				  footnote = fn ) 
 	  } else {
 		  warning("footnote ", shQuote(fnid), " is not defined in the markdown.")
+		  pot( value = "", format = text.properties)
 	  }
 		  
 
     } else if( attr(chunk,"spec")["inline_img"] ){
       warning("inline images are not supported in this markdown implementation" )
-	  pot("")
+	  pot( value = "", format = text.properties)
     } else if( !any(attr(chunk,"spec")[5:8]) ){
       pot( value = as.character(chunk), format = set.text.format(text.properties, chunk ) )
-    } else chunk
-  })
+    } else pot( value = chunk, format = text.properties)
+  }, drop.footnotes = drop.footnotes )
   for(i in 1:length( chunks ) ){
     if( i == 1 ) out = chunks[[i]]
     else out = out + chunks[[i]]
   }
   out
 }
+
+
 
