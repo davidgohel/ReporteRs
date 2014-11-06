@@ -29,6 +29,8 @@ added (see
 \url{http://johnmacfarlane.net/pandoc/README.html#footnotes}.
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addMarkdown.docx}}
+\code{\link{docx}}, \code{\link{addMarkdown.docx}} ,
+\code{\link{html}}, \code{\link{addMarkdown.html}} ,
+\code{\link{pptx}}, \code{\link{addMarkdown.pptx}}
 }
 

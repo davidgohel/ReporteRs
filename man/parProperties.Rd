@@ -2,7 +2,7 @@
 \alias{parProperties}
 \title{Paragraph formatting properties}
 \usage{
-parProperties(text.align = "left", padding.bottom = 1, padding.top = 1,
+parProperties(text.align = "left", padding.bottom = 0, padding.top = 0,
   padding.left = 1, padding.right = 1, padding, list.style = "none",
   level = 1, border.bottom = borderNone(), border.left = borderNone(),
   border.top = borderNone(), border.right = borderNone(), shading.color)

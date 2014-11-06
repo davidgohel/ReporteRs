@@ -1,8 +1,8 @@
-\name{addMarkdown.docx}
-\alias{addMarkdown.docx}
-\title{Add a markdown text or file into a docx object}
+\name{addMarkdown.pptx}
+\alias{addMarkdown.pptx}
+\title{Add a markdown text or file into a pptx object}
 \usage{
-\method{addMarkdown}{docx}(doc, file, text,
+\method{addMarkdown}{pptx}(doc, file, text,
   text.properties = textProperties(font.size =
   getOption("ReporteRs-fontsize")),
   default.par.properties = parProperties(text.align = "justify"),
@@ -11,7 +11,7 @@
   hr.border = borderSolid(width = 2, color = "gray10"), ...)
 }
 \arguments{
-  \item{doc}{Object of class \code{\link{docx}} where
+  \item{doc}{Object of class \code{\link{pptx}} where
   markdown has to be added}
 
   \item{file}{markdown file. Not used if text is provided.}
@@ -37,24 +37,32 @@
   \item{...}{further arguments, not used.}
 }
 \value{
-an object of class \code{\link{docx}}.
+an object of class \code{\link{pptx}}.
 }
 \description{
-Add markdown into a \code{\link{docx}} object.
+Add markdown into a \code{\link{pptx}} object.
 }
 \details{
 You can configure backtick rendering (single or double
 backtick) with options "ReporteRs-backtick-color" and
 "ReporteRs-backtick-shading-color".
+
+The implemented markdown for pptx objects is minimal. It
+does not support horizontal rules, titles and footnotes.
 }
 \examples{
 #START_TAG_TEST
-doc.filename = "addMarkdown_example.docx"
+doc.filename = "addParagraph_example.pptx"
 
-# set default font size to 10
-options( "ReporteRs-fontsize" = 10 )
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
 
-doc = docx( )
+doc = pptx( title = "title" )
+
+# add a slide with layout "Title and Content"
+doc = addSlide( doc, slide.layout = "Title and Content" )
+
+doc = addTitle( doc, "Title example 1" )
 mkd = "# This is a title 1
 		
 This is a link to the [cran] (http://cran.r-project.org/). 
@@ -149,6 +157,6 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}
+\code{\link{pptx}}
 }
 

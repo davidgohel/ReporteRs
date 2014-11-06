@@ -3,8 +3,13 @@ ReporteRs 0.6.7
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* add markdown processing via function addMarkdown. Available for 
-  Word and html documents
+* add markdown processing via function addMarkdown.
+
+DEBUG
+------------------------------------------------------------------
+
+* addRScript.pptx debug (line height is now correct). 
+
 
 ReporteRs 0.6.6
 ==================================================================

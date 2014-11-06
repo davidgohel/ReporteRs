@@ -130,7 +130,7 @@ A horizontal rule is a line that goes across the middle of the page.
 
 ---------
 
-It's sometimes usefull for breaking things up.
+It's sometimes useful for breaking things up.
 
 ## Images
 

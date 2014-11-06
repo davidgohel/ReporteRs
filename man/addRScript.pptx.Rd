@@ -2,7 +2,7 @@
 \alias{addRScript.pptx}
 \title{Add R script into a pptx object}
 \usage{
-\method{addRScript}{pptx}(doc, rscript, file, text, ...)
+\method{addRScript}{pptx}(doc, rscript, file, text, append = FALSE, ...)
 }
 \arguments{
   \item{doc}{\code{\link{pptx}} object where expressions
@@ -16,6 +16,12 @@
 
   \item{rscript}{an object of class \code{RScript}. Not
   used if file or text is provided.}
+
+  \item{append}{boolean default to FALSE. If TRUE,
+  paragraphs will be appened in the current shape instead
+  of beeing sent into a new shape. Paragraphs can only be
+  appended on shape containing paragraphs (i.e. you can not
+  add paragraphs after a FlexTable).}
 
   \item{...}{further arguments, not used.}
 }
