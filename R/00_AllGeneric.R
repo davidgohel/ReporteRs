@@ -133,6 +133,8 @@ addImage = function(doc, filename, ...){
 #' @return a document object
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addMarkdown.docx}}
+#' , \code{\link{html}}, \code{\link{addMarkdown.html}}
+#' , \code{\link{pptx}}, \code{\link{addMarkdown.pptx}}
 addMarkdown = function(doc, file, text, ...){
 	if( missing( file ) && missing( text ) )
 		stop("need a markdown file or text argument.")

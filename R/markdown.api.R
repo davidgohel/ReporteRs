@@ -566,26 +566,40 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
 		link.reg = regexpr( "\\[([[:alnum:][:blank:]]*)\\]", newtext )
 		link = substring(newtext, link.reg+1, link.reg + attr(link.reg, "match.length")-2)
 		
-		link = attr(blocktable_info, "reference_link")[link]
-		
 		tp = set.text.format(text.properties, chunk )
-		pot( value = text, format = chprop(tp, underline = TRUE ), 
-			hyperlink = link )
+		
+		if( is.element(link, names( attr(blocktable_info, "reference_link") ) ) ){
+			link = attr(blocktable_info, "reference_link")[link]
+			pot( value = text, format = chprop(tp, underline = TRUE ), 
+					hyperlink = link )		
+		} else {
+			warning("referenced link ", shQuote(link), " is not defined in the markdown.")
+			pot( value = text, format = chprop(tp, underline = TRUE ) )
+		}
+			
+
     } else if( attr(chunk,"spec")["footnote"] ){
       fnid = substring( chunk, 3, nchar(chunk) - 1 )
-      fn_obj = attr(blocktable_info, "footnotes" )[[fnid]]
-      fn = Footnote( )
-	  for(i in seq_along(fn_obj) ){
-		  if( fn_obj[[i]]$fun == "addParagraph" ){
-			  fn = addParagraph( fn, fn_obj[[i]]$args$value, par.properties = fn_obj[[i]]$args$par.properties )
-		  } else if( fn_obj[[i]]$fun == "addRScript" ){
-			  fn = addParagraph( fn, RScript(text=fn_obj[[i]]$args$value), par.properties = fn_obj[[i]]$args$par.properties )
-		  } 
+	  
+	  if( is.element(fnid, names( attr(blocktable_info, "footnotes") ) ) ){
+		  fn_obj = attr(blocktable_info, "footnotes" )[[fnid]]
+		  fn = Footnote( )
+		  for(i in seq_along(fn_obj) ){
+			  if( fn_obj[[i]]$fun == "addParagraph" ){
+				  fn = addParagraph( fn, fn_obj[[i]]$args$value, par.properties = fn_obj[[i]]$args$par.properties )
+			  } else if( fn_obj[[i]]$fun == "addRScript" ){
+				  fn = addParagraph( fn, RScript(text=fn_obj[[i]]$args$value), par.properties = fn_obj[[i]]$args$par.properties )
+			  } 
+		  }
+		  
+		  pot( value = "", 
+				  format = chprop( text.properties, vertical.align = "superscript" ), 
+				  footnote = fn ) 
+	  } else {
+		  warning("footnote ", shQuote(fnid), " is not defined in the markdown.")
 	  }
+		  
 
-      pot( value = "", 
-        format = chprop( text.properties, vertical.align = "superscript" ), 
-        footnote = fn )
     } else if( attr(chunk,"spec")["inline_img"] ){
       warning("inline images are not supported in this markdown implementation" )
 	  pot("")
