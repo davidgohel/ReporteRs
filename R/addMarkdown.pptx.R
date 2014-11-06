@@ -23,7 +23,7 @@
 #' horizontal rules, titles and footnotes.
 #' @examples
 #' #START_TAG_TEST
-#' doc.filename = "addParagraph_example.pptx"
+#' doc.filename = "addMarkdown_example.pptx"
 #' @example examples/pptx.R
 #' @example examples/addSlide.R
 #' @example examples/addTitle1NoLevel.R

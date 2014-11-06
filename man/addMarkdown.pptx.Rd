@@ -52,7 +52,7 @@ does not support horizontal rules, titles and footnotes.
 }
 \examples{
 #START_TAG_TEST
-doc.filename = "addParagraph_example.pptx"
+doc.filename = "addMarkdown_example.pptx"
 
 # set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
