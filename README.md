@@ -6,8 +6,11 @@ Usefull links:
 
 * Help pages: [**Documentation**](http://davidgohel.github.io/ReporteRs/index.html) 
 * if you have questions, use the mailing list: [**Mailing list**](http://groups.google.com/forum/#!forum/reporters-package "if you have questions, use the mailing list")  
-* Report a bug: [**Bug report**](http://github.com/davidgohel/ReporteRs/issues "please provide a reproducible example")
-
+* Report a bug: [**Bug report**](http://github.com/davidgohel/ReporteRs/issues "please provide a reproducible example"). If you report a bug, try to send a reproducible example 
+    and don't forget to send the result of 
+    
+        sessionInfo()
+        
 Features
 --------
 * Create docx, pptx or html files with only a few lines of R code.
@@ -41,9 +44,9 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 
 **Get the latest Windows binary packages:**  
 [ReporteRsjars 0.2](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.2 "ReporteRsjars") &diams; 
-[ReporteRs 0.6.3](https://github.com/davidgohel/ReporteRs/releases/tag/v0.6.3 "ReporteRs")
+[ReporteRs 0.6.8](https://github.com/davidgohel/ReporteRs/releases/tag/v0.6.8 "ReporteRs")
 
-	
+  
 Getting Started
 ---------------
 
@@ -56,11 +59,12 @@ Getting Started
     ?ReporteRs
     ?addFlexTable
     ?addPlot
+    ?addMarkdown
     ?addParagraph
     ?docx
     ?pptx
     ?html
-	
+  
 License
 -------
-The ReporteRs package is licensed under the GPLv3. See COPYRIGHTS file in the inst directory for additional details.
+The ReporteRs package is licensed under the GPLv3. See ``COPYRIGHTS`` file in the ``inst`` directory for additional details.
