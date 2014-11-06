@@ -237,22 +237,22 @@ get.pots.from.script = function( file, text
 			, slot.properties = slot.properties
 			, default.properties = default.properties
 		)
-	
-	pot.list = lapply( ldata, function(x, tp.list ){
+
+		pot.list = lapply( ldata, function(x, tp.list, default.properties ){
 				x = x[ order(x[,2] ), ]
-				out = pot()
+				out = pot("", format=default.properties)
 				last_pos = 0
 				for(i in 1:nrow(x) ){
 					if( x[i,2] != (last_pos + 1) ){
 						.size = x[i,2] - (last_pos + 1)
-						out = out + paste( rep( " ", .size ), collapse = "" )
+						out = out + pot( paste( rep( " ", .size ), collapse = "" ), format=default.properties)
 					}
 					prop.name = paste( x[i,"extentionTag"], ".properties", sep = "" )
 					out = out + pot( x[i,"text"], format = tp.list[[ prop.name ]] )
 					last_pos = x[i,4]
 				}
 				out
-			} , tp.list = tp.list )
+			} , tp.list = tp.list, default.properties = default.properties )
 	out = lapply( 1: max( data[,3]) , function(x) pot() )
 	names( out ) = as.character( 1: max( data[,3] ) )
 	out[names(pot.list)] = pot.list
