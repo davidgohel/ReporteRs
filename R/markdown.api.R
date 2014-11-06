@@ -289,7 +289,8 @@ get.blocks = function( value ){
     auto_link_pos = regexpr(auto_link_reg, value)
   }
 
-  raw_blocks = gsub("^\\s*\n*", "", value )
+  raw_blocks = gsub("^\\s+\n+", "", value )
+  raw_blocks = gsub("^\n+", "", raw_blocks )
   raw_blocks = gsub("\n\\s+\n", "\n\n", raw_blocks )
   
   raw_blocks = unlist( strsplit( raw_blocks, "(\n|\r)" ) )
@@ -461,7 +462,7 @@ update.through.blocks = function( blocks, last.indent = 0, index = 1 ){
     } else if( types[index] == "footnote") {
       blocks[[index]] = get.blockmd.refnote( block )
       blank.ref = 4
-    } else {              
+    } else {
       if( is.blockquotes( block, blank.ref = blank.ref ) ){
         blocks[[index]] = get.blockmd.blockquotes( block, blank.ref = blank.ref )
       } else if( is.code( block, blank.ref = blank.ref ) ){
