@@ -12,8 +12,6 @@
 #' @param ... further arguments - not used
 #' @return a docx object
 #' @seealso \code{\link{FlexTable}}, \code{\link{docx}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
-#' , \code{\link{addTable.docx}}, \code{\link{bookmark}}
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addFlexTable_example.docx"

@@ -8,7 +8,6 @@
 #' @return a \code{\link{html}} object
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{html}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.docx}}
 #' @examples
 #' #START_TAG_TEST
 #' doc.dirname = "addFlexTable_example"

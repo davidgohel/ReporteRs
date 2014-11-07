@@ -24,7 +24,7 @@
 #' #STOP_TAG_TEST
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addDate.pptx}}
-#' , \code{\link{addPageNumber.pptx}}, \code{\link{addFooter}} 
+#' , \code{\link{addPageNumber.pptx}} 
 #' @method addFooter pptx
 #' @S3method addFooter pptx
 

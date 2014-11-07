@@ -11,8 +11,6 @@
 #' @param ... further arguments - not used
 #' @return a pptx object
 #' @seealso \code{\link{FlexTable}}, \code{\link{pptx}}
-#' , \code{\link{addFlexTable.html}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{addTable.pptx}}
 #' @details
 #' If arguments offx, offy, width, height are missing, position and dimensions
 #' will be defined by the width and height of the next available shape of the slide. This 
