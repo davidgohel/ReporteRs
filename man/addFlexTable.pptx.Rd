@@ -192,9 +192,6 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{pptx}} ,
-\code{\link{addFlexTable.html}},
-\code{\link{addFlexTable.docx}} ,
-\code{\link{addTable.pptx}}
+\code{\link{FlexTable}}, \code{\link{pptx}}
 }
 

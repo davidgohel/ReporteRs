@@ -38,6 +38,6 @@ writeDoc( doc, "addFooter_example.pptx" )
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addDate.pptx}} ,
-\code{\link{addPageNumber.pptx}}, \code{\link{addFooter}}
+\code{\link{addPageNumber.pptx}}
 }
 
