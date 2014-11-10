@@ -72,7 +72,7 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 #' @seealso \code{\link{bsdoc}}, \code{\link{print}}
 #' @method print bsdoc
 #' @S3method print bsdoc
-print.html = function (x, ...){
+print.bsdoc = function (x, ...){
 	
 	cat("[bsdoc object]\n")
 	
@@ -83,3 +83,34 @@ print.html = function (x, ...){
 }
 
 
+#' @title add javascript into a bsdoc object
+#'
+#' @description
+#' add javascript into a \code{bsdoc} object.
+#' 
+#' @param doc a \code{bsdoc} object.
+#' @param file a javascript file. Not used if text is provided.
+#' @param text character vector. The javascript text to parse. 
+#' Not used if file is provided.
+#' @return an object of class \code{\link{bsdoc}}.
+#' @export
+addJavascript = function( doc, file, text ){
+	if( !inherits( doc , "bsdoc") )
+		stop("doc is not a bsdoc object.")
+		
+	if( !missing( file ) ){
+		if( length( file ) != 1 ) stop("file must be a single filename.")
+		if( !file.exists( file ) ) stop("file does not exist.")
+	}
+	
+	if( missing( file ) ){
+		js = paste( text, collapse = "\n" )
+	} else {
+		js = paste( scan( file = file, what = "character", sep = "\n", quiet = TRUE ), collapse = "\n" ) 
+	}	
+	
+	.jcall( doc$jobj , "V", "addJavascriptCode", js )
+	
+	doc
+	}
+	
