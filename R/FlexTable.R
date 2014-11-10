@@ -176,12 +176,13 @@ FlexTable = function(data, numrow, numcol
 		}
 		
 		row.names( data ) = NULL
-		data = apply( data, 2, function(x) {
+		data = lapply( data, function(x) {
 				if( is.character( x) ) x
 				else if( is.factor( x ) ) as.character( x )
 				else if( is.logical( x ) ) ifelse( x, "TRUE", "FALSE" )
 				else format(x)
 			} )
+		data = as.matrix( as.data.frame( data ) )
 	} else {
 		.row_names = rep(NA, numrow )
 		.colnames = rep(NA, numcol )
