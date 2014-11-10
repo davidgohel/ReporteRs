@@ -279,16 +279,28 @@ get.blockmd.list.item = function( value, blank.ref ){
 
 get.blocks = function( value ){
 
-  auto_link_pos = regexpr(auto_link_reg, value)
-
-  while( auto_link_pos > 0 ){
-    link = substring( value, auto_link_pos+1, auto_link_pos + attr(auto_link_pos, "match.length")-2)
-    pre = substring( value, 1, auto_link_pos -1 )
-    post = substring( value, auto_link_pos + attr(auto_link_pos, "match.length"))
-    value = paste0( pre, "[", link, "] (", link, ")", post )
-    auto_link_pos = regexpr(auto_link_reg, value)
-  }
-
+	# transform the <url> into [url](url)
+	auto_link_pos = regexpr(auto_link_reg, value)
+	while( auto_link_pos > 0 ){
+		link = substring( value, auto_link_pos+1, auto_link_pos + attr(auto_link_pos, "match.length")-2)
+		pre = substring( value, 1, auto_link_pos -1 )
+		post = substring( value, auto_link_pos + attr(auto_link_pos, "match.length"))
+		value = paste0( pre, "[", link, "] (", link, ")", post )
+		auto_link_pos = regexpr(auto_link_reg, value)
+	}
+	
+	# transform the <email> into [email](email)
+	auto_email_pos = regexpr(auto_email_reg, value)
+	while( auto_email_pos > 0 ){
+		link = substring( value, auto_email_pos + 1, auto_email_pos + attr(auto_email_pos, "match.length")-2)
+		pre = substring( value, 1, auto_email_pos -1 )
+		post = substring( value, auto_email_pos + attr(auto_email_pos, "match.length"))
+		value = paste0( pre, "[", link, "] (", link, ")", post )
+		auto_email_pos = regexpr(auto_email_reg, value)
+	}
+	
+  
+  
   raw_blocks = gsub("^\\s+\n+", "", value )
   raw_blocks = gsub("^\n+", "", raw_blocks )
   raw_blocks = gsub("\n\\s+\n", "\n\n", raw_blocks )

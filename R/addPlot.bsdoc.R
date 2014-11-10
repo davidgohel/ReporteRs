@@ -1,3 +1,35 @@
+#' @title Add a plot into an bsdoc object
+#'
+#' @description
+#' Add a plot into the \code{bsdoc} object.
+#' 
+#' @param doc Object of class \code{bsdoc} where paragraph has to be added
+#' @param fun plot function. The function will be executed to produce graphics. 
+#' For \code{grid} or \code{lattice} or \code{ggplot} object, the function 
+#' should just be print and an extra argument x should specify the object 
+#' to plot. For traditionnal plots, the function should contain plot instructions. See examples.
+#' @param width plot width in inches (default value is 6).
+#' @param height plot height in inches (default value is 6).
+#' @param vector.graphic logical scalar, default to FALSE. If TRUE, vector graphics 
+#' are produced instead of PNG images. If TRUE, vector graphics are 
+#' RaphaelJS instructions(transformed as SVG). 
+#' @param pointsize the default pointsize of plotted text in pixels, default to 12.
+#' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param ... arguments for \code{fun}.
+#' @return an object of class \code{\link{bsdoc}}.
+#' @examples
+#' #START_TAG_TEST
+#' doc.filename = "addPlot_bsdoc/example.html"
+#' @example examples/bsdoc.R
+#' @example examples/addTitle1Level1.R
+#' @example examples/addBasePlot_vg.R
+#' @example examples/addTitle2Level1.R
+#' @example examples/addggplot.R
+#' @example examples/addTitle3Level1.R
+#' @example examples/addLMPlot.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{bsdoc}}, \code{\link{addPlot}}
 #' @method addPlot bsdoc
 #' @S3method addPlot bsdoc
 addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vector.graphic = T, width=6, height=6, fontname = getOption("ReporteRs-default-font"), ... ) {
@@ -54,63 +86,3 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), ve
 	doc
 }
 
-
-
-#' @title get HTML code from a plot
-#'
-#' @description
-#' get HTML code from a plot
-#' 
-#' @param fun plot function
-#' @param width plot width in inches (default value is 6).
-#' @param height plot height in inches (default value is 6).
-#' @param pointsize the default pointsize of plotted text in points, default to 12.
-#' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
-#' @param canvas_id canvas id - an integer - unique id in the web page
-#' @param ... arguments for \code{fun}.
-#' @return an html string. 
-#' @examples
-#' #START_TAG_TEST
-#' @example examples/raphael.html.R
-#' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{html}}, \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
-#' , \code{\link{addPlot.html}}
-#' @export 
-raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize")
-	, width=6, height=6, fontname = getOption("ReporteRs-default-font")
-	, canvas_id = 0
-	, ... ) {
-	
-	plotargs = list(...)
-	
-	dirname = tempfile( )
-	dir.create( dirname )
-	pointsize = FontMetric( fontname, pointsize )$info[3]
-	
-	filename = file.path( dirname, "plot", fsep = "/" )
-	env = raphael( file = filename,width=width*72.2
-			, height = height*72.2
-			, ps=pointsize, fontname = fontname
-			, canvas_id = as.integer(canvas_id) )
-	fun(...)
-	.C("trigger_last_post_commands", (dev.cur()-1L) )
-	dev.off()
-	plot_ids = get("plot_ids", envir = env )
-	
-	jimg = .jnew( class.html4r.RAPHAELGraphics )
-	
-	for(i in 1:length( plot_ids ) ){
-		file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))
-		div.id = plot_ids[[i]]$div.id
-		
-		.jcall( jimg, "V", "registerGraphic", as.character(div.id), file )
-	}
-	js.code = .jcall( jimg, "S", "getJS" )
-	out = .jcall( jimg, "S", "getHTML" )
-	out = paste( out, "<script type=\"text/javascript\">", sep = "" )
-	out = paste( out, js.code, sep = "" )
-	out = paste( out, "</script>", sep = "" )
-	attr( out, "div_id" ) = sapply( plot_ids, function(x) x$div.id )
-	attr( out, "js_id" ) = sapply( plot_ids, function(x) x$js.plotid )
-	out
-}

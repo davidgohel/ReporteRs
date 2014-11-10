@@ -13,7 +13,6 @@
 #' 
 #' # add a page where to add R outputs with title 'page example'
 #' doc = addPage( doc, title = "page example" )
-
 #' # add iris dataset as a table in the page
 #' doc = addTable(doc, iris )
 #' 
@@ -24,7 +23,6 @@
 #' @seealso \code{\link{html}}, \code{\link{writeDoc}}
 #' @method writeDoc html
 #' @S3method writeDoc html
-
 writeDoc.html = function(doc, directory, ...) {
 	www.directory = normalizePath( path.expand(directory) , mustWork=F, winslash="/")
 	try( unlink( www.directory, recursive = T ) , silent = TRUE )	

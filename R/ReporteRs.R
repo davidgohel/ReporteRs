@@ -4,8 +4,8 @@
 #' \tabular{ll}{
 #' Package: \tab ReporteRs\cr
 #' Type: \tab Package\cr
-#' Version: \tab 0.6.8\cr
-#' Date: \tab 2014-11-06\cr
+#' Version: \tab 0.6.9\cr
+#' Date: \tab 2014-11-10\cr
 #' License: \tab GPL (>= 3)\cr
 #' LazyLoad: \tab yes\cr
 #' }
@@ -14,10 +14,11 @@
 #' \itemize{
 #'   \item \code{\link{docx}} Create a Microsoft Word document object
 #'   \item \code{\link{pptx}} Create a Microsoft PowerPoint document object
+#'   \item \code{\link{bsdoc}} Create an HTML document object
 #'   \item \code{\link{html}} Create an HTML document object
 #' }
 #' 
-#' The following functions can be used whatever the output format is (docx, pptx, html).
+#' The following functions can be used whatever the output format is (docx, pptx, html, bsdoc).
 #' 
 #' \itemize{
 #'   \item \code{\link{addTitle}} Add a title

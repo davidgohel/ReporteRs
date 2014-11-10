@@ -71,9 +71,10 @@ addFlexTable = function(doc, flextable, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @details 
-#' addFooter only works for pptx documents. See \code{\link{addFooter.pptx}} for examples.
+#' addFooter only works for pptx and bsdoc documents. 
 #' @export
-#' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}
+#' @seealso \code{\link{pptx}}, \code{\link{addFooter.pptx}}
+#' , \code{\link{bsdoc}}, \code{\link{addFooter.bsdoc}}
 addFooter = function(doc, ...){
 	checkHasSlide(doc)
 	UseMethod("addFooter")

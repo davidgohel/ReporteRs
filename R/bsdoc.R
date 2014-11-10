@@ -1,8 +1,36 @@
+#' @title Create an object representation of a bootstrap html 
+#' document
+#'
+#' @description
+#' Create a \code{\link{bsdoc}} object
+#' 
+#' @param title \code{"character"} value: title of the document.
+#' @param list.definition a list definition to specify how ordered and unordered 
+#' lists have to be formated. See \code{\link{list.settings}}. Default to 
+#' \code{getOption("ReporteRs-list-definition")}.
+#' @return an object of class \code{\link{bsdoc}}.
+#' @details
+#' Several methods can used to send R output into an object of class \code{\link{bsdoc}}.
+#' 
+#' \itemize{
+#'   \item \code{\link{addTitle.bsdoc}} add titles
+#'   \item \code{\link{addParagraph.bsdoc}} add text
+#'   \item \code{\link{addPlot.bsdoc}} add plots
+#'   \item \code{\link{addFlexTable.bsdoc}} add tables. See \code{\link{FlexTable}}
+#'   \item \code{\link{addImage.bsdoc}} add external images
+#'   \item \code{\link{addMarkdown.bsdoc}} add markdown text
+#'   \item \code{\link{addBootstrapMenu}} add a bootstrap menu to the html page
+#'   \item \code{\link{addFooter.bsdoc}} add text into the footer of the html page
+#' }
+#' 
+#' Once object has content, user can write the docx into a ".html" file, see \code{\link{writeDoc.bsdoc}}.
 #' @export
+#' @examples
+#' #START_TAG_TEST
+#' @example examples/bsdoc_example.R
+#' @example examples/STOP_TAG_TEST.R
 bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-list-definition") ){
 		
-	if( missing( title ) )
-		stop("title is missing.")
 	if( !is.character( title ) )
 		stop("title must be a character vector of length 1.")
 	if( length( title ) != 1 )
@@ -22,8 +50,36 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 	.jcall( HTMLPage , "V", "addStylesheet", "css/docs.min.css" )
 	.jcall( HTMLPage , "V", "addStylesheet", "css/bootstrap-theme.css" )
 	
-	.Object = list( jobj = HTMLPage )
+	.Object = list( title = title, jobj = HTMLPage )
 	class( .Object ) = "bsdoc"
 
 	.Object
 }
+
+#' @title print informations about an object of class \code{\link{bsdoc}}.
+#'
+#' @description
+#' print informations about an object of class \code{\link{bsdoc}}.
+#' 
+#' @param x an object of class \code{\link{bsdoc}}
+#' @param ... further arguments, not used. 
+#' @examples
+#' #START_TAG_TEST
+#' # Create a new document 
+#' doc = bsdoc( )
+#' print( doc )
+#' #STOP_TAG_TEST
+#' @seealso \code{\link{bsdoc}}, \code{\link{print}}
+#' @method print bsdoc
+#' @S3method print bsdoc
+print.html = function (x, ...){
+	
+	cat("[bsdoc object]\n")
+	
+	cat("title:", x$title, "\n")
+	
+	invisible()
+	
+}
+
+

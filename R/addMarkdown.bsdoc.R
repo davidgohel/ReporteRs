@@ -1,3 +1,28 @@
+#' @title Add a markdown text or file into an bsdoc object
+#'
+#' @description Add markdown into a \code{\link{bsdoc}} object.
+#' 
+#' @param doc Object of class \code{\link{bsdoc}} where markdown has to be added
+#' @param file markdown file. Not used if text is provided.
+#' @param text character vector. The markdown text to parse.
+#' @param text.properties default \code{\link{textProperties}} object
+#' @param default.par.properties default \code{\link{parProperties}} object
+#' @param blockquote.par.properties \code{\link{parProperties}} object used for 
+#' blockquote blocks.
+#' @param code.par.properties \code{\link{parProperties}} object used for 
+#' code blocks.
+#' @param hr.border \code{\link{borderProperties}} object used for 
+#' horizontal rules.
+#' @param ... further arguments, not used. 
+#' @return an object of class \code{\link{bsdoc}}.
+#' @examples
+#' #START_TAG_TEST
+#' doc.filename = "addMarkdown_bsdoc/example.html"
+#' @example examples/bsdoc.R
+#' @example examples/addMarkdown.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{bsdoc}}
 #' @method addMarkdown bsdoc
 #' @S3method addMarkdown bsdoc
 addMarkdown.bsdoc = function(doc, file, text, 

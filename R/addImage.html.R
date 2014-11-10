@@ -26,7 +26,6 @@
 #' , \code{\link{addImage}}
 #' @method addImage html
 #' @S3method addImage html
-
 addImage.html = function(doc, filename, width, height, ... ) {
 
 	slide = doc$current_slide 

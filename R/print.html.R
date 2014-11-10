@@ -14,7 +14,6 @@
 #' @seealso \code{\link{html}}, \code{\link{print}}
 #' @method print html
 #' @S3method print html
-
 print.html = function (x, ...){
 
 	cat("[html object]\n")
