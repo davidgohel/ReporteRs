@@ -32,10 +32,10 @@ class \code{\link{docx}}.
 \code{\link{addPlot.docx}} add plots \item
 \code{\link{addFlexTable.docx}} add tables. See
 \code{\link{FlexTable}} \item \code{\link{addImage.docx}}
-add external images \item \code{\link{addTOC.docx}} add
-table of content \item \code{\link{addPageBreak.docx}} add
-page break \item \code{\link{addSection.docx}} add section
-}
+add external images \item \code{\link{addMarkdown.docx}}
+add markdown text \item \code{\link{addTOC.docx}} add table
+of content \item \code{\link{addPageBreak.docx}} add page
+break \item \code{\link{addSection.docx}} add section }
 
 R outputs (tables, plots, paragraphs and images) can be
 inserted (and not added at the end) in a document if a

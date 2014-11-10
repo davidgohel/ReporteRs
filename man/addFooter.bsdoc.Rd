@@ -1,0 +1,52 @@
+\name{addFooter.bsdoc}
+\alias{addFooter.bsdoc}
+\title{Add text in footer of a \code{bsdoc} object}
+\usage{
+\method{addFooter}{bsdoc}(doc, value, par.properties = parProperties(),
+  restart.numbering = FALSE, ...)
+}
+\arguments{
+  \item{doc}{\code{\link{bsdoc}} object}
+
+  \item{value}{text to add to in the footer as paragraphs:
+  an object of class \code{\link{pot}} or
+  \code{\link{set_of_paragraphs}} or a character vector.}
+
+  \item{par.properties}{\code{\link{parProperties}} to
+  apply to paragraphs.}
+
+  \item{restart.numbering}{boolean value. If \code{TRUE},
+  next numbered list counter will be set to 1.}
+
+  \item{...}{further arguments, not used.}
+}
+\value{
+a \code{bsdoc} object
+}
+\description{
+Add text in footer of a \code{bsdoc} object. The function
+has the same behaviour than addParagraph, except that its
+content will be written in the footer part of the
+\code{bsdoc} instead of the body of the document.
+}
+\examples{
+#START_TAG_TEST
+
+# Create a new document
+doc = bsdoc( title = "title" )
+
+doc = addFooter( doc,
+  pot( "Code licensed under ", format = textProperties(color="gray") ) +
+    pot("GPL-3", format = textProperties(color="#428bca"),
+      hyperlink = "https://gnu.org/licenses/gpl.html" ) + pot(".", format = textProperties(color="gray") ),
+  parCenter( padding = 2 )
+)
+
+# write the html object in a directory
+writeDoc( doc, "addFooter/example.html")
+#STOP_TAG_TEST
+}
+\seealso{
+\code{\link{bsdoc}}
+}
+

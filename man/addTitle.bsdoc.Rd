@@ -1,0 +1,46 @@
+\name{addTitle.bsdoc}
+\alias{addTitle.bsdoc}
+\title{Insert a title into a bsdoc object}
+\usage{
+\method{addTitle}{bsdoc}(doc, value, level = 1, ...)
+}
+\arguments{
+  \item{doc}{\code{\link{bsdoc}} object}
+
+  \item{value}{\code{"character"} value to use as title
+  text}
+
+  \item{level}{\code{"integer"} positive value to use as
+  heading level. 1 for title1, 2 for title2, etc. Default
+  to 1.}
+
+  \item{...}{further arguments, not used.}
+}
+\value{
+an object of class \code{bsdoc}.
+}
+\description{
+Add a title into a \code{\link{bsdoc}} object.
+}
+\examples{
+#START_TAG_TEST
+doc.filename = "addImage_bsdoc/example.html"
+
+# set default font size to 11
+options( "ReporteRs-fontsize" = 11 )
+
+doc = bsdoc( )
+
+doc = addTitle( doc, "Title example 1", level = 1 )
+
+
+doc = addTitle( doc, "Title example 2", level = 1 )
+
+# Write the object
+writeDoc( doc, file = doc.filename )
+#STOP_TAG_TEST
+}
+\seealso{
+\code{\link{bsdoc}}, \code{\link{addTitle}}
+}
+
