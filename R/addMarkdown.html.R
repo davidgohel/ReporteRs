@@ -89,9 +89,6 @@ addMarkdown.html = function(doc, file, text,
 					)
 			)
 		} else if( elt_table[ i, "block_type"]=="h" ){
-#			pars = get.paragraph.from.blockmd( text = elt_table[ i, "text"], 
-#					text.properties = text.properties,
-#					blocktable_info = elt_table )
 			doc = addTitle( doc, value = elt_table[ i, "text"], level = elt_table[ i, "level"] )
 		} else if( elt_table[ i, "block_type"]=="hr" ){
 			doc = addParagraph( doc, value = "", par.properties = chprop( default.par.properties, border.bottom = hr.border) )
