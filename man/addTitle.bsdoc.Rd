@@ -24,7 +24,7 @@ Add a title into a \code{\link{bsdoc}} object.
 }
 \examples{
 #START_TAG_TEST
-doc.filename = "addImage_bsdoc/example.html"
+doc.filename = "addTitle_bsdoc/example.html"
 
 # set default font size to 11
 options( "ReporteRs-fontsize" = 11 )

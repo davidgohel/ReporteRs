@@ -10,7 +10,7 @@
 #' @return an object of class \code{bsdoc}.
 #' @examples
 #' #START_TAG_TEST
-#' doc.filename = "addImage_bsdoc/example.html"
+#' doc.filename = "addTitle_bsdoc/example.html"
 #' @example examples/bsdoc.R
 #' @example examples/addTitle1Level1.R
 #' @example examples/addTitle2Level1.R
