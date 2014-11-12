@@ -5,6 +5,11 @@ ENHANCEMENT
 
 * add bsdoc, a new object to produce html documents with Bootstrap.
 
+DEBUG
+------------------------------------------------------------------
+
+* debug an issue with POSIXlt data when used in FlexTable  
+  (reported by Victor Perrier)
 
 ReporteRs 0.6.8
 ==================================================================
