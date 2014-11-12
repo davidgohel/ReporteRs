@@ -48,6 +48,10 @@ addParagraph.bsdoc = function(doc, value,
 	
 	parset = .jset_of_paragraphs(value, par.properties)
 	
+	if( !inherits( par.properties, "parProperties" ) ){
+		stop("argument 'par.properties' must be an object of class 'parProperties'")
+	}
+	
 	if( restart.numbering ){
 		.jcall( doc$jobj, "V", "restartNumbering" )
 	}

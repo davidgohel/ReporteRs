@@ -47,6 +47,10 @@ addParagraph.html = function(doc, value,
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
+	if( !inherits( par.properties, "parProperties" ) ){
+		stop("argument 'par.properties' must be an object of class 'parProperties'")
+	}
+	
 	parset = .jset_of_paragraphs(value, par.properties)
 	
 	if( restart.numbering ){
