@@ -16,6 +16,7 @@
 #' before the new item. It only applies when x is a \code{DropDownMenu} object.
 #' @param separator.after if TRUE, a separator will be inserted 
 #' after the new item. It only applies when x is a \code{DropDownMenu} object.
+#' @param active if TRUE, the item will be declared as active (highlighted).
 #' @return an object of class \code{BoostrapMenu}.
 #' @export
 #' @examples
@@ -23,7 +24,7 @@
 #' @example examples/BoostrapMenu.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addBootstrapMenu}}
-addLinkItem = function( x, label, link, dd, separator.before = FALSE, separator.after = FALSE ){
+addLinkItem = function( x, label, link, dd, separator.before = FALSE, separator.after = FALSE, active = FALSE ){
 	if( !inherits( x , "BoostrapMenu") && !inherits( x , "DropDownMenu") ){
 		stop("addLinkItem only applies to DropDownMenu or BoostrapMenu objects.")
 	}
@@ -35,9 +36,10 @@ addLinkItem = function( x, label, link, dd, separator.before = FALSE, separator.
 		
 		if( !missing( dd ) ){
 			if( !inherits( dd , "DropDownMenu") ) stop("dd must be a DropDownMenu object.")
+			if( active ) .jcall( dd$jobj, "V", "setActive" )
 			.jcall( x$jobj, "V", "add", dd$jobj )
 		} else if( !missing( label ) && !missing( link ) ){
-			.jcall( x$jobj, "V", "add", label, link )
+			.jcall( x$jobj, "V", "add", label, link, as.logical(active) )
 		}
 		
 		if( separator.after ) 
@@ -46,9 +48,10 @@ addLinkItem = function( x, label, link, dd, separator.before = FALSE, separator.
 		
 		if( !missing( dd ) ){
 			if( !inherits( dd , "DropDownMenu") ) stop("dd must be a DropDownMenu object.")
+			if( active ) .jcall( dd$jobj, "V", "setActive" )
 			.jcall( x$jobj, "V", "add", dd$jobj )
 		} else if( !missing( label ) && !missing( link ) ){
-			.jcall( x$jobj, "V", "add", label, link )
+			.jcall( x$jobj, "V", "add", label, link, as.logical(active) )
 		}
 	}
 	x

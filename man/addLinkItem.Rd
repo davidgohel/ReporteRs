@@ -3,7 +3,7 @@
 \title{add an item in a \code{BootstrapMenu} or a \code{DropDownMenu}}
 \usage{
 addLinkItem(x, label, link, dd, separator.before = FALSE,
-  separator.after = FALSE)
+  separator.after = FALSE, active = FALSE)
 }
 \arguments{
   \item{x}{a \code{DropDownMenu} or a \code{BoostrapMenu}
@@ -26,6 +26,9 @@ addLinkItem(x, label, link, dd, separator.before = FALSE,
   \item{separator.after}{if TRUE, a separator will be
   inserted after the new item. It only applies when x is a
   \code{DropDownMenu} object.}
+
+  \item{active}{if TRUE, the item will be declared as
+  active (highlighted).}
 }
 \value{
 an object of class \code{BoostrapMenu}.
