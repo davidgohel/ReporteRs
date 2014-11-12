@@ -2,7 +2,8 @@
 \alias{addImage.bsdoc}
 \title{Insert an external image into a bsdoc object}
 \usage{
-\method{addImage}{bsdoc}(doc, filename, width, height, ...)
+\method{addImage}{bsdoc}(doc, filename, width, height,
+  par.properties = parProperties(text.align = "center", padding = 5), ...)
 }
 \arguments{
   \item{doc}{\code{\link{bsdoc}} object where external
@@ -14,6 +15,10 @@
   \item{width}{image width in pixel}
 
   \item{height}{image height in pixel}
+
+  \item{par.properties}{paragraph formatting properties of
+  the paragraph that contains images. An object of class
+  \code{\link{parProperties}}}
 
   \item{...}{further arguments, not used.}
 }

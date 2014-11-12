@@ -6,6 +6,8 @@
 #' @param filename \code{"character"} value, complete filename of the external image
 #' @param width image width in pixel
 #' @param height image height in pixel
+#' @param par.properties paragraph formatting properties of the paragraph that contains images. 
+#' An object of class \code{\link{parProperties}}
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{html}}.
 #' @examples
@@ -26,7 +28,9 @@
 #' , \code{\link{addImage}}
 #' @method addImage html
 #' @S3method addImage html
-addImage.html = function(doc, filename, width, height, ... ) {
+addImage.html = function(doc, filename, width, height, 
+		par.properties = parProperties(text.align = "center", padding = 5 ), ... ) {
+	
 
 	slide = doc$current_slide 
 	if( missing( width ) && missing(height) ){
@@ -35,6 +39,7 @@ addImage.html = function(doc, filename, width, height, ... ) {
 	
 	for( i in 1:length( filename ) ){
 		jimg = .jnew(class.Image , filename[i] )
+		.jcall( jimg, "V", "setParProperties", .jParProperties(par.properties) )
 		if( !missing( width ) && !missing(height) )
 			.jcall( jimg, "V", "setDim", as.integer(width), as.integer(height) )
 		out = .jcall( slide, "I", "add", jimg )
