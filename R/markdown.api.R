@@ -8,7 +8,7 @@ ul_reg = "^\\s*[\\*\\-]\\s+(.*)*"
 
 hr_reg = "^(\\*{1}\\s{0,1}){3,}\\s*$|^(\\-{1}\\s{0,1}){3,}\\s*$|^(\\_{1}\\s{0,1}){3,}\\s*$"
 
-reference_link_reg = "(( |\t)*\\[[[:alnum:]]+\\]\\:[[:blank:]]+[[:alnum:]\\s\\.\\:\\/#\\?\\=]+([[:blank:]]+(\"|'|\\()[[:alnum:][:blank:]\\s\\.\\:\\/#\\?\\=]+(\"|'|\\))){0,1})"
+reference_link_reg = "[[:blank:]]*\\[[[:alnum:][:blank:]!\"#\\$%&'\\(\\)\\*\\+,-.\\:;\\<\\>\\?@_`{}\\|~/]+\\]\\:(.*)*"
 
 auto_link_reg = "<(http|https|file|ftp){1}\\:\\/\\/[[:alnum:][:blank:]\\s\\.\\/#\\?\\=]+>"
 auto_email_reg = "<[[:alnum:].-]+@[[:alnum:].-]+>"
@@ -295,7 +295,7 @@ get.blocks = function( value ){
 		link = substring( value, auto_email_pos + 1, auto_email_pos + attr(auto_email_pos, "match.length")-2)
 		pre = substring( value, 1, auto_email_pos -1 )
 		post = substring( value, auto_email_pos + attr(auto_email_pos, "match.length"))
-		value = paste0( pre, "[", link, "] (", link, ")", post )
+		value = paste0( pre, "[", link, "] (mailto:", link, ")", post )
 		auto_email_pos = regexpr(auto_email_reg, value)
 	}
 	
@@ -353,18 +353,36 @@ get.blocks = function( value ){
   blocks = blocks[ blocks$id_ref == "", ]
   
   attr(blocks, "footnotes" ) = footnotes
-  attr(blocks, "reference_link" ) = extract.reference.links( reference_links )
+  if( length( reference_links ) > 0 ){
+	  attr(blocks, "reference_link" ) = transform.reference.links( reference_links ) 
+  } else attr(blocks, "reference_link" ) = character(0)
+  	
   blocks
 }
 
-extract.reference.links = function( x ){
-  link_id = gsub( x = x, pattern = "^\\[(\\w+)\\](.*)*", replacement = "\\1" )
-  url_reg = regexpr( x, pattern = "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+" )
-  url_value = substring( text = x, url_reg, url_reg + attr(url_reg,"match.length") -1 )
-  names(url_value) = link_id
-  url_value
+transform.reference.links = function( x ){
+	id_reg = regexpr( text = x, pattern = "\\[[[:alnum:] ]+\\]\\:")
+	if( any( id_reg < 1 ) ) 
+		stop("links id - unexpected format: ", paste( shQuote(x[which( id_reg < 1 )] ), collapse = ";" ) )
+	
+	link_id = substring(x, id_reg + 1, id_reg + attr(id_reg, "match.length") - 3 )
+	x = substring( x, id_reg + attr(id_reg, "match.length"), nchar(x) )
+	x = gsub( pattern = "(^[ ]+|[ ]+$)", replacement ="", x )
+	
+	tooltip_reg = regexpr(pattern = " ", text = x)
+	.wtooltip = which( tooltip_reg > 0 )
+	if( length( .wtooltip ) > 0 ) {
+		x[.wtooltip] = substring( x[.wtooltip] , 1, tooltip_reg[.wtooltip] - 1 )
+	}
+	
+	mail_reg = regexpr( x, pattern = "[[:alnum:].-]+@[[:alnum:].-]+" )
+	.wmail = which( mail_reg > 0 )
+	if( length( .wmail ) > 0 ) {
+		x[.wmail] = paste0("mailto:", x[.wmail])
+	}
+	names(x) = link_id
+	x
 }
-
 
 prepare.footnote = function( elt_table, par.properties, text.properties ){
   out = list()
@@ -488,6 +506,54 @@ update.through.blocks = function( blocks, last.indent = 0, index = 1 ){
   blocks
 }
 
+extract.inline.links = function( x ){
+	label_reg = regexpr( text = x, pattern = "\\[[[:alnum:][:blank:]!\"#\\$%&'\\(\\)\\*\\+,-.\\:;\\<\\>\\?@_`{}\\|~/]+\\]")
+	
+	if( any( label_reg < 1 ) ) 
+		stop("inline link - unexpected format: ", x )
+	
+	label = substring( x, label_reg + 1, label_reg + attr(label_reg, "match.length") - 2 )
+	x = substring( x, label_reg + attr(label_reg, "match.length"), nchar(x) )
+	x = gsub( pattern = "(^[ ]+|[ ]+$)", replacement ="", x )
+	
+	url_reg = regexpr( text = x, pattern = "\\([[:alnum:]!\"#\\$%&'\\(\\)\\*\\+,-.\\:;\\<\\>\\?@_`{}\\|~/]+")
+	
+	if( any( url_reg < 1 ) ) 
+		stop("inline link - unexpected format: ", x )
+	
+	x = substring( x, url_reg + 1, url_reg + attr(url_reg, "match.length") - 2 )
+	
+	mail_reg = regexpr( x, pattern = "[[:alnum:].-]+@[[:alnum:].-]+" )
+	.wmail = which( mail_reg > 0 )
+	if( length( .wmail ) > 0 ) {
+		x[.wmail] = paste0("mailto:", x[.wmail])
+	}
+	
+	names(x) = label
+	x
+}
+
+extract.reference.links = function( x ){
+	label_reg = regexpr( text = x, pattern = "\\[[[:alnum:][:blank:]!\"#\\$%&'\\(\\)\\*\\+,-.\\:;\\<\\>\\?@_`{}\\|~/]+\\]")
+	
+	if( any( label_reg < 1 ) ) 
+		stop("reference link - unexpected format: ", x )
+	
+	label = substring( x, label_reg + 1, label_reg + attr(label_reg, "match.length") - 2 )
+	x = substring( x, label_reg + attr(label_reg, "match.length"), nchar(x) )
+	x = gsub( pattern = "(^[ ]+|[ ]+$)", replacement ="", x )
+	
+	url_reg = regexpr( text = x, pattern = "\\[[[:alnum:][:blank:]!\"#\\$%&'\\(\\)\\*\\+,-.\\:;\\<\\>\\?@_`{}\\|~/]+\\]")
+	
+	if( any( url_reg < 1 ) ) 
+		stop("reference link - unexpected format: ", x )
+	
+	x = substring( x, url_reg + 1, url_reg + attr(url_reg, "match.length") - 2 )
+	names(x) = label
+	x
+}
+
+
 
 get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = textProperties(), drop.footnotes = FALSE ){
   
@@ -565,20 +631,13 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
   
   chunks = lapply( chunks, function( chunk, drop.footnotes ){
     if( attr(chunk,"spec")["inline_link"] ){
-		test.reg = regexpr( "\\[(.*)\\]", chunk )
-		text = substring(chunk, test.reg+1, test.reg + attr(test.reg, "match.length")-2)
-		link.reg = regexpr("\\((http|https|file|ftp){1}\\:\\/\\/[[:alnum:][:blank:]\\s\\.\\/#\\?\\=\\-]+", chunk)
-		link = substring(chunk, link.reg+1, link.reg + attr(link.reg, "match.length")-1)
+		link = extract.inline.links( chunk )
 		tp = set.text.format(text.properties, chunk )
-		pot( value = text, format = chprop(tp, underline = TRUE ), 
-		hyperlink = link )
+		pot( value = names(link), format = chprop(tp, underline = TRUE ), 
+		hyperlink = as.character(link) )
     } else if( attr(chunk,"spec")["reference_link"] ){
-		test.reg = regexpr( "\\[([[:alnum:][:blank:]]*)\\]", chunk )
-		text = substring(chunk, test.reg+1, test.reg + attr(test.reg, "match.length")-2)
-		newtext = substring( chunk, test.reg + attr(test.reg, "match.length"))
-		link.reg = regexpr( "\\[([[:alnum:][:blank:]]*)\\]", newtext )
-		link = substring(newtext, link.reg+1, link.reg + attr(link.reg, "match.length")-2)
-		
+		link = extract.reference.links( chunk )
+		text = names( link )
 		tp = set.text.format(text.properties, chunk )
 		
 		if( is.element(link, names( attr(blocktable_info, "reference_link") ) ) ){
