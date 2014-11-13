@@ -4,7 +4,8 @@
 \usage{
 \method{addPlot}{html}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
   vector.graphic = T, width = 6, height = 6,
-  fontname = getOption("ReporteRs-default-font"), ...)
+  fontname = getOption("ReporteRs-default-font"),
+  par.properties = parCenter(padding = 5), ...)
 }
 \arguments{
   \item{doc}{Object of class \code{html} where paragraph
@@ -32,6 +33,10 @@
 
   \item{fontname}{the default font family to use, default
   to getOption("ReporteRs-default-font").}
+
+  \item{par.properties}{paragraph formatting properties of
+  the paragraph that contains images. An object of class
+  \code{\link{parProperties}}}
 
   \item{...}{arguments for \code{fun}.}
 }

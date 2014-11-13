@@ -2,12 +2,17 @@
 \alias{addFlexTable.bsdoc}
 \title{Insert a FlexTable into an bsdoc object}
 \usage{
-\method{addFlexTable}{bsdoc}(doc, flextable, ...)
+\method{addFlexTable}{bsdoc}(doc, flextable,
+  par.properties = parProperties(text.align = "left"), ...)
 }
 \arguments{
   \item{doc}{\code{\link{bsdoc}} object}
 
   \item{flextable}{the \code{FlexTable} object}
+
+  \item{par.properties}{paragraph formatting properties of
+  the paragraph that contains the table. An object of class
+  \code{\link{parProperties}}}
 
   \item{...}{further arguments - not used}
 }

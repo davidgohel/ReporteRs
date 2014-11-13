@@ -4,7 +4,7 @@
 \usage{
 raphael.html(fun, pointsize = getOption("ReporteRs-fontsize"), width = 6,
   height = 6, fontname = getOption("ReporteRs-default-font"),
-  canvas_id = 0, ...)
+  canvas_id = 0, par.properties = parCenter(padding = 5), ...)
 }
 \arguments{
   \item{fun}{plot function}
@@ -22,6 +22,10 @@ raphael.html(fun, pointsize = getOption("ReporteRs-fontsize"), width = 6,
 
   \item{canvas_id}{canvas id - an integer - unique id in
   the web page}
+
+  \item{par.properties}{paragraph formatting properties of
+  the paragraph that contains images. An object of class
+  \code{\link{parProperties}}}
 
   \item{...}{arguments for \code{fun}.}
 }

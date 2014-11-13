@@ -2,12 +2,17 @@
 \alias{addFlexTable.html}
 \title{Insert a FlexTable into an html object}
 \usage{
-\method{addFlexTable}{html}(doc, flextable, ...)
+\method{addFlexTable}{html}(doc, flextable,
+  par.properties = parProperties(text.align = "left"), ...)
 }
 \arguments{
   \item{doc}{\code{\link{html}} object}
 
   \item{flextable}{the \code{FlexTable} object}
+
+  \item{par.properties}{paragraph formatting properties of
+  the paragraph that contains the table. An object of class
+  \code{\link{parProperties}}}
 
   \item{...}{further arguments - not used}
 }
