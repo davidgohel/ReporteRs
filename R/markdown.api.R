@@ -450,7 +450,7 @@ guess.indentation = function( x, i ){
     list.options = getOption("ReporteRs-list-definition")
     
     level = x[i,"indent"] / 4
-    
+	list.type = "ul"
     for( n in seq(i-1, 1, by = -1) ){
       if( x[n, "list_type"] == "ul"){
         list.type = "ul"
@@ -567,7 +567,6 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
         "inline_img", "reference_img", "footnote"
       ) ) )
   types_matrix[types_matrix[,"inline_img"], "inline_link"]=FALSE
-  
   character_dataset = cbind( character_dataset, types_matrix)
   
   drop_lines_id = integer(0)
@@ -633,7 +632,7 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
     if( attr(chunk,"spec")["inline_link"] ){
 		link = extract.inline.links( chunk )
 		tp = set.text.format(text.properties, chunk )
-		pot( value = names(link), format = chprop(tp, underline = TRUE ), 
+		pot( value = names(link), format = chprop(tp, color = "#428bca", underline = TRUE ), 
 		hyperlink = as.character(link) )
     } else if( attr(chunk,"spec")["reference_link"] ){
 		link = extract.reference.links( chunk )
@@ -642,11 +641,11 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
 		
 		if( is.element(link, names( attr(blocktable_info, "reference_link") ) ) ){
 			link = attr(blocktable_info, "reference_link")[link]
-			pot( value = text, format = chprop(tp, underline = TRUE ), 
+			pot( value = text, format = chprop(tp, color = "#428bca", underline = TRUE ), 
 					hyperlink = link )		
 		} else {
 			warning("referenced link ", shQuote(link), " is not defined in the markdown.")
-			pot( value = text, format = chprop(tp, underline = TRUE ) )
+			pot( value = text, format = chprop(tp, color = "#428bca", underline = TRUE ) )
 		}
 			
 
