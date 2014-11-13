@@ -4,7 +4,8 @@
 document}
 \usage{
 bsdoc(title = "untitled",
-  list.definition = getOption("ReporteRs-list-definition"))
+  list.definition = getOption("ReporteRs-list-definition"), keywords = "",
+  description = "")
 }
 \arguments{
   \item{title}{\code{"character"} value: title of the
@@ -14,6 +15,12 @@ bsdoc(title = "untitled",
   ordered and unordered lists have to be formated. See
   \code{\link{list.settings}}. Default to
   \code{getOption("ReporteRs-list-definition")}.}
+
+  \item{keywords}{\code{"character"} value: keywords
+  metadata value to set in the html page}
+
+  \item{description}{\code{"character"} value: description
+  metadata value to set in the html page}
 }
 \value{
 an object of class \code{\link{bsdoc}}.

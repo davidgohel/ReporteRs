@@ -8,6 +8,8 @@
 #' @param list.definition a list definition to specify how ordered and unordered 
 #' lists have to be formated. See \code{\link{list.settings}}. Default to 
 #' \code{getOption("ReporteRs-list-definition")}.
+#' @param keywords \code{"character"} value: keywords metadata value to set in the html page
+#' @param description \code{"character"} value: description metadata value to set in the html page
 #' @return an object of class \code{\link{bsdoc}}.
 #' @details
 #' Several methods can used to send R output into an object of class \code{\link{bsdoc}}.
@@ -29,7 +31,7 @@
 #' #START_TAG_TEST
 #' @example examples/bsdoc_example.R
 #' @example examples/STOP_TAG_TEST.R
-bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-list-definition") ){
+bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-list-definition"), keywords = "", description = "" ){
 		
 	if( !is.character( title ) )
 		stop("title must be a character vector of length 1.")
@@ -38,7 +40,9 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 	
 	lidef = do.call( list.settings, list.definition )
 	
-	HTMLPage = .jnew(class.html4r.HTMLPage, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1"), lidef )
+	HTMLPage = .jnew(class.html4r.HTMLPage, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1"), 
+			lidef ,
+			description, keywords)
 	.jcall( HTMLPage , "V", "addJavascript", "js/jquery.min.js" )
 	.jcall( HTMLPage , "V", "addJavascript", "js/bootstrap.min.js" )
 	.jcall( HTMLPage , "V", "addJavascript", "js/docs.min.js" )
