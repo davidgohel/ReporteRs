@@ -81,6 +81,22 @@ addFooter = function(doc, ...){
 }
 
 
+
+#' @title Add an iframe into a document object
+#'
+#' @description Add an iframe into a document object
+#' 
+#' @param doc document object
+#' @param ... further arguments passed to other methods 
+#' @return a document object
+#' @export
+#' @seealso \code{\link{addIframe.bsdoc}}
+addIframe = function(doc, ...){
+	checkHasSlide(doc)
+	UseMethod("addIframe")
+}
+
+
 #' @title Add an external image into a document object
 #'
 #' @description Add an external image into a document object
