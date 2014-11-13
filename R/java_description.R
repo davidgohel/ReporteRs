@@ -40,6 +40,7 @@ class.BoostrapMenu = "org/lysis/reporters/html4r/elements/menu/BoostrapMenu"
 class.DropDown = "org/lysis/reporters/html4r/elements/menu/Dropdown"
 class.MenuLink = "org/lysis/reporters/html4r/elements/menu/MenuLink"
 class.Separator = "org/lysis/reporters/html4r/elements/menu/Separator"
+class.Iframe = "org/lysis/reporters/html4r/elements/Iframe"
 
 # fonts
 class.fontMetric = "org/lysis/reporters/graphicaldevices/fonts/FontMetric"
