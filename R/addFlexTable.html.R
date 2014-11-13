@@ -4,6 +4,8 @@
 #' 
 #' @param doc \code{\link{html}} object
 #' @param flextable the \code{FlexTable} object
+#' @param par.properties paragraph formatting properties of the paragraph that contains the table. 
+#' An object of class \code{\link{parProperties}}
 #' @param ... further arguments - not used
 #' @return a \code{\link{html}} object
 #' @export
@@ -26,8 +28,10 @@
 #' @example examples/STOP_TAG_TEST.R
 #' @method addFlexTable html
 #' @S3method addFlexTable html
-addFlexTable.html = function(doc, flextable, ... ) {
+addFlexTable.html = function(doc, flextable, 
+		par.properties = parProperties(text.align = "left" ), ... ) {
 	
+	.jcall( flextable$jobj, "V", "setParProperties", .jParProperties(par.properties) )
 	out = .jcall( doc$current_slide, "I", "add", flextable$jobj )
 	if( out != 1 ){
 		stop( "Problem while trying to add FlexTable." )

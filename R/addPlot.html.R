@@ -15,6 +15,8 @@
 #' RaphaelJS instructions(transformed as SVG). 
 #' @param pointsize the default pointsize of plotted text in pixels, default to 12.
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param par.properties paragraph formatting properties of the paragraph that contains images. 
+#' An object of class \code{\link{parProperties}}
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{\link{html}}.
 #' @examples
@@ -33,7 +35,9 @@
 #' @seealso \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
 #' @method addPlot html
 #' @S3method addPlot html
-addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vector.graphic = T, width=6, height=6, fontname = getOption("ReporteRs-default-font"), ... ) {
+addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vector.graphic = T, width=6, height=6, 
+		fontname = getOption("ReporteRs-default-font"), 
+		par.properties = parCenter( padding = 5 ), ... ) {
 
 	
 	plotargs = list(...)
@@ -54,7 +58,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		fun_res = try( fun(...), silent = T )
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
-		doc = addImage( doc, plotfiles, width = width*72, height = height*72 )
+		doc = addImage( doc, plotfiles, width = width*72, height = height*72, par.properties = par.properties )
 	} else {
 		filename = file.path( dirname, "plot", fsep = "/" )
 		env = raphael( file = filename,width=width*72.2
@@ -70,7 +74,7 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 		if( last_canvas_id < 0 ) stop("unexpected error, could not find device information.")
 		else doc$canvas_id = last_canvas_id;
 
-		jimg = .jnew( class.html4r.RAPHAELGraphics )
+		jimg = .jnew( class.html4r.RAPHAELGraphics, .jParProperties(par.properties)  )
 		
 		for(i in 1:length( plot_ids ) ){
 			file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))
@@ -100,6 +104,8 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 #' @param pointsize the default pointsize of plotted text in points, default to 12.
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param canvas_id canvas id - an integer - unique id in the web page
+#' @param par.properties paragraph formatting properties of the paragraph that contains images. 
+#' An object of class \code{\link{parProperties}}
 #' @param ... arguments for \code{fun}.
 #' @return an html string. 
 #' @examples
@@ -109,10 +115,11 @@ addPlot.html = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vec
 #' @seealso \code{\link{html}}, \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
 #' , \code{\link{addPlot.html}}
 #' @export 
-raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize")
-	, width=6, height=6, fontname = getOption("ReporteRs-default-font")
-	, canvas_id = 0
-	, ... ) {
+raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize"), 
+	width=6, height=6, fontname = getOption("ReporteRs-default-font"), 
+	canvas_id = 0, 
+	par.properties = parCenter( padding = 5 ), 
+	... ) {
 	
 	plotargs = list(...)
 	
@@ -130,7 +137,7 @@ raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize")
 	dev.off()
 	plot_ids = get("plot_ids", envir = env )
 	
-	jimg = .jnew( class.html4r.RAPHAELGraphics )
+	jimg = .jnew( class.html4r.RAPHAELGraphics, .jParProperties(par.properties)  )
 	
 	for(i in 1:length( plot_ids ) ){
 		file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))

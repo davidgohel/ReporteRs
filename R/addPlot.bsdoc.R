@@ -15,6 +15,7 @@
 #' RaphaelJS instructions(transformed as SVG). 
 #' @param pointsize the default pointsize of plotted text in pixels, default to 12.
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param par.properties paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{\link{bsdoc}}.
 #' @examples
@@ -32,7 +33,10 @@
 #' @seealso \code{\link{bsdoc}}, \code{\link{addPlot}}
 #' @method addPlot bsdoc
 #' @S3method addPlot bsdoc
-addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), vector.graphic = T, width=6, height=6, fontname = getOption("ReporteRs-default-font"), ... ) {
+addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), 
+		vector.graphic = T, width=6, height=6, 
+		fontname = getOption("ReporteRs-default-font"), 
+		par.properties = parCenter( padding = 5 ), ... ) {
 
 	
 	plotargs = list(...)
@@ -53,7 +57,8 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), ve
 		fun_res = try( fun(...), silent = T )
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
-		doc = addImage( doc, plotfiles, width = width*72, height = height*72 )
+		doc = addImage( doc, plotfiles, width = width*72, height = height*72, 
+				par.properties = par.properties )
 	} else {
 		filename = file.path( dirname, "plot", fsep = "/" )
 		env = raphael( file = filename,width=width*72.2
@@ -69,7 +74,7 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), ve
 		if( last_canvas_id < 0 ) stop("unexpected error, could not find device information.")
 		else doc$canvas_id = last_canvas_id;
 
-		jimg = .jnew( class.html4r.RAPHAELGraphics )
+		jimg = .jnew( class.html4r.RAPHAELGraphics, .jParProperties(par.properties)  )
 		
 		for(i in 1:length( plot_ids ) ){
 			file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))

@@ -4,6 +4,8 @@
 #' 
 #' @param doc \code{\link{bsdoc}} object
 #' @param flextable the \code{FlexTable} object
+#' @param par.properties paragraph formatting properties of the paragraph that contains the table. 
+#' An object of class \code{\link{parProperties}}
 #' @param ... further arguments - not used
 #' @return a \code{\link{bsdoc}} object
 #' @export
@@ -25,7 +27,10 @@
 #' @example examples/STOP_TAG_TEST.R
 #' @method addFlexTable bsdoc
 #' @S3method addFlexTable bsdoc
-addFlexTable.bsdoc = function(doc, flextable, ... ) {
+addFlexTable.bsdoc = function(doc, flextable, 
+		par.properties = parProperties(text.align = "left" ), ... ) {
+	
+	.jcall( flextable$jobj, "V", "setParProperties", .jParProperties(par.properties) )
 	
 	out = .jcall( doc$jobj, "I", "add", flextable$jobj )
 	if( out != 1 ){
