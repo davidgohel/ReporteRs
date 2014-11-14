@@ -556,137 +556,144 @@ extract.reference.links = function( x ){
 
 
 get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = textProperties(), drop.footnotes = FALSE ){
-  
-  Span = .jnew("org/lysis/markdown/tools/Span" , text )
-  character_dataset = data.frame( text = substring(text, seq_len(nchar(text)), seq_len(nchar(text)) ),
-    stringsAsFactors = F )
-  types_matrix = matrix( .jcall( Span, "[Z", "getEmphasisMatrix"), ncol = 9 ,
-    dimnames = list( NULL, 
-      c("bold", "singlebacktick", "doublebacktick", "italic", 
-        "inline_link", "reference_link", 
-        "inline_img", "reference_img", "footnote"
-      ) ) )
-  types_matrix[types_matrix[,"inline_img"], "inline_link"]=FALSE
-  character_dataset = cbind( character_dataset, types_matrix)
-  
-  drop_lines_id = integer(0)
-  
-  cmp_rle = rle( character_dataset$bold )
-  llre = length(cmp_rle[[2]])
-  idx = 1
-  for( i in 1:llre ){
-    if( cmp_rle[[2]][i] ){
-      drop_lines_id = c( drop_lines_id, idx, idx + 1, (idx+cmp_rle[[1]][i])-2, (idx+cmp_rle[[1]][i])-1 )
-    }
-    idx = idx + cmp_rle[[1]][i]
-  }
-  
-  cmp_rle = rle( character_dataset$doublebacktick )
-  llre = length(cmp_rle[[2]])
-  idx = 1
-  for( i in 1:llre ){
-    if( cmp_rle[[2]][i] ){
-      drop_lines_id = c( drop_lines_id, idx, idx + 1, (idx+cmp_rle[[1]][i])-2, (idx+cmp_rle[[1]][i])-1 )
-    }
-    idx = idx + cmp_rle[[1]][i]
-  }
-  
-  cmp_rle = rle( character_dataset$singlebacktick )
-  llre = length(cmp_rle[[2]])
-  idx = 1
-  for( i in 1:llre ){
-    if( cmp_rle[[2]][i] ){
-      drop_lines_id = c( drop_lines_id, idx, (idx+cmp_rle[[1]][i])-1 )
-    }
-    idx = idx + cmp_rle[[1]][i]
-  }
-  
-  cmp_rle = rle( character_dataset$italic )
-  llre = length(cmp_rle[[2]])
-  idx = 1
-  for( i in 1:llre ){
-    if( cmp_rle[[2]][i] ){
-      drop_lines_id = c( drop_lines_id, idx, (idx+cmp_rle[[1]][i])-1 )
-    }
-    idx = idx + cmp_rle[[1]][i]
-  }
-  if( length(drop_lines_id )> 0 ){
-    types_matrix = types_matrix[-drop_lines_id,]
-    character_dataset = character_dataset[-drop_lines_id,]
-  }
-  
-  compar_str = apply( types_matrix, 1, function(x) paste( ifelse(x, "1", "0"), collapse = "" ) )
-  cmp_rle = rle( compar_str )
-  llre = length(cmp_rle[[2]])
-  idx = 1
-  chunks = list()
-  for( i in 1:llre ){
-    idstart = idx
-    idend = (idx -1 +cmp_rle[[1]][i])
-    chunks[[i]] = paste( character_dataset$text[idstart:idend], collapse = "" )
-    attr( chunks[[i]], "spec" ) = types_matrix[idstart,]
-    idx = idx + cmp_rle[[1]][i]
-  }
-  
-  chunks = lapply( chunks, function( chunk, drop.footnotes ){
-    if( attr(chunk,"spec")["inline_link"] ){
-		link = extract.inline.links( chunk )
-		tp = set.text.format(text.properties, chunk )
-		pot( value = names(link), format = chprop(tp, color = "#428bca", underline = TRUE ), 
-		hyperlink = as.character(link) )
-    } else if( attr(chunk,"spec")["reference_link"] ){
-		link = extract.reference.links( chunk )
-		text = names( link )
-		tp = set.text.format(text.properties, chunk )
-		
-		if( is.element(link, names( attr(blocktable_info, "reference_link") ) ) ){
-			link = attr(blocktable_info, "reference_link")[link]
-			pot( value = text, format = chprop(tp, color = "#428bca", underline = TRUE ), 
-					hyperlink = link )		
-		} else {
-			warning("referenced link ", shQuote(link), " is not defined in the markdown.")
-			pot( value = text, format = chprop(tp, color = "#428bca", underline = TRUE ) )
+
+	Span = .jnew("org/lysis/markdown/tools/Span" , text )
+	character_dataset = data.frame( text = substring(text, seq_len(nchar(text)), seq_len(nchar(text)) ),
+			stringsAsFactors = F )
+	types_matrix = matrix( .jcall( Span, "[Z", "getEmphasisMatrix"), ncol = 9 ,
+			dimnames = list( NULL, 
+					c("bold", "singlebacktick", "doublebacktick", "italic", 
+							"inline_link", "reference_link", 
+							"inline_img", "reference_img", "footnote"
+					) ) )
+	
+	types_matrix[types_matrix[,"inline_img"], "inline_link"]=FALSE
+	types_matrix[types_matrix[,"reference_img"], "reference_link"]=FALSE
+	types_matrix[types_matrix[,"inline_link"] | types_matrix[,"reference_link"] | 
+					types_matrix[,"inline_img"] | types_matrix[,"reference_img"], "footnote"]=FALSE
+	
+	character_dataset = cbind( character_dataset, types_matrix)
+	
+	drop_lines_id = integer(0)
+	
+	cmp_rle = rle( character_dataset$bold )
+	llre = length(cmp_rle[[2]])
+	idx = 1
+	for( i in 1:llre ){
+		if( cmp_rle[[2]][i] ){
+			drop_lines_id = c( drop_lines_id, idx, idx + 1, (idx+cmp_rle[[1]][i])-2, (idx+cmp_rle[[1]][i])-1 )
 		}
-			
-
-    } else if( attr(chunk,"spec")["footnote"] ){
-      fnid = substring( chunk, 3, nchar(chunk) - 1 )
-	  if( drop.footnotes ){
-		  return (pot( value = "", format = text.properties))
-	  }
-	  if( is.element(fnid, names( attr(blocktable_info, "footnotes") ) ) ){
-
-		  fn_obj = attr(blocktable_info, "footnotes" )[[fnid]]
-		  fn = Footnote( )
-		  for(i in seq_along(fn_obj) ){
-			  if( fn_obj[[i]]$fun == "addParagraph" ){
-				  fn = addParagraph( fn, fn_obj[[i]]$args$value, par.properties = fn_obj[[i]]$args$par.properties )
-			  } else if( fn_obj[[i]]$fun == "addRScript" ){
-				  fn = addParagraph( fn, RScript(text=fn_obj[[i]]$args$value), par.properties = fn_obj[[i]]$args$par.properties )
-			  } 
-		  }
-		  
-		  pot( value = "", 
-				  format = chprop( text.properties, vertical.align = "superscript" ), 
-				  footnote = fn ) 
-	  } else {
-		  warning("footnote ", shQuote(fnid), " is not defined in the markdown.")
-		  pot( value = "", format = text.properties)
-	  }
-		  
-
-    } else if( attr(chunk,"spec")["inline_img"] ){
-      warning("inline images are not supported in this markdown implementation" )
-	  pot( value = "", format = text.properties)
-    } else if( !any(attr(chunk,"spec")[5:8]) ){
-      pot( value = as.character(chunk), format = set.text.format(text.properties, chunk ) )
-    } else pot( value = chunk, format = text.properties)
-  }, drop.footnotes = drop.footnotes )
-  for(i in 1:length( chunks ) ){
-    if( i == 1 ) out = chunks[[i]]
-    else out = out + chunks[[i]]
-  }
-  out
+		idx = idx + cmp_rle[[1]][i]
+	}
+	
+	cmp_rle = rle( character_dataset$doublebacktick )
+	llre = length(cmp_rle[[2]])
+	idx = 1
+	for( i in 1:llre ){
+		if( cmp_rle[[2]][i] ){
+			drop_lines_id = c( drop_lines_id, idx, idx + 1, (idx+cmp_rle[[1]][i])-2, (idx+cmp_rle[[1]][i])-1 )
+		}
+		idx = idx + cmp_rle[[1]][i]
+	}
+	
+	cmp_rle = rle( character_dataset$singlebacktick )
+	llre = length(cmp_rle[[2]])
+	idx = 1
+	for( i in 1:llre ){
+		if( cmp_rle[[2]][i] ){
+			drop_lines_id = c( drop_lines_id, idx, (idx+cmp_rle[[1]][i])-1 )
+		}
+		idx = idx + cmp_rle[[1]][i]
+	}
+	
+	cmp_rle = rle( character_dataset$italic )
+	llre = length(cmp_rle[[2]])
+	idx = 1
+	for( i in 1:llre ){
+		if( cmp_rle[[2]][i] ){
+			drop_lines_id = c( drop_lines_id, idx, (idx+cmp_rle[[1]][i])-1 )
+		}
+		idx = idx + cmp_rle[[1]][i]
+	}
+	
+	if( length(drop_lines_id )> 0 ){
+		types_matrix = types_matrix[-drop_lines_id,]
+		character_dataset = character_dataset[-drop_lines_id,]
+	}
+ 	
+	# concatenation des indicateurs de caracteristiques et decoupages par element identiques
+	compar_str = apply( types_matrix, 1, function(x) paste( ifelse(x, "1", "0"), collapse = "" ) )
+	cmp_rle = rle( compar_str )
+	llre = length(cmp_rle[[2]])
+	idx = 1
+	chunks = list()
+	for( i in 1:llre ){
+		idstart = idx
+		idend = (idx -1 +cmp_rle[[1]][i])
+		chunks[[i]] = paste( character_dataset$text[idstart:idend], collapse = "" )
+		attr( chunks[[i]], "spec" ) = types_matrix[idstart,]
+		idx = idx + cmp_rle[[1]][i]
+	}
+	
+	chunks = lapply( chunks, function( chunk, drop.footnotes ){
+			if( attr(chunk,"spec")["inline_link"] ){
+				link = extract.inline.links( chunk )
+				tp = set.text.format(text.properties, chunk )
+				pot( value = names(link), format = chprop(tp, color = "#428bca", underline = TRUE ), 
+						hyperlink = as.character(link) )
+			} else if( attr(chunk,"spec")["reference_link"] ){
+				link = extract.reference.links( chunk )
+				text = names( link )
+				tp = set.text.format(text.properties, chunk )
+				
+				if( is.element(link, names( attr(blocktable_info, "reference_link") ) ) ){
+					link = attr(blocktable_info, "reference_link")[link]
+					pot( value = text, format = chprop(tp, color = "#428bca", underline = TRUE ), 
+							hyperlink = link )		
+				} else {
+					warning("referenced link ", shQuote(link), " is not defined in the markdown.")
+					pot( value = text, format = chprop(tp, color = "#428bca", underline = TRUE ) )
+				}
+				
+				
+			} else if( attr(chunk,"spec")["footnote"] ){
+				fnid = substring( chunk, 3, nchar(chunk) - 1 )
+				if( drop.footnotes ){
+					return (pot( value = "", format = text.properties))
+				}
+				if( is.element(fnid, names( attr(blocktable_info, "footnotes") ) ) ){
+					
+					fn_obj = attr(blocktable_info, "footnotes" )[[fnid]]
+					fn = Footnote( )
+					for(i in seq_along(fn_obj) ){
+						if( fn_obj[[i]]$fun == "addParagraph" ){
+							fn = addParagraph( fn, fn_obj[[i]]$args$value, par.properties = fn_obj[[i]]$args$par.properties )
+						} else if( fn_obj[[i]]$fun == "addRScript" ){
+							fn = addParagraph( fn, RScript(text=fn_obj[[i]]$args$value), par.properties = fn_obj[[i]]$args$par.properties )
+						} 
+					}
+					
+					pot( value = "", 
+							format = chprop( text.properties, vertical.align = "superscript" ), 
+							footnote = fn ) 
+				} else {
+					warning("footnote ", shQuote(fnid), " is not defined in the markdown.")
+					pot( value = "", format = text.properties)
+				}
+				
+				
+			} else if( attr(chunk,"spec")["inline_img"] ){
+				warning("inline images are not supported in this markdown implementation" )
+				pot( value = "", format = text.properties)
+			} else if( !any(attr(chunk,"spec")[5:8]) ){
+				pot( value = as.character(chunk), format = set.text.format(text.properties, chunk ) )
+			} else pot( value = chunk, format = text.properties)
+		}, drop.footnotes = drop.footnotes )
+	for(i in 1:length( chunks ) ){
+		if( i == 1 ) out = chunks[[i]]
+		else out = out + chunks[[i]]
+	}
+	out
 }
 
 
