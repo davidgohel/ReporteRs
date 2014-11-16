@@ -556,7 +556,6 @@ extract.reference.links = function( x ){
 
 
 get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = textProperties(), drop.footnotes = FALSE ){
-
 	Span = .jnew("org/lysis/markdown/tools/Span" , text )
 	character_dataset = data.frame( text = substring(text, seq_len(nchar(text)), seq_len(nchar(text)) ),
 			stringsAsFactors = F )
@@ -569,9 +568,6 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
 	
 	types_matrix[types_matrix[,"inline_img"], "inline_link"]=FALSE
 	types_matrix[types_matrix[,"reference_img"], "reference_link"]=FALSE
-	types_matrix[types_matrix[,"inline_link"] | types_matrix[,"reference_link"] | 
-					types_matrix[,"inline_img"] | types_matrix[,"reference_img"], "footnote"]=FALSE
-	
 	character_dataset = cbind( character_dataset, types_matrix)
 	
 	drop_lines_id = integer(0)
@@ -636,6 +632,7 @@ get.paragraph.from.blockmd = function( text, blocktable_info, text.properties = 
 	}
 	
 	chunks = lapply( chunks, function( chunk, drop.footnotes ){
+				
 			if( attr(chunk,"spec")["inline_link"] ){
 				link = extract.inline.links( chunk )
 				tp = set.text.format(text.properties, chunk )
