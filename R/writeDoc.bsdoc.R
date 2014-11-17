@@ -31,6 +31,10 @@ writeDoc.bsdoc = function(doc, file, reset.dir = FALSE, ...) {
 	
 	www.directory = dirname( file )
 	
+	if( reset.dir ){
+		try( unlink( www.directory, recursive = T ) , silent = TRUE )
+	}
+	
 	if( !file.exists( www.directory ) || reset.dir ){
 		dir.create( www.directory, recursive = T )
 		bootstrap.copy( www.directory, "ReporteRs")	
