@@ -5,7 +5,7 @@
 #' An item can be a simple link associated with a label or a \code{DropDownMenu} 
 #' object.
 #' 
-#' @param x a \code{DropDownMenu} or a \code{BoostrapMenu} object.
+#' @param x a \code{DropDownMenu} or a \code{BootstrapMenu} object.
 #' @param label \code{"character"} value: label of a simple link. If used, 
 #' argument \code{link} must be specified.
 #' @param link \code{"character"} value: hyperlink value. If used, 
@@ -17,16 +17,16 @@
 #' @param separator.after if TRUE, a separator will be inserted 
 #' after the new item. It only applies when x is a \code{DropDownMenu} object.
 #' @param active if TRUE, the item will be declared as active (highlighted).
-#' @return an object of class \code{BoostrapMenu}.
+#' @return an object of class \code{BootstrapMenu}.
 #' @export
 #' @examples
 #' #START_TAG_TEST
-#' @example examples/BoostrapMenu.R
+#' @example examples/BootstrapMenu.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addBootstrapMenu}}
 addLinkItem = function( x, label, link, dd, separator.before = FALSE, separator.after = FALSE, active = FALSE ){
-	if( !inherits( x , "BoostrapMenu") && !inherits( x , "DropDownMenu") ){
-		stop("addLinkItem only applies to DropDownMenu or BoostrapMenu objects.")
+	if( !inherits( x , "BootstrapMenu") && !inherits( x , "DropDownMenu") ){
+		stop("addLinkItem only applies to DropDownMenu or BootstrapMenu objects.")
 	}
 	
 	if( inherits( x , "DropDownMenu") ){
@@ -44,7 +44,7 @@ addLinkItem = function( x, label, link, dd, separator.before = FALSE, separator.
 		
 		if( separator.after ) 
 			.jcall( x$jobj, "V", "addSeparator" )
-	} else if( inherits( x , "BoostrapMenu") ){
+	} else if( inherits( x , "BootstrapMenu") ){
 		
 		if( !missing( dd ) ){
 			if( !inherits( dd , "DropDownMenu") ) stop("dd must be a DropDownMenu object.")

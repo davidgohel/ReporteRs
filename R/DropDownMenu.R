@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Create a \code{DropDownMenu} object. This object is to be used with 
-#' \code{\link{BoostrapMenu}} to define menu links.
+#' \code{\link{BootstrapMenu}} to define menu links.
 #' 
 #' @param label \code{"character"} value: label of the DropDownMenu.
 #' @return an object of class \code{DropDownMenu}.

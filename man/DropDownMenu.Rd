@@ -13,7 +13,7 @@ an object of class \code{DropDownMenu}.
 }
 \description{
 Create a \code{DropDownMenu} object. This object is to be
-used with \code{\link{BoostrapMenu}} to define menu links.
+used with \code{\link{BootstrapMenu}} to define menu links.
 }
 \examples{
 #START_TAG_TEST

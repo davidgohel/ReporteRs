@@ -52,7 +52,6 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 	
 	.jcall( HTMLPage , "V", "addStylesheet", "css/bootstrap.min.css" )
 	.jcall( HTMLPage , "V", "addStylesheet", "css/docs.min.css" )
-	.jcall( HTMLPage , "V", "addStylesheet", "css/bootstrap-theme.css" )
 	
 	.Object = list( title = title, jobj = HTMLPage )
 	class( .Object ) = "bsdoc"

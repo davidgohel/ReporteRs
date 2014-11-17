@@ -6,7 +6,7 @@ addLinkItem(x, label, link, dd, separator.before = FALSE,
   separator.after = FALSE, active = FALSE)
 }
 \arguments{
-  \item{x}{a \code{DropDownMenu} or a \code{BoostrapMenu}
+  \item{x}{a \code{DropDownMenu} or a \code{BootstrapMenu}
   object.}
 
   \item{label}{\code{"character"} value: label of a simple
@@ -31,7 +31,7 @@ addLinkItem(x, label, link, dd, separator.before = FALSE,
   active (highlighted).}
 }
 \value{
-an object of class \code{BoostrapMenu}.
+an object of class \code{BootstrapMenu}.
 }
 \description{
 add an item in a \code{BootstrapMenu} or
@@ -40,7 +40,7 @@ associated with a label or a \code{DropDownMenu} object.
 }
 \examples{
 #START_TAG_TEST
-mymenu = BoostrapMenu( title = "my title")
+mymenu = BootstrapMenu( title = "my title")
 
 mydd = DropDownMenu( label = "Mon menu" )
 mydd = addLinkItem( mydd, label = "GitHub", "http://github.com/")

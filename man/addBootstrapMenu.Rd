@@ -11,7 +11,7 @@ addBootstrapMenu(doc, bsmenu)
   \code{bsdoc}.}
 }
 \value{
-an object of class \code{BoostrapMenu}.
+an object of class \code{BootstrapMenu}.
 }
 \description{
 add a \code{BootstrapMenu} into a \code{bsdoc} object.
@@ -22,7 +22,7 @@ library( ReporteRs )
 
 doc = bsdoc( title = "my document" )
 
-mymenu = BoostrapMenu( title = "my title")
+mymenu = BootstrapMenu( title = "my title")
 
 mydd = DropDownMenu( label = "Mon menu" )
 mydd = addLinkItem( mydd, label = "GitHub", "http://github.com/")
@@ -38,6 +38,6 @@ pages = writeDoc( doc, file = "addBoostrapMenu_example/example.html")
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{bsdoc}}, \code{\link{addBootstrapMenu}}
+\code{\link{bsdoc}}, \code{\link{BootstrapMenu}}
 }
 
