@@ -9,7 +9,7 @@ and Powerpoint pptx) and html documents.
 }
 \details{
 \tabular{ll}{ Package: \tab ReporteRs\cr Type: \tab
-Package\cr Version: \tab 0.6.9\cr Date: \tab 2014-11-10\cr
+Package\cr Version: \tab 0.7.0\cr Date: \tab 2014-11-18\cr
 License: \tab GPL (>= 3)\cr LazyLoad: \tab yes\cr }
 
 To get an r document object: \itemize{ \item
