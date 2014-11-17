@@ -25,7 +25,7 @@ FlexRow(values, colspan, text.properties = textProperties(),
 }
 \description{
 Create a representation of a row that can be inserted in a
-FlexTable.
+FlexTable. For internal usage.
 }
 \examples{
 #START_TAG_TEST
@@ -41,8 +41,7 @@ headerRow[2] = FlexCell( "Column 2"
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{addFlexTable}},
-\code{\link{alterFlexRow}} , \code{\link{addHeaderRow}},
-\code{\link{addFooterRow}}
+\code{\link{FlexTable}}, \code{\link{alterFlexRow}} ,
+\code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 }
 

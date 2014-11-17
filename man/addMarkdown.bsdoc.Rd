@@ -43,6 +43,11 @@ an object of class \code{\link{bsdoc}}.
 \description{
 Add markdown into a \code{\link{bsdoc}} object.
 }
+\details{
+You can configure backtick rendering (single or double
+backtick) with options "ReporteRs-backtick-color" and
+"ReporteRs-backtick-shading-color".
+}
 \examples{
 #START_TAG_TEST
 doc.filename = "addMarkdown_bsdoc/example.html"
@@ -145,6 +150,6 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{bsdoc}}
+\code{\link{bsdoc}}, \code{\link{addMarkdown}}
 }
 

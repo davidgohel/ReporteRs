@@ -43,6 +43,11 @@ an object of class \code{\link{html}}.
 \description{
 Add markdown into a \code{\link{html}} object.
 }
+\details{
+You can configure backtick rendering (single or double
+backtick) with options "ReporteRs-backtick-color" and
+"ReporteRs-backtick-shading-color".
+}
 \examples{
 #START_TAG_TEST
 doc.dirname = "addMarkdown_example"
@@ -148,6 +153,6 @@ writeDoc( doc, directory = doc.dirname )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}
+\code{\link{html}}, \code{\link{addMarkdown}}
 }
 

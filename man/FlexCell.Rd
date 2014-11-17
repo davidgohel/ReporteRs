@@ -20,7 +20,7 @@ FlexCell(value, colspan = 1, par.properties = parProperties(),
 }
 \description{
 Create a representation of a cell that can be inserted in a
-FlexRow.
+FlexRow. For internal usage.
 }
 \examples{
 #START_TAG_TEST

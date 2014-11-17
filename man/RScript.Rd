@@ -73,6 +73,6 @@ x = rnorm(10)" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{addRScript}}, \code{\link{as.html.RScript}}
+\code{\link{addRScript}}
 }
 

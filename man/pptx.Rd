@@ -34,7 +34,7 @@ class \code{\link{pptx}}.
 \itemize{ \item \code{\link{addTitle.pptx}} add titles
 \item \code{\link{addParagraph.pptx}} add text \item
 \code{\link{addPlot.pptx}} add plots \item
-\code{\link{addTable.pptx}} add tables \item
+\code{\link{addMarkdown.pptx}} add markdown \item
 \code{\link{addFlexTable.pptx}} add \code{\link{FlexTable}}
 \item \code{\link{addDate.pptx}} add a date (most often in
 the bottom left area of the slide) \item
@@ -160,10 +160,6 @@ Wikipedia: Office Open
 XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \seealso{
-\code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}} ,
-\code{\link{addParagraph.pptx}},
-\code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}} ,
-\code{\link{slide.layouts.pptx}}, \code{\link{dim.pptx}},
-\code{\link{writeDoc.pptx}}
+\code{\link{docx}}, \code{\link{bsdoc}}
 }
 

@@ -38,8 +38,9 @@ class \code{\link{bsdoc}}.
 \code{\link{addFlexTable.bsdoc}} add tables. See
 \code{\link{FlexTable}} \item \code{\link{addImage.bsdoc}}
 add external images \item \code{\link{addMarkdown.bsdoc}}
-add markdown text \item \code{\link{addBootstrapMenu}} add
-a bootstrap menu to the html page \item
+add markdown text \item \code{\link{addRScript.bsdoc}} add
+highlighted r script \item \code{\link{addBootstrapMenu}}
+add a bootstrap menu to the html page \item
 \code{\link{addFooter.bsdoc}} add text into the footer of
 the html page }
 
@@ -167,5 +168,8 @@ doc = addFooter( doc, pot( "Hello world",
 # write the doc
 pages = writeDoc( doc, file = "bsdoc_example/example.html")
 #STOP_TAG_TEST
+}
+\seealso{
+\code{\link{docx}}, \code{\link{pptx}}
 }
 

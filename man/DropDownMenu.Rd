@@ -24,6 +24,7 @@ mydd = addLinkItem( mydd, label = "Wikipedia", "http://www.wikipedia.fr")
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{bsdoc}}
+\code{\link{bsdoc}}, \code{\link{addLinkItem}},
+\code{\link{addBootstrapMenu}}
 }
 

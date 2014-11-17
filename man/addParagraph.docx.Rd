@@ -126,6 +126,7 @@ writeDoc( doc, file = doc.filename )
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addParagraph}},
-\code{\link{bookmark}}
+\code{\link{bookmark}}, \code{\link{addMarkdown.docx}},
+\code{\link{pot}}
 }
 

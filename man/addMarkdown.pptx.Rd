@@ -157,6 +157,6 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{pptx}}
+\code{\link{pptx}}, \code{\link{addMarkdown}}
 }
 

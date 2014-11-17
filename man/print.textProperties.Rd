@@ -17,6 +17,6 @@ print text formatting properties (an object of class
 print( textProperties (color="red", font.size = 12) )
 }
 \seealso{
-\code{\link{pptx}}, \code{\link{docx}}
+\code{\link{textProperties}}
 }
 

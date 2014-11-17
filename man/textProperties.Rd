@@ -66,7 +66,6 @@ textProperties( shading.color = "red" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{cellProperties}}, \code{\link{parProperties}} ,
 \code{\link{chprop.textProperties}}, \code{\link{pot}} ,
 \code{\link{alterFlexTable}}
 }

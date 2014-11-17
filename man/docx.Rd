@@ -196,11 +196,7 @@ Wikipedia: Office Open
 XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \seealso{
-\code{\link{addTitle.docx}}, \code{\link{addImage.docx}},
-\code{\link{addParagraph.docx}},
-\code{\link{addFlexTable.docx}},
-\code{\link{addPlot.docx}}, \code{\link{addSection.docx}},
-\code{\link{addTOC.docx}}, \code{\link{styles.docx}},
-\code{\link{writeDoc.docx}}, \code{\link{bookmark}}
+\code{\link{bsdoc}}, \code{\link{pptx}},
+\code{\link{bookmark}}
 }
 

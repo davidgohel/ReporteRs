@@ -115,6 +115,6 @@ writeDoc( doc, directory = doc.dirname )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{html}}, \code{\link{pot}}
+\code{\link{docx}}, \code{\link{bsdoc}}, \code{\link{pot}}
 }
 

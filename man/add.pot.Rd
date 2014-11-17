@@ -22,10 +22,6 @@ pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 my.pars = add.pot( my.pars, pot2 )
 }
 \seealso{
-\code{\link{set_of_paragraphs}},
-\code{\link{addParagraph}},
-\code{\link{addParagraph.docx}},
-\code{\link{addParagraph.pptx}},
-\code{\link{addParagraph.html}}
+\code{\link{set_of_paragraphs}}, \code{\link{pot}}
 }
 

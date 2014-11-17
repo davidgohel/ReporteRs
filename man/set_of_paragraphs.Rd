@@ -8,7 +8,7 @@ set_of_paragraphs(...)
   \item{...}{pot objects, one per paragraph.}
 }
 \description{
-Create a container of paragraphs of text (\code{pot}
+Create a container of paragraphs of text (\code{\link{pot}}
 objects).
 }
 \details{
@@ -30,6 +30,6 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 \code{\link{addParagraph}},
 \code{\link{addParagraph.docx}},
 \code{\link{addParagraph.pptx}},
-\code{\link{addParagraph.html}}
+\code{\link{addParagraph.html}}, \code{\link{pot}}
 }
 

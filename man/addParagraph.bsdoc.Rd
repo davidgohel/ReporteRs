@@ -99,6 +99,7 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{bsdoc}}
+\code{\link{bsdoc}}, \code{\link{addMarkdown.bsdoc}},
+\code{\link{pot}}
 }
 

@@ -99,6 +99,7 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{bsdoc}}, \code{\link{addPlot}}
+\code{\link{bsdoc}}, \code{\link{addPlot}} ,
+\code{\link{add.plot.interactivity}}
 }
 

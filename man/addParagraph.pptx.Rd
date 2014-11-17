@@ -168,5 +168,6 @@ writeDoc( doc, file = doc.filename )
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addParagraph}}
+\code{\link{addMarkdown.pptx}}, \code{\link{pot}}
 }
 

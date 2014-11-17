@@ -139,6 +139,6 @@ writeDoc( doc, directory = html_directory )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}, \code{\link{pptx}}
+\code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
 }
 
