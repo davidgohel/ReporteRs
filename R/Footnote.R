@@ -16,7 +16,7 @@
 #' @example examples/FootnoteDocxExample.R
 #' @example examples/FootnoteHTMLExample.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{docx}}, \code{\link{html}}, \code{\link{pot}}
+#' @seealso \code{\link{docx}}, \code{\link{bsdoc}}, \code{\link{pot}}
 #' @export 
 Footnote = function( index.text.properties = textProperties(vertical.align = "superscript") ) {
 	

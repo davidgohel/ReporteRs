@@ -31,6 +31,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addPlot}}
+#' , \code{\link{add.plot.interactivity}}
 #' @method addPlot bsdoc
 #' @S3method addPlot bsdoc
 addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), 

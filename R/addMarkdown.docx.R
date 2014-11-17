@@ -25,7 +25,7 @@
 #' @example examples/addMarkdown.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{docx}}
+#' @seealso \code{\link{docx}}, \code{\link{addMarkdown}}
 #' @method addMarkdown docx
 #' @S3method addMarkdown docx
 addMarkdown.docx = function(doc, file, text, 

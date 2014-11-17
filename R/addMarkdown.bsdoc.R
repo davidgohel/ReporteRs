@@ -15,6 +15,10 @@
 #' horizontal rules.
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{bsdoc}}.
+#' @details 
+#' You can configure backtick rendering (single or double backtick) with 
+#' options "ReporteRs-backtick-color" and "ReporteRs-backtick-shading-color". 
+#' 
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addMarkdown_bsdoc/example.html"
@@ -22,7 +26,7 @@
 #' @example examples/addMarkdown.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{bsdoc}}
+#' @seealso \code{\link{bsdoc}}, \code{\link{addMarkdown}}
 #' @method addMarkdown bsdoc
 #' @S3method addMarkdown bsdoc
 addMarkdown.bsdoc = function(doc, file, text, 

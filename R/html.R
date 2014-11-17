@@ -29,7 +29,7 @@
 #' #START_TAG_TEST
 #' @example examples/html_example.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{docx}}, \code{\link{pptx}}
+#' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
 html = function( title = "untitled" ){
 		
 	# java calls

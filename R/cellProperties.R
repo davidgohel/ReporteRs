@@ -75,10 +75,7 @@
 #' #START_TAG_TEST
 #' @example examples/cellProperties.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}
-#' , \code{\link{textProperties}}, \code{\link{borderProperties}}
-#' , \code{\link{chprop.cellProperties}}, \code{\link{chprop.parProperties}}
-#' , \code{\link{chprop.textProperties}}, \code{\link{chprop.borderProperties}}
+#' @seealso \code{\link{borderProperties}}, \code{\link{chprop.cellProperties}}
 #' , \code{\link{FlexTable}}
 cellProperties = function( 
 	padding, 
@@ -320,7 +317,8 @@ out
 #' #START_TAG_TEST
 #' @example examples/chprop.cellProperties.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}
+#' @seealso \code{\link{borderProperties}}, \code{\link{cellProperties}}
+#' , \code{\link{FlexTable}}
 #' @method chprop cellProperties
 #' @S3method chprop cellProperties
 chprop.cellProperties <- function(object

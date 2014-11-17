@@ -1,7 +1,7 @@
 #' @title Set of paragraphs of text
 #'
 #' @description
-#' Create a container of paragraphs of text (\code{pot} objects). 
+#' Create a container of paragraphs of text (\code{\link{pot}} objects). 
 #' 
 #' @param ... pot objects, one per paragraph.
 #' @details each pot are representing a paragraph. 
@@ -16,7 +16,9 @@
 #' 	, textProperties(color="blue") )
 #' my.pars = set_of_paragraphs( pot1, pot2 )
 #' #STOP_TAG_TEST
-#' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
+#' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, 
+#' \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}},
+#' \code{\link{pot}} 
 set_of_paragraphs = function( ... ){
 	
 	.Object = list(...)
@@ -53,7 +55,7 @@ set_of_paragraphs = function( ... ){
 #' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 #' 	, textProperties(color="blue") )
 #' my.pars = add.pot( my.pars, pot2 )
-#' @seealso \code{\link{set_of_paragraphs}}, \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
+#' @seealso \code{\link{set_of_paragraphs}}, \code{\link{pot}}
 add.pot = function( x, value ){
 	if ( class( x )!= "set_of_paragraphs" )
 		stop("x must be a set_of_paragraphs object.")

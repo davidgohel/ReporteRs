@@ -1,6 +1,7 @@
 #' @title Cell object for FlexTable
 #'
 #' @description Create a representation of a cell that can be inserted in a FlexRow.
+#' For internal usage.
 #' 
 #' @param value a content value - a value of type \code{character} or \code{\link{pot}} or \code{\link{set_of_paragraphs}}.
 #' @param colspan defines the number of columns the cell should span

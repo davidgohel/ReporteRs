@@ -30,7 +30,7 @@
 #' @example examples/addMarkdown.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{pptx}}
+#' @seealso \code{\link{pptx}}, \code{\link{addMarkdown}}
 #' @method addMarkdown pptx
 #' @S3method addMarkdown pptx
 addMarkdown.pptx = function(doc, file, text, 

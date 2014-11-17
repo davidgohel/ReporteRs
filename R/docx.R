@@ -37,14 +37,7 @@
 #' #START_TAG_TEST
 #' @example examples/docx_example.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{addTitle.docx}}, \code{\link{addImage.docx}}, 
-#' \code{\link{addParagraph.docx}}, 
-#' \code{\link{addFlexTable.docx}}, 
-#' \code{\link{addPlot.docx}}, 
-#' \code{\link{addSection.docx}}, 
-#' \code{\link{addTOC.docx}},
-#' \code{\link{styles.docx}}, 
-#' \code{\link{writeDoc.docx}}, 
+#' @seealso \code{\link{bsdoc}}, \code{\link{pptx}}, 
 #' \code{\link{bookmark}}
 docx = function( title = "untitled", template, list.definition = getOption("ReporteRs-list-definition") ){
 	

@@ -1,6 +1,7 @@
 #' @title Row object for FlexTable
 #'
 #' @description Create a representation of a row that can be inserted in a FlexTable.
+#' For internal usage.
 #' 
 #' @param values Optional. a character vector to use as text content, the row will contain as many cells as there are in \code{values}.
 #' @param text.properties Optional. textProperties to apply to each cell. Used only if values are not missing.
@@ -8,7 +9,7 @@
 #' @param cell.properties Optional. cellProperties to apply to each cell. Used only if values are not missing.
 #' @param colspan integer Optional. vector specifying for each element the number of columns to span for each corresponding value (in \code{values}). 
 #' @export
-#' @seealso \code{\link{FlexTable}}, \code{\link{addFlexTable}}, \code{\link{alterFlexRow}} 
+#' @seealso \code{\link{FlexTable}}, \code{\link{alterFlexRow}} 
 #' , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples
 #' #START_TAG_TEST

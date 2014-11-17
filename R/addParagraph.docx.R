@@ -36,7 +36,9 @@
 #' @example examples/lists_doc.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{docx}}, \code{\link{addParagraph}}, \code{\link{bookmark}}
+#' @seealso \code{\link{docx}}, \code{\link{addParagraph}}, 
+#' \code{\link{bookmark}}, \code{\link{addMarkdown.docx}}, 
+#' \code{\link{pot}}
 #' @method addParagraph docx
 #' @S3method addParagraph docx
 addParagraph.docx = function(doc, value, stylename, bookmark, 

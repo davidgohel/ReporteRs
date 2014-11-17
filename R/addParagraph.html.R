@@ -28,7 +28,8 @@
 #' @example examples/lists_doc.R
 #' @example examples/writeDoc_directory.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{html}}, \code{\link{addParagraph}}
+#' @seealso \code{\link{html}}, \code{\link{addParagraph}}, 
+#' \code{\link{addMarkdown.html}}, \code{\link{pot}}
 #' @method addParagraph html
 #' @S3method addParagraph html
 addParagraph.html = function(doc, value, 

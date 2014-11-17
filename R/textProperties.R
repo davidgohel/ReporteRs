@@ -35,8 +35,7 @@
 #' #START_TAG_TEST
 #' @example examples/textProperties.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}
-#' , \code{\link{chprop.textProperties}}, \code{\link{pot}}
+#' @seealso \code{\link{chprop.textProperties}}, \code{\link{pot}}
 #' , \code{\link{alterFlexTable}}
 textProperties = function( color = "black", font.size = getOption("ReporteRs-fontsize")
 		, font.weight = "normal", font.style = "normal", underlined = FALSE
@@ -106,7 +105,7 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 #' @param ... further arguments, not used. 
 #' @examples
 #' print( textProperties (color="red", font.size = 12) )
-#' @seealso \code{\link{pptx}}, \code{\link{docx}} 
+#' @seealso \code{\link{textProperties}}
 #' @method print textProperties
 #' @S3method print textProperties
 print.textProperties = function (x, ...){

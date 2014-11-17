@@ -11,7 +11,7 @@
 #' #START_TAG_TEST
 #' @example examples/DropDownMenu.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{bsdoc}}
+#' @seealso \code{\link{bsdoc}}, \code{\link{addLinkItem}}, \code{\link{addBootstrapMenu}}
 DropDownMenu = function( label ) {
 	out = list()
 	out$jobj = .jnew( class.DropDown, label )

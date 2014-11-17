@@ -25,7 +25,7 @@
 #' an_rscript = RScript( text = "ls()
 #' x = rnorm(10)" )
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{addRScript}}, \code{\link{as.html.RScript}}
+#' @seealso \code{\link{addRScript}}
 #' @export
 RScript = function( file, text
 		, comment.properties = textProperties( color = "#A7947D" )

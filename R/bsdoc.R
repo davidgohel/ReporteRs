@@ -21,6 +21,7 @@
 #'   \item \code{\link{addFlexTable.bsdoc}} add tables. See \code{\link{FlexTable}}
 #'   \item \code{\link{addImage.bsdoc}} add external images
 #'   \item \code{\link{addMarkdown.bsdoc}} add markdown text
+#'   \item \code{\link{addRScript.bsdoc}} add highlighted r script
 #'   \item \code{\link{addBootstrapMenu}} add a bootstrap menu to the html page
 #'   \item \code{\link{addFooter.bsdoc}} add text into the footer of the html page
 #' }
@@ -31,6 +32,7 @@
 #' #START_TAG_TEST
 #' @example examples/bsdoc_example.R
 #' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{docx}}, \code{\link{pptx}}
 bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-list-definition"), keywords = "", description = "" ){
 		
 	if( !is.character( title ) )
