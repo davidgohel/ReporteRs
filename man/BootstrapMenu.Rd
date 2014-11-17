@@ -1,0 +1,54 @@
+\name{BootstrapMenu}
+\alias{BootstrapMenu}
+\title{Create a bootstrap DropDownMenu}
+\usage{
+BootstrapMenu(title, link = "#", bg.active.color = "#34495E",
+  bg.color = "#2C3E50", text.emphasis.color = "white",
+  text.color = "#ecf0f1")
+}
+\arguments{
+  \item{title}{\code{"character"} value: label of the
+  title.}
+
+  \item{link}{url to use as link associated with the
+  title.}
+
+  \item{bg.active.color}{active background color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{bg.color}{background color - a single character
+  value specifying a valid color (e.g. "#000000" or
+  "black").}
+
+  \item{text.emphasis.color}{text emphasis color - a single
+  character value specifying a valid color (e.g. "#000000"
+  or "black").}
+
+  \item{text.color}{text color - a single character value
+  specifying a valid color (e.g. "#000000" or "black").}
+}
+\value{
+an object of class \code{BootstrapMenu}.
+}
+\description{
+Create a \code{DropDownMenu} object. This object is to be
+used with \code{\link{BootstrapMenu}} to define menu links.
+}
+\examples{
+#START_TAG_TEST
+mymenu = BootstrapMenu( title = "my title")
+
+mydd = DropDownMenu( label = "Mon menu" )
+mydd = addLinkItem( mydd, label = "GitHub", "http://github.com/")
+mydd = addLinkItem( mydd, separator.after = TRUE)
+mydd = addLinkItem( mydd, label = "Wikipedia", "http://www.wikipedia.fr")
+
+mymenu = addLinkItem( mymenu, label = "ReporteRs", "http://github.com/davidgohel/ReporteRs")
+mymenu = addLinkItem( mymenu, dd = mydd )
+#STOP_TAG_TEST
+}
+\seealso{
+\code{\link{bsdoc}}, \code{\link{addBootstrapMenu}}
+}
+

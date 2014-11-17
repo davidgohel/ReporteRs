@@ -96,7 +96,7 @@ doc = addFlexTable( doc, MyFTable )
 
 #####################################################################
 # add a menu
-mymenu = BoostrapMenu( title = "my title")
+mymenu = BootstrapMenu( title = "my title")
 
 mydd = DropDownMenu( label = "my menu" )
 mydd = addLinkItem( mydd, label = "GitHub", "http://github.com/")
