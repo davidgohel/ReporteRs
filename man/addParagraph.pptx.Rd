@@ -85,8 +85,10 @@ pot1 = pot("My tailor", textProperties(color = "red" )
   ) + " is " + pot("rich", textProperties(shading.color = "red", font.weight = "bold" ) )
 
 # "Cats and dogs" with formatting on some words
-pot2 = pot("Cats", textProperties(color = "red" ) 
-  ) + " and " + pot("dogs", textProperties( color = "blue" ), hyperlink = "http://www.wikipedia.org/" )
+pot2 = pot("Cats", textProperties(color = "red" ) ) + 
+  " and " + 
+  pot("dogs", textProperties( color = "blue" ), 
+    hyperlink = "http://www.wikipedia.org/" )
 
 # create a set of paragraphs made of pot1 and pot2
 my.pars = set_of_paragraphs( pot1, pot2 )
@@ -109,8 +111,10 @@ pot1 = pot("My tailor", textProperties(color = "red" )
   ) + " is " + pot("rich", textProperties(shading.color = "red", font.weight = "bold" ) )
 
 # "Cats and dogs" with formatting on some words
-pot2 = pot("Cats", textProperties(color = "red" ) 
-  ) + " and " + pot("dogs", textProperties( color = "blue" ), hyperlink = "http://www.wikipedia.org/" )
+pot2 = pot("Cats", textProperties(color = "red" ) ) + 
+  " and " + 
+  pot("dogs", textProperties( color = "blue" ), 
+    hyperlink = "http://www.wikipedia.org/" )
 
 # create a set of paragraphs made of pot1 and pot2
 my.pars = set_of_paragraphs( pot1, pot2 )

@@ -38,8 +38,10 @@ pot1 = pot("My tailor", textProperties(color = "red" )
   ) + " is " + pot("rich", textProperties(shading.color = "red", font.weight = "bold" ) )
 
 # "Cats and dogs" with formatting on some words
-pot2 = pot("Cats", textProperties(color = "red" ) 
-  ) + " and " + pot("dogs", textProperties( color = "blue" ), hyperlink = "http://www.wikipedia.org/" )
+pot2 = pot("Cats", textProperties(color = "red" ) ) + 
+  " and " + 
+  pot("dogs", textProperties( color = "blue" ), 
+    hyperlink = "http://www.wikipedia.org/" )
 #STOP_TAG_TEST
 }
 \seealso{
