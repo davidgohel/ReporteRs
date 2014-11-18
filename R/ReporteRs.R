@@ -15,17 +15,16 @@
 #'   \item \code{\link{docx}} Create a Microsoft Word document object
 #'   \item \code{\link{pptx}} Create a Microsoft PowerPoint document object
 #'   \item \code{\link{bsdoc}} Create an HTML document object
-#'   \item \code{\link{html}} Create an HTML document object
 #' }
 #' 
-#' The following functions can be used whatever the output format is (docx, pptx, html, bsdoc).
+#' The following functions can be used whatever the output format is (docx, pptx, bsdoc).
 #' 
 #' \itemize{
 #'   \item \code{\link{addTitle}} Add a title
-#'   \item \code{\link{addTable}} Add a table
 #'   \item \code{\link{addFlexTable}} Add a table (new)
 #'   \item \code{\link{addPlot}} Add plots
 #'   \item \code{\link{addImage}} Add external images
+#'   \item \code{\link{addMarkdown}} Add markdown
 #'   \item \code{\link{addParagraph}} Add paragraphs of text
 #'   \item \code{\link{addRScript}} Add an r script 
 #'   \item \code{\link{writeDoc}} Write the document into a file or a directory
@@ -41,8 +40,6 @@
 #' 
 #' If many text output is needed you may consider using 
 #' function \code{\link{addMarkdown}}. 
-#' 
-#' Note that html is experimental. 
 #' 
 #' Default values:
 #' 
