@@ -22,7 +22,7 @@ class.text.TextProperties = "org/lysis/reporters/formats/TextProperties"
 
 # document objects
 class.docx4r.document = "org/lysis/reporters/docs/docx4R"
-class.html4r.HTMLPage = "org/lysis/reporters/docs/BootstrapPage"
+class.BootstrapPage.document = "org/lysis/reporters/docs/BootstrapPage"
 class.pptx4r.document = "org/lysis/reporters/docs/pptx4R"
 class.pptx4r.SlideContent = "org/lysis/reporters/docs/SlideContent"
 

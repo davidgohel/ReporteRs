@@ -42,7 +42,7 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 	
 	lidef = do.call( list.settings, list.definition )
 	
-	HTMLPage = .jnew(class.html4r.HTMLPage, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1"), 
+	HTMLPage = .jnew(class.BootstrapPage.document, title, ifelse(l10n_info()$"UTF-8", "UTF-8", "ISO-8859-1"), 
 			lidef ,
 			description, keywords)
 	.jcall( HTMLPage , "V", "addJavascript", "js/jquery.min.js" )
@@ -55,7 +55,7 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 	.jcall( HTMLPage , "V", "addStylesheet", "css/bootstrap.min.css" )
 	.jcall( HTMLPage , "V", "addStylesheet", "css/docs.min.css" )
 	
-	.Object = list( title = title, jobj = HTMLPage )
+	.Object = list( title = title, jobj = HTMLPage, canvas_id = 1 )
 	class( .Object ) = "bsdoc"
 
 	.Object
