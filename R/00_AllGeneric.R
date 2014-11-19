@@ -47,11 +47,11 @@ addDate = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @details 
 #' See \code{\link{addFlexTable.docx}} or \code{\link{addFlexTable.pptx}}
-#' or \code{\link{addFlexTable.html}} for examples.
+#' or \code{\link{addFlexTable.bsdoc}} for examples.
 #' @return a document object
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
+#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.bsdoc}}
 #' , \code{\link{addTable}}
 addFlexTable = function(doc, flextable, ...){
 	
@@ -108,11 +108,11 @@ addIframe = function(doc, ...){
 #' @return a document object
 #' @details 
 #' See \code{\link{addImage.docx}} or \code{\link{addImage.pptx}}
-#' or \code{\link{addImage.html}} for examples.
+#' or \code{\link{addImage.bsdoc}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addImage.docx}}
 #' , \code{\link{pptx}}, \code{\link{addImage.pptx}}
-#' , \code{\link{html}}, \code{\link{addImage.html}}
+#' , \code{\link{bsdoc}}, \code{\link{addImage.bsdoc}}
 addImage = function(doc, filename, ...){
 	checkHasSlide(doc)
 	if( missing( filename ) )
@@ -150,7 +150,7 @@ addImage = function(doc, filename, ...){
 #' @return a document object
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addMarkdown.docx}}
-#' , \code{\link{html}}, \code{\link{addMarkdown.html}}
+#' , \code{\link{bsdoc}}, \code{\link{addMarkdown.bsdoc}}
 #' , \code{\link{pptx}}, \code{\link{addMarkdown.pptx}}
 addMarkdown = function(doc, file, text, ...){
 	if( missing( file ) && missing( text ) )
@@ -159,23 +159,6 @@ addMarkdown = function(doc, file, text, ...){
 }
 
 
-
-
-
-#' @title Add a page into a document object
-#'
-#' @description Add a page into a document object
-#' 
-#' @param doc document object
-#' @param ... further arguments passed to other methods 
-#' @return a document object
-#' @details 
-#' \code{addPage} only works with html documents. See \code{\link{addPage.html}} for examples.
-#' @export
-#' @seealso \code{\link{html}}, \code{\link{addPage.html}}
-addPage = function(doc, ...){
-	UseMethod("addPage")
-}
 
 
 #' @title Add a page break into a document object
@@ -233,10 +216,10 @@ addPageNumber = function(doc, ...){
 #' @export
 #' @details 
 #' See \code{\link{addParagraph.docx}} or \code{\link{addParagraph.pptx}}
-#' or \code{\link{addParagraph.html}} for examples.
+#' or \code{\link{addParagraph.bsdoc}} for examples.
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{pptx}}, \code{\link{addParagraph.pptx}}
-#' , \code{\link{html}}, \code{\link{addParagraph.html}}
+#' , \code{\link{bsdoc}}, \code{\link{addParagraph.bsdoc}}
 #' , \code{\link{pot}}, \code{\link{textProperties}}
 addParagraph = function(doc, value, ...){
 	checkHasSlide(doc)
@@ -260,7 +243,7 @@ addParagraph = function(doc, value, ...){
 #' @param vector.graphic logical scalar, if TRUE, vector graphics 
 #' are produced instead of PNG images. 
 #' 
-#' SVG will be produced for \code{html} objects
+#' SVG will be produced for \code{bsdoc} objects
 #' and DrawingML instructions for \code{docx} and \code{pptx} objects. 
 #' 
 #' DrawingML instructions
@@ -277,17 +260,17 @@ addParagraph = function(doc, value, ...){
 #' If you want to add ggplot2 or lattice plot, use 
 #' \code{print} function. 
 #' 
-#' \code{vector.graphic}: if document is a pptx or html document, 
-#' vector graphics will always be displayed.Don't use vector 
+#' \code{vector.graphic}: if document is a pptx or bsdoc document, 
+#' vector graphics will always be displayed. Don't use vector 
 #' graphics if document is a docx and MS Word version used 
 #' to open the document is 2007.
 #' 
 #' See \code{\link{addPlot.docx}} or \code{\link{addPlot.pptx}}
-#' or \code{\link{addPlot.html}} for examples.
+#' or \code{\link{addPlot.bsdoc}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
 #' , \code{\link{pptx}}, \code{\link{addPlot.pptx}}
-#' , \code{\link{html}}, \code{\link{addPlot.html}}
+#' , \code{\link{bsdoc}}, \code{\link{addPlot.bsdoc}}
 addPlot = function(doc, fun, pointsize = 12, vector.graphic = F, ...){
 	
 	checkHasSlide(doc)
@@ -359,7 +342,7 @@ addSubtitle = function(doc, ...){
 #' You have to one of the following argument: file or text or rscript. 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{addRScript.html}}, \code{\link{addRScript.docx}}
+#' @seealso \code{\link{addRScript.bsdoc}}, \code{\link{addRScript.docx}}
 #' , \code{\link{addRScript.pptx}}
 addRScript = function(doc, rscript, file, text, ... ){
 
@@ -423,12 +406,12 @@ addRScript = function(doc, rscript, file, text, ... ){
 #'
 #' 
 #' See \code{\link{addTable.docx}} or \code{\link{addTable.pptx}}
-#' or \code{\link{addTable.html}} for examples.
+#' or \code{\link{addTable.bsdoc}} for examples.
 #' @return a document object
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addTable.docx}}, \code{\link{addFlexTable.docx}}
 #' , \code{\link{pptx}}, \code{\link{addTable.pptx}}, \code{\link{addFlexTable.pptx}}
-#' , \code{\link{html}}, \code{\link{addTable.html}}, \code{\link{addFlexTable.html}}
+#' , \code{\link{bsdoc}}, \code{\link{addTable.bsdoc}}, \code{\link{addFlexTable.bsdoc}}
 #' , \code{\link{FlexTable}}
 addTable = function(doc, data, layout.properties
 		, header.labels, groupedheader.row
@@ -558,10 +541,10 @@ addTable = function(doc, data, layout.properties
 #' @return a document object
 #' @details 
 #' See \code{\link{addTitle.docx}} or \code{\link{addTitle.pptx}}
-#' or \code{\link{addTitle.html}} for examples.
+#' or \code{\link{addTitle.bsdoc}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}, \code{\link{pptx}}
-#' , \code{\link{addTitle.pptx}}, \code{\link{html}}, \code{\link{addTitle.html}}
+#' , \code{\link{addTitle.pptx}}, \code{\link{bsdoc}}, \code{\link{addTitle.bsdoc}}
 addTitle = function(doc, value, ...){
 	checkHasSlide(doc)
 	
@@ -698,11 +681,11 @@ styles = function(doc, ...){
 #' @return a document object
 #' @details 
 #' See \code{\link{writeDoc.docx}} or \code{\link{writeDoc.pptx}}
-#' or \code{\link{writeDoc.html}} for examples.
+#' or \code{\link{writeDoc.bsdoc}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{writeDoc.docx}}
 #' , \code{\link{pptx}}, \code{\link{writeDoc.pptx}}
-#' , \code{\link{html}}, \code{\link{writeDoc.html}}
+#' , \code{\link{bsdoc}}, \code{\link{writeDoc.bsdoc}}
 writeDoc = function(doc, ...){
 	UseMethod("writeDoc")
 }
