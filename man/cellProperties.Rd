@@ -118,7 +118,7 @@ cellProperties(padding, border.width, border.style, border.color, border.bottom,
 \description{
 Create a \code{cellProperties} object that describes cell
 formatting properties. This objects are used by
-\code{\link{tableProperties}}, \code{\link{FlexTable}}.
+\code{\link{FlexTable}}.
 }
 \details{
 Default values are: \itemize{ \item

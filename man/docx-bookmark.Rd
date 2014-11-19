@@ -9,9 +9,8 @@ about bookmark here:
 
 http://office.microsoft.com/en-us/word-help/add-or-delete-bookmarks-HP001226532.aspx#BM1
 
-Functions \code{\link{addTable}},
-\code{\link{addFlexTable}}, \code{\link{addPlot}} ,
-\code{\link{addParagraph}} and \code{\link{addImage}} can
+Functions \code{\link{addFlexTable}}, \code{\link{addPlot}}
+, \code{\link{addParagraph}} and \code{\link{addImage}} can
 send respective outputs into these bookmarks.
 
 These functions have an optional argument named
@@ -22,9 +21,9 @@ When used with \code{\link{addPlot}},
 content (plots, paragraphs or images) will replace the
 whole paragraph containing the bookmark.
 
-When used with \code{\link{addTable}} and
-\code{\link{addFlexTable}} content (tables) will be
-inserted after the paragraph containing the bookmark.
+When used with \code{\link{addFlexTable}} content (table)
+will be inserted after the paragraph containing the
+bookmark.
 
 To be used with a \code{docx} object, bookmark must be
 placed into a single paragraph, if placed along 1 or more
@@ -73,8 +72,8 @@ doc = addFlexTable( doc
 
 # replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx' 
 # by data.frame objects 'data' and 'conf.int'
-doc = addTable( doc
-	, head( iris )
+doc = addFlexTable( doc
+	, vanilla.table( head( iris ) )
 	, bookmark = "DATA2" )
 
 doc = addPlot( doc, vector.graphic = TRUE

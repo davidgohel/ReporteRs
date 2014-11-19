@@ -29,6 +29,6 @@ See \code{\link{addFlexTable.docx}} or
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFlexTable.docx}} ,
 \code{\link{addFlexTable.pptx}},
-\code{\link{addFlexTable.bsdoc}} , \code{\link{addTable}}
+\code{\link{addFlexTable.bsdoc}}
 }
 

@@ -75,26 +75,6 @@
 #' @docType package
 NULL
 
-#' Dummy dataset used in ReporterRs examples
-#' 
-#' A dataset containing several data types and few rows
-#' 
-#' \itemize{
-#'   \item col1 a character vector
-#'   \item col2 an integer vector
-#'   \item col3 a double vector
-#'   \item col4 a date vector
-#'   \item col5 a double vector (percent values)
-#'   \item col6 a boolean vector
-#' }
-#' 
-#' @docType data
-#' @keywords datasets
-#' @name data_ReporteRs
-#' @usage data(data_ReporteRs)
-#' @format A data frame with 4 rows and 6 variables
-NULL
-
 
 #' pbc summary
 #' 
@@ -113,7 +93,7 @@ NULL
 #' 
 #' http://office.microsoft.com/en-us/word-help/add-or-delete-bookmarks-HP001226532.aspx#BM1
 #' 
-#' Functions \code{\link{addTable}}, \code{\link{addFlexTable}}, \code{\link{addPlot}}
+#' Functions \code{\link{addFlexTable}}, \code{\link{addPlot}}
 #' , \code{\link{addParagraph}} and \code{\link{addImage}} can send respective 
 #' outputs into these bookmarks.
 #' 
@@ -123,8 +103,8 @@ NULL
 #' and \code{\link{addImage}}, content (plots, paragraphs or images) will replace 
 #' the whole paragraph containing the bookmark.
 #' 
-#' When used with \code{\link{addTable}} and \code{\link{addFlexTable}} 
-#' content (tables) will be inserted after the paragraph containing the bookmark.
+#' When used with \code{\link{addFlexTable}} 
+#' content (table) will be inserted after the paragraph containing the bookmark.
 #' 
 #' To be used with a \code{docx} object, bookmark must be placed into 
 #' a single paragraph, if placed along 1 or more paragraphs

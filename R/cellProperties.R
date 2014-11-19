@@ -1,7 +1,7 @@
 #' @title Cell formatting properties 
 #'
 #' @description Create a \code{cellProperties} object that describes cell formatting properties. 
-#' This objects are used by \code{\link{tableProperties}}, \code{\link{FlexTable}}.
+#' This objects are used by \code{\link{FlexTable}}.
 #' 
 #' @param padding cell padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.

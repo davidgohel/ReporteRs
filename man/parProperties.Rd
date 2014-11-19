@@ -64,8 +64,8 @@ paragraph formatting properties.
 }
 \details{
 parProperties is used to control paragraph properties. It
-is used when creating a tableProperties, when adding plots
-into a docx object or when adding content in a FlexTable.
+is used when adding plots or when adding content in a
+FlexTable.
 
 Default values are: \itemize{ \item \code{text.align}
 "left" \item \code{padding.bottom} 1 \item

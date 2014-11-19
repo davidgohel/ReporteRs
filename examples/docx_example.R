@@ -94,16 +94,6 @@ doc = addPlot( doc, function( ) print( myplot ) )
 # Add a legend below the plot
 doc = addParagraph( doc, value = "my first plot", stylename = "rPlotLegend")
 
-################ TABLE DEMO ################
-
-# Add a table
-doc = addTitle( doc, "Table example", level =  1 )
-# add iris sample
-doc = addTable( doc, data = iris[25:33, ] )
-# Add a legend below the table
-doc = addParagraph( doc, value = "my first table", stylename = "rTableLegend")
-
-
 ################ FLEXTABLE DEMO ################
 
 doc = addTitle( doc, "FlexTable example", level = 1 )
@@ -130,6 +120,7 @@ MyFTable = setFlexTableBorders(MyFTable,
 
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
+doc = addParagraph( doc, value = "my first table", stylename = "rTableLegend")
 
 # write the doc
 writeDoc( doc, file = docx.file)

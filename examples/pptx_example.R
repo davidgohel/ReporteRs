@@ -56,13 +56,6 @@ myplot = qplot(Sepal.Length, Petal.Length
 # Add titles and then 'myplot'
 doc = addPlot( doc, function( ) print( myplot ) )
 
-################ TABLE DEMO ################
-doc = addSlide( doc, slide.layout = "Title and Content" )
-doc = addTitle( doc, "Table example" )
-
-# add iris sample
-doc = addTable( doc, data = iris[25:33, ] )
-
 ################ FLEXTABLE DEMO ################
 doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addTitle( doc, "FlexTable example" )
