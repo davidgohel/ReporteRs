@@ -24,11 +24,11 @@ details.
 \details{
 See \code{\link{addFlexTable.docx}} or
 \code{\link{addFlexTable.pptx}} or
-\code{\link{addFlexTable.html}} for examples.
+\code{\link{addFlexTable.bsdoc}} for examples.
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFlexTable.docx}} ,
 \code{\link{addFlexTable.pptx}},
-\code{\link{addFlexTable.html}} , \code{\link{addTable}}
+\code{\link{addFlexTable.bsdoc}} , \code{\link{addTable}}
 }
 

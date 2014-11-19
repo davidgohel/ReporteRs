@@ -83,15 +83,15 @@ tables:\cr \preformatted{+--------------+---------------+}
 \preformatted{+------+-------+-------+-------+}
 
 See \code{\link{addTable.docx}} or
-\code{\link{addTable.pptx}} or \code{\link{addTable.html}}
+\code{\link{addTable.pptx}} or \code{\link{addTable.bsdoc}}
 for examples.
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addTable.docx}},
 \code{\link{addFlexTable.docx}} , \code{\link{pptx}},
 \code{\link{addTable.pptx}},
-\code{\link{addFlexTable.pptx}} , \code{\link{html}},
-\code{\link{addTable.html}},
-\code{\link{addFlexTable.html}} , \code{\link{FlexTable}}
+\code{\link{addFlexTable.pptx}} , \code{\link{bsdoc}},
+\code{\link{addTable.bsdoc}},
+\code{\link{addFlexTable.bsdoc}} , \code{\link{FlexTable}}
 }
 

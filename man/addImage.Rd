@@ -20,12 +20,12 @@ Add an external image into a document object
 }
 \details{
 See \code{\link{addImage.docx}} or
-\code{\link{addImage.pptx}} or \code{\link{addImage.html}}
+\code{\link{addImage.pptx}} or \code{\link{addImage.bsdoc}}
 for examples.
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addImage.docx}} ,
 \code{\link{pptx}}, \code{\link{addImage.pptx}} ,
-\code{\link{html}}, \code{\link{addImage.html}}
+\code{\link{bsdoc}}, \code{\link{addImage.bsdoc}}
 }
 

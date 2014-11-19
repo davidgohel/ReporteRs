@@ -68,9 +68,8 @@ doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 docx.file = "footnote.docx"
 
 writeDoc( doc, file = docx.file )
-## html example 
-doc = html( )
-doc = addPage( doc, "Footnote example" )
+## bsdoc example 
+doc = bsdoc( title = "Footnote example" )
 
 par1 = pot("About this reference", textBold( ) )
 par2 = pot("Omni ab coalitos pro malivolus obsecrans graviter 
@@ -109,9 +108,7 @@ nec urbium primatibus nec plebeiis." ) + pot(" Here is another note.", footnote 
 # Add my.pars into the document doc
 doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 
-doc.dirname = "Footnote"
-
-writeDoc( doc, directory = doc.dirname )
+writeDoc( doc, file = "Footnote/example.html" )
 #STOP_TAG_TEST
 }
 \seealso{

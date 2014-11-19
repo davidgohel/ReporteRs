@@ -29,7 +29,7 @@ required , a new paragraph is required.
 \seealso{
 \code{\link{docx}}, \code{\link{addParagraph.docx}} ,
 \code{\link{pptx}}, \code{\link{addParagraph.pptx}} ,
-\code{\link{html}}, \code{\link{addParagraph.html}} ,
+\code{\link{bsdoc}}, \code{\link{addParagraph.bsdoc}} ,
 \code{\link{pot}}, \code{\link{textProperties}}
 }
 

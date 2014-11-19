@@ -12,7 +12,7 @@ addPlot(doc, fun, pointsize = 12, vector.graphic = F, ...)
   \item{vector.graphic}{logical scalar, if TRUE, vector
   graphics are produced instead of PNG images.
 
-  SVG will be produced for \code{html} objects and
+  SVG will be produced for \code{bsdoc} objects and
   DrawingML instructions for \code{docx} and \code{pptx}
   objects.
 
@@ -41,18 +41,18 @@ into a function whose parameters will be specified as
 If you want to add ggplot2 or lattice plot, use
 \code{print} function.
 
-\code{vector.graphic}: if document is a pptx or html
-document, vector graphics will always be displayed.Don't
+\code{vector.graphic}: if document is a pptx or bsdoc
+document, vector graphics will always be displayed. Don't
 use vector graphics if document is a docx and MS Word
 version used to open the document is 2007.
 
 See \code{\link{addPlot.docx}} or
-\code{\link{addPlot.pptx}} or \code{\link{addPlot.html}}
+\code{\link{addPlot.pptx}} or \code{\link{addPlot.bsdoc}}
 for examples.
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addPlot.docx}} ,
 \code{\link{pptx}}, \code{\link{addPlot.pptx}} ,
-\code{\link{html}}, \code{\link{addPlot.html}}
+\code{\link{bsdoc}}, \code{\link{addPlot.bsdoc}}
 }
 

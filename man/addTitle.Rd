@@ -21,12 +21,12 @@ Add a title into a document object
 }
 \details{
 See \code{\link{addTitle.docx}} or
-\code{\link{addTitle.pptx}} or \code{\link{addTitle.html}}
+\code{\link{addTitle.pptx}} or \code{\link{addTitle.bsdoc}}
 for examples.
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addTitle.docx}},
 \code{\link{pptx}} , \code{\link{addTitle.pptx}},
-\code{\link{html}}, \code{\link{addTitle.html}}
+\code{\link{bsdoc}}, \code{\link{addTitle.bsdoc}}
 }
 

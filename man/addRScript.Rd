@@ -29,7 +29,7 @@ You have to one of the following argument: file or text or
 rscript.
 }
 \seealso{
-\code{\link{addRScript.html}},
+\code{\link{addRScript.bsdoc}},
 \code{\link{addRScript.docx}} ,
 \code{\link{addRScript.pptx}}
 }
