@@ -81,7 +81,7 @@
 #' doc = addPlot( doc, fun = plot_function, width = 8 )
 #' pages = writeDoc( doc, "add_interactivity_example")
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{html}}, \code{\link{addPlot.html}}
+#' @seealso \code{\link{bsdoc}}, \code{\link{addPlot.bsdoc}}
 #' @export 
 add.plot.interactivity = function( fun, popup.labels, click.actions, dblclick.actions, ... ){
 	

@@ -21,7 +21,7 @@
 #' @example examples/pot2_example.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}},
-#'  \code{\link{addParagraph.html}}, \code{\link{Footnote}}
+#'  \code{\link{addParagraph.bsdoc}}, \code{\link{Footnote}}
 #' , \code{\link{+.pot}}
 pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 

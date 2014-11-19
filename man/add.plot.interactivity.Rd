@@ -95,6 +95,6 @@ pages = writeDoc( doc, "add_interactivity_example")
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}, \code{\link{addPlot.html}}
+\code{\link{bsdoc}}, \code{\link{addPlot.bsdoc}}
 }
 

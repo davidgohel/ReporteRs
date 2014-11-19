@@ -47,7 +47,7 @@ documents.
 
 It can be set in R session options or as a parameter in
 \code{\link{docx}} or \code{\link{pptx}} or
-\code{\link{addPage.html}}.
+\code{\link{addPage.bsdoc}}.
 }
 \examples{
 #START_TAG_TEST
@@ -75,6 +75,6 @@ options("ReporteRs-list-definition" = list(
 \seealso{
 \code{\link{addParagraph.docx}},
 \code{\link{addParagraph.pptx}},
-\code{\link{addParagraph.html}}, \code{\link{ReporteRs}}
+\code{\link{addParagraph.bsdoc}}, \code{\link{ReporteRs}}
 }
 

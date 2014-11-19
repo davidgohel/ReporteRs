@@ -17,7 +17,7 @@ an object of class \code{\link{Footnote}}.
 A footnote is a a set of paragraphs placed at the bottom of
 a page if document object is a \code{\link{docx}} object or
 used as a tooltip if document object is an
-\code{\link{html}} object.
+\code{\link{bsdoc}} object.
 
 If in a \code{docx} object, footnote will be flagged by a
 number immediately following the portion of the text the

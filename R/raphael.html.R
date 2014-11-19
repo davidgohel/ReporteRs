@@ -17,8 +17,8 @@
 #' #START_TAG_TEST
 #' @example examples/raphael.html.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{html}}, \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
-#' , \code{\link{addPlot.html}}
+#' @seealso \code{\link{bsdoc}}, \code{\link{addPlot}}, \code{\link{add.plot.interactivity}}
+#' , \code{\link{addPlot.bsdoc}}
 #' @export 
 raphael.html = function( fun, pointsize=getOption("ReporteRs-fontsize"), 
 	width=6, height=6, fontname = getOption("ReporteRs-default-font"), 

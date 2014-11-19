@@ -17,7 +17,7 @@
 #' my.pars = set_of_paragraphs( pot1, pot2 )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}}, 
-#' \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}},
+#' \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.bsdoc}},
 #' \code{\link{pot}} 
 set_of_paragraphs = function( ... ){
 	

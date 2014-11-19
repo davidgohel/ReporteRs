@@ -54,8 +54,8 @@ raphael.html( fun = function( ){
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{html}}, \code{\link{addPlot}},
+\code{\link{bsdoc}}, \code{\link{addPlot}},
 \code{\link{add.plot.interactivity}} ,
-\code{\link{addPlot.html}}
+\code{\link{addPlot.bsdoc}}
 }
 

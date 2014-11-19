@@ -47,7 +47,7 @@ pot2 = pot("Cats", textProperties(color = "red" ) ) +
 \seealso{
 \code{\link{addParagraph.docx}},
 \code{\link{addParagraph.pptx}},
-\code{\link{addParagraph.html}}, \code{\link{Footnote}} ,
+\code{\link{addParagraph.bsdoc}}, \code{\link{Footnote}} ,
 \code{\link{+.pot}}
 }
 
