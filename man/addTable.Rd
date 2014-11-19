@@ -69,6 +69,8 @@ a document object
 Add a table into a document object
 }
 \details{
+This function is deprecated. Please use FlexTable instead.
+
 The table below shows the display model used to format
 tables:\cr \preformatted{+--------------+---------------+}
 \preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
@@ -83,15 +85,9 @@ tables:\cr \preformatted{+--------------+---------------+}
 \preformatted{+------+-------+-------+-------+}
 
 See \code{\link{addTable.docx}} or
-\code{\link{addTable.pptx}} or \code{\link{addTable.bsdoc}}
-for examples.
+\code{\link{addTable.pptx}} for examples.
 }
 \seealso{
-\code{\link{docx}}, \code{\link{addTable.docx}},
-\code{\link{addFlexTable.docx}} , \code{\link{pptx}},
-\code{\link{addTable.pptx}},
-\code{\link{addFlexTable.pptx}} , \code{\link{bsdoc}},
-\code{\link{addTable.bsdoc}},
-\code{\link{addFlexTable.bsdoc}} , \code{\link{FlexTable}}
+\code{\link{FlexTable}}
 }
 

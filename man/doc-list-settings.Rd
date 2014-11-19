@@ -47,7 +47,7 @@ documents.
 
 It can be set in R session options or as a parameter in
 \code{\link{docx}} or \code{\link{pptx}} or
-\code{\link{addPage.bsdoc}}.
+\code{\link{bsdoc}}.
 }
 \examples{
 #START_TAG_TEST

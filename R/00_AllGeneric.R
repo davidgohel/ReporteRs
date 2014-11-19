@@ -391,6 +391,9 @@ addRScript = function(doc, rscript, file, text, ... ){
 #'		Each element of the list is a vector of length \code{nrow(data)}.
 #' @param ... further arguments passed to or from other methods.. 
 #' @details
+#' 
+#' This function is deprecated. Please use FlexTable instead. 
+#' 
 #' The table below shows the display model used to format tables:\cr
 #' \preformatted{+--------------+---------------+}
 #' \preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
@@ -406,13 +409,10 @@ addRScript = function(doc, rscript, file, text, ... ){
 #'
 #' 
 #' See \code{\link{addTable.docx}} or \code{\link{addTable.pptx}}
-#' or \code{\link{addTable.bsdoc}} for examples.
+#'  for examples.
 #' @return a document object
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{addTable.docx}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{pptx}}, \code{\link{addTable.pptx}}, \code{\link{addFlexTable.pptx}}
-#' , \code{\link{bsdoc}}, \code{\link{addTable.bsdoc}}, \code{\link{addFlexTable.bsdoc}}
-#' , \code{\link{FlexTable}}
+#' @seealso \code{\link{FlexTable}}
 addTable = function(doc, data, layout.properties
 		, header.labels, groupedheader.row
 		, span.columns, col.types
