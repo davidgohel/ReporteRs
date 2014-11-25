@@ -1,7 +1,7 @@
 blockquotes_reg = "^\\s*(>\\s{1})+"
 title_reg_atx = "^#{1,6}\\s+(.*)*#*"
-title_reg_setext_firstlevel = "^(=)+(.*)*\\s*$"
-title_reg_setext_secondlevel = "^(-)+(.*)*\\s*$"
+title_reg_setext_firstlevel = "^(=)+\\s*$"
+title_reg_setext_secondlevel = "^(-)+\\s*$"
 
 ol_reg = "^\\s*[0-9]\\.\\s+(.*)*"
 ul_reg = "^\\s*[\\*\\-]\\s+(.*)*"
