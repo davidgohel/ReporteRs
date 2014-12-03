@@ -12,16 +12,11 @@
 #' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = docx( title = "title" )
-#' 
-#' # the file 'logo.jpg' only exists in R for Windows
-#' img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-#' doc = addImage(doc, img.file )
-#' 
-#' # Write the object in file "addImage_example.docx"
-#' writeDoc( doc, "addImage_example.docx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addImage_example.docx"
+#' @example examples/docx.R
+#' @example examples/addImageRLogo.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
 #' , \code{\link{addImage}}, \code{\link{bookmark}}
 #' @method addImage docx

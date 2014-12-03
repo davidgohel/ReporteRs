@@ -31,15 +31,18 @@ Add external images into a \code{\link{docx}} object.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = docx( title = "title" )
+doc.filename = "addImage_example.docx"
 
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
+doc = docx( )
 # the file 'logo.jpg' only exists in R for Windows
 img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-doc = addImage(doc, img.file )
+doc = addImage(doc, img.file, width = 100, height = 76 )
 
-# Write the object in file "addImage_example.docx"
-writeDoc( doc, "addImage_example.docx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
