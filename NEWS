@@ -17,8 +17,10 @@ ENHANCEMENT
   Libre Office users. 
   see http://github.com/davidgohel/ReporteRs/issues/45
 
-* id of the title can be specified with addTitle.html
+* id of the title can be specified with addTitle.bsdoc
 
+* new function for bsdoc: addTOC. It lets you generate a TOC 
+  into a bsdoc document.
 
 ReporteRs 0.7.0
 ==================================================================
