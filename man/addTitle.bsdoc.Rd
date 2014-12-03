@@ -2,7 +2,7 @@
 \alias{addTitle.bsdoc}
 \title{Insert a title into a bsdoc object}
 \usage{
-\method{addTitle}{bsdoc}(doc, value, level = 1, ...)
+\method{addTitle}{bsdoc}(doc, value, level = 1, id, ...)
 }
 \arguments{
   \item{doc}{\code{\link{bsdoc}} object}
@@ -13,6 +13,9 @@
   \item{level}{\code{"integer"} positive value to use as
   heading level. 1 for title1, 2 for title2, etc. Default
   to 1.}
+
+  \item{id}{\code{character} single and unique value to use
+  as title id.}
 
   \item{...}{further arguments, not used.}
 }
