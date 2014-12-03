@@ -36,6 +36,33 @@ addDate = function(doc, ...){
 	UseMethod("addDate")
 }
 
+
+#' @title Add an external document into a document object
+#'
+#' @description Add an external document into a document object
+#' 
+#' @param doc document object
+#' @param filename \code{"character"} value, complete filename 
+#' of the external file
+#' @param ... further arguments passed to other methods 
+#' @return a document object
+#' @export
+#' @seealso \code{\link{docx}}, \code{\link{addDocument.docx}}
+addDocument = function(doc, filename, ...){
+	checkHasSlide(doc)
+	if( missing( filename ) )
+		stop("filename cannot be missing")
+	if( !inherits( filename, "character" ) )
+		stop("filename must be a single character value")
+	if( length( filename ) != 1 )
+		stop("filename must be a single character value")		
+	if( !file.exists( filename ) )
+		stop( filename, " does not exist")
+	
+	UseMethod("addDocument")
+}
+
+
 #' @title Insert a FlexTable into a document object
 #'
 #' @description Insert a FlexTable into a document object

@@ -1,0 +1,24 @@
+\name{addDocument}
+\alias{addDocument}
+\title{Add an external document into a document object}
+\usage{
+addDocument(doc, filename, ...)
+}
+\arguments{
+  \item{doc}{document object}
+
+  \item{filename}{\code{"character"} value, complete
+  filename of the external file}
+
+  \item{...}{further arguments passed to other methods}
+}
+\value{
+a document object
+}
+\description{
+Add an external document into a document object
+}
+\seealso{
+\code{\link{docx}}, \code{\link{addDocument.docx}}
+}
+
