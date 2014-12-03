@@ -1,6 +1,5 @@
 doc = bsdoc( title = "full example" )
 
-
 doc = addTitle( doc, "Plot example", level = 1, id = "plot_example" )
 # load ggplot2
 require( ggplot2 )
@@ -116,6 +115,9 @@ doc = addBootstrapMenu( doc, mymenu )
 doc = addFooter( doc, pot( "Hello world", 
   format = textProperties(color="gray") ), parCenter( padding = 0 ) )
 
+# add a TOC
+doc = addTOC( doc )
+
 #####################################################################
 # write the doc
-pages = writeDoc( doc, file = "bsdoc_example/example.html")
+writeDoc( doc, file = "bsdoc_example/example.html")
