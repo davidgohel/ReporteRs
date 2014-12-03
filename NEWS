@@ -1,3 +1,18 @@
+ReporteRs 0.7.1
+==================================================================
+DEBUG
+------------------------------------------------------------------
+
+* markdown Title illegitimately detected 
+  see http://github.com/davidgohel/ReporteRs/issues/46
+  
+ENHANCEMENT
+------------------------------------------------------------------
+
+* embed external docx file into docx object with addDocument 
+  function (suggested by Olivier Barriere).
+  see http://github.com/davidgohel/ReporteRs/issues/49
+
 ReporteRs 0.7.0
 ==================================================================
 ENHANCEMENT
