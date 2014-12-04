@@ -9,8 +9,8 @@ cellProperties(padding, border.width, border.style, border.color, border.bottom,
   border.left.width = 1, border.top.color = "black",
   border.top.style = "solid", border.top.width = 1,
   border.right.color = "black", border.right.style = "solid",
-  border.right.width = 1, vertical.align = "middle", padding.bottom = 1,
-  padding.top = 1, padding.left = 1, padding.right = 1,
+  border.right.width = 1, vertical.align = "middle", padding.bottom = 0,
+  padding.top = 0, padding.left = 0, padding.right = 0,
   background.color = "white")
 }
 \arguments{
