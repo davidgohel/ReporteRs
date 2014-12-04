@@ -5,7 +5,11 @@ DEBUG
 
 * markdown Title illegitimately detected 
   see http://github.com/davidgohel/ReporteRs/issues/46
-  
+
+* PDF issues: table cell padding is now rendered correctly when 
+  docx is saved to pdf.
+
+
 ENHANCEMENT
 ------------------------------------------------------------------
 
