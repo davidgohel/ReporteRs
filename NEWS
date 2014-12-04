@@ -3,28 +3,20 @@ ReporteRs 0.7.1
 DEBUG
 ------------------------------------------------------------------
 
-* markdown Title illegitimately detected 
-  see http://github.com/davidgohel/ReporteRs/issues/46
+* markdown Title illegitimately detected. See [github](http://github.com/davidgohel/ReporteRs/issues/46). 
 
-* PDF issues: table cell padding is now rendered correctly when 
-  docx is saved to pdf.
-
+* PDF issues: table cell padding is now rendered correctly when docx is saved to pdf. 
 
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* embed external docx file into docx object with addDocument 
-  function (suggested by Olivier Barriere).
-  see http://github.com/davidgohel/ReporteRs/issues/49
+* embed external docx file into docx object with addDocument function (suggested by Olivier Barriere). See [github] (http://github.com/davidgohel/ReporteRs/issues/49).
 
-* allow comma and few other symbols in layout names for 
-  Libre Office users. 
-  see http://github.com/davidgohel/ReporteRs/issues/45
+* allow comma and few other symbols in layout names for Libre Office users. See [github] (http://github.com/davidgohel/ReporteRs/issues/45).
 
 * id of the title can be specified with addTitle.bsdoc
 
-* new function for bsdoc: addTOC. It lets you generate a TOC 
-  into a bsdoc document.
+* new function for bsdoc: addTOC. It lets you generate a TOC into a bsdoc document.
 
 ReporteRs 0.7.0
 ==================================================================
