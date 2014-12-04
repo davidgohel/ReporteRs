@@ -11,10 +11,6 @@ these components are included below):
 - raphaeljs
   http://raphaeljs.com/
 
-- gRaphael
-  http://g.raphaeljs.com/
-
-
 
 jQuery License
 ----------------------------------------------------------------------
@@ -67,7 +63,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-raphaeljs and gRaphael License
+raphaeljs License
 ----------------------------------------------------------------------
 
 The MIT License (MIT)

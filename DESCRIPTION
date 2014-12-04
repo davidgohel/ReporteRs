@@ -11,11 +11,11 @@ Authors@R: c(
     person("jQuery", role = c("ctb", "cph"),
     comment = "The jQuery Foundation"),
     person("Dmitry Baranovskiy", role = c("ctb", "cph"),
-    comment = "raphael and g.raphael javascript libraries" ) )
+    comment = "raphael javascript libraries" ) )
 Author: David Gohel [aut, cre],
     Bootstrap [ctb, cph] (Bootstrap development team),
     jQuery [ctb, cph] (The jQuery Foundation),
-    Dmitry Baranovskiy [ctb, cph] (raphael and g.raphael javascript
+    Dmitry Baranovskiy [ctb, cph] (raphael javascript 
     libraries)
 Maintainer: David Gohel <david.gohel@lysis-consultants.fr>
 Description: Create Microsoft Word document (>=2007),
