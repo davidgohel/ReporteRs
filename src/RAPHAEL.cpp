@@ -279,7 +279,7 @@ static void RAPHAEL_Circle(double x, double y, double r, const pGEcontext gc,
 	register_element( dev);
 
 	fprintf(pd->dmlFilePointer,
-			"var elt_%d = %s.circle(%.0f, %.0f, %.0f);\n", idx, pd->objectname, x, y, r);
+			"var elt_%d = %s.circle(%.5f, %.5f, %.5f);\n", idx, pd->objectname, x, y, r);
 	RAPHAEL_SetLineSpec(dev, gc, idx);
 	RAPHAEL_SetFillColor(dev, gc, idx);
 
@@ -301,8 +301,8 @@ static void RAPHAEL_Line(double x1, double y1, double x2, double y2,
 		int idx = get_and_increment_idx(dev);
 		register_element( dev);
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
-		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x1, y1);
-		fprintf(pd->dmlFilePointer, "L %.0f %.0f", x2, y2);
+		fprintf(pd->dmlFilePointer, "M %.5f %.5f", x1, y1);
+		fprintf(pd->dmlFilePointer, "L %.5f %.5f", x2, y2);
 		fputs("\");\n", pd->dmlFilePointer );
 
 		RAPHAEL_SetLineSpec(dev, gc, idx);
@@ -334,10 +334,10 @@ static void RAPHAEL_Polyline(int n, double *x, double *y, const pGEcontext gc,
 		register_element( dev);
 		int i;
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
-		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x[0], y[0]);
+		fprintf(pd->dmlFilePointer, "M %.5f %.5f", x[0], y[0]);
 
 		for (i = 1; i < n; i++) {
-			fprintf(pd->dmlFilePointer, "L %.0f %.0f", x[i], y[i]);
+			fprintf(pd->dmlFilePointer, "L %.5f %.5f", x[i], y[i]);
 		}
 		fputs("\");\n", pd->dmlFilePointer );
 
@@ -367,10 +367,10 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 	register_element( dev);
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
-	fprintf(pd->dmlFilePointer, "M %.0f %.0f", x[0], y[0]);
+	fprintf(pd->dmlFilePointer, "M %.5f %.5f", x[0], y[0]);
 
 	for (i = 1; i < n; i++) {
-		fprintf(pd->dmlFilePointer, "L %.0f %.0f", x[i], y[i]);
+		fprintf(pd->dmlFilePointer, "L %.5f %.5f", x[i], y[i]);
 	}
 
 	fputs("Z\");\n", pd->dmlFilePointer );
@@ -405,8 +405,8 @@ static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 	}
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.rect(", idx, pd->objectname );
-	fprintf(pd->dmlFilePointer, "%.0f,%.0f", x0, y0);
-	fprintf(pd->dmlFilePointer, ",%.0f,%.0f", x1-x0, y1-y0);
+	fprintf(pd->dmlFilePointer, "%.5f,%.5f", x0, y0);
+	fprintf(pd->dmlFilePointer, ",%.5f,%.5f", x1-x0, y1-y0);
 	fputs(");\n", pd->dmlFilePointer );
 
 	RAPHAEL_SetLineSpec(dev, gc, idx);
@@ -446,7 +446,7 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.text(", idx, pd->objectname );
-	fprintf(pd->dmlFilePointer, "%.0f,%.0f", corrected_offx, corrected_offy);
+	fprintf(pd->dmlFilePointer, "%.5f,%.5f", corrected_offx, corrected_offy);
 	fputs(",\"", pd->dmlFilePointer );
 	raphael_text(str, pd);
 	fputs("\"", pd->dmlFilePointer );
@@ -455,7 +455,7 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 	RAPHAEL_SetFontSpec(dev, gc, idx);
 	if( rot > 0 ) {
 		fprintf(pd->dmlFilePointer, "elt_%d.transform(\"", idx);
-		fprintf(pd->dmlFilePointer, "R-%.0f", rot);
+		fprintf(pd->dmlFilePointer, "R-%.5f", rot);
 		fputs("\");\n", pd->dmlFilePointer );
 	}
 
