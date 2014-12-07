@@ -7,7 +7,6 @@ ENHANCEMENT
 * nicer tooltip with interactive plots in bsdoc documents. 
   See addPlot.bsdoc.
 
-
 ReporteRs 0.7.1
 ==================================================================
 DEBUG
