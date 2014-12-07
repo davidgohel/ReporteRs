@@ -1,3 +1,13 @@
+ReporteRs 0.7.2
+==================================================================
+
+ENHANCEMENT
+------------------------------------------------------------------
+
+* nicer tooltip with interactive plots in bsdoc documents. 
+  See addPlot.bsdoc.
+
+
 ReporteRs 0.7.1
 ==================================================================
 DEBUG
@@ -17,6 +27,7 @@ ENHANCEMENT
 * id of the title can be specified with addTitle.bsdoc
 
 * new function for bsdoc: addTOC. It lets you generate a TOC into a bsdoc document.
+
 
 ReporteRs 0.7.0
 ==================================================================
