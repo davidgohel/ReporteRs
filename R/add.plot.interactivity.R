@@ -75,7 +75,7 @@
 #' }
 #' invisible()
 #' }
-#' library( ReporteRs )
+#' 
 #' doc = bsdoc( title = "title" )
 #' doc = addPlot( doc, fun = plot_function, width = 8 )
 #' pages = writeDoc( doc, file = "interactive_plot/example.html")

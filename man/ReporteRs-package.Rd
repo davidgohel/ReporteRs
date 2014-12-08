@@ -4,12 +4,12 @@
 \alias{ReporteRs-package}
 \title{ReporteRs: a package to create document from R}
 \description{
-ReporteRs is an R package for creating Microsoft (Word docx
-and Powerpoint pptx) and html documents.
+ReporteRs lets you create Microsoft Word, Microsoft
+Powerpoint and html documents.
 }
 \details{
 \tabular{ll}{ Package: \tab ReporteRs\cr Type: \tab
-Package\cr Version: \tab 0.7.2\cr Date: \tab 2014-12-04\cr
+Package\cr Version: \tab 0.7.2\cr Date: \tab 2014-12-08\cr
 License: \tab GPL (>= 3)\cr LazyLoad: \tab yes\cr }
 
 To get an r document object: \itemize{ \item

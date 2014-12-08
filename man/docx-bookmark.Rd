@@ -37,8 +37,6 @@ portion of a text in a paragraph.
 }
 \examples{
 #START_TAG_TEST
-require( ReporteRs )
-
 # Word document to write
 docx.file = "document_new.docx"
 
@@ -78,7 +76,6 @@ doc = addFlexTable( doc
 
 doc = addPlot( doc, vector.graphic = TRUE
 	, fun = function(){
-		require(stats)
 		sale5 <- c(6, 4, 9, 7, 6, 12, 8, 10, 9, 13)
 		plot(sale5)
 		abline(lsfit(1:10, sale5))

@@ -1,11 +1,11 @@
-#' ReporteRs is an R package for creating Microsoft (Word docx 
-#' and Powerpoint pptx) and html documents.
+#' ReporteRs lets you create Microsoft Word, Microsoft Powerpoint
+#' and html documents.
 #' 
 #' \tabular{ll}{
 #' Package: \tab ReporteRs\cr
 #' Type: \tab Package\cr
 #' Version: \tab 0.7.2\cr
-#' Date: \tab 2014-12-04\cr
+#' Date: \tab 2014-12-08\cr
 #' License: \tab GPL (>= 3)\cr
 #' LazyLoad: \tab yes\cr
 #' }
@@ -73,16 +73,6 @@
 #' @title ReporteRs: a package to create document from R
 #' @author David Gohel \email{david.gohel@@lysis-consultants.fr}
 #' @docType package
-NULL
-
-
-#' pbc summary
-#' 
-#' @docType data
-#' @keywords datasets
-#' @name pbc_summary
-#' @usage data(pbc_summary)
-#' @format A data frame
 NULL
 
 

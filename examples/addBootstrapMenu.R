@@ -1,5 +1,3 @@
-library( ReporteRs )
-
 doc = bsdoc( title = "my document" )
 
 mymenu = BootstrapMenu( title = "my title")

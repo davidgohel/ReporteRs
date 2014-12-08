@@ -1,5 +1,3 @@
-require( ggplot2 )
-
 # Word document to write
 docx.file = "document_example.docx"
 
@@ -83,16 +81,22 @@ doc = addParagraph( doc, value = sometext, par.properties = ordered.list.level1 
 doc = addParagraph( doc, value = sometext, par.properties = ordered.list.level2 )
 
 ################ PLOT DEMO ################
-
-myplot = qplot(Sepal.Length, Petal.Length
-  , data = iris, color = Species
-  , size = Petal.Width, alpha = I(0.7)
-)
-# Add titles and then 'myplot'
-doc = addTitle( doc, "Plot examples", level =  1 )
-doc = addPlot( doc, function( ) print( myplot ) )
-# Add a legend below the plot
-doc = addParagraph( doc, value = "my first plot", stylename = "rPlotLegend")
+# load ggplot2
+if( requireNamespace("ggplot2", quietly = TRUE) ){
+  doc = addTitle( doc, "Plot example", level = 1 )
+  
+  # create a ggplot2 plot
+  myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris
+    , color = Species, size = Petal.Width, alpha = I(0.7) )
+  
+  # Add myplot into object doc
+  # myplot is assigned to argument 'x' because function 'print' on ggplot
+  # objects is expecting argument 'x'.
+  doc = addPlot( doc = doc, fun = print, x = myplot )
+  
+  # Add a legend below the plot
+  doc = addParagraph( doc, value = "my first plot", stylename = "rPlotLegend")
+}
 
 ################ FLEXTABLE DEMO ################
 

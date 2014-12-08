@@ -1,18 +1,19 @@
 doc = bsdoc( title = "full example" )
 
-doc = addTitle( doc, "Plot example", level = 1, id = "plot_example" )
+
 # load ggplot2
-require( ggplot2 )
+if( requireNamespace("ggplot2", quietly = TRUE) ){
+  doc = addTitle( doc, "Plot example", level = 1 )
 
-# create a ggplot2 plot
-myplot = qplot(Sepal.Length, Petal.Length, data = iris
-  , color = Species, size = Petal.Width, alpha = I(0.7) )
-
-# Add myplot into object doc
-#   myplot is assigned to argument 'x' because function 'print' on ggplot
-#   objects is expecting argument 'x'.
-doc = addPlot( doc = doc, fun = print, x = myplot )
-
+  # create a ggplot2 plot
+  myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris
+    , color = Species, size = Petal.Width, alpha = I(0.7) )
+	
+  # Add myplot into object doc
+  #   myplot is assigned to argument 'x' because function 'print' on ggplot
+  #   objects is expecting argument 'x'.
+  doc = addPlot( doc = doc, fun = print, x = myplot )
+}
 
 
 

@@ -57,8 +57,6 @@ object.
 }
 \examples{
 #START_TAG_TEST
-require( ggplot2 )
-
 # Word document to write
 pptx.file = "presentation_example.pptx"
 
@@ -105,15 +103,17 @@ pot2 = pot("Cats"
 doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 
 ################ PLOT DEMO ################
-doc = addSlide( doc, slide.layout = "Title and Content" )
-doc = addTitle( doc, "Plot examples" )
+if( requireNamespace("ggplot2", quietly = TRUE) ){
+  doc = addSlide( doc, slide.layout = "Title and Content" )
+  doc = addTitle( doc, "Plot examples" )
 
-myplot = qplot(Sepal.Length, Petal.Length
-	, data = iris, color = Species
-	, size = Petal.Width, alpha = I(0.7)
+  myplot = ggplot2::qplot(Sepal.Length, Petal.Length
+    , data = iris, color = Species
+    , size = Petal.Width, alpha = I(0.7)
 )
-# Add titles and then 'myplot'
-doc = addPlot( doc, function( ) print( myplot ) )
+  # Add titles and then 'myplot'
+  doc = addPlot( doc, function( ) print( myplot ) )
+}
 
 ################ FLEXTABLE DEMO ################
 doc = addSlide( doc, slide.layout = "Title and Content" )
