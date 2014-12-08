@@ -43,92 +43,35 @@ add a header row in a FlexTable
 # simple example
 #############################
 
-data(pbc_summary)
-
 # set header.columns to FALSE so that default header row is not added in
 # the FlexTable object
 # We do only want the 4 first columns of the dataset
-MyFTable = FlexTable( data = pbc_summary[,1:4], header.columns = FALSE )
+MyFTable = FlexTable( data = iris[46:55, ], header.columns = FALSE )
 
-# add an header row with 2 cells, the first one spans three columns
-# and the second one spans one column (normal width)
-MyFTable = addHeaderRow( MyFTable
-  , value = c("By variables", "Serum cholesterol (mg/dl)")
-  , colspan = c( 3, 1) 
+# add an header row with 3 cells, the first one spans two columns, 
+# the second one spans two columns and the last one does not span 
+# multiple columns
+MyFTable = addHeaderRow( MyFTable, 
+  value = c("Sepal", "Petal", ""), 
+  colspan = c( 2, 2, 1) 
 )
 
-# add an header row with table columns labels
-MyFTable = addHeaderRow( MyFTable
-  , value=c("Treatment", "Sex", "Status", "Mean")
+# add an header row with modified table columns labels
+MyFTable = addHeaderRow( MyFTable, 
+  value=c("Length", "Width", "Length", "Width", "Species")
 )
 #######################################
 # how to change default formats
 #######################################
-data(pbc_summary)
 
-MyFTable = FlexTable( data = pbc_summary[,1:4], header.columns = FALSE
-  , body.cell.props = cellProperties(border.color="#7895A2")
+MyFTable = FlexTable( data = iris[46:55, ], header.columns = FALSE, 
+  body.cell.props = cellProperties(border.color="#7895A2")
 )
 # add an header row with table columns labels
-MyFTable = addHeaderRow( MyFTable
-  , text.properties = textProperties(color = "#517281", font.weight="bold")
-  , cell.properties = cellProperties(border.color="#7895A2")
-  , value=c("Treatment", "Sex", "Status", "Serum cholesterol (mg/dl)")
-)
-#########################################
-# example with FlexRow objects usage
-#########################################
-
-data(pbc_summary)
-
-# cell styles definitions
-cellProperties1 = cellProperties( border.top.width = 2
-    , border.right.style="dashed"
-    , border.bottom.style="dashed"
-    , border.left.width = 2 )
-cellProperties2 = cellProperties( border.top.width = 2
-    , border.left.style="dashed"
-    , border.bottom.style="dashed"
-    , border.right.width = 2 )
-
-# create a FlexTable
-MyFTable = FlexTable( data = pbc_summary[,1:4]
-  , header.columns = FALSE, body.text.props=textProperties() )
-
-# create a FlexRow - container for 2 cells
-headerRow = FlexRow()
-headerRow[1] = FlexCell( "By variables", colspan = 3, cell.properties = cellProperties1 )
-headerRow[2] = FlexCell( "Serum cholesterol (mg/dl)", cell.properties = cellProperties2 )
-# add the FlexRow to the FlexTable
-MyFTable = addHeaderRow( MyFTable, headerRow )
-
-
-# cell styles definitions
-cellProperties3 = cellProperties( border.bottom.width = 2, border.left.width = 2
-    , border.right.style="dashed"
-    , border.top.style="dashed" 
-)
-cellProperties4 = cellProperties( border.bottom.width = 2
-    , border.right.style="dashed", border.left.style="dashed"
-    , border.top.style="dashed" )
-cellProperties5 = cellProperties( border.bottom.width = 2, border.right.width = 2
-    , border.left.style="dashed"
-    , border.top.style="dashed"
-)
-
-# create a FlexRow - container for 4 cells
-headerRow = FlexRow()
-headerRow[1] = FlexCell( "Treatment", cell.properties = cellProperties3 )
-headerRow[2] = FlexCell( "Sex", cell.properties = cellProperties4 )
-headerRow[3] = FlexCell( "Status", cell.properties = cellProperties4 )
-headerRow[4] = FlexCell( "Mean", cell.properties = cellProperties5 )
-# add the FlexRow to the FlexTable
-MyFTable = addHeaderRow( MyFTable, headerRow )
-MyFTable = setFlexTableBorders( MyFTable
-  , inner.vertical = borderProperties( style = "dashed" )
-  , inner.horizontal = borderProperties( style = "dashed" )
-  , outer.vertical = borderProperties( width = 2 )
-  , outer.horizontal = borderProperties( width = 2 )
+MyFTable = addHeaderRow( MyFTable, 
+  text.properties = textProperties(color = "#517281", font.weight="bold"), 
+  cell.properties = cellProperties(border.color="#7895A2"), 
+  value = c("Sepal Length", "Sepal Width", "Sepal Length", "Sepal Width", "Species")
 )
 #STOP_TAG_TEST
 }

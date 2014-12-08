@@ -26,8 +26,6 @@
 #' #START_TAG_TEST
 #' @example examples/addHeaderRowDefaults.R
 #' @example /examples/addHeaderRowFormats.R
-#' @example /examples/addHeaderRowComplex.R 
-#' @example /examples/setFlexTableBorders1.R
 #' @example examples/STOP_TAG_TEST.R
 #' @export
 addHeaderRow = function( x, value, colspan, text.properties, par.properties, cell.properties ){
@@ -641,7 +639,6 @@ setFlexTableBackgroundColors = function (object, i, j, colors, to = "body"){
 #' runs of equal values will indicate to merge corresponding rows.  
 #' @examples 
 #' #START_TAG_TEST
-#' @example examples/FlexTable.pbc.header.R
 #' @example examples/spanFlexTableRows.R
 #' @example examples/STOP_TAG_TEST.R
 #' @export
@@ -726,7 +723,6 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 #' runs of equal values will indicate to merge corresponding columns.  
 #' @examples 
 #' #START_TAG_TEST
-#' @example examples/FlexTable.pbc.header.R
 #' @example examples/spanFlexTableColumns.R
 #' @example examples/STOP_TAG_TEST.R
 #' @export
