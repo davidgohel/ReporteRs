@@ -28,15 +28,18 @@ merged cells are forbidden.
 }
 \examples{
 #START_TAG_TEST
-data(pbc_summary)
+mydata = iris[46:55, ]
+MyFTable = FlexTable( data = mydata )
 
-MyFTable = FlexTable( data = pbc_summary[, 1:4] )
-# merge line 7 to 11 in column 1
+# merge line 5 to 7 in column 1
 MyFTable = spanFlexTableRows( MyFTable, j = 3, from = 5, to = 7 )
-# merge cells in column 1 (trt) when successive values of trt are identical
-MyFTable = spanFlexTableRows( MyFTable, j=1, runs = as.character( pbc_summary$trt ) )
-# merge cells in column 2 (sex) when successive values of sex are identical
-MyFTable = spanFlexTableRows( MyFTable, j=2, runs = as.character( pbc_summary$sex ) )
+
+# merge cells in column "Species" when successive values 
+# of Species are identical. Note 
+# the character vector length is the same 
+# than the number of lines of the FlexTable.
+MyFTable = spanFlexTableRows( MyFTable, j = "Species", 
+  runs = as.character( mydata$Species ) )
 #STOP_TAG_TEST
 }
 \seealso{
