@@ -7,6 +7,8 @@ ENHANCEMENT
 * nicer tooltip with interactive plots in bsdoc documents. 
   See addPlot.bsdoc.
 
+* modify examples so that R CMD check --run-donttest does not fail
+ 
 ReporteRs 0.7.1
 ==================================================================
 DEBUG
