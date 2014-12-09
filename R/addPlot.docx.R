@@ -71,7 +71,8 @@ addPlot.docx = function(doc, fun
 				doc = addImage( doc, filename = plotfiles[fi], 
 						width = width, height = height, 
 						bookmark = bookmark )
-			else if( missing( bookmark ) ) doc = addImage( doc, filename = plotfiles[fi] )
+			else if( missing( bookmark ) ) 
+				doc = addImage( doc, filename = plotfiles[fi], width = width, height = height )
 			else stop("bookmark can only be used when one single graph is inserted.")
 		}
 	
