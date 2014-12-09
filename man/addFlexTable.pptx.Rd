@@ -139,6 +139,11 @@ Footnote1 = addParagraph( Footnote1, an_rscript )
 MyFTable[1, 1, newpar = TRUE] = pot("a note", 
   footnote = Footnote1, format = textBold(color="gray") )
 
+pot_link = pot(" (link example)", textProperties( color = "cyan" ), 
+  hyperlink = "http://www.wikipedia.org/" )
+
+MyFTable[1, 1, to = "header"] = pot_link
+
 # applies a border grid on table
 MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
   , inner.vertical = borderProperties( color = "#666666" )
