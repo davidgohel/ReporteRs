@@ -229,13 +229,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 	} else if( to == "body" ){
 	}
 	
-	if( to == "header" ){
-		args.get.indexes$numrow = .jcall( x$jobj, "I", "headerSize" )
-	} else if( to == "footer" ){
-		args.get.indexes$numrow = .jcall( x$jobj, "I", "footerSize" )
-	} else if( to == "body" ){
-		args.get.indexes$numrow = x$numrow
-	}
+
 	indexes = do.call(getncheckid, args.get.indexes)
 	i = indexes$i
 	j = indexes$j
@@ -495,7 +489,6 @@ setRowsColors = function (object, i, colors){
 	
 	args.get.indexes = list(object = object)
 	if( !missing(i) ) args.get.indexes$i = i
-	args.get.indexes$numrow = object$numrow
 	args.get.indexes$partname = "body"
 	indexes = do.call(getncheckid, args.get.indexes)
 	i = indexes$i
@@ -536,7 +529,6 @@ setColumnsColors = function (object, j, colors){
 	
 	args.get.indexes = list(object = object)
 	if( !missing(j) ) args.get.indexes$j = j
-	args.get.indexes$numrow = object$numrow
 	args.get.indexes$partname = "body"
 	indexes = do.call(getncheckid, args.get.indexes)
 	j = indexes$j
@@ -583,20 +575,6 @@ setFlexTableBackgroundColors = function (object, i, j, colors, to = "body"){
 	if( !missing(j) ) args.get.indexes$j = j
 	args.get.indexes$partname = to
 	
-	if( to == "header" ){
-		headers = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
-	} else if( to == "footer" ){
-		footers = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
-	} else if( to == "body" ){
-	}
-	
-	if( to == "header" ){
-		args.get.indexes$numrow = .jcall( object$jobj, "I", "headerSize" )
-	} else if( to == "footer" ){
-		args.get.indexes$numrow = .jcall( object$jobj, "I", "footerSize" )
-	} else if( to == "body" ){
-		args.get.indexes$numrow = object$numrow
-	}
 	indexes = do.call(getncheckid, args.get.indexes)
 	i = indexes$i
 	j = indexes$j
@@ -651,7 +629,6 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 	
 	args.get.indexes = list(object = object)
 	if( !missing(j) ) args.get.indexes$j = j
-	args.get.indexes$numrow = object$numrow
 	args.get.indexes$partname = "body"
 	
 	indexes = do.call(getncheckid, args.get.indexes)
@@ -736,7 +713,6 @@ spanFlexTableColumns = function (object, i, from, to, runs ){
 	
 	if( !missing(i) ) args.get.indexes$i = i
 	args.get.indexes$partname = "body"
-	args.get.indexes$numrow = object$numrow
 	indexes = do.call(getncheckid, args.get.indexes)
 	rowid = indexes$i
 	if( !missing( runs ) ){
