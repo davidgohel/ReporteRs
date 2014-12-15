@@ -16,7 +16,7 @@ Features
 * Create docx, pptx or html files with only a few lines of R code.
 * Add tables, plots, text or tables of contents into Word, PowerPoint and html documents.
 * Customize formatting of R outputs.
-* Design and format any complex table
+* Design and format any complex table.
 
 Installation
 ------------
@@ -44,7 +44,7 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 
 **Get the latest Windows binary packages:**  
 [ReporteRsjars 0.2](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.2 "ReporteRsjars") &diams; 
-[ReporteRs 0.6.9](https://github.com/davidgohel/ReporteRs/releases/tag/v0.6.9 "ReporteRs")
+[ReporteRs 0.7.3](https://github.com/davidgohel/ReporteRs/releases/tag/v0.7.3 "ReporteRs")
 
   
 Getting Started
