@@ -1,3 +1,14 @@
+ReporteRs 0.7.3
+==================================================================
+
+DEBUG
+------------------------------------------------------------------
+
+* minor debug with FlexTable subset (reported by Gilles Chapron).
+
+* Fix addDocument issue: close embedded file after having read it.
+  (suggested by Olivier Barriere)
+ 
 ReporteRs 0.7.2
 ==================================================================
 
