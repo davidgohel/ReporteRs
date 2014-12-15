@@ -221,14 +221,6 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 	if( !missing(i) ) args.get.indexes$i = i
 	if( !missing(j) ) args.get.indexes$j = j
 	args.get.indexes$partname = to
-	
-	if( to == "header" ){
-		headers = .jcall( x$jobj, paste0("L", class.MetaRows, ";"), "getHeader" )
-	} else if( to == "footer" ){
-		footers = .jcall( x$jobj, paste0("L", class.MetaRows, ";"), "getFooter" )
-	} else if( to == "body" ){
-	}
-	
 
 	indexes = do.call(getncheckid, args.get.indexes)
 	i = indexes$i

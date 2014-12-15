@@ -19,7 +19,7 @@ get.formatted.dataset = function( dataset ){
 }
 
 
-getncheckid = function( object, i, j, numrow, partname ){
+getncheckid = function( object, i, j, partname ){
 	
 	
 	if( partname == "header" ){
