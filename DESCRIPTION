@@ -1,8 +1,8 @@
 Package: ReporteRs
 Type: Package
 Title: Microsoft Word, Microsoft Powerpoint and HTML Documents Generation
-Version: 0.7.3
-Date: 2014-12-08
+Version: 0.7.4
+Date: 2014-01-20
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@lysis-consultants.fr"),
