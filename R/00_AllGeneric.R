@@ -473,6 +473,20 @@ as.html = function( object, ... ){
 	UseMethod("as.html")
 }
 
+#' @title R tables as FlexTables
+#'
+#' @description Get a \code{\link{FlexTable}} object from 
+#' an R object.
+#' 
+#' @param x object to get \code{FlexTable} from
+#' @param ... further arguments passed to other methods 
+#' @return a \code{\link{FlexTable}} object
+#' @export
+#' @seealso \code{\link{FlexTable}}
+as.FlexTable = function( x, ... ){
+	UseMethod("as.FlexTable")
+}
+
 #' @title Set manually headers'styles of a document object
 #'
 #' @description Set manually titles'styles of a document object
