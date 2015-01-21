@@ -1,3 +1,15 @@
+ReporteRs 0.7.4
+==================================================================
+
+ENHANCEMENT
+------------------------------------------------------------------
+
+* new print method for FlexTable that display the FlexTable in 
+  the default browser or in RStudio viewer 
+
+* improved vanilla.table rendering
+
+
 ReporteRs 0.7.3
 ==================================================================
 
