@@ -180,7 +180,7 @@ FlexTable = function(data, numrow, numcol
 				if( is.character( x) ) x
 				else if( is.factor( x ) ) as.character( x )
 				else if( is.logical( x ) ) ifelse( x, "TRUE", "FALSE" )
-				else if( is.integer( x ) ) sprintf(x, rnorm( 10 ) )
+				else if( is.integer( x ) ) as.character( x )
 				else format(x)
 			} )
 		data = as.matrix( as.data.frame( data ) )
