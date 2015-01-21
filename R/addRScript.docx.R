@@ -33,8 +33,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addRScript}}, \code{\link{bookmark}}
-#' @method addRScript docx
-#' @S3method addRScript docx
+#' @export
 addRScript.docx = function(doc, rscript, file, text, bookmark, par.properties = parProperties(), ... ) {
 	
 	if( !missing ( file ) ){

@@ -32,8 +32,7 @@
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addPlot}}
 #' , \code{\link{add.plot.interactivity}}
-#' @method addPlot bsdoc
-#' @S3method addPlot bsdoc
+#' @export
 addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"), 
 		vector.graphic = T, width=6, height=6, 
 		fontname = getOption("ReporteRs-default-font"), 

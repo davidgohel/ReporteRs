@@ -25,8 +25,7 @@
 #' @example examples/addFlexTable.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @method addFlexTable bsdoc
-#' @S3method addFlexTable bsdoc
+#' @export
 addFlexTable.bsdoc = function(doc, flextable, 
 		par.properties = parProperties(text.align = "left" ), ... ) {
 	

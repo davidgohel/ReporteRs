@@ -164,8 +164,7 @@ RScript = function( file, text
 	out
 }
 
-#' @method print RScript
-#' @S3method print RScript
+#' @export
 print.RScript = function(x, ...){
 	out = .jcall( x$jobj, "S", "toString" )
 	cat(out)
@@ -187,8 +186,7 @@ print.RScript = function(x, ...){
 #' my_rscript = RScript( text = "ls()" )
 #' as.html( my_rscript )
 #' @example examples/STOP_TAG_TEST.R
-#' @method as.html RScript
-#' @S3method as.html RScript
+#' @export
 as.html.RScript = function(object, ...){
 	out = .jcall( object$jobj, "S", "getHTML" )
 	out

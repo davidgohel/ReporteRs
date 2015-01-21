@@ -22,8 +22,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addDocument}}
-#' @method addDocument docx
-#' @S3method addDocument docx
+#' @export
 addDocument.docx = function(doc, filename, ... ) {
 	
 	pos <- regexpr("\\.([[:alnum:]]+)$", filename)

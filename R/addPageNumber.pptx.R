@@ -30,8 +30,7 @@
 #' #STOP_TAG_TEST
 #' @export
 #' @seealso \code{\link{addPageNumber}}, \code{\link{addDate.pptx}}
-#' @method addPageNumber pptx
-#' @S3method addPageNumber pptx
+#' @export
 addPageNumber.pptx = function(doc, value, ... ) {
 	
 	

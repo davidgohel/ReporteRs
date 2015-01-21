@@ -18,8 +18,7 @@
 #' @example examples/slide.layouts_2.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}
-#' @method slide.layouts pptx
-#' @S3method slide.layouts pptx
+#' @export
 slide.layouts.pptx = function( doc, layout, ... ) {
 	
 	if( length( doc$styles ) == 0 ){

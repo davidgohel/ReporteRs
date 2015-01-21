@@ -18,8 +18,7 @@
 #' doc = toc.options( doc, list.separator = "," )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}
-#' @method toc.options docx
-#' @S3method toc.options docx
+#' @export
 toc.options.docx = function( doc, list.separator, ... ){
 	
 	if( missing( list.separator ) )

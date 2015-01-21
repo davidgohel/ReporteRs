@@ -64,8 +64,7 @@
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{addTitle.pptx}}, \code{\link{slide.layouts}}
 #' , \code{\link{pptx}}, \code{\link{addSlide}}
-#' @method addSlide pptx
-#' @S3method addSlide pptx
+#' @export
 addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 	if( length( doc$styles ) == 0 ){
 		stop("You must defined layout in your pptx template.")				

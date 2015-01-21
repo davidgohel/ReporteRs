@@ -24,8 +24,7 @@
 #' writeDoc( doc, "addSubtitle_example.pptx" )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addSubtitle}}
-#' @method addSubtitle pptx
-#' @S3method addSubtitle pptx
+#' @export
 addSubtitle.pptx = function( doc, value, ... ) {
 	
 	slide = doc$current_slide 

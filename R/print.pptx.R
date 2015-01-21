@@ -12,9 +12,7 @@
 #' print( doc )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{print}}
-#' @method print pptx
-#' @S3method print pptx
-
+#' @export
 print.pptx = function (x, ...){
 
 	cat("[pptx object]\n")

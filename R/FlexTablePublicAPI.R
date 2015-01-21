@@ -212,8 +212,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @example examples/STOP_TAG_TEST.R
 #' @rdname FlexTable-alter
 #' @aliases alterFlexTable
-#' @method [<- FlexTable
-#' @S3method [<- FlexTable
+#' @export
 "[<-.FlexTable" = function( x, i, j, text.properties, newpar = F, byrow = FALSE, 
 		to = "body", side = "top", value ){
 	

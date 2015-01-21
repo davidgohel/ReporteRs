@@ -27,8 +27,7 @@
 #' @example examples/addFlexTable.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @method addFlexTable docx
-#' @S3method addFlexTable docx
+#' @export
 addFlexTable.docx = function(doc, flextable
 	, par.properties = parProperties(text.align = "left" )
 	, bookmark, ... ) {

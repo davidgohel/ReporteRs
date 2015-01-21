@@ -19,8 +19,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addTitle}}
-#' @method addTitle bsdoc
-#' @S3method addTitle bsdoc
+#' @export
 addTitle.bsdoc = function( doc, value, level = 1, id, ... ) {
 
 	if( !is.numeric( level ) )

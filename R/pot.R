@@ -60,16 +60,14 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 	.Object
 }
 
-#' @method print pot
-#' @S3method print pot
+#' @export
 print.pot = function (x, ...){
 	for(i in seq_along(x)){
 		if( !is.null(x[[i]]$format) ) cat("[", x[[i]]$value, as.character(x[[i]]$format), "]", sep = "" )
 		else cat("[", x[[i]]$value, "]", sep = "" )
 	}
 }
-#' @method as.character pot
-#' @S3method as.character pot
+#' @export
 as.character.pot = function (x, ...){
 	out = ""
 	for(i in seq_along(x)){
@@ -94,9 +92,7 @@ as.character.pot = function (x, ...){
 #' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
 #' @seealso \code{\link{addParagraph}}
-#' @method + pot
-#' @S3method + pot
-#' @rdname pot-add
+#' @export
 "+.pot" = function(e1, e2) {
 	if( is.character(e1) ) e1 = pot(value = e1)
 	if( is.character(e2) ) e2 = pot(value = e2)
@@ -123,8 +119,7 @@ as.character.pot = function (x, ...){
 #' 	, textProperties(font.weight="bold") )
 #' as.html( my_pot )
 #' @example examples/STOP_TAG_TEST.R
-#' @method as.html pot
-#' @S3method as.html pot
+#' @export
 as.html.pot = function( object, ... ) {
 	par = .jpot( object )
 	.jcall( par, "S", "getHTML" )	

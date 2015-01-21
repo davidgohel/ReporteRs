@@ -38,8 +38,7 @@
 #' @example examples/addFlexTable.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @method addFlexTable pptx
-#' @S3method addFlexTable pptx
+#' @export
 addFlexTable.pptx = function(doc, flextable, offx, offy, width, height, ... ) {
 	
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )

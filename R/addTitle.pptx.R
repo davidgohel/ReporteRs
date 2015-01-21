@@ -22,8 +22,7 @@
 #' writeDoc( doc, "addTitle_example.pptx" )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addTitle}}, \code{\link{addSlide.pptx}}
-#' @method addTitle pptx
-#' @S3method addTitle pptx
+#' @export
 addTitle.pptx = function( doc, value, ... ) {
 
 	slide = doc$current_slide 

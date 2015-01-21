@@ -26,8 +26,7 @@
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
 #' , \code{\link{addImage}}, \code{\link{bookmark}}
-#' @method addImage docx
-#' @S3method addImage docx
+#' @export
 addImage.docx = function(doc, filename, bookmark,
 	par.properties = parProperties(text.align = "center", padding = 5 ), 
 	width, height, ... ) {

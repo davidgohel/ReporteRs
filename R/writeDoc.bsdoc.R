@@ -18,8 +18,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{writeDoc}}
-#' @method writeDoc bsdoc
-#' @S3method writeDoc bsdoc
+#' @export
 writeDoc.bsdoc = function(doc, file, reset.dir = FALSE, ...) {
 	if( !is.character( file ) ) stop("argument file must be a valid filename (a string value).")
 	if( length( file ) != 1 ) stop("length of argument file is not 1.")

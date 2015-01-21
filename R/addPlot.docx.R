@@ -36,8 +36,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addPlot}}, \code{\link{bookmark}}.
-#' @method addPlot docx
-#' @S3method addPlot docx
+#' @export
 addPlot.docx = function(doc, fun
 		, pointsize = getOption("ReporteRs-fontsize")
 		, vector.graphic = F

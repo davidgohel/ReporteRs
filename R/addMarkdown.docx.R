@@ -26,8 +26,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addMarkdown}}
-#' @method addMarkdown docx
-#' @S3method addMarkdown docx
+#' @export
 addMarkdown.docx = function(doc, file, text, 
 	text.properties = textProperties( font.size = getOption("ReporteRs-fontsize") ),
 	default.par.properties = parProperties(text.align = "justify"),

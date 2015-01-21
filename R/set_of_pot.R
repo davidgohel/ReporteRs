@@ -66,8 +66,7 @@ add.pot = function( x, value ){
 }
 
 
-#' @method print set_of_paragraphs
-#' @S3method print set_of_paragraphs
+#' @export
 print.set_of_paragraphs = function (x, ...){
 	for(i in seq_along(x)){
 		print(x[[i]])

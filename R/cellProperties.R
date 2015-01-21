@@ -319,8 +319,7 @@ out
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{borderProperties}}, \code{\link{cellProperties}}
 #' , \code{\link{FlexTable}}
-#' @method chprop cellProperties
-#' @S3method chprop cellProperties
+#' @export
 chprop.cellProperties <- function(object
 	, border.bottom
 	, border.left
@@ -501,8 +500,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 	object					
 }
 
-#' @method print cellProperties
-#' @S3method print cellProperties
+#' @export
 print.cellProperties = function (x, ...){
 	cat( "cellProperties{border.bottom:", as.character(x$border.bottom), ";" )
 	cat( "border.top:", as.character(x$border.top), ";" )

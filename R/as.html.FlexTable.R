@@ -11,8 +11,7 @@
 #' @example examples/FlexTableExample.R
 #' @example examples/as.html.MyFTable.R
 #' @example examples/STOP_TAG_TEST.R
-#' @method as.html FlexTable
-#' @S3method as.html FlexTable
+#' @export
 as.html.FlexTable = function( object, ... ) {
 		
 	.jcall( object$jobj, "S", "getHTML" )

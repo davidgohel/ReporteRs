@@ -21,8 +21,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addRScript}}
-#' @method addRScript bsdoc
-#' @S3method addRScript bsdoc
+#' @export
 addRScript.bsdoc = function(doc, rscript, file, text, ...) {
 	
 	if( !missing ( file ) ){

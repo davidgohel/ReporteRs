@@ -21,8 +21,7 @@
 #' writeDoc( doc, "writeDoc_example.pptx" )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{writeDoc}}
-#' @method writeDoc pptx
-#' @S3method writeDoc pptx
+#' @export
 writeDoc.pptx = function(doc, file, ...) {
 
 	if( !is.character( file ) ) stop("argument file must be a valid filename (a string value).")

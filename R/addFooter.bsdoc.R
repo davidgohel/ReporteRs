@@ -33,8 +33,7 @@
 #' #STOP_TAG_TEST
 #' @export
 #' @seealso \code{\link{bsdoc}}
-#' @method addFooter bsdoc
-#' @S3method addFooter bsdoc
+#' @export
 addFooter.bsdoc = function(doc, value, 
 		par.properties = parProperties(), 
 		restart.numbering = FALSE, ... ) {

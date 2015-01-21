@@ -41,8 +41,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
-#' @method addPlot pptx
-#' @S3method addPlot pptx
+#' @export
 addPlot.pptx = function(doc, fun, pointsize = 11
 	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
 	, editable = TRUE, offx, offy, width, height

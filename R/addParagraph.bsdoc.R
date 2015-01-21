@@ -29,8 +29,7 @@
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addMarkdown.bsdoc}}, 
 #' \code{\link{pot}}
-#' @method addParagraph bsdoc
-#' @S3method addParagraph bsdoc
+#' @export
 addParagraph.bsdoc = function(doc, value, 
 		par.properties = parProperties(), 
 		restart.numbering = FALSE, ... ) {

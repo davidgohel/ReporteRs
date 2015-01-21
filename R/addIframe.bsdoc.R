@@ -11,8 +11,7 @@
 #' An object of class \code{\link{parProperties}}
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{bsdoc}}.
-#' @method addIframe bsdoc
-#' @S3method addIframe bsdoc
+#' @export
 addIframe.bsdoc = function(doc, src, width, height, seamless = FALSE, 
 		par.properties = parProperties(text.align = "center", padding = 5 ), ... ) {
 	

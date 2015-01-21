@@ -74,8 +74,7 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 #' print( doc )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{bsdoc}}, \code{\link{print}}
-#' @method print bsdoc
-#' @S3method print bsdoc
+#' @export
 print.bsdoc = function (x, ...){
 	
 	cat("[bsdoc object]\n")

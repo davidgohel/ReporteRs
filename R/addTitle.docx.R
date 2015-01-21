@@ -39,8 +39,7 @@
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{declareTitlesStyles.docx}}, \code{\link{styles.docx}}
-#' @method addTitle docx
-#' @S3method addTitle docx
+#' @export
 addTitle.docx = function( doc, value, level = 1, ... ) {
 	if( length( doc$header.styles ) == 0 ){
 		stop("You must defined title styles via declareTitlesStyles first.")				

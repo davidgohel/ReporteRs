@@ -67,9 +67,7 @@
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}
 #' , \code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
-#' @method addTOC docx
-#' @S3method addTOC docx
-
+#' @export
 addTOC.docx = function(doc, stylename, ... ) {
 	
 	if( missing( stylename ) ){

@@ -27,8 +27,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addMarkdown}}
-#' @method addMarkdown bsdoc
-#' @S3method addMarkdown bsdoc
+#' @export
 addMarkdown.bsdoc = function(doc, file, text, 
 	text.properties = textProperties( font.size = getOption("ReporteRs-fontsize") ),
 	default.par.properties = parProperties(text.align = "justify"),

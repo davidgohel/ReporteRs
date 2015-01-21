@@ -29,8 +29,7 @@
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{bsdoc}}, \code{\link{addTOC.bsdoc}}
 #' , \code{\link{docx}}, \code{\link{addTOC.docx}}
-#' @method addTOC bsdoc
-#' @S3method addTOC bsdoc
+#' @export
 addTOC.bsdoc = function(doc, ... ) {
 
 	.jcall( doc$jobj, "V", "addTOC" )

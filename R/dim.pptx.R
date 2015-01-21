@@ -11,8 +11,7 @@
 #' dim(doc)
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{dim.docx}}
-#' @method dim pptx
-#' @S3method dim pptx
+#' @export
 dim.pptx = function( x ){
 	if( !is.null(x$current_slide) )
 		temp = .jcall(x$current_slide, "[I", "getShapeDimensions")

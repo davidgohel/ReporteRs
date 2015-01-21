@@ -19,8 +19,7 @@
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addPlot.bsdoc}}
 #' , \code{\link{addImage}}
-#' @method addImage bsdoc
-#' @S3method addImage bsdoc
+#' @export
 addImage.bsdoc = function(doc, filename, width, height, 
 		par.properties = parProperties(text.align = "center", padding = 5 ), ... ) {
 

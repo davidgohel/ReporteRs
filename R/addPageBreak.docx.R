@@ -11,8 +11,7 @@
 #' doc = addPageBreak( doc )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{addPageBreak}}
-#' @method addPageBreak docx
-#' @S3method addPageBreak docx
+#' @export
 addPageBreak.docx =  function( doc, ... ) {
 	.jcall( doc$obj, "V", "addPageBreak" )
 	doc

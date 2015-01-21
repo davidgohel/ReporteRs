@@ -32,9 +32,7 @@
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addFooter.pptx}}, \code{\link{addPageNumber.pptx}}
 #' , \code{\link{strptime}},  \code{\link{addDate}}
-#' @method addDate pptx
-#' @S3method addDate pptx
-
+#' @export
 addDate.pptx = function(doc, value, str.format = "%Y-%m-%d", ... ) {
 	
 	

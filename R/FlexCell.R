@@ -55,8 +55,7 @@ FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.
 	.Object
 }
 
-#' @method print FlexCell
-#' @S3method print FlexCell
+#' @export
 print.FlexCell = function(x, ...){
 	out = .jcall( x$jobj, "S", "toString" )
 	cat(out)

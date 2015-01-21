@@ -58,8 +58,7 @@
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addParagraph}}
 #' \code{\link{addMarkdown.pptx}}, \code{\link{pot}}
-#' @method addParagraph pptx
-#' @S3method addParagraph pptx
+#' @export
 addParagraph.pptx = function(doc, value, offx, offy, width, height, 
 		par.properties = parProperties(), 
 		append = FALSE, 

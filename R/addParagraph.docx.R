@@ -39,8 +39,7 @@
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph}}, 
 #' \code{\link{bookmark}}, \code{\link{addMarkdown.docx}}, 
 #' \code{\link{pot}}
-#' @method addParagraph docx
-#' @S3method addParagraph docx
+#' @export
 addParagraph.docx = function(doc, value, stylename, bookmark, 
 		par.properties = parProperties(), 
 		restart.numbering = FALSE, ... ) {

@@ -37,9 +37,7 @@
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot.pptx}}
 #' , \code{\link{addImage}}
-#' @method addImage pptx
-#' @S3method addImage pptx
-
+#' @export
 addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
 	
 	slide = doc$current_slide 

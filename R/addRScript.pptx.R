@@ -30,8 +30,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addRScript}}
-#' @method addRScript pptx
-#' @S3method addRScript pptx
+#' @export
 addRScript.pptx = function(doc, rscript, file, text, append = FALSE, ... ) {
 	
 	if( !missing ( file ) ){

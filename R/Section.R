@@ -17,8 +17,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addSection}}
-#' @method addSection docx
-#' @S3method addSection docx
+#' @export
 addSection.docx = function(doc, landscape = FALSE, ncol = 1, space_between = 0.3, columns.only = FALSE , ...) {
 	.jcall( doc$obj, "V", "startSection", as.logical( landscape ), 
 			as.integer( ncol ), as.integer( space_between*1440 ),
@@ -45,8 +44,7 @@ addSection.docx = function(doc, landscape = FALSE, ncol = 1, space_between = 0.3
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addColumnBreak}}, \code{\link{addSection.docx}}
-#' @method addColumnBreak docx
-#' @S3method addColumnBreak docx
+#' @export
 addColumnBreak.docx = function(doc, ...) {
 	
 	.jcall( doc$obj, "V", "addColumnBreak" )

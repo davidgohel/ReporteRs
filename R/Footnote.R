@@ -47,8 +47,7 @@ Footnote = function( index.text.properties = textProperties(vertical.align = "su
 #' @return an object of class \code{\link{Footnote}}.
 #' @seealso \code{\link{Footnote}}, \code{\link{parProperties}}, \code{\link{pot}}
 #' , \code{\link{set_of_paragraphs}}
-#' @method addParagraph Footnote
-#' @S3method addParagraph Footnote
+#' @export
 addParagraph.Footnote = function( doc, value, par.properties = parProperties(), ... ) {
 	if( missing( value ) ){
 		stop("argument value is missing." )
@@ -95,16 +94,14 @@ addParagraph.Footnote = function( doc, value, par.properties = parProperties(), 
 }
 
 
-#' @method str Footnote
-#' @S3method str Footnote
-str.Footnote = function(object, ...){
-	
-	print( object )
-	
-	invisible()
-}
-#' @method print Footnote
-#' @S3method print Footnote
+
+#' @title print a Footnote
+#'
+#' @description print a Footnote
+#' 
+#' @param x a \code{\link{Footnote}} object
+#' @param ... further arguments, not used. 
+#' @export
 print.Footnote = function (x, ...){
 	for(i in seq_along(x$values)){
 		print(x$value[[i]]$value)
