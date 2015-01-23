@@ -9,6 +9,12 @@ ENHANCEMENT
 
 * improved vanilla.table rendering
 
+DEBUG
+------------------------------------------------------------------
+
+* debug text insertion in header/footer row with merged cells.
+  See http://github.com/davidgohel/ReporteRs/issues/58
+
 
 ReporteRs 0.7.3
 ==================================================================
