@@ -1,6 +1,6 @@
 ReporteRs
 ======
-ReporteRs is a R package for creating Microsoft Word, Microsoft Powerpoint and HTML documents from R.
+ReporteRs is an R package for creating Microsoft Word, Microsoft Powerpoint and HTML documents from R.
 
 Usefull links: 
 
@@ -39,8 +39,8 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 **Get the latest release:**  
 
     if( !require( devtools ) ) install.packages("devtools")
-    devtools::install_github('ReporteRsjars', 'davidgohel')
-    devtools::install_github('ReporteRs', 'davidgohel')
+    devtools::install_github('davidgohel/ReporteRsjars')
+    devtools::install_github('davidgohel/ReporteRs')
 
 **Get the latest Windows binary packages:**  
 [ReporteRsjars 0.2](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.2 "ReporteRsjars") &diams; 
