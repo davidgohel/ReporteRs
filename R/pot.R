@@ -71,7 +71,7 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 print.pot = function (x, ...){
 	
 	viewer <- getOption("viewer")
-	if ( interactive() && is.null( viewer ) ){
+	if ( !interactive() || is.null( viewer ) ){
 		for(i in seq_along(x)){
 			if( !is.null(x[[i]]$format) ) cat("[", x[[i]]$value, as.character(x[[i]]$format), "]", sep = "" )
 			else cat("[", x[[i]]$value, "]", sep = "" )
