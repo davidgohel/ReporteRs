@@ -60,13 +60,37 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 	.Object
 }
 
+#' @title Print pot objects
+#'
+#' @description print a \code{\link{pot}} object. 
+#' Within RStudio, the pot is rendered in the viewer.
+#' 
+#' @param x a \code{\link{pot}} object
+#' @param ... further arguments, not used. 
 #' @export
 print.pot = function (x, ...){
-	for(i in seq_along(x)){
-		if( !is.null(x[[i]]$format) ) cat("[", x[[i]]$value, as.character(x[[i]]$format), "]", sep = "" )
-		else cat("[", x[[i]]$value, "]", sep = "" )
+	
+	viewer <- getOption("viewer")
+	if ( interactive() && is.null( viewer ) ){
+		for(i in seq_along(x)){
+			if( !is.null(x[[i]]$format) ) cat("[", x[[i]]$value, as.character(x[[i]]$format), "]", sep = "" )
+			else cat("[", x[[i]]$value, "]", sep = "" )
+		}
+	} else {
+		
+		path = file.path(tempfile(), "index.html" )
+		doc = bsdoc( )
+		doc = addParagraph( doc, x )
+		doc = writeDoc( doc, path, reset.dir = TRUE)
+		if( !is.null( viewer ) && is.function( viewer ) ){
+			viewer( path )
+		} else {
+			utils::browseURL(path)
+		}
 	}
 }
+
+
 #' @export
 as.character.pot = function (x, ...){
 	out = ""

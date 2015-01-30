@@ -251,15 +251,7 @@ length.FlexTable = function(x) {
 #' @param ... further arguments, not used. 
 #' @export
 print.FlexTable = function(x, ...){
-	
-#	cat("FlexTable object with", x$numrow, "row(s) and", x$numcol, "column(s).\n")
-#	cat("Row ids:", paste( head( x$row_id ), collapse = ", " ), " ... \n" )
-#	cat("Col ids:", paste( head( x$col_id ), collapse = ", " ), " ... \n" )
-#	
-#	if( is.jnull(x$jobj ) ) cat("java object is null. Object need to be rebuild.\n")
-#	
-#	invisible()
-	
+		
 	if( is.jnull(x$jobj ) ) cat("java object is null. Object need to be rebuild.\n")
 	
 	if (!interactive() ){
@@ -268,7 +260,7 @@ print.FlexTable = function(x, ...){
 		cat("Col ids:", paste( head( x$col_id ), collapse = ", " ), " ... \n" )
 	} else {
 		viewer <- getOption("viewer")
-		path = file.path( tempdir(), "index.html" )
+		path = file.path(tempfile(), "index.html" )
 		doc = bsdoc( )
 		doc = addFlexTable( doc, x )
 		doc = writeDoc( doc, path, reset.dir = TRUE)
