@@ -35,7 +35,6 @@ addParagraph.bsdoc = function(doc, value,
 		restart.numbering = FALSE, ... ) {
 
 	if( inherits( value, "character" ) ){
-		value = gsub("(\\n|\\r)", "", value )
 		x = lapply( value, function(x) pot(value = x) )
 		value = do.call( "set_of_paragraphs", x )
 	}
