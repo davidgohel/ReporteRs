@@ -9,7 +9,7 @@ ENHANCEMENT
 
 * improved vanilla.table rendering
 
-* pot now handles soft returns when \n is used.
+* pot now handles *soft returns* when \n is used.
 
 DEBUG
 ------------------------------------------------------------------
