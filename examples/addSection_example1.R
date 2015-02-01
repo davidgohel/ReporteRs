@@ -18,6 +18,6 @@ doc = addColumnBreak(doc )
 doc = addParagraph( doc = doc, "Text 3.", "Normal" )
 
 
-doc = addSection(doc, ncol = 1, columns.only = TRUE ) 
+doc = addSection( doc ) 
 doc = addFlexTable(doc, FlexTable(mtcars, add.rownames = TRUE) )
 doc = addParagraph( doc = doc, "Text 4.", "Normal" )

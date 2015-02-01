@@ -25,6 +25,11 @@ an object of class \code{\link{docx}}.
 }
 \description{
 Add a section into a \code{\link{docx}} object.
+It lets you change document orientation and split new
+content along 2 or more columns.
+The function requires you to add a section before and after
+the item(s) that  you want to be on a landscape and/or
+multicolumns mode page.
 }
 \examples{
 #START_TAG_TEST
@@ -54,7 +59,7 @@ doc = addColumnBreak(doc )
 doc = addParagraph( doc = doc, "Text 3.", "Normal" )
 
 
-doc = addSection(doc, ncol = 1, columns.only = TRUE ) 
+doc = addSection( doc ) 
 doc = addFlexTable(doc, FlexTable(mtcars, add.rownames = TRUE) )
 doc = addParagraph( doc = doc, "Text 4.", "Normal" )
 

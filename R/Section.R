@@ -1,7 +1,11 @@
 #' @title Add a section into a docx object
 #'
 #' @description Add a section into a \code{\link{docx}} object.
-#' 
+#' It lets you change document orientation and split new  
+#' content along 2 or more columns. 
+#' The function requires you to add a section before and after 
+#' the item(s) that  you want to be on a landscape and/or 
+#' multicolumns mode page. 
 #' @param doc \code{\link{docx}} object where section has to be added
 #' @param landscape logical value. Specify TRUE to get a section with horizontal page.
 #' @param ncol \code{integer} number to specify how many columns the section should contains.
