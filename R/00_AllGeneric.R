@@ -272,9 +272,8 @@ addParagraph = function(doc, value, ...){
 #' SVG will be produced for \code{bsdoc} objects
 #' and DrawingML instructions for \code{docx} and \code{pptx} objects. 
 #' 
-#' DrawingML instructions
-#' offer advantage to provide editable graphics (forms and text colors
-#' , text contents, moving and resizing is disabled).
+#' DrawingML instructions offer the advantage of providing editable graphics 
+#' (forms and text colors, text contents).
 #' @param pointsize the default pointsize of plotted text in pixels, default to 12.
 #' @param ... further arguments passed to or from other methods.. 
 #' @return a document object

@@ -2,13 +2,13 @@
 % Please edit documentation in R/Section.R
 \name{addSection.docx}
 \alias{addSection.docx}
-\title{Insert a slide into a pptx object}
+\title{Add a section into a docx object}
 \usage{
 \method{addSection}{docx}(doc, landscape = FALSE, ncol = 1,
   space_between = 0.3, columns.only = FALSE, ...)
 }
 \arguments{
-\item{doc}{Object of class \code{\link{docx}} where section has to be added}
+\item{doc}{\code{\link{docx}} object where section has to be added}
 
 \item{landscape}{logical value. Specify TRUE to get a section with horizontal page.}
 
@@ -24,7 +24,7 @@
 an object of class \code{\link{docx}}.
 }
 \description{
-Add a slide into a \code{\link{pptx}} object.
+Add a section into a \code{\link{docx}} object.
 }
 \examples{
 #START_TAG_TEST

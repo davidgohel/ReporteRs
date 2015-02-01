@@ -1,8 +1,8 @@
-#' @title Insert a slide into a pptx object
+#' @title Add a section into a docx object
 #'
-#' @description Add a slide into a \code{\link{pptx}} object.
+#' @description Add a section into a \code{\link{docx}} object.
 #' 
-#' @param doc Object of class \code{\link{docx}} where section has to be added
+#' @param doc \code{\link{docx}} object where section has to be added
 #' @param landscape logical value. Specify TRUE to get a section with horizontal page.
 #' @param ncol \code{integer} number to specify how many columns the section should contains.
 #' @param space_between width in inches of the space between columns of the section.

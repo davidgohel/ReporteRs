@@ -4,13 +4,12 @@
 \alias{light.table}
 \title{get a simple FlexTable from a dataset}
 \usage{
-light.table(dataset, double.format = "\%0.3f")
+light.table(dataset, add.rownames = FALSE)
 }
 \arguments{
 \item{dataset}{the data to use}
 
-\item{double.format}{format string for \code{double} column to
-format in the dataset. See argument \code{fmt} of \code{\link{sprintf}}.}
+\item{add.rownames}{logical value - should the row.names be included in the table.}
 }
 \description{
 get a simple FlexTable from a dataset

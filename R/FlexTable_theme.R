@@ -41,21 +41,19 @@ vanilla.table = function( dataset, double.format = "%0.3f", add.rownames = FALSE
 #' get a simple FlexTable from a dataset
 #' 
 #' @param dataset the data to use
-#' @param double.format format string for \code{double} column to 
-#' format in the dataset. See argument \code{fmt} of \code{\link{sprintf}}.
+#' @param add.rownames logical value - should the row.names be included in the table. 
 #' @export
 #' @examples
 #' #START_TAG_TEST
 #' light.table( iris)
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}
-light.table = function( dataset, double.format = "%0.3f" ){
+light.table = function( dataset, add.rownames = FALSE ){
 	for(j in names( dataset ) ){
-		if( is.numeric( dataset[, j] ) )
-			dataset[, j] = sprintf(double.format, dataset[, j] )
+		dataset[, j] = format( dataset[, j] )
 	}
 	
-	ft = FlexTable( dataset, add.rownames = TRUE )
+	ft = FlexTable( dataset, add.rownames = add.rownames )
 	
 	ft[,,to="header"] = textBold()
 	ft[,,to="header"] = parRight()
