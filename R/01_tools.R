@@ -2,7 +2,7 @@
 #' @import ReporteRsjars
 .onLoad= function(libname, pkgname){
 	.jpackage( pkgname, lib.loc = libname )
-	options("ReporteRs-default-font"="Helvetica")
+	options("ReporteRs-default-font"="Arial")
 	options("ReporteRs-locale.language"="en")
 	options("ReporteRs-locale.region"="US")
 	options("ReporteRs-backtick-color" = "#c7254e" )
