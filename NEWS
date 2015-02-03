@@ -1,3 +1,13 @@
+ReporteRs 0.7.5
+==================================================================
+
+DEBUG
+------------------------------------------------------------------
+
+* debug PowerPoint slide replacement
+  See https://github.com/davidgohel/ReporteRs/issues/66 
+
+
 ReporteRs 0.7.4
 ==================================================================
 
@@ -16,7 +26,6 @@ DEBUG
 
 * debug text insertion in header/footer row with merged cells.
   See http://github.com/davidgohel/ReporteRs/issues/58
-
 
 ReporteRs 0.7.3
 ==================================================================
