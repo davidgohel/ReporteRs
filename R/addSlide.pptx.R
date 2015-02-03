@@ -33,35 +33,14 @@
 #' The layout names must only contain letters (upper or lower case) from 'a' 
 #' to 'z', numbers (from 0 to 9) and spaces.
 #' @return an object of class \code{\link{pptx}}.
-#' @examples 
+#' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' 
-#' # add a slide with layout "Title Slide"
-#' doc = addSlide( doc, slide.layout = "Title Slide" )
-#' doc = addTitle( doc, "Presentation title" ) #set the main title
-#' doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
-#' 
-#' 
-#' # add a slide with layout "Title and Content" then add content
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' doc = addTitle( doc, "Iris sample dataset", level = 1 )
-#' doc = addFlexTable( doc, vanilla.table( iris[ 1:10,] ) )
-#' 
-#' 
-#' # add a slide with layout "Two Content" then add content
-#' doc = addSlide( doc, slide.layout = "Two Content" )
-#' doc = addTitle( doc, "Two Content demo", level = 1 )
-#' doc = addFlexTable( doc, vanilla.table( iris[ 46:55,] ) )
-#' doc = addParagraph(doc, "Hello Word!" )
-#' 
-#' # to see available layouts :
-#' slide.layouts( doc )
-#' 
-#' # Write the object in file "addSlide_example.pptx"
-#' writeDoc( doc, "addSlide_example.pptx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addSlide_example.pptx"
+#' @example examples/pptx.R
+#' @example examples/addSlide_example.R
+#' @example examples/writeDoc_file.R
+#' @example examples/addSlide_replace_example.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addTitle.pptx}}, \code{\link{slide.layouts}}
 #' , \code{\link{pptx}}, \code{\link{addSlide}}
 #' @export
@@ -69,7 +48,15 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 	if( length( doc$styles ) == 0 ){
 		stop("You must defined layout in your pptx template.")				
 	}
-	
+	if( !missing( bookmark ) ) {
+		if( length( bookmark ) != 1 )
+			stop("bookmark must be a positive unique integer")
+		if( !is.numeric( bookmark ) )
+			stop("bookmark must be a positive unique integer")
+		if( bookmark < 1 )
+			stop("bookmark must be a positive unique integer")
+		
+	}
 	if( !is.element( slide.layout, doc$styles ) ){
 		stop("Slide layout '", slide.layout, "' does not exist in defined layouts.")				
 	}
@@ -80,23 +67,46 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 		as.character(slide.layout)
 		)
 	if( missing( bookmark ) ) {
-		slide.part = .jcall( doc$obj, 
-			paste0("L", class.pptx4r.SlidePart, ";"), 
-			"getNewSlide", 
-			as.character(slide.layout)
-			)
+		slide.part = try( .jcall( doc$obj, 
+				paste0("L", class.pptx4r.SlidePart, ";"), 
+				"getNewSlide", 
+				as.character(slide.layout)
+				), 
+			silent = T)
+		if( inherits( slide.part, "try-error")) {
+			.reg = regexpr(pattern = "java\\.lang\\.Exception: ", slide.part)
+			msg = substring( text = slide.part, first = .reg + attr( .reg, "match.length") )
+			stop(msg)
+		}
 		slideindex = .jcall( doc$obj, "I", "getSlideNumber" )
 			
 	} else {
-		slide.part = .jcall( doc$obj, 
-			paste0("L", class.pptx4r.SlidePart, ";"), 
-			"getAndReInitExistingSlide", 
-			as.character(slide.layout), as.integer(bookmark)
-			)
+		slide.part = try( .jcall( doc$obj, 
+				paste0("L", class.pptx4r.SlidePart, ";"), 
+				"getAndReInitExistingSlide", 
+				as.character(slide.layout), as.integer(bookmark)
+				), 
+			silent = T)
+		if( inherits( slide.part, "try-error")) {
+			.reg = regexpr(pattern = "java\\.lang\\.Exception: ", slide.part)
+			msg = substring( text = slide.part, first = .reg + attr( .reg, "match.length") )
+			stop(msg)
+		}
 		slideindex = as.integer(bookmark)
 	}
-	slide = .jnew(class.pptx4r.SlideContent, slide.part, doc$obj, layout.description)
-	slideindex = .jcall( slide, "V", "setSlideIndex", slideindex )
+	
+	slide = try( .jnew(class.pptx4r.SlideContent, 
+			slide.part, doc$obj, layout.description), 
+		silent = T)
+
+	if( inherits( slide, "try-error")) {
+		.reg = regexpr(pattern = "java\\.lang\\.Exception: ", slide)
+		msg = substring( text = slide, first = .reg + attr( .reg, "match.length") )
+		stop(msg)
+	}
+	
+	# mainly for addPageNumber
+	.jcall( slide, "V", "setSlideIndex", slideindex )
 
 	doc$current_slide = slide
 	
