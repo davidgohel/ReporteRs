@@ -20,6 +20,7 @@
 #' Used only if values are not missing. Default is the value of argument 
 #' \code{header.cell.props} provided to funtion \code{FlexTable} when object 
 #' has been created
+#' @param first if \code{TRUE}, row will be inserted as first row
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFooterRow}}
 #' , \code{\link{alterFlexTable}}
 #' @examples
@@ -28,7 +29,9 @@
 #' @example /examples/addHeaderRowFormats.R
 #' @example examples/STOP_TAG_TEST.R
 #' @export
-addHeaderRow = function( x, value, colspan, text.properties, par.properties, cell.properties ){
+addHeaderRow = function( x, value, colspan, 
+		text.properties, par.properties, cell.properties, 
+		first = F){
 	
 	if( !inherits(x, c("FlexTable") ) ) 
 		stop("x must be a FlexTable object.")
@@ -67,7 +70,9 @@ addHeaderRow = function( x, value, colspan, text.properties, par.properties, cel
 	
 	
 	headers = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
-	.jcall( headers, "V", "add", value$jobj )
+	if( !first )
+		.jcall( headers, "V", "add", value$jobj )
+	else .jcall( headers, "V", "insert", value$jobj )
 	
 	#.jcall( x$jobj, "V", "addHeader", value$jobj )
 	

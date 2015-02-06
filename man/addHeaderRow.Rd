@@ -5,7 +5,7 @@
 \title{add header in a FlexTable}
 \usage{
 addHeaderRow(x, value, colspan, text.properties, par.properties,
-  cell.properties)
+  cell.properties, first = F)
 }
 \arguments{
 \item{x}{a \code{FlexTable} object}
@@ -31,6 +31,8 @@ has been created}
 Used only if values are not missing. Default is the value of argument
 \code{header.cell.props} provided to funtion \code{FlexTable} when object
 has been created}
+
+\item{first}{if \code{TRUE}, row will be inserted as first row}
 }
 \description{
 add a header row in a FlexTable

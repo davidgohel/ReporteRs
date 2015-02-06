@@ -2,7 +2,7 @@
 % Please edit documentation in R/text_extract.R
 \name{text_extract}
 \alias{text_extract}
-\title{Simple text extraction from a docx document}
+\title{Simple Text Extraction From a Word Document}
 \usage{
 text_extract(x, body = TRUE, header = TRUE, footer = TRUE, bookmark)
 }
