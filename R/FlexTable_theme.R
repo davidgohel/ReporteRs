@@ -16,7 +16,7 @@
 vanilla.table = function( dataset, double.format = "%0.3f", add.rownames = FALSE ){
 	for(j in names( dataset ) ){
 		if( is.numeric( dataset[, j] ) )
-			dataset[, j] = sprintf(double.format, dataset[, j] )
+			dataset[, j] = format(double.format )
 	}
 	
 	ft = FlexTable( dataset, add.rownames = add.rownames )
