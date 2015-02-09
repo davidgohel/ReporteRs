@@ -4,8 +4,6 @@
 #' get a simple FlexTable from a dataset
 #' 
 #' @param dataset the data to use
-#' @param double.format format string for \code{double} column to 
-#' format in the dataset. See argument \code{fmt} of \code{\link{sprintf}}.
 #' @param add.rownames logical value - should the row.names be included in the table. 
 #' @export
 #' @examples
@@ -13,10 +11,10 @@
 #' vanilla.table( iris)
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}
-vanilla.table = function( dataset, double.format = "%0.3f", add.rownames = FALSE ){
+vanilla.table = function( dataset, add.rownames = FALSE ){
 	for(j in names( dataset ) ){
 		if( is.numeric( dataset[, j] ) )
-			dataset[, j] = format(double.format )
+			dataset[, j] = format(dataset[, j] )
 	}
 	
 	ft = FlexTable( dataset, add.rownames = add.rownames )
