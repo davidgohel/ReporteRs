@@ -35,6 +35,6 @@ text_extract( doc, bookmark = "author" )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{docx}}
+\code{\link{docx}}, \code{\link{list_bookmarks}}
 }
 

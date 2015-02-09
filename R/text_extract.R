@@ -18,9 +18,14 @@
 #' text_extract( doc, header = FALSE, footer = FALSE )
 #' text_extract( doc, bookmark = "author" )
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{docx}}
+#' @seealso \code{\link{docx}}, \code{\link{list_bookmarks}}
 #' @export
 text_extract = function( x, body = TRUE, header = TRUE, footer = TRUE, bookmark){
+	
+	if( !inherits(x, "docx")){
+		stop("x must be a docx object.")
+	}
+	
 	if( missing( bookmark ) )
 		out = .jcall(x$obj, "[S", "getWords", body, header, footer)
 	else {
@@ -29,4 +34,28 @@ text_extract = function( x, body = TRUE, header = TRUE, footer = TRUE, bookmark)
 		out = .jcall(x$obj, "[S", "getWords", casefold( bookmark, upper = FALSE ) )
 	}
 	out
+}
+
+#' @title List Bookmarks from a Word Document
+#'
+#' @description
+#' List all bookmarks available in a \code{docx} object.
+#' @param x a \code{docx} object
+#' @return a character vector
+#' @examples 
+#' #START_TAG_TEST
+#' doc = docx( title = "My example", template = file.path( 
+#'   find.package("ReporteRs"), "templates/bookmark_example.docx") )
+#' list_bookmarks( doc )
+#' @example examples/STOP_TAG_TEST.R
+#' @seealso \code{\link{docx}}, \code{\link{text_extract}}
+#' @export
+list_bookmarks = function( x, body = TRUE, header = TRUE, footer = TRUE){
+	
+	if( !inherits(x, "docx")){
+		stop("x must be a docx object.")
+	}
+	
+	out = .jcall(x$obj, "[S", "getBookMarks", body, header, footer)
+	setdiff(out, "_GoBack" )
 }
