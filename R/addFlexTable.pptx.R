@@ -4,10 +4,10 @@
 #' 
 #' @param doc docx object
 #' @param flextable the \code{FlexTable} object
-#' @param offx optional, x position of the shape (top left position of the bounding box) in inch. See details.
-#' @param offy optional, y position of the shape (top left position of the bounding box) in inch. See details.
-#' @param width optional, width of the shape in inch. See details.
-#' @param height optional, height of the shape in inch. See details.
+#' @param offx optional, x position of the shape (top left position of the bounding box) in inches. See details.
+#' @param offy optional, y position of the shape (top left position of the bounding box) in inches. See details.
+#' @param width optional, width of the shape in inches. See details.
+#' @param height optional, height of the shape in inches. See details.
 #' @param ... further arguments - not used
 #' @return a pptx object
 #' @seealso \code{\link{FlexTable}}, \code{\link{pptx}}
