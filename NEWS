@@ -10,6 +10,8 @@ ENHANCEMENT
 * new function list_bookmarks to extract bookmark names in a 
   docx object
 
+* addImage has a new argument ppi to help defining dimensions of 
+  images within documents. 
 
 ReporteRs 0.7.5
 ==================================================================

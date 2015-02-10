@@ -16,14 +16,14 @@ an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}}
 or a character vector.}
 
 \item{offx}{optional, x position of the shape (top left position of the bounding box)
-in inch. See details.}
+in inches. See details.}
 
 \item{offy}{optional, y position of the shape (top left position of the bounding box)
-in inch. See details.}
+in inches. See details.}
 
-\item{width}{optional, width of the shape in inch. See details.}
+\item{width}{optional, width of the shape in inches. See details.}
 
-\item{height}{optional, height of the shape in inch. See details.}
+\item{height}{optional, height of the shape in inches. See details.}
 
 \item{par.properties}{\code{\link{parProperties}} to apply to paragraphs. Shading
 and border settings will have no effect.}

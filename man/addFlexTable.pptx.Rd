@@ -11,13 +11,13 @@
 
 \item{flextable}{the \code{FlexTable} object}
 
-\item{offx}{optional, x position of the shape (top left position of the bounding box) in inch. See details.}
+\item{offx}{optional, x position of the shape (top left position of the bounding box) in inches. See details.}
 
-\item{offy}{optional, y position of the shape (top left position of the bounding box) in inch. See details.}
+\item{offy}{optional, y position of the shape (top left position of the bounding box) in inches. See details.}
 
-\item{width}{optional, width of the shape in inch. See details.}
+\item{width}{optional, width of the shape in inches. See details.}
 
-\item{height}{optional, height of the shape in inch. See details.}
+\item{height}{optional, height of the shape in inches. See details.}
 
 \item{...}{further arguments - not used}
 }
@@ -100,7 +100,7 @@ MyFTable = FlexTable( data = dataset
   , header.par.props = parProperties(text.align = "right" )
 )
 
-# set columns widths (in inches)
+# set columns widths (inch)
 MyFTable = setFlexTableWidths( MyFTable, widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
 
 # span successive identical cells within column 1, 2 and 3

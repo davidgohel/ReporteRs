@@ -6,7 +6,7 @@
 \usage{
 \method{addImage}{docx}(doc, filename, bookmark,
   par.properties = parProperties(text.align = "center", padding = 5), width,
-  height, ...)
+  height, ppi = 72, ...)
 }
 \arguments{
 \item{doc}{Object of class \code{\link{docx}} where external image has to be added}
@@ -19,9 +19,11 @@ optional. if missing, image is added at the end of the document. See \code{\link
 \item{par.properties}{paragraph formatting properties of the paragraph that contains images.
 An object of class \code{\link{parProperties}}}
 
-\item{width}{image width in inch}
+\item{width}{image width in inches}
 
-\item{height}{image height in inch}
+\item{height}{image height in inches}
+
+\item{ppi}{dot per inches, default to 72}
 
 \item{...}{further arguments, not used.}
 }
@@ -31,12 +33,9 @@ an object of class \code{\link{docx}}.
 \description{
 Add external images into a \code{\link{docx}} object.
 }
-\note{
-If the following message is displayed: \code{can not read dpi, assuming 96 dpi.}
-ReporteRs try to read dpi from images when \code{width} and \code{height} are unknown.
-If it fails, the message is displayed and a value of 96 dpi is assumed.
-To avoid this, specify arguments \code{width} and \code{height} ; ReporteRs
-won't try to read dpi value.
+\details{
+If arguments width and height are missing, values will be defined as
+their respective number of pixels divide by \code{ppi}.
 }
 \examples{
 #START_TAG_TEST
@@ -46,9 +45,24 @@ doc.filename = "addImage_example.docx"
 options( "ReporteRs-fontsize" = 10 )
 
 doc = docx( )
-# the file 'logo.jpg' only exists in R for Windows
-img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-doc = addImage(doc, img.file )
+# files 'logo.jpg' and 'logosm.jpg' only exist in R for Windows
+img.file1 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
+img.file2 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logosm.jpg" )
+
+if( file.exists( img.file1 ) && file.exists( img.file2 ) ){
+	doc = addTitle( doc, "Add images with defaut PPI (72)", level = 1)
+	doc = addTitle( doc, "Image 1", level = 2)
+	doc = addImage(doc, img.file1 )
+	doc = addTitle( doc, "Image 2", level = 2)
+	doc = addImage(doc, img.file2 )
+	doc = addTitle( doc, "Add images with their respective PPI", level = 1)
+	doc = addTitle( doc, "Image 1", level = 2)
+	doc = addImage(doc, img.file1, ppi = 300 )
+	doc = addTitle( doc, "Image 2", level = 2)
+	doc = addImage(doc, img.file2, ppi = 96)
+	doc = addTitle( doc, "Add images with width and height", level = 1)
+	doc = addImage(doc, img.file1, width = 4, height = 2 )
+}
 
 # Write the object
 writeDoc( doc, file = doc.filename )

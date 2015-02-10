@@ -7,7 +7,13 @@
 list_bookmarks(x, body = TRUE, header = TRUE, footer = TRUE)
 }
 \arguments{
-\item{x}{\code{\link{docx}} object}
+\item{x}{a \code{docx} object}
+
+\item{body}{specifies to scan document body}
+
+\item{header}{specifies to scan document header}
+
+\item{footer}{specifies to scan document footer}
 }
 \value{
 a character vector

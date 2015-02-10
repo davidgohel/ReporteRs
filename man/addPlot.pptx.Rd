@@ -25,13 +25,13 @@ are produced instead of PNG images. Vector graphics in pptx document are Drawing
 
 \item{editable}{logical value - if TRUE vector graphics elements (points, text, etc.) are editable.}
 
-\item{offx}{optional, x position of the shape (top left position of the bounding box) in inch. See details.}
+\item{offx}{optional, x position of the shape (top left position of the bounding box) in inches. See details.}
 
-\item{offy}{optional, y position of the shape (top left position of the bounding box) in inch. See details.}
+\item{offy}{optional, y position of the shape (top left position of the bounding box) in inches. See details.}
 
-\item{width}{optional, width of the shape in inch. See details.}
+\item{width}{optional, width of the shape in inches. See details.}
 
-\item{height}{optional, height of the shape in inch. See details.}
+\item{height}{optional, height of the shape in inches. See details.}
 
 \item{...}{arguments for \code{fun}.}
 }
