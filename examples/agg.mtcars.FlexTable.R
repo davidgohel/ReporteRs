@@ -20,7 +20,7 @@ MyFTable = FlexTable( data = dataset
   , header.par.props = parProperties(text.align = "right" )
 )
 
-# set columns widths (in inches)
+# set columns widths (inch)
 MyFTable = setFlexTableWidths( MyFTable, widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
 
 # span successive identical cells within column 1, 2 and 3
