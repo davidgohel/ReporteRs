@@ -13,10 +13,10 @@
 #' are produced instead of PNG images. Vector graphics in pptx document are DrawingML instructions. 
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
-#' @param offx optional, x position of the shape (top left position of the bounding box) in inch. See details.
-#' @param offy optional, y position of the shape (top left position of the bounding box) in inch. See details.
-#' @param width optional, width of the shape in inch. See details.
-#' @param height optional, height of the shape in inch. See details.
+#' @param offx optional, x position of the shape (top left position of the bounding box) in inches. See details.
+#' @param offy optional, y position of the shape (top left position of the bounding box) in inches. See details.
+#' @param width optional, width of the shape in inches. See details.
+#' @param height optional, height of the shape in inches. See details.
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{\link{pptx}}.
 #' @details
@@ -204,13 +204,13 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 	for( i in seq_along( plotfiles ) ){
 		if( check.dims > 3 ){
 			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy, 
-					width=width, height=height )
+					width=width, height=height, ppi = 300 )
 		} else if( !missing(offx) && !missing(offy) && missing(width) && missing(height) ){
-			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy )
+			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy, ppi = 300 )
 		}  else if( check.dims < 1 ){
-			doc = addImage( doc, plotfiles[i] )
+			doc = addImage( doc, plotfiles[i], ppi = 300 )
 		} else {
-			doc = addImage( doc, plotfiles[i] )
+			doc = addImage( doc, plotfiles[i], ppi = 300 )
 		}
 	}
 	

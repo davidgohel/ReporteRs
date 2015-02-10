@@ -58,7 +58,7 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
 		doc = addImage( doc, plotfiles, width = width*72, height = height*72, 
-				par.properties = par.properties )
+				par.properties = par.properties, ppi = 300 )
 	} else {
 		filename = file.path( dirname, "plot", fsep = "/" )
 		env = raphael( file = filename,width=width*72.2
