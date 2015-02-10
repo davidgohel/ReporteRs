@@ -41,6 +41,9 @@ text_extract = function( x, body = TRUE, header = TRUE, footer = TRUE, bookmark)
 #' @description
 #' List all bookmarks available in a \code{docx} object.
 #' @param x a \code{docx} object
+#' @param body specifies to scan document body 
+#' @param header specifies to scan document header 
+#' @param footer specifies to scan document footer 
 #' @return a character vector
 #' @examples 
 #' #START_TAG_TEST
