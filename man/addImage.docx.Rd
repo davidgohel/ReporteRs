@@ -63,6 +63,13 @@ if( file.exists( img.file1 ) && file.exists( img.file2 ) ){
 	doc = addTitle( doc, "Add images with width and height", level = 1)
 	doc = addImage(doc, img.file1, width = 4, height = 2 )
 }
+if( exists("win.metafile") ){
+	win.metafile(filename = "image.wmf", width = 5, height = 5 )
+	barplot( 1:6, col = 2:7)
+	dev.off()
+	
+	doc =addImage(doc, "image.wmf", width = 5, height = 5 )
+}
 
 # Write the object
 writeDoc( doc, file = doc.filename )
