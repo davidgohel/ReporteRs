@@ -1,0 +1,56 @@
+plot_function = function(){
+  head( iris )
+  colorsspec = list( setosa.solid = rgb(153/255, 51/255, 0/255, 1)
+    , versicolor.solid = rgb(102/255, 102/255, 51/255, 1)
+    , virginica.solid = rgb(0/255, 51/255, 102/255, 1)
+    , setosa.area = rgb(153/255, 51/255, 0/255, 0.5)
+    , versicolor.area = rgb(102/255, 102/255, 51/255, 0.5)
+    , virginica.area = rgb(0/255, 51/255, 102/255, 0.5)
+  )
+  links = list( setosa = "window.open(\"http://en.wikipedia.org/wiki/Iris_(plant)\");"
+    , versicolor = "window.open(\"http://en.wikipedia.org/wiki/Iris_versicolor\");"
+    , virginica = "window.open(\"http://en.wikipedia.org/wiki/Iris_virginica\");"
+  )
+  # init plot
+  with( iris, plot( Sepal.Length, Petal.Length , type = "n" ) )
+  # loop over species
+  sdata = split( iris, iris$Species )
+  for(i in names( sdata ) ){
+    tempdata = sdata[[i]]
+    ###############
+    # do some calculations to get, predictions and lower bands (3* se)
+    lo = loess(Petal.Length~Sepal.Length, data = tempdata )
+    min.x = min(tempdata$Sepal.Length, na.rm = TRUE)
+    max.x = max(tempdata$Sepal.Length, na.rm = TRUE)
+    newdata = data.frame( Sepal.Length = seq( min.x, max.x, length.out = 10 ) )
+    .pred = predict( lo, newdata = newdata, se = TRUE)
+    lower = .pred$fit - 3*.pred$se.fit
+    upper = .pred$fit + 3*.pred$se.fit
+    coord.x = c( newdata$Sepal.Length
+      , rev( newdata$Sepal.Length )
+      , NA )
+    coord.y = c( lower, rev(upper), NA )
+    # end of calculations
+    ###############
+    # add interactive elts on polygons
+    add.plot.interactivity( fun = polygon, x = coord.x , y = coord.y
+      , col = colorsspec[[paste0( i, ".area")]], border = FALSE
+      , popup.labels = paste0( i, "\\n", "click on the area")
+      , click.actions = links[[i]]
+    )
+    
+    lines( newdata$Sepal.Length, .pred$fit, col = colorsspec[[paste0( i, ".solid")]] )
+    # add interactive elts on points
+    labs = paste( i, "\\n", rep("double click on the point", nrow(tempdata) ), sep = "" )
+    actions = paste("alert('", format( tempdata$Petal.Length ), "');")
+    add.plot.interactivity( fun = points
+      , x = tempdata$Sepal.Length , y = tempdata$Petal.Length
+      , col = colorsspec[[paste0( i, ".solid")]], pch = 16
+      , popup.labels = labs
+      , dblclick.actions = actions
+    )
+  }
+  invisible()
+}
+
+doc = addPlot( doc, fun = plot_function, width = 8 )
