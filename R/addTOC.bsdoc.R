@@ -11,22 +11,11 @@
 #' @return an object of class \code{\link{bsdoc}}.
 #' @examples
 #' #START_TAG_TEST
-#' doc = bsdoc( )
-#' 
-#' doc = addTitle( doc, 'Title 1', level = 1 )
-#' 
-#' doc = addTitle( doc, 'Title 2', level = 1 )
-#' 
-#' doc = addTitle( doc, 'Title 3', level = 1 )
-#' 
-#' doc = addTitle( doc, 'Title A', level = 2 )
-#' 
-#' doc = addTitle( doc, 'Title B', level = 2 )
-#' 
-#' doc = addTOC( doc )
-#' 
-#' writeDoc( doc, file = 'addTOC_example/example.html')
-#' #STOP_TAG_TEST
+#' doc.filename = "addTOC_example/example.html"
+#' @example examples/bsdoc.R
+#' @example examples/addTOC.bsdoc.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addTOC.bsdoc}}
 #' , \code{\link{docx}}, \code{\link{addTOC.docx}}
 #' @export

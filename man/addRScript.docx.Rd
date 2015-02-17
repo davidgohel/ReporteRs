@@ -38,16 +38,13 @@ You have to one of the following argument: file or text or rscript.
 \examples{
 #START_TAG_TEST
 doc.filename = "addRScript_example.docx"
-# Create a new document
-doc = docx( title = "title" )
 
-an_rscript = RScript( text = "ls()
-x = rnorm(10)" )
-doc = addRScript(doc, an_rscript )
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
 
-doc = addPageBreak( doc )
-
-doc = addRScript(doc, text = "ls()" )
+doc = docx( )
+doc = addRScript(doc, text = "x = rnorm(100)
+plot(density( x ) )" )
 
 # Write the object
 writeDoc( doc, file = doc.filename )

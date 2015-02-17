@@ -24,16 +24,18 @@ Subtitle shape only exist in slide of type 'Title Slide'.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = pptx( title = "title" )
+doc.filename = "addSubtitle_example.pptx"
 
-# add a slide with layout "Title Slide"
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
+doc = pptx( title = "title" )
 doc = addSlide( doc, slide.layout = "Title Slide" )
 doc = addTitle( doc, "Presentation title" ) #set the main title
 doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
 
-# Write the object in file "addSubtitle_example.pptx"
-writeDoc( doc, "addSubtitle_example.pptx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

@@ -19,17 +19,8 @@
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addRScript_example.docx"
-#' # Create a new document 
-#' doc = docx( title = "title" )
-#' 
-#' an_rscript = RScript( text = "ls()
-#' x = rnorm(10)" )
-#' doc = addRScript(doc, an_rscript )
-#' 
-#' doc = addPageBreak( doc )
-#' 
-#' doc = addRScript(doc, text = "ls()" )
-#' 
+#' @example examples/docx.R
+#' @example examples/addRScript.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addRScript}}, \code{\link{bookmark}}

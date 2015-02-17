@@ -113,8 +113,10 @@ as.character.pot = function (x, ...){
 #' \code{pot} object with no associated format ; therefore, document default document style
 #' will be used (see \code{\link{addParagraph}}).
 #' @examples
+#' #START_TAG_TEST
 #' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addParagraph}}
 #' @export
 "+.pot" = function(e1, e2) {

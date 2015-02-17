@@ -8,7 +8,9 @@
 #' @param ... further arguments, not used. 
 #' @return a \code{\link{FlexTable}} object
 #' @examples
+#' #START_TAG_TEST
 #' as.FlexTable( sessionInfo() )
+#' @example examples/STOP_TAG_TEST.R
 #' @export 
 as.FlexTable.sessionInfo = function( x, locale = TRUE, ... ){
 	

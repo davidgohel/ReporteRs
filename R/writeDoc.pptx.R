@@ -8,18 +8,12 @@
 #' 
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' 
-#' # add a slide with layout "Title and Content"
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' 
-#' # add a dummy text in the content shape
-#' doc = addParagraph(doc, "Hello Word!")
-#' 
-#' # Write the object in file "writeDoc_example.pptx"
-#' writeDoc( doc, "writeDoc_example.pptx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "writeDoc_example.pptx"
+#' @example examples/pptx.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle1NoLevel.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{writeDoc}}
 #' @export
 writeDoc.pptx = function(doc, file, ...) {

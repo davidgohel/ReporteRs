@@ -18,13 +18,15 @@ Write the \code{\link{docx}} object in a '.docx' file.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = docx( title = "title" )
+doc.filename = "writeDoc_example.docx"
 
-doc = addParagraph(doc, "Hello Word!", stylename = "Normal")
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
 
-# Write the object in file "writeDoc_example.docx"
-writeDoc( doc, "writeDoc_example.docx" )
+doc = docx( )
+
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

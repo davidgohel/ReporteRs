@@ -29,18 +29,23 @@ declareTitlesStyles to indicate which available styles are meant to be
 used as header styles.
 }
 \examples{
-\dontrun{
-doc = docx( title = "My example" )
+#START_TAG_TEST
+doc.filename = "addImage_example.docx"
+
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
+
+doc = docx( )
 styles( doc )
 # [1] "Normal"                  "Title1"                  "Title2"
 # [4] "Title3"                  "Title4"                  "Title5"
 # [7] "Title6"                  "Title7"                  "Title8"
 #[10] "Title9"                  "Defaut"                  ...
 doc = declareTitlesStyles(doc
-	, stylenames = c("Title1", "Title2", "Title3"
-	, "Title4", "Title5", "Title6", "Title7", "Title8", "Title9" ) )
+	, stylenames = c("Titre1", "Titre2", "Titre3"
+		, "Titre4", "Titre5", "Titre6", "Titre7", "Titre8", "Titre9" ) )
 doc = addTitle( doc, "title 1", 1 )
-}
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{docx}},\code{\link{styles.docx}},\code{\link{addTitle.docx}}

@@ -10,13 +10,10 @@
 #' @param footer specifies to scan document footer 
 #' @param bookmark a character value ; id of the Word bookmark to scan.
 #' @return a character vector
-#' @examples 
+#' @examples
 #' #START_TAG_TEST
-#' doc = docx( title = "My example", template = file.path( 
-#'   find.package("ReporteRs"), "templates/bookmark_example.docx") )
-#' text_extract( doc )
-#' text_extract( doc, header = FALSE, footer = FALSE )
-#' text_extract( doc, bookmark = "author" )
+#' @example examples/text_extract_get_docx.R
+#' @example examples/text_extract.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{list_bookmarks}}
 #' @export
@@ -45,11 +42,10 @@ text_extract = function( x, body = TRUE, header = TRUE, footer = TRUE, bookmark)
 #' @param header specifies to scan document header 
 #' @param footer specifies to scan document footer 
 #' @return a character vector
-#' @examples 
+#' @examples
 #' #START_TAG_TEST
-#' doc = docx( title = "My example", template = file.path( 
-#'   find.package("ReporteRs"), "templates/bookmark_example.docx") )
-#' list_bookmarks( doc )
+#' @example examples/text_extract_get_docx.R
+#' @example examples/list_bookmarks.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{text_extract}}
 #' @export

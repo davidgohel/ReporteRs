@@ -8,14 +8,10 @@
 #' 
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = docx( title = "title" )
-#' 
-#' doc = addParagraph(doc, "Hello Word!", stylename = "Normal")
-#' 
-#' # Write the object in file "writeDoc_example.docx"
-#' writeDoc( doc, "writeDoc_example.docx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "writeDoc_example.docx"
+#' @example examples/docx.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{writeDoc}}
 #' @export
 writeDoc.docx = function(doc, file, ...) {

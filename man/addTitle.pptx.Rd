@@ -21,17 +21,20 @@ Add a title into a \code{\link{pptx}} object.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
+doc.filename = "addTitle_example.pptx"
+
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-# Here we fill the title shape with "My title"
-doc = addTitle( doc, "My title" )
+doc = addTitle( doc, "Title example 1" )
 
-# Write the object in file "addTitle_example.pptx"
-writeDoc( doc, "addTitle_example.pptx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

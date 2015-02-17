@@ -37,12 +37,18 @@ You have to one of the following argument: file or text or rscript.
 \examples{
 #START_TAG_TEST
 doc.filename = "addRScript_example.pptx"
-# Create a new document
+
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
 doc = pptx( title = "title" )
+
+# add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
-an_rscript = RScript( text = "ls()
-x = rnorm(10)", par.properties = parProperties() )
-doc = addRScript(doc, an_rscript )
+
+doc = addTitle( doc, "Title example 1" )
+doc = addRScript(doc, text = "x = rnorm(100)
+plot(density( x ) )" )
 
 # Write the object
 writeDoc( doc, file = doc.filename )

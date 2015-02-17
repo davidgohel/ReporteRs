@@ -27,7 +27,6 @@ For example, this can be used to produce a toc with only plots.
 }
 \examples{
 #START_TAG_TEST
-### example 1
 # Create a new document
 doc = docx( title = "title" )
 #leave the first page blank and add a page break
@@ -43,30 +42,27 @@ doc = addTitle( doc, "My second title", level = 1 )
 
 # Write the object in file "addTOC_example1.docx"
 writeDoc( doc, "addTOC_example1.docx" )
-
-
-### example 2
-# Create a new document
 doc = docx( title = "title" )
+
 #leave the first page blank and add a page break
-doc = addPageBreak(doc)#'
+doc = addPageBreak(doc)
 
 doc = addTitle( doc, "Plots", level = 1 )
-doc = addPlot( doc
-		, fun = plot
-		, x = rnorm( 100 )
-		, y = rnorm (100 )
-		, main = "base plot main title"
-	)
+doc = addPlot( doc, 
+	fun = plot,
+	x = rnorm( 100 ),
+	y = rnorm (100 ),
+	main = "base plot main title"
+)
 doc = addParagraph( doc, value="graph example 1", stylename = "rPlotLegend" )
 if( requireNamespace("ggplot2", quietly = TRUE) ){
-  myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-    , size = Petal.Width, alpha = I(0.7))
-  doc = addPlot( doc = doc
-    , fun = print
-    , x = myplot #this argument MUST be named, print is expecting argument 'x'
-  )
-  doc = addParagraph( doc, value="graph example 2", stylename = "rPlotLegend" )
+	myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris, color = Species
+		, size = Petal.Width, alpha = I(0.7))
+	doc = addPlot( doc = doc
+	, fun = print
+	, x = myplot #this argument MUST be named, print is expecting argument 'x'
+	)
+	doc = addParagraph( doc, value="graph example 2", stylename = "rPlotLegend" )
 }
 
 # Because we used "rPlotLegend" as legend in plot

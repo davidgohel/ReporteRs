@@ -16,21 +16,11 @@
 #' @return a \code{bsdoc} object
 #' @examples
 #' #START_TAG_TEST
-#' 
-#' # Create a new document 
-#' doc = bsdoc( title = "title" )
-#' 
-#' doc = addFooter( doc, value = pot( "Code licensed under ", 
-#'     format = textProperties(color="gray") ) + 
-#'   pot("GPL-3", format = textProperties(color="#428bca"), 
-#'     hyperlink = "https://gnu.org/licenses/gpl.html" ) + 
-#'   pot(".", format = textProperties(color="gray") ), 
-#' par.properties = parCenter( padding = 2 ) 
-#' )
-#'  
-#' # write the html object in a directory
-#' writeDoc( doc, "addFooter/example.html")
-#' #STOP_TAG_TEST
+#' doc.filename = "addFooter/example.html"
+#' @example examples/bsdoc.R
+#' @example examples/addFooter.bsdoc.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @export
 #' @seealso \code{\link{bsdoc}}
 #' @export

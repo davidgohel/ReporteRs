@@ -26,9 +26,12 @@ Insert a date into the current slide of a \code{pptx} object.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
+doc.filename = "addDate_example.pptx"
+
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
 doc = pptx( title = "title" )
-# add a slide with layout "Title Slide"
 doc = addSlide( doc, slide.layout = "Title Slide" )
 doc = addTitle( doc, "Presentation title" ) #set the main title
 doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
@@ -36,12 +39,13 @@ doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the s
 ## add a date on the current slide
 doc = addDate( doc )
 
+
 doc = addSlide( doc, slide.layout = "Title and Content" )
 ## add a page number on the current slide but not the default text (slide number)
 doc = addDate( doc, "Dummy date" )
 
-# Write the object in file "presentation.pptx"
-writeDoc( doc, "addDate_example.pptx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

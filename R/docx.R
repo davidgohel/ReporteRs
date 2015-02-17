@@ -23,7 +23,9 @@
 #'   \item \code{\link{addMarkdown.docx}} add markdown text
 #'   \item \code{\link{addTOC.docx}} add table of content
 #'   \item \code{\link{addPageBreak.docx}} add page break
-#'   \item \code{\link{addSection.docx}} add section
+#'   \item \code{\link{addSection.docx}} add section (for landscape orientation)
+#'   \item \code{\link{addDocument.docx}} add an external \code{docx} file into 
+#' 		a \code{docx} object.
 #' }
 #' 
 #' R outputs (tables, plots, paragraphs and images) can be inserted (and not added at the end) 

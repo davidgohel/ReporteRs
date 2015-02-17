@@ -20,13 +20,10 @@
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addRScript_example.pptx"
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' an_rscript = RScript( text = "ls()
-#' x = rnorm(10)", par.properties = parProperties() )
-#' doc = addRScript(doc, an_rscript )
-#' 
+#' @example examples/pptx.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle1NoLevel.R
+#' @example examples/addRScript.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addRScript}}

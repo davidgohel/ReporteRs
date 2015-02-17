@@ -32,20 +32,22 @@ the document.
 }
 \examples{
 #START_TAG_TEST
+doc.filename = "addFooter/example.html"
 
-# Create a new document
-doc = bsdoc( title = "title" )
+# set default font size to 11
+options( "ReporteRs-fontsize" = 11 )
 
-doc = addFooter( doc, value = pot( "Code licensed under ",
-    format = textProperties(color="gray") ) +
-  pot("GPL-3", format = textProperties(color="#428bca"),
-    hyperlink = "https://gnu.org/licenses/gpl.html" ) +
-  pot(".", format = textProperties(color="gray") ),
-par.properties = parCenter( padding = 2 )
+doc = bsdoc( )
+doc = addFooter( doc, value = pot( "Code licensed under ", 
+    format = textProperties(color="gray") ) + 
+  pot("GPL-3", format = textProperties(color="#428bca"), 
+    hyperlink = "https://gnu.org/licenses/gpl.html" ) + 
+  pot(".", format = textProperties(color="gray") ), 
+par.properties = parCenter( padding = 2 ) 
 )
 
-# write the html object in a directory
-writeDoc( doc, "addFooter/example.html")
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

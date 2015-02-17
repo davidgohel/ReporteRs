@@ -22,9 +22,12 @@ Insert a page number shape into the current slide of a \code{pptx} object.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = pptx( title = "title" )
+doc.filename = "addPageNumber_example.pptx"
 
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
+doc = pptx( title = "title" )
 # add a slide with layout "Title Slide"
 doc = addSlide( doc, slide.layout = "Title Slide" )
 doc = addTitle( doc, "Presentation title" ) #set the main title
@@ -38,8 +41,8 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 ## add a page number on the current slide but not the default text (slide number)
 doc = addPageNumber( doc, value = "Page number text")
 
-# Write the object in file "presentation.pptx"
-writeDoc( doc, "addPageNumber_example.pptx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

@@ -18,17 +18,20 @@ Write the \code{\link{pptx}} object in a '.pptx' file.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
+doc.filename = "writeDoc_example.pptx"
+
+# set default font size to 24
+options( "ReporteRs-fontsize" = 24 )
+
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-# add a dummy text in the content shape
-doc = addParagraph(doc, "Hello Word!")
+doc = addTitle( doc, "Title example 1" )
 
-# Write the object in file "writeDoc_example.pptx"
-writeDoc( doc, "writeDoc_example.pptx" )
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

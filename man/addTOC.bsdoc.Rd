@@ -23,8 +23,12 @@ of the content.
 }
 \examples{
 #START_TAG_TEST
-doc = bsdoc( )
+doc.filename = "addTOC_example/example.html"
 
+# set default font size to 11
+options( "ReporteRs-fontsize" = 11 )
+
+doc = bsdoc( )
 doc = addTitle( doc, 'Title 1', level = 1 )
 
 doc = addTitle( doc, 'Title 2', level = 1 )
@@ -37,7 +41,8 @@ doc = addTitle( doc, 'Title B', level = 2 )
 
 doc = addTOC( doc )
 
-writeDoc( doc, file = 'addTOC_example/example.html')
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{

@@ -21,6 +21,8 @@ Get a \code{\link{FlexTable}} object from
 a \code{\link{sessionInfo}} object.
 }
 \examples{
+#START_TAG_TEST
 as.FlexTable( sessionInfo() )
+#STOP_TAG_TEST
 }
 

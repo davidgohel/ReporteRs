@@ -17,18 +17,11 @@
 #' the style to use for title 2, etc.
 #' @param ... further arguments, not used. 
 #' @examples
-#' \dontrun{
-#' doc = docx( title = "My example" )
-#' styles( doc )
-#' # [1] "Normal"                  "Title1"                  "Title2"                 
-#' # [4] "Title3"                  "Title4"                  "Title5"                 
-#' # [7] "Title6"                  "Title7"                  "Title8"                 
-#' #[10] "Title9"                  "Defaut"                  ...         
-#' doc = declareTitlesStyles(doc
-#' 	, stylenames = c("Title1", "Title2", "Title3"
-#' 	, "Title4", "Title5", "Title6", "Title7", "Title8", "Title9" ) )
-#' doc = addTitle( doc, "title 1", 1 )
-#' }
+#' #START_TAG_TEST
+#' doc.filename = "addImage_example.docx"
+#' @example examples/docx.R
+#' @example examples/declareTitlesStyles.docx.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}},\code{\link{styles.docx}},\code{\link{addTitle.docx}}
 #' ,\code{\link{declareTitlesStyles}}
 #' @export
@@ -39,3 +32,4 @@ declareTitlesStyles.docx = function( doc, stylenames, ... ) {
 	doc$header.styles = stylenames
 	doc
 	}
+	

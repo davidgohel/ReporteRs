@@ -38,18 +38,20 @@ will be able then to add a table of content in your Word document.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document
-doc = docx( title = "title" )
+doc.filename = "addTitle_example.docx"
 
-# add a title (level 1)
-doc = addTitle( doc, "My first title", level = 1 )
+# set default font size to 10
+options( "ReporteRs-fontsize" = 10 )
 
-# add another title (level 2)
-doc = addTitle( doc, "My first sub-title", level = 2 )
-doc = addParagraph(doc, "Hello Word!", stylename = "Normal")
+doc = docx( )
 
-# Write the object in file "addTitle_example.docx"
-writeDoc( doc, "addTitle_example.docx" )
+doc = addTitle( doc, "Title example 1", level = 1 )
+
+
+doc = addTitle( doc, "Title example 2", level = 1 )
+
+# Write the object
+writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
