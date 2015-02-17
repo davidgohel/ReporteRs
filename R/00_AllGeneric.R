@@ -150,6 +150,8 @@ addImage = function(doc, filename, ...){
 	if( !file.exists( filename ) )
 		stop( filename, " does not exist")
 	
+	if( !grepl("\\.(png|jpg|jpeg|gif|bmp|wmf|emf)$", filename ) )
+		stop( filename, " is not a valid file. Valid files are png, jpg, jpeg, gif, bmp, wmf, emf.")
 	UseMethod("addImage")
 }
 

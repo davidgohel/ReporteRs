@@ -28,19 +28,18 @@ addImage.bsdoc = function(doc, filename, width, height,
 		par.properties = parProperties(text.align = "center", padding = 5 ), 
 		ppi = 72, ... ) {
 
+	if( any( grepl("\\.(wmf|emf)$", filename ) ) )
+		stop("Not a valid file. Valid files are png, jpg, jpeg, gif, bmp.")
 	
-	for( i in 1:length( filename ) ){
-		jimg = .jnew(class.Image , filename, as.integer(ppi) )
-		if( !missing( width ) && !missing(height) )
-			.jcall( jimg, "V", "setDim", as.double( width ), as.double( height ) )
-		
-		.jcall( jimg, "V", "setParProperties", .jParProperties(par.properties) )
+	jimg = .jnew(class.Image , filename, as.integer(ppi) )
+	if( !missing( width ) && !missing(height) )
+		.jcall( jimg, "V", "setDim", as.double( width ), as.double( height ) )
+	
+	.jcall( jimg, "V", "setParProperties", .jParProperties(par.properties) )
+	
+	out = .jcall( doc$jobj, "I", "add", jimg )
+	if( out != 1 )
+		stop( "Problem while trying to add image(s)." )
 
-		out = .jcall( doc$jobj, "I", "add", jimg )
-		if( out != 1 )
-			stop( "Problem while trying to add image(s)." )
-	}
-	
-	
 	doc
 }

@@ -21,6 +21,7 @@
 #' doc.filename = "addImage_example.docx"
 #' @example examples/docx.R
 #' @example examples/addImageDocument.R
+#' @example examples/addImageWMFDocument.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
@@ -29,7 +30,12 @@
 addImage.docx = function(doc, filename, bookmark,
 	par.properties = parProperties(text.align = "center", padding = 5 ), 
 	width, height, ppi = 72, ... ) {
-	
+
+	if( grepl("\\.(wmf|emf)$", filename ) ){
+		if( missing( width ) || missing(height) )
+			stop("when using wmf or emf file, you must specify argument width and height.")
+	}
+
 	jimg = .jnew(class.Image , filename, as.integer(ppi) )
 	if( !missing( width ) && !missing(height) )
 		.jcall( jimg, "V", "setDim", as.double( width ), as.double( height ) )

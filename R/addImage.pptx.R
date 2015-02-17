@@ -27,6 +27,7 @@
 #' doc.filename = "addImage_example.pptx"
 #' @example examples/pptx.R
 #' @example examples/addImagePresentation.R
+#' @example examples/addImageWMFPresentation.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot.pptx}}
@@ -41,8 +42,7 @@ addImage.pptx = function(doc, filename, offx, offy, width, height, ppi = 72, ...
 	if( !missing(offy) && !is.numeric( offy ) ) stop("arguments offy must be a numeric vector")
 	if( !missing(width) && !is.numeric( width ) ) stop("arguments width must be a numeric vector")
 	if( !missing(height) && !is.numeric( height ) ) stop("arguments height must be a numeric vector")
-	
-#	jimg = .jnew(class.Image , filename )
+
 	jimg = .jnew(class.Image , filename, as.integer(ppi) )
 	if( !missing( width ) && !missing(height) )
 		.jcall( jimg, "V", "setDim", as.double( width ), as.double( height ) )
