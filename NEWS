@@ -4,6 +4,8 @@ ReporteRs 0.7.6
 ENHANCEMENT
 ------------------------------------------------------------------
 
+* addImage now allows wmf and emf image within docx and pptx objects. 
+
 * addHeaderRow has a new argument **first** to insert the row at 
   on top of header rows.  
   
