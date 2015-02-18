@@ -73,7 +73,7 @@ and argument \code{font.size} of \code{\link{pot}}.
 }
 \examples{
 #START_TAG_TEST
-options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Arial")
+options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Helvetica")
 numbering.pattern = c( "\%1.", "\%1. \%2.", "\%1. \%2. \%3.", 
   "\%4.", "\%5.", "\%6.", "\%7.", "\%8.", "\%9." )
 

@@ -65,7 +65,7 @@
 #' 
 #' @examples
 #' #START_TAG_TEST
-#' options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Arial")
+#' options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Helvetica")
 #' @example examples/options.listdefinitions.R
 #' @example examples/STOP_TAG_TEST.R
 #' @name ReporteRs-package

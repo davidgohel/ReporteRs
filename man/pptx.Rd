@@ -49,11 +49,11 @@ unless the \code{\link{writeDoc}} method has been called on the object.
 }
 \examples{
 #START_TAG_TEST
+# set default font size to 10
+options( "ReporteRs-fontsize" = 11 )
+
 # Word document to write
 pptx.file = "presentation_example.pptx"
-
-# set default font size to 26
-options( "ReporteRs-fontsize" = 26 )
 
 # Create a new document
 doc = pptx( title = "title" )
@@ -110,9 +110,6 @@ if( requireNamespace("ggplot2", quietly = TRUE) ){
 ################ FLEXTABLE DEMO ################
 doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addTitle( doc, "FlexTable example" )
-
-# set default font size to 10
-options( "ReporteRs-fontsize" = 10 )
 
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body

@@ -45,6 +45,9 @@ Once object has content, user can write the docx into a ".html" file, see \code{
 }
 \examples{
 #START_TAG_TEST
+# set default font size to 11
+options( "ReporteRs-fontsize" = 11 )
+
 doc = bsdoc( title = "full example" )
 
 
