@@ -5,8 +5,7 @@
 \title{Insert a paragraph into a pptx object}
 \usage{
 \method{addParagraph}{pptx}(doc, value, offx, offy, width, height,
-  par.properties = parProperties(), append = FALSE,
-  restart.numbering = FALSE, ...)
+  par.properties, append = FALSE, restart.numbering = FALSE, ...)
 }
 \arguments{
 \item{doc}{\code{\link{pptx}} object where paragraph is added}

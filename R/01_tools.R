@@ -24,7 +24,9 @@
 
 .jset_of_paragraphs = function( value, par.properties ){
 	
-	parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
+	if( !missing( par.properties ))
+		parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
+	else parset = .jnew( class.ParagraphSet )
 	
 	for( pot_index in 1:length( value ) ){
 		paragrah = .jnew(class.Paragraph )

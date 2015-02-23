@@ -60,7 +60,7 @@
 #' \code{\link{addMarkdown.pptx}}, \code{\link{pot}}
 #' @export
 addParagraph.pptx = function(doc, value, offx, offy, width, height, 
-		par.properties = parProperties(), 
+		par.properties, 
 		append = FALSE, 
 		restart.numbering = FALSE, ... ) {
 	
@@ -97,16 +97,18 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height,
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
-	if( !inherits( par.properties, "parProperties" ) ){
+	if( !missing(par.properties) && !inherits( par.properties, "parProperties" ) ){
 		stop("argument 'par.properties' must be an object of class 'parProperties'")
 	}
 	
-	
 	slide = doc$current_slide 
-	
-	parset = .jset_of_paragraphs(value, par.properties)
-	
+	if( !missing(par.properties) )
+		parset = .jset_of_paragraphs(value, par.properties)
+	else parset = .jset_of_paragraphs(value)
+
 	if( check.dims > 3 ){
+		if( missing(par.properties) )
+			stop("You have to specify par.properties when using arguments offx and offy")
 		out = .jcall( slide, "I", "add", parset
 				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ), 
 				as.logical(restart.numbering) )
