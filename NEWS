@@ -15,6 +15,14 @@ ENHANCEMENT
 * addImage has a new argument ppi to help defining dimensions of 
   images within documents. 
 
+DEBUG
+------------------------------------------------------------------
+
+* propagation of shape layout styles to the presentation slides with 
+  pptx object is now working if argument par.properties is missing 
+  in the call of addParagraph. http://github.com/davidgohel/ReporteRs/issues/48 
+
+
 ReporteRs 0.7.5
 ==================================================================
 
