@@ -36,6 +36,7 @@ The following functions can be used whatever the output format is (docx, pptx, b
   \item \code{\link{addMarkdown}} Add markdown
   \item \code{\link{addParagraph}} Add paragraphs of text
   \item \code{\link{addRScript}} Add an r script
+  \item \code{\link{addDocument}} Add an external Word file
   \item \code{\link{writeDoc}} Write the document into a file or a directory
 }
 
@@ -70,6 +71,13 @@ and argument \code{font.size} of \code{\link{pot}}.
   \item \code{"ReporteRs-locale.language"} language encoding (for html objects). Default to "en".
   \item \code{"ReporteRs-locale.region"} region encoding (for html objects). Default to "US".
 }
+}
+\note{
+Examples are in a \code{donttest} section as they are using font that may be not
+available on the host machine. Default font is Helvetica, it can be modified
+with option \code{ReporteRs-default-font}. To run an example with 'Arial'
+default font, run first
+	\code{options("ReporteRs-default-font" = "Arial")}
 }
 \examples{
 #START_TAG_TEST
