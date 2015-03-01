@@ -27,7 +27,6 @@
 #'   \item \code{\link{addMarkdown}} Add markdown
 #'   \item \code{\link{addParagraph}} Add paragraphs of text
 #'   \item \code{\link{addRScript}} Add an r script 
-#'   \item \code{\link{addDocument}} Add an external Word file 
 #'   \item \code{\link{writeDoc}} Write the document into a file or a directory
 #' }
 #' 
@@ -50,13 +49,11 @@
 #' This will be used as default values for argument \code{fontname} of \code{\link{addPlot}}
 #' and argument \code{font.family} of \code{\link{pot}}. 
 #' 
-#' Note that if you do not have \code{Helvetica} font, this options must be set to an 
-#' available font. 
-#' 
 #' 
 #'   \item \code{"ReporteRs-fontsize"} Default font size to use (default to 11).
 #' This will be used as default values for argument \code{pointsize} of \code{\link{addPlot}}
 #' and argument \code{font.size} of \code{\link{pot}}.
+#' 
 #'   \item \code{"ReporteRs-backtick-color"} backtick font color in markdown
 #'   \item \code{"ReporteRs-backtick-shading-color"} backtick shading color in markdown
 #' 	 \item \code{"ReporteRs-list-definition"} see \code{\link{list.settings}}.
@@ -70,6 +67,7 @@
 #' available on the host machine. Default font is Helvetica, it can be modified 
 #' with option \code{ReporteRs-default-font}. To run an example with 'Arial' 
 #' default font, run first  
+#' 
 #' 	\code{options("ReporteRs-default-font" = "Arial")}
 #' 
 #' @examples
