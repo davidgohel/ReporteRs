@@ -1,2 +1,4 @@
 .project
 .settings/de.walware.r.core.prefs
+/.DS_Store
+/.gitignore
