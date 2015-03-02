@@ -13,8 +13,10 @@ slide.layouts( doc )
 # add a slide with layout "Title Slide"
 doc = addSlide( doc, slide.layout = "Title Slide" )
 
-doc = addTitle( doc, "Presentation title" ) #set the main title
-doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
+#set the main title
+doc = addTitle( doc, "Presentation title" )
+#set the sub-title
+doc = addSubtitle( doc , "This document is generated with ReporteRs.")
 
 
 ################ TEXT DEMO ################
@@ -25,7 +27,7 @@ doc = addSlide( doc, slide.layout = "Two Content" )
 # add a title
 doc = addTitle( doc, "Text demo" )
 sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-	, "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
+	, "In sit amet ipsum tellus. Vivamus dignissim sit amet auctor."
 	, "Quisque dictum tristique ligula."
 )
 
@@ -75,8 +77,10 @@ MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 MyFTable = setFlexTableBorders(MyFTable,
 	inner.vertical = borderProperties( color="#0070A8", style="solid" ),
 	inner.horizontal = borderNone(),
-	outer.vertical = borderProperties( color = "#006699", style = "solid", width = 2 ),
-	outer.horizontal = borderProperties( color = "#006699", style = "solid", width = 2 )
+	outer.vertical = borderProperties( color = "#006699", 
+	  style = "solid", width = 2 ),
+	outer.horizontal = borderProperties( color = "#006699", 
+	  style = "solid", width = 2 )
 )
 
 # add MyFTable into document 

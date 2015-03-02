@@ -90,7 +90,7 @@ doc = addParagraph(doc, my.pars )
 doc = addTitle( doc, "List example", level = 1, id = "list_example" )
 # define some text
 text1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-text2 = "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
+text2 = "In sit amet ipsum tellus. Vivamus dignissim arcu."
 text3 = "Quisque dictum tristique ligula."
 
 # define parProperties with list properties
@@ -112,7 +112,8 @@ doc = addParagraph( doc, value = c( text1, text2, text3),
   par.properties = ordered.list.level1 )
 
 # add ordered list items and restart renumbering
-doc = addParagraph( doc, value = c( text1, text2, text3), restart.numbering = TRUE, 
+doc = addParagraph( doc, value = c( text1, text2, text3), 
+  restart.numbering = TRUE, 
   par.properties = ordered.list.level1 )
 
 # add unordered list items
@@ -139,8 +140,10 @@ MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 MyFTable = setFlexTableBorders(MyFTable,
   inner.vertical = borderProperties( color="#0070A8", style="solid" ),
   inner.horizontal = borderNone(),
-  outer.vertical = borderProperties( color = "#006699", style = "solid", width = 2 ),
-  outer.horizontal = borderProperties( color = "#006699", style = "solid", width = 2 )
+  outer.vertical = borderProperties( color = "#006699", 
+	style = "solid", width = 2 ),
+  outer.horizontal = borderProperties( color = "#006699", 
+	style = "solid", width = 2 )
 )
 
 # add MyFTable into document 
@@ -154,9 +157,11 @@ mymenu = BootstrapMenu( title = "my title")
 mydd = DropDownMenu( label = "my menu" )
 mydd = addLinkItem( mydd, label = "GitHub", "http://github.com/")
 mydd = addLinkItem( mydd, separator.after = TRUE)
-mydd = addLinkItem( mydd, label = "Wikipedia", "http://www.wikipedia.fr")
+mydd = addLinkItem( mydd, 
+	label = "Wikipedia", "http://www.wikipedia.fr")
 
-mymenu = addLinkItem( mymenu, label = "ReporteRs", "http://github.com/davidgohel/ReporteRs")
+mymenu = addLinkItem( mymenu, 
+	label = "ReporteRs", "http://github.com/davidgohel/ReporteRs")
 mymenu = addLinkItem( mymenu, dd = mydd )
 
 doc = addBootstrapMenu( doc, mymenu )

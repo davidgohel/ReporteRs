@@ -97,7 +97,7 @@ doc = addTitle( doc, "Text demo", level =  1 )
 
 
 sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  , "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
+  , "In sit amet ipsum tellus. Vivamus dignissim arcu sit."
   , "Quisque dictum tristique ligula."
 )
 # add simple text with 'Normal' style
@@ -107,31 +107,34 @@ doc = addParagraph( doc, value = sometext, stylename="BulletList" )
 
 # Add "My tailor is rich" and "Cats and Dogs"
 # format some of the pieces of text
-pot1 = pot("My tailor"
-  , textProperties(color="red", shading.color = "#CCCCCC" ) ) + " is " + pot("rich"
-	, textProperties(font.weight="bold") )
-pot2 = pot("Cats"
-	, textProperties(color="red" )
-	) + " and " + pot("Dogs"
-	, textProperties(color="blue" ) )
-doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), stylename="Normal" )
+pot1 = pot("My tailor", textProperties(color="red", 
+	shading.color = "#CCCCCC" ) ) + " is " + pot("rich", 
+		textProperties(font.weight="bold") )
+pot2 = pot("Cats", textProperties(color="red" )) + " and " + pot("Dogs", 
+	textProperties(color="blue" ) )
+doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ), 
+	stylename = "Normal" )
 
 doc = addParagraph(doc, "Silentium tractibus per minimis ne excita 
 ut temptentur generalibus quam primordiis per clades post delictis 
 iuge exitium silentium per et.", 
-	par.properties = parProperties( padding.left = 25, padding.right = 25) )
+  par.properties = parProperties( padding.left = 25, 
+    padding.right = 25) )
 
 
-doc = addParagraph(doc, pot("Gallus necem refert singula modum quae 
-est quae quorum leo quae non cadaveribus ut quod.", format = textItalic( ) ), 
-	par.properties = parProperties(list.style = "blockquote") )
+doc = addParagraph(doc, 
+  pot("Gallus necem refert singula modum quae est quae quorum leo.", 
+	format = textItalic( ) ), 
+  par.properties = parProperties(list.style = "blockquote") )
 
 
 ordered.list.level1 = parProperties(list.style = "ordered", level = 1 )
 ordered.list.level2 = parProperties(list.style = "ordered", level = 2 )
 
-doc = addParagraph( doc, value = sometext, par.properties = ordered.list.level1 )
-doc = addParagraph( doc, value = sometext, par.properties = ordered.list.level2 )
+doc = addParagraph( doc, value = sometext, 
+	par.properties = ordered.list.level1 )
+doc = addParagraph( doc, value = sometext, 
+	par.properties = ordered.list.level2 )
 
 ################ PLOT DEMO ################
 # load ggplot2
@@ -143,12 +146,13 @@ if( requireNamespace("ggplot2", quietly = TRUE) ){
     , color = Species, size = Petal.Width, alpha = I(0.7) )
   
   # Add myplot into object doc
-  # myplot is assigned to argument 'x' because function 'print' on ggplot
-  # objects is expecting argument 'x'.
+  # myplot is assigned to argument 'x' because function 'print' 
+  # on ggplot objects is expecting argument 'x'.
   doc = addPlot( doc = doc, fun = print, x = myplot )
   
   # Add a legend below the plot
-  doc = addParagraph( doc, value = "my first plot", stylename = "rPlotLegend")
+  doc = addParagraph( doc, value = "my first plot", 
+	stylename = "rPlotLegend")
 }
 
 ################ FLEXTABLE DEMO ################
@@ -170,14 +174,17 @@ MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 MyFTable = setFlexTableBorders(MyFTable,
 	inner.vertical = borderProperties( color="#0070A8", style="solid" ),
 	inner.horizontal = borderNone(),
-	outer.vertical = borderProperties( color = "#006699", style = "solid", width = 2 ),
-	outer.horizontal = borderProperties( color = "#006699", style = "solid", width = 2 )
+	outer.vertical = borderProperties( color = "#006699", 
+		style = "solid", width = 2 ),
+	outer.horizontal = borderProperties( color = "#006699", 
+		style = "solid", width = 2 )
 )
 
 
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
-doc = addParagraph( doc, value = "my first table", stylename = "rTableLegend")
+doc = addParagraph( doc, value = "my first table", 
+	stylename = "rTableLegend")
 
 # write the doc
 writeDoc( doc, file = docx.file)

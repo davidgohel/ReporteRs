@@ -85,8 +85,8 @@ MyFTable[ , 1] = textProperties( font.style="italic", font.size = 9)
 MyFTable[ , 1] = parProperties( text.align = "right" )
 
 # change cell formatting properties for various columns
-MyFTable[ c(3,6:9), c( "mpg", "disp"
-  , "hp", "drat", "wt", "qsec" ) ] = cellProperties( background.color="#CCCCCC")
+MyFTable[ c(3,6:9), c( "mpg", "disp", "hp", "drat", "wt", 
+	"qsec" ) ] = cellProperties( background.color="#CCCCCC")
 # add text to elements of the column cyl
 MyFTable[, "cyl", text.properties = textProperties( 
   vertical.align="superscript", font.size = 9) ] = " miles/gallon"
@@ -97,16 +97,20 @@ data( iris )
 iris = head( iris[, c(5, 1:4)] )
 
 default_text = textProperties( font.size = 11 )
-note_text = chprop(default_text, vertical.align = "superscript", color = "blue")
+note_text = chprop(default_text, 
+	vertical.align = "superscript", color = "blue")
 
 iris_ft = FlexTable( data = iris, header.columns = FALSE )
-iris_ft = addHeaderRow( iris_ft, value = c("", "Measures" ), colspan = c( 4, 1 ) )
-iris_ft = addHeaderRow( iris_ft, value = gsub( "\\\\.", " ", names( iris ) ) )
+iris_ft = addHeaderRow( iris_ft, 
+	value = c("", "Measures" ), colspan = c( 4, 1 ) )
+iris_ft = addHeaderRow( iris_ft, 
+	value = gsub( "\\\\.", " ", names( iris ) ) )
 iris_ft[2, 2, newpar = TRUE ] = "Hi there"
 iris_ft[2, 1, to="header"] = pot("* this is a note", note_text )
 
 
-iris_ft = spanFlexTableRows( iris_ft, j = "Species", runs = as.character( iris$Species ) )
+iris_ft = spanFlexTableRows( iris_ft, j = "Species", 
+	runs = as.character( iris$Species ) )
 iris_ft = setFlexTableBorders( iris_ft, 
   inner.vertical = borderProperties( style = "none" ), 
   inner.horizontal = borderProperties( width = 1 ), 

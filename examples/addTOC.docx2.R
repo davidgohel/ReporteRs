@@ -4,21 +4,24 @@ doc = docx( title = "title" )
 doc = addPageBreak(doc)
 
 doc = addTitle( doc, "Plots", level = 1 )
-doc = addPlot( doc, 
-	fun = plot,
-	x = rnorm( 100 ),
-	y = rnorm (100 ),
-	main = "base plot main title"
+doc = addPlot( doc, fun = plot,
+  x = rnorm( 100 ),y = rnorm (100 ),
+  main = "base plot main title"
 )
+
 doc = addParagraph( doc, value="graph example 1", stylename = "rPlotLegend" )
+
 if( requireNamespace("ggplot2", quietly = TRUE) ){
-	myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris, color = Species
-		, size = Petal.Width, alpha = I(0.7))
-	doc = addPlot( doc = doc
-	, fun = print
-	, x = myplot #this argument MUST be named, print is expecting argument 'x'
-	)
-	doc = addParagraph( doc, value="graph example 2", stylename = "rPlotLegend" )
+
+  myplot = ggplot2::qplot(Sepal.Length, Petal.Length, 
+    data = iris, color = Species,
+    size = Petal.Width, alpha = I(0.7))
+  doc = addPlot( doc = doc, fun = print, 
+    x = myplot #this argument MUST be named, print is expecting argument 'x' 
+  )
+  doc = addParagraph( doc, value="graph example 2", 
+    stylename = "rPlotLegend" )
+
 }
 
 # Because we used "rPlotLegend" as legend in plot

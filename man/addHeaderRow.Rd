@@ -71,7 +71,8 @@ MyFTable = FlexTable( data = iris[46:55, ], header.columns = FALSE,
 MyFTable = addHeaderRow( MyFTable, 
   text.properties = textProperties(color = "#517281", font.weight="bold"), 
   cell.properties = cellProperties(border.color="#7895A2"), 
-  value = c("Sepal Length", "Sepal Width", "Sepal Length", "Sepal Width", "Species")
+  value = c("Sepal Length", "Sepal Width", 
+	"Sepal Length", "Sepal Width", "Species")
 )
 #STOP_TAG_TEST
 }

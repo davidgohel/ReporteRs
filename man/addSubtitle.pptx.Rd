@@ -31,8 +31,10 @@ options( "ReporteRs-fontsize" = 24 )
 
 doc = pptx( title = "title" )
 doc = addSlide( doc, slide.layout = "Title Slide" )
-doc = addTitle( doc, "Presentation title" ) #set the main title
-doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
+#set the main title
+doc = addTitle( doc, "Presentation title" ) 
+#set the sub-title
+doc = addSubtitle( doc , "This document is generated with ReporteRs.")
 
 # Write the object
 writeDoc( doc, file = doc.filename )

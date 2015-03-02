@@ -21,12 +21,16 @@ MyFTable = FlexTable( data = dataset
 )
 
 # set columns widths (inch)
-MyFTable = setFlexTableWidths( MyFTable, widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
+MyFTable = setFlexTableWidths( MyFTable, 
+	widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
 
 # span successive identical cells within column 1, 2 and 3
-MyFTable = spanFlexTableRows( MyFTable, j = 1, runs = as.character( dataset$cyl ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 2, runs = as.character( dataset$gear ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 3, runs = as.character( dataset$carb ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 1,
+	runs = as.character( dataset$cyl ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 2, 
+	runs = as.character( dataset$gear ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 3, 
+	runs = as.character( dataset$carb ) )
 
 # overwrites some text formatting properties
 MyFTable[dataset$wt < 3, 6] = textProperties( color="#003366")
@@ -46,7 +50,8 @@ cum perquisitor perquisitor pericula saepeque inmunibus coalitos ut.",
 Footnote1 = addParagraph( Footnote1, set_of_paragraphs( par1, par2 ), 
   parProperties(text.align = "justify"))
 
-Footnote1 = addParagraph( Footnote1, set_of_paragraphs( "list item 1", "list item 2" ), 
+Footnote1 = addParagraph( Footnote1, 
+	set_of_paragraphs( "list item 1", "list item 2" ), 
   parProperties(text.align = "left", list.style = "ordered"))
 
 an_rscript = RScript( text = "ls()

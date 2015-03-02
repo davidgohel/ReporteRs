@@ -53,7 +53,8 @@ textProp05 = chprop( textProp, underlined = TRUE )
 textProp06 = chprop( textProp, font.family = "Arial" )
 textProp07 = chprop( textProp, vertical.align = "superscript" )
 
-textProp08 = chprop( textProp, font.size = 12, font.weight = "bold", shading.color = "red" )
+textProp08 = chprop( textProp, font.size = 12, 
+	font.weight = "bold", shading.color = "red" )
 #STOP_TAG_TEST
 }
 \seealso{

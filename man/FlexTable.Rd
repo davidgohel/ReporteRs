@@ -140,8 +140,10 @@ MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 MyFTable = setFlexTableBorders(MyFTable,
   inner.vertical = borderProperties( color="#0070A8", style="solid" ),
   inner.horizontal = borderNone(),
-  outer.vertical = borderProperties( color = "#006699", style = "solid", width = 2 ),
-  outer.horizontal = borderProperties( color = "#006699", style = "solid", width = 2 )
+  outer.vertical = borderProperties( color = "#006699", 
+	style = "solid", width = 2 ),
+  outer.horizontal = borderProperties( color = "#006699", 
+	style = "solid", width = 2 )
 )
 #####################################################################
 
@@ -166,12 +168,16 @@ MyFTable = FlexTable( data = dataset
 )
 
 # set columns widths (inch)
-MyFTable = setFlexTableWidths( MyFTable, widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
+MyFTable = setFlexTableWidths( MyFTable, 
+	widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
 
 # span successive identical cells within column 1, 2 and 3
-MyFTable = spanFlexTableRows( MyFTable, j = 1, runs = as.character( dataset$cyl ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 2, runs = as.character( dataset$gear ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 3, runs = as.character( dataset$carb ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 1,
+	runs = as.character( dataset$cyl ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 2, 
+	runs = as.character( dataset$gear ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 3, 
+	runs = as.character( dataset$carb ) )
 
 # overwrites some text formatting properties
 MyFTable[dataset$wt < 3, 6] = textProperties( color="#003366")
@@ -191,7 +197,8 @@ cum perquisitor perquisitor pericula saepeque inmunibus coalitos ut.",
 Footnote1 = addParagraph( Footnote1, set_of_paragraphs( par1, par2 ), 
   parProperties(text.align = "justify"))
 
-Footnote1 = addParagraph( Footnote1, set_of_paragraphs( "list item 1", "list item 2" ), 
+Footnote1 = addParagraph( Footnote1, 
+	set_of_paragraphs( "list item 1", "list item 2" ), 
   parProperties(text.align = "left", list.style = "ordered"))
 
 an_rscript = RScript( text = "ls()
@@ -234,12 +241,15 @@ MyFTable = setFlexTableBackgroundColors( MyFTable, i = 1,
   colors = "gray", to = "header" )
 MyFTable[1, , to = "header"] = textBold(color="white")
 
-MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, colors = "gray" )
+MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, 
+	colors = "gray" )
 MyFTable[,1] = textBold(color="white")
 
 MyFTable = setFlexTableBorders( MyFTable,
-  inner.vertical = borderProperties( style = "dashed", color = "white" ),
-  inner.horizontal = borderProperties( style = "dashed", color = "white"  ),
+  inner.vertical = borderProperties( style = "dashed", 
+	color = "white" ),
+  inner.horizontal = borderProperties( style = "dashed", 
+	color = "white"  ),
   outer.vertical = borderProperties( width = 2, color = "white"  ),
   outer.horizontal = borderProperties( width = 2, color = "white"  )
 )
@@ -250,16 +260,20 @@ data( iris )
 iris = head( iris[, c(5, 1:4)] )
 
 default_text = textProperties( font.size = 11 )
-note_text = chprop(default_text, vertical.align = "superscript", color = "blue")
+note_text = chprop(default_text, 
+	vertical.align = "superscript", color = "blue")
 
 iris_ft = FlexTable( data = iris, header.columns = FALSE )
-iris_ft = addHeaderRow( iris_ft, value = c("", "Measures" ), colspan = c( 4, 1 ) )
-iris_ft = addHeaderRow( iris_ft, value = gsub( "\\\\.", " ", names( iris ) ) )
+iris_ft = addHeaderRow( iris_ft, 
+	value = c("", "Measures" ), colspan = c( 4, 1 ) )
+iris_ft = addHeaderRow( iris_ft, 
+	value = gsub( "\\\\.", " ", names( iris ) ) )
 iris_ft[2, 2, newpar = TRUE ] = "Hi there"
 iris_ft[2, 1, to="header"] = pot("* this is a note", note_text )
 
 
-iris_ft = spanFlexTableRows( iris_ft, j = "Species", runs = as.character( iris$Species ) )
+iris_ft = spanFlexTableRows( iris_ft, j = "Species", 
+	runs = as.character( iris$Species ) )
 iris_ft = setFlexTableBorders( iris_ft, 
   inner.vertical = borderProperties( style = "none" ), 
   inner.horizontal = borderProperties( width = 1 ), 

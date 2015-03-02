@@ -7,8 +7,8 @@
 #' 
 #' @param doc \code{\link{bsdoc}} object
 #' @param value text to add to in the footer as paragraphs: 
-#' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
-#' or a character vector.
+#' an object of class \code{\link{pot}} or an object of 
+#' class \code{\link{set_of_paragraphs}} or a character vector.
 #' @param par.properties \code{\link{parProperties}} to apply to paragraphs.
 #' @param restart.numbering boolean value. If \code{TRUE}, next numbered 
 #' list counter will be set to 1.

@@ -83,8 +83,9 @@ spiritu concrepantes; aut quod est studiorum omnium maximum ab ortu lucis
 ad vesperam sole fatiscunt vel pluviis, per minutias aurigarum equorumque 
 praecipua vel delicta scrutantes.
 
-Paragraphs must be separated by a blank line. Basic formatting of *italics* and **bold** is 
-supported. This *can be **nested** like* so. Formatting of ``backtick`` is also 
+Paragraphs must be separated by a blank line. Basic formatting of *italics* 
+and **bold** is supported. This *can be **nested** like* so. Formatting 
+of ``backtick`` is also 
 supported.
 		
 # This is a title 2
@@ -118,8 +119,10 @@ when used.
 # URLs
 		
 * A named link to [DaringFireball][1]. 
-* Another named link to [DaringFireball](http://daringfireball.net/projects/markdown)
-* Sometimes you just want a URL like <http://daringfireball.net/projects/markdown>.
+* Another named link to 
+[DaringFireball](http://daringfireball.net/projects/markdown)
+* Sometimes you just want a URL like 
+<http://daringfireball.net/projects/markdown>.
 		
 # Miscellaneous
 		
@@ -133,7 +136,8 @@ It's sometimes useful for breaking things up.
 
 ## Images
 
-This implementation does not support images yet. Use addImage or addPlot instead.
+This implementation does not support images yet. Use addImage or addPlot 
+instead.
 
 [1]: http://daringfireball.net/projects/markdown/
 "

@@ -54,8 +54,10 @@ MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 MyFTable = setFlexTableBorders(MyFTable,
   inner.vertical = borderProperties( color="#0070A8", style="solid" ),
   inner.horizontal = borderNone(),
-  outer.vertical = borderProperties( color = "#006699", style = "solid", width = 2 ),
-  outer.horizontal = borderProperties( color = "#006699", style = "solid", width = 2 )
+  outer.vertical = borderProperties( color = "#006699", 
+	style = "solid", width = 2 ),
+  outer.horizontal = borderProperties( color = "#006699", 
+	style = "solid", width = 2 )
 )
 
 # add MyFTable into document 
@@ -86,12 +88,16 @@ MyFTable = FlexTable( data = dataset
 )
 
 # set columns widths (inch)
-MyFTable = setFlexTableWidths( MyFTable, widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
+MyFTable = setFlexTableWidths( MyFTable, 
+	widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
 
 # span successive identical cells within column 1, 2 and 3
-MyFTable = spanFlexTableRows( MyFTable, j = 1, runs = as.character( dataset$cyl ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 2, runs = as.character( dataset$gear ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 3, runs = as.character( dataset$carb ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 1,
+	runs = as.character( dataset$cyl ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 2, 
+	runs = as.character( dataset$gear ) )
+MyFTable = spanFlexTableRows( MyFTable, j = 3, 
+	runs = as.character( dataset$carb ) )
 
 # overwrites some text formatting properties
 MyFTable[dataset$wt < 3, 6] = textProperties( color="#003366")
@@ -111,7 +117,8 @@ cum perquisitor perquisitor pericula saepeque inmunibus coalitos ut.",
 Footnote1 = addParagraph( Footnote1, set_of_paragraphs( par1, par2 ), 
   parProperties(text.align = "justify"))
 
-Footnote1 = addParagraph( Footnote1, set_of_paragraphs( "list item 1", "list item 2" ), 
+Footnote1 = addParagraph( Footnote1, 
+	set_of_paragraphs( "list item 1", "list item 2" ), 
   parProperties(text.align = "left", list.style = "ordered"))
 
 an_rscript = RScript( text = "ls()
@@ -160,12 +167,15 @@ MyFTable = setFlexTableBackgroundColors( MyFTable, i = 1,
   colors = "gray", to = "header" )
 MyFTable[1, , to = "header"] = textBold(color="white")
 
-MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, colors = "gray" )
+MyFTable = setFlexTableBackgroundColors( MyFTable, j = 1, 
+	colors = "gray" )
 MyFTable[,1] = textBold(color="white")
 
 MyFTable = setFlexTableBorders( MyFTable,
-  inner.vertical = borderProperties( style = "dashed", color = "white" ),
-  inner.horizontal = borderProperties( style = "dashed", color = "white"  ),
+  inner.vertical = borderProperties( style = "dashed", 
+	color = "white" ),
+  inner.horizontal = borderProperties( style = "dashed", 
+	color = "white"  ),
   outer.vertical = borderProperties( width = 2, color = "white"  ),
   outer.horizontal = borderProperties( width = 2, color = "white"  )
 )

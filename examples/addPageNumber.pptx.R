@@ -8,5 +8,6 @@ doc = addSubtitle( doc , "This document is generated with ReporteRs.")
 doc = addPageNumber( doc )
 
 doc = addSlide( doc, slide.layout = "Title and Content" )
-## add a page number on the current slide but not the default text (slide number)
+## add a page number on the current slide but 
+## not the default text (slide number)
 doc = addPageNumber( doc, value = "Page number text")

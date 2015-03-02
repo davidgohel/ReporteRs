@@ -15,6 +15,8 @@ MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 MyFTable = setFlexTableBorders(MyFTable,
   inner.vertical = borderProperties( color="#0070A8", style="solid" ),
   inner.horizontal = borderNone(),
-  outer.vertical = borderProperties( color = "#006699", style = "solid", width = 2 ),
-  outer.horizontal = borderProperties( color = "#006699", style = "solid", width = 2 )
+  outer.vertical = borderProperties( color = "#006699", 
+	style = "solid", width = 2 ),
+  outer.horizontal = borderProperties( color = "#006699", 
+	style = "solid", width = 2 )
 )

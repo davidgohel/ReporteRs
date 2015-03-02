@@ -77,7 +77,8 @@ doc = addTitle( doc, "Title example 2" )
 
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
-  ) + " is " + pot("rich", textProperties(shading.color = "red", font.weight = "bold" ) )
+  ) + " is " + pot("rich", textProperties(shading.color = "red", 
+  font.weight = "bold" ) )
 
 # "Cats and dogs" with formatting on some words
 pot2 = pot("Cats", textProperties(color = "red" ) ) + 
@@ -92,8 +93,9 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 doc = addParagraph(doc, my.pars )
 
 # Add my.pars into the document doc
-doc = addParagraph(doc, my.pars, offx = 3, offy = 3, width = 2, height = 0.5
-	, par.properties=parProperties(text.align="center", padding=0) )
+doc = addParagraph(doc, my.pars, offx = 3, offy = 3, 
+  width = 2, height = 0.5,
+  par.properties=parProperties(text.align="center", padding=0) )
 
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
@@ -103,7 +105,8 @@ doc = addTitle( doc, "Title example 3" )
 
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
-  ) + " is " + pot("rich", textProperties(shading.color = "red", font.weight = "bold" ) )
+  ) + " is " + pot("rich", textProperties(shading.color = "red", 
+  font.weight = "bold" ) )
 
 # "Cats and dogs" with formatting on some words
 pot2 = pot("Cats", textProperties(color = "red" ) ) + 
@@ -115,8 +118,8 @@ pot2 = pot("Cats", textProperties(color = "red" ) ) +
 my.pars = set_of_paragraphs( pot1, pot2 )
 
 # Add my.pars into the document doc
-doc = addParagraph(doc, my.pars
-		, par.properties=parProperties(text.align="center", padding=24) )
+doc = addParagraph(doc, my.pars, 
+  par.properties=parProperties(text.align="center", padding=24) )
 
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
@@ -124,16 +127,20 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addTitle( doc, "Title example 1" )
 # define some text
 text1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-text2 = "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."
+text2 = "In sit amet ipsum tellus. Vivamus arcu sit faucibus auctor."
 text3 = "Quisque dictum tristique ligula."
 
 # define parProperties with list properties
-ordered.list.level1 = parProperties(list.style = "ordered", level = 1 )
-ordered.list.level2 = parProperties(list.style = "ordered", level = 2 )
+ordered.list.level1 = parProperties(list.style = "ordered", 
+	level = 1 )
+ordered.list.level2 = parProperties(list.style = "ordered", 
+	level = 2 )
 
 # define parProperties with list properties
-unordered.list.level1 = parProperties(list.style = "unordered", level = 1 )
-unordered.list.level2 = parProperties(list.style = "unordered", level = 2 )
+unordered.list.level1 = parProperties(list.style = "unordered", 
+	level = 1 )
+unordered.list.level2 = parProperties(list.style = "unordered", 
+	level = 2 )
 
 # add ordered list items 
 doc = addParagraph( doc, value = text1, 
@@ -141,11 +148,12 @@ doc = addParagraph( doc, value = text1,
 doc = addParagraph( doc, value = text2, append = TRUE, 
 	par.properties = ordered.list.level2 )
 
-doc = addParagraph(doc, "This paragraph has no list attribute", append = TRUE )
+doc = addParagraph(doc, "This paragraph has no list attribute", 
+	append = TRUE )
 
 # add ordered list items without restart renumbering
-doc = addParagraph( doc, value = c( text1, text2, text3), append = TRUE, 
-	par.properties = ordered.list.level1 )
+doc = addParagraph( doc, value = c( text1, text2, text3), 
+	append = TRUE, par.properties = ordered.list.level1 )
 
 # add ordered list items and restart renumbering
 doc = addParagraph( doc, value = c( text1, text2, text3), 

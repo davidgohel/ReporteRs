@@ -2,20 +2,17 @@
 docx.file = "document_new.docx"
 
 # create document
-doc = docx( title = "My example"
-  , template = file.path( find.package("ReporteRs"), "templates/bookmark_example.docx")
-  )
+doc = docx( title = "My example", 
+  template = file.path( find.package("ReporteRs"), 
+	"templates/bookmark_example.docx") )
 
 # replace bookmarks 'AUTHOR' and 'REVIEWER'
 # by dummy values
-doc = addParagraph( doc
-	, value = c( "James Sonny Crockett", "Ricardo Rico Tubbs" )	
-	, stylename = "Normal"
-	, bookmark = "AUTHOR" )
-doc = addParagraph( doc
-	, value = c( "Martin Marty Castillo" )	
-	, stylename = "Normal"
-	, bookmark = "REVIEWER" )
+doc = addParagraph( doc, 
+	value = c( "James Sonny Crockett", "Ricardo Rico Tubbs" ),
+	stylename = "Normal", bookmark = "AUTHOR" )
+doc = addParagraph( doc, 	value = c( "Martin Marty Castillo" ), 
+	stylename = "Normal", bookmark = "REVIEWER" )
 
 
 

@@ -32,7 +32,8 @@ a \code{pptx} object.
 
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
-  ) + " is " + pot("rich", textProperties(shading.color = "red", font.weight = "bold" ) )
+  ) + " is " + pot("rich", textProperties(shading.color = "red", 
+  font.weight = "bold" ) )
 
 # "Cats and dogs" with formatting on some words
 pot2 = pot("Cats", textProperties(color = "red" ) ) + 

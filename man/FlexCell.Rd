@@ -24,7 +24,8 @@ For internal usage.
 #START_TAG_TEST
 FlexCell( value = "Hello" )
 FlexCell( value = "Hello", colspan = 3)
-FlexCell( "Column 1", cell.properties = cellProperties(background.color="#527578")  )
+FlexCell( "Column 1", 
+	cell.properties = cellProperties(background.color="#527578")  )
 
 
 # define a complex formatted text
