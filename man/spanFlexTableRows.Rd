@@ -25,7 +25,7 @@ Span rows within columns.
 Overlappings of horizontally merged cells and vertically merged cells are forbidden.
 }
 \examples{
-#START_TAG_TEST
+#
 mydata = iris[46:55, ]
 MyFTable = FlexTable( data = mydata )
 
@@ -38,7 +38,6 @@ MyFTable = spanFlexTableRows( MyFTable, j = 3, from = 5, to = 7 )
 # than the number of lines of the FlexTable.
 MyFTable = spanFlexTableRows( MyFTable, j = "Species", 
   runs = as.character( mydata$Species ) )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{spanFlexTableColumns}}

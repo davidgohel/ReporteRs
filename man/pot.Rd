@@ -28,7 +28,7 @@ A pot can be associated with a Footnote. Note that footnotes can not be inserted
 a \code{pptx} object.
 }
 \examples{
-#START_TAG_TEST
+#
 
 # "My tailor is rich" with formatting on some words
 pot1 = pot("My tailor", textProperties(color = "red" ) 
@@ -40,7 +40,6 @@ pot2 = pot("Cats", textProperties(color = "red" ) ) +
   " and " + 
   pot("dogs", textProperties( color = "blue" ), 
     hyperlink = "http://www.wikipedia.org/" )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}},

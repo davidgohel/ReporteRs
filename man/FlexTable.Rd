@@ -122,7 +122,7 @@ Span columns within rows with function \code{\link{spanFlexTableColumns}}.
 Set columns widths with function \code{\link{setFlexTableWidths}}.
 }
 \examples{
-#START_TAG_TEST
+#
 #####################################################################
 
 # Create a FlexTable with data.frame mtcars, display rownames
@@ -281,7 +281,6 @@ iris_ft = setFlexTableBorders( iris_ft,
   outer.horizontal = borderProperties( width = 2 ), 
   footer = TRUE
 )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}

@@ -53,7 +53,7 @@ Default values are:
 }
 }
 \examples{
-#START_TAG_TEST
+#
 textProperties( font.size = 12 )
 
 textProperties(color="red", 
@@ -64,7 +64,6 @@ textProperties(color="red",
 )
 
 textProperties( shading.color = "red" )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{chprop.textProperties}}, \code{\link{pot}}

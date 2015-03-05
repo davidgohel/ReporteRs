@@ -21,7 +21,7 @@ Create a representation of a cell that can be inserted in a FlexRow.
 For internal usage.
 }
 \examples{
-#START_TAG_TEST
+#
 FlexCell( value = "Hello" )
 FlexCell( value = "Hello", colspan = 3)
 FlexCell( "Column 1", 
@@ -38,7 +38,6 @@ Fcell = FlexCell( mytext, colspan = 4 )
 mytext1 = pot("Hello", format = textProperties(color = "blue") )
 mytext2 = pot( "world", format = textProperties(font.size = 9) )
 Fcell = FlexCell( set_of_paragraphs( mytext1, mytext2 ) )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addFlexTable}}, \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}

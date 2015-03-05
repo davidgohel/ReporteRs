@@ -16,10 +16,9 @@
 #' a \code{pptx} object. 
 #' @export
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/pot1_example.R
 #' @example examples/pot2_example.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}},
 #'  \code{\link{addParagraph.bsdoc}}, \code{\link{Footnote}}
 #' , \code{\link{+.pot}}
@@ -113,10 +112,8 @@ as.character.pot = function (x, ...){
 #' \code{pot} object with no associated format ; therefore, document default document style
 #' will be used (see \code{\link{addParagraph}}).
 #' @examples
-#' #START_TAG_TEST
 #' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addParagraph}}
 #' @export
 "+.pot" = function(e1, e2) {
@@ -140,11 +137,9 @@ as.character.pot = function (x, ...){
 #' @return a character value
 #' @seealso \code{\link{pot}}
 #' @examples
-#' #START_TAG_TEST
 #' my_pot = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
 #' as.html( my_pot )
-#' @example examples/STOP_TAG_TEST.R
 #' @export
 as.html.pot = function( object, ... ) {
 	par = .jpot( object )

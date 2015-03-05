@@ -36,7 +36,7 @@ a set of 4 different borders: inner vectical and horizontal
 , outer vectical and horizontal.
 }
 \examples{
-#START_TAG_TEST
+#
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
 MyFTable = FlexTable( data = mtcars[1:10, ]
@@ -47,7 +47,6 @@ MyFTable = setFlexTableBorders( MyFTable,
   inner.horizontal = borderProperties( style = "dashed" ), 
   outer.vertical = borderProperties( width = 2 ), 
   outer.horizontal = borderProperties( width = 2 ) )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}

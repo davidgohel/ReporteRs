@@ -27,7 +27,7 @@ for each corresponding value (in \code{values}).}
 add a footer row in a FlexTable
 }
 \examples{
-#START_TAG_TEST
+#
 #############################
 # simple example
 #############################
@@ -56,7 +56,6 @@ footerRow[1] = FlexCell( mytext, colspan = 4 )
 
 # add the FlexRow to the FlexTable
 MyFTable = addFooterRow( MyFTable, footerRow )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addHeaderRow}}

@@ -18,7 +18,7 @@ a character value
 get HTML code from a FlexTable
 }
 \examples{
-#START_TAG_TEST
+#
 #####################################################################
 
 # Create a FlexTable with data.frame mtcars, display rownames
@@ -44,7 +44,6 @@ MyFTable = setFlexTableBorders(MyFTable,
 
 # get HTML of the FlexTable
 as.html( MyFTable )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}

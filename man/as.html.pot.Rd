@@ -18,11 +18,9 @@ a character value
 get HTML code from a pot
 }
 \examples{
-#START_TAG_TEST
 my_pot = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 	, textProperties(font.weight="bold") )
 as.html( my_pot )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{pot}}

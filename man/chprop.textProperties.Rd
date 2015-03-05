@@ -42,7 +42,7 @@ a \code{textProperties} object
 Modify an object of class \code{textProperties}.
 }
 \examples{
-#START_TAG_TEST
+#
 textProp = textProperties()
 
 textProp01 = chprop( textProp, color = "red" )
@@ -55,7 +55,6 @@ textProp07 = chprop( textProp, vertical.align = "superscript" )
 
 textProp08 = chprop( textProp, font.size = 12, 
 	font.weight = "bold", shading.color = "red" )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{textProperties}}

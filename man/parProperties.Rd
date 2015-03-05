@@ -65,7 +65,7 @@ Default values are:
 }
 }
 \examples{
-#START_TAG_TEST
+#
 parProperties( text.align = "center", padding = 5)
 
 parProperties( text.align = "center", 
@@ -78,7 +78,6 @@ parProperties( text.align = "center",
 parProperties( list.style = "ordered", level = 2)
 
 parProperties( list.style = "unordered", level = 2)
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{chprop.parProperties}}, \code{\link{alterFlexTable}}

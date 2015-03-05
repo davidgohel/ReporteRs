@@ -32,9 +32,8 @@
 #'   \item \code{vertical.align} "baseline"
 #' }
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/textProperties.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{chprop.textProperties}}, \code{\link{pot}}
 #' , \code{\link{alterFlexTable}}
 textProperties = function( color = "black", font.size = getOption("ReporteRs-fontsize")
@@ -186,9 +185,8 @@ as.character.textProperties = function (x, ...){
 #' @param ... further arguments - not used 
 #' @return a \code{textProperties} object
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/chprop.textProperties.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{textProperties}}
 #' @export
 chprop.textProperties <- function(object, color, font.size

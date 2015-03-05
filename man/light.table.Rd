@@ -15,9 +15,7 @@ light.table(dataset, add.rownames = FALSE)
 get a simple FlexTable from a dataset
 }
 \examples{
-#START_TAG_TEST
 light.table( iris)
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}

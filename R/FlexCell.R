@@ -10,9 +10,8 @@
 #' @export
 #' @seealso \code{\link{addFlexTable}}, \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples 
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexCell.R
-#' @example examples/STOP_TAG_TEST.R
 FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.properties = cellProperties() ) {
 	
 	if( !inherits( par.properties, "parProperties" ) ){

@@ -23,7 +23,7 @@ values "body" (default) or "header" or "footer"}
 applies background colors to cells of a FlexTable
 }
 \examples{
-#START_TAG_TEST
+#
 data = cor( cor(mtcars) )
 
 pal = c( "#D73027", "#F46D43", "#FDAE61", "#FEE08B", 
@@ -57,7 +57,6 @@ MyFTable = setFlexTableBorders( MyFTable,
   outer.vertical = borderProperties( width = 2, color = "white"  ),
   outer.horizontal = borderProperties( width = 2, color = "white"  )
 )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{is.color}}

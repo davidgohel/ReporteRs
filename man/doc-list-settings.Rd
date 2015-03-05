@@ -41,7 +41,7 @@ It can be set in R session options or as a parameter in \code{\link{docx}} or
 \code{\link{pptx}} or \code{\link{bsdoc}}.
 }
 \examples{
-#START_TAG_TEST
+#
 numbering.pattern = c( "\%1.", "\%1. \%2.", "\%1. \%2. \%3.", 
   "\%4.", "\%5.", "\%6.", "\%7.", "\%8.", "\%9." )
 
@@ -61,7 +61,6 @@ options("ReporteRs-list-definition" = list(
   ul.format = unordered.formats
   )
 )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}},

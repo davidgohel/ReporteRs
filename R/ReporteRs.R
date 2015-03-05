@@ -63,7 +63,7 @@
 #' 
 #' @note 
 #' 
-#' Examples are in a \code{donttest} section as they are using font that may be not 
+#' Examples are in a \code{dontrun} section as they are using font that may be not 
 #' available on the host machine. Default font is Helvetica, it can be modified 
 #' with option \code{ReporteRs-default-font}. To run an example with 'Arial' 
 #' default font, run first  
@@ -71,10 +71,8 @@
 #' 	\code{options("ReporteRs-default-font" = "Arial")}
 #' 
 #' @examples
-#' #START_TAG_TEST
 #' options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Helvetica")
 #' @example examples/options.listdefinitions.R
-#' @example examples/STOP_TAG_TEST.R
 #' @name ReporteRs-package
 #' @aliases ReporteRs
 #' @title ReporteRs: a package to create document from R

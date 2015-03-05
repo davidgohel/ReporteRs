@@ -72,9 +72,8 @@
 #'   \item \code{background.color} "white"
 #' }
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/cellProperties.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{borderProperties}}, \code{\link{chprop.cellProperties}}
 #' , \code{\link{FlexTable}}
 cellProperties = function( 
@@ -314,9 +313,8 @@ out
 #' @param ... further arguments - not used 
 #' @return a \code{cellProperties} object
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/chprop.cellProperties.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{borderProperties}}, \code{\link{cellProperties}}
 #' , \code{\link{FlexTable}}
 #' @export

@@ -33,7 +33,7 @@ Create a \code{DropDownMenu} object. This object is to be used with
 \code{\link{BootstrapMenu}} to define menu links.
 }
 \examples{
-#START_TAG_TEST
+#
 mymenu = BootstrapMenu( title = "my title")
 
 mydd = DropDownMenu( label = "Mon menu" )
@@ -46,7 +46,6 @@ mydd = addLinkItem( mydd,
 mymenu = addLinkItem( mymenu, 
 	label = "ReporteRs", "http://github.com/davidgohel/ReporteRs")
 mymenu = addLinkItem( mymenu, dd = mydd )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{bsdoc}}, \code{\link{addBootstrapMenu}}

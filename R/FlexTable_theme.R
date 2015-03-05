@@ -7,9 +7,7 @@
 #' @param add.rownames logical value - should the row.names be included in the table. 
 #' @export
 #' @examples
-#' #START_TAG_TEST
 #' vanilla.table( iris)
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}
 vanilla.table = function( dataset, add.rownames = FALSE ){
 	for(j in names( dataset ) ){
@@ -42,9 +40,7 @@ vanilla.table = function( dataset, add.rownames = FALSE ){
 #' @param add.rownames logical value - should the row.names be included in the table. 
 #' @export
 #' @examples
-#' #START_TAG_TEST
 #' light.table( iris)
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}
 light.table = function( dataset, add.rownames = FALSE ){
 	for(j in names( dataset ) ){

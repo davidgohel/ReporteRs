@@ -12,10 +12,9 @@
 #' @seealso \code{\link{FlexTable}}, \code{\link{alterFlexRow}} 
 #' , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexRow1.R
 #' @example examples/FlexRow2.R
-#' @example examples/STOP_TAG_TEST.R
 FlexRow = function( values, colspan, text.properties = textProperties(), par.properties = parProperties(), cell.properties = cellProperties()){
 	.Object = list()
 	.Object$jobj = .jnew(class.FlexRow)
@@ -56,9 +55,8 @@ weight.FlexRow = function(x) {
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFlexTable}}, \code{\link{FlexRow}} 
 #' , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexRow2.R
-#' @example examples/STOP_TAG_TEST.R
 #' @rdname FlexRow-alter
 #' @aliases alterFlexRow
 #' @export

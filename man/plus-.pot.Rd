@@ -22,10 +22,8 @@ If one of the 2 parameters is a simple string, it is converted as a
 will be used (see \code{\link{addParagraph}}).
 }
 \examples{
-#START_TAG_TEST
 pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 	, textProperties(font.weight="bold") )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addParagraph}}

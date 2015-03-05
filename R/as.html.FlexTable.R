@@ -7,10 +7,9 @@
 #' @return a character value
 #' @seealso \code{\link{FlexTable}}
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexTableExample.R
 #' @example examples/as.html.MyFTable.R
-#' @example examples/STOP_TAG_TEST.R
 #' @export
 as.html.FlexTable = function( object, ... ) {
 		

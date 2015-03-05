@@ -79,7 +79,7 @@ a \code{cellProperties} object
 Modify an object of class \code{cellProperties}.
 }
 \examples{
-#START_TAG_TEST
+#
 cellProp = cellProperties()
 
 cellProp01 = chprop( cellProp, border.bottom.color = "#8A949B" )
@@ -112,7 +112,6 @@ cellProp22 = chprop( cellProp, background.color = "#517281" )
 
 cellProp23 = chprop( cellProp, background.color = "#517281"
   , border.color = "#F37257", border.width = 2  )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{borderProperties}}, \code{\link{cellProperties}}

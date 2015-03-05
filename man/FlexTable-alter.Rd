@@ -73,7 +73,7 @@ If dealing with \code{borderProperties} objects, use also argument
 properties.
 }
 \examples{
-#START_TAG_TEST
+#
 # Create a FlexTable object with first 10 lines of data.frame mtcars
 # add row.names as first column
 MyFTable = FlexTable( data = mtcars[1:10, ]
@@ -118,7 +118,6 @@ iris_ft = setFlexTableBorders( iris_ft,
   outer.horizontal = borderProperties( width = 2 ), 
   footer = TRUE
 )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{borderProperties}}

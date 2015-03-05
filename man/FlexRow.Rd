@@ -23,7 +23,7 @@ Create a representation of a row that can be inserted in a FlexTable.
 For internal usage.
 }
 \examples{
-#START_TAG_TEST
+#
 ## example with characters
 headerRow = FlexRow( c("Column 1", "Column 2")
   , cell.properties = cellProperties(background.color="#527578") )
@@ -33,7 +33,6 @@ headerRow[1] = FlexCell( "Column 1"
   , cell.properties = cellProperties(background.color="#527578")  )
 headerRow[2] = FlexCell( "Column 2"
   , cell.properties = cellProperties(background.color="#527578")  )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{alterFlexRow}}

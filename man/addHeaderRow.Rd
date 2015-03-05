@@ -38,7 +38,7 @@ has been created}
 add a header row in a FlexTable
 }
 \examples{
-#START_TAG_TEST
+#
 #############################
 # simple example
 #############################
@@ -74,7 +74,6 @@ MyFTable = addHeaderRow( MyFTable,
   value = c("Sepal Length", "Sepal Width", 
 	"Sepal Length", "Sepal Width", "Species")
 )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFooterRow}}
