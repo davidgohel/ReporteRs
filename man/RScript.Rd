@@ -62,10 +62,8 @@ RScript(file, text, comment.properties = textProperties(color = "#A7947D"),
 Colored RScript object
 }
 \examples{
-#START_TAG_TEST
 an_rscript = RScript( text = "ls()
 x = rnorm(10)" )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addRScript}}

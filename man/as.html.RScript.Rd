@@ -18,10 +18,8 @@ a character value
 get HTML code from a RScript object
 }
 \examples{
-#START_TAG_TEST
 my_rscript = RScript( text = "ls()" )
 as.html( my_rscript )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{RScript}}

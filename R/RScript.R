@@ -21,10 +21,8 @@
 #' @param default.properties default txtProperties object
 #' @param par.properties a parProperties object
 #' @examples
-#' #START_TAG_TEST
 #' an_rscript = RScript( text = "ls()
 #' x = rnorm(10)" )
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addRScript}}
 #' @export
 RScript = function( file, text
@@ -182,10 +180,8 @@ print.RScript = function(x, ...){
 #' @return a character value
 #' @seealso \code{\link{RScript}}
 #' @examples
-#' #START_TAG_TEST
 #' my_rscript = RScript( text = "ls()" )
 #' as.html( my_rscript )
-#' @example examples/STOP_TAG_TEST.R
 #' @export
 as.html.RScript = function(object, ...){
 	out = .jcall( object$jobj, "S", "getHTML" )
