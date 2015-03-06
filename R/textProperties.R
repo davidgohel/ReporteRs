@@ -46,7 +46,7 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 			, "font.weight" = "normal" 
 			, "font.style" = "normal"
 			, "underlined" = FALSE
-			, "font.family" = "Arial"
+			, "font.family" = "Helvetica"
 			, "vertical.align" = "baseline"
 			)
 	out = list()
@@ -74,9 +74,8 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 	else out$color = getHexColorCode( color )
 
 	if( is.character( font.family ) ){
-		check.fontfamily(font.family)
 		out$font.family = font.family
-	} else stop("font.family must be a character scalar (a font name, eg. 'Arial', 'Times', ...).")
+	} else stop("font.family must be a character scalar (a font name, eg. 'Helvetica', 'Times', ...).")
 
 	if( is.character( vertical.align ) ){
 		if( is.element( vertical.align, c("subscript", "superscript") ) )
@@ -229,9 +228,8 @@ chprop.textProperties <- function(object, color, font.size
 	
 	if( !missing( font.family ) ){
 		if( is.character( font.family ) ){
-			check.fontfamily(font.family)
 			object$font.family = font.family
-		} else stop("font.family must be a character scalar (a font name, eg. 'Arial', 'Times', ...).")
+		} else stop("font.family must be a character scalar (a font name, eg. 'Helvetica', 'Times', ...).")
 	}
 	
 	if( !missing( vertical.align ) ){
