@@ -2,17 +2,19 @@
 % Please edit documentation in R/bsdoc.R
 \name{print.bsdoc}
 \alias{print.bsdoc}
-\title{print informations about an object of class \code{\link{bsdoc}}.}
+\title{Print method for \code{\link{bsdoc}} objects.}
 \usage{
 \method{print}{bsdoc}(x, ...)
 }
 \arguments{
-\item{x}{an object of class \code{\link{bsdoc}}}
+\item{x}{a \code{\link{bsdoc}} object}
 
 \item{...}{further arguments, not used.}
 }
 \description{
-print informations about an object of class \code{\link{bsdoc}}.
+print a \code{\link{bsdoc}} object.
+If R session is interactive, the document is
+rendered in an HTML page and loaded into a WWW browser.
 }
 \examples{
 #START_TAG_TEST
@@ -20,8 +22,5 @@ print informations about an object of class \code{\link{bsdoc}}.
 doc = bsdoc( )
 print( doc )
 #STOP_TAG_TEST
-}
-\seealso{
-\code{\link{bsdoc}}, \code{\link{print}}
 }
 

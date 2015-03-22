@@ -259,10 +259,10 @@ print.FlexTable = function(x, ...){
 		cat("Col ids:", paste( head( x$col_id ), collapse = ", " ), " ... \n" )
 	} else {
 		viewer <- getOption("viewer")
-		path = file.path(tempfile(), "index.html" )
+		path = file.path(tempfile(), "temp_FlexTable.html" )
 		doc = bsdoc( )
 		doc = addFlexTable( doc, x )
-		doc = writeDoc( doc, path, reset.dir = TRUE)
+		writeDoc( doc, path, reset.dir = TRUE)
 		if( !is.null( viewer ) && is.function( viewer ) ){
 			viewer( path )
 		} else {

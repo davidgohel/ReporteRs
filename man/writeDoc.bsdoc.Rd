@@ -4,16 +4,12 @@
 \alias{writeDoc.bsdoc}
 \title{Write a \code{bsdoc} object in a html file}
 \usage{
-\method{writeDoc}{bsdoc}(doc, file, reset.dir = FALSE, ...)
+\method{writeDoc}{bsdoc}(doc, file, ...)
 }
 \arguments{
 \item{doc}{\code{\link{bsdoc}} object that has to be written.}
 
 \item{file}{single character value, name of the html file to write.}
-
-\item{reset.dir}{logical defaut to FALSE. Used to specify if the directory containing
-the file to produced should be deleted first (if existing for example). Set to FALSE
-enable to produce several html files in the same directory.}
 
 \item{...}{further arguments, not used.}
 }

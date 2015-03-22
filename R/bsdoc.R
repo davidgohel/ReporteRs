@@ -60,30 +60,44 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 	.Object
 }
 
-#' @title print informations about an object of class \code{\link{bsdoc}}.
+
+#' @title Print method for \code{\link{bsdoc}} objects.
 #'
-#' @description
-#' print informations about an object of class \code{\link{bsdoc}}.
+#' @description print a \code{\link{bsdoc}} object. 
+#' If R session is interactive, the document is 
+#' rendered in an HTML page and loaded into a WWW browser.
 #' 
-#' @param x an object of class \code{\link{bsdoc}}
+#' @param x a \code{\link{bsdoc}} object
 #' @param ... further arguments, not used. 
+#' 
 #' @examples
 #' #START_TAG_TEST
 #' # Create a new document 
 #' doc = bsdoc( )
 #' print( doc )
 #' #STOP_TAG_TEST
-#' @seealso \code{\link{bsdoc}}, \code{\link{print}}
 #' @export
-print.bsdoc = function (x, ...){
-	
-	cat("[bsdoc object]\n")
-	
-	cat("title:", x$title, "\n")
+print.bsdoc = function(x, ...){
+		
+	if (!interactive() ){
+		cat("[bsdoc object]\n")
+		cat("title:", x$title, "\n")
+	} else {
+		viewer <- getOption("viewer")
+		path = file.path(tempfile(), "temp_bsdoc.html" )
+		writeDoc( doc, path )
+		if( !is.null( viewer ) && is.function( viewer ) ){
+			viewer( path )
+		} else {
+			utils::browseURL(path)
+		}
+	}
 	
 	invisible()
 	
 }
+
+
 
 
 #' @title add javascript into a bsdoc object
