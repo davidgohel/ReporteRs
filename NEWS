@@ -1,3 +1,21 @@
+ReporteRs 0.7.9
+==================================================================
+
+ENHANCEMENT
+------------------------------------------------------------------
+
+* print method for bsdoc objects when R is interactive
+
+* drop argument reset.dir of writeDoc.bsdoc
+
+ReporteRs 0.7.8
+==================================================================
+
+ENHANCEMENT
+------------------------------------------------------------------
+
+* modify examples for cran submission
+
 ReporteRs 0.7.6
 ==================================================================
 
@@ -200,7 +218,7 @@ ENHANCEMENT
 * work on the documentation of FlexTable and alterFlexTable
 
 * let addParagraph.docx have no stylename argument when bookmark 
-  argument is used. (suggested by Günter Lutz)
+  argument is used. (suggested by Gï¿½nter Lutz)
 
 DEBUG
 ------------------------------------------------------------------
@@ -260,7 +278,7 @@ ReporteRs 0.5.6
 BUG FIXES
 ------------------------------------------------------------------
 * debug addParagraph.docx into a bookmark with multiple paragraph
-  (reported by Günter Lutz)
+  (reported by GÃ¼nter Lutz)
 * debug text function in dml graphical devices when symbols 
   '<', '>', '&' where used.
   (reported by Ted Kwartler and Karen Zalvan)
@@ -339,7 +357,7 @@ BUG FIXES
 * compilation with flags -Wformat -Wformat-security (default 
   compiler flags on Ubuntu) was driving to an error. Code changed:
   usage of fputs instead of fprintf when no formatting is required
-  (reported by Günter Lutz)
+  (reported by GÃ¼nter Lutz)
 
 ENHANCEMENT
 ------------------------------------------------------------------
@@ -373,7 +391,7 @@ BUG FIXES
 ------------------------------------------------------------------
 * deleteBookmark and deleteBookmarkNextContent did not return 
   the input document as expected - returned invisible() instead
-  (reported by Günter Lutz) 
+  (reported by GÃ¼nter Lutz) 
 
 ENHANCEMENT 
 ------------------------------------------------------------------
