@@ -216,7 +216,7 @@ FlexTable = function(data, numrow, numcol
 	out$header.par.props = header.par.props
 	out$header.text.props = header.text.props
 	
-	class( out ) = c("FlexTable", "FlexElement")
+	class( out ) = c("FlexTable")
 
 	if( !miss_data && header.columns ){
 		headerRow = FlexRow(values = .colnames, text.properties = header.text.props, par.properties = header.par.props, cell.properties = header.cell.props )

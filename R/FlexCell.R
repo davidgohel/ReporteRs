@@ -49,7 +49,7 @@ FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.
 	.Object$jobj = flexCell
 	.Object$colspan = colspan
 
-	class( .Object ) = c("FlexCell", "FlexElement")
+	class( .Object ) = c("FlexCell")
 
 	.Object
 }
