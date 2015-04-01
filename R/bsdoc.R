@@ -85,7 +85,7 @@ print.bsdoc = function(x, ...){
 	} else {
 		viewer <- getOption("viewer")
 		path = file.path(tempfile(), "temp_bsdoc.html" )
-		writeDoc( doc, path )
+		writeDoc( x, path )
 		if( !is.null( viewer ) && is.function( viewer ) ){
 			viewer( path )
 		} else {
