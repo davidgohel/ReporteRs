@@ -48,6 +48,8 @@
 #' @param padding.right cell right padding - 0 or positive integer value.
 #' @param background.color cell background color - a single character value specifying a 
 #' valid color (e.g. "#000000" or "black").
+#' @param text.direction cell text rotation - a single character value, expected 
+#' value is one of "lrtb", "tbrl", "btlr".
 #' @export
 #' @details 
 #' Default values are:
@@ -70,6 +72,7 @@
 #'   \item \code{padding.left} 1
 #'   \item \code{padding.right} 1
 #'   \item \code{background.color} "white"
+#'   \item \code{text.direction} "lrtb"
 #' }
 #' @examples
 #' #
@@ -86,7 +89,7 @@ cellProperties = function(
 	border.right.color = "black", border.right.style = "solid", border.right.width = 1,
 	vertical.align = "middle", 
 	padding.bottom = 0, padding.top = 0, padding.left = 0, padding.right = 0,
-	background.color = "white"
+	background.color = "white", text.direction = "lrtb"
 ){
 vertical.align.styles = c( "top", "middle", "bottom" )
 
@@ -109,7 +112,8 @@ out = list(
 	, padding.left = 1
 	, padding.right = 1
 	, background.color = "#FFFFFF"
-	
+	, text.direction = "lrTb"
+
 )
 
 if( !missing( border.width ) ){
@@ -149,22 +153,18 @@ if( !missing( padding ) ){
 
 if( is.character( border.bottom.style ) ){
 	match.arg( border.bottom.style, choices = ReporteRs.border.styles, several.ok = F )
-	border.bottom.style = border.bottom.style
 } else stop("border.bottom.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.left.style ) ){
 	match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = F )
-	border.left.style = border.left.style
 } else stop("border.left.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.top.style ) ){
 	match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = F )
-	border.top.style = border.top.style
 } else stop("border.top.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.right.style ) ){
 	match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = F )
-	border.right.style = border.right.style
 } else stop("border.right.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 
@@ -217,6 +217,11 @@ else out$background.color = getHexColorCode(background.color)
 
 match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
 out$vertical.align = vertical.align
+
+if( is.character( text.direction ) ){
+	match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = F )
+	out$text.direction = text.direction
+} else stop("text.direction must be a character scalar (", paste( ReporteRs.text.directions, collapse = "|") ,").")
 
 
 # padding checking
@@ -310,6 +315,8 @@ out
 #' @param padding.right cell right padding - 0 or positive integer value.
 #' @param background.color cell background color - a single character value specifying a 
 #' valid color (e.g. "#000000" or "black").
+#' @param text.direction cell text rotation - a single character value, expected 
+#' value is one of "lrtb", "tbrl", "btlr".
 #' @param ... further arguments - not used 
 #' @return a \code{cellProperties} object
 #' @examples
@@ -334,6 +341,7 @@ chprop.cellProperties <- function(object
 	, padding.left
 	, padding.right
 	, background.color
+	, text.direction
 	, ...) {
 	
 vertical.align.styles = c( "top", "middle", "bottom" )
@@ -472,7 +480,15 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 		match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
 		object$vertical.align = vertical.align
 	}
-		
+	
+	if( !missing( text.direction ) ){
+		if( is.character( text.direction ) ){
+			match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = F )
+			object$text.direction = text.direction
+		} else stop("text.direction must be a character scalar (", 
+				paste( ReporteRs.text.directions, collapse = "|") ,").")
+	}
+	
 		# padding checking
 	if( !missing( padding.bottom ) )
 		if( is.numeric( padding.bottom ) ){
@@ -510,6 +526,7 @@ print.cellProperties = function (x, ...){
 	cat( "padding.left: {", x$padding.left, "}\n" )
 	cat( "padding.right: {", x$padding.right, "}\n" )
 	cat( "background.color: {", x$background.color, "}\n" )
+	cat( "text.direction: {", x$text.direction, "}\n" )
 }
 
 
@@ -525,6 +542,7 @@ print.cellProperties = function (x, ...){
 			, as.integer( robject$padding.left )
 			, as.integer( robject$padding.right )
 			, as.character(robject$background.color )
+			, as.character(robject$text.direction )
 	)
 	jcellProp
 }

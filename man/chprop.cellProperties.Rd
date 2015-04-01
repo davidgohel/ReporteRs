@@ -9,7 +9,8 @@
   border.bottom.width, border.left.color, border.left.style, border.left.width,
   border.top.color, border.top.style, border.top.width, border.right.color,
   border.right.style, border.right.width, vertical.align, padding.bottom,
-  padding.top, padding.left, padding.right, background.color, ...)
+  padding.top, padding.left, padding.right, background.color, text.direction,
+  ...)
 }
 \arguments{
 \item{object}{\code{cellProperties} object to modify}
@@ -69,6 +70,9 @@ value is one of "none", "solid", "dotted", "dashed".}
 
 \item{background.color}{cell background color - a single character value specifying a
 valid color (e.g. "#000000" or "black").}
+
+\item{text.direction}{cell text rotation - a single character value, expected
+value is one of "lrtb", "tbrl", "btlr".}
 
 \item{...}{further arguments - not used}
 }

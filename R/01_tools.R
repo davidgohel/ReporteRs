@@ -145,6 +145,8 @@ getHexColorCode = function( valid.color ){
 }
 
 ReporteRs.border.styles = c( "none", "solid", "dotted", "dashed" )
+#ReporteRs.text.directions = c( "lrTb", "tbRl", "btLr" )
+ReporteRs.text.directions = c( "lrtb", "tbrl", "btlr" )
 
 get.pots.from.script = function( file, text
 , comment.properties

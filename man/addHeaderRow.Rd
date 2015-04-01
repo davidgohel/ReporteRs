@@ -5,7 +5,7 @@
 \title{add header in a FlexTable}
 \usage{
 addHeaderRow(x, value, colspan, text.properties, par.properties,
-  cell.properties, first = F)
+  cell.properties, first = F, vertical.extra.space = 0.2)
 }
 \arguments{
 \item{x}{a \code{FlexTable} object}
@@ -33,6 +33,10 @@ Used only if values are not missing. Default is the value of argument
 has been created}
 
 \item{first}{if \code{TRUE}, row will be inserted as first row}
+
+\item{vertical.extra.space}{extra space in inches (default to 0.2)
+to add to maximum string width if \code{text.direction} is not
+horizontal (the result is used as line height).}
 }
 \description{
 add a header row in a FlexTable

@@ -13,7 +13,7 @@ cellProperties(padding, border.width, border.style, border.color, border.bottom,
   border.right.color = "black", border.right.style = "solid",
   border.right.width = 1, vertical.align = "middle", padding.bottom = 0,
   padding.top = 0, padding.left = 0, padding.right = 0,
-  background.color = "white")
+  background.color = "white", text.direction = "lrtb")
 }
 \arguments{
 \item{padding}{cell padding - 0 or positive integer value. Argument \code{padding} overwrites
@@ -86,6 +86,9 @@ value is one of "none", "solid", "dotted", "dashed".}
 
 \item{background.color}{cell background color - a single character value specifying a
 valid color (e.g. "#000000" or "black").}
+
+\item{text.direction}{cell text rotation - a single character value, expected
+value is one of "lrtb", "tbrl", "btlr".}
 }
 \description{
 Create a \code{cellProperties} object that describes cell formatting properties.
@@ -112,6 +115,7 @@ Default values are:
   \item \code{padding.left} 1
   \item \code{padding.right} 1
   \item \code{background.color} "white"
+  \item \code{text.direction} "lrtb"
 }
 }
 \examples{

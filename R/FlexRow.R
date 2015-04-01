@@ -8,6 +8,9 @@
 #' @param par.properties Optional. parProperties to apply to each cell. Used only if values are not missing.
 #' @param cell.properties Optional. cellProperties to apply to each cell. Used only if values are not missing.
 #' @param colspan integer Optional. vector specifying for each element the number of columns to span for each corresponding value (in \code{values}). 
+#' @param vertical.extra.space extra space in inches (default to 0.2) 
+#' to add to maximum string width if \code{text.direction} is not 
+#' horizontal (the result is used as line height).
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{alterFlexRow}} 
 #' , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
@@ -15,13 +18,26 @@
 #' #
 #' @example examples/FlexRow1.R
 #' @example examples/FlexRow2.R
-FlexRow = function( values, colspan, text.properties = textProperties(), par.properties = parProperties(), cell.properties = cellProperties()){
+FlexRow = function( values, colspan, text.properties = textProperties(), 
+	par.properties = parProperties(), cell.properties = cellProperties(), 
+	vertical.extra.space = 0.2 ){
+	
 	.Object = list()
-	.Object$jobj = .jnew(class.FlexRow)
-	class( .Object ) = c("FlexRow", "FlexElement")
 	
 	if( !missing ( values ) ){
 		if( !is.character( values ) ) stop("argument 'values' must be a character vector.")
+		fm = FontMetric(fontfamily = text.properties$font.family, fontsize = text.properties$font.size)
+		deccodes = sapply( values, function(x) as.integer(charToRaw(x)) )
+		str_width = max( sapply( deccodes, function( y, ref ) sum(ref$widths[y]), fm ) )
+		.Object$jobj = .jnew(class.FlexRow, as.integer(str_width + (vertical.extra.space*72) ) )
+	} else {
+		.Object$jobj = .jnew(class.FlexRow)
+	}
+	
+	class( .Object ) = c("FlexRow")
+	
+	if( !missing ( values ) ){
+
 		if( missing( colspan ) ) colspan = rep(1, length( values ) )
 		if( length( colspan ) != length( values ) ) stop("Length of colspan is different from length of values.")
 		if( any( is.na( values ) ) ) values[is.na(values)] = "NA"
