@@ -5,7 +5,7 @@
 \title{add footer in a FlexTable}
 \usage{
 addFooterRow(x, value, colspan, text.properties, par.properties,
-  cell.properties, vertical.extra.space = 0.2)
+  cell.properties)
 }
 \arguments{
 \item{x}{a \code{FlexTable} object}
@@ -22,10 +22,6 @@ for each corresponding value (in \code{values}).}
 \item{par.properties}{Optional. parProperties to apply to each cell. Used only if values are not missing.}
 
 \item{cell.properties}{Optional. cellProperties to apply to each cell. Used only if values are not missing.}
-
-\item{vertical.extra.space}{extra space in inches (default to 0.2)
-to add to maximum string width if \code{text.direction} is not
-horizontal (the result is used as line height).}
 }
 \description{
 add a footer row in a FlexTable

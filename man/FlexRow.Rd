@@ -5,8 +5,7 @@
 \title{Row object for FlexTable}
 \usage{
 FlexRow(values, colspan, text.properties = textProperties(),
-  par.properties = parProperties(), cell.properties = cellProperties(),
-  vertical.extra.space = 0.2)
+  par.properties = parProperties(), cell.properties = cellProperties())
 }
 \arguments{
 \item{values}{Optional. a character vector to use as text content, the row will contain as many cells as there are in \code{values}.}
@@ -18,10 +17,6 @@ FlexRow(values, colspan, text.properties = textProperties(),
 \item{par.properties}{Optional. parProperties to apply to each cell. Used only if values are not missing.}
 
 \item{cell.properties}{Optional. cellProperties to apply to each cell. Used only if values are not missing.}
-
-\item{vertical.extra.space}{extra space in inches (default to 0.2)
-to add to maximum string width if \code{text.direction} is not
-horizontal (the result is used as line height).}
 }
 \description{
 Create a representation of a row that can be inserted in a FlexTable.

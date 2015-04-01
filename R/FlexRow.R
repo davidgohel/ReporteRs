@@ -8,9 +8,6 @@
 #' @param par.properties Optional. parProperties to apply to each cell. Used only if values are not missing.
 #' @param cell.properties Optional. cellProperties to apply to each cell. Used only if values are not missing.
 #' @param colspan integer Optional. vector specifying for each element the number of columns to span for each corresponding value (in \code{values}). 
-#' @param vertical.extra.space extra space in inches (default to 0.2) 
-#' to add to maximum string width if \code{text.direction} is not 
-#' horizontal (the result is used as line height).
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{alterFlexRow}} 
 #' , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
@@ -19,22 +16,26 @@
 #' @example examples/FlexRow1.R
 #' @example examples/FlexRow2.R
 FlexRow = function( values, colspan, text.properties = textProperties(), 
-	par.properties = parProperties(), cell.properties = cellProperties(), 
-	vertical.extra.space = 0.2 ){
+	par.properties = parProperties(), cell.properties = cellProperties() ){
 	
 	.Object = list()
 	
 	if( !missing ( values ) ){
 		if( !is.character( values ) ) stop("argument 'values' must be a character vector.")
 		fm = FontMetric(fontfamily = text.properties$font.family, fontsize = text.properties$font.size)
-		deccodes = sapply( values, function(x) as.integer(charToRaw(x)) )
+		deccodes = sapply( paste0(" ", values, " "), function(x) as.integer(charToRaw(x)) )
 		str_width = max( sapply( deccodes, function( y, ref ) sum(ref$widths[y]), fm ) )
-		.Object$jobj = .jnew(class.FlexRow, as.integer(str_width + (vertical.extra.space*72) ) )
+		vertical.extra.space = str_width + cell.properties$padding.left + 
+				cell.properties$padding.left + 
+				par.properties$padding.left + par.properties$padding.right +
+				cell.properties$border.left.width + 
+				cell.properties$border.right.width
+		.Object$jobj = .jnew(class.FlexRow, as.integer(vertical.extra.space) )
 	} else {
 		.Object$jobj = .jnew(class.FlexRow)
 	}
 	
-	class( .Object ) = c("FlexRow")
+	class( .Object ) = "FlexRow"
 	
 	if( !missing ( values ) ){
 

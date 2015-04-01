@@ -21,9 +21,6 @@
 #' \code{header.cell.props} provided to funtion \code{FlexTable} when object 
 #' has been created
 #' @param first if \code{TRUE}, row will be inserted as first row
-#' @param vertical.extra.space extra space in inches (default to 0.2) 
-#' to add to maximum string width if \code{text.direction} is not 
-#' horizontal (the result is used as line height).
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFooterRow}}
 #' , \code{\link{alterFlexTable}}
 #' @examples
@@ -33,7 +30,7 @@
 #' @export
 addHeaderRow = function( x, value, colspan, 
 		text.properties, par.properties, cell.properties, 
-		first = F, vertical.extra.space = 0.2){
+		first = F ){
 	
 	if( !inherits(x, c("FlexTable") ) ) 
 		stop("x must be a FlexTable object.")
@@ -64,7 +61,7 @@ addHeaderRow = function( x, value, colspan,
 		value = FlexRow( values = value, colspan = colspan, 
 			text.properties = text.properties, 
 			par.properties = par.properties, 
-			cell.properties = cell.properties, vertical.extra.space = vertical.extra.space )
+			cell.properties = cell.properties )
 	} 
 	
 	.weights = weight.FlexRow( value )
@@ -92,9 +89,6 @@ addHeaderRow = function( x, value, colspan,
 #' @param text.properties Optional. textProperties to apply to each cell. Used only if values are not missing.
 #' @param par.properties Optional. parProperties to apply to each cell. Used only if values are not missing.
 #' @param cell.properties Optional. cellProperties to apply to each cell. Used only if values are not missing.
-#' @param vertical.extra.space extra space in inches (default to 0.2) 
-#' to add to maximum string width if \code{text.direction} is not 
-#' horizontal (the result is used as line height).
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{addHeaderRow}}
 #' , \code{\link{alterFlexTable}}
@@ -102,10 +96,7 @@ addHeaderRow = function( x, value, colspan,
 #' #
 #' @example examples/addFooterRowDefaults.R
 #' @example examples/addFooterRowComplex.R
-addFooterRow = function( x, value, colspan, 
-		text.properties, 
-		par.properties, 
-		cell.properties, vertical.extra.space = 0.2 ){
+addFooterRow = function( x, value, colspan, text.properties, par.properties, cell.properties ){
 	
 	if( !inherits(x, c("FlexTable") ) ) 
 		stop("x must be a FlexTable object.")
@@ -136,7 +127,7 @@ addFooterRow = function( x, value, colspan,
 		value = FlexRow( values = value, colspan = colspan, 
 			text.properties = text.properties, 
 			par.properties = par.properties, 
-			cell.properties = cell.properties, vertical.extra.space = vertical.extra.space )
+			cell.properties = cell.properties )
 
 	} 
 	
