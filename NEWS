@@ -8,6 +8,11 @@ ENHANCEMENT
 
 * drop argument reset.dir of writeDoc.bsdoc
 
+* rotation of pptx shape is now handled
+
+* FlexTable header row text can be rotated
+
+
 ReporteRs 0.7.8
 ==================================================================
 
