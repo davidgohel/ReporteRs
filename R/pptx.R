@@ -73,13 +73,6 @@ pptx = function( title, template, list.definition = getOption("ReporteRs-list-de
 	lidef = do.call( list.settings, list.definition )
 	.jcall( obj, "V", "setNumberingDefinition", lidef )
 	layout.labels = .jcall( obj, "[S", "getStyleNames" )
-	are.layout.valid = regexpr("^[0-9a-zA-Z !#\\$'\\(\\)\\*\\+,-\\.\\:;\\?@_`{}\\|~/]+$", layout.labels )
-	
-	if( any( are.layout.valid < 0 ) ){
-		w.inv_templ = which( are.layout.valid < 0 )
-		inv_templ = paste( shQuote(layout.labels[w.inv_templ]), collapse = ", " )
-		stop("Following layout names are invalid, they should only contain spaces, letters (from a to z) and numeric values :\n", inv_templ)
-	}
 	
 	.Object = list( obj = obj
 			, title = title

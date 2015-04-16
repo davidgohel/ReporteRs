@@ -1,8 +1,33 @@
 #' @import rJava
 #' @import ReporteRsjars
 .onLoad= function(libname, pkgname){
+	
 	.jpackage( pkgname, lib.loc = libname )
-	options("ReporteRs-default-font"="Helvetica")
+	.jcall('java.lang.System','S','setProperty','file.encoding', 'UTF-8')
+	
+	.try = try( check.fontfamily( fontfamily = "Helvetica", as.message = FALSE ), silent = TRUE )
+	
+	if( inherits( .try , "try-error") ){
+		.try = try( check.fontfamily( fontfamily = "Arial", as.message = FALSE ), silent = TRUE )
+	} else options("ReporteRs-default-font" = "Helvetica")
+	
+	if( inherits( .try , "try-error") ){
+		.try = try( check.fontfamily( fontfamily = "Georgia", as.message = FALSE ), silent = TRUE )
+	} else options("ReporteRs-default-font" = "Arial")
+	
+	if( inherits( .try , "try-error") ){
+		.try = try( check.fontfamily( fontfamily = "Times New Roman", as.message = FALSE ), silent = TRUE )
+	} else options("ReporteRs-default-font" = "Georgia")
+	
+	if( inherits( .try , "try-error") ){
+		.try = try( check.fontfamily( fontfamily = "Verdana", as.message = FALSE ), silent = TRUE )
+	} else options("ReporteRs-default-font" = "Times New Roman")
+	
+	if( inherits( .try , "try-error") ){
+		options("ReporteRs-default-font" = "Arial")
+		warning("Could not set any defaut font, please specify a font using:\noptions('ReporteRs-default-font' = 'existing font on your machine')\n")
+	} else options("ReporteRs-default-font" = "Verdana")
+	
 	options("ReporteRs-locale.language"="en")
 	options("ReporteRs-locale.region"="US")
 	options("ReporteRs-backtick-color" = "#c7254e" )

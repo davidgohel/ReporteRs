@@ -44,7 +44,7 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 
 **Get the latest Windows binary packages:**  
 [ReporteRsjars 0.2](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.2 "ReporteRsjars") &diams; 
-[ReporteRs 0.7.5](https://github.com/davidgohel/ReporteRs/releases/tag/v0.7.5 "ReporteRs")
+[ReporteRs 0.8.0](https://github.com/davidgohel/ReporteRs/releases/tag/v0.8.0 "ReporteRs")
 
   
 Getting Started

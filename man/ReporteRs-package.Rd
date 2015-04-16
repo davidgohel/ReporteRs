@@ -13,8 +13,8 @@ and html documents.
 \tabular{ll}{
 Package: \tab ReporteRs\cr
 Type: \tab Package\cr
-Version: \tab 0.7.9\cr
-Date: \tab 2015-03-22\cr
+Version: \tab 0.8.0\cr
+Date: \tab 2015-04-15\cr
 License: \tab GPL (>= 3)\cr
 LazyLoad: \tab yes\cr
 }
