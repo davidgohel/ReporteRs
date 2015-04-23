@@ -27,3 +27,4 @@ char* get_raphael_filename(char* filename, int index);
 char* get_raphael_canvasname( int index);
 char* get_raphael_jsobject_name(char* filename, int index);
 void raphael_text(const char *str, DOCDesc *pd);
+void raphael_textUTF8(const char *str, DOCDesc *pd);

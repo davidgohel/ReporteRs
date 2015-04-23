@@ -79,15 +79,17 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 	dev->newPage = RAPHAEL_NewPage;
 	dev->clip = RAPHAEL_Clip;
 	dev->strWidth = RAPHAEL_StrWidth;
+	dev->strWidthUTF8 = RAPHAEL_StrWidthUTF8;
 	dev->text = RAPHAEL_Text;
+	dev->textUTF8 = RAPHAEL_TextUTF8;
 	dev->rect = RAPHAEL_Rect;
 	dev->circle = RAPHAEL_Circle;
 	dev->line = RAPHAEL_Line;
 	dev->polyline = RAPHAEL_Polyline;
 	dev->polygon = RAPHAEL_Polygon;
 	dev->metricInfo = RAPHAEL_MetricInfo;
-	dev->hasTextUTF8 = (Rboolean) FALSE;
-	dev->wantSymbolUTF8 = (Rboolean) FALSE;
+	dev->hasTextUTF8 = (Rboolean) TRUE;
+	dev->wantSymbolUTF8 = (Rboolean) TRUE;
 	dev->useRotatedTextInContour = (Rboolean) FALSE;
 	/*
 	 * Initial graphical settings
@@ -130,8 +132,8 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 	 * Device capabilities
 	 */
 	dev->canClip = (Rboolean) TRUE;
-	dev->canHAdj = 2;//canHadj – integer: can the device do horizontal adjustment of text via the text callback, and if so, how precisely? 0 = no adjustment, 1 = {0, 0.5, 1} (left, centre, right justification) or 2 = continuously variable (in [0,1]) between left and right justification.
-	dev->canChangeGamma = (Rboolean) FALSE;	//canChangeGamma – Rboolean: can the display gamma be adjusted? This is now ignored, as gamma support has been removed.
+	dev->canHAdj = 2;
+	dev->canChangeGamma = (Rboolean) FALSE;
 	dev->displayListOn = (Rboolean) FALSE;
 
 	dev->haveTransparency = 2;
@@ -463,6 +465,52 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 
 }
 
+static void RAPHAEL_TextUTF8(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev) {
+
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int idx = get_and_increment_idx(dev);
+	register_element( dev);
+	double w = RAPHAEL_StrWidth(str, gc, dev);
+	double fontsize = getFontSize(gc->cex, gc->ps, gc->lineheight);
+	double h = fontsize;
+	if( h < 1.0 ) return;
+	double pi = 3.141592653589793115997963468544185161590576171875;
+
+	double alpha = -rot * pi / 180;
+	double height = h;
+	double Qx = x;
+	double Qy = y ;
+	double Px = x + (0.5-hadj) * w;
+	double Py = y - 0.5 * height;
+	double _cos = cos( alpha );
+	double _sin = sin( alpha );
+
+	double Ppx = Qx + (Px-Qx) * _cos - (Py-Qy) * _sin ;
+	double Ppy = Qy + (Px-Qx) * _sin + (Py-Qy) * _cos;
+
+	double corrected_offx = Ppx ;//- 0.5 * w;
+	double corrected_offy = Ppy ;//- 0.1 * h;
+
+
+	fprintf(pd->dmlFilePointer, "var elt_%d = %s.text(", idx, pd->objectname );
+	fprintf(pd->dmlFilePointer, "%.5f,%.5f", corrected_offx, corrected_offy);
+	fputs(",\"", pd->dmlFilePointer );
+	textUTF8(str, pd);
+	fputs("\"", pd->dmlFilePointer );
+	fputs(");\n", pd->dmlFilePointer );
+
+	RAPHAEL_SetFontSpec(dev, gc, idx);
+	if( rot > 0 ) {
+		fprintf(pd->dmlFilePointer, "elt_%d.transform(\"", idx);
+		fprintf(pd->dmlFilePointer, "R-%.5f", rot);
+		fputs("\");\n", pd->dmlFilePointer );
+	}
+
+	fflush(pd->dmlFilePointer);
+
+}
+
 static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	if (pd->pageNumber > 0) {
@@ -552,6 +600,9 @@ static double RAPHAEL_StrWidth(const char *str, const pGEcontext gc, pDevDesc de
 	return DOC_StrWidth(str, gc, dev);
 }
 
+static double RAPHAEL_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
+	return DOC_StrWidthUTF8(str, gc, dev);
+}
 
 
 SEXP R_RAPHAEL_Device(SEXP filename

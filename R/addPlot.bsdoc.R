@@ -70,6 +70,7 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		.C("trigger_last_post_commands", (dev.cur()-1L) )
 		
 		dev.off()
+
 		plot_ids = get("plot_ids", envir = env )
 		if( last_canvas_id < 0 ) stop("unexpected error, could not find device information.")
 		else doc$canvas_id = last_canvas_id;
@@ -77,10 +78,8 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		jimg = .jnew( class.html4r.RAPHAELGraphics, .jParProperties(par.properties)  )
 		
 		for(i in 1:length( plot_ids ) ){
-			file = as.character(paste(readLines(plot_ids[[i]]$filename), collapse = "\n"))
 			div.id = plot_ids[[i]]$div.id
-			
-			.jcall( jimg, "V", "registerGraphic", as.character(div.id), file )
+			.jcall( jimg, "V", "registerGraphic", as.character(div.id), plot_ids[[i]]$filename )
 		}
 		out = .jcall( doc$jobj, "I", "add", jimg )
 		if( out != 1 ){

@@ -107,15 +107,17 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	dev->newPage = DOCX_NewPage;
 	dev->clip = DOCX_Clip;
 	dev->strWidth = DOCX_StrWidth;
+	dev->strWidthUTF8 = DOCX_StrWidthUTF8;
 	dev->text = DOCX_Text;
+	dev->textUTF8 = DOCX_TextUTF8;
 	dev->rect = DOCX_Rect;
 	dev->circle = DOCX_Circle;
 	dev->line = DOCX_Line;
 	dev->polyline = DOCX_Polyline;
 	dev->polygon = DOCX_Polygon;
 	dev->metricInfo = DOCX_MetricInfo;
-	dev->hasTextUTF8 = (Rboolean) FALSE;
-	dev->wantSymbolUTF8 = (Rboolean) FALSE;
+	dev->hasTextUTF8 = (Rboolean) TRUE;
+	dev->wantSymbolUTF8 = (Rboolean) TRUE;
 	dev->useRotatedTextInContour = (Rboolean) FALSE;
 	/*
 	 * Initial graphical settings
@@ -158,8 +160,8 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	 * Device capabilities
 	 */
 	dev->canClip = (Rboolean) TRUE;
-	dev->canHAdj = 2;//canHadj – integer: can the device do horizontal adjustment of text via the text callback, and if so, how precisely? 0 = no adjustment, 1 = {0, 0.5, 1} (left, centre, right justification) or 2 = continuously variable (in [0,1]) between left and right justification.
-	dev->canChangeGamma = (Rboolean) FALSE;	//canChangeGamma – Rboolean: can the display gamma be adjusted? This is now ignored, as gamma support has been removed.
+	dev->canHAdj = 2;
+	dev->canChangeGamma = (Rboolean) FALSE;
 	dev->displayListOn = (Rboolean) FALSE;
 
 	dev->haveTransparency = 2;
@@ -585,6 +587,89 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 
 	//return;
 }
+static void DOCX_TextUTF8(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev) {
+
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	int idx = get_and_increment_idx(dev);
+
+	double w = DOCX_StrWidthUTF8(str, gc, dev);
+	if( strlen(str) < 3 ) w+= 1 * w / strlen(str);
+	else w += 3 * w / strlen(str);
+	double h = getFontSize(gc->cex, gc->ps, gc->lineheight) * 1.0;
+	if( h < 1.0 ) return;
+	double fontsize = h;
+
+//	/* translate and rotate ops */
+	double alpha = -rot * pi / 180;
+	double height = h;
+	double Qx = x;
+	double Qy = y ;
+	double Px = x + (0.5-hadj) * w;
+	double Py = y - 0.5 * height;
+	double _cos = cos( alpha );
+	double _sin = sin( alpha );
+
+	double Ppx = Qx + (Px-Qx) * _cos - (Py-Qy) * _sin ;
+	double Ppy = Qy + (Px-Qx) * _sin + (Py-Qy) * _cos;
+
+	double corrected_offx = Ppx - 0.5 * w;
+	double corrected_offy = Ppy - 0.5 * h;
+
+	//////////////
+	if( rot < 0.05 || rot > 0.05 ) rot = -rot;
+	else rot = 0.0;
+
+	fputs(docx_elt_tag_start, pd->dmlFilePointer );
+	if( pd->editable < 1 )
+		fprintf(pd->dmlFilePointer, "<wps:cNvPr id=\"%d\" name=\"Text %d\" />%s", idx,	idx, docx_lock_properties);
+	else fprintf(pd->dmlFilePointer, "<wps:cNvPr id=\"%d\" name=\"Text %d\" />%s", idx,	idx, docx_unlock_properties);
+
+	fputs("<wps:spPr>", pd->dmlFilePointer );
+
+	fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", rot * 60000);
+	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>", p2e_(pd->offx + corrected_offx), p2e_(pd->offy + corrected_offy));
+	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(w), p2e_(h));
+	fputs("</a:xfrm>", pd->dmlFilePointer );
+	fputs("<a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>", pd->dmlFilePointer );
+	fputs("<a:noFill />", pd->dmlFilePointer );
+	fputs("</wps:spPr>", pd->dmlFilePointer );
+	fputs("<wps:txbx>", pd->dmlFilePointer );
+
+	fputs("<w:txbxContent>", pd->dmlFilePointer );
+	fputs("<w:p>", pd->dmlFilePointer );
+	fputs("<w:pPr>", pd->dmlFilePointer );
+
+	if (hadj < 0.25)
+		fputs("<w:jc w:val=\"left\" />", pd->dmlFilePointer );
+	else if (hadj < 0.75)
+		fputs("<w:jc w:val=\"center\" />", pd->dmlFilePointer );
+	else
+		fputs("<w:jc w:val=\"right\" />", pd->dmlFilePointer );
+
+	fprintf(pd->dmlFilePointer, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", height*20);
+	DOCX_setRunProperties( dev, gc, fontsize);
+	fputs("</w:pPr>", pd->dmlFilePointer );
+	fputs("<w:r>", pd->dmlFilePointer );
+
+	DOCX_setRunProperties( dev, gc, fontsize);
+
+	fputs("<w:t>", pd->dmlFilePointer );
+	dml_textUTF8(str, pd);
+	fputs("</w:t></w:r></w:p>", pd->dmlFilePointer );
+
+	fputs("</w:txbxContent>", pd->dmlFilePointer );
+	fputs("</wps:txbx>", pd->dmlFilePointer );
+	fputs("<wps:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\">", pd->dmlFilePointer );
+
+	fputs( "<a:spAutoFit /></wps:bodyPr>", pd->dmlFilePointer);
+	fputs(docx_elt_tag_end, pd->dmlFilePointer );
+//	fprintf(pd->dmlFilePointer, "\n");
+	fflush(pd->dmlFilePointer);
+
+	//return;
+}
 
 static void DOCX_NewPage(const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
@@ -656,6 +741,9 @@ static void DOCX_Size(double *left, double *right, double *bottom, double *top,
 
 static double DOCX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 	return DOC_StrWidth(str, gc, dev);
+}
+static double DOCX_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
+	return DOC_StrWidthUTF8(str, gc, dev);
 }
 
 //SEXP setDimensions(SEXP devNumber, SEXP ext, SEXP off){

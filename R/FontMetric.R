@@ -22,3 +22,9 @@ FontMetric = function( fontfamily, fontsize ){
 	list( info = info, widths = widths )
 }
 
+#' @export 
+reporters_str_width = function( str, fontfamily, fontsize, fontface ){
+	fontMetric = .jnew(class.fontMetric, fontfamily, as.integer( fontsize ) )
+	width = .jcall( fontMetric, "I", "getWidth", as.integer( fontface ), str )
+	list( width = as.integer(width) )
+}

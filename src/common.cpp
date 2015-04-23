@@ -102,6 +102,55 @@ void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 	*width = pd->fi->widths[(fontface * 256) + c];
 }
 
+void textUTF8(const char *str, DOCDesc *pd){
+	unsigned char *p;
+	p = (unsigned char *) str;
+	int val, val1, val2, val3, val4;
+	while(*p){
+		val = *(p++);
+		if( val < 128 ){ /* ASCII */
+			fprintf(pd->dmlFilePointer, "%c", val);
+		} else if( val > 240 ){ /* 4 octets*/
+			val1 = (val - 240) * 65536;
+			val = *(p++);
+			val2 = (val - 128) * 4096;
+			val = *(p++);
+			val3 = (val - 128) * 64;
+			val = *(p++);
+			val4 = val - 128;
+			val = val1 + val2 + val3 + val4;
+
+			char byte1 = 0xf0 | ((val & 0x1C0000) >> 18);
+			char byte2 = 0x80 | ((val & 0x3F000)  >> 12);
+			char byte3 = 0x80 | ((val & 0xFC0) >> 6);
+			char byte4 = 0x80 | (val & 0x3f);
+			fprintf(pd->dmlFilePointer, "%c%c%c%c", byte1, byte2, byte3, byte4);
+		} else {
+			if( val >= 224 ){ /* 3 octets : 224 = 128+64+32 */
+				val1 = (val - 224) * 4096;
+				val = *(p++);
+				val2 = (val-128) * 64;
+				val = *(p++);
+				val3 = (val-128);
+				val = val1 + val2 + val3;
+				char byte1 = 0xe0 | ((val & 0xf000) >> 12);
+				char byte2 = 0x80 | ((val & 0xfc0)  >> 6);
+				char byte3 = 0x80 | (val & 0x3f);
+				fprintf(pd->dmlFilePointer, "%c%c%c", byte1, byte2, byte3);
+			} else { /* 2 octets : >192 = 128+64 */
+				val1 = (val - 192) * 64;
+				val = *(p++);
+				val2 = val-128;
+				val = val1 + val2;
+				char byte1 = 0xc0 | ((val & 0x7c0) >> 6);
+				char byte2 = 0x80 | (val & 0x3f);
+				fprintf(pd->dmlFilePointer, "%c%c", byte1, byte2);
+			}
+
+		}
+	}
+}
+
 
 double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 	double sum;
@@ -122,7 +171,35 @@ double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 
 	return sum;
 }
+double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 
+	char *fontname;
+	int fontface=gc->fontface;
+	if( gc->fontface == 5 ) {
+		fontface = 1;
+		fontname = strdup("Symbol");
+	} else if( strlen( gc->fontfamily ) > 0 ) {
+		fontname = strdup(gc->fontfamily);
+	} else if( pd->fi->isinit > 0 ) {
+		fontname = strdup(pd->fi->fontname);
+	} else {
+		fontname = strdup(pd->fontname);
+	}
+	fontface--;
+	int fontsize = (int)getFontSize(gc->cex, gc->ps, gc->lineheight);
+
+	SEXP out;
+	out = eval(
+			lang5(install("reporters_str_width"),
+					mkString(str),
+					mkString(fontname),
+					ScalarInteger( fontsize ),
+					ScalarInteger(fontface)), R_GlobalEnv);
+
+	int *fm = INTEGER(VECTOR_ELT(out, 0));
+	return (double) fm[0];
+}
 int get_and_increment_idx(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int id = pd->id;
@@ -182,7 +259,7 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 
 	/*Clipping Left */
 	if (ptd->clippedx1 >= dev->clipLeft && ptd->clippedx0 < dev->clipLeft) {
-//		Rprintf("%% DOC_ClipLine à gauche\n" );
+//		Rprintf("%% DOC_ClipLine ï¿½ gauche\n" );
 
 		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
@@ -191,7 +268,7 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 		ptd->clippedx0 = dev->clipLeft;
 	}
 	if (ptd->clippedx1 <= dev->clipLeft && ptd->clippedx0 > dev->clipLeft) {
-//		Rprintf("%% DOC_ClipLine à gauche\n" );
+//		Rprintf("%% DOC_ClipLine ï¿½ gauche\n" );
 		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
 				(dev->clipLeft-ptd->clippedx0)) +
@@ -201,7 +278,7 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	/* Clipping Right */
 	if (ptd->clippedx1 >= dev->clipRight &&
 			ptd->clippedx0 < dev->clipRight) {
-//		Rprintf("%% DOC_ClipLine à droite\n" );
+//		Rprintf("%% DOC_ClipLine ï¿½ droite\n" );
 
 		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
@@ -211,7 +288,7 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	}
 	if (ptd->clippedx1 <= dev->clipRight &&
 			ptd->clippedx0 > dev->clipRight) {
-//		Rprintf("%% DOC_ClipLine à droite\n" );
+//		Rprintf("%% DOC_ClipLine ï¿½ droite\n" );
 
 		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
