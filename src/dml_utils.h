@@ -31,5 +31,7 @@ void DML_SetFontColor(pDevDesc dev, R_GE_gcontext *gc);
 void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc);
 void dml_text(const char *str, DOCDesc *pd);
 void dml_textUTF8(const char *str, DOCDesc *pd);
+double translate_rotate_x(double x, double y, double rot, double height, double width, double hadj);
+double translate_rotate_y(double x, double y, double rot, double height, double width, double hadj);
+double getStrWidth(const char *str, double w);
 int get_and_increment_idx(pDevDesc dev);
-

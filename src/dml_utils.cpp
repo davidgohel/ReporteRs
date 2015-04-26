@@ -173,4 +173,38 @@ void dml_textUTF8(const char *str, DOCDesc *pd){
 	}
 }
 
+double translate_rotate_x(double x, double y, double rot, double height, double width, double hadj) {
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	double alpha = -rot * pi / 180;
 
+	double Px = x + (0.5-hadj) * width;
+	double Py = y - 0.5 * height;
+
+	double _cos = cos( alpha );
+	double _sin = sin( alpha );
+
+	return x + (Px-x) * _cos - (Py-y) * _sin;
+}
+double translate_rotate_y(double x, double y, double rot, double height, double width, double hadj) {
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	double alpha = -rot * pi / 180;
+
+	double Px = x + (0.5-hadj) * width;
+	double Py = y - 0.25 * height;
+
+	double _cos = cos( alpha );
+	double _sin = sin( alpha );
+
+	return y + (Px-x) * _sin + (Py-y) * _cos;
+}
+
+double getStrWidth(const char *str, double w) {
+
+	if( strlen(str) < 6 ) w+= w / strlen(str);
+	else if( strlen(str) < 15 ) w+= 2 * w / strlen(str);
+	else if( strlen(str) < 30 ) w+= 4 * w / strlen(str);
+	else if( strlen(str) < 45 ) w+= 5 * w / strlen(str);
+	else w+= 6 * w / strlen(str);
+
+	return w;
+}
