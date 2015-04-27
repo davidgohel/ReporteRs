@@ -82,14 +82,9 @@ int getFontface( int ff ){
 	return fontface;
 }
 
-//http://cran.r-project.org/doc/manuals/R-ints.html#Handling-text
-
 void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 		double* descent, double* width, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-
-	char str[16];
-	int Unicode = mbcslocale;
 
 	if( c < 0 ) c = -c;
 	if( c >255 ) c = 77;
@@ -102,75 +97,8 @@ void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 	*width = pd->fi->widths[(fontface * 256) + c];
 }
 
-void textUTF8(const char *str, DOCDesc *pd){
-	unsigned char *p;
-	p = (unsigned char *) str;
-	int val, val1, val2, val3, val4;
-	while(*p){
-		val = *(p++);
-		if( val < 128 ){ /* ASCII */
-			fprintf(pd->dmlFilePointer, "%c", val);
-		} else if( val > 240 ){ /* 4 octets*/
-			val1 = (val - 240) * 65536;
-			val = *(p++);
-			val2 = (val - 128) * 4096;
-			val = *(p++);
-			val3 = (val - 128) * 64;
-			val = *(p++);
-			val4 = val - 128;
-			val = val1 + val2 + val3 + val4;
-
-			char byte1 = 0xf0 | ((val & 0x1C0000) >> 18);
-			char byte2 = 0x80 | ((val & 0x3F000)  >> 12);
-			char byte3 = 0x80 | ((val & 0xFC0) >> 6);
-			char byte4 = 0x80 | (val & 0x3f);
-			fprintf(pd->dmlFilePointer, "%c%c%c%c", byte1, byte2, byte3, byte4);
-		} else {
-			if( val >= 224 ){ /* 3 octets : 224 = 128+64+32 */
-				val1 = (val - 224) * 4096;
-				val = *(p++);
-				val2 = (val-128) * 64;
-				val = *(p++);
-				val3 = (val-128);
-				val = val1 + val2 + val3;
-				char byte1 = 0xe0 | ((val & 0xf000) >> 12);
-				char byte2 = 0x80 | ((val & 0xfc0)  >> 6);
-				char byte3 = 0x80 | (val & 0x3f);
-				fprintf(pd->dmlFilePointer, "%c%c%c", byte1, byte2, byte3);
-			} else { /* 2 octets : >192 = 128+64 */
-				val1 = (val - 192) * 64;
-				val = *(p++);
-				val2 = val-128;
-				val = val1 + val2;
-				char byte1 = 0xc0 | ((val & 0x7c0) >> 6);
-				char byte2 = 0x80 | (val & 0x3f);
-				fprintf(pd->dmlFilePointer, "%c%c", byte1, byte2);
-			}
-
-		}
-	}
-}
 
 
-double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
-	double sum;
-	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	updateFontInfo(dev, gc);
-	int fontface = getFontface(gc->fontface);
-
-	const unsigned char *c = (const unsigned char*) str;
-	int unicode_dec;
-	sum = 0.0;
-	while (*c) {
-		unicode_dec = *c;
-		if( unicode_dec > 255 ) unicode_dec = 77;
-		if( unicode_dec < 0 ) unicode_dec = 77;
-		sum += pd->fi->widths[(fontface * 256) + unicode_dec];
-		c++;
-	}
-
-	return sum;
-}
 double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	char *fontname;
@@ -199,6 +127,8 @@ double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
 	int *fm = INTEGER(VECTOR_ELT(out, 0));
 	return (double) fm[0];
 }
+
+
 int get_and_increment_idx(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int id = pd->id;

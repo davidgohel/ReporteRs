@@ -119,59 +119,7 @@ void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc) {
 	}
 }
 
-void dml_text(const char *str, DOCDesc *pd){
-    for( ; *str ; str++)
-	switch(*str) {
-	case '<':
-		fprintf(pd->dmlFilePointer, "&lt;");
-	    break;
-	case '>':
-		fprintf(pd->dmlFilePointer, "&gt;");
-	    break;
-	case '&':
-		fprintf(pd->dmlFilePointer, "&amp;");
-	    break;
-	default:
-	    fputc(*str, pd->dmlFilePointer);
-	    break;
-	}
-}
 
-void dml_textUTF8(const char *str, DOCDesc *pd){
-	unsigned char *p;
-	p = (unsigned char *) str;
-	int val, val1, val2, val3, val4;
-	while(*p){
-		val = *(p++);
-		if( val < 128 ){ /* ASCII */
-			fprintf(pd->dmlFilePointer, "&#%d;", val);
-		} else if( val > 240 ){
-			val1 = (val - 240) * 65536;
-			val = *(p++);
-			val2 = (val - 128) * 4096;
-			val = *(p++);
-			val3 = (val - 128) * 64;
-			val = *(p++);
-			val4 = val - 128;
-			fprintf(pd->dmlFilePointer, "&#%d;", val1+val2+val3+val4);
-		} else {
-			if( val >= 224 ){ /* 3 octets : 224 = 128+64+32 */
-				val1 = (val - 224) * 4096;
-				val = *(p++);
-				val2 = (val-128) * 64;
-				val = *(p++);
-				val3 = (val-128);
-				fprintf(pd->dmlFilePointer, "&#%d;", val1 + val2 + val3);
-			} else { /* 2 octets : >192 = 128+64 */
-				val1 = (val - 192) * 64;
-				val = *(p++);
-				val2 = val-128;
-				fprintf(pd->dmlFilePointer, "&#%d;", val1+val2);
-			}
-
-		}
-	}
-}
 
 double translate_rotate_x(double x, double y, double rot, double height, double width, double hadj) {
 	double pi = 3.141592653589793115997963468544185161590576171875;
