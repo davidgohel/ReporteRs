@@ -7,6 +7,12 @@ ENHANCEMENT
 * Now always run java in UTF-8. For example, it make possible to 
   use any layout name within PowerPoint templates.
 
+DEBUG
+------------------------------------------------------------------
+
+* There are major corrections in graphic devices with UTF-8 
+  text and text position.
+
 
 ReporteRs 0.7.9
 ==================================================================
