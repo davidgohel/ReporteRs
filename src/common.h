@@ -31,10 +31,13 @@ void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 		double* descent, double* width, pDevDesc dev);
 
 double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev);
-
+double translate_rotate_x(double x, double y, double rot, double height, double width, double hadj);
+double translate_rotate_y(double x, double y, double rot, double height, double width, double hadj);
+double rotate_x(double cx, double cy, double rot, double x, double y);
+double rotate_y(double cx, double cy, double rot, double x, double y);
 int get_and_increment_idx(pDevDesc dev);
 void register_element(pDevDesc dev);
-
+int getFontface( int ff );
 void closeFile( FILE *file);
 
 void DOC_ClipLine(double x0, double y0, double x1, double y1, pDevDesc dev);

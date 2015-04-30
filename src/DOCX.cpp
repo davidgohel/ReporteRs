@@ -565,7 +565,8 @@ static void DOCX_TextUTF8(double x, double y, const char *str, double rot,
 
 	double w = DOCX_StrWidthUTF8(str, gc, dev);
 	w = getStrWidth( str, w);
-	double h = getFontSize(gc->cex, gc->ps, gc->lineheight);
+	double h = pd->fi->ascent[getFontface(gc->fontface)];
+	double fs = getFontSize(gc->cex, gc->ps, gc->lineheight);
 	if( h < 1.0 ) return;
 
 	double pp_x = translate_rotate_x(x, y, rot, h, w, hadj);
@@ -609,7 +610,7 @@ static void DOCX_TextUTF8(double x, double y, const char *str, double rot,
 	fputs("</w:pPr>", pd->dmlFilePointer );
 	fputs("<w:r>", pd->dmlFilePointer );
 
-	DOCX_setRunProperties( dev, gc, h);
+	DOCX_setRunProperties( dev, gc, fs);
 
 	fputs("<w:t>", pd->dmlFilePointer );
 	docx_text(str, pd);

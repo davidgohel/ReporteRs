@@ -25,7 +25,7 @@
 #include <R_ext/GraphicsDevice.h>
 
 double getFontSize(double cex, double fontsize, double lineheight) {
-	double size = (cex * fontsize + 0.5 );
+	double size = (cex * fontsize * lineheight );
 	if( size < 1.0 ) size = 0.0;
 	return size;
 }
@@ -88,12 +88,11 @@ void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 
 	if( c < 0 ) c = -c;
 	if( c >255 ) c = 77;
-
 	updateFontInfo(dev, gc);
 
 	int fontface = getFontface(gc->fontface);
-	*ascent = pd->fi->ascent[fontface]*gc->lineheight;
-	*descent = pd->fi->descent[fontface]*gc->lineheight;
+	*ascent = pd->fi->ascent[fontface];
+	*descent = pd->fi->descent[fontface];
 	*width = pd->fi->widths[(fontface * 256) + c];
 }
 
@@ -128,6 +127,47 @@ double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
 	return (double) fm[0];
 }
 
+double translate_rotate_x(double x, double y, double rot, double height, double width, double hadj) {
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	double alpha = -rot * pi / 180;
+
+	double Px = x + (0.5-hadj) * width;
+	double Py = y - height;
+
+	double _cos = cos( alpha );
+	double _sin = sin( alpha );
+
+	return x + (Px-x) * _cos - (Py-y) * _sin;
+}
+double rotate_x(double cx, double cy, double rot, double x, double y)
+{
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	double angle = -rot * pi / 180;
+	double s = sin(angle);
+	double c = cos(angle);
+	return (c * (x - cx)) - (s * (y - cy)) + cx;
+}
+double rotate_y(double cx, double cy, double rot, double x, double y)
+{
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	double angle = -rot * pi / 180;
+	double s = sin(angle);
+	double c = cos(angle);
+	return (s * (x - cx)) + (c * (y - cy)) + cy;
+}
+
+double translate_rotate_y(double x, double y, double rot, double height, double width, double hadj) {
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	double alpha = -rot * pi / 180;
+
+	double Px = x + (0.5-hadj) * width;
+	double Py = y - height;
+
+	double _cos = cos( alpha );
+	double _sin = sin( alpha );
+
+	return y + (Px-x) * _sin + (Py-y) * _cos;
+}
 
 int get_and_increment_idx(pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;

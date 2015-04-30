@@ -494,15 +494,22 @@ static void PPTX_TextUTF8(double x, double y, const char *str, double rot,
 
 	double w = PPTX_StrWidthUTF8(str, gc, dev);
 	w = getStrWidth( str, w);
-	double h = getFontSize(gc->cex, gc->ps, gc->lineheight);
+	double h = pd->fi->ascent[getFontface(gc->fontface)];
+	double fs = getFontSize(gc->cex, gc->ps, gc->lineheight);
 	if( h < 1.0 ) return;
 
-	double pp_x = translate_rotate_x(x, y, rot, h, w, hadj);
+	/*double pp_x = translate_rotate_x(x, y, rot, h, w, hadj);
 	double pp_y = translate_rotate_y(x, y, rot, h, w, hadj);
 
-	double corrected_offx = pp_x - 0.5 * w;
+
+	*/
+	double pp_x = rotate_x(x + (-hadj) * w, y - .5*h, rot, x, y);
+	double pp_y = rotate_y(x + (-hadj) * w, y - .5*h, rot, x, y);
+
+	double corrected_offx = pp_x + (-hadj) * w;
 	double corrected_offy = pp_y - 0.5 * h;
 
+	Rprintf("h:%.3f fs%.3f new x:%.3f new y:%.3f x:%.3f  y:%.3f lineheight:%.3f value:%s\n", h, fs, corrected_offx, corrected_offy, x, y, gc->lineheight, str);
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
 	if( pd->editable < 1 )
@@ -533,13 +540,13 @@ static void PPTX_TextUTF8(double x, double y, const char *str, double rot,
 	else
 		fputs(" algn=\"r\"", pd->dmlFilePointer );
 	fputs(" marL=\"0\" marR=\"0\" indent=\"0\" >", pd->dmlFilePointer );
-	fprintf(pd->dmlFilePointer, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>", h*100);
+	fprintf(pd->dmlFilePointer, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>", fs*100);
 	fputs("<a:spcBef><a:spcPts val=\"0\"/></a:spcBef>", pd->dmlFilePointer );
 	fputs("<a:spcAft><a:spcPts val=\"0\"/></a:spcAft>", pd->dmlFilePointer );
 
 	fputs("</a:pPr>", pd->dmlFilePointer );
 	fputs("<a:r>", pd->dmlFilePointer );
-	fprintf(pd->dmlFilePointer, "<a:rPr sz=\"%.0f\"", h*100);
+	fprintf(pd->dmlFilePointer, "<a:rPr sz=\"%.0f\"", fs*100);
 	if (gc->fontface == 2) {
 		fputs(" b=\"1\"", pd->dmlFilePointer );
 	} else if (gc->fontface == 3) {
