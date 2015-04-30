@@ -46,8 +46,8 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 [ReporteRsjars 0.2](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.2 "ReporteRsjars") &diams; 
 [ReporteRs 0.8.0](https://github.com/davidgohel/ReporteRs/releases/tag/v0.8.0 "ReporteRs")
 
-    install.packages("C:/path/ReporteRsjars_0.0.2.zip", repos = NULL,type="win.binary")
-    install.packages("C:/path/ReporteRs_0.7.9.zip", repos = NULL,type="win.binary")
+    install.packages("C:/path/ReporteRsjars_x.x.x.zip", repos = NULL,type="win.binary")
+    install.packages("C:/path/ReporteRs_x.x.x.zip", repos = NULL,type="win.binary")
   
 Getting Started
 ---------------
