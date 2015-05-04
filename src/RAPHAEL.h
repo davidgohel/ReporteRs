@@ -51,6 +51,8 @@ static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 
 static void RAPHAEL_TextUTF8(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev);
+static void RAPHAEL_Text(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev);
 
 static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) ;
 static void RAPHAEL_Close(pDevDesc dev) ;
@@ -62,6 +64,7 @@ static void RAPHAEL_Size(double *left, double *right, double *bottom, double *to
 		pDevDesc dev);
 
 static double RAPHAEL_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev);
+static double RAPHAEL_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
 
 //SEXP setDimensions(SEXP devNumber, SEXP ext, SEXP off);
 

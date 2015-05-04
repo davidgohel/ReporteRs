@@ -24,17 +24,16 @@
 #include <R_ext/Boolean.h>
 
 
-double getFontSize(double cex, double fontsize, double lineheight);
+double getFontSize(double cex, double fontsize);
 void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc);
 
 void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 		double* descent, double* width, pDevDesc dev);
 
 double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev);
-double translate_rotate_x(double x, double y, double rot, double height, double width, double hadj);
-double translate_rotate_y(double x, double y, double rot, double height, double width, double hadj);
-double rotate_x(double cx, double cy, double rot, double x, double y);
-double rotate_y(double cx, double cy, double rot, double x, double y);
+double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
+double translate_rotate_x(double x, double y, double rot, double h, double w, double hadj);
+double translate_rotate_y(double x, double y, double rot, double h, double w, double hadj);
 int get_and_increment_idx(pDevDesc dev);
 void register_element(pDevDesc dev);
 int getFontface( int ff );

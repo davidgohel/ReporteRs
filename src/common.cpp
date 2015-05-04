@@ -24,8 +24,8 @@
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/GraphicsDevice.h>
 
-double getFontSize(double cex, double fontsize, double lineheight) {
-	double size = (cex * fontsize * lineheight );
+double getFontSize(double cex, double fontsize) {
+	double size = cex * fontsize;
 	if( size < 1.0 ) size = 0.0;
 	return size;
 }
@@ -46,7 +46,7 @@ void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc) {
 		fontname = strdup(pd->fontname);
 	}
 
-	int fonsize = (int)getFontSize(gc->cex, gc->ps, gc->lineheight);
+	int fonsize = (int)getFontSize(gc->cex, gc->ps);
 
 	if (pd->fi->isinit < 1 || strcmp(pd->fi->fontname, fontname) != 0 || pd->fi->fontsize != fonsize) {
 		pd->fi->fontsize = fonsize;
@@ -113,7 +113,7 @@ double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
 		fontname = strdup(pd->fontname);
 	}
 	fontface--;
-	int fontsize = (int)getFontSize(gc->cex, gc->ps, gc->lineheight);
+	int fontsize = (int)getFontSize(gc->cex, gc->ps);
 
 	SEXP out;
 	out = eval(
@@ -127,46 +127,56 @@ double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
 	return (double) fm[0];
 }
 
-double translate_rotate_x(double x, double y, double rot, double height, double width, double hadj) {
+
+double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
+	double sum;
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	updateFontInfo(dev, gc);
+	int fontface = getFontface(gc->fontface);
+
+	const unsigned char *c = (const unsigned char*) str;
+	int unicode_dec;
+	sum = 0.0;
+	while (*c) {
+		unicode_dec = *c;
+		if( unicode_dec > 255 ) unicode_dec = 77;
+		if( unicode_dec < 0 ) unicode_dec = 77;
+		sum += pd->fi->widths[(fontface * 256) + unicode_dec];
+		c++;
+	}
+
+	return sum;
+}
+
+double translate_rotate_x(double x, double y, double rot, double h, double w, double hadj) {
 	double pi = 3.141592653589793115997963468544185161590576171875;
 	double alpha = -rot * pi / 180;
 
-	double Px = x + (0.5-hadj) * width;
-	double Py = y - height;
+	double Px = x + (0.5-hadj) * w;
+	double Py = y - 0.5 * h;
 
 	double _cos = cos( alpha );
 	double _sin = sin( alpha );
 
-	return x + (Px-x) * _cos - (Py-y) * _sin;
-}
-double rotate_x(double cx, double cy, double rot, double x, double y)
-{
-	double pi = 3.141592653589793115997963468544185161590576171875;
-	double angle = -rot * pi / 180;
-	double s = sin(angle);
-	double c = cos(angle);
-	return (c * (x - cx)) - (s * (y - cy)) + cx;
-}
-double rotate_y(double cx, double cy, double rot, double x, double y)
-{
-	double pi = 3.141592653589793115997963468544185161590576171875;
-	double angle = -rot * pi / 180;
-	double s = sin(angle);
-	double c = cos(angle);
-	return (s * (x - cx)) + (c * (y - cy)) + cy;
+	double Ppx = x + (Px-x) * _cos - (Py-y) * _sin ;
+
+	return Ppx - 0.5 * w;
 }
 
-double translate_rotate_y(double x, double y, double rot, double height, double width, double hadj) {
+
+double translate_rotate_y(double x, double y, double rot, double h, double w, double hadj) {
 	double pi = 3.141592653589793115997963468544185161590576171875;
 	double alpha = -rot * pi / 180;
 
-	double Px = x + (0.5-hadj) * width;
-	double Py = y - height;
+	double Px = x + (0.5-hadj) * w;
+	double Py = y - 0.5 * h;
 
 	double _cos = cos( alpha );
 	double _sin = sin( alpha );
 
-	return y + (Px-x) * _sin + (Py-y) * _cos;
+	double Ppy = y + (Px-x) * _sin + (Py-y) * _cos;
+
+	return Ppy - 0.5 * h;
 }
 
 int get_and_increment_idx(pDevDesc dev) {

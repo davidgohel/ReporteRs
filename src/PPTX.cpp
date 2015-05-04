@@ -27,6 +27,8 @@
 #include "common.h"
 #include "PPTX.h"
 #include "utils.h"
+#include <R_ext/Riconv.h>
+#include <errno.h>
 
 static char pptx_elt_tag_start[] = "<p:sp>";
 static char pptx_elt_tag_end[] = "</p:sp>";
@@ -74,9 +76,9 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	dev->size = PPTX_Size;
 	dev->newPage = PPTX_NewPage;
 	dev->clip = PPTX_Clip;
-	//dev->strWidth = PPTX_StrWidth;
+	dev->strWidth = PPTX_StrWidth;
 	dev->strWidthUTF8 = PPTX_StrWidthUTF8;
-	//dev->text = PPTX_Text;
+	dev->text = PPTX_Text;
 	dev->textUTF8 = PPTX_TextUTF8;
 	dev->rect = PPTX_Rect;
 	dev->circle = PPTX_Circle;
@@ -486,6 +488,8 @@ void pptx_text(const char *str, DOCDesc *pd){
 		}
 	}
 }
+
+
 static void PPTX_TextUTF8(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev) {
 
@@ -494,22 +498,15 @@ static void PPTX_TextUTF8(double x, double y, const char *str, double rot,
 
 	double w = PPTX_StrWidthUTF8(str, gc, dev);
 	w = getStrWidth( str, w);
-	double h = pd->fi->ascent[getFontface(gc->fontface)];
-	double fs = getFontSize(gc->cex, gc->ps, gc->lineheight);
+	double h = pd->fi->height[getFontface(gc->fontface)];
+	double fs = getFontSize(gc->cex, gc->ps );
 	if( h < 1.0 ) return;
 
-	/*double pp_x = translate_rotate_x(x, y, rot, h, w, hadj);
-	double pp_y = translate_rotate_y(x, y, rot, h, w, hadj);
+	double corrected_offx = translate_rotate_x(x, y, rot, h, w, hadj) ;
+	double corrected_offy = translate_rotate_y(x, y, rot, h, w, hadj) ;
 
 
-	*/
-	double pp_x = rotate_x(x + (-hadj) * w, y - .5*h, rot, x, y);
-	double pp_y = rotate_y(x + (-hadj) * w, y - .5*h, rot, x, y);
 
-	double corrected_offx = pp_x + (-hadj) * w;
-	double corrected_offy = pp_y - 0.5 * h;
-
-	Rprintf("h:%.3f fs%.3f new x:%.3f new y:%.3f x:%.3f  y:%.3f lineheight:%.3f value:%s\n", h, fs, corrected_offx, corrected_offy, x, y, gc->lineheight, str);
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
 	if( pd->editable < 1 )
@@ -529,7 +526,7 @@ static void PPTX_TextUTF8(double x, double y, const char *str, double rot,
 
 	fputs("<p:txBody>", pd->dmlFilePointer );
 	fputs("<a:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\">", pd->dmlFilePointer );
-	fputs("<a:spAutoFit />", pd->dmlFilePointer );
+	//fputs("<a:spAutoFit />", pd->dmlFilePointer );
 	fputs("</a:bodyPr><a:lstStyle /><a:p>", pd->dmlFilePointer );
 	fputs("<a:pPr", pd->dmlFilePointer );
 
@@ -570,6 +567,83 @@ static void PPTX_TextUTF8(double x, double y, const char *str, double rot,
 
 	fflush(pd->dmlFilePointer);
 }
+
+static void PPTX_Text(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev) {
+
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int idx = get_and_increment_idx(dev);
+
+	double w = PPTX_StrWidth(str, gc, dev);
+	w = getStrWidth( str, w);
+	double h = pd->fi->height[getFontface(gc->fontface)];
+	double fs = getFontSize(gc->cex, gc->ps );
+	if( h < 1.0 ) return;
+
+	double corrected_offx = translate_rotate_x(x, y, rot, h, w, hadj) ;
+	double corrected_offy = translate_rotate_y(x, y, rot, h, w, hadj) ;
+
+	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
+
+	if( pd->editable < 1 )
+		fprintf(pd->dmlFilePointer, "<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
+	else fprintf(pd->dmlFilePointer, "<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
+
+	fputs("<p:spPr>", pd->dmlFilePointer );
+	if( fabs( rot ) < 1 )
+		fputs("<a:xfrm>", pd->dmlFilePointer);
+	else fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", (-rot) * 60000);
+	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>", p2e_(pd->offx + corrected_offx), p2e_(pd->offy + corrected_offy));
+	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(w), p2e_(h));
+	fputs("</a:xfrm>", pd->dmlFilePointer );
+	fputs("<a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>", pd->dmlFilePointer );
+	fputs("<a:noFill />", pd->dmlFilePointer );
+	fputs("</p:spPr>", pd->dmlFilePointer );
+
+	fputs("<p:txBody>", pd->dmlFilePointer );
+	fputs("<a:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\">", pd->dmlFilePointer );
+	//fputs("<a:spAutoFit />", pd->dmlFilePointer );
+	fputs("</a:bodyPr><a:lstStyle /><a:p>", pd->dmlFilePointer );
+	fputs("<a:pPr", pd->dmlFilePointer );
+
+	if (hadj < 0.25)
+		fputs(" algn=\"l\"", pd->dmlFilePointer );
+	else if (hadj < 0.75)
+		fputs(" algn=\"ctr\"", pd->dmlFilePointer );
+	else
+		fputs(" algn=\"r\"", pd->dmlFilePointer );
+	fputs(" marL=\"0\" marR=\"0\" indent=\"0\" >", pd->dmlFilePointer );
+	fprintf(pd->dmlFilePointer, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>", fs*100);
+	fputs("<a:spcBef><a:spcPts val=\"0\"/></a:spcBef>", pd->dmlFilePointer );
+	fputs("<a:spcAft><a:spcPts val=\"0\"/></a:spcAft>", pd->dmlFilePointer );
+
+	fputs("</a:pPr>", pd->dmlFilePointer );
+	fputs("<a:r>", pd->dmlFilePointer );
+	fprintf(pd->dmlFilePointer, "<a:rPr sz=\"%.0f\"", fs*100);
+	if (gc->fontface == 2) {
+		fputs(" b=\"1\"", pd->dmlFilePointer );
+	} else if (gc->fontface == 3) {
+		fputs(" i=\"1\"", pd->dmlFilePointer );
+	} else if (gc->fontface == 4) {
+		fputs(" b=\"1\" i=\"1\"", pd->dmlFilePointer );
+	}
+
+	fputs(">", pd->dmlFilePointer );
+	DML_SetFontColor(dev, gc);
+
+	fprintf(pd->dmlFilePointer,
+				"<a:latin typeface=\"%s\"/><a:cs typeface=\"%s\"/>",
+				pd->fi->fontname, pd->fi->fontname);
+
+	fputs("</a:rPr>", pd->dmlFilePointer );
+	fputs("<a:t>", pd->dmlFilePointer );
+	dml_text_native(str, pd);
+	fputs("</a:t></a:r></a:p></p:txBody>", pd->dmlFilePointer );
+	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
+
+	fflush(pd->dmlFilePointer);
+}
+
 
 static void PPTX_NewPage(const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
@@ -648,6 +722,9 @@ static double PPTX_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc d
 	return DOC_StrWidthUTF8(str, gc, dev);
 }
 
+static double PPTX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
+	return DOC_StrWidth(str, gc, dev);
+}
 
 SEXP R_PPTX_Device(SEXP filename
 		, SEXP width, SEXP height, SEXP offx

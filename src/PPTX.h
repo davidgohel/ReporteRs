@@ -51,6 +51,8 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 
 static void PPTX_TextUTF8(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev);
+static void PPTX_Text(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev);
 
 static void PPTX_NewPage(const pGEcontext gc, pDevDesc dev) ;
 static void PPTX_Close(pDevDesc dev) ;
@@ -62,6 +64,7 @@ static void PPTX_Size(double *left, double *right, double *bottom, double *top,
 		pDevDesc dev);
 
 static double PPTX_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev);
+static double PPTX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
 
 SEXP R_PPTX_Device(SEXP filename, SEXP width, SEXP height, SEXP offx,
 		SEXP offy, SEXP pointsize, SEXP fontfamily, SEXP start_id, SEXP is_editable);
