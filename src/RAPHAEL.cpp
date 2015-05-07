@@ -174,6 +174,11 @@ void RAPHAEL_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc, int idx) {
 	saved_locale = setlocale(LC_NUMERIC, "C");
 
 	float alpha =  R_ALPHA(gc->col)/255.0;
+
+	int newlty = gc->lty;
+	double newlwd = gc->lwd;
+	int i;
+
 	fprintf(pd->dmlFilePointer, "elt_%d.attr({", idx);
 
 	if (gc->lty > -1 && gc->lwd > 0.0 && alpha > 0) {
