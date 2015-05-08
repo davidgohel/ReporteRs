@@ -22,6 +22,14 @@ FontMetric = function( fontfamily, fontsize ){
 	list( info = info, widths = widths )
 }
 
+#' @title Compute the width of a string
+#'
+#' @description Compute the width of a string. Internal use.
+#' 
+#' @param str value
+#' @param fontfamily font name
+#' @param fontsize font size
+#' @param fontface font face
 #' @export 
 reporters_str_width = function( str, fontfamily, fontsize, fontface ){
 	fontMetric = .jnew(class.fontMetric, fontfamily, as.integer( fontsize ) )
