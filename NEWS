@@ -11,8 +11,10 @@ DEBUG
 ------------------------------------------------------------------
 
 * There are major corrections in graphic devices with UTF-8 
-  text and text position.
-
+  text and text position. (reported by John Ehrlinger)
+  
+* fix par.properties issue when using addPlot with vector.graphic = F
+  in docx. (reported by Gilles Chapron)
 
 ReporteRs 0.7.9
 ==================================================================
