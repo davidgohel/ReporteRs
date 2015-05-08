@@ -175,10 +175,6 @@ void RAPHAEL_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc, int idx) {
 
 	float alpha =  R_ALPHA(gc->col)/255.0;
 
-	int newlty = gc->lty;
-	double newlwd = gc->lwd;
-	int i;
-
 	fprintf(pd->dmlFilePointer, "elt_%d.attr({", idx);
 
 	if (gc->lty > -1 && gc->lwd > 0.0 && alpha > 0) {
@@ -471,7 +467,7 @@ void raphael_textUTF8(const char *str, DOCDesc *pd){
 			val4 = val - 128;
 			val = val1 + val2 + val3 + val4;
 
-			char byte1 = 0xf0 | ((val & 0x1C0000) >> 18);
+			char byte1 = 0xf0 | ((val & 0x1C0000) >> 16);
 			char byte2 = 0x80 | ((val & 0x3F000)  >> 12);
 			char byte3 = 0x80 | ((val & 0xFC0) >> 6);
 			char byte4 = 0x80 | (val & 0x3f);
