@@ -4,8 +4,8 @@
 #' \tabular{ll}{
 #' Package: \tab ReporteRs\cr
 #' Type: \tab Package\cr
-#' Version: \tab 0.8.0\cr
-#' Date: \tab 2015-04-15\cr
+#' Version: \tab 0.8.1\cr
+#' Date: \tab 2015-06-08\cr
 #' License: \tab GPL (>= 3)\cr
 #' LazyLoad: \tab yes\cr
 #' }
