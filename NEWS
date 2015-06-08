@@ -1,15 +1,17 @@
 ReporteRs 0.8.1
 ==================================================================
 
-DEBUG
-------------------------------------------------------------------
-
-* docx FlexTable headers were not repeated along pages.
-
 ENHANCEMENT
 ------------------------------------------------------------------
 
 * add CodeBlock for vertabim output
+
+* add pot_img function to add inline images to pot objects
+
+DEBUG
+------------------------------------------------------------------
+
+* docx FlexTable headers were not repeated along pages.
 
 
 ReporteRs 0.8.0
