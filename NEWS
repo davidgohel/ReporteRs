@@ -6,6 +6,12 @@ DEBUG
 
 * docx FlexTable headers were not repeated along pages.
 
+ENHANCEMENT
+------------------------------------------------------------------
+
+* add CodeBlock for vertabim output
+
+
 ReporteRs 0.8.0
 ==================================================================
 
