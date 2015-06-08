@@ -36,6 +36,7 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 	.Object = list()
 	.Object[[1]] = list()
 	.Object[[1]]$value = value
+	.Object[[1]]$jimg = NULL
 	
 	if( !missing(format) ){
 		if( !inherits(format, "textProperties") )
@@ -58,6 +59,46 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 	class( .Object ) = c("pot")
 	.Object
 }
+
+#' @title Image to be concatenate with pot object
+#'
+#' @description
+#' Create an pot object that handle images.
+#' 
+#' @param filename \code{"character"} value, complete filename of the external image
+#' @param width image width in inches
+#' @param height image height in inches
+#' @param ppi dot per inches, default to 72
+#' @export
+pot_img = function( filename, width, height, ppi = 72 ){
+		
+	if( length( filename ) != 1 ){
+		stop("length of filename must be 1.")
+	} 
+	if( !file.exists( filename ) )
+		stop( filename, " does not exist")
+	
+	if( !grepl("\\.(png|jpg|jpeg|gif|bmp|wmf|emf)$", filename ) )
+		stop( filename, " is not a valid file. Valid files are png, jpg, jpeg, gif, bmp, wmf, emf.")
+	
+	if( grepl("\\.(wmf|emf)$", filename ) ){
+		if( missing( width ) || missing(height) )
+			stop("when using wmf or emf file, you must specify argument width and height.")
+	}
+	jimg = .jnew(class.Image , filename, as.integer(ppi) )
+	if( !missing( width ) && !missing(height) )
+		.jcall( jimg, "V", "setDim", as.double( width ), as.double( height ) )
+	
+	
+	.Object = list()
+	.Object[[1]] = list()
+	.Object[[1]]$value = ""
+	.Object[[1]]$jimg = jimg
+	
+	class( .Object ) = c("pot")
+	.Object
+}
+
 
 #' @title Print pot objects
 #'
@@ -154,19 +195,23 @@ as.html.pot = function( object, ... ) {
 	if( !missing( object ) ) 
 		for( i in 1:length(object)){
 			current_value = object[[i]]
-
-			if( is.null( current_value$format ) ) {
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value )
-				else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
+			if( !is.null( current_value$jimg )){
+				.jcall( paragrah, "V", "addImage", current_value$jimg )
+				.jcall( paragrah, "V", "addText", "")
 			} else {
-				jtext.properties = .jTextProperties( current_value$format )
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
-				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
-			}
-			if( !is.null( current_value$footnote ) ) {
-				.jcall( paragrah, "V", "addFootnoteToLastEntry", .jFootnote(current_value$footnote ) )
+				if( is.null( current_value$format ) ) {
+					if( is.null( current_value$hyperlink ) )
+						.jcall( paragrah, "V", "addText", current_value$value )
+					else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
+				} else {
+					jtext.properties = .jTextProperties( current_value$format )
+					if( is.null( current_value$hyperlink ) )
+						.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
+					else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
+				}
+				if( !is.null( current_value$footnote ) ) {
+					.jcall( paragrah, "V", "addFootnoteToLastEntry", .jFootnote(current_value$footnote ) )
+				}				
 			}
 		}
 	paragrah

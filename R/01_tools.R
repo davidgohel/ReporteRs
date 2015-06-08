@@ -58,19 +58,25 @@
 		pot_value = value[[pot_index]]
 		for( i in 1:length(pot_value)){
 			current_value = pot_value[[i]]
-			if( is.null( current_value$format ) ) {
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value )
-				else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
+			if( !is.null( current_value$jimg )){
+				.jcall( paragrah, "V", "addImage", current_value$jimg )
+				.jcall( paragrah, "V", "addText", "" )
 			} else {
-				jtext.properties = .jTextProperties( current_value$format )
-				if( is.null( current_value$hyperlink ) )
-					.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
-				else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
-			}
-			if( !is.null( current_value$footnote ) ) {
-				jfn = .jFootnote(current_value$footnote)
-				.jcall( paragrah, "V", "addFootnoteToLastEntry", jfn )
+				
+				if( is.null( current_value$format ) ) {
+					if( is.null( current_value$hyperlink ) )
+						.jcall( paragrah, "V", "addText", current_value$value )
+					else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
+				} else {
+					jtext.properties = .jTextProperties( current_value$format )
+					if( is.null( current_value$hyperlink ) )
+						.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
+					else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
+				}
+				if( !is.null( current_value$footnote ) ) {
+					jfn = .jFootnote(current_value$footnote)
+					.jcall( paragrah, "V", "addFootnoteToLastEntry", jfn )
+				}
 			}
 		}
 		.jcall( parset, "V", "addParagraph", paragrah )
