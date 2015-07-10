@@ -1,3 +1,12 @@
+ReporteRs 0.8.2
+==================================================================
+
+ENHANCEMENT
+------------------------------------------------------------------
+
+* new function as.HTML for bsdoc objects. It return the raw HTML of 
+  a bsdoc document. (suggested by Tyler Beason)
+
 ReporteRs 0.8.1
 ==================================================================
 

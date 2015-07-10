@@ -41,3 +41,17 @@ writeDoc.bsdoc = function(doc, file, ...) {
 	invisible()
 }
 
+#' @title get HTML code from a bsdoc object
+#'
+#' @description get HTML code from a bsdoc document
+#' 
+#' @param object the \code{bsdoc} object
+#' @param ... further arguments passed to other methods 
+#' @return a character value
+#' @seealso \code{\link{bsdoc}}
+#' @export
+as.html.bsdoc = function( object, ... ) {
+	.jcall( object$jobj, "S", "getHTML" )
+	
+}
+
