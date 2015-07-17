@@ -4,6 +4,7 @@
 	
 	.jpackage( pkgname, lib.loc = libname )
 	.jcall('java.lang.System','S','setProperty','file.encoding', 'UTF-8')
+	.jcall('java.lang.System','S','setProperty','java.awt.headless', 'true')
 	
 	.try = try( check.fontfamily( fontfamily = "Helvetica", as.message = FALSE ), silent = TRUE )
 	
