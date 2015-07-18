@@ -19,7 +19,6 @@
 #' #START_TAG_TEST
 #' doc.filename = "addDocument_example.docx"
 #' @example examples/addDocument.docx.R
-#' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addDocument}}
 #' @export
