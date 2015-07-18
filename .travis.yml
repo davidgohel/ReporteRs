@@ -1,0 +1,12 @@
+language: r
+
+# Be strict when checking our package
+warnings_are_errors: true
+
+# System dependencies for HTTP calling
+apt_packages:
+ - r-cran-rjava
+r_packages:
+ - ggplot2
+ - rJava
+ - ReporteRsjars
