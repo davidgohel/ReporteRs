@@ -1,3 +1,5 @@
+[![Travis-CI Build Status](https://travis-ci.org/davidgohel/ReporteRs.svg?branch=master)](https://travis-ci.org/davidgohel/ReporteRs)
+
 ReporteRs
 ======
 ReporteRs is an R package for creating Microsoft Word, Microsoft Powerpoint and HTML documents from R.
