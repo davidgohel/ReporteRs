@@ -21,4 +21,6 @@ r_packages:
  - rJava
  - ReporteRsjars
 
- 
+os:
+ - linux
+ - osx
