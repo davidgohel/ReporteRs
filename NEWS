@@ -7,6 +7,12 @@ ENHANCEMENT
 * new function as.HTML for bsdoc objects. It return the raw HTML of 
   a bsdoc document. (suggested by Tyler Beason)
 
+DEBUG
+------------------------------------------------------------------
+
+* fix an encodign issue in pptx with bullets (reported by Jonathan 
+  Oxborrow) 
+
 ReporteRs 0.8.1
 ==================================================================
 
