@@ -75,3 +75,103 @@ add.plot.interactivity = function( fun, popup.labels, click.actions, dblclick.ac
 	
 }
 
+#' @title trace id on signal
+#'
+#' @description trace id on signal to raphael device. Internal use only.
+#' @export 
+raphael_tracer_on <- function(){
+	dl <- dev.list()
+	if( length( dl ) < 1 )
+		stop("cannot find any open graphical device")
+	
+	if( .Device == "RAPHAEL" ) .C("set_tracer_on", (dev.cur()-1L))
+	invisible()
+}
+
+#' @title trace id off signal
+#'
+#' @description trace id off signal to raphael device. Internal use only.
+#' @export 
+raphael_tracer_off <- function(){
+	dl <- dev.list()
+	if( length( dl ) < 1 )
+		stop("cannot find any open graphical device")
+	if( .Device == "RAPHAEL" ){
+		ids = .C("collect_id", (dev.cur()-1L), integer(2))[[2]]
+		.C("set_tracer_off", (dev.cur()-1L))
+	} else ids = integer(0)
+	
+	ids
+}
+
+#' @title tooltips instructions to raphael device
+#'
+#' @description send tooltips instructions to raphael device. Internal use only.
+#' @param ids raphael elements identifiers. integer vector.
+#' @param tooltips tooltips. character vector.
+#' @export 
+raphael_tooltips <- function( ids,  tooltips ){
+	dl <- dev.list()
+	if( length( dl ) < 1 )
+		stop("cannot find any open graphical device")
+	if( .Device == "RAPHAEL" ){
+		if( length( ids ) != length( tooltips ) )
+			stop("ids and tooltips should have the same length.")
+		if( !is.character( tooltips ) ) 
+			stop("argument tooltips must be a character vector")
+
+		tooltips = gsub("\\n", "\n", tooltips)
+
+		.C("add_post_commands", (dev.cur()-1L), as.integer(ids), tooltips, length( ids ) )
+	}
+	invisible()
+}
+
+#' @title clicks instructions to raphael device
+#'
+#' @description send click instructions to raphael device. Internal use only.
+#' @param ids raphael elements identifiers. integer vector.
+#' @param clicks javascript commands. character vector.
+#' @export 
+raphael_clicks <- function( ids,  clicks ){
+	dl <- dev.list()
+	if( length( dl ) < 1 )
+		stop("cannot find any open graphical device")
+	if( .Device == "RAPHAEL" ){
+		if( length( ids ) != length( clicks ) )
+			stop("ids and clicks should have the same length.")
+		if( !is.character( clicks ) ) 
+			stop("argument clicks must be a character vector")
+		
+		clicks = gsub("\\n", "\n", clicks)
+		
+		.C("add_click", (dev.cur()-1L), as.integer(ids), clicks, length( ids ) )
+		
+	}
+	invisible()
+}
+
+#' @title tooltips instructions to raphael device
+#'
+#' @description send tooltips instructions to raphael device. Internal use only.
+#' @param ids raphael elements identifiers. integer vector.
+#' @param dbclicks javascript commands. character vector.
+#' @export 
+raphael_dbclicks <- function( ids,  dbclicks ){
+	dl <- dev.list()
+	if( length( dl ) < 1 )
+		stop("cannot find any open graphical device")
+	if( .Device == "RAPHAEL" ){
+		if( length( ids ) != length( dbclicks ) )
+			stop("ids and dbclicks should have the same length.")
+		if( !is.character( dbclicks ) ) 
+			stop("argument dbclicks must be a character vector")
+		
+		dbclicks = gsub("\\n", "\n", dbclicks)
+		
+		.C("add_dblclick", (dev.cur()-1L), as.integer(ids), dbclicks, length( ids ) )
+		
+	}
+	invisible()
+}
+
