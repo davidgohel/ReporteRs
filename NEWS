@@ -7,6 +7,9 @@ ENHANCEMENT
 * new function as.HTML for bsdoc objects. It return the raw HTML of 
   a bsdoc document. (suggested by Tyler Beason)
 
+* new functions to let make the plot interactive when graphical 
+  device is 'raphael'.
+
 DEBUG
 ------------------------------------------------------------------
 
