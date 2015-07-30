@@ -91,6 +91,12 @@ addPlot.docx = function(doc, fun
 				, editable = editable
 		)
 		fun_res = try( fun(...), silent = T )
+		if( inherits(fun_res, "try-error")){
+			dev.off()
+			message(attr(fun_res,"condition"))
+			stop("an error occured when executing plot function.")
+		}
+		
 		last_id = .C("get_current_element_id", (dev.cur()-1L), 0L)[[2]]
 		
 		dev.off()

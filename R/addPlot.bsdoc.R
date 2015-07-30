@@ -65,7 +65,14 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 			, height = height*72.2
 			, ps=pixelsize, fontname = fontname
 			, canvas_id = as.integer(doc$canvas_id) )
-		fun(...)
+		fun_res = try( fun(...), silent = T )
+		
+		if( inherits(fun_res, "try-error")){
+			dev.off()
+			message(attr(fun_res,"condition"))
+			stop("an error occured when executing plot function.")
+		}
+		
 		last_canvas_id = .C("get_current_canvas_id", (dev.cur()-1L), 0L)[[2]]
 		.C("trigger_last_post_commands", (dev.cur()-1L) )
 		
