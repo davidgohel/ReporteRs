@@ -2,8 +2,7 @@
 #' @import ReporteRsjars
 #' @import grDevices
 #' @import graphics
-#' @importFrom utils head
-#' @importFrom utils tail
+#' @import utils
 .onLoad= function(libname, pkgname){
 	
 	.jpackage( pkgname, lib.loc = libname )
@@ -213,7 +212,7 @@ get.pots.from.script = function( file, text
 		myexpr = parse( file = file, keep.source = TRUE )
 	}
 	
-	data = getParseData( myexpr )
+	data = utils::getParseData( myexpr )
 	data = data[ data$terminal, ]
 	
 	desc_token   = as.character( data[ data[["terminal"]], "token" ] )
