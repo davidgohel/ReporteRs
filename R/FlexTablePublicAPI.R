@@ -317,7 +317,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 	} else if( is.data.frame( value ) || is.matrix( value ) || is.table( value ) || ( is.vector( value ) ) ){
 		
 		if( is.table( value ) ) {
-			if( length( dim( data ) ) < 2 ){
+			if( length( dim( value ) ) < 2 ){
 				value = matrix( unclass( value ), dimnames = list( names( value ), "" ), nrow = dim( value ) )
 			}
 			else {
