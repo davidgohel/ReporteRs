@@ -583,7 +583,27 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	if (pd->pageNumber > 0) {
-		eval( lang2(install("triggerPostCommand"), pd->env ), R_GlobalEnv);
+		SEXP repPackage;
+		PROTECT(
+				repPackage = eval(
+						lang2(install("getNamespace"),
+								ScalarString(mkChar("ReporteRs"))),
+						R_GlobalEnv));
+
+		SEXP RCallBack;
+		PROTECT(RCallBack = allocVector(LANGSXP, 2));
+		SETCAR(RCallBack, findFun(install("triggerPostCommand"), repPackage));
+
+		SEXP env;
+
+		PROTECT(env = coerceVector(pd->env, ENVSXP));
+
+		SETCADR(RCallBack, env);
+		SET_TAG(CDR(RCallBack), install("env"));
+
+		PROTECT(eval(RCallBack, repPackage));
+
+		UNPROTECT(4);
 		closeFile(pd->dmlFilePointer);
 	}
 
@@ -629,10 +649,30 @@ static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 	SET_STRING_ELT(cmdSexp, 1, mkChar(pd->objectname));
 	SET_STRING_ELT(cmdSexp, 2, mkChar(canvasname));
 
-	eval( lang3(install("registerRaphaelGraph")
-						, cmdSexp, pd->env
-						), R_GlobalEnv);
-    UNPROTECT(1);
+	SEXP repPackage;
+	PROTECT(
+			repPackage = eval(
+					lang2(install("getNamespace"),
+							ScalarString(mkChar("ReporteRs"))),
+					R_GlobalEnv));
+
+	SEXP RCallBack;
+	PROTECT(RCallBack = allocVector(LANGSXP, 3));
+	SETCAR(RCallBack, findFun(install("registerRaphaelGraph"), repPackage));
+
+	SETCADR( RCallBack, cmdSexp );
+	SET_TAG( CDR( RCallBack ), install("plot_attributes") );
+
+	SEXP env;
+	PROTECT(env = coerceVector(pd->env, ENVSXP));
+
+	SETCADDR(RCallBack, env);
+	SET_TAG( CDDR( RCallBack ), install("env") );
+
+	PROTECT(eval(RCallBack, repPackage));
+
+	UNPROTECT(5);
+
 
 	free(filename);
 	free(canvasname);

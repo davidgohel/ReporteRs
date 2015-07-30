@@ -52,9 +52,32 @@ void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc) {
 		pd->fi->fontsize = fonsize;
 		pd->fi->fontname = fontname;
 		pd->fi->isinit = 1;
-		out = eval(
-				lang3(install("FontMetric"), mkString(fontname),
-						ScalarInteger(pd->fi->fontsize)), R_GlobalEnv);
+
+		SEXP repPackage;
+		  PROTECT(
+		    repPackage = eval( lang2( install("getNamespace"),
+		      ScalarString(mkChar("ReporteRs")) ),
+		      R_GlobalEnv
+		    )
+		  );
+
+		  SEXP RCallBack;
+		  PROTECT( RCallBack = allocVector(LANGSXP, 3 ));
+		  SETCAR( RCallBack,
+		    findFun( install("FontMetric"), repPackage )
+		  );
+
+		  SETCADR( RCallBack, mkString(fontname) );
+		  SET_TAG( CDR( RCallBack ), install("fontfamily") );
+
+		  SETCADDR( RCallBack, ScalarInteger(pd->fi->fontsize) );
+		  SET_TAG( CDDR( RCallBack ), install("fontsize") );
+
+		  PROTECT(
+		    out = eval( RCallBack, repPackage )
+		  );
+
+		  UNPROTECT(3);
 
 		int *fm = INTEGER(VECTOR_ELT(out, 0));
 		int *widthstemp = INTEGER(VECTOR_ELT(out, 1));
@@ -116,12 +139,38 @@ double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
 	int fontsize = (int)getFontSize(gc->cex, gc->ps);
 
 	SEXP out;
-	out = eval(
-			lang5(install("reporters_str_width"),
-					mkString(str),
-					mkString(fontname),
-					ScalarInteger( fontsize ),
-					ScalarInteger(fontface)), R_GlobalEnv);
+	SEXP repPackage;
+	  PROTECT(
+	    repPackage = eval( lang2( install("getNamespace"),
+	      ScalarString(mkChar("ReporteRs")) ),
+	      R_GlobalEnv
+	    )
+	  );
+
+	  SEXP RCallBack;
+	  PROTECT( RCallBack = allocVector(LANGSXP, 5 ));
+	  SETCAR( RCallBack,
+	    findFun( install("reporters_str_width"), repPackage )
+	  );
+
+	  SETCADR( RCallBack, mkString(str) );
+	  SET_TAG( CDR( RCallBack ), install("str") );
+
+	  SETCADDR( RCallBack, mkString(fontname) );
+	  SET_TAG( CDDR( RCallBack ), install("fontfamily") );
+
+	  SETCADDDR( RCallBack, ScalarInteger( fontsize ) );
+	  SET_TAG( CDR(CDDR( RCallBack )), install("fontsize") );
+
+	  SETCAD4R( RCallBack, ScalarInteger(fontface) );
+	  SET_TAG( CDR(CDR(CDDR( RCallBack ))), install("fontface") );
+
+	  PROTECT(
+	    out = eval( RCallBack, repPackage )
+	  );
+
+	  UNPROTECT(3);
+
 
 	int *fm = INTEGER(VECTOR_ELT(out, 0));
 	return (double) fm[0];
