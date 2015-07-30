@@ -2,7 +2,8 @@
 #' @import ReporteRsjars
 #' @import grDevices
 #' @import graphics
-#' @import utils
+#' @importFrom utils head
+#' @importFrom utils tail
 .onLoad= function(libname, pkgname){
 	
 	.jpackage( pkgname, lib.loc = libname )
