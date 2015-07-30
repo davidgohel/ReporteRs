@@ -94,7 +94,7 @@ MyFTable[, "cyl", text.properties = textProperties(
 
 
 data( iris )
-iris = utils::head( iris[, c(5, 1:4)] )
+iris = iris[1:10, c(5, 1:4)]
 
 default_text = textProperties( font.size = 11 )
 note_text = chprop(default_text, 

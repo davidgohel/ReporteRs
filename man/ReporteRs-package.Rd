@@ -14,7 +14,7 @@ and html documents.
 Package: \tab ReporteRs\cr
 Type: \tab Package\cr
 Version: \tab 0.8.2\cr
-Date: \tab 2015-07-10\cr
+Date: \tab 2015-07-31\cr
 License: \tab GPL (>= 3)\cr
 LazyLoad: \tab yes\cr
 }

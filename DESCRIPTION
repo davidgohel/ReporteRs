@@ -2,7 +2,7 @@ Package: ReporteRs
 Type: Package
 Title: Microsoft Word, Microsoft Powerpoint and HTML Documents Generation
 Version: 0.8.2
-Date: 2015-07-10
+Date: 2015-07-31
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@lysis-consultants.fr"),
@@ -31,7 +31,7 @@ Copyright: See file COPYRIGHTS.
 Depends:
     R (>= 3.0),ReporteRsjars (>= 0.0.2)
 Imports:
-    rJava, utils, graphics, grDevices
+    rJava, graphics, grDevices
 Suggests:
     ggplot2
 SystemRequirements: java (>= 1.6)

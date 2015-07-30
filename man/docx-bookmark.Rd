@@ -64,7 +64,7 @@ doc = addFlexTable( doc
 # replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx' 
 # by data.frame objects 'data' and 'conf.int'
 doc = addFlexTable( doc
-	, vanilla.table( utils::head( iris ) )
+	, vanilla.table( iris[1:10,] )
 	, bookmark = "DATA2" )
 
 doc = addPlot( doc, vector.graphic = TRUE

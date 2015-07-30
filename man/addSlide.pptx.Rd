@@ -85,8 +85,8 @@ writeDoc( doc, file = doc.filename )
 # demo slide replacement --------
 
 # define 2 FlexTables
-ft1 = vanilla.table( utils::head( mtcars ), add.rownames = TRUE )
-ft2 = vanilla.table( utils::head( iris ), add.rownames = TRUE )
+ft1 = vanilla.table( mtcars[1:6,] , add.rownames = TRUE )
+ft2 = vanilla.table( iris[1:10,], add.rownames = TRUE )
 
 # create an doc to be used as template later
 mydoc = pptx( )

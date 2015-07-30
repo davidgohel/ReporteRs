@@ -1,4 +1,3 @@
-#' @import utils
 #' @import graphics
 #' @import grDevices
 #' @import rJava
@@ -281,6 +280,11 @@ get.pots.from.script = function( file, text
 	out
 }
 
+last_elts <- function(x, n = 5L){
+	.l = length( x )
+	n = if (n < 0L) max(.l + n, 0L) else min(n, .l)
+	x[seq.int(to = .l, length.out = n)]
+}
 
 
 
