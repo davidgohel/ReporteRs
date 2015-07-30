@@ -1,8 +1,5 @@
 #' @import rJava
 #' @import ReporteRsjars
-#' @import grDevices
-#' @import graphics
-#' @import utils
 .onLoad= function(libname, pkgname){
 	
 	.jpackage( pkgname, lib.loc = libname )
