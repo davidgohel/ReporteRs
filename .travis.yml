@@ -16,9 +16,11 @@ notifications:
 apt_packages:
  - r-cran-rjava
 
-r_packages:
+r_binary_packages:
  - ggplot2
  - rJava
+
+r_packages:
  - ReporteRsjars
 
 os:
