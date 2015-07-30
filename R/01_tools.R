@@ -1,3 +1,6 @@
+#' @import utils
+#' @import graphics
+#' @import grDevices
 #' @import rJava
 #' @import ReporteRsjars
 .onLoad= function(libname, pkgname){
