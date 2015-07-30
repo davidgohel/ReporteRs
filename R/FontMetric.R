@@ -26,13 +26,13 @@ FontMetric = function( fontfamily, fontsize ){
 #'
 #' @description Compute the width of a string. Internal use.
 #' 
-#' @param str value
+#' @param value string value
 #' @param fontfamily font name
 #' @param fontsize font size
 #' @param fontface font face
 #' @export 
-reporters_str_width = function( str, fontfamily, fontsize, fontface ){
+reporters_str_width = function( value, fontfamily, fontsize, fontface ){
 	fontMetric = .jnew(class.fontMetric, fontfamily, as.integer( fontsize ) )
-	width = .jcall( fontMetric, "I", "getWidth", as.integer( fontface ), str )
+	width = .jcall( fontMetric, "I", "getWidth", as.integer( fontface ), value )
 	list( width = as.integer(width) )
 }

@@ -255,8 +255,8 @@ print.FlexTable = function(x, ...){
 	
 	if (!interactive() ){
 		cat("FlexTable object with", x$numrow, "row(s) and", x$numcol, "column(s).\n")
-		cat("Row ids:", paste( head( x$row_id ), collapse = ", " ), " ... \n" )
-		cat("Col ids:", paste( head( x$col_id ), collapse = ", " ), " ... \n" )
+		cat("Row ids:", paste( utils::head( x$row_id ), collapse = ", " ), " ... \n" )
+		cat("Col ids:", paste( utils::head( x$col_id ), collapse = ", " ), " ... \n" )
 	} else {
 		viewer <- getOption("viewer")
 		path = file.path(tempfile(), "temp_FlexTable.html" )

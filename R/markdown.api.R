@@ -485,7 +485,7 @@ update.through.blocks = function( blocks, last.indent = 0, index = 1 ){
       blank.ref = 0
     } else if( types[index] == "list") {
       blocks[[index]] = get.blockmd.list.item( block, blank.ref = blank.ref )
-      blank.ref = tail(blocks[[index]], n = 1)$indent + 4
+      blank.ref = utils::tail(blocks[[index]], n = 1)$indent + 4
     } else if( types[index] == "hr") {
       blocks[[index]] = get.blockmd.hr(  )
       blank.ref = 0

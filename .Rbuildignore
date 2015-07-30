@@ -1,3 +1,4 @@
 ^README.md$
 ^.travis.yml$
 ^appveyor.yml$
+^examples$

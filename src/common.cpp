@@ -154,7 +154,7 @@ double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
 	  );
 
 	  SETCADR( RCallBack, mkString(str) );
-	  SET_TAG( CDR( RCallBack ), install("str") );
+	  SET_TAG( CDR( RCallBack ), install("value") );
 
 	  SETCADDR( RCallBack, mkString(fontname) );
 	  SET_TAG( CDDR( RCallBack ), install("fontfamily") );

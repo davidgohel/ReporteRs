@@ -4,10 +4,10 @@
 \alias{reporters_str_width}
 \title{Compute the width of a string}
 \usage{
-reporters_str_width(str, fontfamily, fontsize, fontface)
+reporters_str_width(value, fontfamily, fontsize, fontface)
 }
 \arguments{
-\item{str}{value}
+\item{value}{string value}
 
 \item{fontfamily}{font name}
 
