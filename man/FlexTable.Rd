@@ -257,7 +257,7 @@ MyFTable = setFlexTableBorders( MyFTable,
 
 
 data( iris )
-iris = head( iris[, c(5, 1:4)] )
+iris = utils::head( iris[, c(5, 1:4)] )
 
 default_text = textProperties( font.size = 11 )
 note_text = chprop(default_text, 

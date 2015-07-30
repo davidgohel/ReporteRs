@@ -43,7 +43,6 @@ options( "ReporteRs-fontsize" = 11 )
 doc = bsdoc( )
 plot_function = function(){
   
-  head( iris )
   colorsspec = list( setosa.solid = rgb(153/255, 51/255, 0/255, 1), 
      versicolor.solid = rgb(102/255, 102/255, 51/255, 1), 
      virginica.solid = rgb(0/255, 51/255, 102/255, 1), 
