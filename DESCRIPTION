@@ -31,7 +31,7 @@ Copyright: See file COPYRIGHTS.
 Depends:
     R (>= 3.0),ReporteRsjars (>= 0.0.2)
 Imports:
-    utils, graphics, grDevices, rJava
+    graphics, grDevices, rJava
 Suggests:
     ggplot2
 SystemRequirements: java (>= 1.6)
