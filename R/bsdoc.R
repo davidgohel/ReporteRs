@@ -50,9 +50,11 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 	.jcall( HTMLPage , "V", "addJavascript", "js/docs.min.js" )
 	
 	.jcall( HTMLPage , "V", "addJavascript", "js/raphael-min.js" )
+	.jcall( HTMLPage , "V", "addJavascript", "js/tooltip.js" )
 	
 	.jcall( HTMLPage , "V", "addStylesheet", "css/bootstrap.min.css" )
 	.jcall( HTMLPage , "V", "addStylesheet", "css/docs.min.css" )
+	.jcall( HTMLPage , "V", "addStylesheet", "css/tooltip.css" )
 	
 	.Object = list( title = title, jobj = HTMLPage, canvas_id = 1 )
 	class( .Object ) = "bsdoc"
