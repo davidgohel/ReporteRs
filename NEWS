@@ -10,11 +10,19 @@ ENHANCEMENT
 * new functions to let make the plot interactive when graphical 
   device is 'raphael'.
 
+* function raphael.html now returns a list with javascript instructions, 
+  HTML code and id values.
+
 DEBUG
 ------------------------------------------------------------------
 
-* fix an encodign issue in pptx with bullets (reported by Jonathan 
+* fix an encoding issue in pptx with bullets (reported by Jonathan 
   Oxborrow) 
+
+* fix an issue with NA values in FlexTable (reported by Vadim 
+  Bondarenko)
+
+* the package is now configured so that headless mode is always true.
 
 ReporteRs 0.8.1
 ==================================================================
