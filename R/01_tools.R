@@ -3,6 +3,7 @@
 #' @importFrom grDevices col2rgb
 #' @importFrom grDevices dev.cur
 #' @importFrom grDevices dev.off
+#' @importFrom grDevices dev.list
 #' @importFrom grDevices rgb
 #' @importFrom graphics box
 #' @importFrom graphics box
