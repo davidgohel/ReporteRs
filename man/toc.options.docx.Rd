@@ -22,7 +22,7 @@ This function is to be used if TOC cannot be built. It is
 occuring when list separator used when building the TOC is
 different from the list separator in your computer's regional settings.
 
-see \url{http://support.microsoft.com/kb/302865/EN-US}
+See entry 302865 of Microsoft knowledge database for more information.
 }
 \examples{
 #START_TAG_TEST
