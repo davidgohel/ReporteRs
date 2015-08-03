@@ -1,3 +1,4 @@
+#' @import utils
 #' @import graphics
 #' @import grDevices
 #' @import rJava
