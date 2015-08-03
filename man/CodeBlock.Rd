@@ -24,6 +24,7 @@ treated as verbatim text in a document object.
 \examples{
 #START_TAG_TEST
 cb_example = CodeBlock( text = "ls -a\\nwhich -a ls" )
+#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addCodeBlock}}

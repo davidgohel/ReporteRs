@@ -10,6 +10,7 @@
 #' @examples
 #' #START_TAG_TEST
 #' @example examples/codeblock_1.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addCodeBlock}}
 #' @export
 CodeBlock = function( file, text, text.properties = textProperties( color = "#A7947D" ), 
