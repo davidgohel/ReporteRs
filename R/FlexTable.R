@@ -188,7 +188,7 @@ FlexTable = function(data, numrow, numcol
 		.colnames = rep(NA, numcol )
 		data = matrix("", nrow = numrow, ncol = numcol )
 	}
-
+	data[is.na(data)] = ""
 	
 	out = list(
 		numcol = numcol
