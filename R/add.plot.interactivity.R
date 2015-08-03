@@ -30,48 +30,33 @@
 #' @export 
 add.plot.interactivity = function( fun, popup.labels, click.actions, dblclick.actions, ... ){
 	
-	
-	if( .Device == "RAPHAEL" ) .C("set_tracer_on", (dev.cur()-1L))
-	fun(...)
-	if( .Device == "RAPHAEL" ) {
-		ids = .C("collect_id", (dev.cur()-1L), integer(2))[[2]]
-		.C("set_tracer_off", (dev.cur()-1L))
-	}
-	
-	if( .Device != "RAPHAEL" ){
-		warning("Current device is not a RAPHAEL device.")
-		return(invisible())
-	} 
-	
-	if( any( ids < 0 ) ) {
-		warning("Unable to retrieve element identifiers")
-		return(invisible())
-	}
-	ids = seq( ids[1], ids[2], by = 1 )
-	
-	if( !missing( popup.labels ) ){
-		if( !is.character( popup.labels ) ) stop("argument popup.labels must be a character vector")
-		if( length( popup.labels ) != length( ids ) ) stop("argument popup.labels must be the same length than plotted elements")
-		popup.labels = gsub("\\n", "\n", popup.labels)
-		instructs = list( as.integer(ids), as.character( popup.labels ), length( ids ) )
-		#.C("add_popup", (dev.cur()-1L), as.integer(ids), as.character( popup.labels ), length( ids ) )
+	raphael_tracer_on()
 
-		.C("add_post_commands", (dev.cur()-1L), as.integer(ids), as.character( popup.labels ), length( ids ) )
+	fun(...)
+	ids = raphael_tracer_off()
+	
+	if( length( ids )==2 && all( ids > 0 ) ) {
+		ids = seq(from = ids[1], to = ids[2])
+		if( !missing( popup.labels ) ){
+			if( !is.character( popup.labels ) ) stop("argument popup.labels must be a character vector")
+			if( length( popup.labels ) != length( ids ) ) stop("argument popup.labels must be the same length than plotted elements")
+			raphael_tooltips(ids, as.character( popup.labels ) )
+		}
+		
+		if( !missing( click.actions ) ){
+			if( !is.character( click.actions ) ) stop("argument click.actions must be a character vector")
+			if( length( click.actions ) != length( ids ) ) stop("argument click.actions must be the same length than plotted elements")
+			raphael_clicks(ids, as.character( click.actions ) )
+		}
+		
+		if( !missing( dblclick.actions ) ){
+			if( !is.character( dblclick.actions ) ) stop("argument dblclick.actions must be a character vector")
+			if( length( dblclick.actions ) != length( ids ) ) stop("argument dblclick.actions must be the same length than plotted elements")
+			raphael_clicks(ids, as.character( dblclick.actions ) )
+		}
 	}
 	
-	if( !missing( click.actions ) ){
-		if( !is.character( click.actions ) ) stop("argument click.actions must be a character vector")
-		if( length( click.actions ) != length( ids ) ) stop("argument click.actions must be the same length than plotted elements")
-		click.actions = gsub("\\n", "\n", click.actions)
-		.C("add_click", (dev.cur()-1L), as.integer(ids), as.character( click.actions ), length( ids ) )
-	}
-	
-	if( !missing( dblclick.actions ) ){
-		if( !is.character( dblclick.actions ) ) stop("argument dblclick.actions must be a character vector")
-		if( length( dblclick.actions ) != length( ids ) ) stop("argument dblclick.actions must be the same length than plotted elements")
-		dblclick.actions = gsub("\\n", "\n", dblclick.actions)
-		.C("add_dblclick", (dev.cur()-1L), as.integer(ids), as.character( dblclick.actions ), length( ids ) )
-	}
+	invisible()
 	
 }
 

@@ -6,9 +6,11 @@ plot_function = function(){
      setosa.area = rgb(153/255, 51/255, 0/255, 0.5), 
      versicolor.area = rgb(102/255, 102/255, 51/255, 0.5), 
      virginica.area = rgb(0/255, 51/255, 102/255, 0.5) )
+
   links = list( setosa = "window.open(\"http://en.wikipedia.org/wiki/Iris_(plant)\");", 
       versicolor = "window.open(\"http://en.wikipedia.org/wiki/Iris_versicolor\");", 
       virginica = "window.open(\"http://en.wikipedia.org/wiki/Iris_virginica\");")
+
   # init plot
   with( iris, plot( Sepal.Length, Petal.Length , type = "n" ) )
   # loop over species
@@ -32,11 +34,11 @@ plot_function = function(){
     # add interactive elts on polygons
     add.plot.interactivity( fun = polygon, x = coord.x , y = coord.y, 
       col = colorsspec[[paste0( i, ".area")]], border = FALSE, 
-      popup.labels = paste0( i, "\\n", "click on the area"), click.actions = links[[i]] )
+      popup.labels = paste0( i, "<br/>", "click on the area"), click.actions = links[[i]] )
     
     lines( newdata$Sepal.Length, .pred$fit, col = colorsspec[[paste0( i, ".solid")]] )
     # add interactive elts on points
-    labs = paste( i, "\\n", rep("double click on the point", nrow(tempdata) ), sep = "" )
+    labs = paste( i, "<br/>", rep("double click on the point", nrow(tempdata) ), sep = "" )
     actions = paste("alert('", format( tempdata$Petal.Length ), "');")
     add.plot.interactivity( fun = points, 
         x = tempdata$Sepal.Length , y = tempdata$Petal.Length, 
