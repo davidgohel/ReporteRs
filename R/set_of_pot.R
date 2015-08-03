@@ -27,7 +27,7 @@ set_of_paragraphs = function( ... ){
 		.Object = lapply( .Object, 
 				function( x ) {
 					if( inherits(x, "character") ) {
-						pot( gsub("(\\n|\\r)", "", x ) )
+						pot( gsub("\\r", "", x ) )
 					} else x 
 				}
 			)

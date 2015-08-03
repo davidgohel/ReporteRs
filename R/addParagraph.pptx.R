@@ -86,7 +86,7 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height,
 	
 	
 	if( inherits( value, "character" ) ){
-		value = gsub("(\\n|\\r)", "", value )
+		value = gsub("\\r", "", value )
 		x = lapply( value, function(x) pot(value = x) )
 		value = do.call( "set_of_paragraphs", x )
 	}
