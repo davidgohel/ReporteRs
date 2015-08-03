@@ -1,7 +1,16 @@
-#' @import graphics
-#' @import grDevices
 #' @import rJava
 #' @import ReporteRsjars
+#' @importFrom grDevices col2rgb
+#' @importFrom grDevices dev.cur
+#' @importFrom grDevices dev.off
+#' @importFrom grDevices rgb
+#' @importFrom graphics box
+#' @importFrom graphics box
+#' @importFrom graphics plot
+#' @importFrom graphics polygon
+#' @importFrom graphics text
+#' @importFrom utils getParseData
+#' @importFrom utils browseURL
 .onLoad= function(libname, pkgname){
 	
 	.jpackage( pkgname, lib.loc = libname )
