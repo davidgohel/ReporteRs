@@ -17,6 +17,7 @@
 **/
 
 #include "datastruct.h"
+#include <wchar.h>
 
 char* get_raphael_filename(char* filename, int index){
 	char *buf;
@@ -42,20 +43,4 @@ char* get_raphael_jsobject_name(char* filename, int index){
 	return buf;
 }
 
-void raphael_text(const char *str, DOCDesc *pd){
-    for( ; *str ; str++)
-	switch(*str) {
-	case '"':
-		fprintf(pd->dmlFilePointer, "\\\"");
-	    break;
-
-	case '\n':
-		fprintf(pd->dmlFilePointer, "\\\n");
-	    break;
-
-	default:
-	    fputc(*str, pd->dmlFilePointer);
-	    break;
-	}
-}
 

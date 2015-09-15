@@ -84,7 +84,7 @@ triggerPostCommand = function( env ){
 	invisible()
 }
 
-check.fontfamily = function( fontfamily ){
+check.fontfamily = function( fontfamily, as.message = TRUE ){
 	
 	if( !is.character( fontfamily ) ){
 		stop("fontfamily must be a single character.")
@@ -92,8 +92,13 @@ check.fontfamily = function( fontfamily ){
 	
 	font = .jnew(class.fontInfo)
 	font_family = .jcall( font, "S", "getFontFamily", fontfamily )
-	if( font_family == "Dialog" )
-		stop("Font ", fontfamily, " can't be found in available fonts on this machine.")
+	if( font_family == "Dialog" ){
+		if( !as.message ) 
+			stop("Font ", fontfamily, " can't be found in available fonts on this machine.")
+		else 
+			message("Font ", fontfamily, " can't be found in available fonts on this machine.")
+	}
+		
 	invisible()
 }
 

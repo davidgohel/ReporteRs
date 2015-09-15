@@ -5,6 +5,9 @@
 #' 
 #' @param title \code{"character"} value: title of the document (in the doc properties).
 #' @param template \code{"character"} value, it represents the filename of the pptx file used as a template.
+#' @param list.definition a list definition to specify how ordered and unordered 
+#' lists have to be formated. See \code{\link{list.settings}}. Default to 
+#' \code{getOption("ReporteRs-list-definition")}.
 #' @return an object of class \code{\link{pptx}}.
 #' @details
 #' To send R output in a pptx document, a slide (see \code{\link{addSlide.pptx}}
@@ -16,7 +19,7 @@
 #'   \item \code{\link{addTitle.pptx}} add titles
 #'   \item \code{\link{addParagraph.pptx}} add text
 #'   \item \code{\link{addPlot.pptx}} add plots
-#'   \item \code{\link{addTable.pptx}} add tables
+#'   \item \code{\link{addMarkdown.pptx}} add markdown
 #'   \item \code{\link{addFlexTable.pptx}} add \code{\link{FlexTable}}
 #'   \item \code{\link{addDate.pptx}} add a date (most often in the bottom left area of the slide)
 #'   \item \code{\link{addFooter.pptx}} add a comment in the footer (most often in the bottom center area of the slide)
@@ -36,10 +39,8 @@
 #' @example examples/pptx_example.R
 #' @example examples/STOP_TAG_TEST.R
 #' @export 
-#' @seealso \code{\link{addTitle.pptx}}, \code{\link{addImage.pptx}}
-#' , \code{\link{addParagraph.pptx}}, \code{\link{addPlot.pptx}}, \code{\link{addTable.pptx}}
-#' , \code{\link{slide.layouts.pptx}}, \code{\link{dim.pptx}}, \code{\link{writeDoc.pptx}}
-pptx = function( title, template){
+#' @seealso \code{\link{docx}}, \code{\link{bsdoc}}
+pptx = function( title, template, list.definition = getOption("ReporteRs-list-definition")){
 	
 	# title mngt
 	if( missing( title ) ) title = ""
@@ -69,14 +70,18 @@ pptx = function( title, template){
 	if( basedoc.return != error_codes["NO_ERROR"] ){
 		stop( "an error occured - code[", names(error_codes)[which( error_codes == basedoc.return )], "].")
 	}
+	lidef = do.call( list.settings, list.definition )
+	.jcall( obj, "V", "setNumberingDefinition", lidef )
+	layout.labels = .jcall( obj, "[S", "getStyleNames" )
 	
 	.Object = list( obj = obj
-		, title = title
-		, basefile = template
-		, styles = .jcall( obj, "[S", "getStyleNames" ) 
-		, plot_first_id = 0L
-		, current_slide = NULL
-		)
+			, title = title
+			, basefile = template
+			, styles = layout.labels
+			, plot_first_id = 0L
+			, current_slide = NULL
+	)
+	
 	class( .Object ) = "pptx"
 	
 	.Object

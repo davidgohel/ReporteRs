@@ -5,17 +5,24 @@
 #' 
 #' @param value text value or a value that has a \code{format} method returning character value.
 #' @param format formatting properties (an object of class \code{textProperties}).
+#' @param hyperlink a valid url to use as hyperlink when clicking on \code{value}.
+#' @param footnote a \code{\link{Footnote}} object.
 #' @details a pot (piece of text) is a convenient way to define a paragraph 
 #' of text where some text are not all formated the same.
+#' 
+#' A pot can be associated with an hyperlink.
+#' 
+#' A pot can be associated with a Footnote. Note that footnotes can not be inserted in 
+#' a \code{pptx} object. 
 #' @export
 #' @examples
-#' #START_TAG_TEST
-#' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
-#' 	, textProperties(font.weight="bold") )
-#' #STOP_TAG_TEST
-#' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}}, \code{\link{addParagraph.html}}
+#' #
+#' @example examples/pot1_example.R
+#' @example examples/pot2_example.R
+#' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}},
+#'  \code{\link{addParagraph.bsdoc}}, \code{\link{Footnote}}
 #' , \code{\link{+.pot}}
-pot = function( value ="", format = textProperties() ){
+pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 
 	value = format( value )
 	if( !is.character( value ) ){
@@ -25,30 +32,106 @@ pot = function( value ="", format = textProperties() ){
 	if( length( value ) != 1 ){
 		stop("length of value must be 1.")
 	} 
-	
+		
 	.Object = list()
 	.Object[[1]] = list()
 	.Object[[1]]$value = value
+	.Object[[1]]$jimg = NULL
+	
 	if( !missing(format) ){
 		if( !inherits(format, "textProperties") )
 			stop("argument format must be a textProperties object.")
 		else .Object[[1]]$format = format
 	} else .Object[[1]]$format = NULL
 
+	if( !missing( hyperlink )){
+		if( !is.character( hyperlink ) || length( hyperlink ) != 1 )
+			stop("hyperlink must be a character vector of size 1.")
+		.Object[[1]]$hyperlink = hyperlink
+	}
+	
+	if( !missing( footnote )){
+		if( !inherits(footnote, "Footnote") )
+			stop("footnote must be a Footnote object.")
+		.Object[[1]]$footnote = footnote
+	}
+	
 	class( .Object ) = c("pot")
 	.Object
 }
 
-#' @method print pot
-#' @S3method print pot
+#' @title Image to be concatenate with pot object
+#'
+#' @description
+#' Create an pot object that handle images.
+#' 
+#' @param filename \code{"character"} value, complete filename of the external image
+#' @param width image width in inches
+#' @param height image height in inches
+#' @param ppi dot per inches, default to 72
+#' @export
+pot_img = function( filename, width, height, ppi = 72 ){
+		
+	if( length( filename ) != 1 ){
+		stop("length of filename must be 1.")
+	} 
+	if( !file.exists( filename ) )
+		stop( filename, " does not exist")
+	
+	if( !grepl("\\.(png|jpg|jpeg|gif|bmp|wmf|emf)$", filename ) )
+		stop( filename, " is not a valid file. Valid files are png, jpg, jpeg, gif, bmp, wmf, emf.")
+	
+	if( grepl("\\.(wmf|emf)$", filename ) ){
+		if( missing( width ) || missing(height) )
+			stop("when using wmf or emf file, you must specify argument width and height.")
+	}
+	jimg = .jnew(class.Image , filename, as.integer(ppi) )
+	if( !missing( width ) && !missing(height) )
+		.jcall( jimg, "V", "setDim", as.double( width ), as.double( height ) )
+	
+	
+	.Object = list()
+	.Object[[1]] = list()
+	.Object[[1]]$value = ""
+	.Object[[1]]$jimg = jimg
+	
+	class( .Object ) = c("pot")
+	.Object
+}
+
+
+#' @title Print pot objects
+#'
+#' @description print a \code{\link{pot}} object. 
+#' Within RStudio, the pot is rendered in the viewer.
+#' 
+#' @param x a \code{\link{pot}} object
+#' @param ... further arguments, not used. 
+#' @export
 print.pot = function (x, ...){
-	for(i in seq_along(x)){
-		if( !is.null(x[[i]]$format) ) cat("[", x[[i]]$value, as.character(x[[i]]$format), "]", sep = "" )
-		else cat("[", x[[i]]$value, "]", sep = "" )
+	
+	viewer <- getOption("viewer")
+	if ( !interactive() || is.null( viewer ) ){
+		for(i in seq_along(x)){
+			if( !is.null(x[[i]]$format) ) cat("[", x[[i]]$value, as.character(x[[i]]$format), "]", sep = "" )
+			else cat("[", x[[i]]$value, "]", sep = "" )
+		}
+	} else {
+		
+		path = file.path(tempfile(), "index.html" )
+		doc = bsdoc( )
+		doc = addParagraph( doc, x )
+		doc = writeDoc( doc, path, reset.dir = TRUE)
+		if( !is.null( viewer ) && is.function( viewer ) ){
+			viewer( path )
+		} else {
+			utils::browseURL(path)
+		}
 	}
 }
-#' @method as.character pot
-#' @S3method as.character pot
+
+
+#' @export
 as.character.pot = function (x, ...){
 	out = ""
 	for(i in seq_along(x)){
@@ -73,9 +156,7 @@ as.character.pot = function (x, ...){
 #' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
 #' @seealso \code{\link{addParagraph}}
-#' @method + pot
-#' @S3method + pot
-#' @rdname pot-add
+#' @export
 "+.pot" = function(e1, e2) {
 	if( is.character(e1) ) e1 = pot(value = e1)
 	if( is.character(e2) ) e2 = pot(value = e2)
@@ -97,13 +178,10 @@ as.character.pot = function (x, ...){
 #' @return a character value
 #' @seealso \code{\link{pot}}
 #' @examples
-#' #START_TAG_TEST
 #' my_pot = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
 #' as.html( my_pot )
-#' @example examples/STOP_TAG_TEST.R
-#' @method as.html pot
-#' @S3method as.html pot
+#' @export
 as.html.pot = function( object, ... ) {
 	par = .jpot( object )
 	.jcall( par, "S", "getHTML" )	
@@ -114,13 +192,26 @@ as.html.pot = function( object, ... ) {
 		stop("argument 'object' must be an object of class 'pot'")
 	}
 	paragrah = .jnew(class.Paragraph)
-	if( !missing( object ) ) for( i in 1:length(object)){
+	if( !missing( object ) ) 
+		for( i in 1:length(object)){
 			current_value = object[[i]]
-			if( is.null( current_value$format ) ) 
-				.jcall( paragrah, "V", "addText", current_value$value )
-			else {
-				jtext.properties = .jTextProperties( current_value$format )
-				.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
+			if( !is.null( current_value$jimg )){
+				.jcall( paragrah, "V", "addImage", current_value$jimg )
+				.jcall( paragrah, "V", "addText", "")
+			} else {
+				if( is.null( current_value$format ) ) {
+					if( is.null( current_value$hyperlink ) )
+						.jcall( paragrah, "V", "addText", current_value$value )
+					else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
+				} else {
+					jtext.properties = .jTextProperties( current_value$format )
+					if( is.null( current_value$hyperlink ) )
+						.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
+					else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
+				}
+				if( !is.null( current_value$footnote ) ) {
+					.jcall( paragrah, "V", "addFootnoteToLastEntry", .jFootnote(current_value$footnote ) )
+				}				
 			}
 		}
 	paragrah

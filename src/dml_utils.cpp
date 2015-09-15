@@ -68,6 +68,12 @@ void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc) {
 
 	int alpha =  (int) (R_ALPHA(gc->col)/255.0 * 100000);
 
+
+
+	int newlty = gc->lty;
+	double newlwd = gc->lwd;
+	int i;
+
 	if (gc->lty > -1 && gc->lwd > 0.0 && alpha > 0) {
 		fprintf(pd->dmlFilePointer, "<a:ln w=\"%.0f\">", p2e_(gc->lwd * 72 / 96));
 
@@ -90,14 +96,18 @@ void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc) {
 		case LTY_LONGDASH:
 			fputs("<a:prstDash val=\"lgDash\" />", pd->dmlFilePointer );
 			break;
-		case LTY_DOTDASH:
-			fputs("<a:prstDash val=\"dashDot\" />", pd->dmlFilePointer );
-			break;
-		case LTY_TWODASH:
-			fputs("<a:prstDash val=\"lgDash\" />", pd->dmlFilePointer );
-			break;
 		default:
-			fputs("<a:prstDash val=\"solid\" />", pd->dmlFilePointer );
+			fputs("<a:custDash>", pd->dmlFilePointer );
+			for(i=0 ; i<8 && newlty&15 ; i++) {
+				int lwd = (int)newlwd * newlty;
+				lwd = lwd & 15;
+				if( i%2 < 1 )
+					fprintf(pd->dmlFilePointer, "<a:ds d=\"%i\" ", lwd *100000 );
+				else
+					fprintf(pd->dmlFilePointer, "sp=\"%i\"/>", lwd *100000 );
+				newlty = newlty>>4;
+			}
+			fputs("</a:custDash>", pd->dmlFilePointer );
 			break;
 		}
 
@@ -119,7 +129,8 @@ void DML_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc) {
 	}
 }
 
-void dml_text(const char *str, DOCDesc *pd){
+
+void dml_text_native(const char *str, DOCDesc *pd){
     for( ; *str ; str++)
 	switch(*str) {
 	case '<':
@@ -137,3 +148,13 @@ void dml_text(const char *str, DOCDesc *pd){
 	}
 }
 
+double getStrWidth(const char *str, double w) {
+
+	if( strlen(str) < 6 ) w+= w / strlen(str);
+	else if( strlen(str) < 15 ) w+= 2 * w / strlen(str);
+	else if( strlen(str) < 30 ) w+= 4 * w / strlen(str);
+	else if( strlen(str) < 45 ) w+= 5 * w / strlen(str);
+	else w+= 6 * w / strlen(str);
+
+	return w;
+}

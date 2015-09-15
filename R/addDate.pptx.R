@@ -12,29 +12,15 @@
 #' @return a document object
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' # add a slide with layout "Title Slide"
-#' doc = addSlide( doc, slide.layout = "Title Slide" )
-#' doc = addTitle( doc, "Presentation title" ) #set the main title
-#' doc = addSubtitle( doc , "This document is generated with ReporteRs.")#set the sub-title
-#' 
-#' ## add a date on the current slide
-#' doc = addDate( doc )
-#' 
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' ## add a page number on the current slide but not the default text (slide number)
-#' doc = addDate( doc, "Dummy date" )
-#' 
-#' # Write the object in file "presentation.pptx"
-#' writeDoc( doc, "addDate_example.pptx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addDate_example.pptx"
+#' @example examples/pptx.R
+#' @example examples/addDate_pptx.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addFooter.pptx}}, \code{\link{addPageNumber.pptx}}
 #' , \code{\link{strptime}},  \code{\link{addDate}}
-#' @method addDate pptx
-#' @S3method addDate pptx
-
+#' @export
 addDate.pptx = function(doc, value, str.format = "%Y-%m-%d", ... ) {
 	
 	

@@ -9,6 +9,10 @@
 #' Not used if file or rscript is provided.
 #' @param rscript an object of class \code{RScript}. 
 #' Not used if file or text is provided.
+#' @param append boolean default to FALSE. If TRUE, paragraphs will be 
+#' appened in the current shape instead of beeing sent into a new shape. 
+#' Paragraphs can only be appended on shape containing paragraphs (i.e. you 
+#' can not add paragraphs after a FlexTable).
 #' @param ... further arguments, not used. 
 #' @details 
 #' You have to one of the following argument: file or text or rscript. 
@@ -16,27 +20,24 @@
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addRScript_example.pptx"
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' an_rscript = RScript( text = "ls()
-#' x = rnorm(10)", par.properties = parProperties() )
-#' doc = addRScript(doc, an_rscript )
-#' 
+#' @example examples/pptx.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle1NoLevel.R
+#' @example examples/addRScript.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addRScript}}
-#' @method addRScript pptx
-#' @S3method addRScript pptx
-addRScript.pptx = function(doc, rscript, file, text, ... ) {
+#' @export
+addRScript.pptx = function(doc, rscript, file, text, append = FALSE, ... ) {
 	
 	if( !missing ( file ) ){
 		rscript = RScript( file = file, ... )
 	} else if( !missing ( text ) ){
 		rscript = RScript( text = text, ... )
 	} 
-	
-	out = .jcall( doc$current_slide, "I", "add", rscript$jobj )
+	if( !append )
+		out = .jcall( doc$current_slide, "I", "add", rscript$jobj )
+	else out = .jcall( doc$current_slide, "I", "append", rscript$jobj )
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "RScript") )
 	}

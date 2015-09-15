@@ -20,17 +20,17 @@
 #' Used only if values are not missing. Default is the value of argument 
 #' \code{header.cell.props} provided to funtion \code{FlexTable} when object 
 #' has been created
+#' @param first if \code{TRUE}, row will be inserted as first row
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFooterRow}}
 #' , \code{\link{alterFlexTable}}
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/addHeaderRowDefaults.R
 #' @example /examples/addHeaderRowFormats.R
-#' @example /examples/addHeaderRowComplex.R 
-#' @example /examples/setFlexTableBorders1.R
-#' @example examples/STOP_TAG_TEST.R
 #' @export
-addHeaderRow = function( x, value, colspan, text.properties, par.properties, cell.properties ){
+addHeaderRow = function( x, value, colspan, 
+		text.properties, par.properties, cell.properties, 
+		first = F ){
 	
 	if( !inherits(x, c("FlexTable") ) ) 
 		stop("x must be a FlexTable object.")
@@ -58,9 +58,10 @@ addHeaderRow = function( x, value, colspan, text.properties, par.properties, cel
 			stop("cell.properties is not a cellProperties object")
 		}
 		
-		value = FlexRow( values = value, colspan = colspan
-				, text.properties = text.properties, par.properties = par.properties, cell.properties = cell.properties
-		)
+		value = FlexRow( values = value, colspan = colspan, 
+			text.properties = text.properties, 
+			par.properties = par.properties, 
+			cell.properties = cell.properties )
 	} 
 	
 	.weights = weight.FlexRow( value )
@@ -69,10 +70,10 @@ addHeaderRow = function( x, value, colspan, text.properties, par.properties, cel
 	
 	
 	headers = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
-	.jcall( headers, "V", "add", value$jobj )
-	
-	#.jcall( x$jobj, "V", "addHeader", value$jobj )
-	
+	if( !first )
+		.jcall( headers, "V", "add", value$jobj )
+	else .jcall( headers, "V", "insert", value$jobj )
+		
 	x
 }
 #' @title add footer in a FlexTable
@@ -92,10 +93,9 @@ addHeaderRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @seealso \code{\link{FlexTable}}, \code{\link{addHeaderRow}}
 #' , \code{\link{alterFlexTable}}
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/addFooterRowDefaults.R
 #' @example examples/addFooterRowComplex.R
-#' @example examples/STOP_TAG_TEST.R
 addFooterRow = function( x, value, colspan, text.properties, par.properties, cell.properties ){
 	
 	if( !inherits(x, c("FlexTable") ) ) 
@@ -124,9 +124,11 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 			stop("cell.properties is not a cellProperties object")
 		}
 		
-		value = FlexRow( values = value, colspan = colspan
-				, text.properties = text.properties, par.properties = par.properties, cell.properties = cell.properties
-		)
+		value = FlexRow( values = value, colspan = colspan, 
+			text.properties = text.properties, 
+			par.properties = par.properties, 
+			cell.properties = cell.properties )
+
 	} 
 	
 	.weights = weight.FlexRow( value )
@@ -206,16 +208,14 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' , \code{\link{cellProperties}}, \code{\link{parProperties}}
 #' , \code{\link{textProperties}}
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/FlexTable.mtcars.alterProps.R
 #' @example examples/FlexTable.mtcars.alterContent.R
 #' @example examples/FlexTableAPIFullDemo.R
-#' @example examples/STOP_TAG_TEST.R
 #' @rdname FlexTable-alter
 #' @aliases alterFlexTable
-#' @method [<- FlexTable
-#' @S3method [<- FlexTable
+#' @export
 "[<-.FlexTable" = function( x, i, j, text.properties, newpar = F, byrow = FALSE, 
 		to = "body", side = "top", value ){
 	
@@ -223,21 +223,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 	if( !missing(i) ) args.get.indexes$i = i
 	if( !missing(j) ) args.get.indexes$j = j
 	args.get.indexes$partname = to
-	
-	if( to == "header" ){
-		headers = .jcall( x$jobj, paste0("L", class.MetaRows, ";"), "getHeader" )
-	} else if( to == "footer" ){
-		footers = .jcall( x$jobj, paste0("L", class.MetaRows, ";"), "getFooter" )
-	} else if( to == "body" ){
-	}
-	
-	if( to == "header" ){
-		args.get.indexes$numrow = .jcall( x$jobj, "I", "headerSize" )
-	} else if( to == "footer" ){
-		args.get.indexes$numrow = .jcall( x$jobj, "I", "footerSize" )
-	} else if( to == "body" ){
-		args.get.indexes$numrow = x$numrow
-	}
+
 	indexes = do.call(getncheckid, args.get.indexes)
 	i = indexes$i
 	j = indexes$j
@@ -331,7 +317,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 	} else if( is.data.frame( value ) || is.matrix( value ) || is.table( value ) || ( is.vector( value ) ) ){
 		
 		if( is.table( value ) ) {
-			if( length( dim( data ) ) < 2 ){
+			if( length( dim( value ) ) < 2 ){
 				value = matrix( unclass( value ), dimnames = list( names( value ), "" ), nrow = dim( value ) )
 			}
 			else {
@@ -391,10 +377,9 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @param footer a logical value (default to FALSE), specifies 
 #' to apply scheme to table footer
 #' @examples 
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/setFlexTableBorders1.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}
 #' @export 
 setFlexTableBorders = function (object
@@ -451,10 +436,9 @@ setFlexTableBorders = function (object
 #' @param odd background color applied to odd row indexes - single character value (e.g. "#000000" or "black")
 #' @param even background color applied to even row indexes - single character value (e.g. "#000000" or "black")
 #' @examples 
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/setZebraStyle.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}
 #' @export 
 setZebraStyle = function (object, odd, even){
@@ -484,10 +468,9 @@ setZebraStyle = function (object, odd, even){
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection. 
 #' @param colors background colors to apply (e.g. "#000000" or "black")
 #' @examples 
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/setRowsColors.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
 #' @export 
 setRowsColors = function (object, i, colors){
@@ -497,7 +480,6 @@ setRowsColors = function (object, i, colors){
 	
 	args.get.indexes = list(object = object)
 	if( !missing(i) ) args.get.indexes$i = i
-	args.get.indexes$numrow = object$numrow
 	args.get.indexes$partname = "body"
 	indexes = do.call(getncheckid, args.get.indexes)
 	i = indexes$i
@@ -526,10 +508,9 @@ setRowsColors = function (object, i, colors){
 #' @param j vector (integer index, col.names values or boolean vector) for columns selection. 
 #' @param colors background colors to apply (e.g. "#000000" or "black")
 #' @examples 
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexTable.mtcars.R
 #' @example examples/setColumnsColors.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{setRowsColors}}, \code{\link{FlexTable}}, \code{\link{setZebraStyle}}
 #' @export 
 setColumnsColors = function (object, j, colors){
@@ -538,7 +519,6 @@ setColumnsColors = function (object, j, colors){
 	
 	args.get.indexes = list(object = object)
 	if( !missing(j) ) args.get.indexes$j = j
-	args.get.indexes$numrow = object$numrow
 	args.get.indexes$partname = "body"
 	indexes = do.call(getncheckid, args.get.indexes)
 	j = indexes$j
@@ -571,9 +551,8 @@ setColumnsColors = function (object, j, colors){
 #' @param to specify on which part of the FlexTable to apply colors, must be one of the following 
 #' values "body" (default) or "header" or "footer"
 #' @examples 
-#' #START_TAG_TEST
+#' # 
 #' @example examples/setFlexTableBackgroundColors.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}, \code{\link{is.color}}
 #' @export 
 setFlexTableBackgroundColors = function (object, i, j, colors, to = "body"){
@@ -585,20 +564,6 @@ setFlexTableBackgroundColors = function (object, i, j, colors, to = "body"){
 	if( !missing(j) ) args.get.indexes$j = j
 	args.get.indexes$partname = to
 	
-	if( to == "header" ){
-		headers = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
-	} else if( to == "footer" ){
-		footers = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
-	} else if( to == "body" ){
-	}
-	
-	if( to == "header" ){
-		args.get.indexes$numrow = .jcall( object$jobj, "I", "headerSize" )
-	} else if( to == "footer" ){
-		args.get.indexes$numrow = .jcall( object$jobj, "I", "footerSize" )
-	} else if( to == "body" ){
-		args.get.indexes$numrow = object$numrow
-	}
 	indexes = do.call(getncheckid, args.get.indexes)
 	i = indexes$i
 	j = indexes$j
@@ -640,10 +605,8 @@ setFlexTableBackgroundColors = function (object, i, j, colors, to = "body"){
 #' @param runs a vector of size \code{numrow} of FlexTable. If provided, successive 
 #' runs of equal values will indicate to merge corresponding rows.  
 #' @examples 
-#' #START_TAG_TEST
-#' @example examples/FlexTable.pbc.header.R
+#' #
 #' @example examples/spanFlexTableRows.R
-#' @example examples/STOP_TAG_TEST.R
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{spanFlexTableColumns}}
 #' @export 
@@ -654,7 +617,6 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 	
 	args.get.indexes = list(object = object)
 	if( !missing(j) ) args.get.indexes$j = j
-	args.get.indexes$numrow = object$numrow
 	args.get.indexes$partname = "body"
 	
 	indexes = do.call(getncheckid, args.get.indexes)
@@ -673,7 +635,7 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 						} ) )
 		if( sum( weights ) != object$numrow )
 			stop("row spanning not possible, runs has wrong dimension")
-		for( colid in j  )object$rowspan[, colid ] = weights
+		for( colid in j  ) object$rowspan[, colid ] = weights
 		
 	} else {
 		
@@ -722,31 +684,46 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection. 
 #' @param from index of the first column to span (its content will be the visible one).  
 #' @param to index of the last column to span.  
+#' @param runs a vector of size \code{numcol} of FlexTable. If provided, successive 
+#' runs of equal values will indicate to merge corresponding columns.  
 #' @examples 
-#' #START_TAG_TEST
-#' @example examples/FlexTable.pbc.header.R
-#' @example examples/spanFlexTableRows.R
-#' @example examples/STOP_TAG_TEST.R
+#' #
+#' @example examples/spanFlexTableColumns.R
 #' @export
 #' @seealso \code{\link{spanFlexTableRows}}, \code{\link{FlexTable}}
 #' @export 
-spanFlexTableColumns = function (object, i, from, to){
+spanFlexTableColumns = function (object, i, from, to, runs ){
 	
 	if( !inherits(object, "FlexTable") )
 		stop("argument object must be a FlexTable object.")
+	args.get.indexes = list(object = object)
 	
-	if( missing(i) && is.numeric (i) && length(i) != 1 ) {
-		stop("invalid argument i, it must be a unique positive integer.")
-	} 
-	if( missing( from ) || missing( to ) ) {
+	if( !missing(i) ) args.get.indexes$i = i
+	args.get.indexes$partname = "body"
+	indexes = do.call(getncheckid, args.get.indexes)
+	rowid = indexes$i
+	if( !missing( runs ) ){
+		if( is.factor( runs) ) runs = as.character( runs )
+		if( !is.vector( runs ) ) stop("argument runs must be a vector.")
+		.rle = rle( runs )
+		weights = unlist( lapply( .rle$lengths
+			, function(x) {
+				if( x < 2 )
+					return(1)
+				else
+					return( c(x, rep(0, x-1 ) ) )
+			} ) )
+		if( sum( weights ) != object$numcol )
+			stop("column spanning not possible, runs has wrong dimension")
+		object$colspan[rowid, ] = matrix( rep( weights, each = length(rowid)), nrow = length(rowid), byrow = F )
+	} else if( missing( from ) || missing( to ) ) {
 		stop("argument from and to cannot be missing.")
+	} else {
+		.seq = seq( from, to, by = 1 )
+		object$colspan[rowid, .seq] = t( apply( object$colspan[rowid, , drop = F], 1 , function( x, .seq ){
+				x[.seq] = c( length(.seq), integer(length(.seq) - 1) )
+			}, .seq = .seq ) )
 	}
-	.seq = seq( from, to, by = 1 )
-	
-	colspan = object$colspan[i,]
-	colspan[.seq] = c( length(.seq), integer(length(.seq) - 1) )
-	if( sum( colspan ) != object$numcol ) stop("col spanning not possible")
-	else object$colspan[i, ] = colspan
 	
 	merged.rows = which( object$rowspan != 1 )
 	merged.cols = which( object$colspan != 1 )
@@ -754,12 +731,13 @@ spanFlexTableColumns = function (object, i, from, to){
 	if( length( overlaps ) > 0 )
 		stop("span overlappings, some merged cells are already merged with other cells.")
 	
-	.jcall( object$jobj , "V", "setColSpanInstructions"
-			, as.integer( i - 1 )
-			, .jarray( as.integer( object$colspan[i, ] ) )
-	)
-	
-	
+	for(i in rowid){
+		.jcall( object$jobj , "V", "setColSpanInstructions"
+				, as.integer( i - 1 )
+				, .jarray( as.integer( object$colspan[i, ] ) )
+		)
+	}
+
 	object
 }
 
@@ -771,9 +749,8 @@ spanFlexTableColumns = function (object, i, from, to){
 #' @param object a \code{FlexTable} object
 #' @param widths a numeric vector specifying columns widths in inches.
 #' @examples 
-#' #START_TAG_TEST
+#' #
 #' @example examples/setFlexTableWidths.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{FlexTable}}
 #' @export 
 setFlexTableWidths = function (object, widths ){

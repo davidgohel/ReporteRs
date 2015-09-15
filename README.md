@@ -1,18 +1,26 @@
+[![Travis-CI Build Status](https://travis-ci.org/davidgohel/ReporteRs.svg?branch=master)](https://travis-ci.org/davidgohel/ReporteRs)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/davidgohel/ReporteRs?branch=master)](https://ci.appveyor.com/project/davidgohel/ReporteRs/branch/master)
+[![CRAN version](http://www.r-pkg.org/badges/version/ReporteRs)](http://cran.rstudio.com/web/packages/ReporteRs/index.html)
+
 ReporteRs
 ======
-ReporteRs is a R package for creating Microsoft Word, Microsoft Powerpoint and HTML documents from R.
+ReporteRs is an R package for creating Microsoft Word, Microsoft Powerpoint and HTML documents from R.
 
 Usefull links: 
-[**Documentation**](http://davidgohel.github.io/ReporteRs/index.html) &diams;
-[**Mailing list**](http://groups.google.com/forum/#!forum/reporters-package "if you have questions, use the mailing list - to subscribe, send a mail to reporters-package+subscribe@googlegroups.com") &diams; 
-[**Bug report**](http://github.com/davidgohel/ReporteRs/issues "please provide a reproducible example")
 
+* Help pages: [**Documentation**](http://davidgohel.github.io/ReporteRs/index.html) 
+* if you have questions, use the mailing list: [**Mailing list**](http://groups.google.com/forum/#!forum/reporters-package "if you have questions, use the mailing list")  
+* Report a bug: [**Bug report**](http://github.com/davidgohel/ReporteRs/issues "please provide a reproducible example"). If you report a bug, try to send a reproducible example 
+    and don't forget to send the result of 
+    
+        sessionInfo()
+        
 Features
 --------
 * Create docx, pptx or html files with only a few lines of R code.
 * Add tables, plots, text or tables of contents into Word, PowerPoint and html documents.
 * Customize formatting of R outputs.
-* Design and format any complex table
+* Design and format any complex table.
 
 Installation
 ------------
@@ -35,14 +43,16 @@ ReporteRs needs some R packages ; run the following script to install them if ne
 **Get the latest release:**  
 
     if( !require( devtools ) ) install.packages("devtools")
-    devtools::install_github('ReporteRsjars', 'davidgohel')
-    devtools::install_github('ReporteRs', 'davidgohel')
+    devtools::install_github('davidgohel/ReporteRsjars')
+    devtools::install_github('davidgohel/ReporteRs')
 
 **Get the latest Windows binary packages:**  
 [ReporteRsjars 0.2](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.2 "ReporteRsjars") &diams; 
-[ReporteRs 0.6.0](https://github.com/davidgohel/ReporteRs/releases/tag/v0.6.0 "ReporteRs")
+[ReporteRs 0.8.0](https://github.com/davidgohel/ReporteRs/releases/tag/v0.8.0 "ReporteRs")
 
-	
+    install.packages("C:/path/ReporteRsjars_x.x.x.zip", repos = NULL,type="win.binary")
+    install.packages("C:/path/ReporteRs_x.x.x.zip", repos = NULL,type="win.binary")
+  
 Getting Started
 ---------------
 
@@ -50,16 +60,17 @@ Getting Started
     
     example(docx) #run a complete and detailed docx example
     example(pptx) #run a complete and detailed pptx example
-    example(html) #run a complete and detailed html example
+    example(bsdoc) #run a complete and detailed html example
     
     ?ReporteRs
     ?addFlexTable
     ?addPlot
+    ?addMarkdown
     ?addParagraph
     ?docx
     ?pptx
-    ?html
-	
+    ?bsdoc
+  
 License
 -------
-The ReporteRs package is licensed under the GPLv3. See COPYRIGHTS file in the inst directory for additional details.
+The ReporteRs package is licensed under the GPLv3. See ``COPYRIGHTS`` file in the ``inst`` directory for additional details.

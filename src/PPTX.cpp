@@ -27,6 +27,8 @@
 #include "common.h"
 #include "PPTX.h"
 #include "utils.h"
+#include <R_ext/Riconv.h>
+#include <errno.h>
 
 static char pptx_elt_tag_start[] = "<p:sp>";
 static char pptx_elt_tag_end[] = "</p:sp>";
@@ -75,15 +77,17 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	dev->newPage = PPTX_NewPage;
 	dev->clip = PPTX_Clip;
 	dev->strWidth = PPTX_StrWidth;
+	dev->strWidthUTF8 = PPTX_StrWidthUTF8;
 	dev->text = PPTX_Text;
+	dev->textUTF8 = PPTX_TextUTF8;
 	dev->rect = PPTX_Rect;
 	dev->circle = PPTX_Circle;
 	dev->line = PPTX_Line;
 	dev->polyline = PPTX_Polyline;
 	dev->polygon = PPTX_Polygon;
 	dev->metricInfo = PPTX_MetricInfo;
-	dev->hasTextUTF8 = (Rboolean) FALSE;
-	dev->wantSymbolUTF8 = (Rboolean) FALSE;
+	dev->hasTextUTF8 = (Rboolean) TRUE;
+	dev->wantSymbolUTF8 = (Rboolean) TRUE;
 	dev->useRotatedTextInContour = (Rboolean) FALSE;
 	/*
 	 * Initial graphical settings
@@ -126,8 +130,8 @@ static Rboolean PPTXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	 * Device capabilities
 	 */
 	dev->canClip = (Rboolean) TRUE;
-	dev->canHAdj = 2;//canHadj – integer: can the device do horizontal adjustment of text via the text callback, and if so, how precisely? 0 = no adjustment, 1 = {0, 0.5, 1} (left, centre, right justification) or 2 = continuously variable (in [0,1]) between left and right justification.
-	dev->canChangeGamma = (Rboolean) FALSE;	//canChangeGamma – Rboolean: can the display gamma be adjusted? This is now ignored, as gamma support has been removed.
+	dev->canHAdj = 2;
+	dev->canChangeGamma = (Rboolean) FALSE;
 	dev->displayListOn = (Rboolean) FALSE;
 
 	dev->haveTransparency = 2;
@@ -168,7 +172,6 @@ static void PPTX_Circle(double x, double y, double r, const pGEcontext gc,
 		pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
-//	Rprintf("%% ----------PPTX_Circle\n" );
 
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
@@ -197,7 +200,6 @@ static void PPTX_Line(double x1, double y1, double x2, double y2,
 		const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
-//	Rprintf("%% ----------PPTX_Line\n" );
 
 	double maxx = 0, maxy = 0;
 	double minx = 0, miny = 0;
@@ -260,7 +262,6 @@ static void PPTX_Polyline(int n, double *x, double *y, const pGEcontext gc,
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
 	int i;
-//	Rprintf("%% ----------PPTX_Polyline\n" );
 
 	double maxx = 0, maxy = 0;
 	for (i = 0; i < n; i++) {
@@ -336,7 +337,6 @@ static void PPTX_Polygon(int n, double *x, double *y, const pGEcontext gc,
 	int idx = get_and_increment_idx(dev);
 	int i;
 	double maxx = 0, maxy = 0;
-//	Rprintf("%% ----------PPTX_Polygon\n" );
 
 	for (i = 0; i < n; i++) {
 		if (x[i] > maxx)
@@ -411,8 +411,6 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 	double tmp;
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
-//	Rprintf("%% ----------PPTX_Rect\n" );
-//	Rprintf("%% Region from %.2f %.2f to %.2f %.2f\n", x0, y0, x1, y1);
 
 	if (x0 >= x1) {
 		tmp = x0;
@@ -455,55 +453,72 @@ static void PPTX_Rect(double x0, double y0, double x1, double y1,
 
 }
 
+void pptx_text(const char *str, DOCDesc *pd){
+	unsigned char *p;
+	p = (unsigned char *) str;
+	int val, val1, val2, val3, val4;
+	while(*p){
+		val = *(p++);
+		if( val < 128 ){ /* ASCII */
+			fprintf(pd->dmlFilePointer, "&#%d;", val);
+		} else if( val > 240 ){
+			val1 = (val - 240) * 65536;
+			val = *(p++);
+			val2 = (val - 128) * 4096;
+			val = *(p++);
+			val3 = (val - 128) * 64;
+			val = *(p++);
+			val4 = val - 128;
+			fprintf(pd->dmlFilePointer, "&#%d;", val1+val2+val3+val4);
+		} else {
+			if( val >= 224 ){ /* 3 octets : 224 = 128+64+32 */
+				val1 = (val - 224) * 4096;
+				val = *(p++);
+				val2 = (val-128) * 64;
+				val = *(p++);
+				val3 = (val-128);
+				fprintf(pd->dmlFilePointer, "&#%d;", val1 + val2 + val3);
+			} else { /* 2 octets : >192 = 128+64 */
+				val1 = (val - 192) * 64;
+				val = *(p++);
+				val2 = val-128;
+				fprintf(pd->dmlFilePointer, "&#%d;", val1+val2);
+			}
 
-static void PPTX_Text(double x, double y, const char *str, double rot,
+		}
+	}
+}
+
+
+static void PPTX_TextUTF8(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	int idx = get_and_increment_idx(dev);
-//	Rprintf("%% ----------PPTX_Text\n" );
 
-	double pi = 3.141592653589793115997963468544185161590576171875;
-	double w = PPTX_StrWidth(str, gc, dev);
-	if( strlen(str) < 3 ) w+= 1 * w / strlen(str);
-	else w += 3 * w / strlen(str);
-	double h = getFontSize(gc->cex, gc->ps, gc->lineheight);
+	double w = PPTX_StrWidthUTF8(str, gc, dev);
+	w = getStrWidth( str, w);
+	double h = pd->fi->height[getFontface(gc->fontface)];
+	double fs = getFontSize(gc->cex, gc->ps );
 	if( h < 1.0 ) return;
 
-	double fontsize = h * 100;
+	double corrected_offx = translate_rotate_x(x, y, rot, h, w, hadj) ;
+	double corrected_offy = translate_rotate_y(x, y, rot, h, w, hadj) ;
 
-	/* translate and rotate ops */
-	//http://www.win.tue.nl/~vanwijk/2IV60/2IV60_3_2D_transformations.pdf
-	//http://www.youtube.com/watch?v=otCpCn0l4Wo
-	double alpha = -rot * pi / 180;
-	double height = h ;
-	double Qx = x;
-	double Qy = y ;
-	double Px = x + (0.5-hadj) * w;
-	double Py = y - 0.5 * height;
-	double _cos = cos( alpha );
-	double _sin = sin( alpha );
 
-	double Ppx = Qx + (Px-Qx) * _cos - (Py-Qy) * _sin ;
-	double Ppy = Qy + (Px-Qx) * _sin + (Py-Qy) * _cos;
-
-	double corrected_offx = Ppx - 0.5 * w;
-	double corrected_offy = Ppy - 0.5 * h;
-	//////////////
 
 	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
 
 	if( pd->editable < 1 )
-		fprintf(pd->dmlFilePointer,
-			"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
-	else fprintf(pd->dmlFilePointer,
-				"<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
+		fprintf(pd->dmlFilePointer, "<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
+	else fprintf(pd->dmlFilePointer, "<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
+
 	fputs("<p:spPr>", pd->dmlFilePointer );
-	fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", (-rot) * 60000);
-	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>",
-			p2e_(pd->offx + corrected_offx), p2e_(pd->offy + corrected_offy));
-	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>",
-			p2e_(w), p2e_(h));
+	if( fabs( rot ) < 1 )
+		fputs("<a:xfrm>", pd->dmlFilePointer);
+	else fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", (-rot) * 60000);
+	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>", p2e_(pd->offx + corrected_offx), p2e_(pd->offy + corrected_offy));
+	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(w), p2e_(h));
 	fputs("</a:xfrm>", pd->dmlFilePointer );
 	fputs("<a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>", pd->dmlFilePointer );
 	fputs("<a:noFill />", pd->dmlFilePointer );
@@ -511,7 +526,7 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 
 	fputs("<p:txBody>", pd->dmlFilePointer );
 	fputs("<a:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\">", pd->dmlFilePointer );
-	fputs("<a:spAutoFit />", pd->dmlFilePointer );
+	//fputs("<a:spAutoFit />", pd->dmlFilePointer );
 	fputs("</a:bodyPr><a:lstStyle /><a:p>", pd->dmlFilePointer );
 	fputs("<a:pPr", pd->dmlFilePointer );
 
@@ -522,13 +537,13 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 	else
 		fputs(" algn=\"r\"", pd->dmlFilePointer );
 	fputs(" marL=\"0\" marR=\"0\" indent=\"0\" >", pd->dmlFilePointer );
-	fprintf(pd->dmlFilePointer, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>",fontsize);
+	fprintf(pd->dmlFilePointer, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>", fs*100);
 	fputs("<a:spcBef><a:spcPts val=\"0\"/></a:spcBef>", pd->dmlFilePointer );
 	fputs("<a:spcAft><a:spcPts val=\"0\"/></a:spcAft>", pd->dmlFilePointer );
 
 	fputs("</a:pPr>", pd->dmlFilePointer );
 	fputs("<a:r>", pd->dmlFilePointer );
-	fprintf(pd->dmlFilePointer, "<a:rPr sz=\"%.0f\"", fontsize);
+	fprintf(pd->dmlFilePointer, "<a:rPr sz=\"%.0f\"", fs*100);
 	if (gc->fontface == 2) {
 		fputs(" b=\"1\"", pd->dmlFilePointer );
 	} else if (gc->fontface == 3) {
@@ -546,12 +561,89 @@ static void PPTX_Text(double x, double y, const char *str, double rot,
 
 	fputs("</a:rPr>", pd->dmlFilePointer );
 	fputs("<a:t>", pd->dmlFilePointer );
-	dml_text(str, pd);
+	pptx_text(str, pd);
 	fputs("</a:t></a:r></a:p></p:txBody>", pd->dmlFilePointer );
 	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
 
 	fflush(pd->dmlFilePointer);
 }
+
+static void PPTX_Text(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev) {
+
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int idx = get_and_increment_idx(dev);
+
+	double w = PPTX_StrWidth(str, gc, dev);
+	w = getStrWidth( str, w);
+	double h = pd->fi->height[getFontface(gc->fontface)];
+	double fs = getFontSize(gc->cex, gc->ps );
+	if( h < 1.0 ) return;
+
+	double corrected_offx = translate_rotate_x(x, y, rot, h, w, hadj) ;
+	double corrected_offy = translate_rotate_y(x, y, rot, h, w, hadj) ;
+
+	fputs(pptx_elt_tag_start, pd->dmlFilePointer );
+
+	if( pd->editable < 1 )
+		fprintf(pd->dmlFilePointer, "<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_lock_properties);
+	else fprintf(pd->dmlFilePointer, "<p:nvSpPr><p:cNvPr id=\"%d\" name=\"Text %d\" />%s</p:nvSpPr>", idx, idx, pptx_unlock_properties);
+
+	fputs("<p:spPr>", pd->dmlFilePointer );
+	if( fabs( rot ) < 1 )
+		fputs("<a:xfrm>", pd->dmlFilePointer);
+	else fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", (-rot) * 60000);
+	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>", p2e_(pd->offx + corrected_offx), p2e_(pd->offy + corrected_offy));
+	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(w), p2e_(h));
+	fputs("</a:xfrm>", pd->dmlFilePointer );
+	fputs("<a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>", pd->dmlFilePointer );
+	fputs("<a:noFill />", pd->dmlFilePointer );
+	fputs("</p:spPr>", pd->dmlFilePointer );
+
+	fputs("<p:txBody>", pd->dmlFilePointer );
+	fputs("<a:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\">", pd->dmlFilePointer );
+	//fputs("<a:spAutoFit />", pd->dmlFilePointer );
+	fputs("</a:bodyPr><a:lstStyle /><a:p>", pd->dmlFilePointer );
+	fputs("<a:pPr", pd->dmlFilePointer );
+
+	if (hadj < 0.25)
+		fputs(" algn=\"l\"", pd->dmlFilePointer );
+	else if (hadj < 0.75)
+		fputs(" algn=\"ctr\"", pd->dmlFilePointer );
+	else
+		fputs(" algn=\"r\"", pd->dmlFilePointer );
+	fputs(" marL=\"0\" marR=\"0\" indent=\"0\" >", pd->dmlFilePointer );
+	fprintf(pd->dmlFilePointer, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>", fs*100);
+	fputs("<a:spcBef><a:spcPts val=\"0\"/></a:spcBef>", pd->dmlFilePointer );
+	fputs("<a:spcAft><a:spcPts val=\"0\"/></a:spcAft>", pd->dmlFilePointer );
+
+	fputs("</a:pPr>", pd->dmlFilePointer );
+	fputs("<a:r>", pd->dmlFilePointer );
+	fprintf(pd->dmlFilePointer, "<a:rPr sz=\"%.0f\"", fs*100);
+	if (gc->fontface == 2) {
+		fputs(" b=\"1\"", pd->dmlFilePointer );
+	} else if (gc->fontface == 3) {
+		fputs(" i=\"1\"", pd->dmlFilePointer );
+	} else if (gc->fontface == 4) {
+		fputs(" b=\"1\" i=\"1\"", pd->dmlFilePointer );
+	}
+
+	fputs(">", pd->dmlFilePointer );
+	DML_SetFontColor(dev, gc);
+
+	fprintf(pd->dmlFilePointer,
+				"<a:latin typeface=\"%s\"/><a:cs typeface=\"%s\"/>",
+				pd->fi->fontname, pd->fi->fontname);
+
+	fputs("</a:rPr>", pd->dmlFilePointer );
+	fputs("<a:t>", pd->dmlFilePointer );
+	dml_text_native(str, pd);
+	fputs("</a:t></a:r></a:p></p:txBody>", pd->dmlFilePointer );
+	fputs(pptx_elt_tag_end, pd->dmlFilePointer );
+
+	fflush(pd->dmlFilePointer);
+}
+
 
 static void PPTX_NewPage(const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
@@ -605,7 +697,6 @@ static void PPTX_Close(pDevDesc dev) {
 
 
 static void PPTX_Clip(double x0, double x1, double y0, double y1, pDevDesc dev) {
-//	Rprintf("%% Setting Clip Region to %.2f %.2f %.2f %.2f\n", x0, y0, x1, y1);
 	dev->clipLeft = x0;
 	dev->clipRight = x1;
 	dev->clipBottom = y1;
@@ -627,11 +718,13 @@ static void PPTX_Size(double *left, double *right, double *bottom, double *top,
 }
 
 
+static double PPTX_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
+	return DOC_StrWidthUTF8(str, gc, dev);
+}
+
 static double PPTX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 	return DOC_StrWidth(str, gc, dev);
 }
-
-
 
 SEXP R_PPTX_Device(SEXP filename
 		, SEXP width, SEXP height, SEXP offx

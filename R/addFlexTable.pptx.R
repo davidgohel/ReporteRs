@@ -4,15 +4,13 @@
 #' 
 #' @param doc docx object
 #' @param flextable the \code{FlexTable} object
-#' @param offx optional, x position of the shape (top left position of the bounding box) in inch. See details.
-#' @param offy optional, y position of the shape (top left position of the bounding box) in inch. See details.
-#' @param width optional, width of the shape in inch. See details.
-#' @param height optional, height of the shape in inch. See details.
+#' @param offx optional, x position of the shape (top left position of the bounding box) in inches. See details.
+#' @param offy optional, y position of the shape (top left position of the bounding box) in inches. See details.
+#' @param width optional, width of the shape in inches. See details.
+#' @param height optional, height of the shape in inches. See details.
 #' @param ... further arguments - not used
 #' @return a pptx object
 #' @seealso \code{\link{FlexTable}}, \code{\link{pptx}}
-#' , \code{\link{addFlexTable.html}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{addTable.pptx}}
 #' @details
 #' If arguments offx, offy, width, height are missing, position and dimensions
 #' will be defined by the width and height of the next available shape of the slide. This 
@@ -26,22 +24,21 @@
 #' doc.filename = "addFlexTable_example.pptx"
 #' @example examples/pptx.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle1Level1.R
+#' @example examples/addTitle1NoLevel.R
 #' @example examples/FlexTableExample.R
 #' @example examples/addFlexTable.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle2Level1.R
+#' @example examples/addTitle2NoLevel.R
 #' @example examples/agg.mtcars.FlexTable.R
 #' @example examples/addFlexTable.R
 #' @example examples/addFlexTable_posdim.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle3Level1.R
+#' @example examples/addTitle3NoLevel.R
 #' @example examples/setFlexTableBackgroundColors.R
 #' @example examples/addFlexTable.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @method addFlexTable pptx
-#' @S3method addFlexTable pptx
+#' @export
 addFlexTable.pptx = function(doc, flextable, offx, offy, width, height, ... ) {
 	
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )

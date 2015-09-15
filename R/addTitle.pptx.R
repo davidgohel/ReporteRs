@@ -9,21 +9,14 @@
 #' @return an object of class \code{\link{pptx}}.
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' 
-#' # add a slide with layout "Title and Content"
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' 
-#' # Here we fill the title shape with "My title"
-#' doc = addTitle( doc, "My title" )
-#' 
-#' # Write the object in file "addTitle_example.pptx"
-#' writeDoc( doc, "addTitle_example.pptx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addTitle_example.pptx"
+#' @example examples/pptx.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle1NoLevel.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addTitle}}, \code{\link{addSlide.pptx}}
-#' @method addTitle pptx
-#' @S3method addTitle pptx
+#' @export
 addTitle.pptx = function( doc, value, ... ) {
 
 	slide = doc$current_slide 

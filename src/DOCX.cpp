@@ -37,7 +37,7 @@ static char docx_unlock_properties[] = "<wps:cNvSpPr /><wps:nvPr />";
 
 void DOCX_setRunProperties(pDevDesc dev, R_GE_gcontext *gc, double fontsize){
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	int alpha =  (int) ((255-R_ALPHA(gc->col))/255.0 * 100000);//n importe quoi
+	int alpha =  (int) ((255-R_ALPHA(gc->col))/255.0 * 100000);
 	int fontface = gc->fontface;
 	fputs("<w:rPr>", pd->dmlFilePointer );
 	fprintf(pd->dmlFilePointer, "<w:rFonts w:ascii=\"%s\" w:hAnsi=\"%s\" w:cs=\"%s\" />", pd->fi->fontname, pd->fi->fontname, pd->fi->fontname );
@@ -106,7 +106,9 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	dev->size = DOCX_Size;
 	dev->newPage = DOCX_NewPage;
 	dev->clip = DOCX_Clip;
+	dev->strWidthUTF8 = DOCX_StrWidthUTF8;
 	dev->strWidth = DOCX_StrWidth;
+	dev->textUTF8 = DOCX_TextUTF8;
 	dev->text = DOCX_Text;
 	dev->rect = DOCX_Rect;
 	dev->circle = DOCX_Circle;
@@ -114,8 +116,8 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	dev->polyline = DOCX_Polyline;
 	dev->polygon = DOCX_Polygon;
 	dev->metricInfo = DOCX_MetricInfo;
-	dev->hasTextUTF8 = (Rboolean) FALSE;
-	dev->wantSymbolUTF8 = (Rboolean) FALSE;
+	dev->hasTextUTF8 = (Rboolean) TRUE;
+	dev->wantSymbolUTF8 = (Rboolean) TRUE;
 	dev->useRotatedTextInContour = (Rboolean) FALSE;
 	/*
 	 * Initial graphical settings
@@ -158,8 +160,8 @@ static Rboolean DOCXDeviceDriver(pDevDesc dev, const char* filename, double* wid
 	 * Device capabilities
 	 */
 	dev->canClip = (Rboolean) TRUE;
-	dev->canHAdj = 2;//canHadj – integer: can the device do horizontal adjustment of text via the text callback, and if so, how precisely? 0 = no adjustment, 1 = {0, 0.5, 1} (left, centre, right justification) or 2 = continuously variable (in [0,1]) between left and right justification.
-	dev->canChangeGamma = (Rboolean) FALSE;	//canChangeGamma – Rboolean: can the display gamma be adjusted? This is now ignored, as gamma support has been removed.
+	dev->canHAdj = 2;
+	dev->canChangeGamma = (Rboolean) FALSE;
 	dev->displayListOn = (Rboolean) FALSE;
 
 	dev->haveTransparency = 2;
@@ -502,39 +504,76 @@ static void DOCX_Rect(double x0, double y0, double x1, double y1,
 }
 
 
-static void DOCX_Text(double x, double y, const char *str, double rot,
+void docx_text(const char *str, DOCDesc *pd){
+	unsigned char *p;
+	p = (unsigned char *) str;
+	int val, val1, val2, val3, val4;
+	while(*p){
+		val = *(p++);
+		if( val < 128 ){ /* ASCII */
+
+			switch(val) {
+				case '<':
+					fprintf(pd->dmlFilePointer, "&lt;");
+					break;
+				case '>':
+					fprintf(pd->dmlFilePointer, "&gt;");
+					break;
+				case '&':
+					fprintf(pd->dmlFilePointer, "&amp;");
+					break;
+				default:
+					fprintf(pd->dmlFilePointer, "%c", val);
+					break;
+			}
+		} else if( val > 240 ){ /* 4 octets*/
+			val1 = (val - 240) * 65536;
+			val = *(p++);
+			val2 = (val - 128) * 4096;
+			val = *(p++);
+			val3 = (val - 128) * 64;
+			val = *(p++);
+			val4 = val - 128;
+			val = val1 + val2 + val3 + val4;
+			fprintf(pd->dmlFilePointer, "&#%d;", val);
+		} else {
+			if( val >= 224 ){ /* 3 octets : 224 = 128+64+32 */
+				val1 = (val - 224) * 4096;
+				val = *(p++);
+				val2 = (val-128) * 64;
+				val = *(p++);
+				val3 = (val-128);
+				val = val1 + val2 + val3;
+				fprintf(pd->dmlFilePointer, "&#%d;", val);
+			} else { /* 2 octets : >192 = 128+64 */
+				val1 = (val - 192) * 64;
+				val = *(p++);
+				val2 = val-128;
+				val = val1 + val2;
+				fprintf(pd->dmlFilePointer, "&#%d;", val);
+			}
+
+		}
+	}
+}
+
+
+
+static void DOCX_TextUTF8(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev) {
 
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
-	double pi = 3.141592653589793115997963468544185161590576171875;
 	int idx = get_and_increment_idx(dev);
 
-	double w = DOCX_StrWidth(str, gc, dev);
-	if( strlen(str) < 3 ) w+= 1 * w / strlen(str);
-	else w += 3 * w / strlen(str);
-	double h = getFontSize(gc->cex, gc->ps, gc->lineheight) * 1.0;
+	double w = DOCX_StrWidthUTF8(str, gc, dev);
+	w = getStrWidth( str, w);
+	double h = pd->fi->height[getFontface(gc->fontface)];
+	double fs = getFontSize(gc->cex, gc->ps );
 	if( h < 1.0 ) return;
-	double fontsize = h;
 
-//	/* translate and rotate ops */
-	double alpha = -rot * pi / 180;
-	double height = h;
-	double Qx = x;
-	double Qy = y ;
-	double Px = x + (0.5-hadj) * w;
-	double Py = y - 0.5 * height;
-	double _cos = cos( alpha );
-	double _sin = sin( alpha );
+	double corrected_offx = translate_rotate_x(x, y, rot, h, w, hadj) ;
+	double corrected_offy = translate_rotate_y(x, y, rot, h, w, hadj) ;
 
-	double Ppx = Qx + (Px-Qx) * _cos - (Py-Qy) * _sin ;
-	double Ppy = Qy + (Px-Qx) * _sin + (Py-Qy) * _cos;
-
-	double corrected_offx = Ppx - 0.5 * w;
-	double corrected_offy = Ppy - 0.5 * h;
-
-	//////////////
-	if( rot < 0.05 || rot > 0.05 ) rot = -rot;
-	else rot = 0.0;
 
 	fputs(docx_elt_tag_start, pd->dmlFilePointer );
 	if( pd->editable < 1 )
@@ -542,8 +581,9 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 	else fprintf(pd->dmlFilePointer, "<wps:cNvPr id=\"%d\" name=\"Text %d\" />%s", idx,	idx, docx_unlock_properties);
 
 	fputs("<wps:spPr>", pd->dmlFilePointer );
-
-	fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", rot * 60000);
+	if( fabs( rot ) < 1 )
+		fputs("<a:xfrm>", pd->dmlFilePointer);
+	else fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", (-rot) * 60000);
 	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>", p2e_(pd->offx + corrected_offx), p2e_(pd->offy + corrected_offy));
 	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(w), p2e_(h));
 	fputs("</a:xfrm>", pd->dmlFilePointer );
@@ -551,7 +591,7 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 	fputs("<a:noFill />", pd->dmlFilePointer );
 	fputs("</wps:spPr>", pd->dmlFilePointer );
 	fputs("<wps:txbx>", pd->dmlFilePointer );
-	
+
 	fputs("<w:txbxContent>", pd->dmlFilePointer );
 	fputs("<w:p>", pd->dmlFilePointer );
 	fputs("<w:pPr>", pd->dmlFilePointer );
@@ -563,16 +603,18 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 	else
 		fputs("<w:jc w:val=\"right\" />", pd->dmlFilePointer );
 
-	fprintf(pd->dmlFilePointer, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", height*20);
-	DOCX_setRunProperties( dev, gc, fontsize);
+	fprintf(pd->dmlFilePointer, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", h*20);
+	DOCX_setRunProperties( dev, gc, h);
 	fputs("</w:pPr>", pd->dmlFilePointer );
 	fputs("<w:r>", pd->dmlFilePointer );
-	
-	DOCX_setRunProperties( dev, gc, fontsize);
+
+	DOCX_setRunProperties( dev, gc, fs);
 
 	fputs("<w:t>", pd->dmlFilePointer );
-	dml_text(str, pd);
-	fputs("</w:t></w:r></w:p>", pd->dmlFilePointer );
+	docx_text(str, pd);
+	fputs("</w:t>", pd->dmlFilePointer );
+
+	fputs("</w:r></w:p>", pd->dmlFilePointer );
 
 	fputs("</w:txbxContent>", pd->dmlFilePointer );
 	fputs("</wps:txbx>", pd->dmlFilePointer );
@@ -580,12 +622,75 @@ static void DOCX_Text(double x, double y, const char *str, double rot,
 
 	fputs( "<a:spAutoFit /></wps:bodyPr>", pd->dmlFilePointer);
 	fputs(docx_elt_tag_end, pd->dmlFilePointer );
-//	fprintf(pd->dmlFilePointer, "\n");
 	fflush(pd->dmlFilePointer);
 
-	//return;
 }
+static void DOCX_Text(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev) {
 
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int idx = get_and_increment_idx(dev);
+
+	double w = DOCX_StrWidth(str, gc, dev);
+	w = getStrWidth( str, w);
+	double h = pd->fi->height[getFontface(gc->fontface)];
+	double fs = getFontSize(gc->cex, gc->ps );
+	if( h < 1.0 ) return;
+
+	double corrected_offx = translate_rotate_x(x, y, rot, h, w, hadj) ;
+	double corrected_offy = translate_rotate_y(x, y, rot, h, w, hadj) ;
+
+
+	fputs(docx_elt_tag_start, pd->dmlFilePointer );
+	if( pd->editable < 1 )
+		fprintf(pd->dmlFilePointer, "<wps:cNvPr id=\"%d\" name=\"Text %d\" />%s", idx,	idx, docx_lock_properties);
+	else fprintf(pd->dmlFilePointer, "<wps:cNvPr id=\"%d\" name=\"Text %d\" />%s", idx,	idx, docx_unlock_properties);
+
+	fputs("<wps:spPr>", pd->dmlFilePointer );
+	if( fabs( rot ) < 1 )
+		fputs("<a:xfrm>", pd->dmlFilePointer);
+	else fprintf(pd->dmlFilePointer, "<a:xfrm rot=\"%.0f\">", (-rot) * 60000);
+	fprintf(pd->dmlFilePointer, "<a:off x=\"%.0f\" y=\"%.0f\"/>", p2e_(pd->offx + corrected_offx), p2e_(pd->offy + corrected_offy));
+	fprintf(pd->dmlFilePointer, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(w), p2e_(h));
+	fputs("</a:xfrm>", pd->dmlFilePointer );
+	fputs("<a:prstGeom prst=\"rect\"><a:avLst /></a:prstGeom>", pd->dmlFilePointer );
+	fputs("<a:noFill />", pd->dmlFilePointer );
+	fputs("</wps:spPr>", pd->dmlFilePointer );
+	fputs("<wps:txbx>", pd->dmlFilePointer );
+
+	fputs("<w:txbxContent>", pd->dmlFilePointer );
+	fputs("<w:p>", pd->dmlFilePointer );
+	fputs("<w:pPr>", pd->dmlFilePointer );
+
+	if (hadj < 0.25)
+		fputs("<w:jc w:val=\"left\" />", pd->dmlFilePointer );
+	else if (hadj < 0.75)
+		fputs("<w:jc w:val=\"center\" />", pd->dmlFilePointer );
+	else
+		fputs("<w:jc w:val=\"right\" />", pd->dmlFilePointer );
+
+	fprintf(pd->dmlFilePointer, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", h*20);
+	DOCX_setRunProperties( dev, gc, h);
+	fputs("</w:pPr>", pd->dmlFilePointer );
+	fputs("<w:r>", pd->dmlFilePointer );
+
+	DOCX_setRunProperties( dev, gc, fs);
+
+	fputs("<w:t>", pd->dmlFilePointer );
+	dml_text_native(str, pd);
+	fputs("</w:t>", pd->dmlFilePointer );
+
+	fputs("</w:r></w:p>", pd->dmlFilePointer );
+
+	fputs("</w:txbxContent>", pd->dmlFilePointer );
+	fputs("</wps:txbx>", pd->dmlFilePointer );
+	fputs("<wps:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\">", pd->dmlFilePointer );
+
+	fputs( "<a:spAutoFit /></wps:bodyPr>", pd->dmlFilePointer);
+	fputs(docx_elt_tag_end, pd->dmlFilePointer );
+	fflush(pd->dmlFilePointer);
+
+}
 static void DOCX_NewPage(const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	if (pd->pageNumber > 0) {
@@ -654,40 +759,15 @@ static void DOCX_Size(double *left, double *right, double *bottom, double *top,
 }
 
 
+
+static double DOCX_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
+	return DOC_StrWidthUTF8(str, gc, dev);
+}
+
 static double DOCX_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 	return DOC_StrWidth(str, gc, dev);
 }
 
-//SEXP setDimensions(SEXP devNumber, SEXP ext, SEXP off){
-	/*
-static void javaGDresize_(int dev) {
-    int ds = NumDevices();
-    int i = 0;
-    if (dev >= 0 && dev < ds) {
-	i = dev;
-	ds = dev + 1;
-    }
-    while (i < ds) {
-        GEDevDesc *gd = GEgetDevice(i);
-        if (gd) {
-            NewDevDesc *dd = gd->dev;
-#ifdef JGD_DEBUG
-            printf("javaGDresize: device=%d, dd=%lx\n", i, (unsigned long)dd);
-#endif
-            if (dd) {
-#ifdef JGD_DEBUG
-                printf("dd->size=%lx\n", (unsigned long)dd->size);
-#endif
-                dd->size(&(dd->left), &(dd->right), &(dd->bottom), &(dd->top), dd);
-                GEplayDisplayList(gd);
-            }
-        }
-        i++;
-    }
-}
-	 */
-//	return R_NilValue;
-//}
 
 SEXP R_DOCX_Device(SEXP filename
 		, SEXP width, SEXP height, SEXP offx,

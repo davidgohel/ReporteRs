@@ -1,30 +1,101 @@
 #' @import rJava
 #' @import ReporteRsjars
+#' @importFrom grDevices col2rgb
+#' @importFrom grDevices dev.cur
+#' @importFrom grDevices dev.off
+#' @importFrom grDevices dev.list
+#' @importFrom grDevices rgb
+#' @importFrom graphics box
+#' @importFrom graphics box
+#' @importFrom graphics plot
+#' @importFrom graphics polygon
+#' @importFrom graphics text
+#' @importFrom utils getParseData
+#' @importFrom utils browseURL
 .onLoad= function(libname, pkgname){
+	
 	.jpackage( pkgname, lib.loc = libname )
-	options("ReporteRs-default-font"="Helvetica")
+	.jcall('java.lang.System','S','setProperty','file.encoding', 'UTF-8')
+	.jcall('java.lang.System','S','setProperty','java.awt.headless', 'true')
+	
+	.try = try( check.fontfamily( fontfamily = "Helvetica", as.message = FALSE ), silent = TRUE )
+	
+	if( inherits( .try , "try-error") ){
+		.try = try( check.fontfamily( fontfamily = "Arial", as.message = FALSE ), silent = TRUE )
+	} else options("ReporteRs-default-font" = "Helvetica")
+	
+	if( inherits( .try , "try-error") ){
+		.try = try( check.fontfamily( fontfamily = "Georgia", as.message = FALSE ), silent = TRUE )
+	} else options("ReporteRs-default-font" = "Arial")
+	
+	if( inherits( .try , "try-error") ){
+		.try = try( check.fontfamily( fontfamily = "Times New Roman", as.message = FALSE ), silent = TRUE )
+	} else options("ReporteRs-default-font" = "Georgia")
+	
+	if( inherits( .try , "try-error") ){
+		.try = try( check.fontfamily( fontfamily = "Verdana", as.message = FALSE ), silent = TRUE )
+	} else options("ReporteRs-default-font" = "Times New Roman")
+	
+	if( inherits( .try , "try-error") ){
+		options("ReporteRs-default-font" = "Arial")
+		warning("Could not set any defaut font, please specify a font using:\noptions('ReporteRs-default-font' = 'existing font on your machine')\n")
+	} else options("ReporteRs-default-font" = "Verdana")
+	
 	options("ReporteRs-locale.language"="en")
 	options("ReporteRs-locale.region"="US")
+	options("ReporteRs-backtick-color" = "#c7254e" )
+	options("ReporteRs-backtick-shading-color" = "#f9f2f4" )
 	options("ReporteRs-fontsize"=11L)
+	
+	options("ReporteRs-list-definition"= list( 		
+		ol.left = seq( from = 0, by = 0.4, length.out = 9), 
+		ol.hanging = rep( 0.4, 9 ), 
+		ol.format = rep( "decimal", 9 ), 
+		ol.pattern = paste0( "%", 1:9, "." ), 
+		ul.left = seq( from = 0, by = 0.4, length.out = 9), 
+		ul.hanging = rep( 0.4, 9 ), 
+		ul.format = c( "disc", "circle", "square", "disc", "circle", "square", "disc", "circle", "square" ) 
+		)
+	)
 	invisible()
 }
 
-getDefaultColTypes = function( data ){
-	lapply( data , function(x) {
-		out = class(x)
-		if( is.factor( out ) ) out = "character"
-		else if (is.integer(out)) out = "integer"
-		else if (is.numeric(out)) out = "double"
-		else if (is.logical(out)) out = "logical"
-		else if (inherits(out, "Date")) out = "date"
-		else if (inherits(out, "POSIXct")) out = "datetime"
-		else if (inherits(out, "POSIXlt")) out = "datetime"
-		else out = "character"
-		out
-	} )
+.jset_of_paragraphs = function( value, par.properties ){
+	
+	if( !missing( par.properties ))
+		parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
+	else parset = .jnew( class.ParagraphSet )
+	
+	for( pot_index in 1:length( value ) ){
+		paragrah = .jnew(class.Paragraph )
+		pot_value = value[[pot_index]]
+		for( i in 1:length(pot_value)){
+			current_value = pot_value[[i]]
+			if( !is.null( current_value$jimg )){
+				.jcall( paragrah, "V", "addImage", current_value$jimg )
+				.jcall( paragrah, "V", "addText", "" )
+			} else {
+				
+				if( is.null( current_value$format ) ) {
+					if( is.null( current_value$hyperlink ) )
+						.jcall( paragrah, "V", "addText", current_value$value )
+					else .jcall( paragrah, "V", "addText", current_value$value, current_value$hyperlink )
+				} else {
+					jtext.properties = .jTextProperties( current_value$format )
+					if( is.null( current_value$hyperlink ) )
+						.jcall( paragrah, "V", "addText", current_value$value, jtext.properties )
+					else .jcall( paragrah, "V", "addText", current_value$value, jtext.properties, current_value$hyperlink )
+				}
+				if( !is.null( current_value$footnote ) ) {
+					jfn = .jFootnote(current_value$footnote)
+					.jcall( paragrah, "V", "addFootnoteToLastEntry", jfn )
+				}
+			}
+		}
+		.jcall( parset, "V", "addParagraph", paragrah )
+	}
+	parset
 }
-
-
 
 
 shape_errors = c( UNDEFINED = -1, DONOTEXISTS = 0, ISFILLED = 1, NO_ERROR = 2, NOROOMLEFT = 3, UNDEFDIMENSION = 4)
@@ -56,91 +127,58 @@ getSlideErrorString = function( value, shape ){
 	else return("")
 }
 
-get_poly_coord = function( x, height ){
-	
-	if( inherits(x, "try-error") || all( x$dim[1:2]< 1 ) ) 
-		return (NULL)
-	
-	position_left_top = x$dim[1:2]
-	size = x$dim[3:4]
-	out = list()
-	
-	out$x = c( position_left_top[1], position_left_top[1] + size[1], position_left_top[1] + size[1], position_left_top[1], NA )
-	
-	newposytopleft = height - position_left_top[2]
-	out$y = c( newposytopleft, newposytopleft, newposytopleft - size[2], newposytopleft - size[2], NA )
-	
-	out
-}
 
-get_text_coord = function( x, height ){
-	
-	if( inherits(x, "try-error") || all( x$dim[1:2]< 1 ) ) 
-		return (NULL)
-	position_left_top = x$dim[1:2]
-	size = x$dim[3:4]
-	out = list()
-	out$x = position_left_top[1] + size[1] * 0.5
-	newposytopleft = height - position_left_top[2]
-	
-	out$y = newposytopleft - size[2] * 0.5
-	if( is.element("text", names( x ) ) ) out$labels = x$text
-	out
-}
 
 plotSlideLayout = function( doc, layout.name ){
-	
-	SlideLayout = .jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", as.character(layout.name) )
-	maxid = .jcall( SlideLayout, "I", "getContentSize")
-	content_shapes = list()
-	content_size = .jcall( SlideLayout, "I", "getContentSize" )
-	if( content_size > 0 )
-		for(i in 0:( maxid - 1 ) ){
-			content_shapes[[i+1]] = list( 
-					text = "content"
-					, dim = .jcall( SlideLayout
-							, "[I", "getContentDimensions"
-							, as.integer(i) ) / 12700 
-			)
-		}
-	
-	meta_shapes = list()
-	metas = c(TITLE = 0, FOOTER = 1, SLIDENUMBER = 2
-			, DATE = 3, SUBTITLE = 4, CRTTITLE = 5)
-	nummeta = 0
-	for(i in 1:length(metas)){
-		if( .jcall( SlideLayout, "Z", "contains", as.integer(metas[i]) ) ){
-			nummeta = nummeta + 1
-			meta_shapes[[nummeta]] = list( 
-					text = names(metas)[i]
-					, dim = .jcall( SlideLayout, "[I", "getMetaDimensions", as.integer(metas[i]) ) / 12700
-					)
-		}
-	}
 
-	dimensions = .jcall( doc$obj, "[I", "readSlideDimensions" ) / 12700
+	layout_description = .jcall( doc$obj, paste0("L", class.pptx4r.LayoutDescription, ";"), "getLayoutProperties", layout.name )
+	dimensions = .jcall( doc$obj, "[I", "readSlideDimensions" )
 	
-	coords_poly_meta = lapply( meta_shapes, get_poly_coord, height = dimensions[2] )
-	coords_poly_meta = coords_poly_meta[ !sapply( coords_poly_meta, is.null ) ]
+	content_dims = matrix( .jcall( layout_description, "[I", "getContentDimensions" ), 
+		ncol = 4, byrow = T, 
+		dimnames = list(NULL, c( "offxs", "offys", "widths", "heights" ) ) 
+	)
 	
-	coords_text_meta = lapply( meta_shapes, get_text_coord, height = dimensions[2] )
-	coords_text_meta = coords_text_meta[ !sapply( coords_text_meta, is.null ) ]
+	header_dims = matrix( .jcall( layout_description, "[I", "getHeaderDimensions" ), 
+		ncol = 5, byrow = T, 
+		dimnames = list(NULL, c( "name", "offxs", "offys", "widths", "heights") )
+	)
 	
-	if( content_size > 0 ){
-		coords_poly_content = lapply( content_shapes, get_poly_coord, height = dimensions[2] )
-		coords_text_content = lapply( content_shapes, get_text_coord, height = dimensions[2] )
-	}
+	if( nrow(header_dims) > 0 ){
+		metas = c(TITLE = 0, FOOTER = 1, SLIDENUMBER = 2
+				, DATE = 3, SUBTITLE = 4, CRTTITLE = 5)
+		header_names = names( metas )[ match( header_dims[,"name"], metas ) ]
+	} else header_names = character(0)
+		
+	if( nrow(content_dims) > 0 )
+		body_names = paste("BODY", sprintf("%02.0f", 1:nrow(content_dims) ) )
+	else body_names = character(0)
+		
+	polygons_info = rbind( header_dims[, -1], content_dims )
 	
-	plot( x = c(0, dimensions[1]) , y = c(0, dimensions[2]), type = "n", axes = F, xlab = "", ylab = "", main = "" )
-	if( content_size > 0 ){
-		lapply( coords_poly_content, function(x) polygon( x$x, x$y ) )
-		for(i in 1:length( coords_text_content ))
-			text( coords_text_content[[i]]$x, coords_text_content[[i]]$y, labels=paste("shape", i) )
-	}
-	lapply( coords_poly_meta, function(x) polygon( x$x, x$y ) )
-	for(i in 1:length( coords_text_meta ))
-		text( x = coords_text_meta[[i]]$x, y = coords_text_meta[[i]]$y, labels=coords_text_meta[[i]]$labels )
+	position_left = polygons_info[,"offxs"]
+	position_right = polygons_info[,"offxs"] + polygons_info[,"widths"]
+	position_top = dimensions[2] - polygons_info[,"offys"] 
+	position_bottom = dimensions[2] - (polygons_info[,"offys"] + polygons_info[,"heights"])
 	
+	positions = matrix( c( position_left, 
+			position_right, position_top, 
+			position_bottom
+		), ncol = 4 )
+	x = as.vector( apply( positions, 1, function( x ) c( x[1], x[1], x[2], x[2], NA ) ) )
+	y = as.vector( apply( positions, 1, function( x ) c( x[4], x[3], x[3], x[4], NA ) ) )
+	
+	plot( x = c(0, dimensions[1]) , y = c(0, dimensions[2]), 
+			type = "n", axes = F, 
+			xaxs = "i", yaxs = "i", 
+			xlab = "", ylab = "", main = "" )
+	box()
+	polygon(x, y )
+	
+	text( x = (position_left + position_right)/2, 
+		y = (position_top + position_bottom)/2 ,
+		labels = c( header_names, body_names )
+		)
 	invisible()
 }
 
@@ -151,6 +189,8 @@ getHexColorCode = function( valid.color ){
 }
 
 ReporteRs.border.styles = c( "none", "solid", "dotted", "dashed" )
+#ReporteRs.text.directions = c( "lrTb", "tbRl", "btLr" )
+ReporteRs.text.directions = c( "lrtb", "tbrl", "btlr" )
 
 get.pots.from.script = function( file, text
 , comment.properties
@@ -181,7 +221,7 @@ get.pots.from.script = function( file, text
 		myexpr = parse( file = file, keep.source = TRUE )
 	}
 	
-	data = getParseData( myexpr )
+	data = utils::getParseData( myexpr )
 	data = data[ data$terminal, ]
 	
 	desc_token   = as.character( data[ data[["terminal"]], "token" ] )
@@ -228,205 +268,33 @@ get.pots.from.script = function( file, text
 			, slot.properties = slot.properties
 			, default.properties = default.properties
 		)
-	
-	pot.list = lapply( ldata, function(x, tp.list ){
+
+		pot.list = lapply( ldata, function(x, tp.list, default.properties ){
 				x = x[ order(x[,2] ), ]
-				out = pot()
+				out = pot("", format=default.properties)
 				last_pos = 0
 				for(i in 1:nrow(x) ){
 					if( x[i,2] != (last_pos + 1) ){
 						.size = x[i,2] - (last_pos + 1)
-						out = out + paste( rep( " ", .size ), collapse = "" )
+						out = out + pot( paste( rep( " ", .size ), collapse = "" ), format=default.properties)
 					}
 					prop.name = paste( x[i,"extentionTag"], ".properties", sep = "" )
 					out = out + pot( x[i,"text"], format = tp.list[[ prop.name ]] )
 					last_pos = x[i,4]
 				}
 				out
-			} , tp.list = tp.list )
+			} , tp.list = tp.list, default.properties = default.properties )
 	out = lapply( 1: max( data[,3]) , function(x) pot() )
 	names( out ) = as.character( 1: max( data[,3] ) )
 	out[names(pot.list)] = pot.list
 	out
 }
 
-
-
-
-getOldTable = function( data, layout.properties
-	, header.labels, groupedheader.row = list()
-	, span.columns = character(0), col.types
-	, columns.bg.colors = list(), columns.font.colors = list()
-	, row.names = FALSE ) {
-	
-	if( is.matrix( data )){
-		.oldnames = names( data )
-		data = as.data.frame( data )
-		names( data ) = .oldnames
-	}
-	
-	if( missing(header.labels) ){
-		header.labels = names(data)
-	}
-	
-	if( missing(layout.properties) )
-		layout.properties = get.default.tableProperties()
-	
-	if( nrow( data ) < 2 ) span.columns = character(0)
-	
-	if( missing( col.types ) ){
-		col.types = getDefaultColTypes( data )
-	}
-	nbcol = ncol( data ) + as.integer( row.names )
-	
-	if( row.names ){
-		col.types = c("character", col.types )
-	}
-	
-	for( j in 1:ncol( data ) ){
-		if( is.factor(data[, j] ) ) tempdata = as.character( data[, j] )
-		else if( is.logical(data[, j] ) ) tempdata = ifelse( data[, j], "TRUE", "FALSE" )
-		else tempdata = data[, j]
-		
-		if( col.types[j] == "percent" ){
-			format_str = paste( "%0.", layout.properties$fraction.percent.digit, "f" )
-			data[, j] = sprintf( format_str, data[, j] * 100 )
-		} else if( col.types[j] == "double" ){
-			format_str = paste( "%0.", layout.properties$fraction.double.digit, "f" )
-			data[, j] = sprintf( format_str, data[, j] )
-		} else if( col.types[j] == "integer" ){
-			data[, j] = sprintf( "%0.0f", data[, j] )			
-		} else if( col.types[j] == "date" || col.types[j] == "datetime" ){
-			data[, j] = format( tempdata, "%Y-%m-%d" )
-		}
-	}
-	
-	ft = FlexTable( data = data, header.columns = FALSE, add.rownames = row.names )
-	for(j in span.columns ) 
-		ft = spanFlexTableRows( ft, j=j, runs = as.character( data[,j] ) )
-	
-	for( j in 1:nbcol ){
-		if( col.types[j] == "percent" ){
-			ft[,j ] = layout.properties$percent.text
-			ft[,j ] = layout.properties$percent.par
-			ft[,j ] = layout.properties$percent.cell		
-		}
-		else if( col.types[j] == "double" ){
-			ft[,j ] = layout.properties$double.text
-			ft[,j ] = layout.properties$double.par
-			ft[,j ] = layout.properties$double.cell
-		}
-		else if( col.types[j] == "integer" ){
-			ft[,j ] = layout.properties$integer.text
-			ft[,j ] = layout.properties$integer.par
-			ft[,j ] = layout.properties$integer.cell
-		}
-		else if( col.types[j] == "character" ){
-			ft[,j ] = layout.properties$character.text
-			ft[,j ] = layout.properties$character.par
-			ft[,j ] = layout.properties$character.cell
-		}
-		else if( col.types[j] == "date" ){
-			ft[,j ] = layout.properties$date.text
-			ft[,j ] = layout.properties$date.par
-			ft[,j ] = layout.properties$date.cell
-		}
-		else if( col.types[j] == "datetime" ){
-			ft[,j ] = layout.properties$datetime.text
-			ft[,j ] = layout.properties$datetime.par
-			ft[,j ] = layout.properties$datetime.cell
-		}
-		else if( col.types[j] == "logical" ){
-			ft[,j ] = layout.properties$logical.text
-			ft[,j ] = layout.properties$logical.par
-			ft[,j ] = layout.properties$logical.cell
-		}
-		
-		
-	}
-	if( length( groupedheader.row ) > 0 ){
-		ft = addHeaderRow( ft
-				, value = groupedheader.row$values
-				, colspan = groupedheader.row$colspan
-		)
-	}
-	ft = addHeaderRow( ft, value = header.labels )
-	
-	if( length( groupedheader.row ) > 0 ){
-		ft[1,, to = "header"] = layout.properties$groupedheader.text
-		ft[2,, to = "header"] = layout.properties$header.text
-		ft[1,, to = "header"] = layout.properties$groupedheader.par
-		ft[2,, to = "header"] = layout.properties$header.par
-		ft[1,, to = "header"] = layout.properties$groupedheader.cell
-		ft[2,, to = "header"] = layout.properties$header.cell
-	} else {
-		ft[1,, to = "header"] = layout.properties$header.text
-		ft[1,, to = "header"] = layout.properties$header.par
-		ft[1,, to = "header"] = layout.properties$header.cell
-	}
-	
-	for( col in names(columns.bg.colors) ){
-		j = match( col, ft$col_id )
-		if( col.types[j] == "percent" ){
-			cellProp = layout.properties$percent.cell		
-		}
-		else if( col.types[j] == "double" ){
-			cellProp = layout.properties$double.cell
-		}
-		else if( col.types[j] == "integer" ){
-			cellProp = layout.properties$integer.cell
-		}
-		else if( col.types[j] == "character" ){
-			cellProp = layout.properties$character.cell
-		}
-		else if( col.types[j] == "date" ){
-			cellProp = layout.properties$date.cell
-		}
-		else if( col.types[j] == "datetime" ){
-			cellProp = layout.properties$datetime.cell
-		}
-		else if( col.types[j] == "logical" ){
-			cellProp = layout.properties$logical.cell
-		} else cellProp = layout.properties$character.cell
-		
-		for( color in unique(columns.bg.colors[[col]])){
-			ft[columns.bg.colors[[col]] == color, col] = chprop(cellProp, background.color = color )
-		}
-		
-	}
-	
-	
-	
-	for( col in names(columns.font.colors) ){
-		j = match( col, ft$col_id )
-		if( col.types[j] == "percent" ){
-			textProp = layout.properties$percent.text		
-		}
-		else if( col.types[j] == "double" ){
-			textProp = layout.properties$double.text
-		}
-		else if( col.types[j] == "integer" ){
-			textProp = layout.properties$integer.text
-		}
-		else if( col.types[j] == "character" ){
-			textProp = layout.properties$character.text
-		}
-		else if( col.types[j] == "date" ){
-			textProp = layout.properties$date.text
-		}
-		else if( col.types[j] == "datetime" ){
-			textProp = layout.properties$datetime.text
-		}
-		else if( col.types[j] == "logical" ){
-			textProp = layout.properties$logical.text
-		} else textProp = layout.properties$character.text
-		for( color in unique(columns.font.colors[[col]])){
-			ft[columns.font.colors[[col]] == color, col] = chprop(textProp, color = color )
-		}
-		
-	}
-	ft
-	
+last_elts <- function(x, n = 5L){
+	.l = length( x )
+	n = if (n < 0L) max(.l + n, 0L) else min(n, .l)
+	x[seq.int(to = .l, length.out = n)]
 }
-	
-	
+
+
+

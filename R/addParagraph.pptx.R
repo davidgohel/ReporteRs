@@ -8,12 +8,19 @@
 #' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}} 
 #' or a character vector.
 #' @param offx optional, x position of the shape (top left position of the bounding box) 
-#' in inch. See details.
+#' in inches. See details.
 #' @param offy optional, y position of the shape (top left position of the bounding box) 
-#' in inch. See details.
-#' @param width optional, width of the shape in inch. See details.
-#' @param height optional, height of the shape in inch. See details.
-#' @param par.properties a parProperties object
+#' in inches. See details.
+#' @param width optional, width of the shape in inches. See details.
+#' @param height optional, height of the shape in inches. See details.
+#' @param par.properties \code{\link{parProperties}} to apply to paragraphs. Shading 
+#' and border settings will have no effect.
+#' @param restart.numbering boolean value. If \code{TRUE}, next numbered 
+#' list counter will be set to 1.
+#' @param append boolean default to FALSE. If TRUE, paragraphs will be 
+#' appened in the current shape instead of beeing sent into a new shape. 
+#' Paragraphs can only be appended on shape containing paragraphs (i.e. you 
+#' can not add paragraphs after a FlexTable).
 #' @param ... further arguments, not used. 
 #' @return an object of class \code{\link{pptx}}.
 #' @details
@@ -29,29 +36,57 @@
 #' doc.filename = "addParagraph_example.pptx"
 #' @example examples/pptx.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle1Level1.R
+#' @example examples/addTitle1NoLevel.R
 #' @example examples/addParagraph_hello_nostylename.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle2Level1.R
+#' @example examples/addTitle2NoLevel.R
 #' @example examples/pot1_example.R
 #' @example examples/pot2_example.R
 #' @example examples/set_of_paragraphs_example.R
 #' @example examples/addParagraph_sop_nostylename.R
 #' @example examples/addParagraph_position_parProperties.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle3Level1.R
+#' @example examples/addTitle3NoLevel.R
 #' @example examples/pot1_example.R
 #' @example examples/pot2_example.R
 #' @example examples/set_of_paragraphs_example.R
 #' @example examples/addParagraph_parProperties.R
+#' @example examples/addSlide.R
+#' @example examples/addTitle1NoLevel.R
+#' @example examples/lists_slide.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addParagraph}}
-#' @method addParagraph pptx
-#' @S3method addParagraph pptx
-addParagraph.pptx = function(doc, value, offx, offy, width, height, par.properties = parProperties(), ... ) {
+#' \code{\link{addMarkdown.pptx}}, \code{\link{pot}}
+#' @export
+addParagraph.pptx = function(doc, value, offx, offy, width, height, 
+		par.properties, 
+		append = FALSE, 
+		restart.numbering = FALSE, ... ) {
+	
+	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
+	if( check.dims > 0 && check.dims < 4 ) {
+		if( missing( offx ) ) warning("arguments offx, offy, width and height must all be specified: offx is missing")
+		if( missing( offy ) ) warning("arguments offx, offy, width and height must all be specified: offy is missing")
+		if( missing( width ) ) warning("arguments offx, offy, width and height must all be specified: width is missing")
+		if( missing( height ) ) warning("arguments offx, offy, width and height must all be specified: height is missing")
+	}
+	if( check.dims > 3 ) {
+		if( !is.numeric( offx ) ) stop("arguments offx must be a numeric value")
+		if( !is.numeric( offy ) ) stop("arguments offy must be a numeric value")
+		if( !is.numeric( width ) ) stop("arguments width must be a numeric value")
+		if( !is.numeric( height ) ) stop("arguments height must be a numeric value")
+		
+		if( length( offx ) != length( offy ) 
+				|| length( offx ) != length( width )
+				|| length( offx ) != length( height ) || length( offx )!= 1 ){
+			stop("arguments offx, offy, width and height must be numeric of length 1")
+		}
+	}
+	
 	
 	if( inherits( value, "character" ) ){
+		value = gsub("\\r", "", value )
 		x = lapply( value, function(x) pot(value = x) )
 		value = do.call( "set_of_paragraphs", x )
 	}
@@ -62,34 +97,26 @@ addParagraph.pptx = function(doc, value, offx, offy, width, height, par.properti
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 	
-	if( !inherits( par.properties, "parProperties" ) ){
+	if( !missing(par.properties) && !inherits( par.properties, "parProperties" ) ){
 		stop("argument 'par.properties' must be an object of class 'parProperties'")
 	}
 	
-	
 	slide = doc$current_slide 
-	
-	
-	parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
-	
-	for( pot_index in 1:length( value ) ){
-		paragrah = .jnew(class.Paragraph )
-		pot_value = value[[pot_index]]
-		for( i in 1:length(pot_value)){
-			if( is.null( pot_value[[i]]$format ) ) 
-				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
-						.jTextProperties( pot_value[[i]]$format) )
-		}
-		.jcall( parset, "V", "addParagraph", paragrah )
-	}
-	
-	
-	if( !missing( offx )){
+	if( !missing(par.properties) )
+		parset = .jset_of_paragraphs(value, par.properties)
+	else parset = .jset_of_paragraphs(value)
+
+	if( check.dims > 3 ){
+		if( missing(par.properties) )
+			stop("You have to specify par.properties when using arguments offx and offy")
 		out = .jcall( slide, "I", "add", parset
-				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ) )
+				, as.double( offx ), as.double( offy ), as.double( width ), as.double( height ), 
+				as.logical(restart.numbering) )
 	} else {
-		out = .jcall( slide, "I", "add" , parset)
+		if( append ){
+			out = .jcall( slide, "I", "append" , parset, as.logical(restart.numbering))
+			if( out == 1) stop("append is possible if current shape is a shape containing paragraphs.") 
+		} else out = .jcall( slide, "I", "add" , parset, as.logical(restart.numbering))
 	}	
 	
 	if( isSlideError( out ) ){

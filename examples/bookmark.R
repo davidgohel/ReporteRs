@@ -1,23 +1,18 @@
-require( ReporteRs )
-
 # Word document to write
 docx.file = "document_new.docx"
 
 # create document
-doc = docx( title = "My example"
-  , template = file.path( find.package("ReporteRs"), "templates/bookmark_example.docx")
-  )
+doc = docx( title = "My example", 
+  template = file.path( find.package("ReporteRs"), 
+	"templates/bookmark_example.docx") )
 
 # replace bookmarks 'AUTHOR' and 'REVIEWER'
 # by dummy values
-doc = addParagraph( doc
-	, value = c( "James Sonny Crockett", "Ricardo Rico Tubbs" )	
-	, stylename = "Normal"
-	, bookmark = "AUTHOR" )
-doc = addParagraph( doc
-	, value = c( "Martin Marty Castillo" )	
-	, stylename = "Normal"
-	, bookmark = "REVIEWER" )
+doc = addParagraph( doc, 
+	value = c( "James Sonny Crockett", "Ricardo Rico Tubbs" ),
+	stylename = "Normal", bookmark = "AUTHOR" )
+doc = addParagraph( doc, 	value = c( "Martin Marty Castillo" ), 
+	stylename = "Normal", bookmark = "REVIEWER" )
 
 
 
@@ -33,13 +28,12 @@ doc = addFlexTable( doc
 
 # replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx' 
 # by data.frame objects 'data' and 'conf.int'
-doc = addTable( doc
-	, head( iris )
+doc = addFlexTable( doc
+	, vanilla.table( iris[1:10,] )
 	, bookmark = "DATA2" )
 
 doc = addPlot( doc, vector.graphic = TRUE
 	, fun = function(){
-		require(stats)
 		sale5 <- c(6, 4, 9, 7, 6, 12, 8, 10, 9, 13)
 		plot(sale5)
 		abline(lsfit(1:10, sale5))

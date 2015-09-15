@@ -10,8 +10,7 @@
 #' dim( doc )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{dim.pptx}}
-#' @method dim docx
-#' @S3method dim docx
+#' @export
 dim.docx = function( x ){
 	temp = .jcall(x$obj, "[I", "getSectionDimensions")
 	out = list( page = c( width = temp[1], height = temp[2] ) / 1440

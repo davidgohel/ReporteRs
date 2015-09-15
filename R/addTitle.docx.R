@@ -24,23 +24,15 @@
 #' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = docx( title = "title" )
-#' 
-#' # add a title (level 1)
-#' doc = addTitle( doc, "My first title", level = 1 )
-#' 
-#' # add another title (level 2)
-#' doc = addTitle( doc, "My first sub-title", level = 2 )
-#' doc = addParagraph(doc, "Hello Word!", stylename = "Normal")
-#' 
-#' # Write the object in file "addTitle_example.docx"
-#' writeDoc( doc, "addTitle_example.docx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addTitle_example.docx"
+#' @example examples/docx.R
+#' @example examples/addTitle1Level1.R
+#' @example examples/addTitle2Level1.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{declareTitlesStyles.docx}}, \code{\link{styles.docx}}
-#' @method addTitle docx
-#' @S3method addTitle docx
+#' @export
 addTitle.docx = function( doc, value, level = 1, ... ) {
 	if( length( doc$header.styles ) == 0 ){
 		stop("You must defined title styles via declareTitlesStyles first.")				

@@ -9,7 +9,8 @@
 #' borderProperties()
 #' borderProperties(color="orange", style="solid", width=1)
 #' borderProperties(color="gray", style="dotted", width=1)
-#' @seealso \code{\link{FlexTable}}, \code{\link{setFlexTableBorders}}
+#' @seealso \code{\link{chprop.borderProperties}}, \code{\link{alterFlexTable}}, 
+#' \code{\link{setFlexTableBorders}}
 #' @export 
 borderProperties = function( color = "black", style = "solid", width = 1 ){
 	
@@ -58,11 +59,8 @@ borderProperties = function( color = "black", style = "solid", width = 1 ){
 #' x = borderProperties()
 #' chprop(x, color="orange", style="dashed", width=1)
 #' chprop(x, width=5)
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, 
-#' \code{\link{textProperties}}, 
-#' \code{\link{FlexTable}}
-#' @method chprop borderProperties
-#' @S3method chprop borderProperties
+#' @seealso \code{\link{borderProperties}}
+#' @export
 chprop.borderProperties <- function(object, color, style, width, ... ) {
 	
 	if( !missing( color ) ){
@@ -100,16 +98,14 @@ chprop.borderProperties <- function(object, color, style, width, ... ) {
 }
 
 
-#' @method print borderProperties
-#' @S3method print borderProperties
+#' @export
 print.borderProperties = function (x, ...){
 	cat( "borderProperties{color:", x$color, ";" )
 	cat( "style:", x$style, ";" )
 	cat( "width:", x$width, ";" )
 	cat( "}" )
 }
-#' @method as.character borderProperties
-#' @S3method as.character borderProperties
+#' @export
 as.character.borderProperties = function (x, ...){
 	paste( "borderProperties{color:", x$color, ";",
 			"style:", x$style, ";", "width:", x$width, ";}", sep = "" )

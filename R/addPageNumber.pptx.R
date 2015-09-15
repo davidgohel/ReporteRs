@@ -9,29 +9,14 @@
 #' @return a \code{\link{pptx}} document object
 #' @examples
 #' #START_TAG_TEST
-#' # Create a new document 
-#' doc = pptx( title = "title" )
-#' 
-#' # add a slide with layout "Title Slide"
-#' doc = addSlide( doc, slide.layout = "Title Slide" )
-#' doc = addTitle( doc, "Presentation title" ) #set the main title
-#' #set the sub-title
-#' doc = addSubtitle( doc , "This document is generated with ReporteRs.")
-#' 
-#' ## add a page number on the current slide
-#' doc = addPageNumber( doc )
-#' 
-#' doc = addSlide( doc, slide.layout = "Title and Content" )
-#' ## add a page number on the current slide but not the default text (slide number)
-#' doc = addPageNumber( doc, value = "Page number text")
-#' 
-#' # Write the object in file "presentation.pptx"
-#' writeDoc( doc, "addPageNumber_example.pptx" )
-#' #STOP_TAG_TEST
+#' doc.filename = "addPageNumber_example.pptx"
+#' @example examples/pptx.R
+#' @example examples/addPageNumber.pptx.R
+#' @example examples/writeDoc_file.R
+#' @example examples/STOP_TAG_TEST.R
 #' @export
 #' @seealso \code{\link{addPageNumber}}, \code{\link{addDate.pptx}}
-#' @method addPageNumber pptx
-#' @S3method addPageNumber pptx
+#' @export
 addPageNumber.pptx = function(doc, value, ... ) {
 	
 	

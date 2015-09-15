@@ -19,23 +19,34 @@ get.formatted.dataset = function( dataset ){
 }
 
 
-getncheckid = function( object, i, j, numrow, partname ){
+getncheckid = function( object, i, j, partname ){
 	
-	if( numrow < 1 ) stop("FlexTable object has no ", partname, " row.")
+	
+	if( partname == "header" ){
+		metarow = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
+		maxrow = .jcall( metarow, "I", "size")
+	} else if( partname == "footer" ){
+		metarow = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
+		maxrow = .jcall( metarow, "I", "size")
+	} else {
+		maxrow = length(object)
+	}
+	if( maxrow < 1 ) stop("FlexTable object has no ", partname, " row.")
 	
 	if( missing(i) && missing(j) ) {
-		i = 1:numrow
+		i = 1:maxrow
 		j = 1:object$numcol
 	} else if( missing(i) && !missing(j) ) {
-		i = 1:numrow
+		i = 1:maxrow
 	} else if( !missing(i) && missing(j) ) {
 		j = 1:object$numcol
 	}
 	
+	
 	if( is.numeric (i) ){
-		if( any( i < 1 | i > length(object) ) ) stop("invalid ", partname, " row subset - out of bound")
+		if( any( i < 1 | i > maxrow ) ) stop("invalid ", partname, " row subset - out of bound")
 	} else if( is.logical (i) ){
-		if( length( i ) != length(object) ) stop("invalid ", partname, " row subset - incorrect length")
+		if( length( i ) != maxrow ) stop("invalid ", partname, " row subset - incorrect length")
 		else i = which(i)
 	} else if( partname=="body" && is.character (i) ){
 		if( any( is.na( object$row_id ) ) ) stop("null row.names")

@@ -2,30 +2,30 @@
 #'
 #' @description
 #' Add a plot to the current slide of an existing \code{pptx} object.
-#' 
+#'
 #' @param doc \code{\link{pptx}} object
-#' @param fun plot function. The function will be executed to produce graphics. 
-#' For \code{grid} or \code{lattice} or \code{ggplot} object, the function 
-#' should just be print and an extra argument x should specify the object 
+#' @param fun plot function. The function will be executed to produce graphics.
+#' For \code{grid} or \code{lattice} or \code{ggplot} object, the function
+#' should just be print and an extra argument x should specify the object
 #' to plot. For traditionnal plots, the function should contain plot instructions. See examples.
 #' @param pointsize the default pointsize of plotted text, interpreted as big points (1/72 inch) at res ppi.
-#' @param vector.graphic logical scalar, default to TRUE. If TRUE, vector graphics 
-#' are produced instead of PNG images. Vector graphics in pptx document are DrawingML instructions. 
+#' @param vector.graphic logical scalar, default to TRUE. If TRUE, vector graphics
+#' are produced instead of PNG images. Vector graphics in pptx document are DrawingML instructions.
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
-#' @param offx optional, x position of the shape (top left position of the bounding box) in inch. See details.
-#' @param offy optional, y position of the shape (top left position of the bounding box) in inch. See details.
-#' @param width optional, width of the shape in inch. See details.
-#' @param height optional, height of the shape in inch. See details.
+#' @param offx optional, x position of the shape (top left position of the bounding box) in inches. See details.
+#' @param offy optional, y position of the shape (top left position of the bounding box) in inches. See details.
+#' @param width optional, width of the shape in inches. See details.
+#' @param height optional, height of the shape in inches. See details.
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{\link{pptx}}.
 #' @details
 #' If arguments offx, offy, width, height are missing, position and dimensions
-#' will be defined by the width and height of the next available shape of the slide. This 
-#' dimensions can be defined in the layout of the PowerPoint template used to create 
-#' the \code{pptx} object. 
-#' 
-#' If arguments offx, offy, width, height are provided, they become position and 
+#' will be defined by the width and height of the next available shape of the slide. This
+#' dimensions can be defined in the layout of the PowerPoint template used to create
+#' the \code{pptx} object.
+#'
+#' If arguments offx, offy, width, height are provided, they become position and
 #' dimensions of the new shape.
 #' @examples
 #' #START_TAG_TEST
@@ -41,13 +41,12 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
-#' @method addPlot pptx
-#' @S3method addPlot pptx
+#' @export
 addPlot.pptx = function(doc, fun, pointsize = 11
 	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
 	, editable = TRUE, offx, offy, width, height
 	, ... ) {
-	
+
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
 	if( check.dims > 0 && check.dims < 4 ) {
 		if( missing( offx ) ) warning("arguments offx, offy, width and height must be all specified: offx is missing")
@@ -60,15 +59,15 @@ addPlot.pptx = function(doc, fun, pointsize = 11
 		if( !is.numeric( offy ) ) stop("arguments offy must be a numeric vector")
 		if( !is.numeric( width ) ) stop("arguments width must be a numeric vector")
 		if( !is.numeric( height ) ) stop("arguments height must be a numeric vector")
-		
-		if( length( offx ) != length( offy ) 
+
+		if( length( offx ) != length( offy )
 				|| length( offx ) != length( width )
 				|| length( offx ) != length( height ) ){
 			stop("arguments offx, offy, width and height must have the same length")
 		}
 	}
-	
-	slide = doc$current_slide 
+
+	slide = doc$current_slide
 
 	dirname = tempfile( )
 	dir.create( dirname )
@@ -91,26 +90,27 @@ addPlot.pptx = function(doc, fun, pointsize = 11
 				, fontname = fontname, ... )
 		}
 	}
-	
+
 	doc
 }
 
+
 get.graph.dims = function( doc ){
-	slide = doc$current_slide 
-	id = .jcall( slide, "I", "getNextIndex"  )
+	slide = doc$current_slide
+	id = .jcall( slide, "I", "getNextShapeIndex"  )
 	maxid = .jcall( slide, "I", "getmax_shape"  )
 	if( maxid-id < 1 ) stop( getSlideErrorString( shape_errors["NOROOMLEFT"] , "plot") )
-	
 	widths = double( maxid-id )
 	heights = double( maxid-id )
 	offxs = double( maxid-id )
 	offys = double( maxid-id )
 	j=0
+
 	LayoutName = .jcall( slide, "S", "getLayoutName" )
-	SlideLayout = .jcall( doc$obj, paste0("L", class.pptx4r.SlideLayout, ";"), "getSlideLayout", LayoutName )
-	
+	layout_description = .jcall( doc$obj, paste0("L", class.pptx4r.LayoutDescription, ";"), "getLayoutProperties", LayoutName )
+
 	for(i in seq(id,maxid-1, by=1) ){
-		dims = .jcall( SlideLayout, "[I", "getContentDimensions", as.integer(i) )
+		dims = .jcall( layout_description, "[I", "getContentDimensions", as.integer(i) )
 		j = j + 1
 		widths[j] = dims[3] / 914400
 		heights[j] = dims[4] / 914400
@@ -124,9 +124,9 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 		, fontname = getOption("ReporteRs-default-font")
 		, editable = TRUE, offx, offy, width, height
 		, ... ) {
-	slide = doc$current_slide 
+	slide = doc$current_slide
 	plot_first_id = doc$plot_first_id
-	
+
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
 	if( check.dims < 4 ){
 		data.dims = get.graph.dims( doc )
@@ -135,9 +135,9 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 		offx = data.dims$offxs
 		offy = data.dims$offys
 	}
-	
+
 	plotargs = list(...)
-	
+
 	dirname = tempfile( )
 	dir.create( dirname )
 	filename = file.path( dirname, "/plot_"  )
@@ -147,12 +147,20 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 			, offx = offx * 72.2, offy = offy * 72.2, ps = pointsize, fontname = fontname
 			, firstid = doc$plot_first_id, editable = editable
 	)
-	
+
 	fun_res = try( fun(...), silent = T )
+	if( inherits(fun_res, "try-error")){
+		dev.off()
+		message(attr(fun_res,"condition"))
+		stop("an error occured when executing plot function.")
+	}
 	last_id = .C("get_current_element_id", (dev.cur()-1L), 0L)[[2]]
 	dev.off()
+
 	doc$plot_first_id = last_id + 1
-	
+
+
+
 	plotfiles = list.files( dirname , full.names = T )
 
 	for( i in seq_along( plotfiles ) ){
@@ -175,11 +183,11 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 		, fontname = getOption("ReporteRs-default-font")
 		, offx, offy, width, height
 		, ... ) {
-	slide = doc$current_slide 
+	slide = doc$current_slide
 	plot_first_id = doc$plot_first_id
-	
+
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
-	
+
 	if( check.dims < 4 ){
 		data.dims = get.graph.dims( doc )
 		width = data.dims$widths
@@ -187,9 +195,9 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 		offx = data.dims$offxs
 		offy = data.dims$offys
 	}
-	
+
 	plotargs = list(...)
-	
+
 	dirname = tempfile( )
 	dir.create( dirname )
 	filename = paste( dirname, "/plot%03d.png" ,sep = "" )
@@ -197,22 +205,22 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 			, width = width[1], height = height[1], units = 'in'
 			, pointsize = pointsize, res = 300
 	)
-	
+
 	fun(...)
 	dev.off()
 	plotfiles = list.files( dirname , full.names = T )
 	for( i in seq_along( plotfiles ) ){
 		if( check.dims > 3 ){
-			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy, 
-					width=width, height=height )
+			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy,
+					width=width, height=height, ppi = 300 )
 		} else if( !missing(offx) && !missing(offy) && missing(width) && missing(height) ){
-			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy )
+			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy, ppi = 300 )
 		}  else if( check.dims < 1 ){
-			doc = addImage( doc, plotfiles[i] )
+			doc = addImage( doc, plotfiles[i], ppi = 300 )
 		} else {
-			doc = addImage( doc, plotfiles[i] )
+			doc = addImage( doc, plotfiles[i], ppi = 300 )
 		}
 	}
-	
+
 	doc
 }

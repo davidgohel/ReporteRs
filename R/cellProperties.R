@@ -1,7 +1,7 @@
 #' @title Cell formatting properties 
 #'
 #' @description Create a \code{cellProperties} object that describes cell formatting properties. 
-#' This objects are used by \code{\link{tableProperties}}, \code{\link{FlexTable}}.
+#' This objects are used by \code{\link{FlexTable}}.
 #' 
 #' @param padding cell padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
@@ -48,6 +48,8 @@
 #' @param padding.right cell right padding - 0 or positive integer value.
 #' @param background.color cell background color - a single character value specifying a 
 #' valid color (e.g. "#000000" or "black").
+#' @param text.direction cell text rotation - a single character value, expected 
+#' value is one of "lrtb", "tbrl", "btlr".
 #' @export
 #' @details 
 #' Default values are:
@@ -70,15 +72,12 @@
 #'   \item \code{padding.left} 1
 #'   \item \code{padding.right} 1
 #'   \item \code{background.color} "white"
+#'   \item \code{text.direction} "lrtb"
 #' }
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/cellProperties.R
-#' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}
-#' , \code{\link{textProperties}}, \code{\link{borderProperties}}
-#' , \code{\link{chprop.cellProperties}}, \code{\link{chprop.parProperties}}
-#' , \code{\link{chprop.textProperties}}, \code{\link{chprop.borderProperties}}
+#' @seealso \code{\link{borderProperties}}, \code{\link{chprop.cellProperties}}
 #' , \code{\link{FlexTable}}
 cellProperties = function( 
 	padding, 
@@ -89,8 +88,8 @@ cellProperties = function(
 	border.top.color = "black", border.top.style = "solid", border.top.width = 1,
 	border.right.color = "black", border.right.style = "solid", border.right.width = 1,
 	vertical.align = "middle", 
-	padding.bottom = 1, padding.top = 1, padding.left = 1, padding.right = 1,
-	background.color = "white"
+	padding.bottom = 0, padding.top = 0, padding.left = 0, padding.right = 0,
+	background.color = "white", text.direction = "lrtb"
 ){
 vertical.align.styles = c( "top", "middle", "bottom" )
 
@@ -113,7 +112,8 @@ out = list(
 	, padding.left = 1
 	, padding.right = 1
 	, background.color = "#FFFFFF"
-	
+	, text.direction = "lrTb"
+
 )
 
 if( !missing( border.width ) ){
@@ -153,22 +153,18 @@ if( !missing( padding ) ){
 
 if( is.character( border.bottom.style ) ){
 	match.arg( border.bottom.style, choices = ReporteRs.border.styles, several.ok = F )
-	border.bottom.style = border.bottom.style
 } else stop("border.bottom.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.left.style ) ){
 	match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = F )
-	border.left.style = border.left.style
 } else stop("border.left.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.top.style ) ){
 	match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = F )
-	border.top.style = border.top.style
 } else stop("border.top.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.right.style ) ){
 	match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = F )
-	border.right.style = border.right.style
 } else stop("border.right.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 
@@ -221,6 +217,11 @@ else out$background.color = getHexColorCode(background.color)
 
 match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
 out$vertical.align = vertical.align
+
+if( is.character( text.direction ) ){
+	match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = F )
+	out$text.direction = text.direction
+} else stop("text.direction must be a character scalar (", paste( ReporteRs.text.directions, collapse = "|") ,").")
 
 
 # padding checking
@@ -314,17 +315,16 @@ out
 #' @param padding.right cell right padding - 0 or positive integer value.
 #' @param background.color cell background color - a single character value specifying a 
 #' valid color (e.g. "#000000" or "black").
+#' @param text.direction cell text rotation - a single character value, expected 
+#' value is one of "lrtb", "tbrl", "btlr".
 #' @param ... further arguments - not used 
 #' @return a \code{cellProperties} object
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/chprop.cellProperties.R
-#' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{cellProperties}}, \code{\link{parProperties}}, \code{\link{textProperties}}
-#' , \code{\link{chprop.parProperties}}, \code{\link{chprop.textProperties}}
-#' , \code{\link{FlexTable}}, \code{\link{tableProperties}}, \code{\link{addTable}}
-#' @method chprop cellProperties
-#' @S3method chprop cellProperties
+#' @seealso \code{\link{borderProperties}}, \code{\link{cellProperties}}
+#' , \code{\link{FlexTable}}
+#' @export
 chprop.cellProperties <- function(object
 	, border.bottom
 	, border.left
@@ -341,6 +341,7 @@ chprop.cellProperties <- function(object
 	, padding.left
 	, padding.right
 	, background.color
+	, text.direction
 	, ...) {
 	
 vertical.align.styles = c( "top", "middle", "bottom" )
@@ -479,7 +480,15 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 		match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
 		object$vertical.align = vertical.align
 	}
-		
+	
+	if( !missing( text.direction ) ){
+		if( is.character( text.direction ) ){
+			match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = F )
+			object$text.direction = text.direction
+		} else stop("text.direction must be a character scalar (", 
+				paste( ReporteRs.text.directions, collapse = "|") ,").")
+	}
+	
 		# padding checking
 	if( !missing( padding.bottom ) )
 		if( is.numeric( padding.bottom ) ){
@@ -505,8 +514,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 	object					
 }
 
-#' @method print cellProperties
-#' @S3method print cellProperties
+#' @export
 print.cellProperties = function (x, ...){
 	cat( "cellProperties{border.bottom:", as.character(x$border.bottom), ";" )
 	cat( "border.top:", as.character(x$border.top), ";" )
@@ -518,6 +526,7 @@ print.cellProperties = function (x, ...){
 	cat( "padding.left: {", x$padding.left, "}\n" )
 	cat( "padding.right: {", x$padding.right, "}\n" )
 	cat( "background.color: {", x$background.color, "}\n" )
+	cat( "text.direction: {", x$text.direction, "}\n" )
 }
 
 
@@ -533,6 +542,7 @@ print.cellProperties = function (x, ...){
 			, as.integer( robject$padding.left )
 			, as.integer( robject$padding.right )
 			, as.character(robject$background.color )
+			, as.character(robject$text.direction )
 	)
 	jcellProp
 }

@@ -31,6 +31,7 @@
 #include "colors.h"
 #include "raphael_utils.h"
 #include "common.h"
+#include "dml_utils.h"
 #include "utils.h"
 
 
@@ -79,15 +80,17 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 	dev->newPage = RAPHAEL_NewPage;
 	dev->clip = RAPHAEL_Clip;
 	dev->strWidth = RAPHAEL_StrWidth;
+	dev->strWidthUTF8 = RAPHAEL_StrWidthUTF8;
 	dev->text = RAPHAEL_Text;
+	dev->textUTF8 = RAPHAEL_TextUTF8;
 	dev->rect = RAPHAEL_Rect;
 	dev->circle = RAPHAEL_Circle;
 	dev->line = RAPHAEL_Line;
 	dev->polyline = RAPHAEL_Polyline;
 	dev->polygon = RAPHAEL_Polygon;
 	dev->metricInfo = RAPHAEL_MetricInfo;
-	dev->hasTextUTF8 = (Rboolean) FALSE;
-	dev->wantSymbolUTF8 = (Rboolean) FALSE;
+	dev->hasTextUTF8 = (Rboolean) TRUE;
+	dev->wantSymbolUTF8 = (Rboolean) TRUE;
 	dev->useRotatedTextInContour = (Rboolean) FALSE;
 	/*
 	 * Initial graphical settings
@@ -130,8 +133,8 @@ static Rboolean RAPHAELDeviceDriver(pDevDesc dev, const char* filename, double* 
 	 * Device capabilities
 	 */
 	dev->canClip = (Rboolean) TRUE;
-	dev->canHAdj = 2;//canHadj – integer: can the device do horizontal adjustment of text via the text callback, and if so, how precisely? 0 = no adjustment, 1 = {0, 0.5, 1} (left, centre, right justification) or 2 = continuously variable (in [0,1]) between left and right justification.
-	dev->canChangeGamma = (Rboolean) FALSE;	//canChangeGamma – Rboolean: can the display gamma be adjusted? This is now ignored, as gamma support has been removed.
+	dev->canHAdj = 2;
+	dev->canChangeGamma = (Rboolean) FALSE;
 	dev->displayListOn = (Rboolean) FALSE;
 
 	dev->haveTransparency = 2;
@@ -171,6 +174,7 @@ void RAPHAEL_SetLineSpec(pDevDesc dev, R_GE_gcontext *gc, int idx) {
 	saved_locale = setlocale(LC_NUMERIC, "C");
 
 	float alpha =  R_ALPHA(gc->col)/255.0;
+
 	fprintf(pd->dmlFilePointer, "elt_%d.attr({", idx);
 
 	if (gc->lty > -1 && gc->lwd > 0.0 && alpha > 0) {
@@ -247,7 +251,7 @@ void RAPHAEL_SetFontSpec(pDevDesc dev, R_GE_gcontext *gc, int idx) {
 	saved_locale = setlocale(LC_NUMERIC, "C");
 
 	float alpha =  R_ALPHA(gc->col)/255.0;
-	double fontsize = getFontSize(gc->cex, gc->ps, gc->lineheight);
+	double fontsize = getFontSize(gc->cex, gc->ps);
 
 
 	if ( gc->cex > 0.0 && alpha > 0 ) {
@@ -279,7 +283,7 @@ static void RAPHAEL_Circle(double x, double y, double r, const pGEcontext gc,
 	register_element( dev);
 
 	fprintf(pd->dmlFilePointer,
-			"var elt_%d = %s.circle(%.0f, %.0f, %.0f);\n", idx, pd->objectname, x, y, r);
+			"var elt_%d = %s.circle(%.5f, %.5f, %.5f);\n", idx, pd->objectname, x, y, r);
 	RAPHAEL_SetLineSpec(dev, gc, idx);
 	RAPHAEL_SetFillColor(dev, gc, idx);
 
@@ -301,8 +305,8 @@ static void RAPHAEL_Line(double x1, double y1, double x2, double y2,
 		int idx = get_and_increment_idx(dev);
 		register_element( dev);
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
-		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x1, y1);
-		fprintf(pd->dmlFilePointer, "L %.0f %.0f", x2, y2);
+		fprintf(pd->dmlFilePointer, "M %.5f %.5f", x1, y1);
+		fprintf(pd->dmlFilePointer, "L %.5f %.5f", x2, y2);
 		fputs("\");\n", pd->dmlFilePointer );
 
 		RAPHAEL_SetLineSpec(dev, gc, idx);
@@ -334,10 +338,10 @@ static void RAPHAEL_Polyline(int n, double *x, double *y, const pGEcontext gc,
 		register_element( dev);
 		int i;
 		fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
-		fprintf(pd->dmlFilePointer, "M %.0f %.0f", x[0], y[0]);
+		fprintf(pd->dmlFilePointer, "M %.5f %.5f", x[0], y[0]);
 
 		for (i = 1; i < n; i++) {
-			fprintf(pd->dmlFilePointer, "L %.0f %.0f", x[i], y[i]);
+			fprintf(pd->dmlFilePointer, "L %.5f %.5f", x[i], y[i]);
 		}
 		fputs("\");\n", pd->dmlFilePointer );
 
@@ -367,10 +371,10 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 	register_element( dev);
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.path(\"", idx, pd->objectname );
-	fprintf(pd->dmlFilePointer, "M %.0f %.0f", x[0], y[0]);
+	fprintf(pd->dmlFilePointer, "M %.5f %.5f", x[0], y[0]);
 
 	for (i = 1; i < n; i++) {
-		fprintf(pd->dmlFilePointer, "L %.0f %.0f", x[i], y[i]);
+		fprintf(pd->dmlFilePointer, "L %.5f %.5f", x[i], y[i]);
 	}
 
 	fputs("Z\");\n", pd->dmlFilePointer );
@@ -405,8 +409,8 @@ static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 	}
 
 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.rect(", idx, pd->objectname );
-	fprintf(pd->dmlFilePointer, "%.0f,%.0f", x0, y0);
-	fprintf(pd->dmlFilePointer, ",%.0f,%.0f", x1-x0, y1-y0);
+	fprintf(pd->dmlFilePointer, "%.5f,%.5f", x0, y0);
+	fprintf(pd->dmlFilePointer, ",%.5f,%.5f", x1-x0, y1-y0);
 	fputs(");\n", pd->dmlFilePointer );
 
 	RAPHAEL_SetLineSpec(dev, gc, idx);
@@ -415,8 +419,126 @@ static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 	fflush(pd->dmlFilePointer);
 
 }
+void raphael_text(const char *str, DOCDesc *pd){
+    for( ; *str ; str++)
+	switch(*str) {
+	case '"':
+		fprintf(pd->dmlFilePointer, "\\\"");
+	    break;
+
+	case '\n':
+		fprintf(pd->dmlFilePointer, "\\\n");
+	    break;
+
+	default:
+	    fputc(*str, pd->dmlFilePointer);
+	    break;
+	}
+}
+
+void raphael_textUTF8(const char *str, DOCDesc *pd){
+	unsigned char *p;
+	p = (unsigned char *) str;
+	int val, val1, val2, val3, val4;
+	while(*p){
+		val = *(p++);
+		if( val < 128 ){ /* ASCII */
+			switch(val) {
+				case '"':
+					fprintf(pd->dmlFilePointer, "\\\"");
+					break;
+
+				case '\n':
+					fprintf(pd->dmlFilePointer, "\\\n");
+					break;
+
+				default:
+					fprintf(pd->dmlFilePointer, "%c", val);
+					break;
+			}
+
+		} else if( val > 240 ){ /* 4 octets*/
+			val1 = (val - 240) * 65536;
+			val = *(p++);
+			val2 = (val - 128) * 4096;
+			val = *(p++);
+			val3 = (val - 128) * 64;
+			val = *(p++);
+			val4 = val - 128;
+			val = val1 + val2 + val3 + val4;
+
+			char byte1 = 0xf0 | ((val & 0x1C0000) >> 16);
+			char byte2 = 0x80 | ((val & 0x3F000)  >> 12);
+			char byte3 = 0x80 | ((val & 0xFC0) >> 6);
+			char byte4 = 0x80 | (val & 0x3f);
+			fprintf(pd->dmlFilePointer, "%c%c%c%c", byte1, byte2, byte3, byte4);
+		} else {
+			if( val >= 224 ){ /* 3 octets : 224 = 128+64+32 */
+				val1 = (val - 224) * 4096;
+				val = *(p++);
+				val2 = (val-128) * 64;
+				val = *(p++);
+				val3 = (val-128);
+				val = val1 + val2 + val3;
+				char byte1 = 0xe0 | ((val & 0xf000) >> 12);
+				char byte2 = 0x80 | ((val & 0xfc0)  >> 6);
+				char byte3 = 0x80 | (val & 0x3f);
+				fprintf(pd->dmlFilePointer, "%c%c%c", byte1, byte2, byte3);
+			} else { /* 2 octets : >192 = 128+64 */
+				val1 = (val - 192) * 64;
+				val = *(p++);
+				val2 = val-128;
+				val = val1 + val2;
+				char byte1 = 0xc0 | ((val & 0x7c0) >> 6);
+				char byte2 = 0x80 | (val & 0x3f);
+				fprintf(pd->dmlFilePointer, "%c%c", byte1, byte2);
+			}
+
+		}
+	}
+}
 
 
+static void RAPHAEL_TextUTF8(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev) {
+
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	int idx = get_and_increment_idx(dev);
+	register_element( dev);
+	double w = RAPHAEL_StrWidthUTF8(str, gc, dev);
+	double h = getFontSize(gc->cex, gc->ps);
+	if( h < 1.0 ) return;
+
+ 	double pi = 3.141592653589793115997963468544185161590576171875;
+ 	double alpha = -rot * pi / 180;
+
+ 	double Px = x + (0.5-hadj) * w;
+ 	double Py = y - 0.5 * h;
+ 	double _cos = cos( alpha );
+ 	double _sin = sin( alpha );
+
+ 	double Ppx = x + (Px-x) * _cos - (Py-y) * _sin ;
+ 	double Ppy = y + (Px-x) * _sin + (Py-y) * _cos;
+
+ 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.text(", idx, pd->objectname );
+ 	fprintf(pd->dmlFilePointer, "%.5f,%.5f", Ppx, Ppy);
+	fputs(",\"", pd->dmlFilePointer );
+	raphael_textUTF8(str, pd);
+	fputs("\"", pd->dmlFilePointer );
+	fputs(");\n", pd->dmlFilePointer );
+
+	RAPHAEL_SetFontSpec(dev, gc, idx);
+	if( fabs( rot ) < 1 ){
+
+	} else {
+		fprintf(pd->dmlFilePointer, "elt_%d.transform(\"", idx);
+		fprintf(pd->dmlFilePointer, "R-%.5f", rot);
+		fputs("\");\n", pd->dmlFilePointer );
+	}
+
+	fflush(pd->dmlFilePointer);
+
+}
 static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev) {
 
@@ -424,49 +546,64 @@ static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 	int idx = get_and_increment_idx(dev);
 	register_element( dev);
 	double w = RAPHAEL_StrWidth(str, gc, dev);
-	double fontsize = getFontSize(gc->cex, gc->ps, gc->lineheight);
-	double h = fontsize;
+	double h = getFontSize(gc->cex, gc->ps);
 	if( h < 1.0 ) return;
-	double pi = 3.141592653589793115997963468544185161590576171875;
 
-	double alpha = -rot * pi / 180;
-	double height = h;
-	double Qx = x;
-	double Qy = y ;
-	double Px = x + (0.5-hadj) * w;
-	double Py = y - 0.5 * height;
-	double _cos = cos( alpha );
-	double _sin = sin( alpha );
+ 	double pi = 3.141592653589793115997963468544185161590576171875;
+ 	double alpha = -rot * pi / 180;
 
-	double Ppx = Qx + (Px-Qx) * _cos - (Py-Qy) * _sin ;
-	double Ppy = Qy + (Px-Qx) * _sin + (Py-Qy) * _cos;
+ 	double Px = x + (0.5-hadj) * w;
+ 	double Py = y - 0.5 * h;
+ 	double _cos = cos( alpha );
+ 	double _sin = sin( alpha );
 
-	double corrected_offx = Ppx ;//- 0.5 * w;
-	double corrected_offy = Ppy ;//- 0.1 * h;
+ 	double Ppx = x + (Px-x) * _cos - (Py-y) * _sin ;
+ 	double Ppy = y + (Px-x) * _sin + (Py-y) * _cos;
 
+ 	fprintf(pd->dmlFilePointer, "var elt_%d = %s.text(", idx, pd->objectname );
+ 	fprintf(pd->dmlFilePointer, "%.5f,%.5f", Ppx, Ppy);
 
-	fprintf(pd->dmlFilePointer, "var elt_%d = %s.text(", idx, pd->objectname );
-	fprintf(pd->dmlFilePointer, "%.0f,%.0f", corrected_offx, corrected_offy);
 	fputs(",\"", pd->dmlFilePointer );
 	raphael_text(str, pd);
 	fputs("\"", pd->dmlFilePointer );
 	fputs(");\n", pd->dmlFilePointer );
 
 	RAPHAEL_SetFontSpec(dev, gc, idx);
-	if( rot > 0 ) {
+	if( fabs( rot ) < 1 ){
+
+	} else {
 		fprintf(pd->dmlFilePointer, "elt_%d.transform(\"", idx);
-		fprintf(pd->dmlFilePointer, "R-%.0f", rot);
+		fprintf(pd->dmlFilePointer, "R-%.5f", rot);
 		fputs("\");\n", pd->dmlFilePointer );
 	}
 
 	fflush(pd->dmlFilePointer);
 
 }
-
 static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	if (pd->pageNumber > 0) {
-		eval( lang2(install("triggerPostCommand"), pd->env ), R_GlobalEnv);
+		SEXP repPackage;
+		PROTECT(
+				repPackage = eval(
+						lang2(install("getNamespace"),
+								ScalarString(mkChar("ReporteRs"))),
+						R_GlobalEnv));
+
+		SEXP RCallBack;
+		PROTECT(RCallBack = allocVector(LANGSXP, 2));
+		SETCAR(RCallBack, findFun(install("triggerPostCommand"), repPackage));
+
+		SEXP env;
+
+		PROTECT(env = coerceVector(pd->env, ENVSXP));
+
+		SETCADR(RCallBack, env);
+		SET_TAG(CDR(RCallBack), install("env"));
+
+		PROTECT(eval(RCallBack, repPackage));
+
+		UNPROTECT(4);
 		closeFile(pd->dmlFilePointer);
 	}
 
@@ -512,10 +649,30 @@ static void RAPHAEL_NewPage(const pGEcontext gc, pDevDesc dev) {
 	SET_STRING_ELT(cmdSexp, 1, mkChar(pd->objectname));
 	SET_STRING_ELT(cmdSexp, 2, mkChar(canvasname));
 
-	eval( lang3(install("registerRaphaelGraph")
-						, cmdSexp, pd->env
-						), R_GlobalEnv);
-    UNPROTECT(1);
+	SEXP repPackage;
+	PROTECT(
+			repPackage = eval(
+					lang2(install("getNamespace"),
+							ScalarString(mkChar("ReporteRs"))),
+					R_GlobalEnv));
+
+	SEXP RCallBack;
+	PROTECT(RCallBack = allocVector(LANGSXP, 3));
+	SETCAR(RCallBack, findFun(install("registerRaphaelGraph"), repPackage));
+
+	SETCADR( RCallBack, cmdSexp );
+	SET_TAG( CDR( RCallBack ), install("plot_attributes") );
+
+	SEXP env;
+	PROTECT(env = coerceVector(pd->env, ENVSXP));
+
+	SETCADDR(RCallBack, env);
+	SET_TAG( CDDR( RCallBack ), install("env") );
+
+	PROTECT(eval(RCallBack, repPackage));
+
+	UNPROTECT(5);
+
 
 	free(filename);
 	free(canvasname);
@@ -548,10 +705,12 @@ static void RAPHAEL_Size(double *left, double *right, double *bottom, double *to
 }
 
 
+static double RAPHAEL_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
+	return DOC_StrWidthUTF8(str, gc, dev);
+}
 static double RAPHAEL_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 	return DOC_StrWidth(str, gc, dev);
 }
-
 
 
 SEXP R_RAPHAEL_Device(SEXP filename

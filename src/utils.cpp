@@ -81,11 +81,7 @@ void add_popup(int *dn, int *id, char **str, int *l){
 	DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
 	
 	for( i = 0 ; i < nb_elts ; i++ ){
-		fprintf(pd->dmlFilePointer, "var box_%d = elt_%d.getBBox();\n", id[i], id[i] );
-		fprintf(pd->dmlFilePointer, "var popup_%d = %s.popup(box_%d.x + box_%d.width / 2, box_%d.y + box_%d.height / 2 - 3, \"%s\").hide();\n"
-			, id[i], pd->objectname, id[i], id[i], id[i], id[i], str[i] );
-		fprintf(pd->dmlFilePointer, "elt_%d.mouseover(function(){popup_%d.show();});\n", id[i], id[i] );
-		fprintf(pd->dmlFilePointer, "elt_%d.mouseout(function(){popup_%d.hide();});\n", id[i], id[i] );
+		fprintf(pd->dmlFilePointer, "addTip(elt_%d.node, \"%s\");\n", id[i], str[i] );
 	}
 
 }
@@ -126,31 +122,74 @@ void add_post_commands( int *dn, int *id, char **str, int *l) {
 
 	if (dev) {//addPostCommand
 		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
+
+		SEXP repPackage;
+		PROTECT(
+				repPackage = eval(
+						lang2(install("getNamespace"),
+								ScalarString(mkChar("ReporteRs"))),
+						R_GlobalEnv));
+
+		SEXP RCallBack;
+		PROTECT(RCallBack = allocVector(LANGSXP, 4));
+		SETCAR(RCallBack, findFun(install("addPostCommand"), repPackage));
+
 		SEXP cmdSexp = PROTECT(allocVector(STRSXP, nb_elts));
 		for( i = 0 ; i < nb_elts ; i++ ){
 			SET_STRING_ELT(cmdSexp, i, mkChar(str[i]));
 		}
+		SETCADR( RCallBack, cmdSexp );
+		SET_TAG( CDR( RCallBack ), install("labels") );
+
 		SEXP cmdSexp2 = PROTECT(allocVector(INTSXP, nb_elts));
 		for( i = 0 ; i < nb_elts ; i++ ){
 			INTEGER(cmdSexp2)[i] = id[i];
 		}
+		SETCADDR( RCallBack, cmdSexp2 );
+		SET_TAG( CDDR( RCallBack ), install("ids") );
 
-		eval( lang4(install("addPostCommand")
-							, cmdSexp, cmdSexp2, pd->env
-							), R_GlobalEnv);
-	    UNPROTECT(2);
+		SEXP env;
+		PROTECT(env = coerceVector(pd->env, ENVSXP));
+		SETCADDDR( RCallBack, env );
+		SET_TAG( CDR(CDDR( RCallBack )), install("env") );
+
+		PROTECT(eval( RCallBack, repPackage ));
+	    UNPROTECT(6);
 
 	};
 }
 
-void trigger_last_post_commands( int *dn ) {
+void trigger_last_post_commands(int *dn) {
 
-	pGEDevDesc dev= GEgetDevice(*dn);
-	if (!dev) return;
+	pGEDevDesc dev = GEgetDevice(*dn);
+	if (!dev)
+		return;
 
 	if (dev) {
 		DOCDesc *pd = (DOCDesc *) dev->dev->deviceSpecific;
-		eval( lang2(install("triggerPostCommand"), pd->env), R_GlobalEnv);
+
+		SEXP repPackage;
+		PROTECT(
+				repPackage = eval(
+						lang2(install("getNamespace"),
+								ScalarString(mkChar("ReporteRs"))),
+						R_GlobalEnv));
+
+		SEXP RCallBack;
+		PROTECT(RCallBack = allocVector(LANGSXP, 2));
+		SETCAR(RCallBack, findFun(install("triggerPostCommand"), repPackage));
+
+		SEXP env;
+
+		PROTECT(env = coerceVector(pd->env, ENVSXP));
+
+		SETCADR(RCallBack, env);
+		SET_TAG(CDR(RCallBack), install("env"));
+
+		PROTECT(eval(RCallBack, repPackage));
+
+		UNPROTECT(4);
+
 	};
 }
 

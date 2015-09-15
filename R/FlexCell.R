@@ -1,6 +1,7 @@
 #' @title Cell object for FlexTable
 #'
 #' @description Create a representation of a cell that can be inserted in a FlexRow.
+#' For internal usage.
 #' 
 #' @param value a content value - a value of type \code{character} or \code{\link{pot}} or \code{\link{set_of_paragraphs}}.
 #' @param colspan defines the number of columns the cell should span
@@ -9,9 +10,8 @@
 #' @export
 #' @seealso \code{\link{addFlexTable}}, \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples 
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexCell.R
-#' @example examples/STOP_TAG_TEST.R
 FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.properties = cellProperties() ) {
 	
 	if( !inherits( par.properties, "parProperties" ) ){
@@ -38,19 +38,8 @@ FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.
 	if( !inherits(value, "set_of_paragraphs") )
 		stop("argument value must be a character vector or an object of class 'set_of_paragraphs'.")
 	
-	parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
-	for( pot_index in 1:length( value ) ){
-		paragrah = .jnew(class.Paragraph )
-		pot_value = value[[pot_index]]
-		for( i in 1:length(pot_value)){
-			if( is.null( pot_value[[i]]$format ) ) 
-				.jcall( paragrah, "V", "addText", pot_value[[i]]$value )
-			else .jcall( paragrah, "V", "addText", pot_value[[i]]$value, 
-						.jTextProperties( pot_value[[i]]$format) )
-		}
-		.jcall( parset, "V", "addParagraph", paragrah )
-	}
-	
+	parset = .jset_of_paragraphs(value, par.properties)
+		
 	jcellProp = .jCellProperties(cell.properties)
 
 	flexCell = .jnew(class.FlexCell, parset, jcellProp)
@@ -60,13 +49,12 @@ FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.
 	.Object$jobj = flexCell
 	.Object$colspan = colspan
 
-	class( .Object ) = c("FlexCell", "FlexElement")
+	class( .Object ) = c("FlexCell")
 
 	.Object
 }
 
-#' @method print FlexCell
-#' @S3method print FlexCell
+#' @export
 print.FlexCell = function(x, ...){
 	out = .jcall( x$jobj, "S", "toString" )
 	cat(out)

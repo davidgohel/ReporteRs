@@ -99,26 +99,25 @@
 #' 
 #' @export
 #' @examples
-#' #START_TAG_TEST
+#' #
 #' @example examples/FlexTableExample.R
 #' @example examples/agg.mtcars.FlexTable.R
 #' @example examples/setFlexTableBackgroundColors.R
 #' @example examples/FlexTableAPIFullDemo.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
 #' , \code{\link{setFlexTableBackgroundColors}}, \code{\link{pot}}
-#' , \code{\link{addFlexTable}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
+#' , \code{\link{addFlexTable.docx}}
+#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.bsdoc}}
 FlexTable = function(data, numrow, numcol
 	, header.columns = TRUE, add.rownames = FALSE
 	, body.cell.props = cellProperties()
-	, body.par.props = parProperties()
+	, body.par.props = parProperties(padding=0)
 	, body.text.props = textProperties()
 	, header.cell.props = cellProperties()
-	, header.par.props = parProperties()
+	, header.par.props = parProperties(padding=0)
 	, header.text.props = textProperties( font.weight= "bold" )
 ){
 	miss_data = missing( data )
@@ -176,18 +175,20 @@ FlexTable = function(data, numrow, numcol
 		}
 		
 		row.names( data ) = NULL
-		data = apply( data, 2, function(x) {
+		data = lapply( data, function(x) {
 				if( is.character( x) ) x
 				else if( is.factor( x ) ) as.character( x )
 				else if( is.logical( x ) ) ifelse( x, "TRUE", "FALSE" )
+				else if( is.integer( x ) ) as.character( x )
 				else format(x)
 			} )
+		data = as.matrix( as.data.frame( data ) )
 	} else {
 		.row_names = rep(NA, numrow )
 		.colnames = rep(NA, numcol )
 		data = matrix("", nrow = numrow, ncol = numcol )
 	}
-
+	data[is.na(data)] = ""
 	
 	out = list(
 		numcol = numcol
@@ -215,7 +216,7 @@ FlexTable = function(data, numrow, numcol
 	out$header.par.props = header.par.props
 	out$header.text.props = header.text.props
 	
-	class( out ) = c("FlexTable", "FlexElement")
+	class( out ) = "FlexTable"
 
 	if( !miss_data && header.columns ){
 		headerRow = FlexRow(values = .colnames, text.properties = header.text.props, par.properties = header.par.props, cell.properties = header.cell.props )
@@ -234,31 +235,41 @@ FlexTable = function(data, numrow, numcol
 	out
 }
 
-#' @method length FlexTable
-#' @S3method length FlexTable
+#' @export
 length.FlexTable = function(x) {
 	return(x$numrow)
 }
 
-#' @method print FlexTable
-#' @S3method print FlexTable
+#' @title Print FlexTables
+#'
+#' @description print a \code{\link{FlexTable}} object. 
+#' If R session is interactive, the FlexTable is 
+#' rendered in an HTML page and loaded into a WWW browser.
+#' 
+#' @param x a \code{\link{FlexTable}} object
+#' @param ... further arguments, not used. 
+#' @export
 print.FlexTable = function(x, ...){
-	
-	cat("FlexTable object with", x$numrow, "row(s) and", x$numcol, "column(s).\n")
-	cat("Row ids:", paste( head( x$row_id ), collapse = ", " ), " ... \n" )
-	cat("Col ids:", paste( head( x$col_id ), collapse = ", " ), " ... \n" )
-	
+		
 	if( is.jnull(x$jobj ) ) cat("java object is null. Object need to be rebuild.\n")
 	
+	if (!interactive() ){
+		cat("FlexTable object with", x$numrow, "row(s) and", x$numcol, "column(s).\n")
+	} else {
+		viewer <- getOption("viewer")
+		path = file.path(tempfile(), "temp_FlexTable.html" )
+		doc = bsdoc( )
+		doc = addFlexTable( doc, x )
+		writeDoc( doc, path, reset.dir = TRUE)
+		if( !is.null( viewer ) && is.function( viewer ) ){
+			viewer( path )
+		} else {
+			utils::browseURL(path)
+		}
+	}
+	
 	invisible()
+	
 }
 
-#' @method str FlexTable
-#' @S3method str FlexTable
-str.FlexTable = function(object, ...){
-	
-	print( object )
-	
-	invisible()
-}
 

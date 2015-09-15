@@ -21,15 +21,11 @@
 #include <Rinternals.h>
 #include <R.h>
 #include <string.h>
-
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/GraphicsDevice.h>
 
-double getFontSize(double cex, double fontsize, double lineheight) {
-
-	double size = (cex * fontsize * 1.0 );
-	/* from GraphicsEngine, it says: Line height (multiply by font size) */
-	/* Where should I do that? Not here */
+double getFontSize(double cex, double fontsize) {
+	double size = cex * fontsize;
 	if( size < 1.0 ) size = 0.0;
 	return size;
 }
@@ -40,26 +36,48 @@ void updateFontInfo(pDevDesc dev, R_GE_gcontext *gc) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 	SEXP out;
 	char *fontname;
-
 	if( gc->fontface == 5 ) {
 		fontname = strdup("Symbol");
 	} else if( strlen( gc->fontfamily ) > 0 ) {
 		fontname = strdup(gc->fontfamily);
-	} else if( pd->fi->isinit > 0 ) {
+	} else if( pd->fi->isinit > 0 && strcmp(pd->fi->fontname, "Symbol")!= 0 ) {
 		fontname = strdup(pd->fi->fontname);
 	} else {
 		fontname = strdup(pd->fontname);
 	}
 
-	int fonsize = (int)getFontSize(gc->cex, gc->ps, gc->lineheight);
+	int fonsize = (int)getFontSize(gc->cex, gc->ps);
 
 	if (pd->fi->isinit < 1 || strcmp(pd->fi->fontname, fontname) != 0 || pd->fi->fontsize != fonsize) {
 		pd->fi->fontsize = fonsize;
 		pd->fi->fontname = fontname;
 		pd->fi->isinit = 1;
-		out = eval(
-				lang3(install("FontMetric"), mkString(fontname),
-						ScalarInteger(pd->fi->fontsize)), R_GlobalEnv);
+
+		SEXP repPackage;
+		  PROTECT(
+		    repPackage = eval( lang2( install("getNamespace"),
+		      ScalarString(mkChar("ReporteRs")) ),
+		      R_GlobalEnv
+		    )
+		  );
+
+		  SEXP RCallBack;
+		  PROTECT( RCallBack = allocVector(LANGSXP, 3 ));
+		  SETCAR( RCallBack,
+		    findFun( install("FontMetric"), repPackage )
+		  );
+
+		  SETCADR( RCallBack, mkString(fontname) );
+		  SET_TAG( CDR( RCallBack ), install("fontfamily") );
+
+		  SETCADDR( RCallBack, ScalarInteger(pd->fi->fontsize) );
+		  SET_TAG( CDDR( RCallBack ), install("fontsize") );
+
+		  PROTECT(
+		    out = eval( RCallBack, repPackage )
+		  );
+
+		  UNPROTECT(3);
 
 		int *fm = INTEGER(VECTOR_ELT(out, 0));
 		int *widthstemp = INTEGER(VECTOR_ELT(out, 1));
@@ -87,19 +105,75 @@ int getFontface( int ff ){
 	return fontface;
 }
 
-//http://cran.r-project.org/doc/manuals/R-ints.html#Handling-text
-
 void DOC_MetricInfo(int c, const pGEcontext gc, double* ascent,
 		double* descent, double* width, pDevDesc dev) {
 	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
 
+	if( c < 0 ) c = -c;
+	if( c >255 ) c = 77;
 	updateFontInfo(dev, gc);
 
 	int fontface = getFontface(gc->fontface);
-	//if( c < 0 ) c = -c;//"fig-leaf" utf8 issue
-	*ascent = pd->fi->ascent[fontface]*gc->lineheight;
-	*descent = pd->fi->descent[fontface]*gc->lineheight;
+	*ascent = pd->fi->ascent[fontface];
+	*descent = pd->fi->descent[fontface];
 	*width = pd->fi->widths[(fontface * 256) + c];
+}
+
+
+
+double DOC_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev) {
+	DOCDesc *pd = (DOCDesc *) dev->deviceSpecific;
+	char *fontname;
+	int fontface=gc->fontface;
+	if( gc->fontface == 5 ) {
+		fontface = 1;
+		fontname = strdup("Symbol");
+	} else if( strlen( gc->fontfamily ) > 0 ) {
+		fontname = strdup(gc->fontfamily);
+	} else if( pd->fi->isinit > 0 ) {
+		fontname = strdup(pd->fi->fontname);
+	} else {
+		fontname = strdup(pd->fontname);
+	}
+	fontface--;
+	int fontsize = (int)getFontSize(gc->cex, gc->ps);
+
+	SEXP out;
+	SEXP repPackage;
+	  PROTECT(
+	    repPackage = eval( lang2( install("getNamespace"),
+	      ScalarString(mkChar("ReporteRs")) ),
+	      R_GlobalEnv
+	    )
+	  );
+
+	  SEXP RCallBack;
+	  PROTECT( RCallBack = allocVector(LANGSXP, 5 ));
+	  SETCAR( RCallBack,
+	    findFun( install("reporters_str_width"), repPackage )
+	  );
+
+	  SETCADR( RCallBack, mkString(str) );
+	  SET_TAG( CDR( RCallBack ), install("value") );
+
+	  SETCADDR( RCallBack, mkString(fontname) );
+	  SET_TAG( CDDR( RCallBack ), install("fontfamily") );
+
+	  SETCADDDR( RCallBack, ScalarInteger( fontsize ) );
+	  SET_TAG( CDR(CDDR( RCallBack )), install("fontsize") );
+
+	  SETCAD4R( RCallBack, ScalarInteger(fontface) );
+	  SET_TAG( CDR(CDR(CDDR( RCallBack ))), install("fontface") );
+
+	  PROTECT(
+	    out = eval( RCallBack, repPackage )
+	  );
+
+	  UNPROTECT(3);
+
+
+	int *fm = INTEGER(VECTOR_ELT(out, 0));
+	return (double) fm[0];
 }
 
 
@@ -121,6 +195,37 @@ double DOC_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev) {
 	}
 
 	return sum;
+}
+
+double translate_rotate_x(double x, double y, double rot, double h, double w, double hadj) {
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	double alpha = -rot * pi / 180;
+
+	double Px = x + (0.5-hadj) * w;
+	double Py = y - 0.5 * h;
+
+	double _cos = cos( alpha );
+	double _sin = sin( alpha );
+
+	double Ppx = x + (Px-x) * _cos - (Py-y) * _sin ;
+
+	return Ppx - 0.5 * w;
+}
+
+
+double translate_rotate_y(double x, double y, double rot, double h, double w, double hadj) {
+	double pi = 3.141592653589793115997963468544185161590576171875;
+	double alpha = -rot * pi / 180;
+
+	double Px = x + (0.5-hadj) * w;
+	double Py = y - 0.5 * h;
+
+	double _cos = cos( alpha );
+	double _sin = sin( alpha );
+
+	double Ppy = y + (Px-x) * _sin + (Py-y) * _cos;
+
+	return Ppy - 0.5 * h;
 }
 
 int get_and_increment_idx(pDevDesc dev) {
@@ -173,7 +278,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 			(ptd->clippedx0 > dev->clipRight && ptd->clippedx1 > dev->clipRight) ||
 			(ptd->clippedy0 < dev->clipBottom && ptd->clippedy1 < dev->clipBottom) ||
 			(ptd->clippedy0 > dev->clipTop && ptd->clippedy1 > dev->clipTop)) {
-//		Rprintf("%% DOC_ClipLine pas de trace\n" );
 
 		ptd->clippedx0 = ptd->clippedx1;
 		ptd->clippedy0 = ptd->clippedy1;
@@ -182,7 +286,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 
 	/*Clipping Left */
 	if (ptd->clippedx1 >= dev->clipLeft && ptd->clippedx0 < dev->clipLeft) {
-//		Rprintf("%% DOC_ClipLine à gauche\n" );
 
 		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
@@ -191,7 +294,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 		ptd->clippedx0 = dev->clipLeft;
 	}
 	if (ptd->clippedx1 <= dev->clipLeft && ptd->clippedx0 > dev->clipLeft) {
-//		Rprintf("%% DOC_ClipLine à gauche\n" );
 		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
 				(dev->clipLeft-ptd->clippedx0)) +
@@ -201,7 +303,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	/* Clipping Right */
 	if (ptd->clippedx1 >= dev->clipRight &&
 			ptd->clippedx0 < dev->clipRight) {
-//		Rprintf("%% DOC_ClipLine à droite\n" );
 
 		ptd->clippedy1 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
@@ -211,7 +312,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	}
 	if (ptd->clippedx1 <= dev->clipRight &&
 			ptd->clippedx0 > dev->clipRight) {
-//		Rprintf("%% DOC_ClipLine à droite\n" );
 
 		ptd->clippedy0 = ((ptd->clippedy1-ptd->clippedy0) /
 				(ptd->clippedx1-ptd->clippedx0) *
@@ -222,7 +322,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	/*Clipping Bottom */
 	if (ptd->clippedy1 >= dev->clipBottom  &&
 			ptd->clippedy0 < dev->clipBottom ) {
-//		Rprintf("%% DOC_ClipLine en bas\n" );
 		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
 				(ptd->clippedy1-ptd->clippedy0) *
 				(dev->clipBottom -ptd->clippedy0)) +
@@ -231,7 +330,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	}
 	if (ptd->clippedy1 <= dev->clipBottom &&
 			ptd->clippedy0 > dev->clipBottom ) {
-//		Rprintf("%% DOC_ClipLine en bas\n" );
 		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
 				(ptd->clippedy1-ptd->clippedy0) *
 				(dev->clipBottom -ptd->clippedy0)) +
@@ -240,7 +338,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 	}
 	/*Clipping Top */
 	if (ptd->clippedy1 >= dev->clipTop  && ptd->clippedy0 < dev->clipTop ) {
-//		Rprintf("%% DOC_ClipLine en haut\n" );
 		ptd->clippedx1 = ((ptd->clippedx1-ptd->clippedx0) /
 				(ptd->clippedy1-ptd->clippedy0) *
 				(dev->clipTop -ptd->clippedy0)) +
@@ -248,7 +345,6 @@ void DOC_ClipLine(double x0, double y0, double x1, double y1,
 		ptd->clippedy1 = dev->clipTop ;
 	}
 	if (ptd->clippedy1 <= dev->clipTop && ptd->clippedy0 > dev->clipTop ) {
-//		Rprintf("%% DOC_ClipLine en haut\n" );
 		ptd->clippedx0 = ((ptd->clippedx1-ptd->clippedx0) /
 				(ptd->clippedy1-ptd->clippedy0) *
 				(dev->clipTop -ptd->clippedy0)) +

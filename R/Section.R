@@ -1,17 +1,17 @@
-#' @title Insert a slide into a pptx object
+#' @title Add a section into a docx object
 #'
-#' @description Add a slide into a \code{\link{pptx}} object.
-#' 
-#' @param doc Object of class \code{\link{docx}} where section has to be added
+#' @description Add a section into a \code{\link{docx}} object.
+#' It lets you change document orientation and split new  
+#' content along 2 or more columns. 
+#' The function requires you to add a section before and after 
+#' the item(s) that  you want to be on a landscape and/or 
+#' multicolumns mode page. 
+#' @param doc \code{\link{docx}} object where section has to be added
 #' @param landscape logical value. Specify TRUE to get a section with horizontal page.
 #' @param ncol \code{integer} number to specify how many columns the section should contains.
 #' @param space_between width in inches of the space between columns of the section.
 #' @param columns.only logical value, if set to TRUE, no break page will (continuous section).
 #' @param ... further arguments, not used. 
-#' @details 
-#' This function is a key function ; if no slide has been added into the document object
-#' no content (tables, plots, images, text) can be added. 
-#' 
 #' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
@@ -21,8 +21,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addSection}}
-#' @method addSection docx
-#' @S3method addSection docx
+#' @export
 addSection.docx = function(doc, landscape = FALSE, ncol = 1, space_between = 0.3, columns.only = FALSE , ...) {
 	.jcall( doc$obj, "V", "startSection", as.logical( landscape ), 
 			as.integer( ncol ), as.integer( space_between*1440 ),
@@ -49,8 +48,7 @@ addSection.docx = function(doc, landscape = FALSE, ncol = 1, space_between = 0.3
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addColumnBreak}}, \code{\link{addSection.docx}}
-#' @method addColumnBreak docx
-#' @S3method addColumnBreak docx
+#' @export
 addColumnBreak.docx = function(doc, ...) {
 	
 	.jcall( doc$obj, "V", "addColumnBreak" )

@@ -36,6 +36,33 @@ addDate = function(doc, ...){
 	UseMethod("addDate")
 }
 
+
+#' @title Add an external document into a document object
+#'
+#' @description Add an external document into a document object
+#' 
+#' @param doc document object
+#' @param filename \code{"character"} value, complete filename 
+#' of the external file
+#' @param ... further arguments passed to other methods 
+#' @return a document object
+#' @export
+#' @seealso \code{\link{docx}}, \code{\link{addDocument.docx}}
+addDocument = function(doc, filename, ...){
+	checkHasSlide(doc)
+	if( missing( filename ) )
+		stop("filename cannot be missing")
+	if( !inherits( filename, "character" ) )
+		stop("filename must be a single character value")
+	if( length( filename ) != 1 )
+		stop("filename must be a single character value")		
+	if( !file.exists( filename ) )
+		stop( filename, " does not exist")
+	
+	UseMethod("addDocument")
+}
+
+
 #' @title Insert a FlexTable into a document object
 #'
 #' @description Insert a FlexTable into a document object
@@ -47,12 +74,11 @@ addDate = function(doc, ...){
 #' @param ... further arguments passed to other methods 
 #' @details 
 #' See \code{\link{addFlexTable.docx}} or \code{\link{addFlexTable.pptx}}
-#' or \code{\link{addFlexTable.html}} for examples.
+#' or \code{\link{addFlexTable.bsdoc}} for examples.
 #' @return a document object
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
-#' , \code{\link{addTable}}
+#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.bsdoc}}
 addFlexTable = function(doc, flextable, ...){
 	
 	checkHasSlide(doc)
@@ -71,12 +97,29 @@ addFlexTable = function(doc, flextable, ...){
 #' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @details 
-#' addFooter only works for pptx documents. See \code{\link{addFooter.pptx}} for examples.
+#' addFooter only works for pptx and bsdoc documents. 
 #' @export
-#' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}
+#' @seealso \code{\link{pptx}}, \code{\link{addFooter.pptx}}
+#' , \code{\link{bsdoc}}, \code{\link{addFooter.bsdoc}}
 addFooter = function(doc, ...){
 	checkHasSlide(doc)
 	UseMethod("addFooter")
+}
+
+
+
+#' @title Add an iframe into a document object
+#'
+#' @description Add an iframe into a document object
+#' 
+#' @param doc document object
+#' @param ... further arguments passed to other methods 
+#' @return a document object
+#' @export
+#' @seealso \code{\link{addIframe.bsdoc}}
+addIframe = function(doc, ...){
+	checkHasSlide(doc)
+	UseMethod("addIframe")
 }
 
 
@@ -91,22 +134,24 @@ addFooter = function(doc, ...){
 #' @return a document object
 #' @details 
 #' See \code{\link{addImage.docx}} or \code{\link{addImage.pptx}}
-#' or \code{\link{addImage.html}} for examples.
+#' or \code{\link{addImage.bsdoc}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addImage.docx}}
 #' , \code{\link{pptx}}, \code{\link{addImage.pptx}}
-#' , \code{\link{html}}, \code{\link{addImage.html}}
+#' , \code{\link{bsdoc}}, \code{\link{addImage.bsdoc}}
 addImage = function(doc, filename, ...){
 	checkHasSlide(doc)
+	if( missing( filename ) )
+		stop("filename cannot be missing")
 	if( !inherits( filename, "character" ) )
 		stop("filename must be a single character value")
 	if( length( filename ) != 1 )
 		stop("filename must be a single character value")		
-	if( missing( filename ) )
-		stop("filename cannot be missing")
 	if( !file.exists( filename ) )
 		stop( filename, " does not exist")
 	
+	if( !grepl("\\.(png|jpg|jpeg|gif|bmp|wmf|emf)$", filename ) )
+		stop( filename, " is not a valid file. Valid files are png, jpg, jpeg, gif, bmp, wmf, emf.")
 	UseMethod("addImage")
 }
 
@@ -115,22 +160,33 @@ addImage = function(doc, filename, ...){
 
 
 
-
-
-#' @title Add a page into a document object
+#' @title Add a markdown text or file
 #'
-#' @description Add a page into a document object
+#' @description Add markdown into a document object
+#' 
+#' The markdown definition used is John Gruber documented here: 
+#' \url{http://daringfireball.net/projects/markdown/syntax}.
+#' 
+#' Images are not available as \code{addImage} or \code{addPlot} is 
+#' available. Pandoc footnotes have been added (see 
+#' \url{http://johnmacfarlane.net/pandoc/README.html#footnotes}.
 #' 
 #' @param doc document object
+#' @param file markdown file. Not used if text is provided.
+#' @param text character vector. The markdown to parse. 
 #' @param ... further arguments passed to other methods 
 #' @return a document object
-#' @details 
-#' \code{addPage} only works with html documents. See \code{\link{addPage.html}} for examples.
 #' @export
-#' @seealso \code{\link{html}}, \code{\link{addPage.html}}
-addPage = function(doc, ...){
-	UseMethod("addPage")
+#' @seealso \code{\link{docx}}, \code{\link{addMarkdown.docx}}
+#' , \code{\link{bsdoc}}, \code{\link{addMarkdown.bsdoc}}
+#' , \code{\link{pptx}}, \code{\link{addMarkdown.pptx}}
+addMarkdown = function(doc, file, text, ...){
+	if( missing( file ) && missing( text ) )
+		stop("need a markdown file or text argument.")
+	UseMethod("addMarkdown")
 }
+
+
 
 
 #' @title Add a page break into a document object
@@ -188,10 +244,10 @@ addPageNumber = function(doc, ...){
 #' @export
 #' @details 
 #' See \code{\link{addParagraph.docx}} or \code{\link{addParagraph.pptx}}
-#' or \code{\link{addParagraph.html}} for examples.
+#' or \code{\link{addParagraph.bsdoc}} for examples.
 #' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
 #' , \code{\link{pptx}}, \code{\link{addParagraph.pptx}}
-#' , \code{\link{html}}, \code{\link{addParagraph.html}}
+#' , \code{\link{bsdoc}}, \code{\link{addParagraph.bsdoc}}
 #' , \code{\link{pot}}, \code{\link{textProperties}}
 addParagraph = function(doc, value, ...){
 	checkHasSlide(doc)
@@ -201,6 +257,7 @@ addParagraph = function(doc, value, ...){
 		warning("value is empty.")
 		return( doc )
 	}
+	
 	UseMethod("addParagraph")
 }
 
@@ -214,12 +271,11 @@ addParagraph = function(doc, value, ...){
 #' @param vector.graphic logical scalar, if TRUE, vector graphics 
 #' are produced instead of PNG images. 
 #' 
-#' SVG will be produced for \code{html} objects
+#' SVG will be produced for \code{bsdoc} objects
 #' and DrawingML instructions for \code{docx} and \code{pptx} objects. 
 #' 
-#' DrawingML instructions
-#' offer advantage to provide editable graphics (forms and text colors
-#' , text contents, moving and resizing is disabled).
+#' DrawingML instructions offer the advantage of providing editable graphics 
+#' (forms and text colors, text contents).
 #' @param pointsize the default pointsize of plotted text in pixels, default to 12.
 #' @param ... further arguments passed to or from other methods.. 
 #' @return a document object
@@ -231,17 +287,17 @@ addParagraph = function(doc, value, ...){
 #' If you want to add ggplot2 or lattice plot, use 
 #' \code{print} function. 
 #' 
-#' \code{vector.graphic}: if document is a pptx or html document, 
-#' vector graphics will always be displayed.Don't use vector 
+#' \code{vector.graphic}: if document is a pptx or bsdoc document, 
+#' vector graphics will always be displayed. Don't use vector 
 #' graphics if document is a docx and MS Word version used 
 #' to open the document is 2007.
 #' 
 #' See \code{\link{addPlot.docx}} or \code{\link{addPlot.pptx}}
-#' or \code{\link{addPlot.html}} for examples.
+#' or \code{\link{addPlot.bsdoc}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
 #' , \code{\link{pptx}}, \code{\link{addPlot.pptx}}
-#' , \code{\link{html}}, \code{\link{addPlot.html}}
+#' , \code{\link{bsdoc}}, \code{\link{addPlot.bsdoc}}
 addPlot = function(doc, fun, pointsize = 12, vector.graphic = F, ...){
 	
 	checkHasSlide(doc)
@@ -313,7 +369,7 @@ addSubtitle = function(doc, ...){
 #' You have to one of the following argument: file or text or rscript. 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{addRScript.html}}, \code{\link{addRScript.docx}}
+#' @seealso \code{\link{addRScript.bsdoc}}, \code{\link{addRScript.docx}}
 #' , \code{\link{addRScript.pptx}}
 addRScript = function(doc, rscript, file, text, ... ){
 
@@ -323,182 +379,27 @@ addRScript = function(doc, rscript, file, text, ... ){
 	UseMethod("addRScript")
 }
 
-#' @title Add a table into a document object
+#' @title Add code block into a document object
 #'
-#' @description Add a table into a document object
+#' @description Add a code block into a document object
 #' 
 #' @param doc document object
-#' @param data (a \code{data.frame} or \code{matrix} object) to add
-#' @param layout.properties a \code{tableProperties} object to specify 
-#' styles to use to format the table. optional
-#' @param header.labels a character whose elements define labels to display 
-#' in table headers instead of colnames. 
-#' Optional, if missing, headers will be filled with \code{data} column names.
-#' @param groupedheader.row a named list whose elements define the upper 
-#' header row (grouped header). Optional. 
-#' Elements of that list are \code{values} and \code{colspan}. 
-#' Element \code{values} is a character vector containing labels to display 
-#' in the grouped header row. Element \code{colspan} is an integer vector containing 
-#' number of columns to span for each \code{values}.
-#' @param span.columns a character vector specifying columns names 
-#' where row merging should be done (if successive values in a column 
-#' are the same ; if data[p,j]==data[p-1,j] )
-#' @param col.types a character whose elements define the formatting style 
-#' of columns via their data roles. Optional
-#' Possible values are : \emph{"character"}, \emph{"integer"}, \emph{"logical"}
-#' 			, \emph{"double"}, \emph{"percent"}, \emph{"date"}, \emph{"datetime}".
-#' If missing, factor and character will be formated as character
-#' 			, integer as integer and numeric as double.
-#' @param columns.bg.colors A named list of character vector. Define the 
-#' background color of cells for a given column. optional.  
-#' Names are \code{data} column names and values are character vectors specifying 
-#' cells background colors.
-#' Each element of the list is a vector of length \code{nrow(data)}.
-#' @param row.names logical value - should the row.names be included in the table. 
-#' @param columns.font.colors A named list of character vector. Define the font 
-#' color of cells per column. optional.
-#'		A name list, names are \code{data} column names and values 
-#' 			are character vectors specifying cells font colors.
-#'		Each element of the list is a vector of length \code{nrow(data)}.
-#' @param ... further arguments passed to or from other methods.. 
-#' @details
-#' The table below shows the display model used to format tables:\cr
-#' \preformatted{+--------------+---------------+}
-#' \preformatted{GROUPEDHEADER_1|GROUPEDHEADER_2|}
-#' \preformatted{+------+-------+-------+-------+}
-#' \preformatted{HEADER1|HEADER2|HEADER3|HEADER4|}
-#' \preformatted{+------+-------+-------+-------+}
-#' \preformatted{ x[1,1]| x[1,2]| x[1,3]|| x[1,4]|}
-#' \preformatted{+------+-------+-------+-------+}
-#' \preformatted{ x[2,1]| x[2,2]| x[2,3]|| x[2,4]|}
-#' \preformatted{+------+-------+-------+-------+}
-#' \preformatted{ x[3,1]| x[3,2]| x[3,3]|| x[3,4]|}
-#' \preformatted{+------+-------+-------+-------+}
-#'
-#' 
-#' See \code{\link{addTable.docx}} or \code{\link{addTable.pptx}}
-#' or \code{\link{addTable.html}} for examples.
+#' @param file script file. Not used if text is provided.
+#' @param text character vector. The text to parse. 
+#' Not used if file is provided.
+#' @param ... further arguments passed to other methods 
 #' @return a document object
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{addTable.docx}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{pptx}}, \code{\link{addTable.pptx}}, \code{\link{addFlexTable.pptx}}
-#' , \code{\link{html}}, \code{\link{addTable.html}}, \code{\link{addFlexTable.html}}
-#' , \code{\link{FlexTable}}
-addTable = function(doc, data, layout.properties
-		, header.labels, groupedheader.row
-		, span.columns, col.types
-		, columns.bg.colors, columns.font.colors, row.names, ...){
-
-	checkHasSlide(doc)
-	known.types = c("character", "double", "integer", "percent", "date", "datetime", "logical")
-		
-	#### data checking
-	if( missing( data ) ) stop("data is missing.")
+#' @seealso \code{\link{addCodeBlock.bsdoc}}, \code{\link{addCodeBlock.docx}}
+#' , \code{\link{addCodeBlock.pptx}}
+addCodeBlock = function(doc, file, text, ... ){
 	
+	if( missing( file ) && missing( text ) )
+		stop("need a file or text argument.")
 	
-	# check data is a data.frame
-	if( !is.data.frame( data ) && !is.matrix( data ) )
-		stop("data is not a data.frame nor a matrix.")
-	# check data is a data.frame
-	if( nrow( data )<1)
-		stop("data has 0 row.")
-	
-	if( !missing( layout.properties ) ){
-		if( class( layout.properties ) != "tableProperties" ) 
-			stop( "layout.properties is not an object from the class 'tableProperties'." )
-	} 
-	#### check that every colnames has a matching label
-	if( !missing( header.labels ) ){
-		if( !is.character( header.labels ) )
-			stop( "header.labels must be a character vector")
-
-		if( length(header.labels) != ncol(data) ){
-			stop( "header.labels length must be equal to the number of columns" ) 
-		}
-	}
-	
-	#### check span.first.columns
-	if( !missing( span.columns ) ){
-		if( !is.character( span.columns ) )
-			stop( "span.columns must be a character vector")
-
-		.ie.span.columns = is.element( span.columns , names( data ) )
-		if( !all ( .ie.span.columns ) ){
-			stop("span.columns contains unknown columns names :", paste( span.columns[!.ie.span.columns], collapse = "," ) )
-		}	
-	}
-	if( !missing( col.types ) ){
-		if( !is.character( col.types ) )
-			stop("col.types must be a character vector.")
-		
-		if( length(col.types) != ncol(data) ){
-			stop( "col.types length must be the same that the number of columns" ) 
-		} else {
-			.is.elt.types = is.element( col.types, known.types )
-			if( !all( .is.elt.types ) ){
-				stop( "col.types does contain invalid types not in (", paste( known.types, collapse = ", " ) ,") : " 
-						, paste( names( col.types )[!.is.elt.types], collapse = ", " ), "\n"
-				)
-			}
-		}
-	}
-	if( !missing( groupedheader.row ) ){
-		if( class( groupedheader.row ) != "list"  ) 
-			stop("groupedheader.row must be a list.")
-		if( length( groupedheader.row ) > 0 ){
-			if( !all( is.element( c("values", "colspan"), names( groupedheader.row ) ) ) ){
-				stop("groupedheader.row must have 'values' and 'colspan' elements.")
-			}
-			if( any( groupedheader.row$colspan < 1 ) ){
-				stop("Elements of 'groupedheader.row$colspan' must be integers > 0.")
-			}
-			if( sum( groupedheader.row$colspan ) != ncol( data ) ){
-				stop("Sum of 'groupedheader.row$colspan' argument differs from number of columns in data.")
-			}
-		}
-	} 
-	
-	if( !missing( columns.bg.colors ) ){
-		if( class( columns.bg.colors ) != "list"  ) 
-			stop("columns.bg.colors must be a list.")
-		if( length( columns.bg.colors ) > 0 ){
-			.is.elt.columns.bg.colors = is.element( names( columns.bg.colors ), names( data ) )
-			
-			if( !all( .is.elt.columns.bg.colors ) )
-				stop("Some elements of 'columns.bg.colors' does not match with columns of 'data'."
-						, paste( names( columns.bg.colors )[!.is.elt.columns.bg.colors], collapse = "," ) )
-			
-			if( !all( sapply( columns.bg.colors, length ) == nrow( data ) ) )
-				stop("Lengths of 'columns.bg.colors' must be equal to nrow(data).")
-			
-			if( !all( sapply( columns.bg.colors, is.character ) ) )
-				stop("'columns.bg.colors' must be a list of character vector describing valid css colors.")
-			
-		}
-	} 
-	
-	if( !missing( columns.font.colors ) ){
-		if( class( columns.font.colors ) != "list"  ) 
-			stop("columns.font.colors must be a list.")
-		if( length( columns.font.colors ) > 0 ){
-			.is.elt.columns.font.colors = is.element( names( columns.font.colors ), names( data ) )
-			
-			if( !all( .is.elt.columns.font.colors ) )
-				stop("Some elements of 'columns.font.colors' does not match with columns of 'data'."
-						, paste( names( columns.font.colors )[!.is.elt.columns.font.colors], collapse = "," ) )
-			
-			if( !all( sapply( columns.font.colors, length ) == nrow( data ) ) )
-				stop("Lengths of 'columns.font.colors' must be equal to nrow(data).")
-			
-			if( !all( sapply( columns.font.colors, is.character ) ) )
-				stop("'columns.font.colors' must be a list of character vector describing valid css colors.")
-			
-		}
-	}
-	
-	UseMethod("addTable")
-
+	UseMethod("addCodeBlock")
 }
+
 
 
 
@@ -512,18 +413,18 @@ addTable = function(doc, data, layout.properties
 #' @return a document object
 #' @details 
 #' See \code{\link{addTitle.docx}} or \code{\link{addTitle.pptx}}
-#' or \code{\link{addTitle.html}} for examples.
+#' or \code{\link{addTitle.bsdoc}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}, \code{\link{pptx}}
-#' , \code{\link{addTitle.pptx}}, \code{\link{html}}, \code{\link{addTitle.html}}
+#' , \code{\link{addTitle.pptx}}, \code{\link{bsdoc}}, \code{\link{addTitle.bsdoc}}
 addTitle = function(doc, value, ...){
 	checkHasSlide(doc)
 	
 	if( missing( value ) ) stop("value is missing.")
-	if( !is.character( value ) )
-		stop("value must be a character vector of length 1.")
-	if( length( value ) != 1 )
-		stop("value must be a character vector of length 1.")
+	if( !is.character( value ) && !inherits( value, "pot" ) )
+		stop("value must be a character vector of length 1 or a pot object.")
+	if( is.character( value ) && length( value ) != 1 )
+		stop("value must be a character vector of length 1 or a pot object.")
 	
 	UseMethod("addTitle")
 }
@@ -594,6 +495,20 @@ as.html = function( object, ... ){
 	UseMethod("as.html")
 }
 
+#' @title R tables as FlexTables
+#'
+#' @description Get a \code{\link{FlexTable}} object from 
+#' an R object.
+#' 
+#' @param x object to get \code{FlexTable} from
+#' @param ... further arguments passed to other methods 
+#' @return a \code{\link{FlexTable}} object
+#' @export
+#' @seealso \code{\link{FlexTable}}
+as.FlexTable = function( x, ... ){
+	UseMethod("as.FlexTable")
+}
+
 #' @title Set manually headers'styles of a document object
 #'
 #' @description Set manually titles'styles of a document object
@@ -652,11 +567,11 @@ styles = function(doc, ...){
 #' @return a document object
 #' @details 
 #' See \code{\link{writeDoc.docx}} or \code{\link{writeDoc.pptx}}
-#' or \code{\link{writeDoc.html}} for examples.
+#' or \code{\link{writeDoc.bsdoc}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{writeDoc.docx}}
 #' , \code{\link{pptx}}, \code{\link{writeDoc.pptx}}
-#' , \code{\link{html}}, \code{\link{writeDoc.html}}
+#' , \code{\link{bsdoc}}, \code{\link{writeDoc.bsdoc}}
 writeDoc = function(doc, ...){
 	UseMethod("writeDoc")
 }

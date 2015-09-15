@@ -49,6 +49,8 @@ static void RAPHAEL_Polygon(int n, double *x, double *y, const pGEcontext gc,
 static void RAPHAEL_Rect(double x0, double y0, double x1, double y1,
 		const pGEcontext gc, pDevDesc dev) ;
 
+static void RAPHAEL_TextUTF8(double x, double y, const char *str, double rot,
+		double hadj, const pGEcontext gc, pDevDesc dev);
 static void RAPHAEL_Text(double x, double y, const char *str, double rot,
 		double hadj, const pGEcontext gc, pDevDesc dev);
 
@@ -61,6 +63,7 @@ static void RAPHAEL_MetricInfo(int c, const pGEcontext gc, double* ascent,
 static void RAPHAEL_Size(double *left, double *right, double *bottom, double *top,
 		pDevDesc dev);
 
+static double RAPHAEL_StrWidthUTF8(const char *str, const pGEcontext gc, pDevDesc dev);
 static double RAPHAEL_StrWidth(const char *str, const pGEcontext gc, pDevDesc dev);
 
 //SEXP setDimensions(SEXP devNumber, SEXP ext, SEXP off);

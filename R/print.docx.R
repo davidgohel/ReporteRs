@@ -12,9 +12,7 @@
 #' print( doc )
 #' #STOP_TAG_TEST
 #' @seealso \code{\link{docx}}, \code{\link{print}}
-#' @method print docx
-#' @S3method print docx
-
+#' @export
 print.docx = function (x, ...){
 	cat("[docx object]\n")
 	

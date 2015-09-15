@@ -12,8 +12,6 @@
 #' @param ... further arguments - not used
 #' @return a docx object
 #' @seealso \code{\link{FlexTable}}, \code{\link{docx}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.html}}
-#' , \code{\link{addTable.docx}}, \code{\link{bookmark}}
 #' @examples
 #' #START_TAG_TEST
 #' doc.filename = "addFlexTable_example.docx"
@@ -29,8 +27,7 @@
 #' @example examples/addFlexTable.R
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
-#' @method addFlexTable docx
-#' @S3method addFlexTable docx
+#' @export
 addFlexTable.docx = function(doc, flextable
 	, par.properties = parProperties(text.align = "left" )
 	, bookmark, ... ) {
