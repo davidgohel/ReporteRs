@@ -10,6 +10,7 @@
 #' \code{getOption("ReporteRs-list-definition")}.
 #' @param keywords \code{"character"} value: keywords metadata value to set in the html page
 #' @param description \code{"character"} value: description metadata value to set in the html page
+#' @param mathjax \code{logical} value: if \code{TRUE} activate mathjax
 #' @return an object of class \code{\link{bsdoc}}.
 #' @details
 #' Several methods can used to send R output into an object of class \code{\link{bsdoc}}.
@@ -33,7 +34,7 @@
 #' @example examples/bsdoc_example.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{pptx}}
-bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-list-definition"), keywords = "", description = "" ){
+bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-list-definition"), keywords = "", description = "", mathjax = FALSE ){
 		
 	if( !is.character( title ) )
 		stop("title must be a character vector of length 1.")
@@ -51,7 +52,11 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 	
 	.jcall( HTMLPage , "V", "addJavascript", "js/raphael-min.js" )
 	.jcall( HTMLPage , "V", "addJavascript", "js/tooltip.js" )
-	
+
+	if (mathjax){
+	    .jcall( HTMLPage , "V", "addJavascript", "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" )
+	}
+
 	.jcall( HTMLPage , "V", "addStylesheet", "css/bootstrap.min.css" )
 	.jcall( HTMLPage , "V", "addStylesheet", "css/docs.min.css" )
 	.jcall( HTMLPage , "V", "addStylesheet", "css/tooltip.css" )

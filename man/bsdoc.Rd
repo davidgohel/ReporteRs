@@ -7,7 +7,7 @@ document}
 \usage{
 bsdoc(title = "untitled",
   list.definition = getOption("ReporteRs-list-definition"), keywords = "",
-  description = "")
+  description = "", mathjax = FALSE)
 }
 \arguments{
 \item{title}{\code{"character"} value: title of the document.}
@@ -19,6 +19,8 @@ lists have to be formated. See \code{\link{list.settings}}. Default to
 \item{keywords}{\code{"character"} value: keywords metadata value to set in the html page}
 
 \item{description}{\code{"character"} value: description metadata value to set in the html page}
+
+\item{mathjax}{\code{logical} value: if \code{TRUE} activate mathjax}
 }
 \value{
 an object of class \code{\link{bsdoc}}.
@@ -48,7 +50,7 @@ Once object has content, user can write the docx into a ".html" file, see \code{
 # set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
 
-doc = bsdoc( title = "full example" )
+doc = bsdoc( title = "full example", mathjax = TRUE )
 
 
 # load ggplot2
@@ -121,6 +123,11 @@ doc = addParagraph( doc, value = text1,
   par.properties = unordered.list.level1 )
 doc = addParagraph( doc, value = text2, 
   par.properties = unordered.list.level2 )
+
+doc = addTitle( doc, "Math example", level = 1)
+#####################################################################
+# If mathjax option is set to TRUE
+doc = addParagraph( doc, "$$x = {-b \\\\pm \\\\sqrt{b^2-4ac} \\\\over 2a}$$")
 
 doc = addTitle( doc, "Table example", level = 1, id = "table_example" )
 #####################################################################
