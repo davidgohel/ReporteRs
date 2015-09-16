@@ -1,7 +1,7 @@
 # set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
 
-doc = bsdoc( title = "full example" )
+doc = bsdoc( title = "full example", mathjax = TRUE )
 
 
 # load ggplot2
@@ -74,6 +74,11 @@ doc = addParagraph( doc, value = text1,
   par.properties = unordered.list.level1 )
 doc = addParagraph( doc, value = text2, 
   par.properties = unordered.list.level2 )
+
+doc = addTitle( doc, "Math example", level = 1)
+#####################################################################
+# If mathjax option is set to TRUE
+doc = addParagraph( doc, "$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}$$")
 
 doc = addTitle( doc, "Table example", level = 1, id = "table_example" )
 #####################################################################
