@@ -14,13 +14,7 @@ notifications:
     on_failure: change
 
 apt_packages:
- - openjdk-7-jre
-
-before_install:
- - export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre
- - export PATH=$PATH:$JAVA_HOME/bin
- - export LD_LIBRARY_PATH=/usr/lib/jvm/java-8-oracle/lib/amd64:/usr/lib/jvm/java-8-oracle/jre/lib/amd64/server
- - sudo R CMD javareconf
+ - r-cran-rjava
 
 r_binary_packages:
  - ggplot2
@@ -31,4 +25,3 @@ r_packages:
 
 os:
  - linux
- - osx
