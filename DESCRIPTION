@@ -31,7 +31,10 @@ Copyright: See file COPYRIGHTS.
 Depends:
     R (>= 3.0),ReporteRsjars (>= 0.0.2)
 Imports:
-    graphics, grDevices, rJava, utils
+    graphics, grDevices, rJava, utils, Rcpp, gdtools
+LinkingTo:
+  Rcpp,
+  gdtools
 Suggests:
     ggplot2
 SystemRequirements: java (>= 1.6)

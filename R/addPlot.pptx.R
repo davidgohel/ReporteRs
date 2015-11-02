@@ -41,6 +41,10 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
+#' @importFrom Rcpp sourceCpp
+#' @importFrom gdtools raster_view
+#' @importFrom Rcpp sourceCpp
+#' @importFrom gdtools raster_view
 #' @export
 addPlot.pptx = function(doc, fun, pointsize = 11
 	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
@@ -138,42 +142,33 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 
 	plotargs = list(...)
 
-	dirname = tempfile( )
-	dir.create( dirname )
-	filename = file.path( dirname, "/plot_"  )
+	filename = tempfile( fileext = ".dml")
 	filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
-	env = dml.pptx( file = filename, width = width * 72.2, height = height * 72.2
-			, offx = offx * 72.2, offy = offy * 72.2, ps = pointsize, fontname = fontname
-			, firstid = doc$plot_first_id, editable = editable
+	vg_fonts <- getOption("vg_fonts")
+
+
+	devPPTX_(file = filename, bg_="white",
+	         width = width, height = height,
+	         offx = offx, offy = offy,
+	         pointsize = pointsize,
+	         fontname_serif = vg_fonts$fontname_serif,
+	         fontname_sans = vg_fonts$fontname_sans,
+	         fontname_mono = vg_fonts$fontname_mono,
+	         fontname_symbol = vg_fonts$fontname_symbol,
+	         editable = editable )
+	tryCatch(fun(...),
+	         finally = dev.off()
 	)
-
-	fun_res = try( fun(...), silent = T )
-	if( inherits(fun_res, "try-error")){
-		dev.off()
-		message(attr(fun_res,"condition"))
-		stop("an error occured when executing plot function.")
+  # file.copy(filename, ".")
+	dml.object = .jnew( class.DrawingML, filename )
+	if( check.dims < 4 ){
+	  out = .jcall( slide, "I", "add", dml.object )
+	} else {
+	  out = .jcall( slide, "I", "add", dml.object, width, height, offx, offy )
 	}
-	last_id = .C("get_current_element_id", (dev.cur()-1L), 0L)[[2]]
-	dev.off()
-
-	doc$plot_first_id = last_id + 1
-
-
-
-	plotfiles = list.files( dirname , full.names = T )
-
-	for( i in seq_along( plotfiles ) ){
-		dml.object = .jnew( class.DrawingML, plotfiles[i] )
-		if( check.dims < 4 ){
-			out = .jcall( slide, "I", "add", dml.object )
-		} else {
-			out = .jcall( slide, "I", "add", dml.object, width, height, offx, offy )
-		}
-		if( isSlideError( out ) ){
-			stop( getSlideErrorString( out , "dml") )
-		}
-
+	if( isSlideError( out ) ){
+	  stop( getSlideErrorString( out , "dml") )
 	}
 
 	doc
