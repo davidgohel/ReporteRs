@@ -104,23 +104,16 @@ get.graph.dims = function( doc ){
 	id = .jcall( slide, "I", "getNextShapeIndex"  )
 	maxid = .jcall( slide, "I", "getmax_shape"  )
 	if( maxid-id < 1 ) stop( getSlideErrorString( shape_errors["NOROOMLEFT"] , "plot") )
-	widths = double( maxid-id )
-	heights = double( maxid-id )
-	offxs = double( maxid-id )
-	offys = double( maxid-id )
-	j=0
+
 
 	LayoutName = .jcall( slide, "S", "getLayoutName" )
 	layout_description = .jcall( doc$obj, paste0("L", class.pptx4r.LayoutDescription, ";"), "getLayoutProperties", LayoutName )
 
-	for(i in seq(id,maxid-1, by=1) ){
-		dims = .jcall( layout_description, "[I", "getContentDimensions", as.integer(i) )
-		j = j + 1
-		widths[j] = dims[3] / 914400
-		heights[j] = dims[4] / 914400
-		offxs[j] = dims[1] / 914400
-		offys[j] = dims[2] / 914400
-	}
+	dims = .jcall( layout_description, "[I", "getContentDimensions", as.integer(id) )
+	widths = dims[3] / 914400
+	heights = dims[4] / 914400
+	offxs = dims[1] / 914400
+	offys = dims[2] / 914400
 	data.frame( widths = widths, heights = heights, offxs = offxs, offys = offys )
 }
 
@@ -140,14 +133,12 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 		offy = data.dims$offys
 	}
 
-	plotargs = list(...)
-
 	filename = tempfile( fileext = ".dml")
 	filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
 	vg_fonts <- getOption("vg_fonts")
 
-
+# ajouter ID, namespace,
 	devPPTX_(file = filename, bg_="white",
 	         width = width, height = height,
 	         offx = offx, offy = offy,
@@ -156,6 +147,7 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	         fontname_sans = vg_fonts$fontname_sans,
 	         fontname_mono = vg_fonts$fontname_mono,
 	         fontname_symbol = vg_fonts$fontname_symbol,
+	         type = "p",
 	         editable = editable )
 	tryCatch(fun(...),
 	         finally = dev.off()
