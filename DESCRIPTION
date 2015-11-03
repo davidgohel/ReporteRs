@@ -1,8 +1,7 @@
 Package: ReporteRs
 Type: Package
 Title: Microsoft Word, Microsoft Powerpoint and HTML Documents Generation
-Version: 0.8.3
-Date: 2015-08-04
+Version: 0.8.4
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@lysis-consultants.fr"),
@@ -12,12 +11,6 @@ Authors@R: c(
     comment = "The jQuery Foundation"),
     person("Dmitry Baranovskiy", role = c("ctb", "cph"),
     comment = "raphael javascript libraries" ) )
-Author: David Gohel [aut, cre],
-    Bootstrap [ctb, cph] (Bootstrap development team),
-    jQuery [ctb, cph] (The jQuery Foundation),
-    Dmitry Baranovskiy [ctb, cph] (raphael javascript
-    libraries)
-Maintainer: David Gohel <david.gohel@lysis-consultants.fr>
 Description: Create Microsoft Word document (>=2007),
     Microsoft Powerpoint document (>=2007) and HTML documents from R. There are
     several features to let you format and present R outputs ; e.g. Editable
