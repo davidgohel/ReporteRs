@@ -19,8 +19,10 @@
 #include "Rcpp.h"
 #include <gdtools.h>
 #include <string.h>
-#include <math.h>
 #include "R_ext/GraphicsEngine.h"
+#include "rotate.h"
+#include "range.h"
+#include "fonts.h"
 
 // SVG device metadata
 class PPTXdesc {
@@ -77,100 +79,7 @@ public:
   }
 };
 
-inline bool is_bold(int face) {
-  return face == 2 || face == 4;
-}
-inline bool is_italic(int face) {
-  return face == 3 || face == 4;
-}
 
-inline std::string fontname(const char* family_, int face,
-  std::string serif_, std::string sans_, std::string mono_, std::string symbol_) {
-
-  std::string family(family_);
-
-  if( face == 5 ) return symbol_;
-
-  if (family == "mono") {
-    return mono_;
-  } else if (family == "serif") {
-    return serif_;
-  } else if (family == "sans" || family == "") {
-    return sans_;
-  } else {
-    return sans_;
-  }
-}
-
-
-inline double min_value(double *x, int size){
-  double min = x[0];
-
-  for (int i = 0; i < size; i++) {
-    if (x[i] < min)
-      min = x[i];
-  }
-  return min;
-}
-
-inline double max_value(double *x, int size){
-  double max = x[0];
-  for (int i = 0; i < size; i++) {
-    if (x[i] > max)
-      max = x[i];
-  }
-  return max;
-}
-
-inline double min_value_(double x0, double x1 ){
-  if (x0 >= x1) {
-    return x1;
-  }
-  return x0;
-}
-
-inline double max_value_(double x0, double x1 ){
-  if (x0 >= x1) {
-    return x0;
-  }
-  return x1;
-}
-
-inline double p2e_(double x) {
-  double y = x * 12700;
-  return y;
-}
-
-double translate_rotate_x(double x, double y, double rot, double h, double w, double hadj) {
-  double pi = 3.141592653589793115997963468544185161590576171875;
-  double alpha = -rot * pi / 180;
-
-  double Px = x + (0.5-hadj) * w;
-  double Py = y - 0.5 * h;
-
-  double _cos = cos( alpha );
-  double _sin = sin( alpha );
-
-  double Ppx = x + (Px-x) * _cos - (Py-y) * _sin ;
-
-  return Ppx - 0.5 * w;
-}
-
-
-double translate_rotate_y(double x, double y, double rot, double h, double w, double hadj) {
-  double pi = 3.141592653589793115997963468544185161590576171875;
-  double alpha = -rot * pi / 180;
-
-  double Px = x + (0.5-hadj) * w;
-  double Py = y - 0.5 * h;
-
-  double _cos = cos( alpha );
-  double _sin = sin( alpha );
-
-  double Ppy = y + (Px-x) * _sin + (Py-y) * _cos;
-
-  return Ppy - 0.5 * h;
-}
 
 void write_nv_pr(pDevDesc dev, R_GE_gcontext *gc, const char *label) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
@@ -296,6 +205,61 @@ void write_sp_closing(pDevDesc dev) {
   }
 }
 
+void write_sp_tree_close(pDevDesc dev) {
+  PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
+
+  fputs("</p:grpSp>", pptx_dev->file );
+  fputs("</p:spTree>", pptx_dev->file );
+  fputs("</p:cSld>", pptx_dev->file );
+  fputs("</p:sld>", pptx_dev->file );
+}
+
+
+void write_sp_tree_open(pDevDesc dev) {
+  PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
+  int idx = pptx_dev->new_id();
+  if( pptx_dev->type == "p" ){
+    fputs("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", pptx_dev->file );
+    fputs("<p:sld xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" ", pptx_dev->file );
+          fputs("xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" ", pptx_dev->file );
+          fputs("xmlns:p=\"http://schemas.openxmlformats.org/presentationml/2006/main\" >", pptx_dev->file );
+      fputs("<p:cSld>", pptx_dev->file );
+        fputs("<p:spTree>", pptx_dev->file );
+          fputs("<p:nvGrpSpPr>", pptx_dev->file );
+            fprintf(pptx_dev->file, "<p:cNvPr id=\"%d\" name=\"Plot %d\"/>", idx, idx );
+            fputs("<p:cNvGrpSpPr><a:grpSpLocks noResize=\"1\" noUngrp=\"1\" noChangeAspect=\"1\"/></p:cNvGrpSpPr>", pptx_dev->file );
+            fputs("<p:nvPr/>", pptx_dev->file );
+          fputs("</p:nvGrpSpPr>", pptx_dev->file );
+          fputs("<p:grpSpPr>", pptx_dev->file );
+            fputs("<a:xfrm>", pptx_dev->file );
+              fputs("<a:off x=\"0\" y=\"0\" />", pptx_dev->file );
+              fputs("<a:ext cx=\"0\" cy=\"0\" />", pptx_dev->file );
+              fputs("<a:chOff x=\"0\" y=\"0\" />", pptx_dev->file );
+              fputs("<a:chExt cx=\"0\" cy=\"0\" />", pptx_dev->file );
+            fputs("</a:xfrm>", pptx_dev->file );
+          fputs("</p:grpSpPr>", pptx_dev->file );
+          fputs("<p:grpSp>", pptx_dev->file );
+
+          fputs("<p:nvGrpSpPr>", pptx_dev->file );
+          idx = pptx_dev->new_id();
+            fprintf(pptx_dev->file, "<p:cNvPr id=\"%d\" name=\"Groupe %d\"/>", idx, idx );
+            fputs("<p:cNvGrpSpPr/>", pptx_dev->file );
+            fputs("<p:nvPr/>", pptx_dev->file );
+          fputs("</p:nvGrpSpPr>", pptx_dev->file );
+
+          fputs("<p:grpSpPr>", pptx_dev->file );
+            fputs("<a:xfrm rot=\"0\">", pptx_dev->file );
+              fprintf(pptx_dev->file, "<a:off x=\"%.0f\" y=\"%.0f\"/>", pptx_dev->offx, pptx_dev->offy );
+              fprintf(pptx_dev->file, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", dev->right, dev->bottom );
+              fprintf(pptx_dev->file, "<a:chOff x=\"%.0f\" y=\"%.0f\"/>", pptx_dev->offx, pptx_dev->offy );
+              fprintf(pptx_dev->file, "<a:chExt cx=\"%.0f\" cy=\"%.0f\"/>", dev->right, dev->bottom );
+            fputs("</a:xfrm>", pptx_dev->file );
+          fputs("</p:grpSpPr>", pptx_dev->file );
+  } else if( pptx_dev->type == "wps" ){
+
+  }
+}
+
 void write_preset_geom(pDevDesc dev, const char *preset_geom) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
   fprintf(pptx_dev->file,"<a:prstGeom prst=\"%s\"><a:avLst/></a:prstGeom>", preset_geom);
@@ -334,8 +298,8 @@ void write_w_rpr(pDevDesc dev, R_GE_gcontext *gc, double fontsize) {
   }
 
   std::string fontname_ = fontname(gc->fontfamily, gc->fontface,
-                                   pptx_dev->fontname_serif, pptx_dev->fontname_sans,
-                                   pptx_dev->fontname_mono, pptx_dev->fontname_symbol);
+                   pptx_dev->fontname_serif, pptx_dev->fontname_sans,
+                   pptx_dev->fontname_mono, pptx_dev->fontname_symbol);
 
   fputs("<w:rPr>", pptx_dev->file );
   fprintf(pptx_dev->file, "<w:rFonts w:ascii=\"%s\" w:hAnsi=\"%s\" w:cs=\"%s\"/>",
@@ -393,7 +357,7 @@ void write_w_ppr(pDevDesc dev, R_GE_gcontext *gc, double hadj, double fontsize, 
   else
     fputs("<w:jc w:val=\"right\"/>", pptx_dev->file );
 
-  fprintf(pptx_dev->file, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", fontheight*20);
+  fprintf(pptx_dev->file, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", fontsize*20);
 
   write_w_rpr(dev, gc, fontsize);
   fputs("</w:pPr>", pptx_dev->file );
@@ -406,8 +370,9 @@ void write_w_ppr(pDevDesc dev, R_GE_gcontext *gc, double hadj, double fontsize, 
 void write_body_pr(pDevDesc dev) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
   if( pptx_dev->type == "p")
-    fputs("<a:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\"></a:bodyPr><a:lstStyle/>", pptx_dev->file );
-  else if( pptx_dev->type == "wps") fputs("<wps:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"b\"/>", pptx_dev->file );
+    fputs("<a:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"ctr\"></a:bodyPr><a:lstStyle/>", pptx_dev->file );
+  else if( pptx_dev->type == "wps")
+    fputs("<wps:bodyPr lIns=\"0\" tIns=\"0\" rIns=\"0\" bIns=\"0\" anchor=\"ctr\" spcFirstLastPara=\"1\"/>", pptx_dev->file );
 
 }
 
@@ -596,13 +561,14 @@ static void pptx_new_page(const pGEcontext gc, pDevDesc dd) {
     Rf_error("PPTX only supports one page");
   }
   pptx_dev->new_id();
+  write_sp_tree_open(dd);
 
   pptx_dev->pageno++;
 }
 
 static void pptx_close(pDevDesc dd) {
   PPTXdesc *pptx_dev = (PPTXdesc*) dd->deviceSpecific;
-
+  write_sp_tree_close(dd);
   delete(pptx_dev);
 }
 
