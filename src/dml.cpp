@@ -85,40 +85,34 @@ void write_nv_pr(pDevDesc dev, R_GE_gcontext *gc, const char *label) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
   int idx = pptx_dev->new_id();
 
-
   const char *a_lock_properties = "<a:spLocks noSelect=\"1\" noResize=\"1\" noEditPoints=\"1\" noTextEdit=\"1\" noMove=\"1\" noRot=\"1\" noChangeShapeType=\"1\"/>";
+
   if( pptx_dev->type == "p"){
+    fprintf(pptx_dev->file, "<%s:nvSpPr>", pptx_dev->type.c_str());
+    fprintf(pptx_dev->file, "<%s:cNvPr id=\"%d\" name=\"%s%d\"/>", pptx_dev->type.c_str(), idx, label, idx);
+
     if( !pptx_dev->editable ){
-      fprintf(pptx_dev->file, "<%s:nvSpPr><%s:cNvPr id=\"%d\" name=\"%s %d\" /><%s:cNvSpPr>%s</%s:cNvSpPr><%s:nvPr/></%s:nvSpPr>",
-              pptx_dev->type.c_str(), pptx_dev->type.c_str(),
-              idx, label, idx,
-              pptx_dev->type.c_str(),
-              a_lock_properties,
-              pptx_dev->type.c_str(), pptx_dev->type.c_str(), pptx_dev->type.c_str()
-              );
+      fprintf(pptx_dev->file, "<%s:cNvSpPr>%s</%s:cNvSpPr>",
+              pptx_dev->type.c_str(), a_lock_properties, pptx_dev->type.c_str() );
     } else {
-      fprintf(pptx_dev->file, "<%s:nvSpPr><%s:cNvPr id=\"%d\" name=\"%s %d\" /><%s:cNvSpPr/><%s:nvPr/></%s:nvSpPr>",
-         pptx_dev->type.c_str(), pptx_dev->type.c_str(),
-         idx, label, idx,
-         pptx_dev->type.c_str(), pptx_dev->type.c_str(), pptx_dev->type.c_str()
-         );
+      fprintf(pptx_dev->file, "<%s:cNvSpPr/>", pptx_dev->type.c_str() );
     }
+
+    fprintf(pptx_dev->file, "<%s:nvPr/></%s:nvSpPr>",
+            pptx_dev->type.c_str(), pptx_dev->type.c_str() );
+
   } else if( pptx_dev->type == "wps"){
+    fprintf(pptx_dev->file, "<%s:cNvPr id=\"%d\" name=\"%s%d\"/>", pptx_dev->type.c_str(), idx, label, idx );
+
     if( !pptx_dev->editable ){
-      fprintf(pptx_dev->file, "<%s:cNvPr id=\"%d\" name=\"%s %d\" /><%s:cNvSpPr>%s</%s:cNvSpPr><%s:nvPr/>",
-              pptx_dev->type.c_str(),
-              idx, label, idx,
-              pptx_dev->type.c_str(),
-              a_lock_properties,
-              pptx_dev->type.c_str(), pptx_dev->type.c_str()
-      );
+      fprintf(pptx_dev->file, "<%s:cNvSpPr>%s</%s:cNvSpPr>",
+              pptx_dev->type.c_str(), a_lock_properties, pptx_dev->type.c_str() );
     } else {
-      fprintf(pptx_dev->file, "<%s:cNvPr id=\"%d\" name=\"%s %d\" /><%s:cNvSpPr/><%s:nvPr/>",
-              pptx_dev->type.c_str(),
-              idx, label, idx,
-              pptx_dev->type.c_str(), pptx_dev->type.c_str()
-      );
+      fprintf(pptx_dev->file, "<%s:cNvSpPr/>", pptx_dev->type.c_str() );
     }
+
+    fprintf(pptx_dev->file, "<%s:nvPr/>", pptx_dev->type.c_str() );
+
   }
 }
 
@@ -207,13 +201,20 @@ void write_sp_closing(pDevDesc dev) {
 
 void write_sp_tree_close(pDevDesc dev) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
+  if( pptx_dev->type == "p" ){
+          fputs("</p:grpSp>", pptx_dev->file );
+        fputs("</p:spTree>", pptx_dev->file );
+      fputs("</p:cSld>", pptx_dev->file );
+    fputs("</p:sld>", pptx_dev->file );
+  } else if( pptx_dev->type == "wps" ){
+            fputs("</wpg:wgp>", pptx_dev->file );
+          fputs("</a:graphicData>", pptx_dev->file );
+        fputs("</a:graphic>", pptx_dev->file );
+      fputs("</wp:inline>", pptx_dev->file );
+    fputs("</w:drawing>", pptx_dev->file );
+  }
 
-  fputs("</p:grpSp>", pptx_dev->file );
-  fputs("</p:spTree>", pptx_dev->file );
-  fputs("</p:cSld>", pptx_dev->file );
-  fputs("</p:sld>", pptx_dev->file );
 }
-
 
 void write_sp_tree_open(pDevDesc dev) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
@@ -232,10 +233,10 @@ void write_sp_tree_open(pDevDesc dev) {
           fputs("</p:nvGrpSpPr>", pptx_dev->file );
           fputs("<p:grpSpPr>", pptx_dev->file );
             fputs("<a:xfrm>", pptx_dev->file );
-              fputs("<a:off x=\"0\" y=\"0\" />", pptx_dev->file );
-              fputs("<a:ext cx=\"0\" cy=\"0\" />", pptx_dev->file );
-              fputs("<a:chOff x=\"0\" y=\"0\" />", pptx_dev->file );
-              fputs("<a:chExt cx=\"0\" cy=\"0\" />", pptx_dev->file );
+              fprintf(pptx_dev->file, "<a:off x=\"%.0f\" y=\"%.0f\"/>", p2e_(pptx_dev->offx), p2e_(pptx_dev->offy) );
+              fprintf(pptx_dev->file, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(dev->right), p2e_(dev->bottom) );
+              fprintf(pptx_dev->file, "<a:chOff x=\"%.0f\" y=\"%.0f\"/>", p2e_(pptx_dev->offx), p2e_(pptx_dev->offy) );
+              fprintf(pptx_dev->file, "<a:chExt cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(dev->right), p2e_(dev->bottom) );
             fputs("</a:xfrm>", pptx_dev->file );
           fputs("</p:grpSpPr>", pptx_dev->file );
           fputs("<p:grpSp>", pptx_dev->file );
@@ -249,14 +250,36 @@ void write_sp_tree_open(pDevDesc dev) {
 
           fputs("<p:grpSpPr>", pptx_dev->file );
             fputs("<a:xfrm rot=\"0\">", pptx_dev->file );
-              fprintf(pptx_dev->file, "<a:off x=\"%.0f\" y=\"%.0f\"/>", pptx_dev->offx, pptx_dev->offy );
-              fprintf(pptx_dev->file, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", dev->right, dev->bottom );
-              fprintf(pptx_dev->file, "<a:chOff x=\"%.0f\" y=\"%.0f\"/>", pptx_dev->offx, pptx_dev->offy );
-              fprintf(pptx_dev->file, "<a:chExt cx=\"%.0f\" cy=\"%.0f\"/>", dev->right, dev->bottom );
+              fprintf(pptx_dev->file, "<a:off x=\"%.0f\" y=\"%.0f\"/>", p2e_(pptx_dev->offx), p2e_(pptx_dev->offy) );
+              fprintf(pptx_dev->file, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(dev->right), p2e_(dev->bottom) );
+              fprintf(pptx_dev->file, "<a:chOff x=\"%.0f\" y=\"%.0f\"/>", p2e_(pptx_dev->offx), p2e_(pptx_dev->offy) );
+              fprintf(pptx_dev->file, "<a:chExt cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(dev->right), p2e_(dev->bottom) );
             fputs("</a:xfrm>", pptx_dev->file );
           fputs("</p:grpSpPr>", pptx_dev->file );
   } else if( pptx_dev->type == "wps" ){
+    fputs("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", pptx_dev->file );
+    fputs("<w:drawing xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\" >", pptx_dev->file );
 
+      fputs("<wp:inline distT=\"0\" distB=\"0\" distL=\"0\" distR=\"0\">", pptx_dev->file );
+      fprintf(pptx_dev->file, "<wp:extent cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(dev->right), p2e_(dev->bottom) );
+      fprintf(pptx_dev->file, "<wp:docPr id=\"%d\"  name=\"Plot %d\"/>", idx, idx );
+      fputs("<wp:cNvGraphicFramePr/>", pptx_dev->file );
+
+
+      fputs("<a:graphic xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\">", pptx_dev->file );
+        fputs("<a:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\">", pptx_dev->file );
+          fputs("<wpg:wgp>", pptx_dev->file );
+          fputs("<wpg:cNvGrpSpPr/>", pptx_dev->file );
+          fputs("<wpg:grpSpPr>", pptx_dev->file );
+
+            fputs("<a:xfrm rot=\"0\">", pptx_dev->file );
+            fprintf(pptx_dev->file, "<a:off x=\"%.0f\" y=\"%.0f\"/>", 0.0, 0.0 );
+            fprintf(pptx_dev->file, "<a:ext cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(dev->right), p2e_(dev->bottom) );
+            fprintf(pptx_dev->file, "<a:chOff x=\"%.0f\" y=\"%.0f\"/>", 0.0, 0.0 );
+            fprintf(pptx_dev->file, "<a:chExt cx=\"%.0f\" cy=\"%.0f\"/>", p2e_(dev->right), p2e_(dev->bottom) );
+            fputs("</a:xfrm>", pptx_dev->file );
+
+          fputs("</wpg:grpSpPr>", pptx_dev->file );
   }
 }
 
@@ -279,9 +302,9 @@ void write_a_rpr(pDevDesc dev, R_GE_gcontext *gc, double fontsize) {
                                    pptx_dev->fontname_serif, pptx_dev->fontname_sans,
                                    pptx_dev->fontname_mono, pptx_dev->fontname_symbol);
 
-  fprintf(pptx_dev->file,
-          "<a:latin typeface=\"%s\"/><a:cs typeface=\"%s\"/>",
-          fontname_.c_str(), fontname_.c_str() );
+  fprintf(pptx_dev->file, "<a:latin typeface=\"%s\"/>", fontname_.c_str() );
+  fprintf(pptx_dev->file, "<a:cs typeface=\"%s\"/>", fontname_.c_str() );
+  fprintf(pptx_dev->file, "<a:ea typeface=\"%s\"/>", fontname_.c_str() );
 
   fputs("</a:rPr>", pptx_dev->file );
 
@@ -324,46 +347,6 @@ void write_w_rpr(pDevDesc dev, R_GE_gcontext *gc, double fontsize) {
   fputs( "</w:rPr>", pptx_dev->file );
 
 }
-
-
-void write_a_ppr(pDevDesc dev, double hadj, double fontsize) {
-  PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
-
-  fputs("<a:pPr", pptx_dev->file );
-
-  if (hadj < 0.25)
-    fputs(" algn=\"l\"", pptx_dev->file );
-  else if (hadj < 0.75)
-    fputs(" algn=\"ctr\"", pptx_dev->file );
-  else
-    fputs(" algn=\"r\"", pptx_dev->file );
-  fputs(" marL=\"0\" marR=\"0\" indent=\"0\" >", pptx_dev->file );
-  fprintf(pptx_dev->file, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>", fontsize*100);
-  fputs("<a:spcBef><a:spcPts val=\"0\"/></a:spcBef>", pptx_dev->file );
-  fputs("<a:spcAft><a:spcPts val=\"0\"/></a:spcAft>", pptx_dev->file );
-
-  fputs("</a:pPr>", pptx_dev->file );
-
-}
-
-void write_w_ppr(pDevDesc dev, R_GE_gcontext *gc, double hadj, double fontsize, double fontheight) {
-  PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
-
-  fputs("<w:pPr>", pptx_dev->file );
-  if (hadj < 0.25)
-    fputs("<w:jc w:val=\"left\"/>", pptx_dev->file );
-  else if (hadj < 0.75)
-    fputs("<w:jc w:val=\"center\"/>", pptx_dev->file );
-  else
-    fputs("<w:jc w:val=\"right\"/>", pptx_dev->file );
-
-  fprintf(pptx_dev->file, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", fontsize*20);
-
-  write_w_rpr(dev, gc, fontsize);
-  fputs("</w:pPr>", pptx_dev->file );
-
-}
-
 
 
 
@@ -497,7 +480,7 @@ void write_text_body(pDevDesc dd, R_GE_gcontext *gc, const char* text, double ha
     fprintf(pptx_dev->file, "<%s:txBody>", pptx_dev->type.c_str());
     write_body_pr(dd);
     fputs("<a:p>", pptx_dev->file );
-    write_a_ppr(dd, hadj, fontsize);
+    // write_a_ppr(dd, hadj, fontsize);
     fputs("<a:r>", pptx_dev->file );
     write_a_rpr(dd, gc, fontsize) ;
     write_t(dd, text);
@@ -507,7 +490,7 @@ void write_text_body(pDevDesc dd, R_GE_gcontext *gc, const char* text, double ha
   } else if( pptx_dev->type == "wps" ){
     fprintf(pptx_dev->file, "<%s:txbx><w:txbxContent>", pptx_dev->type.c_str());
     fputs("<w:p>", pptx_dev->file );
-    write_w_ppr(dd, gc, hadj, fontsize, fontheight);
+    // write_w_ppr(dd, gc, hadj, fontsize, fontheight);
     fputs("<w:r>", pptx_dev->file );
     write_w_rpr(dd, gc, fontsize);
     write_t(dd, text);
