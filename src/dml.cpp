@@ -289,7 +289,7 @@ void write_preset_geom(pDevDesc dev, const char *preset_geom) {
 void write_a_rpr(pDevDesc dev, R_GE_gcontext *gc, double fontsize) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
 
-  fprintf(pptx_dev->file, "<a:rPr sz=\"%.0f\"", fontsize*100);
+  fprintf(pptx_dev->file, "<a:rPr sz=\"%.0f\"", .75*fontsize*100);
   if( is_italic(gc->fontface) ) fputs(" i=\"1\"", pptx_dev->file );
   if( is_bold(gc->fontface) ) fputs(" b=\"1\"", pptx_dev->file );
   fputs(">", pptx_dev->file );
