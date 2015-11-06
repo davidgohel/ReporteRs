@@ -379,10 +379,6 @@ void write_w_ppr(pDevDesc dev, R_GE_gcontext *gc, double hadj) {
 
   fputs("<w:textAlignment w:val=\"auto\"/>", pptx_dev->file );
 
-//
-//   fprintf(pptx_dev->file, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", fontsize*20);
-//
-  // write_w_rpr(dev, gc, fontsize);
   fputs("</w:pPr>", pptx_dev->file );
 
 }

@@ -80,6 +80,5 @@ writeDoc( doc, file = doc.filename )
 }
 \seealso{
 \code{\link{bsdoc}}, \code{\link{addPlot}}
-, \code{\link{add.plot.interactivity}}
 }
 

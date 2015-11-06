@@ -1,4 +1,4 @@
-class.html4r.RAPHAELGraphics = "org/lysis/reporters/html4r/elements/RAPHAELGraphics"
+class.html4r.SVGContent = "org/lysis/reporters/html4r/elements/SVGContent"
 class.html4r.Title = "org/lysis/reporters/html4r/elements/Title"
 class.pptx4r.LayoutDescription = "org/lysis/reporters/pptx4r/elements/template/LayoutDescription"
 class.pptx4r.SlidePart = "org/docx4j/openpackaging/parts/PresentationML/SlidePart"
@@ -40,7 +40,3 @@ class.DropDown = "org/lysis/reporters/html4r/elements/menu/Dropdown"
 class.MenuLink = "org/lysis/reporters/html4r/elements/menu/MenuLink"
 class.Separator = "org/lysis/reporters/html4r/elements/menu/Separator"
 class.Iframe = "org/lysis/reporters/html4r/elements/Iframe"
-
-# fonts
-class.fontMetric = "org/lysis/reporters/graphicaldevices/fonts/FontMetric"
-class.fontInfo = "org/lysis/reporters/graphicaldevices/fonts/FontInfo"

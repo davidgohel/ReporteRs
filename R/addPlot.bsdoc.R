@@ -1,3 +1,4 @@
+#' @import rvg
 #' @title Add a plot into an bsdoc object
 #'
 #' @description
@@ -29,7 +30,6 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addPlot}}
-#' , \code{\link{add.plot.interactivity}}
 #' @export
 addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		vector.graphic = T, width=6, height=6,
@@ -42,14 +42,13 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 	dirname = tempfile( )
 	dir.create( dirname )
 
-	pixelsize = FontMetric( fontname, pointsize )$info[3]
 
 	if( !vector.graphic ){
 
 		filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 		grDevices::png (filename = filename
 				, width = width, height = height, units = 'in'
-				, pointsize = pixelsize, res = 300
+				, pointsize = pointsize, res = 300
 		)
 
 		fun_res = try( fun(...), silent = T )
@@ -58,34 +57,18 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		doc = addImage( doc, plotfiles, width = width, height = height,
 				par.properties = par.properties, ppi = 300 )
 	} else {
-		filename = file.path( dirname, "plot", fsep = "/" )
-		env = raphael( file = filename,width=width*72.2
-			, height = height*72.2
-			, ps=pixelsize, fontname = fontname
-			, canvas_id = as.integer(doc$canvas_id) )
-		fun_res = try( fun(...), silent = T )
+	  filename = tempfile( fileext = ".svg")
+	  filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
-		if( inherits(fun_res, "try-error")){
-			dev.off()
-			message(attr(fun_res,"condition"))
-			stop("an error occured when executing plot function.")
-		}
+		rvg( file = filename, width = width, height = height,
+		     pointsize = pointsize, canvas_id = as.integer(doc$canvas_id) )
+		tryCatch(fun(...),
+		         finally = dev.off()
+		)
+    doc$canvas_id = doc$canvas_id + 1
 
-		last_canvas_id = .C("get_current_canvas_id", (dev.cur()-1L), 0L)[[2]]
-		.C("trigger_last_post_commands", (dev.cur()-1L) )
+		jimg = .jnew( class.html4r.SVGContent, .jParProperties(par.properties), filename, width*72, height*72 )
 
-		dev.off()
-
-		plot_ids = get("plot_ids", envir = env )
-		if( last_canvas_id < 0 ) stop("unexpected error, could not find device information.")
-		else doc$canvas_id = last_canvas_id;
-
-		jimg = .jnew( class.html4r.RAPHAELGraphics, .jParProperties(par.properties)  )
-
-		for(i in 1:length( plot_ids ) ){
-			div.id = plot_ids[[i]]$div.id
-			.jcall( jimg, "V", "registerGraphic", as.character(div.id), plot_ids[[i]]$filename )
-		}
 		out = .jcall( doc$jobj, "I", "add", jimg )
 		if( out != 1 ){
 			stop( "Problem while trying to add plot." )

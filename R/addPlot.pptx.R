@@ -1,3 +1,4 @@
+#' @useDynLib ReporteRs
 #' @title Add a plot into a pptx object
 #'
 #' @description

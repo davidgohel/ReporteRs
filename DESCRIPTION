@@ -24,7 +24,7 @@ Copyright: See file COPYRIGHTS.
 Depends: 
     R (>= 3.0),ReporteRsjars (>= 0.0.2)
 Imports: 
-    graphics, grDevices, rJava, utils, Rcpp, gdtools, xml2
+    graphics, grDevices, rJava, utils, Rcpp, gdtools, xml2, rvg
 LinkingTo: 
   Rcpp,
   gdtools

@@ -39,7 +39,6 @@
 #' @importFrom Rcpp sourceCpp
 #' @importFrom gdtools raster_view
 #' @importFrom Rcpp sourceCpp
-#' @importFrom gdtools raster_view
 #' @import xml2
 #' @export
 addPlot.docx = function(doc, fun
