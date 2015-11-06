@@ -40,6 +40,7 @@
 #' @importFrom gdtools raster_view
 #' @importFrom Rcpp sourceCpp
 #' @importFrom gdtools raster_view
+#' @import xml2
 #' @export
 addPlot.docx = function(doc, fun
 		, pointsize = getOption("ReporteRs-fontsize")
@@ -84,17 +85,14 @@ addPlot.docx = function(doc, fun
 	} else {
 		# one important and painful point is that shape ids must be unique
 		# in the whole document
-		last_docx_elt_index = .jcall( doc$obj, "I", "getElementIndex") + 1L
-		# start_id should be named last_id...
-		doc_elt_index = last_docx_elt_index;
+		doc_elt_index = .jcall( doc$obj, "I", "getElementIndex") + 1L
 
 		filename = tempfile( fileext = ".dml")
 		filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
 		vg_fonts <- getOption("vg_fonts")
 
-		# ajouter ID, namespace,
-		devPPTX_(file = filename, bg_="white",
+		devPPTX_(file = filename, bg_="purple",
       width = width, height = height,
       offx = 0, offy = 0,
       pointsize = pointsize,
@@ -103,13 +101,14 @@ addPlot.docx = function(doc, fun
       fontname_mono = vg_fonts$fontname_mono,
       fontname_symbol = vg_fonts$fontname_symbol,
       type = "wps",
-      editable = editable )
+      editable = editable, id = doc_elt_index )
 
 		tryCatch(fun(...),
       finally = dev.off()
     )
 
-		# .jcall( doc$obj, "V", "incrementElementIndex", as.integer( last_id - doc_elt_index + 1 ) )
+		dml_doc = read_xml(filename)
+		n_g_elts <- length( xml_find_all(dml_doc, "//*[@id]") )
 
 		dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
 		dml.object = .jnew( class.DrawingML, filename )
@@ -121,6 +120,8 @@ addPlot.docx = function(doc, fun
 		} else {
 			.jcall( doc$obj, "V", "add", dml.object, .jParProperties(par.properties), bookmark )
 		}
+		.jcall( doc$obj, "V", "incrementElementIndex", as.integer( n_g_elts + 1 ) )
+
 	}
 
 	doc

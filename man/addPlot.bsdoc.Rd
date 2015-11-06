@@ -52,13 +52,12 @@ doc = addTitle( doc, "Title example 1", level = 1 )
 # Add a base plot
 # set vector.graphic to FALSE if Word version
 #   used to read the file is <= 2007
-doc = addPlot( doc, fun = plot
-  , x = rnorm( 100 ), y = rnorm (100 )
-  , main = "base plot main title"
-  , vector.graphic = TRUE
-  , width = 5, height = 7
-  , par.properties = parProperties(text.align = "left")
-)
+doc = addPlot( doc, fun = plot,
+  x = rnorm( 100 ), y = rnorm (100 ), main = "base plot main title",
+  vector.graphic = TRUE,
+  width = 5, height = 7,
+  par.properties = parProperties(text.align = "left")
+  )
 
 
 doc = addTitle( doc, "Title example 2", level = 1 )
@@ -74,19 +73,6 @@ if( requireNamespace("ggplot2", quietly = TRUE) ){
   #   objects is expecting argument 'x'.
   doc = addPlot( doc = doc, fun = print, x = myplot )
 }
-
-
-doc = addTitle( doc, "Title example 3", level = 1 )
-###########################################################
-# Create lm.D9, a lm object
-ctl = c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-trt = c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-group = gl(2, 10, 20, labels = c("Ctl","Trt"))
-weight = c(ctl, trt)
-lm.D9 = lm(weight ~ group)
-
-# add the 6 plots into the document
-doc = addPlot( doc, plot, x = lm.D9, width = 6, height = 7 )
 
 # Write the object
 writeDoc( doc, file = doc.filename )

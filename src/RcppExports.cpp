@@ -6,8 +6,8 @@
 using namespace Rcpp;
 
 // devPPTX_
-bool devPPTX_(std::string file, std::string bg_, int width, int height, double offx, double offy, int pointsize, std::string fontname_serif, std::string fontname_sans, std::string fontname_mono, std::string fontname_symbol, std::string type, bool editable);
-RcppExport SEXP ReporteRs_devPPTX_(SEXP fileSEXP, SEXP bg_SEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP offxSEXP, SEXP offySEXP, SEXP pointsizeSEXP, SEXP fontname_serifSEXP, SEXP fontname_sansSEXP, SEXP fontname_monoSEXP, SEXP fontname_symbolSEXP, SEXP typeSEXP, SEXP editableSEXP) {
+bool devPPTX_(std::string file, std::string bg_, int width, int height, double offx, double offy, int pointsize, std::string fontname_serif, std::string fontname_sans, std::string fontname_mono, std::string fontname_symbol, std::string type, bool editable, int id);
+RcppExport SEXP ReporteRs_devPPTX_(SEXP fileSEXP, SEXP bg_SEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP offxSEXP, SEXP offySEXP, SEXP pointsizeSEXP, SEXP fontname_serifSEXP, SEXP fontname_sansSEXP, SEXP fontname_monoSEXP, SEXP fontname_symbolSEXP, SEXP typeSEXP, SEXP editableSEXP, SEXP idSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -24,7 +24,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type fontname_symbol(fontname_symbolSEXP);
     Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
     Rcpp::traits::input_parameter< bool >::type editable(editableSEXP);
-    __result = Rcpp::wrap(devPPTX_(file, bg_, width, height, offx, offy, pointsize, fontname_serif, fontname_sans, fontname_mono, fontname_symbol, type, editable));
+    Rcpp::traits::input_parameter< int >::type id(idSEXP);
+    __result = Rcpp::wrap(devPPTX_(file, bg_, width, height, offx, offy, pointsize, fontname_serif, fontname_sans, fontname_mono, fontname_symbol, type, editable, id));
     return __result;
 END_RCPP
 }

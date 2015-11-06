@@ -122,7 +122,6 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 		, editable = TRUE, offx, offy, width, height
 		, ... ) {
 	slide = doc$current_slide
-	plot_first_id = doc$plot_first_id
 
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
 	if( check.dims < 4 ){
@@ -138,7 +137,6 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 
 	vg_fonts <- getOption("vg_fonts")
 
-# ajouter ID, namespace,
 	devPPTX_(file = filename, bg_="white",
 	         width = width, height = height,
 	         offx = offx, offy = offy,
@@ -148,11 +146,11 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	         fontname_mono = vg_fonts$fontname_mono,
 	         fontname_symbol = vg_fonts$fontname_symbol,
 	         type = "p",
-	         editable = editable )
+	         editable = editable, id = 0 )
 	tryCatch(fun(...),
 	         finally = dev.off()
 	)
-  # file.copy(filename, ".")
+
 	dml.object = .jnew( class.DrawingML, filename )
 	if( check.dims < 4 ){
 	  out = .jcall( slide, "I", "add", dml.object )

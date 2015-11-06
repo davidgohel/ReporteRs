@@ -48,10 +48,10 @@ public:
            std::string fontname_mono_,
            std::string fontname_symbol_,
            std::string type_,
-           bool editable_, double offx_, double offy_ ):
+           bool editable_, double offx_, double offy_ , int id_):
       filename(filename_),
       pageno(0),
-	    id(-1),
+	    id(id_),
 	    offx(offx_), offy(offy_),
 	    fontname_serif(fontname_serif_),
 	    fontname_sans(fontname_sans_),
@@ -79,7 +79,14 @@ public:
   }
 };
 
+inline bool is_black(int col) {
+  return (R_RED(col) == 0) && (R_GREEN(col) == 0) && (R_BLUE(col) == 0);
+}
 
+inline bool is_filled(int col) {
+  const int alpha = R_ALPHA(col);
+  return (col != NA_INTEGER) && (alpha != 0);
+}
 
 void write_nv_pr(pDevDesc dev, R_GE_gcontext *gc, const char *label) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
@@ -130,15 +137,10 @@ void write_xfrm(pDevDesc dev, double x, double y, double width, double height, d
 
 void write_fill(pDevDesc dev, R_GE_gcontext *gc) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
-  int alpha = R_ALPHA(gc->fill);
-  if (gc->fill == NA_INTEGER || alpha == 0) {
-    return ;
-  } else {
-    double alpha_ =  alpha / 255.0 * 100000;
-    fprintf(pptx_dev->file,
-            "<a:solidFill><a:srgbClr val=\"%02X%02X%02X\"><a:alpha val=\"%.0f\" /></a:srgbClr></a:solidFill>",
-            R_RED(gc->fill), R_GREEN(gc->fill), R_BLUE(gc->fill), alpha_);
-  }
+  double alpha_ =  R_ALPHA(gc->fill) / 255.0 * 100000;
+  fprintf(pptx_dev->file,
+          "<a:solidFill><a:srgbClr val=\"%02X%02X%02X\"><a:alpha val=\"%.0f\" /></a:srgbClr></a:solidFill>",
+          R_RED(gc->fill), R_GREEN(gc->fill), R_BLUE(gc->fill), alpha_);
 
 }
 
@@ -289,7 +291,7 @@ void write_preset_geom(pDevDesc dev, const char *preset_geom) {
 void write_a_rpr(pDevDesc dev, R_GE_gcontext *gc, double fontsize) {
   PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
 
-  fprintf(pptx_dev->file, "<a:rPr sz=\"%.0f\"", .75*fontsize*100);
+  fprintf(pptx_dev->file, "<a:rPr sz=\"%.0f\"", fontsize*100);
   if( is_italic(gc->fontface) ) fputs(" i=\"1\"", pptx_dev->file );
   if( is_bold(gc->fontface) ) fputs(" b=\"1\"", pptx_dev->file );
   fputs(">", pptx_dev->file );
@@ -328,8 +330,8 @@ void write_w_rpr(pDevDesc dev, R_GE_gcontext *gc, double fontsize) {
   if( is_bold(gc->fontface) ) fputs("<w:b/>", pptx_dev->file);
 
   fprintf(pptx_dev->file, "<w:color w:val=\"%02X%02X%02X\"/>", R_RED(gc->col), R_GREEN(gc->col), R_BLUE(gc->col) );
-  fprintf(pptx_dev->file, "<w:sz w:val=\"%.0f\"/>", fontsize * 1.5 );
-  fprintf(pptx_dev->file, "<w:szCs w:val=\"%.0f\"/>", fontsize * 1.5 );
+  fprintf(pptx_dev->file, "<w:sz w:val=\"%.0f\"/>", fontsize * 2 );
+  fprintf(pptx_dev->file, "<w:szCs w:val=\"%.0f\"/>", fontsize * 2 );
   if (alpha > 0) {
     fputs( "<w14:textFill>", pptx_dev->file );
     fputs( "<w14:solidFill>", pptx_dev->file );
@@ -344,6 +346,46 @@ void write_w_rpr(pDevDesc dev, R_GE_gcontext *gc, double fontsize) {
 
 }
 
+void write_a_ppr(pDevDesc dev, double hadj) {
+  PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
+
+  fputs("<a:pPr", pptx_dev->file );
+
+  if (hadj < 0.25)
+    fputs(" algn=\"l\"", pptx_dev->file );
+  else if (hadj < 0.75)
+    fputs(" algn=\"ctr\"", pptx_dev->file );
+  else
+    fputs(" algn=\"r\"", pptx_dev->file );
+  fputs(" marL=\"0\" marR=\"0\" indent=\"0\" >", pptx_dev->file );
+//   fprintf(pptx_dev->file, "<a:lnSpc><a:spcPts val=\"%.0f\"/></a:lnSpc>", fontsize*100);
+//   fputs("<a:spcBef><a:spcPts val=\"0\"/></a:spcBef>", pptx_dev->file );
+//   fputs("<a:spcAft><a:spcPts val=\"0\"/></a:spcAft>", pptx_dev->file );
+
+  fputs("</a:pPr>", pptx_dev->file );
+
+}
+
+void write_w_ppr(pDevDesc dev, R_GE_gcontext *gc, double hadj) {
+  PPTXdesc *pptx_dev = (PPTXdesc *) dev->deviceSpecific;
+
+  fputs("<w:pPr>", pptx_dev->file );
+  if (hadj < 0.25)
+    fputs("<w:jc w:val=\"left\"/>", pptx_dev->file );
+  else if (hadj < 0.75)
+    fputs("<w:jc w:val=\"center\"/>", pptx_dev->file );
+  else
+    fputs("<w:jc w:val=\"right\"/>", pptx_dev->file );
+
+  fputs("<w:textAlignment w:val=\"auto\"/>", pptx_dev->file );
+
+//
+//   fprintf(pptx_dev->file, "<w:spacing w:after=\"0\" w:before=\"0\" w:line=\"%.0f\" w:lineRule=\"exact\" />", fontsize*20);
+//
+  // write_w_rpr(dev, gc, fontsize);
+  fputs("</w:pPr>", pptx_dev->file );
+
+}
 
 
 void write_body_pr(pDevDesc dev) {
@@ -476,6 +518,7 @@ void write_text_body(pDevDesc dd, R_GE_gcontext *gc, const char* text, double ha
     fprintf(pptx_dev->file, "<%s:txBody>", pptx_dev->type.c_str());
     write_body_pr(dd);
     fputs("<a:p>", pptx_dev->file );
+    write_a_ppr(dd, hadj);
     fputs("<a:r>", pptx_dev->file );
     write_a_rpr(dd, gc, fontsize) ;
     write_t(dd, text);
@@ -485,6 +528,7 @@ void write_text_body(pDevDesc dd, R_GE_gcontext *gc, const char* text, double ha
   } else if( pptx_dev->type == "wps" ){
     fprintf(pptx_dev->file, "<%s:txbx><w:txbxContent>", pptx_dev->type.c_str());
     fputs("<w:p>", pptx_dev->file );
+    write_w_ppr(dd, gc, hadj);
     fputs("<w:r>", pptx_dev->file );
     write_w_rpr(dd, gc, fontsize);
     write_t(dd, text);
@@ -655,7 +699,7 @@ static void pptx_polygon(int n, double *x, double *y, const pGEcontext gc,
           dml_write_path(dd, x, y, n, 1);
         fputs( "</a:pathLst>", pptx_dev->file );
       fputs("</a:custGeom>", pptx_dev->file );
-      write_fill(dd, gc);
+      if( is_filled(gc->fill) ) write_fill(dd, gc);
       write_line(dd, gc);
     write_sppr_closing(dd);
     write_text_body_empty(dd);
@@ -691,7 +735,7 @@ static void pptx_rect(double x0, double y0, double x1, double y1,
     write_sppr_opening(dd);
       write_xfrm(dd, x0, y0, x1 - x0, y1 - y0, 0);
       write_preset_geom(dd, "rect");
-      write_fill(dd, gc);
+      if( is_filled(gc->fill) ) write_fill(dd, gc);
       write_line(dd, gc);
     write_sppr_closing(dd);
     write_text_body_empty(dd);
@@ -708,7 +752,7 @@ static void pptx_circle(double x, double y, double r, const pGEcontext gc,
     write_sppr_opening(dd);
       write_xfrm(dd, x - r, y - r, r * 2, r * 2, 0);
       write_preset_geom(dd, "ellipse");
-      write_fill(dd, gc);
+      if( is_filled(gc->fill) ) write_fill(dd, gc);
       write_line(dd, gc);
     write_sppr_closing(dd);
 
@@ -728,8 +772,8 @@ static void pptx_text(double x, double y, const char *str, double rot,
   double fs = gc->cex * gc->ps;
   if( h < 1.0 ) return;
 
-  double corrected_offx = translate_rotate_x(x, y, rot, h, w, hadj) ;
-  double corrected_offy = translate_rotate_y(x, y, rot, h, w, hadj) ;
+  double corrected_offx = translate_rotate_x(x, y, rot, h*1.5, w, hadj) ;
+  double corrected_offy = translate_rotate_y(x, y, rot, h*1.5, w, hadj) ;
 
 
   write_sp_opening(dd);
@@ -737,7 +781,7 @@ static void pptx_text(double x, double y, const char *str, double rot,
     write_nv_pr(dd, gc, "tx");
 
     write_sppr_opening(dd);
-      write_xfrm(dd, corrected_offx, corrected_offy, w, h, rot);
+      write_xfrm(dd, corrected_offx, corrected_offy, w, h*1.5, rot);
       write_preset_geom(dd, "rect");
     write_sppr_closing(dd);
 
@@ -772,7 +816,7 @@ pDevDesc pptx_driver_new(std::string filename, int bg, double width, double heig
                         std::string fontname_mono,
                         std::string fontname_symbol,
                         std::string type,
-                        bool editable) {
+                        bool editable, int id) {
 
   pDevDesc dd = (DevDesc*) calloc(1, sizeof(DevDesc));
   if (dd == NULL)
@@ -839,7 +883,7 @@ pDevDesc pptx_driver_new(std::string filename, int bg, double width, double heig
 
   dd->deviceSpecific = new PPTXdesc(filename,
     fontname_serif, fontname_sans, fontname_mono, fontname_symbol, type,
-    editable, offx*72, offy*72);
+    editable, offx*72, offy*72, id);
   return dd;
 }
 
@@ -852,7 +896,7 @@ bool devPPTX_(std::string file, std::string bg_, int width, int height,
     std::string fontname_mono,
     std::string fontname_symbol,
     std::string type,
-    bool editable) {
+    bool editable, int id) {
 
   int bg = R_GE_str2col(bg_.c_str());
 
@@ -862,7 +906,8 @@ bool devPPTX_(std::string file, std::string bg_, int width, int height,
     pDevDesc dev = pptx_driver_new(file, bg, width, height, offx, offy, pointsize,
       fontname_serif, fontname_sans, fontname_mono, fontname_symbol,
       type,
-      editable);
+      editable,
+      id);
     if (dev == NULL)
       Rcpp::stop("Failed to start PPTX device");
 
