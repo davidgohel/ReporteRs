@@ -25,4 +25,5 @@ r_packages:
 
 r_github_packages:
  - davidgohel/gdtools
+ - davidgohel/rvg
 
