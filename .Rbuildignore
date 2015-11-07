@@ -4,3 +4,4 @@
 ^examples$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^todo\.Rmd$

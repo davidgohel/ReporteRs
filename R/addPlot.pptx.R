@@ -1,4 +1,3 @@
-#' @useDynLib ReporteRs
 #' @title Add a plot into a pptx object
 #'
 #' @description
@@ -42,10 +41,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
-#' @importFrom Rcpp sourceCpp
-#' @importFrom gdtools raster_view
-#' @importFrom Rcpp sourceCpp
-#' @importFrom gdtools raster_view
+#' @import rvg
 #' @export
 addPlot.pptx = function(doc, fun, pointsize = 11
 	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
@@ -138,16 +134,14 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 
 	vg_fonts <- getOption("vg_fonts")
 
-	devPPTX_(file = filename, bg_="white",
-	         width = width, height = height,
+	dml_pptx(file = filename, width = width, height = height,
 	         offx = offx, offy = offy,
 	         pointsize = pointsize,
 	         fontname_serif = vg_fonts$fontname_serif,
 	         fontname_sans = vg_fonts$fontname_sans,
 	         fontname_mono = vg_fonts$fontname_mono,
 	         fontname_symbol = vg_fonts$fontname_symbol,
-	         type = "p",
-	         editable = editable, id = 0 )
+	         editable = editable )
 	tryCatch(fun(...),
 	         finally = dev.off()
 	)

@@ -37,16 +37,16 @@ or on a portion of a text in a paragraph.
 docx.file = "document_new.docx"
 
 # create document
-doc = docx( title = "My example", 
-  template = file.path( find.package("ReporteRs"), 
+doc = docx( title = "My example",
+  template = file.path( system.file(package = "ReporteRs"),
 	"templates/bookmark_example.docx") )
 
 # replace bookmarks 'AUTHOR' and 'REVIEWER'
 # by dummy values
-doc = addParagraph( doc, 
+doc = addParagraph( doc,
 	value = c( "James Sonny Crockett", "Ricardo Rico Tubbs" ),
 	stylename = "Normal", bookmark = "AUTHOR" )
-doc = addParagraph( doc, 	value = c( "Martin Marty Castillo" ), 
+doc = addParagraph( doc, 	value = c( "Martin Marty Castillo" ),
 	stylename = "Normal", bookmark = "REVIEWER" )
 
 
@@ -61,7 +61,7 @@ doc = addFlexTable( doc
 	, MyFTable
 	, bookmark = "DATA1" )
 
-# replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx' 
+# replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx'
 # by data.frame objects 'data' and 'conf.int'
 doc = addFlexTable( doc
 	, vanilla.table( iris[1:10,] )
@@ -72,7 +72,7 @@ doc = addPlot( doc, vector.graphic = TRUE
 		sale5 <- c(6, 4, 9, 7, 6, 12, 8, 10, 9, 13)
 		plot(sale5)
 		abline(lsfit(1:10, sale5))
-		abline(lsfit(1:10, sale5, intercept = FALSE), col = 4) 
+		abline(lsfit(1:10, sale5, intercept = FALSE), col = 4)
 	}
 	, bookmark = "PLOT")
 

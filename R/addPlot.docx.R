@@ -36,9 +36,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{addPlot}}, \code{\link{bookmark}}.
-#' @importFrom Rcpp sourceCpp
-#' @importFrom gdtools raster_view
-#' @importFrom Rcpp sourceCpp
+#' @import rvg
 #' @import xml2
 #' @export
 addPlot.docx = function(doc, fun
@@ -91,16 +89,13 @@ addPlot.docx = function(doc, fun
 
 		vg_fonts <- getOption("vg_fonts")
 
-		devPPTX_(file = filename, bg_="purple",
-      width = width, height = height,
-      offx = 0, offy = 0,
+		dml_docx(file = filename, width = width, height = height,
       pointsize = pointsize,
       fontname_serif = vg_fonts$fontname_serif,
       fontname_sans = vg_fonts$fontname_sans,
       fontname_mono = vg_fonts$fontname_mono,
       fontname_symbol = vg_fonts$fontname_symbol,
-      type = "wps",
-      editable = editable, id = doc_elt_index )
+      editable = editable, init_id = doc_elt_index )
 
 		tryCatch(fun(...),
       finally = dev.off()

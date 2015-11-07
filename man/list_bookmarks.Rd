@@ -23,8 +23,8 @@ List all bookmarks available in a \code{docx} object.
 }
 \examples{
 #START_TAG_TEST
-doc = docx( title = "My example", template = file.path( 
-  find.package("ReporteRs"), "templates/bookmark_example.docx") )
+doc = docx( title = "My example", template = file.path(
+  system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
 list_bookmarks( doc )
 #STOP_TAG_TEST
 }

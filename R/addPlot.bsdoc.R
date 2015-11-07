@@ -1,4 +1,3 @@
-#' @import rvg
 #' @title Add a plot into an bsdoc object
 #'
 #' @description
@@ -30,6 +29,7 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{addPlot}}
+#' @import rvg
 #' @export
 addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		vector.graphic = T, width=6, height=6,
@@ -60,7 +60,7 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 	  filename = tempfile( fileext = ".svg")
 	  filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
-		rvg( file = filename, width = width, height = height,
+	  dsvg( file = filename, width = width, height = height,
 		     pointsize = pointsize, canvas_id = as.integer(doc$canvas_id) )
 		tryCatch(fun(...),
 		         finally = dev.off()

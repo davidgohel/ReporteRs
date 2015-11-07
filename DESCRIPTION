@@ -8,9 +8,7 @@ Authors@R: c(
     person("Bootstrap", role = c("ctb", "cph"),
     comment = "Bootstrap development team"),
     person("jQuery", role = c("ctb", "cph"),
-    comment = "The jQuery Foundation"),
-    person("Dmitry Baranovskiy", role = c("ctb", "cph"),
-    comment = "raphael javascript libraries" ) )
+    comment = "The jQuery Foundation") )
 Description: Create Microsoft Word document (>=2007),
     Microsoft Powerpoint document (>=2007) and HTML documents from R. There are
     several features to let you format and present R outputs ; e.g. Editable
@@ -21,16 +19,12 @@ Description: Create Microsoft Word document (>=2007),
     Microsoft files (docx and pptx).
 License: GPL-3
 Copyright: See file COPYRIGHTS.
-Depends: 
+Depends:
     R (>= 3.0),ReporteRsjars (>= 0.0.2)
-Imports: 
-    graphics, grDevices, rJava, utils, Rcpp, gdtools, xml2, rvg
-LinkingTo: 
-  Rcpp,
-  gdtools
-Suggests: 
-    ggplot2,
-    testthat
+Imports:
+    graphics, grDevices, rJava, utils, gdtools, xml2, rvg
+Suggests:
+    ggplot2
 SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
     http://groups.google.com/group/reporters-package
