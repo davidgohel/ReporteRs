@@ -24,7 +24,8 @@ Depends:
 Imports:
     graphics, grDevices, rJava, utils, gdtools, xml2, rvg
 Suggests:
-    ggplot2
+    ggplot2,
+    testthat
 SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
     http://groups.google.com/group/reporters-package
