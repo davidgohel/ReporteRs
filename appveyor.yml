@@ -13,8 +13,6 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - travis-tool.sh install_github davidgohel/gdtools
-  - travis-tool.sh install_github davidgohel/rvg
   - travis-tool.sh install_deps
 
 test_script:
