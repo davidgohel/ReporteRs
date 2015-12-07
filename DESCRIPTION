@@ -22,7 +22,13 @@ Copyright: See file COPYRIGHTS.
 Depends:
     R (>= 3.0),ReporteRsjars (>= 0.0.2)
 Imports:
-    graphics, grDevices, rJava, utils, gdtools, xml2, rvg
+    graphics,
+    grDevices,
+    rJava,
+    utils,
+    gdtools,
+    xml2,
+    rvg
 Suggests:
     ggplot2,
     testthat
@@ -30,3 +36,4 @@ SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
     http://groups.google.com/group/reporters-package
 BugReports: https://github.com/davidgohel/ReporteRs/issues
+RoxygenNote: 5.0.1
