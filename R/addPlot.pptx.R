@@ -133,6 +133,9 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
 	vg_fonts <- getOption("vg_fonts")
+	next_rels_id <- get_next_relid_pptx(doc)-1
+	uid <- basename(tempfile(pattern = ""))
+	img_directory = file.path(getwd(), uid )
 
 	dml_pptx(file = filename, width = width, height = height,
 	         offx = offx, offy = offy,
@@ -141,12 +144,20 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	         fontname_sans = vg_fonts$fontname_sans,
 	         fontname_mono = vg_fonts$fontname_mono,
 	         fontname_symbol = vg_fonts$fontname_symbol,
-	         editable = editable )
+	         editable = editable,
+	         next_rels_id = next_rels_id,
+	         raster_base_path = img_directory)
 	tryCatch(fun(...),
 	         finally = dev.off()
 	)
-
+	raster_files <- list.files(path = getwd(), pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
+	raster_names <- gsub( pattern = "\\.png$", replacement = "", basename(raster_files) )
 	dml.object = .jnew( class.DrawingML, filename )
+	if( length( raster_files ) > 0 ){
+	  .jcall( slide, "I", "add_png", .jarray(raster_files), .jarray(raster_names) )
+	  unlink(raster_files, force = TRUE)
+	}
+
 	if( check.dims < 4 ){
 	  out = .jcall( slide, "I", "add", dml.object )
 	} else {
@@ -155,6 +166,7 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	if( isSlideError( out ) ){
 	  stop( getSlideErrorString( out , "dml") )
 	}
+	unlink(filename, force = TRUE)
 
 	doc
 }

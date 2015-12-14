@@ -88,18 +88,25 @@ addPlot.docx = function(doc, fun
 		filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
 		vg_fonts <- getOption("vg_fonts")
+		next_rels_id <- get_next_relid_docx(doc)-1
+		uid <- basename(tempfile(pattern = ""))
+		img_directory = file.path(getwd(), uid )
 
 		dml_docx(file = filename, width = width, height = height,
-      pointsize = pointsize,
-      fontname_serif = vg_fonts$fontname_serif,
-      fontname_sans = vg_fonts$fontname_sans,
-      fontname_mono = vg_fonts$fontname_mono,
-      fontname_symbol = vg_fonts$fontname_symbol,
-      editable = editable, init_id = doc_elt_index )
-
+		         pointsize = pointsize,
+		         fontname_serif = vg_fonts$fontname_serif,
+		         fontname_sans = vg_fonts$fontname_sans,
+		         fontname_mono = vg_fonts$fontname_mono,
+		         fontname_symbol = vg_fonts$fontname_symbol,
+		         editable = editable,
+		         next_rels_id = next_rels_id,
+		         raster_base_path = img_directory)
 		tryCatch(fun(...),
-      finally = dev.off()
-    )
+		         finally = dev.off()
+		)
+
+		raster_files <- list.files(path = getwd(), pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
+		raster_names <- gsub( pattern = "\\.png$", replacement = "", basename(raster_files) )
 
 		dml_doc = read_xml(filename)
 		n_g_elts <- length( xml_find_all(dml_doc, "//*[@id]") )
@@ -108,6 +115,11 @@ addPlot.docx = function(doc, fun
 		dml.object = .jnew( class.DrawingML, filename )
 		.jcall( dml.object, "V", "setWidth", as.integer( dims[1] ) )
 		.jcall( dml.object, "V", "setHeight", as.integer( dims[2] ) )
+
+		if( length( raster_files ) > 0 ){
+		  .jcall( doc$obj, "V", "add_png", .jarray(raster_files), .jarray(raster_names) )
+		  # unlink(raster_files, force = TRUE)
+		}
 
 		if( missing( bookmark ) ){
 		  .jcall( doc$obj, "V", "add", dml.object, .jParProperties(par.properties) )
