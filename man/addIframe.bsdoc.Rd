@@ -18,12 +18,15 @@
 
 \item{seamless}{Specifies that the iframe should look like it is a part of the containing document}
 
-\item{par.properties}{paragraph formatting properties of the paragraph that contains iframe. 
+\item{par.properties}{paragraph formatting properties of the paragraph that contains iframe.
 An object of class \code{\link{parProperties}}}
 
 \item{...}{further arguments, not used.}
 }
 \value{
 an object of class \code{\link{bsdoc}}.
+}
+\description{
+Add an iframe into a \code{\link{bsdoc}} object
 }
 
