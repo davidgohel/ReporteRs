@@ -51,6 +51,8 @@ docx = function( title = "untitled", template, list.definition = getOption("Repo
 	if( !file.exists( template ) || .reg < 1 )
 		stop(template , " is not a valid file.")
 	
+	template <- path.expand(template)
+	
 	lidef = do.call( list.settings, list.definition )
 	# java calls
 	obj = .jnew( class.docx4r.document )

@@ -2,3 +2,5 @@
 ^.travis.yml$
 ^appveyor.yml$
 ^examples$
+^.*\.Rproj$
+^\.Rproj\.user$

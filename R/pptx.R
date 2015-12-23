@@ -54,6 +54,8 @@ pptx = function( title, template, list.definition = getOption("ReporteRs-list-de
 	if( !file.exists( template ) || .reg < 1 )
 		stop(template , " is not a valid file.")
 	
+	template <- path.expand(template)
+	
 #	public static int NO_ERROR = 0;
 #	public static int READDOC_ERROR = 1;
 #	public static int LOADDOC_ERROR = 2;
