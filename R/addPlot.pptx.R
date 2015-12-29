@@ -17,6 +17,7 @@
 #' @param offy optional, y position of the shape (top left position of the bounding box) in inches. See details.
 #' @param width optional, width of the shape in inches. See details.
 #' @param height optional, height of the shape in inches. See details.
+#' @param bg the initial background colour.
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{\link{pptx}}.
 #' @details
@@ -43,10 +44,10 @@
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
 #' @import rvg
 #' @export
-addPlot.pptx = function(doc, fun, pointsize = 11
-	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
-	, editable = TRUE, offx, offy, width, height
-	, ... ) {
+addPlot.pptx = function(doc, fun, pointsize = 11,
+	vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font"),
+	editable = TRUE, offx, offy, width, height, bg = "white",
+	... ) {
 
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
 	if( check.dims > 0 && check.dims < 4 ) {
@@ -77,18 +78,18 @@ addPlot.pptx = function(doc, fun, pointsize = 11
 		if( vector.graphic ){
 			vector.pptx.graphic(doc = doc, fun = fun, pointsize = pointsize
 				, fontname = fontname, editable = editable
-				, offx, offy, width, height, ... )
+				, offx, offy, width, height, bg = bg, ... )
 		} else {
 			raster.pptx.graphic (doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, offx, offy, width, height, ... )
+				, fontname = fontname, offx, offy, width, height, bg = bg, ... )
 		}
 	} else {
 		if( vector.graphic ){
 			vector.pptx.graphic(doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, editable = editable, ... )
+				, fontname = fontname, editable = editable, bg = bg, ... )
 		} else {
 			raster.pptx.graphic (doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, ... )
+				, fontname = fontname, bg = bg, ... )
 		}
 	}
 
@@ -114,10 +115,10 @@ get.graph.dims = function( doc ){
 	data.frame( widths = widths, heights = heights, offxs = offxs, offys = offys )
 }
 
-vector.pptx.graphic = function(doc, fun, pointsize = 11
-		, fontname = getOption("ReporteRs-default-font")
-		, editable = TRUE, offx, offy, width, height
-		, ... ) {
+vector.pptx.graphic = function(doc, fun, pointsize = 11,
+		fontname = getOption("ReporteRs-default-font"),
+		editable = TRUE, offx, offy, width, height, bg = "white",
+		... ) {
 	slide = doc$current_slide
 
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
@@ -133,11 +134,16 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
 	vg_fonts <- getOption("vg_fonts")
-	next_rels_id <- get_next_relid_pptx(doc)-1
+
+	slide = doc$current_slide
+	next_rels_id <- rJava::.jcall( slide, "S", "getNextRelID" )
+	next_rels_id <- gsub(pattern = "(.*)([0-9]+)$", "\\2", next_rels_id )
+	next_rels_id <- as.integer(next_rels_id) - 1
 	uid <- basename(tempfile(pattern = ""))
 	img_directory = file.path(getwd(), uid )
 
 	dml_pptx(file = filename, width = width, height = height,
+	         bg = bg,
 	         offx = offx, offy = offy,
 	         pointsize = pointsize,
 	         fontname_serif = vg_fonts$fontname_serif,
@@ -146,7 +152,7 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 	         fontname_symbol = vg_fonts$fontname_symbol,
 	         editable = editable,
 	         next_rels_id = next_rels_id,
-	         raster_base_path = img_directory)
+	         raster_prefix = img_directory)
 	tryCatch(fun(...),
 	         finally = dev.off()
 	)
@@ -173,7 +179,7 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 
 raster.pptx.graphic = function(doc, fun, pointsize = 11
 		, fontname = getOption("ReporteRs-default-font")
-		, offx, offy, width, height
+		, offx, offy, width, height, bg = bg
 		, ... ) {
 	slide = doc$current_slide
 	plot_first_id = doc$plot_first_id
@@ -195,7 +201,7 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 	filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 	grDevices::png (filename = filename
 			, width = width[1], height = height[1], units = 'in'
-			, pointsize = pointsize, res = 300
+			, pointsize = pointsize, res = 300, bg = bg
 	)
 
 	fun(...)

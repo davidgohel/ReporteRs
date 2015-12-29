@@ -6,7 +6,7 @@
 \usage{
 \method{addPlot}{pptx}(doc, fun, pointsize = 11, vector.graphic = TRUE,
   fontname = getOption("ReporteRs-default-font"), editable = TRUE, offx,
-  offy, width, height, ...)
+  offy, width, height, bg = "white", ...)
 }
 \arguments{
 \item{doc}{\code{\link{pptx}} object}
@@ -32,6 +32,8 @@ are produced instead of PNG images. Vector graphics in pptx document are Drawing
 \item{width}{optional, width of the shape in inches. See details.}
 
 \item{height}{optional, height of the shape in inches. See details.}
+
+\item{bg}{the initial background colour.}
 
 \item{...}{arguments for \code{fun}.}
 }

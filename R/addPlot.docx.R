@@ -80,19 +80,22 @@ addPlot.docx = function(doc, fun
 
 
 	} else {
-		# one important and painful point is that shape ids must be unique
-		# in the whole document
 		doc_elt_index = .jcall( doc$obj, "I", "getElementIndex") + 1L
 
 		filename = tempfile( fileext = ".dml")
 		filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
 		vg_fonts <- getOption("vg_fonts")
-		next_rels_id <- get_next_relid_docx(doc)-1
+
+		next_rels_id <- rJava::.jcall( doc$obj, "S", "getNextRelID" )
+		next_rels_id <- gsub(pattern = "^rId", "", next_rels_id )
+		next_rels_id <- as.integer(next_rels_id)-1
 		uid <- basename(tempfile(pattern = ""))
 		img_directory = file.path(getwd(), uid )
 
-		dml_docx(file = filename, width = width, height = height,
+		dml_docx(file = filename,
+		         width = width, height = height,
+		         id = doc_elt_index,
 		         pointsize = pointsize,
 		         fontname_serif = vg_fonts$fontname_serif,
 		         fontname_sans = vg_fonts$fontname_sans,
@@ -100,7 +103,7 @@ addPlot.docx = function(doc, fun
 		         fontname_symbol = vg_fonts$fontname_symbol,
 		         editable = editable,
 		         next_rels_id = next_rels_id,
-		         raster_base_path = img_directory)
+		         raster_prefix = img_directory, standalone = TRUE)
 		tryCatch(fun(...),
 		         finally = dev.off()
 		)
@@ -118,7 +121,7 @@ addPlot.docx = function(doc, fun
 
 		if( length( raster_files ) > 0 ){
 		  .jcall( doc$obj, "V", "add_png", .jarray(raster_files), .jarray(raster_names) )
-		  # unlink(raster_files, force = TRUE)
+		  unlink(raster_files, force = TRUE)
 		}
 
 		if( missing( bookmark ) ){
