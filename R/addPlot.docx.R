@@ -23,6 +23,7 @@
 #' @param pointsize the default pointsize of plotted text in pixels, default to getOption("ReporteRs-fontsize").
 #' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
 #' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
+#' @param bg the initial background colour.
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{\link{docx}}.
 #' @examples
@@ -39,15 +40,13 @@
 #' @import rvg
 #' @import xml2
 #' @export
-addPlot.docx = function(doc, fun
-		, pointsize = getOption("ReporteRs-fontsize")
-		, vector.graphic = F
-		, width = 6, height = 6
-		, fontname = getOption("ReporteRs-default-font")
-		, editable = TRUE
-		, bookmark
-		, par.properties = parProperties(text.align = "center", padding = 5 )
-		, ... ) {
+addPlot.docx = function(doc, fun,
+                        pointsize = getOption("ReporteRs-fontsize"),
+                        vector.graphic = FALSE, width = 6, height = 6,
+                        fontname = getOption("ReporteRs-default-font"),
+                        editable = TRUE, bookmark,
+                        par.properties = parProperties(text.align = "center", padding = 5),
+                        bg = "white", ...) {
 
 	plotargs = list(...)
 
@@ -95,6 +94,7 @@ addPlot.docx = function(doc, fun
 
 		dml_docx(file = filename,
 		         width = width, height = height,
+		         bg = bg,
 		         id = doc_elt_index,
 		         pointsize = pointsize,
 		         fontname_serif = vg_fonts$fontname_serif,

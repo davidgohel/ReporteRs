@@ -5,9 +5,10 @@
 \title{Add a plot into a docx object}
 \usage{
 \method{addPlot}{docx}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
-  vector.graphic = F, width = 6, height = 6,
+  vector.graphic = FALSE, width = 6, height = 6,
   fontname = getOption("ReporteRs-default-font"), editable = TRUE, bookmark,
-  par.properties = parProperties(text.align = "center", padding = 5), ...)
+  par.properties = parProperties(text.align = "center", padding = 5),
+  bg = "white", ...)
 }
 \arguments{
 \item{doc}{the \code{docx} to use}
@@ -38,6 +39,8 @@ DrawingML instructions cannot be read by MS Word 2007.}
       If not provided, plot(s) will be added at the end of the document.}
 
 \item{par.properties}{paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}}
+
+\item{bg}{the initial background colour.}
 
 \item{...}{arguments for \code{fun}.}
 }
