@@ -13,16 +13,6 @@ notifications:
     on_success: change
     on_failure: change
 
-apt_packages:
- - r-cran-rjava
-
-r_binary_packages:
- - ggplot2
- - rJava
-
-r_packages:
- - ReporteRsjars
-
 r_github_packages:
  - davidgohel/rvg
 
