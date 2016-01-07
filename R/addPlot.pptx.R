@@ -11,12 +11,16 @@
 #' @param pointsize the default pointsize of plotted text, interpreted as big points (1/72 inch) at res ppi.
 #' @param vector.graphic logical scalar, default to TRUE. If TRUE, vector graphics
 #' are produced instead of PNG images. Vector graphics in pptx document are DrawingML instructions.
-#' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param fontname deprecated. the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param fontname_serif,fontname_sans,fontname_mono,fontname_symbol font
+#' names for font faces.
+#' Used fonts should be available in the operating system.
 #' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
 #' @param offx optional, x position of the shape (top left position of the bounding box) in inches. See details.
 #' @param offy optional, y position of the shape (top left position of the bounding box) in inches. See details.
 #' @param width optional, width of the shape in inches. See details.
 #' @param height optional, height of the shape in inches. See details.
+#' @param bg the initial background colour.
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{\link{pptx}}.
 #' @details
@@ -41,11 +45,24 @@
 #' @example examples/writeDoc_file.R
 #' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{pptx}}, \code{\link{addPlot}}
+#' @import rvg
 #' @export
-addPlot.pptx = function(doc, fun, pointsize = 11
-	, vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font")
-	, editable = TRUE, offx, offy, width, height
-	, ... ) {
+addPlot.pptx = function(doc, fun, pointsize = 11,
+	vector.graphic = TRUE,
+	fontname = getOption("ReporteRs-default-font"),
+	fontname_serif = "Times New Roman",
+	fontname_sans = "Calibri",
+	fontname_mono = "Courier New",
+	fontname_symbol = "Symbol",
+	editable = TRUE, offx, offy, width, height, bg = "white",
+	... ) {
+
+  if (!missing(fontname)) {
+    warning("argument fontname is deprecated; please use",
+            "fontname_serif, fontname_sans ",
+            ",fontname_mono,fontname_symbol instead.",
+            call. = FALSE)
+  }
 
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
 	if( check.dims > 0 && check.dims < 4 ) {
@@ -74,20 +91,29 @@ addPlot.pptx = function(doc, fun, pointsize = 11
 
 	if( check.dims > 3 ){
 		if( vector.graphic ){
-			vector.pptx.graphic(doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, editable = editable
-				, offx, offy, width, height, ... )
+			vector.pptx.graphic(
+			  doc = doc, fun = fun, pointsize = pointsize,
+			  fontname_serif = fontname_serif,
+			  fontname_sans = fontname_sans,
+			  fontname_mono = fontname_mono,
+			  fontname_symbol = fontname_symbol,
+			  editable = editable,
+			  offx, offy, width, height, bg = bg, ... )
 		} else {
 			raster.pptx.graphic (doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, offx, offy, width, height, ... )
+				, fontname = fontname, offx, offy, width, height, bg = bg, ... )
 		}
 	} else {
 		if( vector.graphic ){
-			vector.pptx.graphic(doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, editable = editable, ... )
+			vector.pptx.graphic(doc = doc, fun = fun, pointsize = pointsize,
+			                    fontname_serif = fontname_serif,
+			                    fontname_sans = fontname_sans,
+			                    fontname_mono = fontname_mono,
+			                    fontname_symbol = fontname_symbol,
+			                    editable = editable, bg = bg, ... )
 		} else {
 			raster.pptx.graphic (doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, ... )
+				, fontname = fontname, bg = bg, ... )
 		}
 	}
 
@@ -100,32 +126,27 @@ get.graph.dims = function( doc ){
 	id = .jcall( slide, "I", "getNextShapeIndex"  )
 	maxid = .jcall( slide, "I", "getmax_shape"  )
 	if( maxid-id < 1 ) stop( getSlideErrorString( shape_errors["NOROOMLEFT"] , "plot") )
-	widths = double( maxid-id )
-	heights = double( maxid-id )
-	offxs = double( maxid-id )
-	offys = double( maxid-id )
-	j=0
+
 
 	LayoutName = .jcall( slide, "S", "getLayoutName" )
 	layout_description = .jcall( doc$obj, paste0("L", class.pptx4r.LayoutDescription, ";"), "getLayoutProperties", LayoutName )
 
-	for(i in seq(id,maxid-1, by=1) ){
-		dims = .jcall( layout_description, "[I", "getContentDimensions", as.integer(i) )
-		j = j + 1
-		widths[j] = dims[3] / 914400
-		heights[j] = dims[4] / 914400
-		offxs[j] = dims[1] / 914400
-		offys[j] = dims[2] / 914400
-	}
+	dims = .jcall( layout_description, "[I", "getContentDimensions", as.integer(id) )
+	widths = dims[3] / 914400
+	heights = dims[4] / 914400
+	offxs = dims[1] / 914400
+	offys = dims[2] / 914400
 	data.frame( widths = widths, heights = heights, offxs = offxs, offys = offys )
 }
 
-vector.pptx.graphic = function(doc, fun, pointsize = 11
-		, fontname = getOption("ReporteRs-default-font")
-		, editable = TRUE, offx, offy, width, height
-		, ... ) {
+vector.pptx.graphic = function(doc, fun, pointsize = 11,
+                               fontname_serif,
+                               fontname_sans,
+                               fontname_mono,
+                               fontname_symbol,
+                               editable = TRUE, offx, offy, width, height, bg = "white",
+		... ) {
 	slide = doc$current_slide
-	plot_first_id = doc$plot_first_id
 
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
 	if( check.dims < 4 ){
@@ -136,52 +157,54 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11
 		offy = data.dims$offys
 	}
 
-	plotargs = list(...)
-
-	dirname = tempfile( )
-	dir.create( dirname )
-	filename = file.path( dirname, "/plot_"  )
+	filename = tempfile( fileext = ".dml")
 	filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
-	env = dml.pptx( file = filename, width = width * 72.2, height = height * 72.2
-			, offx = offx * 72.2, offy = offy * 72.2, ps = pointsize, fontname = fontname
-			, firstid = doc$plot_first_id, editable = editable
+	slide = doc$current_slide
+	next_rels_id <- rJava::.jcall( slide, "S", "getNextRelID" )
+	next_rels_id <- gsub(pattern = "(.*)([0-9]+)$", "\\2", next_rels_id )
+	next_rels_id <- as.integer(next_rels_id) - 1
+	uid <- basename(tempfile(pattern = ""))
+	img_directory = file.path(getwd(), uid )
+
+	dml_pptx(file = filename, width = width, height = height,
+	         bg = bg,
+	         offx = offx, offy = offy,
+	         pointsize = pointsize,
+	         fontname_serif = fontname_serif,
+	         fontname_sans = fontname_sans,
+	         fontname_mono = fontname_mono,
+	         fontname_symbol = fontname_symbol,
+	         editable = editable,
+	         next_rels_id = next_rels_id,
+	         raster_prefix = img_directory)
+	tryCatch(fun(...),
+	         finally = dev.off()
 	)
-
-	fun_res = try( fun(...), silent = T )
-	if( inherits(fun_res, "try-error")){
-		dev.off()
-		message(attr(fun_res,"condition"))
-		stop("an error occured when executing plot function.")
+	raster_files <- list.files(path = getwd(), pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
+	raster_names <- gsub( pattern = "\\.png$", replacement = "", basename(raster_files) )
+	dml.object = .jnew( class.DrawingML, filename )
+	if( length( raster_files ) > 0 ){
+	  .jcall( slide, "I", "add_png", .jarray(raster_files), .jarray(raster_names) )
+	  unlink(raster_files, force = TRUE)
 	}
-	last_id = .C("get_current_element_id", (dev.cur()-1L), 0L)[[2]]
-	dev.off()
 
-	doc$plot_first_id = last_id + 1
-
-
-
-	plotfiles = list.files( dirname , full.names = T )
-
-	for( i in seq_along( plotfiles ) ){
-		dml.object = .jnew( class.DrawingML, plotfiles[i] )
-		if( check.dims < 4 ){
-			out = .jcall( slide, "I", "add", dml.object )
-		} else {
-			out = .jcall( slide, "I", "add", dml.object, width, height, offx, offy )
-		}
-		if( isSlideError( out ) ){
-			stop( getSlideErrorString( out , "dml") )
-		}
-
+	if( check.dims < 4 ){
+	  out = .jcall( slide, "I", "add", dml.object )
+	} else {
+	  out = .jcall( slide, "I", "add", dml.object, width, height, offx, offy )
 	}
+	if( isSlideError( out ) ){
+	  stop( getSlideErrorString( out , "dml") )
+	}
+	unlink(filename, force = TRUE)
 
 	doc
 }
 
 raster.pptx.graphic = function(doc, fun, pointsize = 11
 		, fontname = getOption("ReporteRs-default-font")
-		, offx, offy, width, height
+		, offx, offy, width, height, bg = bg
 		, ... ) {
 	slide = doc$current_slide
 	plot_first_id = doc$plot_first_id
@@ -203,7 +226,7 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 	filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 	grDevices::png (filename = filename
 			, width = width[1], height = height[1], units = 'in'
-			, pointsize = pointsize, res = 300
+			, pointsize = pointsize, res = 300, bg = bg
 	)
 
 	fun(...)

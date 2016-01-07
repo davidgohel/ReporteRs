@@ -23,5 +23,6 @@ r_binary_packages:
 r_packages:
  - ReporteRsjars
 
-os:
- - linux
+r_github_packages:
+ - davidgohel/rvg
+

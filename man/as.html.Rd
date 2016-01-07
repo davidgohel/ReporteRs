@@ -18,9 +18,9 @@ a character value
 Get HTML code in a character vector.
 }
 \details{
-See \code{\link{FlexTable}} or \code{\link{raphael.html}} for examples.
+See \code{\link{FlexTable}} for examples.
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{raphael.html}}
+\code{\link{FlexTable}}
 }
 

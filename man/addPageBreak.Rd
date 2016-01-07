@@ -18,7 +18,7 @@ a document object
 Add a page break into a document object
 }
 \details{
-\code{addPageBreak} only works with docx documents. 
+\code{addPageBreak} only works with docx documents.
 
 See \code{\link{addPageBreak.docx}} for examples.
 }

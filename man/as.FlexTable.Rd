@@ -15,7 +15,7 @@ as.FlexTable(x, ...)
 a \code{\link{FlexTable}} object
 }
 \description{
-Get a \code{\link{FlexTable}} object from 
+Get a \code{\link{FlexTable}} object from
 an R object.
 }
 \seealso{

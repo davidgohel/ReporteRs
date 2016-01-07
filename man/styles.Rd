@@ -15,7 +15,7 @@ styles(doc, ...)
 Get styles names that exist into a document
 }
 \details{
-\code{styles} only works with docx documents. 
+\code{styles} only works with docx documents.
 
 See \code{\link{styles.docx}} for examples.
 }

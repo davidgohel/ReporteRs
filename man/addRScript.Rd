@@ -9,13 +9,13 @@ addRScript(doc, rscript, file, text, ...)
 \arguments{
 \item{doc}{document object}
 
-\item{rscript}{an object of class \code{RScript}. 
+\item{rscript}{an object of class \code{RScript}.
 Not used if file or text is provided.}
 
-\item{file}{R script file. Not used if text or 
+\item{file}{R script file. Not used if text or
 rscript is provided.}
 
-\item{text}{character vector. The text to parse. 
+\item{text}{character vector. The text to parse.
 Not used if file or rscript is provided.}
 
 \item{...}{further arguments passed to other methods}

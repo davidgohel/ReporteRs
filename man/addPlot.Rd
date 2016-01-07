@@ -13,13 +13,13 @@ addPlot(doc, fun, pointsize = 12, vector.graphic = F, ...)
 
 \item{pointsize}{the default pointsize of plotted text in pixels, default to 12.}
 
-\item{vector.graphic}{logical scalar, if TRUE, vector graphics 
-are produced instead of PNG images. 
+\item{vector.graphic}{logical scalar, if TRUE, vector graphics
+are produced instead of PNG images.
 
 SVG will be produced for \code{bsdoc} objects
-and DrawingML instructions for \code{docx} and \code{pptx} objects. 
+and DrawingML instructions for \code{docx} and \code{pptx} objects.
 
-DrawingML instructions offer the advantage of providing editable graphics 
+DrawingML instructions offer the advantage of providing editable graphics
 (forms and text colors, text contents).}
 
 \item{...}{further arguments passed to or from other methods..}
@@ -31,16 +31,16 @@ a document object
 Add a plot into a document object
 }
 \details{
-Plot parameters are specified with the \code{...} argument. 
-However, the most convenient usage is to wrap the plot code 
+Plot parameters are specified with the \code{...} argument.
+However, the most convenient usage is to wrap the plot code
 into a function whose parameters will be specified as '...'.
- 
-If you want to add ggplot2 or lattice plot, use 
-\code{print} function. 
 
-\code{vector.graphic}: if document is a pptx or bsdoc document, 
-vector graphics will always be displayed. Don't use vector 
-graphics if document is a docx and MS Word version used 
+If you want to add ggplot2 or lattice plot, use
+\code{print} function.
+
+\code{vector.graphic}: if document is a pptx or bsdoc document,
+vector graphics will always be displayed. Don't use vector
+graphics if document is a docx and MS Word version used
 to open the document is 2007.
 
 See \code{\link{addPlot.docx}} or \code{\link{addPlot.pptx}}

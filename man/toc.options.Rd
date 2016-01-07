@@ -18,7 +18,7 @@ a document object
 Set custom table of contents options for a document object
 }
 \details{
-\code{toc.options} only works with docx documents. 
+\code{toc.options} only works with docx documents.
 
 See \code{\link{toc.options.docx}} for examples.
 }

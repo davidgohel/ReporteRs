@@ -8,14 +8,14 @@ docx(title = "untitled", template,
   list.definition = getOption("ReporteRs-list-definition"))
 }
 \arguments{
-\item{title}{\code{"character"} value: title of the 
+\item{title}{\code{"character"} value: title of the
 document (in the doc properties).}
 
-\item{template}{\code{"character"} value, it represents 
+\item{template}{\code{"character"} value, it represents
 the filename of the docx file used as a template.}
 
-\item{list.definition}{a list definition to specify how ordered and unordered 
-lists have to be formated. See \code{\link{list.settings}}. Default to 
+\item{list.definition}{a list definition to specify how ordered and unordered
+lists have to be formated. See \code{\link{list.settings}}. Default to
 \code{getOption("ReporteRs-list-definition")}.}
 }
 \value{
@@ -37,11 +37,11 @@ Several methods can used to send R output into an object of class \code{\link{do
   \item \code{\link{addTOC.docx}} add table of content
   \item \code{\link{addPageBreak.docx}} add page break
   \item \code{\link{addSection.docx}} add section (for landscape orientation)
-  \item \code{\link{addDocument.docx}} add an external \code{docx} file into 
+  \item \code{\link{addDocument.docx}} add an external \code{docx} file into
 		a \code{docx} object.
 }
 
-R outputs (tables, plots, paragraphs and images) can be inserted (and not added at the end) 
+R outputs (tables, plots, paragraphs and images) can be inserted (and not added at the end)
 in a document if a bookmark exists in the template file. See \code{\link{bookmark}}.
 
 Once object has content, user can write the docx into a ".docx" file, see \code{\link{writeDoc}}.
@@ -194,7 +194,7 @@ writeDoc( doc, file = docx.file)
 Wikipedia: Office Open XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \seealso{
-\code{\link{bsdoc}}, \code{\link{pptx}}, 
+\code{\link{bsdoc}}, \code{\link{pptx}},
 \code{\link{bookmark}}
 }
 

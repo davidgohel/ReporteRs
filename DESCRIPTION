@@ -2,22 +2,13 @@ Package: ReporteRs
 Type: Package
 Title: Microsoft Word, Microsoft Powerpoint and HTML Documents Generation
 Version: 0.8.4
-Date: 2015-12-23
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@lysis-consultants.fr"),
     person("Bootstrap", role = c("ctb", "cph"),
     comment = "Bootstrap development team"),
     person("jQuery", role = c("ctb", "cph"),
-    comment = "The jQuery Foundation"),
-    person("Dmitry Baranovskiy", role = c("ctb", "cph"),
-    comment = "raphael javascript libraries" ) )
-Author: David Gohel [aut, cre],
-    Bootstrap [ctb, cph] (Bootstrap development team),
-    jQuery [ctb, cph] (The jQuery Foundation),
-    Dmitry Baranovskiy [ctb, cph] (raphael javascript
-    libraries)
-Maintainer: David Gohel <david.gohel@lysis-consultants.fr>
+    comment = "The jQuery Foundation") )
 Description: Create Microsoft Word document (>=2007),
     Microsoft Powerpoint document (>=2007) and HTML documents from R. There are
     several features to let you format and present R outputs ; e.g. Editable
@@ -31,12 +22,15 @@ Copyright: See file COPYRIGHTS.
 Depends:
     R (>= 3.0),ReporteRsjars (>= 0.0.2)
 Imports:
-    graphics,
     grDevices,
     rJava,
-    utils
+    utils,
+    rvg,
+    xml2,
+    gdtools
 Suggests:
-    ggplot2
+    ggplot2,
+    testthat
 SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
     http://groups.google.com/group/reporters-package

@@ -18,7 +18,7 @@ a document object
 Add a column break into a section
 }
 \details{
-\code{addColumnBreak} only works with docx documents. 
+\code{addColumnBreak} only works with docx documents.
 
 See \code{\link{addColumnBreak.docx}} for examples.
 }

@@ -5,30 +5,30 @@
 \alias{docx-bookmark}
 \title{docx bookmarks}
 \description{
-\code{docx} can generate Word documents using bookmarks 
+\code{docx} can generate Word documents using bookmarks
 as placeholders to insert contents. Read MS documentation about bookmark here:
 
 http://office.microsoft.com/en-us/word-help/add-or-delete-bookmarks-HP001226532.aspx#BM1
 
 Functions \code{\link{addFlexTable}}, \code{\link{addPlot}}
-, \code{\link{addParagraph}} and \code{\link{addImage}} can send respective 
+, \code{\link{addParagraph}} and \code{\link{addImage}} can send respective
 outputs into these bookmarks.
 
 These functions have an optional argument named \code{bookmark}.
 
-When used with \code{\link{addPlot}}, \code{\link{addParagraph}} 
-and \code{\link{addImage}}, content (plots, paragraphs or images) will replace 
+When used with \code{\link{addPlot}}, \code{\link{addParagraph}}
+and \code{\link{addImage}}, content (plots, paragraphs or images) will replace
 the whole paragraph containing the bookmark.
 
-When used with \code{\link{addFlexTable}} 
+When used with \code{\link{addFlexTable}}
 content (table) will be inserted after the paragraph containing the bookmark.
 
-To be used with a \code{docx} object, bookmark must be placed into 
+To be used with a \code{docx} object, bookmark must be placed into
 a single paragraph, if placed along 1 or more paragraphs
-side effects could occur and insertion of a content could fail. 
+side effects could occur and insertion of a content could fail.
 
 You can insert the bookmark at the beginning of the paragraph (see the file
-bookmark_example.docx in the templates directory of the package for an example) 
+bookmark_example.docx in the templates directory of the package for an example)
 or on a portion of a text in a paragraph.
 }
 \examples{
@@ -37,16 +37,16 @@ or on a portion of a text in a paragraph.
 docx.file = "document_new.docx"
 
 # create document
-doc = docx( title = "My example", 
-  template = file.path( find.package("ReporteRs"), 
+doc = docx( title = "My example",
+  template = file.path( system.file(package = "ReporteRs"),
 	"templates/bookmark_example.docx") )
 
 # replace bookmarks 'AUTHOR' and 'REVIEWER'
 # by dummy values
-doc = addParagraph( doc, 
+doc = addParagraph( doc,
 	value = c( "James Sonny Crockett", "Ricardo Rico Tubbs" ),
 	stylename = "Normal", bookmark = "AUTHOR" )
-doc = addParagraph( doc, 	value = c( "Martin Marty Castillo" ), 
+doc = addParagraph( doc, 	value = c( "Martin Marty Castillo" ),
 	stylename = "Normal", bookmark = "REVIEWER" )
 
 
@@ -61,7 +61,7 @@ doc = addFlexTable( doc
 	, MyFTable
 	, bookmark = "DATA1" )
 
-# replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx' 
+# replace bookmarks 'DATA' and 'CONFINT' located in 'ttest_example.docx'
 # by data.frame objects 'data' and 'conf.int'
 doc = addFlexTable( doc
 	, vanilla.table( iris[1:10,] )
@@ -72,7 +72,7 @@ doc = addPlot( doc, vector.graphic = TRUE
 		sale5 <- c(6, 4, 9, 7, 6, 12, 8, 10, 9, 13)
 		plot(sale5)
 		abline(lsfit(1:10, sale5))
-		abline(lsfit(1:10, sale5, intercept = FALSE), col = 4) 
+		abline(lsfit(1:10, sale5, intercept = FALSE), col = 4)
 	}
 	, bookmark = "PLOT")
 

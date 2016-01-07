@@ -18,7 +18,7 @@ a document object
 Add a table of contents into a document object
 }
 \details{
-\code{addTOC} only works with docx documents. 
+\code{addTOC} only works with docx documents.
 
 See \code{\link{addTOC.docx}} for examples.
 }

@@ -18,7 +18,7 @@ a document object
 Insert a column break
 }
 \details{
-addDate only works for pptx documents. See \code{\link{addSlide.pptx}}. 
+addDate only works for pptx documents. See \code{\link{addSlide.pptx}}.
 
 See \code{\link{addSlide.pptx}} for examples.
 }

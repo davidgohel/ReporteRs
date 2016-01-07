@@ -35,7 +35,7 @@ headerRow[2] = FlexCell( "Column 2"
   , cell.properties = cellProperties(background.color="#527578")  )
 }
 \seealso{
-\code{\link{FlexTable}}, \code{\link{alterFlexRow}} 
+\code{\link{FlexTable}}, \code{\link{alterFlexRow}}
 , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 }
 

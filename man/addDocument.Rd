@@ -9,7 +9,7 @@ addDocument(doc, filename, ...)
 \arguments{
 \item{doc}{document object}
 
-\item{filename}{\code{"character"} value, complete filename 
+\item{filename}{\code{"character"} value, complete filename
 of the external file}
 
 \item{...}{further arguments passed to other methods}

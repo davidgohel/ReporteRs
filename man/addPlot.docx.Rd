@@ -5,21 +5,24 @@
 \title{Add a plot into a docx object}
 \usage{
 \method{addPlot}{docx}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
-  vector.graphic = F, width = 6, height = 6,
-  fontname = getOption("ReporteRs-default-font"), editable = TRUE, bookmark,
-  par.properties = parProperties(text.align = "center", padding = 5), ...)
+  vector.graphic = FALSE, width = 6, height = 6,
+  fontname = getOption("ReporteRs-default-font"),
+  fontname_serif = "Times New Roman", fontname_sans = "Calibri",
+  fontname_mono = "Courier New", fontname_symbol = "Symbol",
+  editable = TRUE, bookmark, par.properties = parProperties(text.align =
+  "center", padding = 5), bg = "white", ...)
 }
 \arguments{
 \item{doc}{the \code{docx} to use}
 
-\item{fun}{plot function. The function will be executed to produce graphics. 
-For \code{grid} or \code{lattice} or \code{ggplot} object, the function 
-should just be print and an extra argument x should specify the object 
+\item{fun}{plot function. The function will be executed to produce graphics.
+For \code{grid} or \code{lattice} or \code{ggplot} object, the function
+should just be print and an extra argument x should specify the object
 to plot. For traditionnal plots, the function should contain plot instructions. See examples.}
 
 \item{pointsize}{the default pointsize of plotted text in pixels, default to getOption("ReporteRs-fontsize").}
 
-\item{vector.graphic}{logical scalar, default to FALSE. 
+\item{vector.graphic}{logical scalar, default to FALSE.
 
 DrawingML instructions cannot be read by MS Word 2007.}
 
@@ -27,17 +30,23 @@ DrawingML instructions cannot be read by MS Word 2007.}
 
 \item{height}{plot height in inches (default value is 6).}
 
-\item{fontname}{the default font family to use, default to getOption("ReporteRs-default-font").}
+\item{fontname}{deprecated. the default font family to use, default to getOption("ReporteRs-default-font").}
+
+\item{fontname_serif, fontname_sans, fontname_mono, fontname_symbol}{font
+names for font faces.
+Used fonts should be available in the operating system.}
 
 \item{editable}{logical value - if TRUE vector graphics elements (points, text, etc.) are editable.}
 
 \item{bookmark}{id of the Word bookmark to replace by the plot. optional.
 
-\code{bookmark} is a character vector specifying bookmark id to replace by the plot(s).\cr 
+\code{bookmark} is a character vector specifying bookmark id to replace by the plot(s).\cr
       If provided, plot(s) will replace the paragraph that contains the bookmark. See \code{\link{bookmark}}.\cr
       If not provided, plot(s) will be added at the end of the document.}
 
 \item{par.properties}{paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}}
+
+\item{bg}{the initial background colour.}
 
 \item{...}{arguments for \code{fun}.}
 }
@@ -60,13 +69,12 @@ doc = addTitle( doc, "Title example 1", level = 1 )
 # Add a base plot
 # set vector.graphic to FALSE if Word version
 #   used to read the file is <= 2007
-doc = addPlot( doc, fun = plot
-  , x = rnorm( 100 ), y = rnorm (100 )
-  , main = "base plot main title"
-  , vector.graphic = TRUE
-  , width = 5, height = 7
-  , par.properties = parProperties(text.align = "left")
-)
+doc = addPlot( doc, fun = plot,
+  x = rnorm( 100 ), y = rnorm (100 ), main = "base plot main title",
+  vector.graphic = TRUE,
+  width = 5, height = 7,
+  par.properties = parProperties(text.align = "left")
+  )
 
 
 doc = addTitle( doc, "Title example 2", level = 1 )

@@ -18,7 +18,7 @@ a document object
 Set manually titles'styles of a document object
 }
 \details{
-\code{declareTitlesStyles} only works with docx documents. 
+\code{declareTitlesStyles} only works with docx documents.
 
 See \code{\link{declareTitlesStyles.docx}} for examples.
 }

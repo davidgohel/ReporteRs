@@ -5,8 +5,10 @@
 \title{Add a plot into a pptx object}
 \usage{
 \method{addPlot}{pptx}(doc, fun, pointsize = 11, vector.graphic = TRUE,
-  fontname = getOption("ReporteRs-default-font"), editable = TRUE, offx,
-  offy, width, height, ...)
+  fontname = getOption("ReporteRs-default-font"),
+  fontname_serif = "Times New Roman", fontname_sans = "Calibri",
+  fontname_mono = "Courier New", fontname_symbol = "Symbol",
+  editable = TRUE, offx, offy, width, height, bg = "white", ...)
 }
 \arguments{
 \item{doc}{\code{\link{pptx}} object}
@@ -21,7 +23,11 @@ to plot. For traditionnal plots, the function should contain plot instructions. 
 \item{vector.graphic}{logical scalar, default to TRUE. If TRUE, vector graphics
 are produced instead of PNG images. Vector graphics in pptx document are DrawingML instructions.}
 
-\item{fontname}{the default font family to use, default to getOption("ReporteRs-default-font").}
+\item{fontname}{deprecated. the default font family to use, default to getOption("ReporteRs-default-font").}
+
+\item{fontname_serif, fontname_sans, fontname_mono, fontname_symbol}{font
+names for font faces.
+Used fonts should be available in the operating system.}
 
 \item{editable}{logical value - if TRUE vector graphics elements (points, text, etc.) are editable.}
 
@@ -32,6 +38,8 @@ are produced instead of PNG images. Vector graphics in pptx document are Drawing
 \item{width}{optional, width of the shape in inches. See details.}
 
 \item{height}{optional, height of the shape in inches. See details.}
+
+\item{bg}{the initial background colour.}
 
 \item{...}{arguments for \code{fun}.}
 }

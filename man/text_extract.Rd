@@ -27,8 +27,8 @@ chunk of text found in the document.
 }
 \examples{
 #START_TAG_TEST
-doc = docx( title = "My example", template = file.path( 
-  find.package("ReporteRs"), "templates/bookmark_example.docx") )
+doc = docx( title = "My example", template = file.path(
+  system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
 text_extract( doc )
 text_extract( doc, header = FALSE, footer = FALSE )
 text_extract( doc, bookmark = "author" )

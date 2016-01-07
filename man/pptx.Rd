@@ -12,8 +12,8 @@ pptx(title, template,
 
 \item{template}{\code{"character"} value, it represents the filename of the pptx file used as a template.}
 
-\item{list.definition}{a list definition to specify how ordered and unordered 
-lists have to be formated. See \code{\link{list.settings}}. Default to 
+\item{list.definition}{a list definition to specify how ordered and unordered
+lists have to be formated. See \code{\link{list.settings}}. Default to
 \code{getOption("ReporteRs-list-definition")}.}
 }
 \value{
@@ -44,7 +44,7 @@ Once object has content, user can write the pptx into a ".pptx" file, see \code{
 \note{
 Power Point 2007-2013 (*.pptx) file formats are the only supported files.
 
-Document are manipulated in-memory ; a \code{pptx}'s document is not written to the disk 
+Document are manipulated in-memory ; a \code{pptx}'s document is not written to the disk
 unless the \code{\link{writeDoc}} method has been called on the object.
 }
 \examples{

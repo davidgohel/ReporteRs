@@ -21,11 +21,11 @@ a document object
 \description{
 Add markdown into a document object
 
-The markdown definition used is John Gruber documented here: 
+The markdown definition used is John Gruber documented here:
 \url{http://daringfireball.net/projects/markdown/syntax}.
 
-Images are not available as \code{addImage} or \code{addPlot} is 
-available. Pandoc footnotes have been added (see 
+Images are not available as \code{addImage} or \code{addPlot} is
+available. Pandoc footnotes have been added (see
 \url{http://johnmacfarlane.net/pandoc/README.html#footnotes}.
 }
 \seealso{

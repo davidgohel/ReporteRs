@@ -1,3 +1,17 @@
+ReporteRs 0.8.4
+==================================================================
+
+ENHANCEMENT
+------------------------------------------------------------------
+
+* package rvg support raster function.
+
+DEBUG
+------------------------------------------------------------------
+
+* Graphics Devices have been dropped, package rvg is now producing
+  the graphics. It solves issue #91.
+
 ReporteRs 0.8.3
 ==================================================================
 
@@ -12,22 +26,22 @@ ReporteRs 0.8.2
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* new function as.HTML for bsdoc objects. It return the raw HTML of 
+* new function as.HTML for bsdoc objects. It return the raw HTML of
   a bsdoc document. (suggested by Tyler Beason)
 
-* new functions to let make the plot interactive when graphical 
+* new functions to let make the plot interactive when graphical
   device is 'raphael'.
 
-* function raphael.html now returns a list with javascript instructions, 
+* function raphael.html now returns a list with javascript instructions,
   HTML code and id values.
 
 DEBUG
 ------------------------------------------------------------------
 
-* fix an encoding issue in pptx with bullets (reported by Jonathan 
-  Oxborrow) 
+* fix an encoding issue in pptx with bullets (reported by Jonathan
+  Oxborrow)
 
-* fix an issue with NA values in FlexTable (reported by Vadim 
+* fix an issue with NA values in FlexTable (reported by Vadim
   Bondarenko)
 
 * the package is now configured so that headless mode is always true.
@@ -54,22 +68,22 @@ ReporteRs 0.8.0
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* Now always run java in UTF-8. For example, it make possible to 
+* Now always run java in UTF-8. For example, it make possible to
   use any layout name within PowerPoint templates.
 
 DEBUG
 ------------------------------------------------------------------
 
-* There are major corrections in graphic devices with UTF-8 
+* There are major corrections in graphic devices with UTF-8
   text and text positions. (reported by John Ehrlinger)
-  
+
 * fix par.properties issue when using addPlot with vector.graphic = F
   in docx. (reported by Gilles Chapron)
 
 * fix row spanning disappearance when a column was resized.
   (reported by Mark Danese)
 
-* Line textures was not handled as documented in GraphicsEngine.h 
+* Line textures was not handled as documented in GraphicsEngine.h
   (reported by José Manuel Martínez)
 
 ReporteRs 0.7.9
@@ -101,23 +115,23 @@ ReporteRs 0.7.6
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* addImage now allows wmf and emf image within docx and pptx objects. 
+* addImage now allows wmf and emf image within docx and pptx objects.
 
-* addHeaderRow has a new argument **first** to insert the row at 
-  on top of header rows.  
-  
-* new function list_bookmarks to extract bookmark names in a 
+* addHeaderRow has a new argument **first** to insert the row at
+  on top of header rows.
+
+* new function list_bookmarks to extract bookmark names in a
   docx object
 
-* addImage has a new argument ppi to help defining dimensions of 
-  images within documents. 
+* addImage has a new argument ppi to help defining dimensions of
+  images within documents.
 
 DEBUG
 ------------------------------------------------------------------
 
-* propagation of shape layout styles to the presentation slides with 
-  pptx object is now working if argument par.properties is missing 
-  in the call of addParagraph. http://github.com/davidgohel/ReporteRs/issues/48 
+* propagation of shape layout styles to the presentation slides with
+  pptx object is now working if argument par.properties is missing
+  in the call of addParagraph. http://github.com/davidgohel/ReporteRs/issues/48
 
 
 ReporteRs 0.7.5
@@ -132,7 +146,7 @@ DEBUG
 ------------------------------------------------------------------
 
 * debug PowerPoint slide replacement
-  See https://github.com/davidgohel/ReporteRs/issues/66 
+  See https://github.com/davidgohel/ReporteRs/issues/66
 
 
 ReporteRs 0.7.4
@@ -141,8 +155,8 @@ ReporteRs 0.7.4
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* new print method for FlexTable that display the FlexTable in 
-  the default browser or in RStudio viewer 
+* new print method for FlexTable that display the FlexTable in
+  the default browser or in RStudio viewer
 
 * improved vanilla.table rendering
 
@@ -164,26 +178,26 @@ DEBUG
 
 * Fix addDocument issue: close embedded file after having read it.
   (suggested by Olivier Barriere)
- 
+
 ReporteRs 0.7.2
 ==================================================================
 
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* nicer tooltip with interactive plots in bsdoc documents. 
+* nicer tooltip with interactive plots in bsdoc documents.
   See addPlot.bsdoc.
 
 * modify examples so that R CMD check --run-donttest does not fail
- 
+
 ReporteRs 0.7.1
 ==================================================================
 DEBUG
 ------------------------------------------------------------------
 
-* markdown Title illegitimately detected. See [github](http://github.com/davidgohel/ReporteRs/issues/46). 
+* markdown Title illegitimately detected. See [github](http://github.com/davidgohel/ReporteRs/issues/46).
 
-* PDF issues: table cell padding is now rendered correctly when docx is saved to pdf. 
+* PDF issues: table cell padding is now rendered correctly when docx is saved to pdf.
 
 ENHANCEMENT
 ------------------------------------------------------------------
@@ -214,7 +228,7 @@ ENHANCEMENT
 DEBUG
 ------------------------------------------------------------------
 
-* debug an issue with POSIXlt data when used in FlexTable  
+* debug an issue with POSIXlt data when used in FlexTable
   (reported by Victor Perrier)
 
 ReporteRs 0.6.8
@@ -227,7 +241,7 @@ ENHANCEMENT
 DEBUG
 ------------------------------------------------------------------
 
-* addRScript.pptx debug (line height is now correct). 
+* addRScript.pptx debug (line height is now correct).
 
 
 ReporteRs 0.6.6
@@ -246,10 +260,10 @@ ReporteRs 0.6.5
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* ordered and unordered list item. See > ?parProperties 
+* ordered and unordered list item. See > ?parProperties
   and > ?list.settings.
- 
-* addParagraph.pptx has a new argument append to append in an 
+
+* addParagraph.pptx has a new argument append to append in an
   existing shape
 
 ReporteRs 0.6.4
@@ -264,9 +278,9 @@ ReporteRs 0.6.3
 DEBUG
 ------------------------------------------------------------------
 
-* addImage.pptx debug (from 0.6.0). 
+* addImage.pptx debug (from 0.6.0).
 
-* addRScript.pptx debug (from 0.6.0). 
+* addRScript.pptx debug (from 0.6.0).
 
 ENHANCEMENT
 ------------------------------------------------------------------
@@ -283,7 +297,7 @@ ENHANCEMENT
 ------------------------------------------------------------------
 * new function vanilla.table and light.table
 
-* add an argument runs to function spanFlexTableColumns to span 
+* add an argument runs to function spanFlexTableColumns to span
   successive columns. (suggested by David Hajage)
 
 
@@ -291,55 +305,55 @@ ReporteRs 0.6.1
 ==================================================================
 ENHANCEMENT
 ------------------------------------------------------------------
-* new function setFlexTableBackgroundColors enable coloring of 
+* new function setFlexTableBackgroundColors enable coloring of
   cell background of a FlexTable. (suggested by Jean-Francois Collin)
 
 * work on the documentation of FlexTable and alterFlexTable
 
-* let addParagraph.docx have no stylename argument when bookmark 
+* let addParagraph.docx have no stylename argument when bookmark
   argument is used. (suggested by G�nter Lutz)
 
 DEBUG
 ------------------------------------------------------------------
-* Reintroducing in function chprop.cellProperties arguments 
-  border.*.style, border.*.width and border.*.color for backward 
+* Reintroducing in function chprop.cellProperties arguments
+  border.*.style, border.*.width and border.*.color for backward
   compatibility.
 
-* fixes for bugs related to FlexTable that appeared during 
+* fixes for bugs related to FlexTable that appeared during
   java refactoring (setFlexTableBorders).
 
 ReporteRs 0.6.0
 ==================================================================
 ENHANCEMENT
 ------------------------------------------------------------------
-* New function AddSection for docx document. It lets you add 
+* New function AddSection for docx document. It lets you add
   horizontal page sections and sections with 2 or more columns.
 
 * java refactoring.
-  
+
 ReporteRs 0.5.9
 ==================================================================
 ENHANCEMENT
 ------------------------------------------------------------------
 * BorderProperties are now supported when formatting FlexTable
-  
+
 ReporteRs 0.5.8
 ==================================================================
 ENHANCEMENT
 ------------------------------------------------------------------
 * implementation of "[" operator for FlexTable headers and footers
   modifications (add and format content).
-  
+
 * add function toc.options for docx object. When list separator
-  used when building the TOC is different from the list separator 
+  used when building the TOC is different from the list separator
   in your computer's regional settings, the doc cannot be built.
-  toc.options let force the separator (read from the template 
+  toc.options let force the separator (read from the template
   document used to initialize the docx object)
   > ?toc.options.docx
   (reported by Isabella R. Ghement)
-  
-* as.html now works on pot objects  
-  
+
+* as.html now works on pot objects
+
 ReporteRs 0.5.7
 ==================================================================
 ENHANCEMENT
@@ -358,7 +372,7 @@ BUG FIXES
 ------------------------------------------------------------------
 * debug addParagraph.docx into a bookmark with multiple paragraph
   (reported by Günter Lutz)
-* debug text function in dml graphical devices when symbols 
+* debug text function in dml graphical devices when symbols
   '<', '>', '&' where used.
   (reported by Ted Kwartler and Karen Zalvan)
 
@@ -371,8 +385,8 @@ ReporteRs 0.5.5
 ==================================================================
 BUG FIXES
 ------------------------------------------------------------------
-* set headless mode when a java.awt library is used in the java code. 
-  The issue only appeared with RStudio Server, something to do with 
+* set headless mode when a java.awt library is used in the java code.
+  The issue only appeared with RStudio Server, something to do with
   a null display device.
   http://www.oracle.com/technetwork/articles/javase/headless-136834.html
 
@@ -392,7 +406,7 @@ ENHANCEMENT
 
 * addParagraph.pptx now comes with a parProperties argument
 
-* HTML code is available for FlexTable and plots. 
+* HTML code is available for FlexTable and plots.
   See as.html.FlexTable and raphael.html.
 
 * addParagraph.pptx, addPlot.pptx, addFlexTable.pptx, addImage.pptx
@@ -405,18 +419,18 @@ ReporteRs 0.5.3
 BUG FIXES
 ------------------------------------------------------------------
 * parProperties paddings were not translated in EMUs as expected
-  by Office. docx and pptx were concerned but not html. (reported 
+  by Office. docx and pptx were concerned but not html. (reported
   here http://github.com/davidgohel/ReporteRs/issues/10)
 
 ENHANCEMENT
 ------------------------------------------------------------------
-* FlexTable API is now much more easier to use. Lot of new  
+* FlexTable API is now much more easier to use. Lot of new
   functions have been added. see ?FlexTable
 
 * add function setFlexTableWidths to set columns widths in FlexTable
   (suggested by Goulven Salic)
 
-* add methods chprop to modify property objects (applies to 
+* add methods chprop to modify property objects (applies to
   textProperties, parProperties and cellProperties). Usefull to reduce
   code.
 
@@ -426,21 +440,21 @@ ENHANCEMENT
 * add names to stylenames returned by styles.docx to help identify
   which stylename corresponds to which Word paragraph style
 
-* add method dim to objects of class docx and pptx. It returns 
+* add method dim to objects of class docx and pptx. It returns
   page dimensions for docx and next free shape dimensions for pptx
-   
+
 ReporteRs 0.5.2
 ==================================================================
 BUG FIXES
 ------------------------------------------------------------------
-* compilation with flags -Wformat -Wformat-security (default 
+* compilation with flags -Wformat -Wformat-security (default
   compiler flags on Ubuntu) was driving to an error. Code changed:
   usage of fputs instead of fprintf when no formatting is required
   (reported by Günter Lutz)
 
 ENHANCEMENT
 ------------------------------------------------------------------
-* add function "add.plot.interactivity" for plot interactivity 
+* add function "add.plot.interactivity" for plot interactivity
   when output is html.
 
 * Cleaning and reorganization of the C code files
@@ -450,7 +464,7 @@ ReporteRs 0.5.1
 BUG FIXES
 ------------------------------------------------------------------
 * graphical element ids were not correctly incremented in the graphical
-  device drivers driving to an error when opening the docx 
+  device drivers driving to an error when opening the docx
   (reported by Jean-Francois Collin)
 
 
@@ -459,25 +473,25 @@ ReporteRs 0.5
 BUG FIXES
 ------------------------------------------------------------------
 * Fixed an issue with lines in pptx graphical device driver
-  (reported by Julio Alejandro Di Rienzo) 
+  (reported by Julio Alejandro Di Rienzo)
 
 * a java exception was throwed when accents were used in pptx
-  (reported by Julio Alejandro Di Rienzo) 
+  (reported by Julio Alejandro Di Rienzo)
 
 ReporteRs 0.4
 ==================================================================
 BUG FIXES
 ------------------------------------------------------------------
-* deleteBookmark and deleteBookmarkNextContent did not return 
+* deleteBookmark and deleteBookmarkNextContent did not return
   the input document as expected - returned invisible() instead
-  (reported by Günter Lutz) 
+  (reported by Günter Lutz)
 
-ENHANCEMENT 
+ENHANCEMENT
 ------------------------------------------------------------------
-* Higher PNG resolution (par res of png is set to 300) in 
+* Higher PNG resolution (par res of png is set to 300) in
   documents(suggested by Goulven Salic)
-  
-* addFlexCellContent is a new function to add formated content 
+
+* addFlexCellContent is a new function to add formated content
   in FlexTable objects
 
 ReporteRs 0.3
@@ -493,18 +507,18 @@ ReporteRs 0.2
 ==================================================================
 BUG FIXES
 ------------------------------------------------------------------
-* Title text can now have accents and '&' and '>' and '<'. 
-  (reported by Jean-Francois Collin) 
+* Title text can now have accents and '&' and '>' and '<'.
+  (reported by Jean-Francois Collin)
 
 * namespace of java codes have been changed to 'org.lysis'.
-  ReporteRs can coexists with R2DOCX now 
-  (reported by Jean-Francois Collin) 
+  ReporteRs can coexists with R2DOCX now
+  (reported by Jean-Francois Collin)
 
 * got rid of java rendersnake for html generation
 
-ENHANCEMENT 
+ENHANCEMENT
 ------------------------------------------------------------------
-* The default Word template has now separate numbering index for 
+* The default Word template has now separate numbering index for
   styles rPlotLegend and rTableLegend
 
 * bookmark are no more deleted, replacements over the same docx or pptx is now possible
