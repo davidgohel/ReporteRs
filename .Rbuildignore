@@ -1,7 +1,7 @@
-^README.md$
-^.travis.yml$
-^appveyor.yml$
-^examples$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^todo\.md$
+^README\.md$
+^appveyor\.yml$
+^\.travis\.yml$
+^examples$

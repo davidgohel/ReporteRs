@@ -11,7 +11,10 @@
 #' @param pointsize the default pointsize of plotted text, interpreted as big points (1/72 inch) at res ppi.
 #' @param vector.graphic logical scalar, default to TRUE. If TRUE, vector graphics
 #' are produced instead of PNG images. Vector graphics in pptx document are DrawingML instructions.
-#' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param fontname deprecated. the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param fontname_serif,fontname_sans,fontname_mono,fontname_symbol font
+#' names for font faces.
+#' Used fonts should be available in the operating system.
 #' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
 #' @param offx optional, x position of the shape (top left position of the bounding box) in inches. See details.
 #' @param offy optional, y position of the shape (top left position of the bounding box) in inches. See details.
@@ -45,9 +48,21 @@
 #' @import rvg
 #' @export
 addPlot.pptx = function(doc, fun, pointsize = 11,
-	vector.graphic = TRUE, fontname = getOption("ReporteRs-default-font"),
+	vector.graphic = TRUE,
+	fontname = getOption("ReporteRs-default-font"),
+	fontname_serif = "Times New Roman",
+	fontname_sans = "Calibri",
+	fontname_mono = "Courier New",
+	fontname_symbol = "Symbol",
 	editable = TRUE, offx, offy, width, height, bg = "white",
 	... ) {
+
+  if (!missing(fontname)) {
+    warning("argument fontname is deprecated; please use",
+            "fontname_serif, fontname_sans ",
+            ",fontname_mono,fontname_symbol instead.",
+            call. = FALSE)
+  }
 
 	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
 	if( check.dims > 0 && check.dims < 4 ) {
@@ -76,17 +91,26 @@ addPlot.pptx = function(doc, fun, pointsize = 11,
 
 	if( check.dims > 3 ){
 		if( vector.graphic ){
-			vector.pptx.graphic(doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, editable = editable
-				, offx, offy, width, height, bg = bg, ... )
+			vector.pptx.graphic(
+			  doc = doc, fun = fun, pointsize = pointsize,
+			  fontname_serif = fontname_serif,
+			  fontname_sans = fontname_sans,
+			  fontname_mono = fontname_mono,
+			  fontname_symbol = fontname_symbol,
+			  editable = editable,
+			  offx, offy, width, height, bg = bg, ... )
 		} else {
 			raster.pptx.graphic (doc = doc, fun = fun, pointsize = pointsize
 				, fontname = fontname, offx, offy, width, height, bg = bg, ... )
 		}
 	} else {
 		if( vector.graphic ){
-			vector.pptx.graphic(doc = doc, fun = fun, pointsize = pointsize
-				, fontname = fontname, editable = editable, bg = bg, ... )
+			vector.pptx.graphic(doc = doc, fun = fun, pointsize = pointsize,
+			                    fontname_serif = fontname_serif,
+			                    fontname_sans = fontname_sans,
+			                    fontname_mono = fontname_mono,
+			                    fontname_symbol = fontname_symbol,
+			                    editable = editable, bg = bg, ... )
 		} else {
 			raster.pptx.graphic (doc = doc, fun = fun, pointsize = pointsize
 				, fontname = fontname, bg = bg, ... )
@@ -116,8 +140,11 @@ get.graph.dims = function( doc ){
 }
 
 vector.pptx.graphic = function(doc, fun, pointsize = 11,
-		fontname = getOption("ReporteRs-default-font"),
-		editable = TRUE, offx, offy, width, height, bg = "white",
+                               fontname_serif,
+                               fontname_sans,
+                               fontname_mono,
+                               fontname_symbol,
+                               editable = TRUE, offx, offy, width, height, bg = "white",
 		... ) {
 	slide = doc$current_slide
 
@@ -133,8 +160,6 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
 	filename = tempfile( fileext = ".dml")
 	filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
-	vg_fonts <- getOption("vg_fonts")
-
 	slide = doc$current_slide
 	next_rels_id <- rJava::.jcall( slide, "S", "getNextRelID" )
 	next_rels_id <- gsub(pattern = "(.*)([0-9]+)$", "\\2", next_rels_id )
@@ -146,10 +171,10 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
 	         bg = bg,
 	         offx = offx, offy = offy,
 	         pointsize = pointsize,
-	         fontname_serif = vg_fonts$fontname_serif,
-	         fontname_sans = vg_fonts$fontname_sans,
-	         fontname_mono = vg_fonts$fontname_mono,
-	         fontname_symbol = vg_fonts$fontname_symbol,
+	         fontname_serif = fontname_serif,
+	         fontname_sans = fontname_sans,
+	         fontname_mono = fontname_mono,
+	         fontname_symbol = fontname_symbol,
 	         editable = editable,
 	         next_rels_id = next_rels_id,
 	         raster_prefix = img_directory)

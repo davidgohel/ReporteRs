@@ -21,7 +21,10 @@
 #'
 #' @param par.properties paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}
 #' @param pointsize the default pointsize of plotted text in pixels, default to getOption("ReporteRs-fontsize").
-#' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param fontname deprecated. the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param fontname_serif,fontname_sans,fontname_mono,fontname_symbol font
+#' names for font faces.
+#' Used fonts should be available in the operating system.
 #' @param editable logical value - if TRUE vector graphics elements (points, text, etc.) are editable.
 #' @param bg the initial background colour.
 #' @param ... arguments for \code{fun}.
@@ -44,11 +47,22 @@ addPlot.docx = function(doc, fun,
                         pointsize = getOption("ReporteRs-fontsize"),
                         vector.graphic = FALSE, width = 6, height = 6,
                         fontname = getOption("ReporteRs-default-font"),
+                        fontname_serif = "Times New Roman",
+                        fontname_sans = "Calibri",
+                        fontname_mono = "Courier New",
+                        fontname_symbol = "Symbol",
                         editable = TRUE, bookmark,
                         par.properties = parProperties(text.align = "center", padding = 5),
                         bg = "white", ...) {
 
 	plotargs = list(...)
+
+	if (!missing(fontname)) {
+	  warning("argument fontname is deprecated; please use",
+	          "fontname_serif, fontname_sans ",
+	          ",fontname_mono,fontname_symbol instead.",
+	          call. = FALSE)
+	}
 
 	dirname = tempfile( )
 	dir.create( dirname )
@@ -58,7 +72,8 @@ addPlot.docx = function(doc, fun,
 		filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 		grDevices::png (filename = filename,
 				width = width, height = height,
-				units = 'in', pointsize = pointsize, res = 300
+				units = 'in', pointsize = pointsize, bg = bg,
+				res = 300
 		)
 
 		fun(...)
@@ -70,21 +85,19 @@ addPlot.docx = function(doc, fun,
 			if( !missing( bookmark ) && fi== 1 )
 				doc = addImage( doc, filename = plotfiles[fi],
 						width = width, height = height,
-						bookmark = bookmark, ppi = 300, par.properties = par.properties )
+						bookmark = bookmark, ppi = 300,
+						par.properties = par.properties )
 			else if( missing( bookmark ) )
-				doc = addImage( doc, filename = plotfiles[fi], width = width, height = height,
+				doc = addImage( doc, filename = plotfiles[fi],
+            width = width, height = height,
 						ppi = 300, par.properties = par.properties  )
 			else stop("bookmark can only be used when one single graph is inserted.")
 		}
-
-
 	} else {
 		doc_elt_index = .jcall( doc$obj, "I", "getElementIndex") + 1L
 
 		filename = tempfile( fileext = ".dml")
 		filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
-
-		vg_fonts <- getOption("vg_fonts")
 
 		next_rels_id <- rJava::.jcall( doc$obj, "S", "getNextRelID" )
 		next_rels_id <- gsub(pattern = "^rId", "", next_rels_id )
@@ -97,10 +110,10 @@ addPlot.docx = function(doc, fun,
 		         bg = bg,
 		         id = doc_elt_index,
 		         pointsize = pointsize,
-		         fontname_serif = vg_fonts$fontname_serif,
-		         fontname_sans = vg_fonts$fontname_sans,
-		         fontname_mono = vg_fonts$fontname_mono,
-		         fontname_symbol = vg_fonts$fontname_symbol,
+		         fontname_serif = fontname_serif,
+		         fontname_sans = fontname_sans,
+		         fontname_mono = fontname_mono,
+		         fontname_symbol = fontname_symbol,
 		         editable = editable,
 		         next_rels_id = next_rels_id,
 		         raster_prefix = img_directory, standalone = TRUE)

@@ -1,9 +1,8 @@
 .project
 .settings/de.walware.r.core.prefs
-/.DS_Store
-/.gitignore
 .Rproj.user
 *.docx
 *.pptx
 .Rhistory
 *.md
+.RData

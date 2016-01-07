@@ -6,9 +6,11 @@
 \usage{
 \method{addPlot}{docx}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
   vector.graphic = FALSE, width = 6, height = 6,
-  fontname = getOption("ReporteRs-default-font"), editable = TRUE, bookmark,
-  par.properties = parProperties(text.align = "center", padding = 5),
-  bg = "white", ...)
+  fontname = getOption("ReporteRs-default-font"),
+  fontname_serif = "Times New Roman", fontname_sans = "Calibri",
+  fontname_mono = "Courier New", fontname_symbol = "Symbol",
+  editable = TRUE, bookmark, par.properties = parProperties(text.align =
+  "center", padding = 5), bg = "white", ...)
 }
 \arguments{
 \item{doc}{the \code{docx} to use}
@@ -28,7 +30,11 @@ DrawingML instructions cannot be read by MS Word 2007.}
 
 \item{height}{plot height in inches (default value is 6).}
 
-\item{fontname}{the default font family to use, default to getOption("ReporteRs-default-font").}
+\item{fontname}{deprecated. the default font family to use, default to getOption("ReporteRs-default-font").}
+
+\item{fontname_serif, fontname_sans, fontname_mono, fontname_symbol}{font
+names for font faces.
+Used fonts should be available in the operating system.}
 
 \item{editable}{logical value - if TRUE vector graphics elements (points, text, etc.) are editable.}
 

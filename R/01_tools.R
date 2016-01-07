@@ -46,11 +46,6 @@
 	options("ReporteRs-backtick-shading-color" = "#f9f2f4" )
 	options("ReporteRs-fontsize"=11L)
 
-	options("vg_fonts" = list(fontname_serif="Times New Roman",
-	                          fontname_sans = "Calibri",
-	                          fontname_mono = "Courier New",
-	                          fontname_symbol = "Symbol") )
-
 	options("ReporteRs-list-definition"= list(
 		ol.left = seq( from = 0, by = 0.4, length.out = 9),
 		ol.hanging = rep( 0.4, 9 ),
