@@ -6,7 +6,6 @@
 #' @importFrom grDevices dev.list
 #' @importFrom grDevices rgb
 #' @importFrom graphics box
-#' @importFrom graphics box
 #' @importFrom graphics plot
 #' @importFrom graphics polygon
 #' @importFrom graphics text
@@ -167,14 +166,14 @@ plotSlideLayout = function( doc, layout.name ){
 	x = as.vector( apply( positions, 1, function( x ) c( x[1], x[1], x[2], x[2], NA ) ) )
 	y = as.vector( apply( positions, 1, function( x ) c( x[4], x[3], x[3], x[4], NA ) ) )
 
-	plot( x = c(0, dimensions[1]) , y = c(0, dimensions[2]),
+	graphics::plot( x = c(0, dimensions[1]) , y = c(0, dimensions[2]),
 			type = "n", axes = F,
 			xaxs = "i", yaxs = "i",
 			xlab = "", ylab = "", main = "" )
-	box()
-	polygon(x, y )
+	graphics::box()
+	graphics::polygon(x, y )
 
-	text( x = (position_left + position_right)/2,
+	graphics::text( x = (position_left + position_right)/2,
 		y = (position_top + position_bottom)/2 ,
 		labels = c( header_names, body_names )
 		)
