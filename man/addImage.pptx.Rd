@@ -4,8 +4,7 @@
 \alias{addImage.pptx}
 \title{Insert an external image into a pptx object}
 \usage{
-\method{addImage}{pptx}(doc, filename, offx, offy, width, height, ppi = 72,
-  ...)
+\method{addImage}{pptx}(doc, filename, offx, offy, width, height, ...)
 }
 \arguments{
 \item{doc}{\code{\link{pptx}} object where external image has to be added}
@@ -16,11 +15,9 @@
 
 \item{offy}{optional, y position of the shape (top left position of the bounding box) in inches See details.}
 
-\item{width}{optional, width of the shape in inches See details.}
+\item{width}{width of the shape in inches. See details.}
 
-\item{height}{optional, height of the shape in inches See details.}
-
-\item{ppi}{dot per inches, default to 72}
+\item{height}{height of the shape in inches. See details.}
 
 \item{...}{further arguments, not used.}
 }
@@ -31,15 +28,15 @@ an object of class \code{\link{pptx}}.
 Add an external image into a \code{\link{pptx}} object.
 }
 \details{
-By default, image is added to the next free 'content' shape of the current slide. 
+By default, image is added to the next free 'content' shape of the current slide.
 See \code{\link{slide.layouts.pptx}} to view the slide layout.
 
-If arguments width and height are missing, values will be defined as 
-their respective number of pixels divide by \code{ppi}.
+Arguments \code{width} and \code{height} can be defined with functions
+\code{png::readPNG}, \code{jpeg::readJPEG} or \code{bmp::read.bmp}.
 
-If arguments offx and offy are missing, position is defined as 
-the position of the next available shape of the slide. This 
-dimensions can be defined in the layout of the PowerPoint template used to create 
+If arguments offx and offy are missing, position is defined as
+the position of the next available shape of the slide. This
+dimensions can be defined in the layout of the PowerPoint template used to create
 the \code{pptx} object.
 }
 \examples{
@@ -52,42 +49,21 @@ options( "ReporteRs-fontsize" = 24 )
 doc = pptx( title = "title" )
 # files 'logo.jpg' and 'logosm.jpg' only exist in R for Windows
 img.file1 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-img.file2 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logosm.jpg" )
 
-if( file.exists( img.file1 ) && file.exists( img.file2 ) ){
-  
-  doc = addSlide( doc, "Two Content")
-  doc = addTitle( doc, "Add images with defaut PPI (72)")
-  doc = addImage(doc, img.file1 )
-  doc = addImage(doc, img.file2 )
-  
-  doc = addSlide( doc, "Two Content")
-  doc = addTitle( doc, "Add images with their respective PPI" )
-  doc = addImage(doc, img.file1, ppi = 300 )
-  doc = addImage(doc, img.file2, ppi = 96)
-  
+if( file.exists( img.file1 ) && requireNamespace("jpeg", quietly = TRUE) ){
+
+  dims <- attr( jpeg::readJPEG(img.file1), "dim" )
   doc = addSlide( doc, "Title and Content" )
-  doc = addTitle( doc, "Add images with width and height" )
-  doc = addImage(doc, img.file1, width = 4, height = 2 )
-  
-  doc = addSlide( doc, "Title and Content" )
-  doc = addTitle( doc, "Add images with width and height and postion" )
-  doc = addImage(doc, img.file1, width = 4, height = 2, 
-    offx = 2, offy = 2 )
-  
-  doc = addSlide( doc, "Title and Content" )
-  doc = addTitle( doc, "Add images with postion" )
-  doc = addImage(doc, img.file1, offx = 2, offy = 2 )
+  doc = addTitle( doc, "Add images" )
+  doc = addImage(doc, img.file1, width = dims[2]/72, height = dims[1]/72)
 }
 if( exists("win.metafile") ){
 	win.metafile(filename = "image.wmf", width = 5, height = 5 )
 	barplot( 1:6, col = 2:7)
 	dev.off()
-	
+
 	doc = addSlide( doc, "Title and Content")
-	doc =addImage(doc, "image.wmf", width = 5, height = 5 )
-	doc = addSlide( doc, "Title and Content")
-	doc =addImage(doc, "image.wmf", width = 8, height = 3 )
+	doc = addImage(doc, "image.wmf", width = 5, height = 5 )
 }
 
 # Write the object
@@ -95,7 +71,7 @@ writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
 \seealso{
-\code{\link{pptx}}, \code{\link{addPlot.pptx}}
-, \code{\link{addImage}}
+\code{\link{pptx}}, \code{\link{addPlot.pptx}},
+\code{\link{addImage}}
 }
 

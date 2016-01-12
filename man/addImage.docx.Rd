@@ -6,24 +6,22 @@
 \usage{
 \method{addImage}{docx}(doc, filename, bookmark,
   par.properties = parProperties(text.align = "center", padding = 5), width,
-  height, ppi = 72, ...)
+  height, ...)
 }
 \arguments{
 \item{doc}{Object of class \code{\link{docx}} where external image has to be added}
 
 \item{filename}{\code{"character"} value, complete filename of the external image}
 
-\item{bookmark}{a character value ; id of the Word bookmark to replace by the image. 
+\item{bookmark}{a character value ; id of the Word bookmark to replace by the image.
 optional. if missing, image is added at the end of the document. See \code{\link{bookmark}}.}
 
-\item{par.properties}{paragraph formatting properties of the paragraph that contains images. 
+\item{par.properties}{paragraph formatting properties of the paragraph that contains images.
 An object of class \code{\link{parProperties}}}
 
 \item{width}{image width in inches}
 
 \item{height}{image height in inches}
-
-\item{ppi}{dot per inches, default to 72}
 
 \item{...}{further arguments, not used.}
 }
@@ -34,8 +32,8 @@ an object of class \code{\link{docx}}.
 Add external images into a \code{\link{docx}} object.
 }
 \details{
-If arguments width and height are missing, values will be defined as 
-their respective number of pixels divide by \code{ppi}.
+Arguments \code{width} and \code{height} can be defined with functions
+\code{png::readPNG}, \code{jpeg::readJPEG} or \code{bmp::read.bmp}.
 }
 \examples{
 #START_TAG_TEST
@@ -45,23 +43,13 @@ doc.filename = "addImage_example.docx"
 options( "ReporteRs-fontsize" = 10 )
 
 doc = docx( )
-# files 'logo.jpg' and 'logosm.jpg' only exist in R for Windows
+# files 'logo.jpg'
 img.file1 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-img.file2 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logosm.jpg" )
 
-if( file.exists( img.file1 ) && file.exists( img.file2 ) ){
-  doc = addTitle( doc, "Add images with defaut PPI (72)", level = 1)
-  doc = addTitle( doc, "Image 1", level = 2)
-  doc = addImage(doc, img.file1 )
-  doc = addTitle( doc, "Image 2", level = 2)
-  doc = addImage(doc, img.file2 )
-  doc = addTitle( doc, "Add images with their respective PPI", level = 1)
-  doc = addTitle( doc, "Image 1", level = 2)
-  doc = addImage(doc, img.file1, ppi = 300 )
-  doc = addTitle( doc, "Image 2", level = 2)
-  doc = addImage(doc, img.file2, ppi = 96)
+if( file.exists( img.file1 ) && requireNamespace("jpeg", quietly = TRUE) ){
+  dims <- attr( jpeg::readJPEG(img.file1), "dim" )
   doc = addTitle( doc, "Add images with width and height", level = 1)
-  doc = addImage(doc, img.file1, width = 4, height = 2 )
+  doc = addImage(doc, img.file1, width = dims[2]/72, height = dims[1]/72)
 }
 if( exists("win.metafile") ){
 	win.metafile(filename = "image.wmf", width = 5, height = 5 )

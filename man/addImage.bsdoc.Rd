@@ -5,8 +5,7 @@
 \title{Insert an external image into a bsdoc object}
 \usage{
 \method{addImage}{bsdoc}(doc, filename, width, height,
-  par.properties = parProperties(text.align = "center", padding = 5),
-  ppi = 72, ...)
+  par.properties = parProperties(text.align = "center", padding = 5), ...)
 }
 \arguments{
 \item{doc}{\code{\link{bsdoc}} object where external image has to be added}
@@ -17,10 +16,8 @@
 
 \item{height}{image height in inches}
 
-\item{par.properties}{paragraph formatting properties of the paragraph that contains images. 
+\item{par.properties}{paragraph formatting properties of the paragraph that contains images.
 An object of class \code{\link{parProperties}}}
-
-\item{ppi}{dot per inches, default to 72}
 
 \item{...}{further arguments, not used.}
 }
@@ -31,8 +28,8 @@ an object of class \code{\link{bsdoc}}.
 Add an external image into a \code{\link{bsdoc}} object.
 }
 \details{
-If arguments width and height are missing, values will be defined as 
-their respective number of pixels divide by \code{ppi}.
+Arguments \code{width} and \code{height} can be defined with functions
+\code{png::readPNG}, \code{jpeg::readJPEG} or \code{bmp::read.bmp}.
 }
 \examples{
 #START_TAG_TEST
@@ -42,23 +39,13 @@ doc.filename = "addImage_bsdoc/example.html"
 options( "ReporteRs-fontsize" = 11 )
 
 doc = bsdoc( )
-# files 'logo.jpg' and 'logosm.jpg' only exist in R for Windows
+# files 'logo.jpg'
 img.file1 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-img.file2 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logosm.jpg" )
 
-if( file.exists( img.file1 ) && file.exists( img.file2 ) ){
-  doc = addTitle( doc, "Add images with defaut PPI (72)", level = 1)
-  doc = addTitle( doc, "Image 1", level = 2)
-  doc = addImage(doc, img.file1 )
-  doc = addTitle( doc, "Image 2", level = 2)
-  doc = addImage(doc, img.file2 )
-  doc = addTitle( doc, "Add images with their respective PPI", level = 1)
-  doc = addTitle( doc, "Image 1", level = 2)
-  doc = addImage(doc, img.file1, ppi = 300 )
-  doc = addTitle( doc, "Image 2", level = 2)
-  doc = addImage(doc, img.file2, ppi = 96)
+if( file.exists( img.file1 ) && requireNamespace("jpeg", quietly = TRUE) ){
+  dims <- attr( jpeg::readJPEG(img.file1), "dim" )
   doc = addTitle( doc, "Add images with width and height", level = 1)
-  doc = addImage(doc, img.file1, width = 4, height = 2 )
+  doc = addImage(doc, img.file1, width = dims[2]/72, height = dims[1]/72)
 }
 
 # Write the object
