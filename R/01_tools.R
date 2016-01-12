@@ -295,4 +295,29 @@ last_elts <- function(x, n = 5L){
 }
 
 
+next_shape_pos = function( doc ){
+  slide = doc$current_slide
+
+  id = .jcall( slide, "I", "getNextShapeIndex"  )
+  maxid = .jcall( slide, "I", "getmax_shape"  )
+
+  if( maxid-id < 1 )
+    stop( getSlideErrorString( shape_errors["NOROOMLEFT"] , "plot") )
+
+  layout_name <- .jcall( slide, "S", "getLayoutName" )
+  classname_ <- paste0("L", class.pptx4r.LayoutDescription, ";")
+  layout_description = .jcall( doc$obj, classname_,
+                               "getLayoutProperties", layout_name )
+
+  dims = .jcall( layout_description, "[I",
+                 "getContentDimensions", as.integer(id) )
+  width = dims[3] / 914400
+  height = dims[4] / 914400
+  offx = dims[1] / 914400
+  offy = dims[2] / 914400
+  list( width = width, height = height, offx = offx, offy = offy )
+}
+
+
+
 

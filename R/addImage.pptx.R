@@ -36,27 +36,36 @@ addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
 
 	slide = doc$current_slide
 
-	if( missing(width) )
-	  stop("width can not be missing")
-	if( missing(height) )
-	  stop("height can not be missing")
+	off_missing <- ( missing( offx ) || missing( offy ) )
+	ext_missing <- ( missing( width ) || missing( height ) )
 
-	if( !missing(offx) && !is.numeric( offx ) )
-	  stop("arguments offx must be a numeric vector")
-	if( !missing(offy) && !is.numeric( offy ) )
-	  stop("arguments offy must be a numeric vector")
-	if( !is.numeric( width ) )
-	  stop("arguments width must be a numeric vector")
-	if( !is.numeric( height ) )
-	  stop("arguments height must be a numeric vector")
-
-	jimg = .jnew(class.Image , filename, .jfloat( width ), .jfloat( height ) )
-
-	if( !missing( offx ) && !missing( offy ) ){
-		out = .jcall( slide, "I", "add", jimg, .jfloat( offx ), .jfloat( offy ) )
-	} else {
-	  out = .jcall( slide, "I", "add", jimg )
+	if( !off_missing && ext_missing ){
+	  stop("width and height must be provided if offx and offy are provided")
 	}
+
+	free_layout <- FALSE
+	if( off_missing && ext_missing ){
+	  position <- next_shape_pos( doc )
+	  offx_ <- position$offx
+	  offy_ <- position$offy
+	  width_ <- position$width
+	  height_ <- position$height
+	} else if( off_missing && !ext_missing ){
+	  position <- next_shape_pos( doc )
+	  offx_ <- position$offx
+	  offy_ <- position$offy
+	  width_ <- width
+	  height_ <- height
+	} else {
+	  offx_ <- offx
+	  offy_ <- offy
+	  width_ <- width
+	  height_ <- height
+	  free_layout <- TRUE
+	}
+
+	jimg = .jnew(class.Image , filename, .jfloat( width_ ), .jfloat( height_ ) )
+	out = .jcall( slide, "I", "add", jimg, .jfloat( offx_ ), .jfloat( offy_ ), free_layout )
 
 	if( isSlideError( out ) ){
 		stop( getSlideErrorString( out , "image") )
