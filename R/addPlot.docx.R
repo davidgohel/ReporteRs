@@ -80,19 +80,19 @@ addPlot.docx = function(doc, fun,
 		dev.off()
 
 		plotfiles = list.files( dirname , full.names = T )
+		if( length( plotfiles ) > 1 )
+		  stop( length( plotfiles ),
+		        " files have been produced. multiple plot files are not supported")
 
-		for( fi in seq_along( plotfiles ) ){
-			if( !missing( bookmark ) && fi== 1 )
-				doc = addImage( doc, filename = plotfiles[fi],
+			if( !missing( bookmark ) )
+				doc = addImage( doc, filename = plotfiles,
 						width = width, height = height,
-						bookmark = bookmark, ppi = 300,
+						bookmark = bookmark,
 						par.properties = par.properties )
-			else if( missing( bookmark ) )
-				doc = addImage( doc, filename = plotfiles[fi],
+			else
+				doc = addImage( doc, filename = plotfiles,
             width = width, height = height,
-						ppi = 300, par.properties = par.properties  )
-			else stop("bookmark can only be used when one single graph is inserted.")
-		}
+						par.properties = par.properties  )
 	} else {
 		doc_elt_index = .jcall( doc$obj, "I", "getElementIndex") + 1L
 

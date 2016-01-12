@@ -11,10 +11,12 @@
 #' @param width plot width in inches (default value is 6).
 #' @param height plot height in inches (default value is 6).
 #' @param vector.graphic logical scalar, default to FALSE. If TRUE, vector graphics
-#' are produced instead of PNG images. If TRUE, vector graphics are
-#' RaphaelJS instructions(transformed as SVG).
+#' are produced instead of PNG images. If TRUE, SVG is produced.
 #' @param pointsize the default pointsize of plotted text in pixels, default to 12.
-#' @param fontname the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param fontname deprecated. the default font family to use, default to getOption("ReporteRs-default-font").
+#' @param fontname_serif,fontname_sans,fontname_mono,fontname_symbol font
+#' names for font faces.
+#' Used fonts should be available in the operating system.
 #' @param par.properties paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}
 #' @param ... arguments for \code{fun}.
 #' @return an object of class \code{\link{bsdoc}}.
@@ -34,8 +36,18 @@
 addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		vector.graphic = T, width=6, height=6,
 		fontname = getOption("ReporteRs-default-font"),
+		fontname_serif = "Times New Roman",
+		fontname_sans = "Calibri",
+		fontname_mono = "Courier New",
+		fontname_symbol = "Symbol",
 		par.properties = parCenter( padding = 5 ), ... ) {
 
+  if (!missing(fontname)) {
+    warning("argument fontname is deprecated; please use",
+            "fontname_serif, fontname_sans ",
+            ",fontname_mono,fontname_symbol instead.",
+            call. = FALSE)
+  }
 
 	plotargs = list(...)
 
@@ -54,17 +66,24 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		fun_res = try( fun(...), silent = T )
 		dev.off()
 		plotfiles = list.files( dirname , full.names = T )
+		if( length( plotfiles ) > 1 )
+		  stop( length( plotfiles ),
+		        " files have been produced. multiple plot files are not supported")
+
 		doc = addImage( doc, plotfiles, width = width, height = height,
-				par.properties = par.properties, ppi = 300 )
+				par.properties = par.properties )
 	} else {
 	  filename = tempfile( fileext = ".svg")
 	  filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
 	  dsvg( file = filename, width = width, height = height,
-		     pointsize = pointsize, canvas_id = as.integer(doc$canvas_id) )
-		tryCatch(fun(...),
-		         finally = dev.off()
-		)
+		     pointsize = pointsize, canvas_id = as.integer(doc$canvas_id),
+		     fontname_serif = fontname_serif,
+		     fontname_sans = fontname_sans,
+		     fontname_mono = fontname_mono,
+		     fontname_symbol = fontname_symbol
+		     )
+		tryCatch(fun(...), finally = dev.off() )
     doc$canvas_id = doc$canvas_id + 1
 
 		jimg = .jnew( class.html4r.SVGContent, .jParProperties(par.properties), filename, width*72, height*72 )

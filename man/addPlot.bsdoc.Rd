@@ -7,6 +7,8 @@
 \method{addPlot}{bsdoc}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
   vector.graphic = T, width = 6, height = 6,
   fontname = getOption("ReporteRs-default-font"),
+  fontname_serif = "Times New Roman", fontname_sans = "Calibri",
+  fontname_mono = "Courier New", fontname_symbol = "Symbol",
   par.properties = parCenter(padding = 5), ...)
 }
 \arguments{
@@ -20,14 +22,17 @@ to plot. For traditionnal plots, the function should contain plot instructions. 
 \item{pointsize}{the default pointsize of plotted text in pixels, default to 12.}
 
 \item{vector.graphic}{logical scalar, default to FALSE. If TRUE, vector graphics
-are produced instead of PNG images. If TRUE, vector graphics are
-RaphaelJS instructions(transformed as SVG).}
+are produced instead of PNG images. If TRUE, SVG is produced.}
 
 \item{width}{plot width in inches (default value is 6).}
 
 \item{height}{plot height in inches (default value is 6).}
 
-\item{fontname}{the default font family to use, default to getOption("ReporteRs-default-font").}
+\item{fontname}{deprecated. the default font family to use, default to getOption("ReporteRs-default-font").}
+
+\item{fontname_serif, fontname_sans, fontname_mono, fontname_symbol}{font
+names for font faces.
+Used fonts should be available in the operating system.}
 
 \item{par.properties}{paragraph formatting properties of the paragraph that contains plot(s). An object of class \code{\link{parProperties}}}
 

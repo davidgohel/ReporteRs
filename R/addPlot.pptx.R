@@ -209,14 +209,18 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 	slide = doc$current_slide
 	plot_first_id = doc$plot_first_id
 
-	check.dims = sum( c( !missing( offx ), !missing( offy ), !missing( width ), !missing( height ) ) )
-
-	if( check.dims < 4 ){
-		data.dims = get.graph.dims( doc )
-		width = data.dims$widths
-		height = data.dims$heights
-		offx = data.dims$offxs
-		offy = data.dims$offys
+	if( missing( offx ) || missing( offy ) ){
+	  data.dims = get.graph.dims( doc )
+	  offx = data.dims$offxs
+	  offy = data.dims$offys
+	  offx = offx[1]
+	  offy = offy[1]
+	}
+	if( missing( width ) || missing( height ) ){
+	  width = data.dims$widths
+	  height = data.dims$heights
+	  width = width[1]
+	  height = height[1]
 	}
 
 	plotargs = list(...)
@@ -232,17 +236,23 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11
 	fun(...)
 	dev.off()
 	plotfiles = list.files( dirname , full.names = T )
-	for( i in seq_along( plotfiles ) ){
-		if( check.dims > 3 ){
-			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy,
-					width=width, height=height, ppi = 300 )
-		} else if( !missing(offx) && !missing(offy) && missing(width) && missing(height) ){
-			doc = addImage( doc, plotfiles[i], offx = offx, offy = offy, ppi = 300 )
-		}  else if( check.dims < 1 ){
-			doc = addImage( doc, plotfiles[i], ppi = 300 )
-		} else {
-			doc = addImage( doc, plotfiles[i], ppi = 300 )
-		}
+
+	if( length( plotfiles ) > 1 )
+	  stop( length( plotfiles ),
+	        " files have been produced. multiple plot files are not supported")
+
+
+	if (!missing(offx) && !missing(offy)) {
+	  doc = addImage(
+	    doc,
+	    plotfiles,
+	    offx = offx,
+	    offy = offy,
+	    width = width,
+	    height = height
+	  )
+	} else {
+	  doc = addImage(doc, plotfiles, width = width, height = height)
 	}
 
 	doc
