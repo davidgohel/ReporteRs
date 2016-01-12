@@ -1,4 +1,4 @@
-context("add plot options")
+context("pptx plot")
 
 dummy_plot <- function(){
   plot.new()
@@ -8,7 +8,7 @@ dummy_plot <- function(){
 test_that("[vg] no position no size generate no error", {
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
-  doc <- try( addPlot(doc, fun = dummy_plot), silent = TRUE)
+  doc <- try( addPlot(doc, fun = dummy_plot, vector.graphic = TRUE), silent = TRUE)
   expect_is(doc, "pptx" )
 })
 
