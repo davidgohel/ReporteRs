@@ -28,11 +28,6 @@ Installation
 
 Java (it has been tested with java version >= 1.6).
 
-ReporteRs needs some R packages ; run the following script to install them if needed.
-
-    if( !require( rJava ) ) install.packages("rJava")
-    if( !require( ggplot2 ) ) install.packages("ggplot2")
-
 ### CRAN
 
     install.packages("ReporteRs")
@@ -45,13 +40,9 @@ ReporteRs needs some R packages ; run the following script to install them if ne
     devtools::install_github('davidgohel/ReporteRsjars')
     devtools::install_github('davidgohel/ReporteRs')
 
-**Get the latest Windows binary packages:**  
-[ReporteRsjars 0.2](https://github.com/davidgohel/ReporteRsjars/releases/tag/v0.2 "ReporteRsjars") &diams; 
-[ReporteRs 0.8.0](https://github.com/davidgohel/ReporteRs/releases/tag/v0.8.0 "ReporteRs")
+**Get the latest binary packages:**  
+https://github.com/davidgohel/ReporteRs/releases/
 
-    install.packages("C:/path/ReporteRsjars_x.x.x.zip", repos = NULL,type="win.binary")
-    install.packages("C:/path/ReporteRs_x.x.x.zip", repos = NULL,type="win.binary")
-  
 Getting Started
 ---------------
 
