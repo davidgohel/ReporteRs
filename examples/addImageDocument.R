@@ -1,18 +1,8 @@
-# files 'logo.jpg' and 'logosm.jpg' only exist in R for Windows
+# files 'logo.jpg'
 img.file1 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
-img.file2 = file.path( Sys.getenv("R_HOME"), "doc", "html", "logosm.jpg" )
 
-if( file.exists( img.file1 ) && file.exists( img.file2 ) ){
-  doc = addTitle( doc, "Add images with defaut PPI (72)", level = 1)
-  doc = addTitle( doc, "Image 1", level = 2)
-  doc = addImage(doc, img.file1 )
-  doc = addTitle( doc, "Image 2", level = 2)
-  doc = addImage(doc, img.file2 )
-  doc = addTitle( doc, "Add images with their respective PPI", level = 1)
-  doc = addTitle( doc, "Image 1", level = 2)
-  doc = addImage(doc, img.file1, ppi = 300 )
-  doc = addTitle( doc, "Image 2", level = 2)
-  doc = addImage(doc, img.file2, ppi = 96)
+if( file.exists( img.file1 ) && requireNamespace("jpeg", quietly = TRUE) ){
+  dims <- attr( jpeg::readJPEG(img.file1), "dim" )
   doc = addTitle( doc, "Add images with width and height", level = 1)
-  doc = addImage(doc, img.file1, width = 4, height = 2 )
+  doc = addImage(doc, img.file1, width = dims[2]/72, height = dims[1]/72)
 }
