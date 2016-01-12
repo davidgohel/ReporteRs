@@ -30,6 +30,7 @@ Imports:
     gdtools
 Suggests:
     ggplot2,
+    png, jpeg, bmp,
     testthat
 SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
