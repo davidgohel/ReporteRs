@@ -1,5 +1,4 @@
 [![Travis-CI Build Status](https://travis-ci.org/davidgohel/ReporteRs.svg?branch=master)](https://travis-ci.org/davidgohel/ReporteRs)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/davidgohel/ReporteRs?branch=master)](https://ci.appveyor.com/project/davidgohel/ReporteRs/branch/master)
 [![CRAN version](http://www.r-pkg.org/badges/version/ReporteRs)](http://cran.rstudio.com/web/packages/ReporteRs/index.html)
 
 ReporteRs
