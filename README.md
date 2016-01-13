@@ -10,9 +10,7 @@ Usefull links:
 * Help pages: [**Documentation**](http://davidgohel.github.io/ReporteRs/index.html) 
 * if you have questions, use the mailing list: [**Mailing list**](http://groups.google.com/forum/#!forum/reporters-package "if you have questions, use the mailing list")  
 * Report a bug: [**Bug report**](http://github.com/davidgohel/ReporteRs/issues "please provide a reproducible example"). If you report a bug, try to send a reproducible example 
-    and don't forget to send the result of 
-    
-        sessionInfo()
+    and don't forget to send the result of `sessionInfo()`.
         
 Features
 --------
