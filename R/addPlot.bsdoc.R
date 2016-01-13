@@ -69,6 +69,8 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		if( length( plotfiles ) > 1 )
 		  stop( length( plotfiles ),
 		        " files have been produced. multiple plot files are not supported")
+		if( length( plotfiles ) < 1 )
+		  stop("unable to produce a plot")
 
 		doc = addImage( doc, plotfiles, width = width, height = height,
 				par.properties = par.properties )
@@ -84,6 +86,9 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		     fontname_symbol = fontname_symbol
 		     )
 		tryCatch(fun(...), finally = dev.off() )
+	  if( !file.exists(filename) )
+	    stop("unable to produce a plot")
+
     doc$canvas_id = doc$canvas_id + 1
 
 		jimg = .jnew( class.html4r.SVGContent, .jParProperties(par.properties), filename, width*72, height*72 )

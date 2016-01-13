@@ -165,6 +165,8 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
            raster_prefix = img_directory
   )
   tryCatch(fun(...), finally = dev.off() )
+  if( !file.exists(filename) )
+    stop("unable to produce a plot")
 
 
   raster_files <- list.files(path = getwd(), pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
@@ -211,6 +213,8 @@ raster.pptx.graphic = function(doc, fun, pointsize = 11,
 
   tryCatch(fun(...), finally = dev.off() )
 
+  if( !file.exists(filename) )
+      stop("unable to produce a plot")
   jimg = .jnew(class.Image , filename, .jfloat( width ), .jfloat( height ) )
   out = .jcall( doc$current_slide, "I", "add", jimg, .jfloat( offx ), .jfloat( offy ), free_layout )
 

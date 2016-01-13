@@ -80,6 +80,9 @@ addPlot.docx = function(doc, fun,
 		dev.off()
 
 		plotfiles = list.files( dirname , full.names = T )
+		if( length( plotfiles ) < 1 )
+		  stop("unable to produce a plot")
+
 		if( length( plotfiles ) > 1 )
 		  stop( length( plotfiles ),
 		        " files have been produced. multiple plot files are not supported")
@@ -120,6 +123,8 @@ addPlot.docx = function(doc, fun,
 		tryCatch(fun(...),
 		         finally = dev.off()
 		)
+		if( !file.exists(filename) )
+		  stop("unable to produce a plot")
 
 		raster_files <- list.files(path = getwd(), pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
 		raster_names <- gsub( pattern = "\\.png$", replacement = "", basename(raster_files) )
