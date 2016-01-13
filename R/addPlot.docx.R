@@ -103,7 +103,7 @@ addPlot.docx = function(doc, fun,
 		next_rels_id <- gsub(pattern = "^rId", "", next_rels_id )
 		next_rels_id <- as.integer(next_rels_id)-1
 		uid <- basename(tempfile(pattern = ""))
-		img_directory = file.path(getwd(), uid )
+		img_directory <- file.path(tempdir(), uid )
 
 		dml_docx(file = filename,
 		         width = width, height = height,
@@ -127,13 +127,22 @@ addPlot.docx = function(doc, fun,
 		dml_doc = read_xml(filename)
 		n_g_elts <- length( xml_find_all(dml_doc, "//*[@id]") )
 
-		dims = as.integer( c( width*72.2 , height*72.2 )* 12700 )
-		dml.object = .jnew( class.DrawingML, filename )
+		dims <- as.integer( c( width*72.2 , height*72.2 )* 12700 )
+		dml.object <- .jnew( class.DrawingML, filename )
 		.jcall( dml.object, "V", "setWidth", as.integer( dims[1] ) )
 		.jcall( dml.object, "V", "setHeight", as.integer( dims[2] ) )
 
 		if( length( raster_files ) > 0 ){
-		  .jcall( doc$obj, "V", "add_png", .jarray(raster_files), .jarray(raster_names) )
+		  dims <- lapply( raster_files, function(x) {
+		    .dims <- attr( readPNG(x), "dim" )
+		    data.frame(width=.dims[2], height = .dims[1])
+		  }
+		  )
+		  dims <- do.call(rbind, dims)
+
+		  .jcall( doc$obj, "V", "add_png",
+		          .jarray(raster_files), .jarray(raster_names),
+		          .jarray(dims$width / 72), .jarray(dims$height / 72) )
 		  unlink(raster_files, force = TRUE)
 		}
 

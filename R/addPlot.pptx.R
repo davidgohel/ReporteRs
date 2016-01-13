@@ -134,6 +134,7 @@ addPlot.pptx = function(doc, fun, pointsize = 11,
 }
 
 
+#' @importFrom png readPNG
 vector.pptx.graphic = function(doc, fun, pointsize = 11,
                                fontname_serif, fontname_sans,
                                fontname_mono, fontname_symbol,
@@ -150,7 +151,7 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
   next_rels_id <- gsub(pattern = "(.*)([0-9]+)$", "\\2", next_rels_id )
   next_rels_id <- as.integer(next_rels_id) - 1
   uid <- basename(tempfile(pattern = ""))
-  img_directory = file.path(getwd(), uid )
+  img_directory <- file.path(tempdir(), uid )
 
   dml_pptx(file = filename,
            width = width, height = height,
@@ -170,7 +171,15 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
   raster_names <- gsub( pattern = "\\.png$", replacement = "", basename(raster_files) )
   dml.object = .jnew( class.DrawingML, filename )
   if( length( raster_files ) > 0 ){
-    .jcall( slide, "I", "add_png", .jarray(raster_files), .jarray(raster_names) )
+    dims <- lapply( raster_files, function(x) {
+      .dims <- attr( readPNG(x), "dim" )
+      data.frame(width=.dims[2], height = .dims[1])
+      }
+    )
+    dims <- do.call(rbind, dims)
+    .jcall( slide, "I", "add_png",
+            .jarray(raster_files), .jarray(raster_names),
+            .jarray(dims$width / 72), .jarray(dims$height / 72) )
     unlink(raster_files, force = TRUE)
   }
 

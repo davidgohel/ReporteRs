@@ -4,7 +4,7 @@
 \alias{pot_img}
 \title{Image to be concatenate with pot object}
 \usage{
-pot_img(filename, width, height, ppi = 72)
+pot_img(filename, width, height)
 }
 \arguments{
 \item{filename}{\code{"character"} value, complete filename of the external image}
@@ -12,8 +12,6 @@ pot_img(filename, width, height, ppi = 72)
 \item{width}{image width in inches}
 
 \item{height}{image height in inches}
-
-\item{ppi}{dot per inches, default to 72}
 }
 \description{
 Create an pot object that handle images.

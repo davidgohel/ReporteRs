@@ -19,12 +19,12 @@ pot(value = "", format = textProperties(), hyperlink, footnote)
 Create an object with a text to display and its formatting properties.
 }
 \details{
-a pot (piece of text) is a convenient way to define a paragraph 
+a pot (piece of text) is a convenient way to define a paragraph
 of text where some text are not all formated the same.
 
 A pot can be associated with an hyperlink.
 
-A pot can be associated with a Footnote. Note that footnotes can not be inserted in 
+A pot can be associated with a Footnote. Note that footnotes can not be inserted in
 a \code{pptx} object.
 }
 \examples{

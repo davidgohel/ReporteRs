@@ -2,18 +2,18 @@
 #'
 #' @description
 #' Create an object with a text to display and its formatting properties.
-#' 
+#'
 #' @param value text value or a value that has a \code{format} method returning character value.
 #' @param format formatting properties (an object of class \code{textProperties}).
 #' @param hyperlink a valid url to use as hyperlink when clicking on \code{value}.
 #' @param footnote a \code{\link{Footnote}} object.
-#' @details a pot (piece of text) is a convenient way to define a paragraph 
+#' @details a pot (piece of text) is a convenient way to define a paragraph
 #' of text where some text are not all formated the same.
-#' 
+#'
 #' A pot can be associated with an hyperlink.
-#' 
-#' A pot can be associated with a Footnote. Note that footnotes can not be inserted in 
-#' a \code{pptx} object. 
+#'
+#' A pot can be associated with a Footnote. Note that footnotes can not be inserted in
+#' a \code{pptx} object.
 #' @export
 #' @examples
 #' #
@@ -27,17 +27,17 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 	value = format( value )
 	if( !is.character( value ) ){
 		stop("value must be a character vector or must have a format method returning a string value.")
-	}  
-	
+	}
+
 	if( length( value ) != 1 ){
 		stop("length of value must be 1.")
-	} 
-		
+	}
+
 	.Object = list()
 	.Object[[1]] = list()
 	.Object[[1]]$value = value
 	.Object[[1]]$jimg = NULL
-	
+
 	if( !missing(format) ){
 		if( !inherits(format, "textProperties") )
 			stop("argument format must be a textProperties object.")
@@ -49,13 +49,13 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 			stop("hyperlink must be a character vector of size 1.")
 		.Object[[1]]$hyperlink = hyperlink
 	}
-	
+
 	if( !missing( footnote )){
 		if( !inherits(footnote, "Footnote") )
 			stop("footnote must be a Footnote object.")
 		.Object[[1]]$footnote = footnote
 	}
-	
+
 	class( .Object ) = c("pot")
 	.Object
 }
@@ -64,37 +64,34 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 #'
 #' @description
 #' Create an pot object that handle images.
-#' 
+#'
 #' @param filename \code{"character"} value, complete filename of the external image
 #' @param width image width in inches
 #' @param height image height in inches
-#' @param ppi dot per inches, default to 72
 #' @export
-pot_img = function( filename, width, height, ppi = 72 ){
-		
+pot_img = function( filename, width, height ){
+
 	if( length( filename ) != 1 ){
 		stop("length of filename must be 1.")
-	} 
+	}
 	if( !file.exists( filename ) )
 		stop( filename, " does not exist")
-	
+
 	if( !grepl("\\.(png|jpg|jpeg|gif|bmp|wmf|emf)$", filename ) )
 		stop( filename, " is not a valid file. Valid files are png, jpg, jpeg, gif, bmp, wmf, emf.")
-	
-	if( grepl("\\.(wmf|emf)$", filename ) ){
-		if( missing( width ) || missing(height) )
-			stop("when using wmf or emf file, you must specify argument width and height.")
-	}
-	jimg = .jnew(class.Image , filename, as.integer(ppi) )
-	if( !missing( width ) && !missing(height) )
-		.jcall( jimg, "V", "setDim", as.double( width ), as.double( height ) )
-	
-	
+
+  if( missing(width) )
+    stop("width can not be missing")
+  if( missing(height) )
+    stop("height can not be missing")
+
+	jimg = .jnew(class.Image , filename, .jfloat( width ), .jfloat( height ) )
+
 	.Object = list()
 	.Object[[1]] = list()
 	.Object[[1]]$value = ""
 	.Object[[1]]$jimg = jimg
-	
+
 	class( .Object ) = c("pot")
 	.Object
 }
@@ -102,14 +99,14 @@ pot_img = function( filename, width, height, ppi = 72 ){
 
 #' @title Print pot objects
 #'
-#' @description print a \code{\link{pot}} object. 
+#' @description print a \code{\link{pot}} object.
 #' Within RStudio, the pot is rendered in the viewer.
-#' 
+#'
 #' @param x a \code{\link{pot}} object
-#' @param ... further arguments, not used. 
+#' @param ... further arguments, not used.
 #' @export
 print.pot = function (x, ...){
-	
+
 	viewer <- getOption("viewer")
 	if ( !interactive() || is.null( viewer ) ){
 		for(i in seq_along(x)){
@@ -117,7 +114,7 @@ print.pot = function (x, ...){
 			else cat("[", x[[i]]$value, "]", sep = "" )
 		}
 	} else {
-		
+
 		path = file.path(tempfile(), "index.html" )
 		doc = bsdoc( )
 		doc = addParagraph( doc, x )
@@ -149,7 +146,7 @@ as.character.pot = function (x, ...){
 #' @param e1 a \code{pot} object or a character (vector of length 1).
 #' @param e2 a \code{pot} object or a character (vector of length 1).
 #' @details at least one of the two objects must be a \code{pot} object.
-#' If one of the 2 parameters is a simple string, it is converted as a 
+#' If one of the 2 parameters is a simple string, it is converted as a
 #' \code{pot} object with no associated format ; therefore, document default document style
 #' will be used (see \code{\link{addParagraph}}).
 #' @examples
@@ -172,9 +169,9 @@ as.character.pot = function (x, ...){
 #' @title get HTML code from a pot
 #'
 #' @description get HTML code from a pot
-#' 
+#'
 #' @param object the \code{pot} object
-#' @param ... further arguments passed to other methods 
+#' @param ... further arguments passed to other methods
 #' @return a character value
 #' @seealso \code{\link{pot}}
 #' @examples
@@ -184,7 +181,7 @@ as.character.pot = function (x, ...){
 #' @export
 as.html.pot = function( object, ... ) {
 	par = .jpot( object )
-	.jcall( par, "S", "getHTML" )	
+	.jcall( par, "S", "getHTML" )
 }
 
 .jpot = function( object ){
@@ -192,7 +189,7 @@ as.html.pot = function( object, ... ) {
 		stop("argument 'object' must be an object of class 'pot'")
 	}
 	paragrah = .jnew(class.Paragraph)
-	if( !missing( object ) ) 
+	if( !missing( object ) )
 		for( i in 1:length(object)){
 			current_value = object[[i]]
 			if( !is.null( current_value$jimg )){
@@ -211,7 +208,7 @@ as.html.pot = function( object, ... ) {
 				}
 				if( !is.null( current_value$footnote ) ) {
 					.jcall( paragrah, "V", "addFootnoteToLastEntry", .jFootnote(current_value$footnote ) )
-				}				
+				}
 			}
 		}
 	paragrah

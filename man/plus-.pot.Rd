@@ -17,7 +17,7 @@ Concatenation of 2 \code{pot} objects returns a pot (of length 2).
 }
 \details{
 at least one of the two objects must be a \code{pot} object.
-If one of the 2 parameters is a simple string, it is converted as a 
+If one of the 2 parameters is a simple string, it is converted as a
 \code{pot} object with no associated format ; therefore, document default document style
 will be used (see \code{\link{addParagraph}}).
 }

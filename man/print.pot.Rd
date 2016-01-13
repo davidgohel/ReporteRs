@@ -12,7 +12,7 @@
 \item{...}{further arguments, not used.}
 }
 \description{
-print a \code{\link{pot}} object. 
+print a \code{\link{pot}} object.
 Within RStudio, the pot is rendered in the viewer.
 }
 
