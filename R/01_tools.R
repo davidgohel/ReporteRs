@@ -16,29 +16,7 @@
 	.jpackage( pkgname, lib.loc = libname )
 	.jcall('java.lang.System','S','setProperty','file.encoding', 'UTF-8')
 	.jcall('java.lang.System','S','setProperty','java.awt.headless', 'true')
-
-	.try <- gdtools::font_family_exists(font_family = "Helvetica")
-	if( !.try ){
-	  .try <- gdtools::font_family_exists(font_family = "Arial")
-	} else options("ReporteRs-default-font" = "Helvetica")
-
-	if( !.try ){
-	  .try <- gdtools::font_family_exists(font_family = "Georgia")
-	} else options("ReporteRs-default-font" = "Arial")
-
-	if( !.try ){
-	  .try <- gdtools::font_family_exists(font_family = "Times New Roman")
-	} else options("ReporteRs-default-font" = "Georgia")
-
-	if( !.try ){
-	  .try <- gdtools::font_family_exists(font_family = "Verdana")
-	} else options("ReporteRs-default-font" = "Times New Roman")
-
-	if( !.try ){
-	  options("ReporteRs-default-font" = "Arial")
-		warning("Could not set any defaut font, please specify a font using:\noptions('ReporteRs-default-font' = 'existing font on your machine')\n")
-	} else options("ReporteRs-default-font" = "Verdana")
-
+	options("ReporteRs-default-font" = "Times New Roman")
 	options("ReporteRs-locale.language"="en")
 	options("ReporteRs-locale.region"="US")
 	options("ReporteRs-backtick-color" = "#c7254e" )
