@@ -27,10 +27,10 @@ Imports:
     utils,
     rvg,
     xml2,
-    gdtools
+    gdtools, png
 Suggests:
     ggplot2,
-    png, jpeg, bmp,
+    jpeg, bmp,
     testthat
 SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
