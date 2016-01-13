@@ -27,7 +27,9 @@ Imports:
     utils,
     rvg,
     xml2,
-    gdtools, png
+    gdtools,
+    png,
+    R.utils
 Suggests:
     ggplot2,
     jpeg, bmp,

@@ -48,9 +48,13 @@ docx = function( title = "untitled", template, list.definition = getOption("Repo
 		template = file.path( system.file(package = "ReporteRs"), "templates/EMPTY_DOC.docx" )
 	.reg = regexpr( paste( "(\\.(?i)(docx))$", sep = "" ), template )
 
-	if( !file.exists( template ) || .reg < 1 )
-		stop(template , " is not a valid file.")
-	template <- path.expand(template)
+	template <- getAbsolutePath(template, expandTilde = TRUE)
+
+	if( .reg < 1 )
+	  stop("invalid template name, it must have extension .docx")
+
+	if( !file.exists( template ) )
+		stop(template , " can not be found.")
 
 	lidef = do.call( list.settings, list.definition )
 	# java calls

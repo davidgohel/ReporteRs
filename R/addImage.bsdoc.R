@@ -37,6 +37,7 @@ addImage.bsdoc = function(doc, filename, width, height,
   if( !is.numeric( height ) )
     stop("arguments height must be a numeric vector")
 
+  filename <- getAbsolutePath(filename, expandTilde = TRUE)
   jimg = .jnew(class.Image , filename, .jfloat( width ), .jfloat( height ) )
 
 	.jcall( jimg, "V", "setParProperties", .jParProperties(par.properties) )

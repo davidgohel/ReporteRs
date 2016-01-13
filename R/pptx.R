@@ -1,3 +1,4 @@
+#' @importFrom R.utils getAbsolutePath
 #' @title Create Microsoft PowerPoint document object representation
 #'
 #' @description
@@ -51,9 +52,13 @@ pptx = function( title, template, list.definition = getOption("ReporteRs-list-de
 		template = file.path( system.file(package = "ReporteRs"), "templates/EMPTY_DOC.pptx" )
 	.reg = regexpr( paste( "(\\.(?i)(pptx))$", sep = "" ), template )
 
-	if( !file.exists( template ) || .reg < 1 )
-		stop(template , " is not a valid file.")
-	template <- path.expand(template)
+	template <- getAbsolutePath(template, expandTilde = TRUE)
+
+	if( .reg < 1 )
+	  stop("invalid template name, it must have extension .pptx")
+
+	if( !file.exists( template ) )
+	  stop(template , " can not be found.")
 
 #	public static int NO_ERROR = 0;
 #	public static int READDOC_ERROR = 1;

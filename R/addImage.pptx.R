@@ -64,6 +64,7 @@ addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
 	  free_layout <- TRUE
 	}
 
+	filename <- getAbsolutePath(filename, expandTilde = TRUE)
 	jimg = .jnew(class.Image , filename, .jfloat( width_ ), .jfloat( height_ ) )
 	out = .jcall( slide, "I", "add", jimg, .jfloat( offx_ ), .jfloat( offy_ ), free_layout )
 

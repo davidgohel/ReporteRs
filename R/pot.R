@@ -74,7 +74,10 @@ pot_img = function( filename, width, height ){
 	if( length( filename ) != 1 ){
 		stop("length of filename must be 1.")
 	}
-	if( !file.exists( filename ) )
+
+  filename <- getAbsolutePath(filename, expandTilde = TRUE)
+
+  if( !file.exists( filename ) )
 		stop( filename, " does not exist")
 
 	if( !grepl("\\.(png|jpg|jpeg|gif|bmp|wmf|emf)$", filename ) )

@@ -41,6 +41,7 @@ addImage.docx = function(doc, filename, bookmark,
   if( !is.numeric( height ) )
     stop("arguments height must be a numeric vector")
 
+  filename <- getAbsolutePath(filename, expandTilde = TRUE)
   jimg = .jnew(class.Image , filename, .jfloat( width ), .jfloat( height ) )
 
 	if( missing( bookmark ) )
