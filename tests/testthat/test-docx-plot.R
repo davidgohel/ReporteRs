@@ -36,3 +36,13 @@ test_that("[raster] size generate no error", {
   expect_is(doc, "docx" )
 })
 
+test_that("[vg] test raster", {
+  myplot <- qplot(Sepal.Length, Petal.Length,
+                  data = iris, color = Petal.Width,
+                  alpha = I(0.7) )
+  doc <- docx( )
+  doc <- try( addPlot(doc, fun = print,
+                      x = myplot,
+                      vector.graphic = TRUE), silent = TRUE)
+  expect_is(doc, "docx" )
+})

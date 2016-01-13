@@ -1,5 +1,7 @@
 context("pptx plot")
 
+library(ggplot2)
+
 dummy_plot <- function(){
   plot.new()
   points(.5,.5)
@@ -76,3 +78,14 @@ test_that("[raster] position but no size generate an error", {
   expect_is(doc, "try-error" )
 })
 
+test_that("[vg] test raster", {
+  myplot <- qplot(Sepal.Length, Petal.Length,
+                   data = iris, color = Petal.Width,
+                   alpha = I(0.7) )
+  doc <- pptx( )
+  doc <- addSlide( doc, "Title and Content" )
+  doc <- try( addPlot(doc, fun = print,
+                      x = myplot,
+                      vector.graphic = TRUE), silent = TRUE)
+  expect_is(doc, "pptx" )
+})
