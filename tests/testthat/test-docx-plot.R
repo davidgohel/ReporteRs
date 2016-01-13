@@ -1,5 +1,7 @@
 context("docx plot")
 
+library(ggplot2)
+
 dummy_plot <- function(){
   plot.new()
   points(.5,.5)
