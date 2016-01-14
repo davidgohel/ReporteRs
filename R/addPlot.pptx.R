@@ -151,7 +151,8 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
   next_rels_id <- gsub(pattern = "(.*)([0-9]+)$", "\\2", next_rels_id )
   next_rels_id <- as.integer(next_rels_id) - 1
   uid <- basename(tempfile(pattern = ""))
-  img_directory <- file.path(tempdir(), uid )
+  raster_dir <- tempdir()
+  img_directory <- file.path(raster_dir, uid )
 
   dml_pptx(file = filename,
            width = width, height = height,
@@ -169,7 +170,7 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
     stop("unable to produce a plot")
 
 
-  raster_files <- list.files(path = getwd(), pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
+  raster_files <- list.files(path = raster_dir, pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
   raster_names <- gsub( pattern = "\\.png$", replacement = "", basename(raster_files) )
   dml.object = .jnew( class.DrawingML, filename )
   if( length( raster_files ) > 0 ){

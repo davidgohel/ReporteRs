@@ -106,7 +106,8 @@ addPlot.docx = function(doc, fun,
 		next_rels_id <- gsub(pattern = "^rId", "", next_rels_id )
 		next_rels_id <- as.integer(next_rels_id)-1
 		uid <- basename(tempfile(pattern = ""))
-		img_directory <- file.path(tempdir(), uid )
+		raster_dir <- tempdir()
+		img_directory <- file.path(raster_dir, uid )
 
 		dml_docx(file = filename,
 		         width = width, height = height,
@@ -126,7 +127,7 @@ addPlot.docx = function(doc, fun,
 		if( !file.exists(filename) )
 		  stop("unable to produce a plot")
 
-		raster_files <- list.files(path = getwd(), pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
+		raster_files <- list.files(path = raster_dir, pattern = paste0("^", uid, "(.*)\\.png$"), full.names = TRUE )
 		raster_names <- gsub( pattern = "\\.png$", replacement = "", basename(raster_files) )
 
 		dml_doc = read_xml(filename)
