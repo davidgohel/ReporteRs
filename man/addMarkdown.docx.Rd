@@ -51,7 +51,7 @@ doc.filename = "addMarkdown_example.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
-doc = docx( )
+doc <- docx( )
 mkd = "# This is a title 1
 		
 This is a link to the [cran] (http://cran.r-project.org/). 

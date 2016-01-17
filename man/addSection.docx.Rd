@@ -38,7 +38,7 @@ doc.filename = "addSection.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
-doc = docx( )
+doc <- docx( )
 doc = addSection(doc, landscape = TRUE, ncol = 2 ) 
 doc = addPlot( doc = doc, fun = function() {
 		barplot( 1:8, col = 1:8 )

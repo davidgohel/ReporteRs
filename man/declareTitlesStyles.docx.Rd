@@ -35,7 +35,7 @@ doc.filename = "addImage_example.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
-doc = docx( )
+doc <- docx( )
 styles( doc )
 # [1] "Normal"                  "Title1"                  "Title2"
 # [4] "Title3"                  "Title4"                  "Title5"

@@ -42,7 +42,7 @@ doc.filename = "addRScript_example.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
-doc = docx( )
+doc <- docx( )
 doc = addRScript(doc, text = "x = rnorm(100)
 plot(density( x ) )" )
 

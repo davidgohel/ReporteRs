@@ -23,7 +23,7 @@ doc.filename = "writeDoc_example.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
-doc = docx( )
+doc <- docx( )
 
 # Write the object
 writeDoc( doc, file = doc.filename )

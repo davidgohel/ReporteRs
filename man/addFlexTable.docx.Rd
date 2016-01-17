@@ -34,7 +34,7 @@ doc.filename = "addFlexTable_example.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
-doc = docx( )
+doc <- docx( )
 
 doc = addTitle( doc, "Title example 1", level = 1 )
 #####################################################################

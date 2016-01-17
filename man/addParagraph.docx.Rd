@@ -42,7 +42,7 @@ doc.filename = "addParagraph_example.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
-doc = docx( )
+doc <- docx( )
 
 # returns available stylenames
 styles( doc )

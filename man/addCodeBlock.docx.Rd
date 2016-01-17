@@ -39,7 +39,7 @@ doc.filename = "addCodeBlock.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
-doc = docx( )
+doc <- docx( )
 doc = addCodeBlock( doc, text = "ls -a\\nwhich -a ls" )
 
 # Write the object
