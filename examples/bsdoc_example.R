@@ -11,10 +11,8 @@ if( requireNamespace("ggplot2", quietly = TRUE) ){
   # create a ggplot2 plot
   myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris
     , color = Species, size = Petal.Width, alpha = I(0.7) )
-	
+
   # Add myplot into object doc
-  #   myplot is assigned to argument 'x' because function 'print' on ggplot
-  #   objects is expecting argument 'x'.
   doc = addPlot( doc = doc, fun = print, x = myplot )
 }
 
@@ -23,14 +21,14 @@ if( requireNamespace("ggplot2", quietly = TRUE) ){
 doc = addTitle( doc, "Text example", level = 1, id = "text_example" )
 
 # "My tailor is rich" with formatting on some words
-pot1 = pot("My tailor", textProperties(color = "red" ) ) + 
-  " is " + 
+pot1 = pot("My tailor", textProperties(color = "red" ) ) +
+  " is " +
   pot("rich", textProperties(shading.color = "red", font.weight = "bold" ) )
 
 # "Cats and dogs" with formatting on some words
-pot2 = pot("Cats", textProperties(color = "red" ) ) + 
-  " and " + 
-  pot("dogs", textProperties( color = "blue" ), 
+pot2 = pot("Cats", textProperties(color = "red" ) ) +
+  " and " +
+  pot("dogs", textProperties( color = "blue" ),
     hyperlink = "http://www.wikipedia.org/" )
 
 # create a set of paragraphs made of pot1 and pot2
@@ -54,25 +52,25 @@ ordered.list.level2 = parProperties(list.style = "ordered", level = 2 )
 unordered.list.level1 = parProperties(list.style = "unordered", level = 1 )
 unordered.list.level2 = parProperties(list.style = "unordered", level = 2 )
 
-# add ordered list items 
-doc = addParagraph( doc, value = text1, 
+# add ordered list items
+doc = addParagraph( doc, value = text1,
   par.properties = ordered.list.level1 )
-doc = addParagraph( doc, value = text2, 
+doc = addParagraph( doc, value = text2,
   par.properties = ordered.list.level2 )
 
 # add ordered list items without restart renumbering
-doc = addParagraph( doc, value = c( text1, text2, text3), 
+doc = addParagraph( doc, value = c( text1, text2, text3),
   par.properties = ordered.list.level1 )
 
 # add ordered list items and restart renumbering
-doc = addParagraph( doc, value = c( text1, text2, text3), 
-  restart.numbering = TRUE, 
+doc = addParagraph( doc, value = c( text1, text2, text3),
+  restart.numbering = TRUE,
   par.properties = ordered.list.level1 )
 
 # add unordered list items
-doc = addParagraph( doc, value = text1, 
+doc = addParagraph( doc, value = text1,
   par.properties = unordered.list.level1 )
-doc = addParagraph( doc, value = text2, 
+doc = addParagraph( doc, value = text2,
   par.properties = unordered.list.level2 )
 
 doc = addTitle( doc, "Math example", level = 1)
@@ -85,10 +83,10 @@ doc = addTitle( doc, "Table example", level = 1, id = "table_example" )
 
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body
-MyFTable = FlexTable( data = mtcars, add.rownames = TRUE, 
-  header.cell.props = cellProperties( background.color = "#00557F" ), 
-  header.text.props = textProperties( color = "white", 
-    font.size = 11, font.weight = "bold" ), 
+MyFTable = FlexTable( data = mtcars, add.rownames = TRUE,
+  header.cell.props = cellProperties( background.color = "#00557F" ),
+  header.text.props = textProperties( color = "white",
+    font.size = 11, font.weight = "bold" ),
   body.text.props = textProperties( font.size = 10 )
 )
 # zebra stripes - alternate colored backgrounds on table rows
@@ -98,13 +96,13 @@ MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 MyFTable = setFlexTableBorders(MyFTable,
   inner.vertical = borderProperties( color="#0070A8", style="solid" ),
   inner.horizontal = borderNone(),
-  outer.vertical = borderProperties( color = "#006699", 
+  outer.vertical = borderProperties( color = "#006699",
 	style = "solid", width = 2 ),
-  outer.horizontal = borderProperties( color = "#006699", 
+  outer.horizontal = borderProperties( color = "#006699",
 	style = "solid", width = 2 )
 )
 
-# add MyFTable into document 
+# add MyFTable into document
 doc = addFlexTable( doc, MyFTable )
 
 
@@ -115,10 +113,10 @@ mymenu = BootstrapMenu( title = "my title")
 mydd = DropDownMenu( label = "my menu" )
 mydd = addLinkItem( mydd, label = "GitHub", "http://github.com/")
 mydd = addLinkItem( mydd, separator.after = TRUE)
-mydd = addLinkItem( mydd, 
+mydd = addLinkItem( mydd,
 	label = "Wikipedia", "http://www.wikipedia.fr")
 
-mymenu = addLinkItem( mymenu, 
+mymenu = addLinkItem( mymenu,
 	label = "ReporteRs", "http://github.com/davidgohel/ReporteRs")
 mymenu = addLinkItem( mymenu, dd = mydd )
 
@@ -126,7 +124,7 @@ doc = addBootstrapMenu( doc, mymenu )
 
 #####################################################################
 # add a footer
-doc = addFooter( doc, pot( "Hello world", 
+doc = addFooter( doc, pot( "Hello world",
   format = textProperties(color="gray") ), parCenter( padding = 0 ) )
 
 # add a TOC

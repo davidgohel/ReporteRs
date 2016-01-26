@@ -229,48 +229,6 @@ addParagraph = function(doc, value, ...){
 }
 
 
-#' @title Add a plot into a document object
-#'
-#' @description Add a plot into a document object
-#'
-#' @param doc document object
-#' @param fun plot function
-#' @param vector.graphic logical scalar, if TRUE, vector graphics
-#' are produced instead of PNG images.
-#'
-#' SVG will be produced for \code{bsdoc} objects
-#' and DrawingML instructions for \code{docx} and \code{pptx} objects.
-#'
-#' DrawingML instructions offer the advantage of providing editable graphics
-#' (forms and text colors, text contents).
-#' @param pointsize the default pointsize of plotted text in pixels, default to 12.
-#' @param ... further arguments passed to or from other methods..
-#' @return a document object
-#' @details
-#' Plot parameters are specified with the \code{...} argument.
-#' However, the most convenient usage is to wrap the plot code
-#' into a function whose parameters will be specified as '...'.
-#'
-#' If you want to add ggplot2 or lattice plot, use
-#' \code{print} function.
-#'
-#' \code{vector.graphic}: if document is a pptx or bsdoc document,
-#' vector graphics will always be displayed. Don't use vector
-#' graphics if document is a docx and MS Word version used
-#' to open the document is 2007.
-#'
-#' See \code{\link{addPlot.docx}} or \code{\link{addPlot.pptx}}
-#' or \code{\link{addPlot.bsdoc}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{addPlot.docx}}
-#' , \code{\link{pptx}}, \code{\link{addPlot.pptx}}
-#' , \code{\link{bsdoc}}, \code{\link{addPlot.bsdoc}}
-addPlot = function(doc, fun, pointsize = 12, vector.graphic = F, ...){
-
-	checkHasSlide(doc)
-	UseMethod("addPlot")
-}
-
 #' @title Add a section into a document object
 #'
 #' @description Add a section into a document object
