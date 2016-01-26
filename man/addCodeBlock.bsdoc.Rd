@@ -37,7 +37,6 @@ options( "ReporteRs-fontsize" = 11 )
 doc = bsdoc( )
 doc = addCodeBlock( doc, text = "ls -a\\nwhich -a ls" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

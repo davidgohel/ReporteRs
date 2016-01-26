@@ -41,7 +41,6 @@ doc = addTitle( doc, "Title example 1", level = 1 )
 # Add "Hello World" into the document doc
 doc = addParagraph(doc, "Hello Word" )
 
-
 doc = addTitle( doc, "Title example 2", level = 1 )
 
 # "My tailor is rich" with formatting on some words
@@ -60,7 +59,6 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 
 # Add my.pars into the document doc
 doc = addParagraph(doc, my.pars )
-
 
 doc = addTitle( doc, "Title example 3", level = 1 )
 # define some text
@@ -101,7 +99,6 @@ doc = addParagraph( doc, value = text2,
 	par.properties = unordered.list.level2 )
 
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

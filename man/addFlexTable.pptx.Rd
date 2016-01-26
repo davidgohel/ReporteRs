@@ -40,9 +40,7 @@ dimensions of the new shape.
 #START_TAG_TEST
 doc.filename = "addFlexTable_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title and Content"
@@ -77,7 +75,6 @@ doc = addFlexTable( doc, MyFTable )
 
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
-
 
 doc = addTitle( doc, "Title example 2" )
 #####################################################################
@@ -165,7 +162,6 @@ doc = addFlexTable( doc, MyFTable, offx = 7, offy = 2, width = 3, height = 3)
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-
 doc = addTitle( doc, "Title example 3" )
 data = cor( cor(mtcars) )
 
@@ -204,7 +200,6 @@ MyFTable = setFlexTableBorders( MyFTable,
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

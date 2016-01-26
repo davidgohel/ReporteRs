@@ -23,9 +23,7 @@ Insert a footer shape into the current slide of a \code{pptx} object.
 #START_TAG_TEST
 doc.filename = "addFooter_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 # add a slide with layout "Title Slide"
 doc = addSlide( doc, slide.layout = "Title Slide" )
@@ -37,7 +35,6 @@ doc = addSubtitle( doc , "This document is generated with ReporteRs.")
 ## add a page number on the current slide
 doc = addFooter( doc, "Hi!" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

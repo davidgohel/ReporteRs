@@ -59,7 +59,6 @@ MyFTable = setFlexTableBorders(MyFTable,
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-
 doc = addTitle( doc, "Title example 2", level = 1 )
 #####################################################################
 
@@ -140,7 +139,6 @@ MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-
 doc = addTitle( doc, "Title example 3", level = 1 )
 data = cor( cor(mtcars) )
 
@@ -179,7 +177,6 @@ MyFTable = setFlexTableBorders( MyFTable,
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

@@ -40,7 +40,6 @@ doc = bsdoc( )
 doc = addRScript(doc, text = "x = rnorm(100)
 plot(density( x ) )" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

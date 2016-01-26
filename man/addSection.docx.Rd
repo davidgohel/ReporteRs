@@ -35,9 +35,7 @@ multicolumns mode page.
 #START_TAG_TEST
 doc.filename = "addSection.docx"
 
-# set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
-
 doc <- docx( )
 doc = addSection(doc, landscape = TRUE, ncol = 2 ) 
 doc = addPlot( doc = doc, fun = function() {
@@ -63,7 +61,6 @@ doc = addSection( doc )
 doc = addFlexTable(doc, FlexTable(mtcars, add.rownames = TRUE) )
 doc = addParagraph( doc = doc, "Text 4.", "Normal" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

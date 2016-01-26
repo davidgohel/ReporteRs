@@ -39,14 +39,11 @@ You have to one of the following argument: file or text or rscript.
 #START_TAG_TEST
 doc.filename = "addRScript_example.docx"
 
-# set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
-
 doc <- docx( )
 doc = addRScript(doc, text = "x = rnorm(100)
 plot(density( x ) )" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

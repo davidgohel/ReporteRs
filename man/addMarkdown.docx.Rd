@@ -48,9 +48,7 @@ options "ReporteRs-backtick-color" and "ReporteRs-backtick-shading-color".
 #START_TAG_TEST
 doc.filename = "addMarkdown_example.docx"
 
-# set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
-
 doc <- docx( )
 mkd = "# This is a title 1
 		
@@ -145,7 +143,6 @@ doc = addMarkdown( doc, text = mkd,
 	default.par.properties = parProperties(text.align = "justify", 
 		padding.left = 0) )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

@@ -38,9 +38,7 @@ You have to one of the following argument: file or text or rscript.
 #START_TAG_TEST
 doc.filename = "addRScript_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title and Content"
@@ -50,7 +48,6 @@ doc = addTitle( doc, "Title example 1" )
 doc = addRScript(doc, text = "x = rnorm(100)
 plot(density( x ) )" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

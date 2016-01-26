@@ -64,7 +64,6 @@ doc = addPlot( doc, fun = plot,
   par.properties = parProperties(text.align = "left")
   )
 
-
 doc = addTitle( doc, "Title example 2", level = 1 )
 # load ggplot2
 if( requireNamespace("ggplot2", quietly = TRUE) ){
@@ -79,7 +78,6 @@ if( requireNamespace("ggplot2", quietly = TRUE) ){
   doc = addPlot( doc = doc, fun = print, x = myplot )
 }
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

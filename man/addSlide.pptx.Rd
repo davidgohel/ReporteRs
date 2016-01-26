@@ -53,9 +53,7 @@ to 'z', numbers (from 0 to 9) and spaces.
 #START_TAG_TEST
 doc.filename = "addSlide_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title Slide"
@@ -79,7 +77,6 @@ doc = addParagraph(doc, "Hello Word!" )
 # to see available layouts :
 slide.layouts( doc )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 
 # demo slide replacement --------

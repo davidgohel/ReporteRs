@@ -36,13 +36,10 @@ You have to one of the following argument: file or text or rscript.
 #START_TAG_TEST
 doc.filename = "addCodeBlock.docx"
 
-# set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
-
 doc <- docx( )
 doc = addCodeBlock( doc, text = "ls -a\\nwhich -a ls" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

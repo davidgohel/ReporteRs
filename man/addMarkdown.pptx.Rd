@@ -51,9 +51,7 @@ horizontal rules, titles and footnotes.
 #START_TAG_TEST
 doc.filename = "addMarkdown_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title and Content"
@@ -153,7 +151,6 @@ doc = addMarkdown( doc, text = mkd,
 	default.par.properties = parProperties(text.align = "justify", 
 		padding.left = 0) )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

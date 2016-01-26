@@ -39,9 +39,7 @@ Insert paragraph(s) of text into a \code{docx} object
 #START_TAG_TEST
 doc.filename = "addParagraph_example.docx"
 
-# set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
-
 doc <- docx( )
 
 # returns available stylenames
@@ -52,7 +50,6 @@ doc = addTitle( doc, "Title example 1", level = 1 )
 # Add "Hello World" into the document doc
 doc = addParagraph(doc, "Hello Word", stylename = "Normal" )
 
-
 doc = addTitle( doc, "Title example 2", level = 1 )
 
 # define some text
@@ -62,7 +59,6 @@ sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 
 # add sometext with stylename BulletList
 doc = addParagraph( doc, value = sometext, stylename="BulletList" )
-
 
 doc = addTitle( doc, "Title example 3", level = 1 )
 
@@ -82,7 +78,6 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 
 # Add my.pars into the document doc
 doc = addParagraph(doc, my.pars, stylename = "Normal" )
-
 
 doc = addTitle( doc, "Title example 4", level = 1 )
 # define some text
@@ -123,7 +118,6 @@ doc = addParagraph( doc, value = text2,
 	par.properties = unordered.list.level2 )
 
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

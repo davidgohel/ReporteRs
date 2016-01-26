@@ -41,7 +41,6 @@ doc = addTitle( doc, 'Title B', level = 2 )
 
 doc = addTOC( doc )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

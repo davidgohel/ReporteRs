@@ -62,9 +62,7 @@ dimensions of the new shape.
 #START_TAG_TEST
 doc.filename = "addPlot_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title and Content"
@@ -86,7 +84,6 @@ doc = addPlot( doc, fun = plot
 # add a slide with layout "Title and Content"
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
-
 doc = addTitle( doc, "Title example 2" )
 # load ggplot2
 if( requireNamespace("ggplot2", quietly = TRUE) ){
@@ -101,7 +98,6 @@ if( requireNamespace("ggplot2", quietly = TRUE) ){
   doc = addPlot( doc = doc, fun = print, x = myplot )
 }
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

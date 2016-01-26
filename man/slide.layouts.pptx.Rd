@@ -26,9 +26,7 @@ This can be useful to check available shapes.
 #START_TAG_TEST
 doc.filename = "addFlexTable_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 # get layouts names
 layouts = slide.layouts(doc)

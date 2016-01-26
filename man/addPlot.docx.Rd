@@ -60,9 +60,7 @@ Add a plot into the \code{docx} object.
 #START_TAG_TEST
 doc.filename = "addPlot_example.docx"
 
-# set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
-
 doc <- docx( )
 
 doc = addTitle( doc, "Title example 1", level = 1 )
@@ -75,7 +73,6 @@ doc = addPlot( doc, fun = plot,
   width = 5, height = 7,
   par.properties = parProperties(text.align = "left")
   )
-
 
 doc = addTitle( doc, "Title example 2", level = 1 )
 # load ggplot2
@@ -91,7 +88,6 @@ if( requireNamespace("ggplot2", quietly = TRUE) ){
   doc = addPlot( doc = doc, fun = print, x = myplot )
 }
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

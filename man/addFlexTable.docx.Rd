@@ -31,9 +31,7 @@ Insert a FlexTable into a docx object
 #START_TAG_TEST
 doc.filename = "addFlexTable_example.docx"
 
-# set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
-
 doc <- docx( )
 
 doc = addTitle( doc, "Title example 1", level = 1 )
@@ -62,7 +60,6 @@ MyFTable = setFlexTableBorders(MyFTable,
 
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
-
 
 doc = addTitle( doc, "Title example 2", level = 1 )
 #####################################################################
@@ -144,7 +141,6 @@ MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-
 doc = addTitle( doc, "Title example 3", level = 1 )
 data = cor( cor(mtcars) )
 
@@ -183,7 +179,6 @@ MyFTable = setFlexTableBorders( MyFTable,
 # add MyFTable into document 
 doc = addFlexTable( doc, MyFTable )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

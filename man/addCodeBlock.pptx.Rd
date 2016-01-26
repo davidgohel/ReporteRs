@@ -35,9 +35,7 @@ Add a code block into a \code{\link{pptx}} object.
 #START_TAG_TEST
 doc.filename = "addCodeBlock.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 
 # add a slide with layout "Title and Content"
@@ -46,7 +44,6 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addTitle( doc, "Title example 1" )
 doc = addCodeBlock( doc, text = "ls -a\\nwhich -a ls" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

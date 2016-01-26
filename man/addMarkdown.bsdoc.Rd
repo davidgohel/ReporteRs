@@ -146,7 +146,6 @@ doc = addMarkdown( doc, text = mkd,
 	default.par.properties = parProperties(text.align = "justify", 
 		padding.left = 0) )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

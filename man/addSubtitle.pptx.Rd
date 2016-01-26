@@ -26,9 +26,7 @@ Subtitle shape only exist in slide of type 'Title Slide'.
 #START_TAG_TEST
 doc.filename = "addSubtitle_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 doc = addSlide( doc, slide.layout = "Title Slide" )
 #set the main title
@@ -36,7 +34,6 @@ doc = addTitle( doc, "Presentation title" )
 #set the sub-title
 doc = addSubtitle( doc , "This document is generated with ReporteRs.")
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

@@ -32,9 +32,7 @@ used as header styles.
 #START_TAG_TEST
 doc.filename = "addImage_example.docx"
 
-# set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
-
 doc <- docx( )
 styles( doc )
 # [1] "Normal"                  "Title1"                  "Title2"

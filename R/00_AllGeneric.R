@@ -123,39 +123,6 @@ addIframe = function(doc, ...){
 }
 
 
-#' @title Add an external image into a document object
-#'
-#' @description Add an external image into a document object
-#'
-#' @param doc document object
-#' @param filename \code{"character"} value, complete filename
-#' of the external image
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' See \code{\link{addImage.docx}} or \code{\link{addImage.pptx}}
-#' or \code{\link{addImage.bsdoc}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{addImage.docx}}
-#' , \code{\link{pptx}}, \code{\link{addImage.pptx}}
-#' , \code{\link{bsdoc}}, \code{\link{addImage.bsdoc}}
-addImage = function(doc, filename, ...){
-	checkHasSlide(doc)
-	if( missing( filename ) )
-		stop("filename cannot be missing")
-	if( !inherits( filename, "character" ) )
-		stop("filename must be a single character value")
-	if( length( filename ) != 1 )
-		stop("filename must be a single character value")
-	if( !file.exists( filename ) )
-		stop( filename, " does not exist")
-
-	if( !grepl("\\.(png|jpg|jpeg|gif|bmp|wmf|emf)$", filename ) )
-		stop( filename, " is not a valid file. Valid files are png, jpg, jpeg, gif, bmp, wmf, emf.")
-	UseMethod("addImage")
-}
-
-
 
 
 
@@ -403,32 +370,6 @@ addCodeBlock = function(doc, file, text, ... ){
 
 
 
-#' @title Add a title into a document object
-#'
-#' @description Add a title into a document object
-#'
-#' @param doc document object
-#' @param value \code{"character"} value to use as title text
-#' @param ... further arguments passed to or from other methods..
-#' @return a document object
-#' @details
-#' See \code{\link{addTitle.docx}} or \code{\link{addTitle.pptx}}
-#' or \code{\link{addTitle.bsdoc}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}, \code{\link{pptx}}
-#' , \code{\link{addTitle.pptx}}, \code{\link{bsdoc}}, \code{\link{addTitle.bsdoc}}
-addTitle = function(doc, value, ...){
-	checkHasSlide(doc)
-
-	if( missing( value ) ) stop("value is missing.")
-	if( !is.character( value ) && !inherits( value, "pot" ) )
-		stop("value must be a character vector of length 1 or a pot object.")
-	if( is.character( value ) && length( value ) != 1 )
-		stop("value must be a character vector of length 1 or a pot object.")
-
-	UseMethod("addTitle")
-}
-
 #' @title Set TOC options for a document object
 #'
 #' @description Set custom table of contents options for a document object
@@ -558,20 +499,4 @@ styles = function(doc, ...){
 }
 
 
-#' @title Write a document object
-#'
-#' @description Write a document object into a file
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' See \code{\link{writeDoc.docx}} or \code{\link{writeDoc.pptx}}
-#' or \code{\link{writeDoc.bsdoc}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{writeDoc.docx}}
-#' , \code{\link{pptx}}, \code{\link{writeDoc.pptx}}
-#' , \code{\link{bsdoc}}, \code{\link{writeDoc.bsdoc}}
-writeDoc = function(doc, ...){
-	UseMethod("writeDoc")
-}
+

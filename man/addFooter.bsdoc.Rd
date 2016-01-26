@@ -46,7 +46,6 @@ doc = addFooter( doc, value = pot( "Code licensed under ",
 par.properties = parCenter( padding = 2 ) 
 )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

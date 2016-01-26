@@ -28,9 +28,7 @@ Insert a date into the current slide of a \code{pptx} object.
 #START_TAG_TEST
 doc.filename = "addDate_example.pptx"
 
-# set default font size to 24
 options( "ReporteRs-fontsize" = 24 )
-
 doc = pptx( title = "title" )
 doc = addSlide( doc, slide.layout = "Title Slide" )
 #set the main title
@@ -47,7 +45,6 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 ## the default text (slide number)
 doc = addDate( doc, "Dummy date" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }

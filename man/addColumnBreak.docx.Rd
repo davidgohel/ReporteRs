@@ -26,7 +26,6 @@ doc = addParagraph( doc = doc, "Text 1.", "Normal" )
 doc = addColumnBreak(doc ) 
 doc = addParagraph( doc = doc, "Text 2.", "Normal" )
 
-# Write the object
 writeDoc( doc, file = doc.filename )
 #STOP_TAG_TEST
 }
