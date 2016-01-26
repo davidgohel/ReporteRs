@@ -15,16 +15,16 @@
 #' Several methods can used to send R output into an object of class \code{\link{docx}}.
 #'
 #' \itemize{
-#'   \item \code{\link{addTitle.docx}} add titles
-#'   \item \code{\link{addParagraph.docx}} add text
-#'   \item \code{\link{addPlot.docx}} add plots
-#'   \item \code{\link{addFlexTable.docx}} add tables. See \code{\link{FlexTable}}
-#'   \item \code{\link{addImage.docx}} add external images
-#'   \item \code{\link{addMarkdown.docx}} add markdown text
-#'   \item \code{\link{addTOC.docx}} add table of content
-#'   \item \code{\link{addPageBreak.docx}} add page break
-#'   \item \code{\link{addSection.docx}} add section (for landscape orientation)
-#'   \item \code{\link{addDocument.docx}} add an external \code{docx} file into
+#'   \item \code{\link{addTitle}} add titles
+#'   \item \code{\link{addParagraph}} add text
+#'   \item \code{\link{addPlot}} add plots
+#'   \item \code{\link{addFlexTable}} add tables. See \code{\link{FlexTable}}
+#'   \item \code{\link{addImage}} add external images
+#'   \item \code{\link{addMarkdown}} add markdown text
+#'   \item \code{\link{addTOC}} add table of content
+#'   \item \code{\link{addPageBreak}} add page break
+#'   \item \code{\link{addSection}} add section (for landscape orientation)
+#'   \item \code{\link{addDocument}} add an external \code{docx} file into
 #' 		a \code{docx} object.
 #' }
 #'
@@ -39,11 +39,9 @@
 #' #START_TAG_TEST
 #' @example examples/docx_example.R
 #' @example examples/STOP_TAG_TEST.R
-#' @seealso \code{\link{bsdoc}}, \code{\link{pptx}},
-#' \code{\link{bookmark}}
+#' @seealso \code{\link{bsdoc}}, \code{\link{pptx}}, \code{\link{bookmark}}
 docx = function( title = "untitled", template, list.definition = getOption("ReporteRs-list-definition") ){
 
-	# docx base file mngt
 	if( missing( template ) )
 		template = file.path( system.file(package = "ReporteRs"), "templates/EMPTY_DOC.docx" )
 	.reg = regexpr( paste( "(\\.(?i)(docx))$", sep = "" ), template )
@@ -73,9 +71,7 @@ docx = function( title = "untitled", template, list.definition = getOption("Repo
 		)
 	class( .Object ) = "docx"
 	.Object$styles = styles( .Object )
-	# uk-us,fr,?,?,?,simplifiedchinese
 	matchheaders = regexpr("^(Heading|Titre|Rubrik|Overskrift|berschrift|)[1-9]{1}$", .Object$styles )
-	#	matchheaders = regexpr("^(?i)(heading|titre|rubrik|overskrift|otsikko|titolo|titulo|baslik|uberschrift|rubrik)[1-9]{1}$", .Object@styles )
 	if( any( matchheaders > 0 ) ){
 		.Object = declareTitlesStyles(.Object, stylenames = sort( .Object$styles[ matchheaders > 0 ] ) )
 	} else .Object$header.styles = character(0)
@@ -83,4 +79,45 @@ docx = function( title = "untitled", template, list.definition = getOption("Repo
 
 	.Object
 }
+
+
+#' @details \code{dim} returns page width and height and page margins
+#' of a \code{docx} object.
+#' @param x a \code{docx} objet
+#' @examples
+#'
+#' # get docx page dimensions ------
+#' doc = docx( title = "title" )
+#' dim( doc )
+#' @rdname docx
+#' @export
+dim.docx = function( x ){
+  temp = .jcall(x$obj, "[I", "getSectionDimensions")
+  out = list( page = c( width = temp[1], height = temp[2] ) / 1440
+              , margins = c(top = temp[3], right = temp[4], bottom = temp[5], left = temp[5]) / 1440
+  )
+  out
+}
+
+
+#' @details
+#' \code{print} print informations about an object of
+#' class \code{docx}.
+#' @param ... unused
+#' @rdname docx
+#' @export
+print.docx = function (x, ...){
+  cat("[docx object]\n")
+
+  cat("title:", x$title, "\n")
+
+  cat(paste( "Original document: '", x$basefile, "'\n", sep = "" ) )
+
+  cat( "Styles:\n" )
+  print( styles( x ) )
+
+  invisible()
+}
+
+
 
