@@ -63,32 +63,6 @@ addDocument = function(doc, filename, ...){
 }
 
 
-#' @title Insert a FlexTable into a document object
-#'
-#' @description Insert a FlexTable into a document object
-#'
-#' FlexTable can be manipulated so that almost any formatting can be specified. See
-#' \code{\link{FlexTable}} for more details.
-#' @param doc document object
-#' @param flextable the \code{FlexTable} object
-#' @param ... further arguments passed to other methods
-#' @details
-#' See \code{\link{addFlexTable.docx}} or \code{\link{addFlexTable.pptx}}
-#' or \code{\link{addFlexTable.bsdoc}} for examples.
-#' @return a document object
-#' @export
-#' @seealso \code{\link{FlexTable}}, \code{\link{addFlexTable.docx}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.bsdoc}}
-addFlexTable = function(doc, flextable, ...){
-
-	checkHasSlide(doc)
-	if( !inherits(flextable, "FlexTable") )
-		stop("argument flextable must be a FlexTable object.")
-
-	UseMethod("addFlexTable")
-}
-
-
 #' @title Insert a footer into a document object
 #'
 #' @description Insert a footer into a document object
