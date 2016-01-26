@@ -50,7 +50,11 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
     unlink(raster_files, force = TRUE)
   }
 
-  out = .jcall( slide, "I", "add", dml.object, width, height, offx, offy )
+  if( free_layout )
+    out = .jcall( slide, "I", "add", dml.object, width, height, offx, offy )
+  else
+    out = .jcall( slide, "I", "add", dml.object)
+
   if( isSlideError( out ) ){
     stop( getSlideErrorString( out , "dml") )
   }

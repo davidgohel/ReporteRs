@@ -286,7 +286,6 @@ next_shape_pos = function( doc ){
   classname_ <- paste0("L", class.pptx4r.LayoutDescription, ";")
   layout_description = .jcall( doc$obj, classname_,
                                "getLayoutProperties", layout_name )
-
   dims = .jcall( layout_description, "[I",
                  "getContentDimensions", as.integer(id) )
   width = dims[3] / 914400
