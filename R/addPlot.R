@@ -346,7 +346,7 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		filename = paste( dirname, "/plot%03d.png" ,sep = "" )
 		grDevices::png (filename = filename
 				, width = width, height = height, units = 'in'
-				, pointsize = pointsize, res = 300
+				, pointsize = pointsize, res = 300, bg = bg
 		)
 
 		fun_res = try( fun(...), silent = T )
@@ -364,7 +364,7 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 	  filename = tempfile( fileext = ".svg")
 	  filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
-	  dsvg( file = filename, width = width, height = height,
+	  dsvg( file = filename, width = width, height = height, bg = bg,
 		     pointsize = pointsize, canvas_id = as.integer(doc$canvas_id),
 		     fontname_serif = fontname_serif,
 		     fontname_sans = fontname_sans,
