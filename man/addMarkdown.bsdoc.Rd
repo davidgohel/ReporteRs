@@ -49,9 +49,7 @@ options "ReporteRs-backtick-color" and "ReporteRs-backtick-shading-color".
 #START_TAG_TEST
 doc.filename = "addMarkdown_bsdoc/example.html"
 
-# set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
-
 doc = bsdoc( )
 mkd = "# This is a title 1
 		

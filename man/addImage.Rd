@@ -86,9 +86,7 @@ writeDoc( doc, file = doc.filename )
 # Image example for bsdoc -------
 doc.filename = "ex_add_image/example.html"
 
-# set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
-
 doc = bsdoc( )
 img.file <- file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
 

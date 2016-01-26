@@ -63,9 +63,7 @@ writeDoc( doc, file = doc.filename )
 # bsdoc example --------
 doc.filename = "ex_codeblock/example.html"
 
-# set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
-
 doc = bsdoc( )
 doc <- addCodeBlock( doc, text = "ls -a\\nwhich -a ls" )
 

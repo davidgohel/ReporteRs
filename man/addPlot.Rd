@@ -169,9 +169,7 @@ writeDoc( doc, file = doc.filename )
 # plot example for bsdoc -----
 doc.filename = "ex_plot/example.html"
 
-# set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
-
 doc = bsdoc( )
 
 doc = addTitle( doc, "Title example 1", level = 1 )

@@ -73,9 +73,7 @@ writeDoc( doc, file = doc.filename )
 # Title example for bsdoc -------
 doc.filename = "ex_add_title/example.html"
 
-# set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
-
 doc = bsdoc( )
 
 doc = addTitle( doc, "Title example 1", level = 1 )

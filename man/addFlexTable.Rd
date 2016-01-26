@@ -217,9 +217,7 @@ writeDoc( doc, file = doc.filename )
 # bsdoc example -------
 doc.filename = "addFlexTable_bsdoc/example.html"
 
-# set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
-
 doc = bsdoc( )
 
 doc = addTitle( doc, "Title example 1", level = 1 )

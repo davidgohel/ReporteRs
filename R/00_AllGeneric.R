@@ -168,41 +168,6 @@ addPageNumber = function(doc, ...){
 }
 
 
-#' @title Add a paragraph into a document object
-#'
-#' @description Add a paragraph into a document object
-#'
-#' @details a paragraph is a set of text that ends with an end of line(\code{'\n'} in C).
-#' Read \code{\link{pot}} to see how to get different font formats.
-#' Trying to insert a \code{'\n'} will have no effect. If an end of line is required
-#' , a new paragraph is required.
-#' @param doc document object
-#' @param value text to add to the document as paragraphs:
-#' an object of class \code{\link{pot}} or \code{\link{set_of_paragraphs}}
-#' or a character vector.
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @export
-#' @details
-#' See \code{\link{addParagraph.docx}} or \code{\link{addParagraph.pptx}}
-#' or \code{\link{addParagraph.bsdoc}} for examples.
-#' @seealso \code{\link{docx}}, \code{\link{addParagraph.docx}}
-#' , \code{\link{pptx}}, \code{\link{addParagraph.pptx}}
-#' , \code{\link{bsdoc}}, \code{\link{addParagraph.bsdoc}}
-#' , \code{\link{pot}}, \code{\link{textProperties}}
-addParagraph = function(doc, value, ...){
-	checkHasSlide(doc)
-	if( !inherits( value, c("set_of_paragraphs", "character", "pot") ) )
-		stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
-	if( length(value) < 1 ){
-		warning("value is empty.")
-		return( doc )
-	}
-
-	UseMethod("addParagraph")
-}
-
-
 #' @title Add a section into a document object
 #'
 #' @description Add a section into a document object
@@ -250,33 +215,6 @@ addSubtitle = function(doc, ...){
 	UseMethod("addSubtitle")
 }
 
-
-
-#' @title Add R script into a document object
-#'
-#' @description Add R script into a document object
-#'
-#' @param doc document object
-#' @param file R script file. Not used if text or
-#' rscript is provided.
-#' @param text character vector. The text to parse.
-#' Not used if file or rscript is provided.
-#' @param rscript an object of class \code{RScript}.
-#' Not used if file or text is provided.
-#' @param ... further arguments passed to other methods
-#' @details
-#' You have to one of the following argument: file or text or rscript.
-#' @return a document object
-#' @export
-#' @seealso \code{\link{addRScript.bsdoc}}, \code{\link{addRScript.docx}}
-#' , \code{\link{addRScript.pptx}}
-addRScript = function(doc, rscript, file, text, ... ){
-
-	if( missing( file ) && missing( text ) && missing( rscript ) )
-		stop("need a rscript or file or text argument.")
-
-	UseMethod("addRScript")
-}
 
 
 #' @title Set TOC options for a document object
