@@ -1,1 +1,1 @@
-doc = addCodeBlock( doc, text = "ls -a\nwhich -a ls" )
+doc <- addCodeBlock( doc, text = "ls -a\nwhich -a ls" )

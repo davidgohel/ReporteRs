@@ -304,29 +304,6 @@ addRScript = function(doc, rscript, file, text, ... ){
 	UseMethod("addRScript")
 }
 
-#' @title Add code block into a document object
-#'
-#' @description Add a code block into a document object
-#'
-#' @param doc document object
-#' @param file script file. Not used if text is provided.
-#' @param text character vector. The text to parse.
-#' Not used if file is provided.
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @export
-#' @seealso \code{\link{addCodeBlock.bsdoc}}, \code{\link{addCodeBlock.docx}}
-#' , \code{\link{addCodeBlock.pptx}}
-addCodeBlock = function(doc, file, text, ... ){
-
-	if( missing( file ) && missing( text ) )
-		stop("need a file or text argument.")
-
-	UseMethod("addCodeBlock")
-}
-
-
-
 
 #' @title Set TOC options for a document object
 #'
