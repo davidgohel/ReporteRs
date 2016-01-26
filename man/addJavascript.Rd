@@ -11,7 +11,7 @@ addJavascript(doc, file, text)
 
 \item{file}{a javascript file. Not used if text is provided.}
 
-\item{text}{character vector. The javascript text to parse. 
+\item{text}{character vector. The javascript text to parse.
 Not used if file is provided.}
 }
 \value{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/bsdoc.R
 \name{bsdoc}
 \alias{bsdoc}
-\title{Create an object representation of a bootstrap html 
+\title{Create an object representation of a bootstrap html
 document}
 \usage{
 bsdoc(title = "untitled",
@@ -12,8 +12,8 @@ bsdoc(title = "untitled",
 \arguments{
 \item{title}{\code{"character"} value: title of the document.}
 
-\item{list.definition}{a list definition to specify how ordered and unordered 
-lists have to be formated. See \code{\link{list.settings}}. Default to 
+\item{list.definition}{a list definition to specify how ordered and unordered
+lists have to be formated. See \code{\link{list.settings}}. Default to
 \code{getOption("ReporteRs-list-definition")}.}
 
 \item{keywords}{\code{"character"} value: keywords metadata value to set in the html page}

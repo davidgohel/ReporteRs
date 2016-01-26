@@ -12,13 +12,13 @@
 \item{...}{further arguments, not used.}
 }
 \description{
-print a \code{\link{bsdoc}} object. 
-If R session is interactive, the document is 
+print a \code{\link{bsdoc}} object.
+If R session is interactive, the document is
 rendered in an HTML page and loaded into a WWW browser.
 }
 \examples{
 #START_TAG_TEST
-# Create a new document 
+# Create a new document
 doc = bsdoc( )
 print( doc )
 #STOP_TAG_TEST
