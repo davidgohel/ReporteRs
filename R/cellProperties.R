@@ -1,18 +1,18 @@
-#' @title Cell formatting properties 
+#' @title Cell formatting properties
 #'
-#' @description Create a \code{cellProperties} object that describes cell formatting properties. 
+#' @description Create a \code{cellProperties} object that describes cell formatting properties.
 #' This objects are used by \code{\link{FlexTable}}.
-#' 
+#'
 #' @param padding cell padding - 0 or positive integer value. Argument \code{padding} overwrites
 #' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
-#' @param border.width border width - 0 or positive integer value. Argument \code{border.width} 
+#' @param border.width border width - 0 or positive integer value. Argument \code{border.width}
 #' overwrites arguments \code{border.bottom.width}, \code{border.top.width}
 #' , \code{border.left.width}, \code{border.right.width}.
 #' @param border.style border style - a single character value, expected value is one of "none"
-#' , "solid", "dotted", "dashed". Argument \code{border.style} overwrites arguments 
+#' , "solid", "dotted", "dashed". Argument \code{border.style} overwrites arguments
 #' \code{border.bottom.style}, \code{border.top.style}, \code{border.left.style}
 #' , \code{border.right.style}.
-#' @param border.color border color - a single character value specifying a valid color 
+#' @param border.color border color - a single character value specifying a valid color
 #' (e.g. "#000000" or "black").
 #'  Argument \code{border.color} overwrites arguments \code{border.bottom.color}
 #' , \code{border.top.color}, \code{border.left.color}, \code{border.right.color}.
@@ -20,24 +20,24 @@
 #' @param border.left \code{\link{borderProperties}} for left border. overwrite all border.left.* if specified.
 #' @param border.top \code{\link{borderProperties}} for top border. overwrite all border.top.* if specified.
 #' @param border.right \code{\link{borderProperties}} for right border. overwrite all border.right.* if specified.
-#' @param border.bottom.color border bottom color - a single character value specifying 
+#' @param border.bottom.color border bottom color - a single character value specifying
 #' a valid color (e.g. "#000000" or "black").
-#' @param border.bottom.style border bottom style - a single character value, expected 
+#' @param border.bottom.style border bottom style - a single character value, expected
 #' value is one of "none", "solid", "dotted", "dashed".
 #' @param border.bottom.width border bottom width - 0 or positive integer value
-#' @param border.left.color border left color - a single character value specifying a 
+#' @param border.left.color border left color - a single character value specifying a
 #' valid color (e.g. "#000000" or "black").
-#' @param border.left.style border left style - a single character value, expected 
+#' @param border.left.style border left style - a single character value, expected
 #' value is one of "none", "solid", "dotted", "dashed".
 #' @param border.left.width border left width - 0 or positive integer value
-#' @param border.top.color border top color - a single character value specifying a 
+#' @param border.top.color border top color - a single character value specifying a
 #' valid color (e.g. "#000000" or "black").
-#' @param border.top.style border top style - a single character value, expected 
+#' @param border.top.style border top style - a single character value, expected
 #' value is one of "none", "solid", "dotted", "dashed".
 #' @param border.top.width border top width - 0 or positive integer value
-#' @param border.right.color border right color - a single character value specifying a 
+#' @param border.right.color border right color - a single character value specifying a
 #' valid color (e.g. "#000000" or "black").
-#' @param border.right.style border right style - a single character value, expected 
+#' @param border.right.style border right style - a single character value, expected
 #' value is one of "none", "solid", "dotted", "dashed".
 #' @param border.right.width border right width - 0 or positive integer value
 #' @param vertical.align cell content vertical alignment - a single character value
@@ -46,23 +46,23 @@
 #' @param padding.top cell top padding - 0 or positive integer value.
 #' @param padding.left cell left padding - 0 or positive integer value.
 #' @param padding.right cell right padding - 0 or positive integer value.
-#' @param background.color cell background color - a single character value specifying a 
+#' @param background.color cell background color - a single character value specifying a
 #' valid color (e.g. "#000000" or "black").
-#' @param text.direction cell text rotation - a single character value, expected 
+#' @param text.direction cell text rotation - a single character value, expected
 #' value is one of "lrtb", "tbrl", "btlr".
 #' @export
-#' @details 
+#' @details
 #' Default values are:
 #' \itemize{
 #'   \item \code{border.bottom.color} "black"
 #'   \item \code{border.bottom.style} "solid"
-#'   \item \code{border.bottom.width} 1 
+#'   \item \code{border.bottom.width} 1
 #'   \item \code{border.left.color} "black"
 #'   \item \code{border.left.style} "solid"
-#'   \item \code{border.left.width} 1 
+#'   \item \code{border.left.width} 1
 #'   \item \code{border.top.color} "black"
 #'   \item \code{border.top.style} "solid"
-#'   \item \code{border.top.width} 1 
+#'   \item \code{border.top.width} 1
 #'   \item \code{border.right.color} "black"
 #'   \item \code{border.right.style} "solid"
 #'   \item \code{border.right.width} 1
@@ -75,19 +75,18 @@
 #'   \item \code{text.direction} "lrtb"
 #' }
 #' @examples
-#' #
+#' # cellProperties examples -------
 #' @example examples/cellProperties.R
-#' @seealso \code{\link{borderProperties}}, \code{\link{chprop.cellProperties}}
-#' , \code{\link{FlexTable}}
-cellProperties = function( 
-	padding, 
+#' @seealso \code{\link{borderProperties}}, \code{\link{FlexTable}}
+cellProperties = function(
+	padding,
 	border.width, border.style, border.color,
-	border.bottom, border.left, border.top, border.right, 
-	border.bottom.color = "black", border.bottom.style = "solid", border.bottom.width = 1,  
-	border.left.color = "black", border.left.style = "solid", border.left.width = 1, 
+	border.bottom, border.left, border.top, border.right,
+	border.bottom.color = "black", border.bottom.style = "solid", border.bottom.width = 1,
+	border.left.color = "black", border.left.style = "solid", border.left.width = 1,
 	border.top.color = "black", border.top.style = "solid", border.top.width = 1,
 	border.right.color = "black", border.right.style = "solid", border.right.width = 1,
-	vertical.align = "middle", 
+	vertical.align = "middle",
 	padding.bottom = 0, padding.top = 0, padding.left = 0, padding.right = 0,
 	background.color = "white", text.direction = "lrtb"
 ){
@@ -96,13 +95,13 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 out = list(
 	  border.bottom.color = "black"
 	, border.bottom.style = "solid"
-	, border.bottom.width = 1 
+	, border.bottom.width = 1
 	, border.left.color = "black"
 	, border.left.style = "solid"
-	, border.left.width = 1 
+	, border.left.width = 1
 	, border.top.color = "black"
 	, border.top.style = "solid"
-	, border.top.width = 1 
+	, border.top.width = 1
 	, border.right.color = "black"
 	, border.right.style = "solid"
 	, border.right.width = 1
@@ -123,7 +122,7 @@ if( !missing( border.width ) ){
 	} else {
 		stop("border.width must be a integer value >= 0")
 	}
-}	
+}
 
 if( !missing( border.style ) ){
 	if( is.character( border.style ) ) {
@@ -278,60 +277,24 @@ class( out ) = "cellProperties"
 out
 }
 
-#' @title Modify a cell formatting properties object
-#'
-#' @description Modify an object of class \code{cellProperties}.  
-#' @param object \code{cellProperties} object to modify
-#' @param border.bottom \code{\link{borderProperties}} for bottom border. Overwrite all border.bottom.* argument values.
-#' @param border.left \code{\link{borderProperties}} for left border. Overwrite all border.left.* argument values.
-#' @param border.top \code{\link{borderProperties}} for top border. Overwrite all border.top.* argument values.
-#' @param border.right \code{\link{borderProperties}} for right border. Overwrite all border.right.* argument values.
-#' @param padding cell padding - 0 or positive integer value. Argument \code{padding} overwrites
-#' arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.
-#' @param border.bottom.color border bottom color - a single character value specifying a 
-#' @param border.bottom.style border bottom style - a single character value, expected 
-#' value is one of "none", "solid", "dotted", "dashed".
-#' @param border.bottom.width border bottom width - 0 or positive integer value
-#' @param border.left.color border left color - a single character value specifying a 
-#' valid color (e.g. "#000000" or "black").
-#' @param border.left.style border left style - a single character value, expected 
-#' value is one of "none", "solid", "dotted", "dashed".
-#' @param border.left.width border left width - 0 or positive integer value
-#' @param border.top.color border top color - a single character value specifying a 
-#' valid color (e.g. "#000000" or "black").
-#' @param border.top.style border top style - a single character value, expected 
-#' value is one of "none", "solid", "dotted", "dashed".
-#' @param border.top.width border top width - 0 or positive integer value
-#' @param border.right.color border right color - a single character value specifying a 
-#' valid color (e.g. "#000000" or "black").
-#' @param border.right.style border right style - a single character value, expected 
-#' value is one of "none", "solid", "dotted", "dashed".
-#' @param border.right.width border right width - 0 or positive integer value
-#' @param vertical.align cell content vertical alignment - a single character value
-#' , expected value is one of "center" or "top" or "bottom"
-#' @param padding.bottom cell bottom padding - 0 or positive integer value.
-#' @param padding.top cell top padding - 0 or positive integer value.
-#' @param padding.left cell left padding - 0 or positive integer value.
-#' @param padding.right cell right padding - 0 or positive integer value.
-#' @param background.color cell background color - a single character value specifying a 
-#' valid color (e.g. "#000000" or "black").
-#' @param text.direction cell text rotation - a single character value, expected 
-#' value is one of "lrtb", "tbrl", "btlr".
-#' @param ... further arguments - not used 
-#' @return a \code{cellProperties} object
+#' @param ... further arguments - not used
+#' @param object \code{cellProperties} object to update
+#' @details
+#' Get a modified version of a \code{cellProperties} with
+#' \code{chprop}.
 #' @examples
-#' #
+#'
+#' # chprop usage example ------
 #' @example examples/chprop.cellProperties.R
-#' @seealso \code{\link{borderProperties}}, \code{\link{cellProperties}}
-#' , \code{\link{FlexTable}}
 #' @export
+#' @rdname cellProperties
 chprop.cellProperties <- function(object
 	, border.bottom
 	, border.left
 	, border.top
 	, border.right
 	, padding
-	, border.bottom.color, border.bottom.style, border.bottom.width 
+	, border.bottom.color, border.bottom.style, border.bottom.width
 	, border.left.color, border.left.style, border.left.width
 	, border.top.color, border.top.style, border.top.width
 	, border.right.color, border.right.style, border.right.width
@@ -343,7 +306,7 @@ chprop.cellProperties <- function(object
 	, background.color
 	, text.direction
 	, ...) {
-	
+
 vertical.align.styles = c( "top", "middle", "bottom" )
 
 
@@ -354,73 +317,73 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 			object$border.bottom$style = border.bottom.style
 		} else stop("border.bottom.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	}
-	
+
 	if( !missing( border.bottom.width ) ){
 		if( is.numeric( border.bottom.width ) ){
 			object$border.bottom$width = as.integer(border.bottom.width)
 		} else stop("border.bottom.width must be an integer scalar.")
 	}
-	
+
 	if( !missing( border.bottom.color ) ){
 		if( is.color( border.bottom.color ) ){
 			object$border.bottom$color = getHexColorCode( border.bottom.color )
 		} else stop("border.bottom.color must be a valid color.")
 	}
-	
-	
+
+
 	if( !missing( border.top.style ) ){
 		if( is.character( border.top.style ) ){
 			match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = F )
 			object$border.top$style = border.top.style
 		} else stop("border.top.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	}
-	
+
 	if( !missing( border.top.width ) ){
 		if( is.numeric( border.top.width ) ){
 			object$border.top$width = as.integer(border.top.width)
 		} else stop("border.top.width must be an integer scalar.")
 	}
-	
+
 	if( !missing( border.top.color ) ){
 		if( is.color( border.top.color ) ){
 			object$border.top$color = getHexColorCode( border.top.color )
 		} else stop("border.top.color must be a valid color.")
 	}
-	
-	
+
+
 	if( !missing( border.left.style ) ){
 		if( is.character( border.left.style ) ){
 			match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = F )
 			object$border.left$style = border.left.style
 		} else stop("border.left.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	}
-	
+
 	if( !missing( border.left.width ) ){
 		if( is.numeric( border.left.width ) ){
 			object$border.left$width = as.integer(border.left.width)
 		} else stop("border.left.width must be an integer scalar.")
 	}
-	
+
 	if( !missing( border.left.color ) ){
 		if( is.color( border.left.color ) ){
 			object$border.left$color = getHexColorCode( border.left.color )
 		} else stop("border.left.color must be a valid color.")
 	}
-	
-	
+
+
 	if( !missing( border.right.style ) ){
 		if( is.character( border.right.style ) ){
 			match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = F )
 			object$border.right$style = border.right.style
 		} else stop("border.right.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	}
-	
+
 	if( !missing( border.right.width ) ){
 		if( is.numeric( border.right.width ) ){
 			object$border.right$width = as.integer(border.right.width)
 		} else stop("border.right.width must be an integer scalar.")
 	}
-	
+
 	if( !missing( border.right.color ) ){
 		if( is.color( border.right.color ) ){
 			object$border.right$color = getHexColorCode( border.right.color )
@@ -435,7 +398,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 			stop("border.bottom must be a borderProperties object.")
 		}
 	}
-	
+
 	if( !missing( border.top ) ){
 		if( inherits( border.top, "borderProperties" ) ) {
 			object$border.top = border.top
@@ -443,7 +406,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 			stop("border.top must be a borderProperties object.")
 		}
 	}
-	
+
 	if( !missing( border.left ) ){
 		if( inherits( border.left, "borderProperties" ) ) {
 			object$border.left = border.left
@@ -451,7 +414,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 			stop("border.left must be a borderProperties object.")
 		}
 	}
-	
+
 	if( !missing( border.right ) ){
 		if( inherits( border.right, "borderProperties" ) ) {
 			object$border.right = border.right
@@ -459,7 +422,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 			stop("border.right must be a borderProperties object.")
 		}
 	}
-	
+
 	if( !missing( padding ) ){
 		if( is.numeric( padding ) ) {
 			if( as.integer( padding ) < 0 || !is.finite( as.integer( padding ) ) ) stop("invalid padding : ", padding )
@@ -468,53 +431,55 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 			stop("padding must be a integer value ( >=0 ).")
 		}
 	}
-	
-		
+
+
 	if( !missing( background.color ) )
 		# background-color checking
 		if( !is.color( background.color ) )
 			stop("background.color must be a valid color." )
 		else object$background.color = getHexColorCode(background.color)
-		
+
 	if( !missing( vertical.align ) ){
 		match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
 		object$vertical.align = vertical.align
 	}
-	
+
 	if( !missing( text.direction ) ){
 		if( is.character( text.direction ) ){
 			match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = F )
 			object$text.direction = text.direction
-		} else stop("text.direction must be a character scalar (", 
+		} else stop("text.direction must be a character scalar (",
 				paste( ReporteRs.text.directions, collapse = "|") ,").")
 	}
-	
+
 		# padding checking
 	if( !missing( padding.bottom ) )
 		if( is.numeric( padding.bottom ) ){
 			object$padding.bottom = as.integer(padding.bottom)
 		} else stop("padding.bottom must be an integer scalar.")
-		
+
 	if( !missing( padding.left ) )
 		if( is.numeric( padding.left ) ){
 			object$padding.left = as.integer(padding.left)
 		} else stop("padding.left must be an integer scalar.")
-		
+
 	if( !missing( padding.top ) )
 		if( is.numeric( padding.top ) ){
 			object$padding.top = as.integer(padding.top)
 		} else stop("padding.top must be an integer scalar.")
-		
+
 	if( !missing( padding.right ) )
 		if( is.numeric( padding.right ) ){
 			object$padding.right = as.integer(padding.right)
 		} else stop("padding.right must be an integer scalar.")
 
-	
-	object					
+
+	object
 }
 
+#' @param x \code{cellProperties} object to print
 #' @export
+#' @rdname cellProperties
 print.cellProperties = function (x, ...){
 	cat( "cellProperties{border.bottom:", as.character(x$border.bottom), ";" )
 	cat( "border.top:", as.character(x$border.top), ";" )

@@ -2,6 +2,8 @@
 % Please edit documentation in R/cellProperties.R
 \name{cellProperties}
 \alias{cellProperties}
+\alias{chprop.cellProperties}
+\alias{print.cellProperties}
 \title{Cell formatting properties}
 \usage{
 cellProperties(padding, border.width, border.style, border.color, border.bottom,
@@ -14,21 +16,31 @@ cellProperties(padding, border.width, border.style, border.color, border.bottom,
   border.right.width = 1, vertical.align = "middle", padding.bottom = 0,
   padding.top = 0, padding.left = 0, padding.right = 0,
   background.color = "white", text.direction = "lrtb")
+
+\method{chprop}{cellProperties}(object, border.bottom, border.left, border.top,
+  border.right, padding, border.bottom.color, border.bottom.style,
+  border.bottom.width, border.left.color, border.left.style, border.left.width,
+  border.top.color, border.top.style, border.top.width, border.right.color,
+  border.right.style, border.right.width, vertical.align, padding.bottom,
+  padding.top, padding.left, padding.right, background.color, text.direction,
+  ...)
+
+\method{print}{cellProperties}(x, ...)
 }
 \arguments{
 \item{padding}{cell padding - 0 or positive integer value. Argument \code{padding} overwrites
 arguments \code{padding.bottom}, \code{padding.top}, \code{padding.left}, \code{padding.right}.}
 
-\item{border.width}{border width - 0 or positive integer value. Argument \code{border.width} 
+\item{border.width}{border width - 0 or positive integer value. Argument \code{border.width}
 overwrites arguments \code{border.bottom.width}, \code{border.top.width}
 , \code{border.left.width}, \code{border.right.width}.}
 
 \item{border.style}{border style - a single character value, expected value is one of "none"
-, "solid", "dotted", "dashed". Argument \code{border.style} overwrites arguments 
+, "solid", "dotted", "dashed". Argument \code{border.style} overwrites arguments
 \code{border.bottom.style}, \code{border.top.style}, \code{border.left.style}
 , \code{border.right.style}.}
 
-\item{border.color}{border color - a single character value specifying a valid color 
+\item{border.color}{border color - a single character value specifying a valid color
 (e.g. "#000000" or "black").
  Argument \code{border.color} overwrites arguments \code{border.bottom.color}
 , \code{border.top.color}, \code{border.left.color}, \code{border.right.color}.}
@@ -41,34 +53,34 @@ overwrites arguments \code{border.bottom.width}, \code{border.top.width}
 
 \item{border.right}{\code{\link{borderProperties}} for right border. overwrite all border.right.* if specified.}
 
-\item{border.bottom.color}{border bottom color - a single character value specifying 
+\item{border.bottom.color}{border bottom color - a single character value specifying
 a valid color (e.g. "#000000" or "black").}
 
-\item{border.bottom.style}{border bottom style - a single character value, expected 
+\item{border.bottom.style}{border bottom style - a single character value, expected
 value is one of "none", "solid", "dotted", "dashed".}
 
 \item{border.bottom.width}{border bottom width - 0 or positive integer value}
 
-\item{border.left.color}{border left color - a single character value specifying a 
+\item{border.left.color}{border left color - a single character value specifying a
 valid color (e.g. "#000000" or "black").}
 
-\item{border.left.style}{border left style - a single character value, expected 
+\item{border.left.style}{border left style - a single character value, expected
 value is one of "none", "solid", "dotted", "dashed".}
 
 \item{border.left.width}{border left width - 0 or positive integer value}
 
-\item{border.top.color}{border top color - a single character value specifying a 
+\item{border.top.color}{border top color - a single character value specifying a
 valid color (e.g. "#000000" or "black").}
 
-\item{border.top.style}{border top style - a single character value, expected 
+\item{border.top.style}{border top style - a single character value, expected
 value is one of "none", "solid", "dotted", "dashed".}
 
 \item{border.top.width}{border top width - 0 or positive integer value}
 
-\item{border.right.color}{border right color - a single character value specifying a 
+\item{border.right.color}{border right color - a single character value specifying a
 valid color (e.g. "#000000" or "black").}
 
-\item{border.right.style}{border right style - a single character value, expected 
+\item{border.right.style}{border right style - a single character value, expected
 value is one of "none", "solid", "dotted", "dashed".}
 
 \item{border.right.width}{border right width - 0 or positive integer value}
@@ -84,14 +96,20 @@ value is one of "none", "solid", "dotted", "dashed".}
 
 \item{padding.right}{cell right padding - 0 or positive integer value.}
 
-\item{background.color}{cell background color - a single character value specifying a 
+\item{background.color}{cell background color - a single character value specifying a
 valid color (e.g. "#000000" or "black").}
 
-\item{text.direction}{cell text rotation - a single character value, expected 
+\item{text.direction}{cell text rotation - a single character value, expected
 value is one of "lrtb", "tbrl", "btlr".}
+
+\item{object}{\code{cellProperties} object to update}
+
+\item{...}{further arguments - not used}
+
+\item{x}{\code{cellProperties} object to print}
 }
 \description{
-Create a \code{cellProperties} object that describes cell formatting properties. 
+Create a \code{cellProperties} object that describes cell formatting properties.
 This objects are used by \code{\link{FlexTable}}.
 }
 \details{
@@ -99,13 +117,13 @@ Default values are:
 \itemize{
   \item \code{border.bottom.color} "black"
   \item \code{border.bottom.style} "solid"
-  \item \code{border.bottom.width} 1 
+  \item \code{border.bottom.width} 1
   \item \code{border.left.color} "black"
   \item \code{border.left.style} "solid"
-  \item \code{border.left.width} 1 
+  \item \code{border.left.width} 1
   \item \code{border.top.color} "black"
   \item \code{border.top.style} "solid"
-  \item \code{border.top.width} 1 
+  \item \code{border.top.width} 1
   \item \code{border.right.color} "black"
   \item \code{border.right.style} "solid"
   \item \code{border.right.width} 1
@@ -117,17 +135,53 @@ Default values are:
   \item \code{background.color} "white"
   \item \code{text.direction} "lrtb"
 }
+
+Get a modified version of a \code{cellProperties} with
+\code{chprop}.
 }
 \examples{
-#
+# cellProperties examples -------
 cellProp01 = cellProperties( border.color = "gray", border.width = 2 )
 cellProp02 = cellProperties(border.left.width = 0, border.right.width = 0
   , border.bottom.width = 2, border.top.width = 0
   , padding.bottom = 2, padding.top = 2
   , padding.left = 2, padding.right = 2 )
+
+# chprop usage example ------
+cellProp = cellProperties()
+
+cellProp01 = chprop( cellProp, border.bottom.color = "#8A949B" )
+cellProp02 = chprop( cellProp, border.right.color = "#8A949B" )
+cellProp03 = chprop( cellProp, border.left.color = "#8A949B" )
+cellProp04 = chprop( cellProp, border.top.color = "#8A949B" )
+cellProp05 = chprop( cellProp, border.color = "#8A949B" )
+
+cellProp06 = chprop( cellProp, border.bottom.width = 2 )
+cellProp07 = chprop( cellProp, border.left.width = 2 )
+cellProp08 = chprop( cellProp, border.top.width = 2 )
+cellProp09 = chprop( cellProp, border.right.width = 2 )
+cellProp10 = chprop( cellProp, border.width = 2 )
+
+cellProp11 = chprop( cellProp, padding.bottom = 5 )
+cellProp12 = chprop( cellProp, padding.top = 5 )
+cellProp13 = chprop( cellProp, padding.left = 5 )
+cellProp14 = chprop( cellProp, padding.right = 5 )
+cellProp15 = chprop( cellProp, padding = 5 )
+
+cellProp16 = chprop( cellProp, 
+	border.bottom = borderProperties( style = "dotted" ) )
+cellProp17 = chprop( cellProp, border.left.style = "dotted" )
+cellProp18 = chprop( cellProp, border.top.style = "dotted" )
+cellProp19 = chprop( cellProp, border.right.style = "dotted" )
+cellProp20 = chprop( cellProp, border.style = "dotted" )
+
+cellProp21 = chprop( cellProp, vertical.align = "middle" )
+cellProp22 = chprop( cellProp, background.color = "#517281" )
+
+cellProp23 = chprop( cellProp, background.color = "#517281"
+  , border.color = "#F37257", border.width = 2  )
 }
 \seealso{
-\code{\link{borderProperties}}, \code{\link{chprop.cellProperties}}
-, \code{\link{FlexTable}}
+\code{\link{borderProperties}}, \code{\link{FlexTable}}
 }
 
