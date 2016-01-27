@@ -20,12 +20,13 @@ Description: Create Microsoft Word document (>=2007),
 License: GPL-3
 Copyright: See file COPYRIGHTS.
 Depends:
-    R (>= 3.0),ReporteRsjars (>= 0.0.2)
+    R (>= 3.0),
+    ReporteRsjars (>= 0.0.2)
 Imports:
     grDevices,
     rJava,
     utils,
-    rvg,
+    rvg (>= 0.0.6),
     xml2,
     gdtools,
     png,

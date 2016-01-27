@@ -20,8 +20,5 @@ r_packages:
  - rJava
  - covr
 
-r_github_packages:
- - davidgohel/rvg
-
 after_success:
   - Rscript -e 'covr::codecov()'
