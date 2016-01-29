@@ -1,17 +1,18 @@
 #' @title Insert a table of contents into a docx object
 #'
 #' @description Insert a table of contents into a \code{\link{docx}} object.
-#' 
+#'
 #' @param doc Object of class \code{\link{docx}} where table of content has to be added
 #' @param stylename optional. Stylename in the document that will be used to build entries of the TOC.
-#' @param ... further arguments, not used. 
-#' @details 
+#' @param level_max max title level to show in the TOC (defaut to 3, from title1 to title3).
+#' @param ... further arguments, not used.
+#' @details
 #' If stylename is not used, a classical table of content will be produced.\cr
-#' If stylename is used, a custom table of contents will be produced, 
-#' pointing to entries that have been formated with \code{stylename}. 
+#' If stylename is used, a custom table of contents will be produced,
+#' pointing to entries that have been formated with \code{stylename}.
 #' For example, this can be used to produce a toc with only plots.
-#' 
-#' 
+#'
+#'
 #' @return an object of class \code{\link{docx}}.
 #' @examples
 #' #START_TAG_TEST
@@ -21,10 +22,14 @@
 #' @seealso \code{\link{docx}}, \code{\link{addTitle.docx}}
 #' , \code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
 #' @export
-addTOC.docx = function(doc, stylename, ... ) {
-	
+addTOC.docx = function(doc, stylename, level_max = 3, ... ) {
+
 	if( missing( stylename ) ){
-		jobject = .jnew(class.TOC )
+	  if( level_max > 9 )
+	    stop("level_max can not be greater than 9")
+	  if( level_max < 1 )
+	    stop("level_max can not be less than 1")
+	  jobject = .jnew(class.TOC, as.integer(level_max) )
 		.jcall( doc$obj, "V", "add", jobject )
 	} else {
 		if( !is.element( stylename , styles( doc ) ) )

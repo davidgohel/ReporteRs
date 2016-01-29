@@ -4,12 +4,14 @@
 \alias{addTOC.docx}
 \title{Insert a table of contents into a docx object}
 \usage{
-\method{addTOC}{docx}(doc, stylename, ...)
+\method{addTOC}{docx}(doc, stylename, level_max = 3, ...)
 }
 \arguments{
 \item{doc}{Object of class \code{\link{docx}} where table of content has to be added}
 
 \item{stylename}{optional. Stylename in the document that will be used to build entries of the TOC.}
+
+\item{level_max}{max title level to show in the TOC (defaut to 3, from title1 to title3).}
 
 \item{...}{further arguments, not used.}
 }
@@ -21,8 +23,8 @@ Insert a table of contents into a \code{\link{docx}} object.
 }
 \details{
 If stylename is not used, a classical table of content will be produced.\cr
-If stylename is used, a custom table of contents will be produced, 
-pointing to entries that have been formated with \code{stylename}. 
+If stylename is used, a custom table of contents will be produced,
+pointing to entries that have been formated with \code{stylename}.
 For example, this can be used to produce a toc with only plots.
 }
 \examples{
