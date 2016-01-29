@@ -5,7 +5,8 @@ ENHANCEMENT
 ------------------------------------------------------------------
 
 * package rvg support raster function.
-* let Word TOC display from one to nine level of titles
+* Word TOC can now display from one to nine level of
+  titles (suggested by Elena Salette).
 
 DEBUG
 ------------------------------------------------------------------
