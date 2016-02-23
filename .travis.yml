@@ -1,17 +1,6 @@
 language: r
 
-sudo: required
-
-warnings_are_errors: true
-
-env:
- global:
-   - CRAN: http://cran.rstudio.com
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+cache: packages
 
 apt_packages:
  - r-cran-rjava
