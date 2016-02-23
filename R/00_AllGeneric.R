@@ -222,21 +222,3 @@ slide.layouts = function(doc, ...){
 	UseMethod("slide.layouts")
 }
 
-#' @title Get styles names of a document object
-#'
-#' @description Get styles names that exist into a document
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @details
-#' \code{styles} only works with docx documents.
-#'
-#' See \code{\link{styles.docx}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{styles.docx}}, \code{\link{addParagraph.docx}}
-styles = function(doc, ...){
-	UseMethod("styles")
-}
-
-
-
