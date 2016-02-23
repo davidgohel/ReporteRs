@@ -2,9 +2,6 @@ language: r
 
 cache: packages
 
-apt_packages:
- - r-cran-rjava
-
 r_packages:
  - rJava
  - covr
