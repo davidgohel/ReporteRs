@@ -1,3 +1,12 @@
+ReporteRs 0.8.5
+==================================================================
+
+ENHANCEMENT
+------------------------------------------------------------------
+
+* pptx shapes inherits visual properties with addParagraph
+* some help files have been rewritten
+
 ReporteRs 0.8.4
 ==================================================================
 

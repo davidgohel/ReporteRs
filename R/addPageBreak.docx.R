@@ -1,17 +1,27 @@
-#' @title Insert a page break into a docx object
+#' @title Add a page break into a document object
 #'
-#' @description Insert a page break into a \code{\link{docx}} object.
-#' 
-#' @param doc Object of class \code{\link{docx}} where page break has to be added
-#' @param ... further arguments, not used. 
-#' @return an object of class \code{\link{docx}}.
+#' @description Add a page break into a document object
+#'
+#' @param doc document object
+#' @param ... further arguments passed to other methods
+#' @return a document object
+#' @details
+#' \code{addPageBreak} only works with docx documents.
+#'
+#' See \code{\link{addPageBreak.docx}} for examples.
+#' @export
+#' @seealso \code{\link{docx}}
+addPageBreak = function(doc, ...){
+  checkHasSlide(doc)
+  UseMethod("addPageBreak")
+}
+
+
 #' @examples
-#' #START_TAG_TEST
 #' doc = docx( title = "title" )
 #' doc = addPageBreak( doc )
-#' #STOP_TAG_TEST
-#' @seealso \code{\link{docx}}, \code{\link{addPageBreak}}
 #' @export
+#' @rdname addPageBreak
 addPageBreak.docx =  function( doc, ... ) {
 	.jcall( doc$obj, "V", "addPageBreak" )
 	doc

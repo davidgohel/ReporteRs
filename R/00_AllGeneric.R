@@ -1,42 +1,3 @@
-#' @title Add a column break into a section
-#'
-#' @description Add a column break into a section
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' \code{addColumnBreak} only works with docx documents.
-#'
-#' See \code{\link{addColumnBreak.docx}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{addColumnBreak.docx}}
-addColumnBreak = function(doc, ...){
-	checkHasSlide(doc)
-	UseMethod("addColumnBreak")
-}
-
-
-
-#' @title Insert a date into a document object
-#'
-#' @description Insert a column break
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' addDate only works for pptx documents. See \code{\link{addSlide.pptx}}.
-#'
-#' See \code{\link{addSlide.pptx}} for examples.
-#' @export
-#' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}
-addDate = function(doc, ...){
-	checkHasSlide(doc)
-	UseMethod("addDate")
-}
-
-
 #' @title Add an external document into a document object
 #'
 #' @description Add an external document into a document object
@@ -128,27 +89,6 @@ addMarkdown = function(doc, file, text, ...){
 }
 
 
-
-
-#' @title Add a page break into a document object
-#'
-#' @description Add a page break into a document object
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' \code{addPageBreak} only works with docx documents.
-#'
-#' See \code{\link{addPageBreak.docx}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{addPageBreak.docx}}
-addPageBreak = function(doc, ...){
-	checkHasSlide(doc)
-	UseMethod("addPageBreak")
-}
-
-
 #' @title Insert a page number into a document object
 #'
 #' @description Insert a page number into a document object
@@ -167,36 +107,6 @@ addPageNumber = function(doc, ...){
 	UseMethod("addPageNumber")
 }
 
-
-#' @title Add a section into a document object
-#'
-#' @description Add a section into a document object
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' \code{addSection} only works with docx documents. See \code{\link{addSection.docx}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{addSection.docx}}
-addSection = function(doc, ...){
-	UseMethod("addSection")
-}
-
-#' @title Add a slide into a document object
-#'
-#' @description Add a slide into a document object
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' \code{addSlide} only works with pptx documents. See \code{\link{addSlide.pptx}} for examples.
-#' @export
-#' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}
-addSlide = function(doc, ...){
-	UseMethod("addSlide")
-}
 
 
 #' @title Add a subtitle shape into a document object
@@ -232,23 +142,6 @@ addSubtitle = function(doc, ...){
 #' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}
 toc.options = function(doc, ...){
 	UseMethod("toc.options")
-}
-
-#' @title Add a table of contents into a document object
-#'
-#' @description Add a table of contents into a document object
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' \code{addTOC} only works with docx documents.
-#'
-#' See \code{\link{addTOC.docx}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}, \code{\link{styles.docx}}
-addTOC = function(doc, ...){
-	UseMethod("addTOC")
 }
 
 #' @title Change a formatting properties object

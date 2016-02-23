@@ -18,7 +18,7 @@ an object of class \code{BootstrapMenu}.
 add a \code{BootstrapMenu} into a \code{bsdoc} object.
 }
 \examples{
-#START_TAG_TEST
+
 doc = bsdoc( title = "my document" )
 
 mymenu = BootstrapMenu( title = "my title")
@@ -35,7 +35,6 @@ mymenu = addLinkItem( mymenu, dd = mydd )
 doc = addBootstrapMenu( doc, mymenu )
 
 pages = writeDoc( doc, file = "addBoostrapMenu_example/example.html")
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{bsdoc}}, \code{\link{BootstrapMenu}}
