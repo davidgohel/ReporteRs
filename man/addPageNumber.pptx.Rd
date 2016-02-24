@@ -9,7 +9,7 @@
 \arguments{
 \item{doc}{\code{\link{pptx}} object}
 
-\item{value}{character value to add into the page number shape of the current slide. 
+\item{value}{character value to add into the page number shape of the current slide.
 optionnal. If missing current slide number will be used.}
 
 \item{...}{further arguments, not used.}
@@ -21,7 +21,6 @@ a \code{\link{pptx}} document object
 Insert a page number shape into the current slide of a \code{pptx} object.
 }
 \examples{
-#START_TAG_TEST
 doc.filename = "addPageNumber_example.pptx"
 
 options( "ReporteRs-fontsize" = 24 )
@@ -41,7 +40,6 @@ doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addPageNumber( doc, value = "Page number text")
 
 writeDoc( doc, file = doc.filename )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{addPageNumber}}, \code{\link{addDate.pptx}}

@@ -32,7 +32,7 @@ bookmark_example.docx in the templates directory of the package for an example)
 or on a portion of a text in a paragraph.
 }
 \examples{
-#START_TAG_TEST
+
 # Word document to write
 docx.file = "document_new.docx"
 
@@ -97,7 +97,6 @@ doc = addParagraph( doc, value = c( "Hello World" )
 
 writeDoc( doc, docx.file )
 
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{docx}}

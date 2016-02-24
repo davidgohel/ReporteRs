@@ -66,7 +66,7 @@ class \code{docx}.
 Word 2007-2013 (*.docx) file formats are the only supported files.\cr Document are manipulated in-memory ; a \code{docx}'s document is not written to the disk unless the \code{\link{writeDoc}} method has been called on the object.
 }
 \examples{
-#START_TAG_TEST
+
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
@@ -199,7 +199,6 @@ doc <- addParagraph( doc, value = "my first table",
 
 # write the doc
 writeDoc( doc, file = "document_example.docx")
-#STOP_TAG_TEST
 
 # get docx page dimensions ------
 doc = docx( title = "title" )

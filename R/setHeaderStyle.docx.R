@@ -1,27 +1,25 @@
 #' @title Set manually headers'styles of a docx object
 #'
 #' @description Set manually headers'styles of a docx object
-#' @details 
-#' Function \code{addTitle} need to know which styles 
+#' @details
+#' Function \code{addTitle} need to know which styles
 #' are corresponding to which title level (1 ; 1.1 ; 1.1.1 ; etc.).
-#' When template is read, function \code{docx} try to guess what 
-#' are theses styles. If he do not succeed, an error occured saying 
+#' When template is read, function \code{docx} try to guess what
+#' are theses styles. If he do not succeed, an error occured saying
 #' 'You must defined header styles via declareTitlesStyles first.'. In that
 #' case, run \code{styles(...)} to see what are available styles, then
-#' declareTitlesStyles to indicate which available styles are meant to be 
+#' declareTitlesStyles to indicate which available styles are meant to be
 #' used as header styles.
-#' 
+#'
 #' @param doc \code{docx} object to be used with declareTitlesStyles.
-#' @param stylenames existing styles (character vector) where first element 
-#' represents the style to use for title 1, second element represents 
+#' @param stylenames existing styles (character vector) where first element
+#' represents the style to use for title 1, second element represents
 #' the style to use for title 2, etc.
-#' @param ... further arguments, not used. 
+#' @param ... further arguments, not used.
 #' @examples
-#' #START_TAG_TEST
 #' doc.filename = "addImage_example.docx"
 #' @example examples/docx.R
 #' @example examples/declareTitlesStyles.docx.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}},\code{\link{styles.docx}},\code{\link{addTitle.docx}}
 #' ,\code{\link{declareTitlesStyles}}
 #' @export
@@ -32,4 +30,3 @@ declareTitlesStyles.docx = function( doc, stylenames, ... ) {
 	doc$header.styles = stylenames
 	doc
 	}
-	

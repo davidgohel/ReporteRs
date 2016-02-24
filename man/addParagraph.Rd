@@ -84,12 +84,8 @@ will have no effect.
 
 # docx example ---------
 doc.filename = "ex_paragraph.docx"
-
-options( "ReporteRs-fontsize" = 10 )
-doc <- docx( )
-
-# returns available stylenames
-styles( doc )
+doc <- docx()
+styles(doc)
 
 doc = addTitle( doc, "Title example 1", level = 1 )
 

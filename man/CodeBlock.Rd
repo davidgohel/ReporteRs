@@ -18,13 +18,11 @@ CodeBlock(file, text, text.properties = textProperties(color = "#A7947D"),
 \item{par.properties}{default parProperties object}
 }
 \description{
-Code Block Object. A code block object is a block of text 
+Code Block Object. A code block object is a block of text
 treated as verbatim text in a document object.
 }
 \examples{
-#START_TAG_TEST
-cb_example = CodeBlock( text = "ls -a\\nwhich -a ls" )
-#STOP_TAG_TEST
+cb_example <- CodeBlock( text = "ls -a\\nwhich -a ls" )
 }
 \seealso{
 \code{\link{addCodeBlock}}

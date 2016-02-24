@@ -10,13 +10,13 @@
 \arguments{
 \item{doc}{\code{\link{bsdoc}} object}
 
-\item{value}{text to add to in the footer as paragraphs: 
-an object of class \code{\link{pot}} or an object of 
+\item{value}{text to add to in the footer as paragraphs:
+an object of class \code{\link{pot}} or an object of
 class \code{\link{set_of_paragraphs}} or a character vector.}
 
 \item{par.properties}{\code{\link{parProperties}} to apply to paragraphs.}
 
-\item{restart.numbering}{boolean value. If \code{TRUE}, next numbered 
+\item{restart.numbering}{boolean value. If \code{TRUE}, next numbered
 list counter will be set to 1.}
 
 \item{...}{further arguments, not used.}
@@ -25,13 +25,12 @@ list counter will be set to 1.}
 a \code{bsdoc} object
 }
 \description{
-Add text in footer of a \code{bsdoc} object. The function has 
-the same behaviour than addParagraph, except that its content will be 
-written in the footer part of the \code{bsdoc} instead of the body of 
+Add text in footer of a \code{bsdoc} object. The function has
+the same behaviour than addParagraph, except that its content will be
+written in the footer part of the \code{bsdoc} instead of the body of
 the document.
 }
 \examples{
-#START_TAG_TEST
 doc.filename = "addFooter/example.html"
 
 options( "ReporteRs-fontsize" = 11 )
@@ -45,7 +44,6 @@ par.properties = parCenter( padding = 2 )
 )
 
 writeDoc( doc, file = doc.filename )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{bsdoc}}

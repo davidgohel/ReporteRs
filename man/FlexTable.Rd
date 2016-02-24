@@ -18,8 +18,8 @@ FlexTable(data, numrow, numcol, header.columns = TRUE, add.rownames = FALSE,
 
 \item{numcol}{number of col in the table body. Mandatory if data is missing.}
 
-\item{header.columns}{logical value - should the colnames be included in the table 
-as table headers. If FALSE, no headers will be printed unless you 
+\item{header.columns}{logical value - should the colnames be included in the table
+as table headers. If FALSE, no headers will be printed unless you
 use \code{\link{addHeaderRow}}.}
 
 \item{add.rownames}{logical value - should the row.names be included in the table.}
@@ -41,23 +41,23 @@ Create an object of class \code{FlexTable}.
 
 FlexTable can be manipulated so that almost any formatting can be specified.
 
-An API is available to let you manipulate (format, add text, merge cells, etc.) 
-your FlexTable. A FlexTable is made of 3 parts: header, body and footer. To insert 
-headers and footers rows with eventually merged cells, see 
+An API is available to let you manipulate (format, add text, merge cells, etc.)
+your FlexTable. A FlexTable is made of 3 parts: header, body and footer. To insert
+headers and footers rows with eventually merged cells, see
 \code{\link{addHeaderRow}} and \code{\link{addFooterRow}}.
 
 Formating can be done on cells, paragraphs and text (borders, colors, fonts, etc.)
 , see \code{\link{alterFlexTable}}.
 }
 \details{
-The classical workflow would be to create a FlexTable, to add headers rows 
-(see \code{\link{addHeaderRow}}) and eventually footers 
+The classical workflow would be to create a FlexTable, to add headers rows
+(see \code{\link{addHeaderRow}}) and eventually footers
 rows (see \code{\link{addFooterRow}}).
 
 
-A FlexTable lets you add text in cells and modify cells, paragraphs and text 
+A FlexTable lets you add text in cells and modify cells, paragraphs and text
 properties. Text can be added with operator \code{[<-}.
-Text, paragraphs and cells properties can be also modified with operator \code{[<-}.  
+Text, paragraphs and cells properties can be also modified with operator \code{[<-}.
 (see \code{\link{alterFlexTable}}).
 
 
@@ -66,37 +66,37 @@ Below list of functions to use with \code{FlexTable} objects:
 
 \strong{Text formatting}
 
-Apply a \code{\link{textProperties}} object to a subset of the 
-FlexTable. Use the operator \code{[<-}. The \code{textProperties} 
-object will be used to format all text from selected cells. See 
+Apply a \code{\link{textProperties}} object to a subset of the
+FlexTable. Use the operator \code{[<-}. The \code{textProperties}
+object will be used to format all text from selected cells. See
 \code{\link{alterFlexTable}}.
 
 \strong{Text adding}
 
-Add text with operator \code{[<-}. Text can be added just after 
-the last text in the cell or as a new paragraph. Format can also 
-be specified. Text can also be a \code{\link{pot}} object if the 
+Add text with operator \code{[<-}. Text can be added just after
+the last text in the cell or as a new paragraph. Format can also
+be specified. Text can also be a \code{\link{pot}} object if the
 text format is complex.
-  
+
 \strong{Paragraph formatting}
 
-Apply a \code{\link{parProperties}} object to a subset of the 
-FlexTable. Use the operator \code{[<-}. The \code{parProperties} 
-object will be used to format all paragraphs from selected cells. See 
+Apply a \code{\link{parProperties}} object to a subset of the
+FlexTable. Use the operator \code{[<-}. The \code{parProperties}
+object will be used to format all paragraphs from selected cells. See
 \code{\link{alterFlexTable}}.
 
 \strong{Cell formatting}
 
-Apply a \code{\link{cellProperties}} object to a subset of the 
-FlexTable. Use the operator \code{[<-}. The \code{cellProperties} 
+Apply a \code{\link{cellProperties}} object to a subset of the
+FlexTable. Use the operator \code{[<-}. The \code{cellProperties}
 object will be used to format selected cells. See \code{\link{alterFlexTable}}.
 
 \strong{Borders}
 
 Apply borders scheme to a FlexTable with function \code{\link{setFlexTableBorders}}.
 
-Set a border to a selection in a FlexTable with the operator \code{[<-} and an object 
-of class \code{\link{borderProperties}}. Don't forget to specify argument \code{side}. 
+Set a border to a selection in a FlexTable with the operator \code{[<-} and an object
+of class \code{\link{borderProperties}}. Don't forget to specify argument \code{side}.
 See \code{\link{alterFlexTable}}.
 
 

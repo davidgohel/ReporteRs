@@ -40,8 +40,8 @@ addParagraph <- function(doc, value, ...){
 #'
 #' # docx example ---------
 #' doc.filename = "ex_paragraph.docx"
-#' @example examples/docx.R
-#' @example examples/styles.docx.R
+#' doc <- docx()
+#' styles(doc)
 #' @example examples/addTitle1Level1.R
 #' @example examples/addParagraph_hello_docx.R
 #' @example examples/addTitle2Level1.R

@@ -21,18 +21,17 @@ text_extract(x, body = TRUE, header = TRUE, footer = TRUE, bookmark)
 a character vector
 }
 \description{
-Provides a simple method to get text from a docx document. 
-It returns a \code{character} vector containing all 
+Provides a simple method to get text from a docx document.
+It returns a \code{character} vector containing all
 chunk of text found in the document.
 }
 \examples{
-#START_TAG_TEST
+
 doc = docx( title = "My example", template = file.path(
   system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
 text_extract( doc )
 text_extract( doc, header = FALSE, footer = FALSE )
 text_extract( doc, bookmark = "author" )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{docx}}, \code{\link{list_bookmarks}}

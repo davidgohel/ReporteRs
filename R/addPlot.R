@@ -56,12 +56,13 @@ addPlot = function(doc, fun, pointsize = 12, vector.graphic = F, ...){
 #'
 #' # plot example for docx -----
 #' doc.filename = "ex_plot.docx"
-#' @example examples/docx.R
-#' @example examples/addTitle1Level1.R
-#' @example examples/addBasePlot_vg.R
-#' @example examples/addTitle2Level1.R
-#' @example examples/addggplot.R
-#' @example examples/writeDoc_file.R
+#' options( "ReporteRs-fontsize" = 11 )
+#' doc = docx( )
+#' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
+#'   vector.graphic = TRUE, width = 5, height = 7,
+#'   par.properties = parProperties(text.align = "left")
+#'   )
+#' writeDoc( doc, file = doc.filename )
 #' @rdname addPlot
 #' @export
 addPlot.docx = function(doc, fun,
@@ -203,15 +204,17 @@ addPlot.docx = function(doc, fun,
 #'
 #' # plot example for pptx -----
 #' doc.filename = "ex_plot.pptx"
-#' @example examples/pptx.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle1NoLevel.R
-#' @example examples/addBasePlot_nodim.R
-#' @example examples/addBasePlot_positiondim.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle2NoLevel.R
-#' @example examples/addggplot.R
-#' @example examples/writeDoc_file.R
+#' options( "ReporteRs-fontsize" = 11 )
+#' doc = pptx( )
+#' doc = addSlide( doc, slide.layout = "Title and Content" )
+#' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
+#'   vector.graphic = TRUE, width = 5, height = 7 )
+#' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
+#'   vector.graphic = FALSE,
+#'   offx = 7, offy = 0,
+#'   width = 3, height = 2
+#'   )
+#' writeDoc( doc, file = doc.filename )
 #' @rdname addPlot
 #' @export
 addPlot.pptx = function(doc, fun, pointsize = 11,
@@ -309,12 +312,13 @@ addPlot.pptx = function(doc, fun, pointsize = 11,
 #'
 #' # plot example for bsdoc -----
 #' doc.filename = "ex_plot/example.html"
-#' @example examples/bsdoc.R
-#' @example examples/addTitle1Level1.R
-#' @example examples/addBasePlot_vg.R
-#' @example examples/addTitle2Level1.R
-#' @example examples/addggplot.R
-#' @example examples/writeDoc_file.R
+#' options( "ReporteRs-fontsize" = 11 )
+#' doc = bsdoc( )
+#' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
+#'   vector.graphic = TRUE, width = 5, height = 7,
+#'   par.properties = parProperties(text.align = "left")
+#'   )
+#' writeDoc( doc, file = doc.filename )
 #' @rdname addPlot
 #' @export
 addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),

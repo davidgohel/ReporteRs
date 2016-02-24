@@ -23,7 +23,6 @@ Add a addSubtitle shape into a \code{\link{pptx}} object.
 Subtitle shape only exist in slide of type 'Title Slide'.
 }
 \examples{
-#START_TAG_TEST
 doc.filename = "addSubtitle_example.pptx"
 
 options( "ReporteRs-fontsize" = 24 )
@@ -35,7 +34,6 @@ doc = addTitle( doc, "Presentation title" )
 doc = addSubtitle( doc , "This document is generated with ReporteRs.")
 
 writeDoc( doc, file = doc.filename )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addSubtitle}}

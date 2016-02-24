@@ -36,9 +36,8 @@
 #' Document are manipulated in-memory ; a \code{pptx}'s document is not written to the disk
 #' unless the \code{\link{writeDoc}} method has been called on the object.
 #' @examples
-#' #START_TAG_TEST
+#'
 #' @example examples/pptx_example.R
-#' @example examples/STOP_TAG_TEST.R
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{bsdoc}}
 pptx = function( title, template, list.definition = getOption("ReporteRs-list-definition")){

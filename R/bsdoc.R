@@ -30,9 +30,8 @@
 #' Once object has content, user can write the docx into a ".html" file, see \code{\link{writeDoc.bsdoc}}.
 #' @export
 #' @examples
-#' #START_TAG_TEST
+#'
 #' @example examples/bsdoc_example.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}, \code{\link{pptx}}
 bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-list-definition"), keywords = "", description = "", mathjax = FALSE ){
 
@@ -74,11 +73,9 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 #' @param ... further arguments, not used.
 #'
 #' @examples
-#' #START_TAG_TEST
 #' # Create a new document
 #' doc = bsdoc( )
 #' print( doc )
-#' #STOP_TAG_TEST
 #' @export
 print.bsdoc = function(x, ...){
 

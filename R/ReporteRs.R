@@ -101,9 +101,8 @@ NULL
 #' or on a portion of a text in a paragraph.
 #'
 #' @examples
-#' #START_TAG_TEST
+#'
 #' @example examples/bookmark.R
-#' @example examples/STOP_TAG_TEST.R
 #' @seealso \code{\link{docx}}
 #' @name docx-bookmark
 #' @aliases bookmark

@@ -101,97 +101,36 @@ dimensions of the new shape.
 
 # plot example for docx -----
 doc.filename = "ex_plot.docx"
-
-options( "ReporteRs-fontsize" = 10 )
-doc <- docx( )
-
-doc = addTitle( doc, "Title example 1", level = 1 )
-# Add a base plot
-doc = addPlot( doc, fun = plot,
-  x = rnorm( 100 ), y = rnorm (100 ), main = "base plot main title",
+options( "ReporteRs-fontsize" = 11 )
+doc = docx( )
+doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
   vector.graphic = TRUE, width = 5, height = 7,
   par.properties = parProperties(text.align = "left")
   )
-
-doc = addTitle( doc, "Title example 2", level = 1 )
-# load ggplot2
-if( requireNamespace("ggplot2", quietly = TRUE) ){
-
-  # create a ggplot2 plot
-  myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris
-    , color = Species, size = Petal.Width, alpha = I(0.7) )
-
-  # Add myplot into object doc
-  doc = addPlot( doc = doc, fun = print, x = myplot )
-}
-
 writeDoc( doc, file = doc.filename )
 
 # plot example for pptx -----
 doc.filename = "ex_plot.pptx"
-
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
-
-# add a slide with layout "Title and Content"
+options( "ReporteRs-fontsize" = 11 )
+doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
-
-doc = addTitle( doc, "Title example 1" )
-# Add a base plot
-doc = addPlot( doc, fun = plot
-  , x = rnorm( 100 ), y = rnorm (100 )
-  , main = "base plot main title"
-)
-# Add a base plot at a specified location
-doc = addPlot( doc, fun = plot
-  , x = rnorm( 100 ), y = rnorm (100 ), col = "red"
-  , main = "small shape", pointsize=5
-  , offx = 7, offy = 0, width = 3, height = 2
-)
-
-# add a slide with layout "Title and Content"
-doc = addSlide( doc, slide.layout = "Title and Content" )
-
-doc = addTitle( doc, "Title example 2" )
-# load ggplot2
-if( requireNamespace("ggplot2", quietly = TRUE) ){
-
-  # create a ggplot2 plot
-  myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris
-    , color = Species, size = Petal.Width, alpha = I(0.7) )
-
-  # Add myplot into object doc
-  doc = addPlot( doc = doc, fun = print, x = myplot )
-}
-
+doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
+  vector.graphic = TRUE, width = 5, height = 7 )
+doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
+  vector.graphic = FALSE,
+  offx = 7, offy = 0,
+  width = 3, height = 2
+  )
 writeDoc( doc, file = doc.filename )
 
 # plot example for bsdoc -----
 doc.filename = "ex_plot/example.html"
-
 options( "ReporteRs-fontsize" = 11 )
 doc = bsdoc( )
-
-doc = addTitle( doc, "Title example 1", level = 1 )
-# Add a base plot
-doc = addPlot( doc, fun = plot,
-  x = rnorm( 100 ), y = rnorm (100 ), main = "base plot main title",
+doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
   vector.graphic = TRUE, width = 5, height = 7,
   par.properties = parProperties(text.align = "left")
   )
-
-doc = addTitle( doc, "Title example 2", level = 1 )
-# load ggplot2
-if( requireNamespace("ggplot2", quietly = TRUE) ){
-
-  # create a ggplot2 plot
-  myplot = ggplot2::qplot(Sepal.Length, Petal.Length, data = iris
-    , color = Species, size = Petal.Width, alpha = I(0.7) )
-
-  # Add myplot into object doc
-  doc = addPlot( doc = doc, fun = print, x = myplot )
-}
-
 writeDoc( doc, file = doc.filename )
 }
 \seealso{

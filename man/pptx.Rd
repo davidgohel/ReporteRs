@@ -64,7 +64,7 @@ Document are manipulated in-memory ; a \code{pptx}'s document is not written to 
 unless the \code{\link{writeDoc}} method has been called on the object.
 }
 \examples{
-#START_TAG_TEST
+
 # set default font size to 10
 options( "ReporteRs-fontsize" = 11 )
 
@@ -155,7 +155,6 @@ doc = addFlexTable( doc, MyFTable )
 
 # write the doc
 writeDoc( doc, file = pptx.file )
-#STOP_TAG_TEST
 
 # get pptx page dimensions ------
 doc = pptx( title = "title" )

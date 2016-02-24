@@ -9,8 +9,8 @@
 \arguments{
 \item{doc}{\code{docx} object to be used with declareTitlesStyles.}
 
-\item{stylenames}{existing styles (character vector) where first element 
-represents the style to use for title 1, second element represents 
+\item{stylenames}{existing styles (character vector) where first element
+represents the style to use for title 1, second element represents
 the style to use for title 2, etc.}
 
 \item{...}{further arguments, not used.}
@@ -19,17 +19,16 @@ the style to use for title 2, etc.}
 Set manually headers'styles of a docx object
 }
 \details{
-Function \code{addTitle} need to know which styles 
+Function \code{addTitle} need to know which styles
 are corresponding to which title level (1 ; 1.1 ; 1.1.1 ; etc.).
-When template is read, function \code{docx} try to guess what 
-are theses styles. If he do not succeed, an error occured saying 
+When template is read, function \code{docx} try to guess what
+are theses styles. If he do not succeed, an error occured saying
 'You must defined header styles via declareTitlesStyles first.'. In that
 case, run \code{styles(...)} to see what are available styles, then
-declareTitlesStyles to indicate which available styles are meant to be 
+declareTitlesStyles to indicate which available styles are meant to be
 used as header styles.
 }
 \examples{
-#START_TAG_TEST
 doc.filename = "addImage_example.docx"
 
 options( "ReporteRs-fontsize" = 10 )
@@ -43,7 +42,6 @@ doc = declareTitlesStyles(doc
 	, stylenames = c("Titre1", "Titre2", "Titre3"
 		, "Titre4", "Titre5", "Titre6", "Titre7", "Titre8", "Titre9" ) )
 doc = addTitle( doc, "title 1", 1 )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{docx}},\code{\link{styles.docx}},\code{\link{addTitle.docx}}

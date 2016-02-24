@@ -23,13 +23,13 @@
 
 \item{default.par.properties}{default \code{\link{parProperties}} object}
 
-\item{blockquote.par.properties}{\code{\link{parProperties}} object used for 
+\item{blockquote.par.properties}{\code{\link{parProperties}} object used for
 blockquote blocks.}
 
-\item{code.par.properties}{\code{\link{parProperties}} object used for 
+\item{code.par.properties}{\code{\link{parProperties}} object used for
 code blocks.}
 
-\item{hr.border}{\code{\link{borderProperties}} object used for 
+\item{hr.border}{\code{\link{borderProperties}} object used for
 horizontal rules.}
 
 \item{...}{further arguments, not used.}
@@ -41,11 +41,10 @@ an object of class \code{\link{docx}}.
 Add markdown into a \code{\link{docx}} object.
 }
 \details{
-You can configure backtick rendering (single or double backtick) with 
+You can configure backtick rendering (single or double backtick) with
 options "ReporteRs-backtick-color" and "ReporteRs-backtick-shading-color".
 }
 \examples{
-#START_TAG_TEST
 doc.filename = "addMarkdown_example.docx"
 
 options( "ReporteRs-fontsize" = 10 )
@@ -144,7 +143,6 @@ doc = addMarkdown( doc, text = mkd,
 		padding.left = 0) )
 
 writeDoc( doc, file = doc.filename )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addMarkdown}}

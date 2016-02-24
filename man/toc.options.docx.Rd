@@ -14,21 +14,19 @@
 \item{...}{further arguments passed to other methods - not used.}
 }
 \description{
-set options for custom table of contents 
+set options for custom table of contents
 of a \code{docx} object.
 }
 \details{
-This function is to be used if TOC cannot be built. It is 
-occuring when list separator used when building the TOC is 
+This function is to be used if TOC cannot be built. It is
+occuring when list separator used when building the TOC is
 different from the list separator in your computer's regional settings.
 
 See entry 302865 of Microsoft knowledge database for more information.
 }
 \examples{
-#START_TAG_TEST
 doc = docx( title = "title" )
 doc = toc.options( doc, list.separator = "," )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addTOC.docx}}

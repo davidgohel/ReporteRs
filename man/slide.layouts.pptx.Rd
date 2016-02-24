@@ -19,11 +19,10 @@ Get layout names that exist into the template used when pptx has been created.
 \details{
 Available names are layout names of the template document (e.g. Title and Content
 , Two Content, etc.).
-If layout is specified, the layout representation will be produced in a plot. 
+If layout is specified, the layout representation will be produced in a plot.
 This can be useful to check available shapes.
 }
 \examples{
-#START_TAG_TEST
 doc.filename = "addFlexTable_example.pptx"
 
 options( "ReporteRs-fontsize" = 24 )
@@ -37,7 +36,6 @@ for(i in layouts ){
 	title(sub = i )
 	if( interactive() ) readline(prompt = "show next slide layout")
 } 
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}

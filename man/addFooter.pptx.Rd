@@ -20,7 +20,6 @@ a document object
 Insert a footer shape into the current slide of a \code{pptx} object.
 }
 \examples{
-#START_TAG_TEST
 doc.filename = "addFooter_example.pptx"
 
 options( "ReporteRs-fontsize" = 24 )
@@ -36,7 +35,6 @@ doc = addSubtitle( doc , "This document is generated with ReporteRs.")
 doc = addFooter( doc, "Hi!" )
 
 writeDoc( doc, file = doc.filename )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addDate.pptx}}

@@ -46,7 +46,7 @@ Several methods can used to send R output into an object of class \code{\link{bs
 Once object has content, user can write the docx into a ".html" file, see \code{\link{writeDoc.bsdoc}}.
 }
 \examples{
-#START_TAG_TEST
+
 # set default font size to 11
 options( "ReporteRs-fontsize" = 11 )
 
@@ -182,7 +182,6 @@ doc = addTOC( doc )
 #####################################################################
 # write the doc
 writeDoc( doc, file = "bsdoc_example/example.html")
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{docx}}, \code{\link{pptx}}

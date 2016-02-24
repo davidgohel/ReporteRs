@@ -8,22 +8,22 @@ Footnote(index.text.properties = textProperties(vertical.align =
   "superscript"))
 }
 \arguments{
-\item{index.text.properties}{\code{\link{textProperties}} to apply to note 
+\item{index.text.properties}{\code{\link{textProperties}} to apply to note
 index symbol (only for \code{docx} object).}
 }
 \value{
 an object of class \code{\link{Footnote}}.
 }
 \description{
-A footnote is a a set of paragraphs placed at the bottom of a page if 
-document object is a \code{\link{docx}} object or used as a tooltip 
-if document object is an \code{\link{bsdoc}} object. 
+A footnote is a a set of paragraphs placed at the bottom of a page if
+document object is a \code{\link{docx}} object or used as a tooltip
+if document object is an \code{\link{bsdoc}} object.
 
-If in a \code{docx} object, footnote will be flagged by a number immediately 
+If in a \code{docx} object, footnote will be flagged by a number immediately
 following the portion of the text the note is in reference to.
 }
 \examples{
-#START_TAG_TEST
+
 ## docx example 
 doc = docx( )
 
@@ -113,7 +113,6 @@ nec urbium primatibus nec plebeiis." ) + pot(" Here is another note.",
 doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 
 writeDoc( doc, file = "Footnote/example.html" )
-#STOP_TAG_TEST
 }
 \seealso{
 \code{\link{docx}}, \code{\link{bsdoc}}, \code{\link{pot}}

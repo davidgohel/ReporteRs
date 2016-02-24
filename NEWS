@@ -6,6 +6,7 @@ ENHANCEMENT
 
 * pptx shapes inherits visual properties with addParagraph
 * some help files have been rewritten
+* FlexTable and pot now have their knitr_print method
 
 ReporteRs 0.8.4
 ==================================================================
