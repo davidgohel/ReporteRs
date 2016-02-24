@@ -130,7 +130,6 @@ print.pot = function (x, ...){
 	}
 }
 
-
 #' @export
 as.character.pot = function (x, ...){
 	out = ""
@@ -185,6 +184,19 @@ as.character.pot = function (x, ...){
 as.html.pot = function( object, ... ) {
 	par = .jpot( object )
 	.jcall( par, "S", "getHTML" )
+}
+
+#' @importFrom knitr knit_print
+#' @importFrom knitr asis_output
+#' @title pot custom printing function for knitr
+#'
+#' @description pot custom printing function for knitr
+#'
+#' @param x a \code{pot} to be printed
+#' @param ... further arguments, not used.
+#' @export
+knit_print.pot<- function(x, ...){
+  asis_output(paste0("<p>", as.html(x), "</p>"))
 }
 
 .jpot = function( object ){
