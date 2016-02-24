@@ -30,7 +30,7 @@ Imports:
     xml2,
     gdtools,
     png,
-    R.utils, knitr
+    R.utils, knitr, shiny
 Suggests:
     ggplot2,
     jpeg, bmp,
