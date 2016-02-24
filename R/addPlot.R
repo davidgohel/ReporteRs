@@ -381,7 +381,7 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 
     doc$canvas_id = doc$canvas_id + 1
 
-		jimg = .jnew( class.html4r.SVGContent, .jParProperties(par.properties), filename, width*72, height*72 )
+		jimg = .jnew( class.html4r.SVGContent, .jParProperties(par.properties), filename )
 
 		out = .jcall( doc$jobj, "I", "add", jimg )
 		if( out != 1 ){
