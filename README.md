@@ -38,8 +38,6 @@ Java (it has been tested with java version >= 1.6).
     devtools::install_github('davidgohel/ReporteRsjars')
     devtools::install_github('davidgohel/ReporteRs')
 
-**Get the latest binary packages:**  
-https://github.com/davidgohel/ReporteRs/releases/
 
 Getting Started
 ---------------
@@ -50,15 +48,6 @@ Getting Started
     example(pptx) #run a complete and detailed pptx example
     example(bsdoc) #run a complete and detailed html example
     
-    ?ReporteRs
-    ?addFlexTable
-    ?addPlot
-    ?addMarkdown
-    ?addParagraph
-    ?docx
-    ?pptx
-    ?bsdoc
-  
 License
 -------
 The ReporteRs package is licensed under the GPLv3. See ``COPYRIGHTS`` file in the ``inst`` directory for additional details.
