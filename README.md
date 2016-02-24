@@ -32,12 +32,9 @@ Java (it has been tested with java version >= 1.6).
 
 ### Github
 
-**Get the latest release:**  
-
     if( !require( devtools ) ) install.packages("devtools")
     devtools::install_github('davidgohel/ReporteRsjars')
     devtools::install_github('davidgohel/ReporteRs')
-
 
 Getting Started
 ---------------
