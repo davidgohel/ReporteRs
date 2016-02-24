@@ -6,7 +6,7 @@
 \alias{print.docx}
 \title{Create Microsoft Word document object representation}
 \usage{
-docx(title = "untitled", template,
+docx(title = "untitled", template, empty_template = FALSE,
   list.definition = getOption("ReporteRs-list-definition"))
 
 \method{dim}{docx}(x)
@@ -19,6 +19,9 @@ document (in the doc properties).}
 
 \item{template}{\code{"character"} value, it represents
 the filename of the docx file used as a template.}
+
+\item{empty_template}{wether the content of the template should
+be clear or not.}
 
 \item{list.definition}{a list definition to specify how ordered and unordered
 lists have to be formated. See \code{\link{list.settings}}. Default to

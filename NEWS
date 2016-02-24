@@ -7,6 +7,8 @@ ENHANCEMENT
 * pptx shapes inherits visual properties with addParagraph
 * some help files have been rewritten
 * FlexTable and pot now have their knitr_print method
+* docx gained a new argument `empty_template` used to clear
+  template content.
 
 ReporteRs 0.8.4
 ==================================================================

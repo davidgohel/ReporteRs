@@ -7,6 +7,8 @@
 #' document (in the doc properties).
 #' @param template \code{"character"} value, it represents
 #' the filename of the docx file used as a template.
+#' @param empty_template wether the content of the template should
+#' be clear or not.
 #' @param list.definition a list definition to specify how ordered and unordered
 #' lists have to be formated. See \code{\link{list.settings}}. Default to
 #' \code{getOption("ReporteRs-list-definition")}.
@@ -39,7 +41,7 @@
 #'
 #' @example examples/docx_example.R
 #' @seealso \code{\link{bsdoc}}, \code{\link{pptx}}, \code{\link{bookmark}}
-docx = function( title = "untitled", template, list.definition = getOption("ReporteRs-list-definition") ){
+docx = function( title = "untitled", template, empty_template = FALSE, list.definition = getOption("ReporteRs-list-definition") ){
 
 	if( missing( template ) )
 		template = file.path( system.file(package = "ReporteRs"), "templates/EMPTY_DOC.docx" )
@@ -62,6 +64,8 @@ docx = function( title = "untitled", template, list.definition = getOption("Repo
 	.jcall( obj, "V", "setDocPropertyTitle", title )
 	.jcall( obj, "V", "setDocPropertyCreator", paste( .sysenv["USERDOMAIN"], "/", .sysenv["USERNAME"], " on computer ", .sysenv["COMPUTERNAME"], sep = "" ) )
 
+	if( empty_template )
+	  .jcall(obj, "V", "deleteContent")
 
 	.Object = list( obj = obj
 		, title = title
