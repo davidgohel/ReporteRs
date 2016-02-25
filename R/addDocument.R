@@ -1,20 +1,33 @@
-#' @title Add external document into a docx object
+#' @title Add an external document into a document object
 #'
-#' @description Add external document into a \code{\link{docx}} object.
+#' @description Add an external document into a document object
 #'
-#' @param doc Object of class \code{\link{docx}} where external image has to be added
-#' @param filename \code{"character"} value, complete filename of the external
-#' file (a Word document with \code{docx} extension).
-#' @param ... further arguments, not used.
+#' @param doc document object
+#' @param filename \code{"character"} value, complete filename
+#' of the external file
+#' @param ... further arguments passed to other methods
+#' @return a document object
+#' @export
+#' @seealso \code{\link{docx}}
+addDocument = function(doc, filename, ...){
+  checkHasSlide(doc)
+  if( missing( filename ) )
+    stop("filename cannot be missing")
+  if( !inherits( filename, "character" ) )
+    stop("filename must be a single character value")
+  if( length( filename ) != 1 )
+    stop("filename must be a single character value")
+  if( !file.exists( filename ) )
+    stop( filename, " does not exist")
+
+  UseMethod("addDocument")
+}
+
+
 #' @details
-#' The rendering of embedded documents is made by Word. ReporteRs does only copy
-#' the content of the external file in the document.
+#' ReporteRs does only copy the document as an external file. Headers and footers are also
+#' imported and displayed. This function is not to be used to merge documents.
 #'
-#' When adding an external docx file into a docx object, styles of the external
-#' file are imported into the docx object. If a style exists in the docx object,
-#' Word will use the style of the docx object.
-#'
-#' @return an object of class \code{\link{docx}}.
 #' @examples
 #' \dontrun{
 #' doc.filename <- "addDocument_example.docx"
@@ -36,7 +49,7 @@
 #'   writeDoc( doc, file = doc.filename )
 #' }
 #' }
-#' @seealso \code{\link{docx}}, \code{\link{addDocument}}
+#' @rdname addDocument
 #' @export
 addDocument.docx = function(doc, filename, ... ) {
 
