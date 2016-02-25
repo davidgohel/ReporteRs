@@ -24,8 +24,7 @@ a document object
 Add an external document into a document object
 }
 \details{
-The rendering of embedded documents is made by Word. ReporteRs does only copy
-the document as an external file. It means that headers and footers are also
+ReporteRs does only copy the document as an external file. Headers and footers are also
 imported and displayed. This function is not to be used to merge documents.
 }
 \examples{
