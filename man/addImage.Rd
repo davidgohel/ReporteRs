@@ -61,67 +61,74 @@ dimensions can be defined in the layout of the PowerPoint template used to creat
 the \code{pptx} object.
 }
 \examples{
+# get rlogo
+img.file <- file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
+
+# tests to use later
+has_img <- file.exists( img.file )
+has_jpeg <- requireNamespace("jpeg", quietly = TRUE)
+has_wmf <- exists("win.metafile")
+is_sunos <- tolower(Sys.info()[["sysname"]]) == "sunos"
+
+# create a wmf file if possible
+if( has_wmf ){
+  win.metafile(filename = "image.wmf", width = 5, height = 5 )
+  barplot( 1:6, col = 2:7)
+  dev.off()
+}
+
+
 # Image example for MS Word -------
-doc.filename = "ex_add_image.docx"
 
-options( "ReporteRs-fontsize" = 10 )
-doc <- docx( )
-img.file <- file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
+doc <- docx()
 
-if( file.exists( img.file ) && requireNamespace("jpeg", quietly = TRUE) ){
+if( has_img && has_jpeg ){
   dims <- attr( jpeg::readJPEG(img.file), "dim" )
-  doc <- addTitle( doc, "Add images with width and height", level = 1)
-  doc <- addImage(doc, img.file, width = dims[2]/72, height = dims[1]/72)
-}
-if( exists("win.metafile") ){
-	win.metafile(filename = "image.wmf", width = 5, height = 5 )
-	barplot( 1:6, col = 2:7)
-	dev.off()
-	
-	doc =addImage(doc, "image.wmf", width = 5, height = 5 )
+  doc <- addImage(doc, img.file, width = dims[2]/72,
+    height = dims[1]/72)
 }
 
-writeDoc( doc, file = doc.filename )
+if( has_wmf ){
+  doc <- addImage(doc, "image.wmf", width = 5, height = 5 )
+}
 
-# Image example for bsdoc -------
-doc.filename = "ex_add_image/example.html"
+writeDoc( doc, file = "ex_add_image.docx" )
 
-options( "ReporteRs-fontsize" = 11 )
-doc = bsdoc( )
-img.file <- file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
 
-if( file.exists( img.file ) && requireNamespace("jpeg", quietly = TRUE) ){
+# Image example for an HTML document -------
+
+doc <- bsdoc()
+
+if( has_img && has_jpeg ){
   dims <- attr( jpeg::readJPEG(img.file), "dim" )
-  doc <- addTitle( doc, "Add images with width and height", level = 1)
-  doc <- addImage(doc, img.file, width = dims[2]/72, height = dims[1]/72)
+  doc <- addImage(doc, img.file, width = dims[2]/72,
+    height = dims[1]/72)
 }
 
-writeDoc( doc, file = doc.filename )
+writeDoc( doc, file = "ex_add_image/example.html" )
+
 
 # Image example for MS PowerPoint -------
-doc.filename = "ex_add_image.pptx"
+if( !is_sunos ){
 
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
-img.file = file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
+doc <- pptx()
 
-if( file.exists( img.file ) && requireNamespace("jpeg", quietly = TRUE) ){
-
-  dims <- attr( jpeg::readJPEG(img.file), "dim" )
+if( has_img && has_jpeg ){
   doc <- addSlide( doc, "Title and Content" )
-  doc <- addTitle( doc, "Add images" )
-  doc <- addImage(doc, img.file, width = dims[2]/72, height = dims[1]/72)
+  dims <- attr( jpeg::readJPEG(img.file), "dim" )
+  doc <- addImage(doc, img.file, width = dims[2]/72,
+    height = dims[1]/72)
 }
-if( exists("win.metafile") ){
-	win.metafile(filename = "image.wmf", width = 5, height = 5 )
-	barplot( 1:6, col = 2:7)
-	dev.off()
-
-	doc = addSlide( doc, "Title and Content")
-	doc = addImage(doc, "image.wmf", width = 5, height = 5 )
+if( has_wmf ){
+  doc <- addSlide( doc, "Title and Content" )
+  doc <- addImage(doc, "image.wmf", width = 5, height = 5 )
 }
 
-writeDoc( doc, file = doc.filename )
+writeDoc( doc, file = "ex_add_image.pptx" )
+
+}
+
+
 }
 \seealso{
 \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}

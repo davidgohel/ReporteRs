@@ -20,21 +20,10 @@ a document object
 Insert a footer shape into the current slide of a \code{pptx} object.
 }
 \examples{
-doc.filename = "addFooter_example.pptx"
-
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
-# add a slide with layout "Title Slide"
-doc = addSlide( doc, slide.layout = "Title Slide" )
-#set the main title
-doc = addTitle( doc, "Presentation title" ) 
-#set the sub-title
-doc = addSubtitle( doc , "This document is generated with ReporteRs.")
-
-## add a page number on the current slide
+doc = pptx( )
+doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addFooter( doc, "Hi!" )
-
-writeDoc( doc, file = doc.filename )
+writeDoc( doc, file = "ex_footer.pptx" )
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addDate.pptx}}

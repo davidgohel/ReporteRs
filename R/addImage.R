@@ -8,6 +8,24 @@
 #' @param ... further arguments passed to other methods
 #' @return a document object
 #' @export
+#' @examples
+#' # get rlogo
+#' img.file <- file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
+#'
+#' # tests to use later
+#' has_img <- file.exists( img.file )
+#' has_jpeg <- requireNamespace("jpeg", quietly = TRUE)
+#' has_wmf <- exists("win.metafile")
+#' is_sunos <- tolower(Sys.info()[["sysname"]]) == "sunos"
+#'
+#' # create a wmf file if possible
+#' if( has_wmf ){
+#'   win.metafile(filename = "image.wmf", width = 5, height = 5 )
+#'   barplot( 1:6, col = 2:7)
+#'   dev.off()
+#' }
+#'
+#'
 #' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
 addImage = function(doc, filename, ...){
   checkHasSlide(doc)
@@ -38,11 +56,22 @@ addImage = function(doc, filename, ...){
 #' \code{png::readPNG}, \code{jpeg::readJPEG} or \code{bmp::read.bmp}.
 #' @examples
 #' # Image example for MS Word -------
-#' doc.filename = "ex_add_image.docx"
-#' @example examples/docx.R
-#' @example examples/addImageDocument.R
-#' @example examples/addImageWMFDocument.R
-#' @example examples/writeDoc_file.R
+#'
+#' doc <- docx()
+#'
+#' if( has_img && has_jpeg ){
+#'   dims <- attr( jpeg::readJPEG(img.file), "dim" )
+#'   doc <- addImage(doc, img.file, width = dims[2]/72,
+#'     height = dims[1]/72)
+#' }
+#'
+#' if( has_wmf ){
+#'   doc <- addImage(doc, "image.wmf", width = 5, height = 5 )
+#' }
+#'
+#' writeDoc( doc, file = "ex_add_image.docx" )
+#'
+#'
 #' @rdname addImage
 #' @export
 addImage.docx = function(doc, filename, bookmark,
@@ -74,12 +103,19 @@ addImage.docx = function(doc, filename, bookmark,
 
 
 #' @examples
+#' # Image example for an HTML document -------
 #'
-#' # Image example for bsdoc -------
-#' doc.filename = "ex_add_image/example.html"
-#' @example examples/bsdoc.R
-#' @example examples/addImageDocument.R
-#' @example examples/writeDoc_file.R
+#' doc <- bsdoc()
+#'
+#' if( has_img && has_jpeg ){
+#'   dims <- attr( jpeg::readJPEG(img.file), "dim" )
+#'   doc <- addImage(doc, img.file, width = dims[2]/72,
+#'     height = dims[1]/72)
+#' }
+#'
+#' writeDoc( doc, file = "ex_add_image/example.html" )
+#'
+#'
 #' @rdname addImage
 #' @export
 addImage.bsdoc = function(doc, filename, width, height,
@@ -122,13 +158,27 @@ addImage.bsdoc = function(doc, filename, width, height,
 #' dimensions can be defined in the layout of the PowerPoint template used to create
 #' the \code{pptx} object.
 #' @examples
-#'
 #' # Image example for MS PowerPoint -------
-#' doc.filename = "ex_add_image.pptx"
-#' @example examples/pptx.R
-#' @example examples/addImagePresentation.R
-#' @example examples/addImageWMFPresentation.R
-#' @example examples/writeDoc_file.R
+#' if( !is_sunos ){
+#'
+#' doc <- pptx()
+#'
+#' if( has_img && has_jpeg ){
+#'   doc <- addSlide( doc, "Title and Content" )
+#'   dims <- attr( jpeg::readJPEG(img.file), "dim" )
+#'   doc <- addImage(doc, img.file, width = dims[2]/72,
+#'     height = dims[1]/72)
+#' }
+#' if( has_wmf ){
+#'   doc <- addSlide( doc, "Title and Content" )
+#'   doc <- addImage(doc, "image.wmf", width = 5, height = 5 )
+#' }
+#'
+#' writeDoc( doc, file = "ex_add_image.pptx" )
+#'
+#' }
+#'
+#'
 #' @rdname addImage
 #' @export
 addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {

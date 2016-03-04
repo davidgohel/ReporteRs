@@ -26,9 +26,14 @@
 #' Don't use vector graphics if document is a docx and MS Word version
 #' used to open the document is 2007.
 #'
+#' @examples
+#'
+#' is_sunos <- tolower(Sys.info()[["sysname"]]) == "sunos"
+#'
+#' options( "ReporteRs-fontsize" = 11 )
 #'
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{docx}}, \code{\link{bsdoc}}
+#' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
 addPlot = function(doc, fun, pointsize = 12, vector.graphic = F, ...){
 
   checkHasSlide(doc)
@@ -55,14 +60,14 @@ addPlot = function(doc, fun, pointsize = 12, vector.graphic = F, ...){
 #' @examples
 #'
 #' # plot example for docx -----
-#' doc.filename = "ex_plot.docx"
-#' options( "ReporteRs-fontsize" = 11 )
 #' doc = docx( )
 #' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
 #'   vector.graphic = TRUE, width = 5, height = 7,
-#'   par.properties = parProperties(text.align = "left")
+#'   par.properties = parProperties(text.align = "center")
 #'   )
-#' writeDoc( doc, file = doc.filename )
+#' writeDoc( doc, file = "ex_plot.docx" )
+#'
+#'
 #' @rdname addPlot
 #' @export
 addPlot.docx = function(doc, fun,
@@ -75,7 +80,7 @@ addPlot.docx = function(doc, fun,
                         fontname_symbol = "Symbol",
                         editable = TRUE, bookmark,
                         par.properties = parProperties(text.align = "center", padding = 5),
-                        bg = "white", ...) {
+                        bg = "transparent", ...) {
 
   plotargs = list(...)
 
@@ -203,18 +208,24 @@ addPlot.docx = function(doc, fun,
 #' @examples
 #'
 #' # plot example for pptx -----
-#' doc.filename = "ex_plot.pptx"
-#' options( "ReporteRs-fontsize" = 11 )
+#'
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
+#'
 #' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
 #'   vector.graphic = TRUE, width = 5, height = 7 )
-#' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
-#'   vector.graphic = FALSE,
-#'   offx = 7, offy = 0,
-#'   width = 3, height = 2
-#'   )
-#' writeDoc( doc, file = doc.filename )
+#' if( !is_sunos ){
+#'   doc = addPlot( doc,
+#'     fun = function() barplot( 1:6, col = 2:7),
+#'     vector.graphic = FALSE,
+#'     offx = 7, offy = 0,
+#'     width = 3, height = 2
+#'     )
+#' }
+#'
+#' writeDoc( doc, file = "ex_plot.pptx" )
+#'
+#'
 #' @rdname addPlot
 #' @export
 addPlot.pptx = function(doc, fun, pointsize = 11,
@@ -223,7 +234,7 @@ addPlot.pptx = function(doc, fun, pointsize = 11,
                         fontname_serif = "Times New Roman", fontname_sans = "Calibri",
                         fontname_mono = "Courier New", fontname_symbol = "Symbol",
                         editable = TRUE, offx, offy, width, height,
-                        bg = "white",
+                        bg = "transparent",
                         ... ) {
 
   if (!missing(fontname)) {
@@ -311,14 +322,17 @@ addPlot.pptx = function(doc, fun, pointsize = 11,
 #' @examples
 #'
 #' # plot example for bsdoc -----
-#' doc.filename = "ex_plot/example.html"
-#' options( "ReporteRs-fontsize" = 11 )
+#'
 #' doc = bsdoc( )
+#'
 #' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
 #'   vector.graphic = TRUE, width = 5, height = 7,
 #'   par.properties = parProperties(text.align = "left")
 #'   )
-#' writeDoc( doc, file = doc.filename )
+#'
+#' writeDoc( doc, file = "ex_plot/example.html" )
+#'
+#'
 #' @rdname addPlot
 #' @export
 addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
@@ -329,7 +343,7 @@ addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
 		fontname_mono = "Courier New",
 		fontname_symbol = "Symbol",
 		par.properties = parCenter( padding = 5 ),
-		bg = "white",
+		bg = "transparent",
 		... ) {
 
   if (!missing(fontname)) {

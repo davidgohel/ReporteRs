@@ -51,37 +51,29 @@ Add a code block into a document object
 }
 \examples{
 
-# docx example ---------
-doc.filename = "ex_codeblock.docx"
-
-options( "ReporteRs-fontsize" = 10 )
-doc <- docx( )
-doc <- addCodeBlock( doc, text = "ls -a\\nwhich -a ls" )
-
-writeDoc( doc, file = doc.filename )
-
-# bsdoc example --------
-doc.filename = "ex_codeblock/example.html"
+cb <- "ls -a\\nwhich -a ls"
 
 options( "ReporteRs-fontsize" = 11 )
-doc = bsdoc( )
-doc <- addCodeBlock( doc, text = "ls -a\\nwhich -a ls" )
-
-writeDoc( doc, file = doc.filename )
 
 # docx example ---------
-doc.filename = "ex_codeblock.pptx"
+doc = docx( )
+doc <- addCodeBlock( doc, text = cb )
+writeDoc( doc, file = "ex_codeblock.docx" )
 
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
 
-# add a slide with layout "Title and Content"
+# bsdoc example ---------
+doc = bsdoc( )
+doc <- addCodeBlock( doc, text = cb )
+writeDoc( doc, file = "ex_codeblock/example.html" )
+
+
+# pptx example ---------
+doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
+doc <- addCodeBlock( doc, text = cb )
+writeDoc( doc, file = "ex_codeblock.pptx" )
 
-doc = addTitle( doc, "Title example 1" )
-doc <- addCodeBlock( doc, text = "ls -a\\nwhich -a ls" )
 
-writeDoc( doc, file = doc.filename )
 }
 \seealso{
 \code{\link{bsdoc}}, \code{\link{docx}}, \code{\link{pptx}}

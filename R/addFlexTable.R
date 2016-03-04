@@ -9,6 +9,12 @@
 #' @param ... further arguments passed to other methods
 #' @return a document object
 #' @export
+#' @examples
+#'
+#' options( "ReporteRs-fontsize" = 11 )
+#'
+#' ft_obj <- vanilla.table(mtcars)
+#'
 #' @seealso \code{\link{FlexTable}}, \code{\link{docx}}
 #' , \code{\link{pptx}}, \code{\link{bsdoc}}
 addFlexTable = function(doc, flextable, ...){
@@ -28,20 +34,12 @@ addFlexTable = function(doc, flextable, ...){
 #'   	If provided, table will be add after paragraph that contains the bookmark. See \code{\link{bookmark}}.
 #'   	If not provided, table will be added at the end of the document.
 #' @examples
+#' # docx example -----
+#' doc = docx( )
+#' doc = addFlexTable( doc, flextable = ft_obj )
+#' writeDoc( doc, file = "add_ft_ex.docx" )
 #'
-#' # docx example -------
-#' doc.filename = "addFlexTable_example.docx"
-#' @example examples/docx.R
-#' @example examples/addTitle1Level1.R
-#' @example examples/FlexTableExample.R
-#' @example examples/addFlexTable.R
-#' @example examples/addTitle2Level1.R
-#' @example examples/agg.mtcars.FlexTable.R
-#' @example examples/addFlexTable.R
-#' @example examples/addTitle3Level1.R
-#' @example examples/setFlexTableBackgroundColors.R
-#' @example examples/addFlexTable.R
-#' @example examples/writeDoc_file.R
+#'
 #' @rdname addFlexTable
 #' @export
 addFlexTable.docx = function(doc, flextable
@@ -57,20 +55,12 @@ addFlexTable.docx = function(doc, flextable
 
 
 #' @examples
+#' # bsdoc example -----
+#' doc = bsdoc( )
+#' doc = addFlexTable( doc, flextable = ft_obj )
+#' writeDoc( doc, file = "add_ft_ex/index.html" )
 #'
-#' # bsdoc example -------
-#' doc.filename = "addFlexTable_bsdoc/example.html"
-#' @example examples/bsdoc.R
-#' @example examples/addTitle1Level1.R
-#' @example examples/FlexTableExample.R
-#' @example examples/addFlexTable.R
-#' @example examples/addTitle2Level1.R
-#' @example examples/agg.mtcars.FlexTable.R
-#' @example examples/addFlexTable.R
-#' @example examples/addTitle3Level1.R
-#' @example examples/setFlexTableBackgroundColors.R
-#' @example examples/addFlexTable.R
-#' @example examples/writeDoc_file.R
+#'
 #' @rdname addFlexTable
 #' @export
 addFlexTable.bsdoc = function(doc, flextable,
@@ -104,24 +94,13 @@ addFlexTable.bsdoc = function(doc, flextable,
 #' If arguments offx, offy, width, height are provided, they become position and
 #' dimensions of the new shape.
 #' @examples
+#' # bsdoc example -----
+#' doc = pptx( )
+#' doc = addSlide( doc, slide.layout = "Title and Content" )
+#' doc = addFlexTable( doc, flextable = ft_obj )
+#' writeDoc( doc, file = "add_ft_ex.pptx" )
 #'
-#' # pptx example -------
-#' doc.filename = "addFlexTable_example.pptx"
-#' @example examples/pptx.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle1NoLevel.R
-#' @example examples/FlexTableExample.R
-#' @example examples/addFlexTable.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle2NoLevel.R
-#' @example examples/agg.mtcars.FlexTable.R
-#' @example examples/addFlexTable.R
-#' @example examples/addFlexTable_posdim.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle3NoLevel.R
-#' @example examples/setFlexTableBackgroundColors.R
-#' @example examples/addFlexTable.R
-#' @example examples/writeDoc_file.R
+#'
 #' @rdname addFlexTable
 #' @export
 addFlexTable.pptx = function(doc, flextable, offx, offy, width, height, ... ) {

@@ -7,10 +7,10 @@
 #' @param ... further arguments, not used.
 #' @return a document object
 #' @examples
-#' doc.filename = "addFooter_example.pptx"
-#' @example examples/pptx.R
-#' @example examples/addFooter.pptx.R
-#' @example examples/writeDoc_file.R
+#' doc = pptx( )
+#' doc = addSlide( doc, slide.layout = "Title and Content" )
+#' doc = addFooter( doc, "Hi!" )
+#' writeDoc( doc, file = "ex_footer.pptx" )
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addDate.pptx}}
 #' , \code{\link{addPageNumber.pptx}}

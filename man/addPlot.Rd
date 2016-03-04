@@ -15,20 +15,20 @@ addPlot(doc, fun, pointsize = 12, vector.graphic = F, ...)
   fontname_serif = "Times New Roman", fontname_sans = "Calibri",
   fontname_mono = "Courier New", fontname_symbol = "Symbol",
   editable = TRUE, bookmark, par.properties = parProperties(text.align =
-  "center", padding = 5), bg = "white", ...)
+  "center", padding = 5), bg = "transparent", ...)
 
 \method{addPlot}{pptx}(doc, fun, pointsize = 11, vector.graphic = TRUE,
   fontname = getOption("ReporteRs-default-font"),
   fontname_serif = "Times New Roman", fontname_sans = "Calibri",
   fontname_mono = "Courier New", fontname_symbol = "Symbol",
-  editable = TRUE, offx, offy, width, height, bg = "white", ...)
+  editable = TRUE, offx, offy, width, height, bg = "transparent", ...)
 
 \method{addPlot}{bsdoc}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
   vector.graphic = T, width = 6, height = 6,
   fontname = getOption("ReporteRs-default-font"),
   fontname_serif = "Times New Roman", fontname_sans = "Calibri",
   fontname_mono = "Courier New", fontname_symbol = "Symbol",
-  par.properties = parCenter(padding = 5), bg = "white", ...)
+  par.properties = parCenter(padding = 5), bg = "transparent", ...)
 }
 \arguments{
 \item{doc}{document object}
@@ -99,41 +99,55 @@ dimensions of the new shape.
 }
 \examples{
 
-# plot example for docx -----
-doc.filename = "ex_plot.docx"
+is_sunos <- tolower(Sys.info()[["sysname"]]) == "sunos"
+
 options( "ReporteRs-fontsize" = 11 )
+
+
+# plot example for docx -----
 doc = docx( )
 doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
   vector.graphic = TRUE, width = 5, height = 7,
-  par.properties = parProperties(text.align = "left")
+  par.properties = parProperties(text.align = "center")
   )
-writeDoc( doc, file = doc.filename )
+writeDoc( doc, file = "ex_plot.docx" )
+
+
 
 # plot example for pptx -----
-doc.filename = "ex_plot.pptx"
-options( "ReporteRs-fontsize" = 11 )
+
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
+
 doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
   vector.graphic = TRUE, width = 5, height = 7 )
-doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
-  vector.graphic = FALSE,
-  offx = 7, offy = 0,
-  width = 3, height = 2
-  )
-writeDoc( doc, file = doc.filename )
+if( !is_sunos ){
+  doc = addPlot( doc,
+    fun = function() barplot( 1:6, col = 2:7),
+    vector.graphic = FALSE,
+    offx = 7, offy = 0,
+    width = 3, height = 2
+    )
+}
+
+writeDoc( doc, file = "ex_plot.pptx" )
+
+
 
 # plot example for bsdoc -----
-doc.filename = "ex_plot/example.html"
-options( "ReporteRs-fontsize" = 11 )
+
 doc = bsdoc( )
+
 doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
   vector.graphic = TRUE, width = 5, height = 7,
   par.properties = parProperties(text.align = "left")
   )
-writeDoc( doc, file = doc.filename )
+
+writeDoc( doc, file = "ex_plot/example.html" )
+
+
 }
 \seealso{
-\code{\link{docx}}, \code{\link{docx}}, \code{\link{bsdoc}}
+\code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
 }
 

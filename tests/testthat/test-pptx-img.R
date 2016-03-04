@@ -6,6 +6,7 @@ points(.5,.5)
 dev.off()
 
 test_that("no position no size generate no error", {
+  skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addImage(doc, "img.png"), silent = TRUE)
@@ -13,6 +14,7 @@ test_that("no position no size generate no error", {
 })
 
 test_that("no position but size generate no error", {
+  skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addImage(doc, "img.png",
@@ -21,6 +23,7 @@ test_that("no position but size generate no error", {
 })
 
 test_that("position and size generate no error", {
+  skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addImage(doc, "img.png",
@@ -30,6 +33,7 @@ test_that("position and size generate no error", {
 })
 
 test_that("position no size generate an error", {
+  skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try(addImage(doc, "img.png",

@@ -9,6 +9,12 @@
 #' @param ... further arguments passed to other methods
 #' @return a document object
 #' @export
+#' @examples
+#'
+#' cb <- "ls -a\nwhich -a ls"
+#'
+#' options( "ReporteRs-fontsize" = 11 )
+#'
 #' @seealso \code{\link{bsdoc}}, \code{\link{docx}}, \code{\link{pptx}}
 addCodeBlock = function(doc, file, text, ... ){
 
@@ -26,12 +32,12 @@ addCodeBlock = function(doc, file, text, ... ){
 #' @param bookmark Only for \code{docx}. A character value ; id of the Word bookmark to
 #' replace by the script. optional. See \code{\link{bookmark}}.
 #' @examples
-#'
 #' # docx example ---------
-#' doc.filename = "ex_codeblock.docx"
-#' @example examples/docx.R
-#' @example examples/addCodeBlock.R
-#' @example examples/writeDoc_file.R
+#' doc = docx( )
+#' doc <- addCodeBlock( doc, text = cb )
+#' writeDoc( doc, file = "ex_codeblock.docx" )
+#'
+#'
 #' @export
 #' @rdname addCodeBlock
 addCodeBlock.docx = function(doc, file, text,
@@ -65,12 +71,12 @@ addCodeBlock.docx = function(doc, file, text,
 
 
 #' @examples
+#' # bsdoc example ---------
+#' doc = bsdoc( )
+#' doc <- addCodeBlock( doc, text = cb )
+#' writeDoc( doc, file = "ex_codeblock/example.html" )
 #'
-#' # bsdoc example --------
-#' doc.filename = "ex_codeblock/example.html"
-#' @example examples/bsdoc.R
-#' @example examples/addCodeBlock.R
-#' @example examples/writeDoc_file.R
+#'
 #' @export
 #' @rdname addCodeBlock
 addCodeBlock.bsdoc = function(doc, file, text,
@@ -101,14 +107,13 @@ addCodeBlock.bsdoc = function(doc, file, text,
 #' Paragraphs can only be appended on shape containing paragraphs (i.e. you
 #' can not add paragraphs after a FlexTable).
 #' @examples
+#' # pptx example ---------
+#' doc = pptx( )
+#' doc = addSlide( doc, slide.layout = "Title and Content" )
+#' doc <- addCodeBlock( doc, text = cb )
+#' writeDoc( doc, file = "ex_codeblock.pptx" )
 #'
-#' # docx example ---------
-#' doc.filename = "ex_codeblock.pptx"
-#' @example examples/pptx.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle1NoLevel.R
-#' @example examples/addCodeBlock.R
-#' @example examples/writeDoc_file.R
+#'
 #' @export
 #' @rdname addCodeBlock
 addCodeBlock.pptx = function(doc, file, text,

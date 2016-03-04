@@ -15,6 +15,7 @@ test_that("[vg] no position no size generate no error", {
 })
 
 test_that("[raster] no position no size generate no error", {
+  skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addPlot(doc, fun = dummy_plot,
@@ -32,6 +33,7 @@ test_that("[vg] no position but size generate no error", {
 })
 
 test_that("[raster] no position but size generate no error", {
+  skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addPlot(doc, fun = dummy_plot,
@@ -51,6 +53,7 @@ test_that("[vg] position and size generate no error", {
 })
 
 test_that("[raster] position and size generate no error", {
+  skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addPlot(doc, fun = dummy_plot,
@@ -70,6 +73,7 @@ test_that("[vg] position but no size generate an error", {
 })
 
 test_that("[raster] position but no size generate an error", {
+  skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addPlot(doc, fun = dummy_plot,
