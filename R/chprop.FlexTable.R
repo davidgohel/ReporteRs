@@ -3,14 +3,22 @@
 #' @description Format a FlexTable object.
 #'
 #' @param object the \code{FlexTable} object
+#' @param value a formatting properties object (\code{textProperties}, \code{parProperties},
+#' \code{borderProperties}, \code{cellProperties})
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection.
 #' @param j vector (integer index, col.names values or boolean vector) for columns selection.
 #' @param to specify on which part of the FlexTable to apply the \code{value}, must be one of the following
 #' values \dQuote{body} (default) or \dQuote{header} or \dQuote{footer}
 #' @param side used only when value is a \code{\link{borderProperties}}, specify on which side to
 #' apply the properties. It must be one of \dQuote{bottom}, \dQuote{top}, \dQuote{left}, \dQuote{right}.
+#' @param ... unused
+#' @examples
+#' my_ft <- vanilla.table( head( iris, n = 5 ) )
+#' my_ft <- chprop( my_ft, textBoldItalic(), i = 1, to = "header" )
+#' my_ft <- chprop( my_ft, parCenter(), j = 5 )
+#' my_ft <- chprop( my_ft, borderSolid(color = "red"), i = 5, side = "bottom" )
 #' @export
-chprop.FlexTable <- function(object, value, i, j, to = "body", side = "top"){
+chprop.FlexTable <- function(object, value, i, j, to = "body", side = "top", ...){
 
   args.get.indexes = list(object = object)
   if( !missing(i) ) args.get.indexes$i = i

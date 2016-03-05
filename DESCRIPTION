@@ -35,7 +35,6 @@ Suggests:
     ggplot2,
     jpeg, bmp,
     testthat, magrittr,
-    knitr,
     rmarkdown
 SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
