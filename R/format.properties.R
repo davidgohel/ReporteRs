@@ -1,266 +1,144 @@
-#' @title shortcut for default textProperties
+#' @title shortcuts for formatting properties
 #'
 #' @description
-#' shortcut for textProperties(...)
-#' @param ... arguments passed to textProperties
+#' Shortcuts for \code{textProperties}, \code{parProperties},
+#' \code{borderProperties} and \code{cellProperties}.
+#' @param ... further arguments passed to original functions.
+#' @rdname shortcut_properties
+#' @aliases shortcut_properties
+
+
 #' @export
 #' @examples
 #' textNormal()
-#' @seealso \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-textNormal = function(...) textProperties( ... )
+#' @rdname shortcut_properties
+textNormal = function(...) {textProperties( ... )}
 
 
-#' @title shortcut for bold
-#'
-#' @description
-#' shortcut for bold textProperties()
-#' @param ... arguments passed to textProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' textBold()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-textBold = function(...) textProperties( font.weight = "bold", ... )
+textBold = function(...) {textProperties( font.weight = "bold", ... )}
 
 
 
 
-#' @title shortcut for italic
-#'
-#' @description
-#' shortcut for italic textProperties()
-#' @param ... arguments passed to textProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' textItalic()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-textItalic = function( ... ) textProperties( font.style = "italic", ... )
+textItalic = function( ... ) {textProperties( font.style = "italic", ... )}
 
 
-#' @title shortcut for bold italic
-#'
-#' @description
-#' shortcut for bold italic textProperties()
-#' @param ... arguments passed to textProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' textBoldItalic()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-textBoldItalic = function( ... ) textProperties( font.weight = "bold", font.style = "italic", ... )
+textBoldItalic = function( ... ) {textProperties( font.weight = "bold", font.style = "italic", ... )}
 
 
-#' @title shortcut for right alignment
-#'
-#' @description
-#' shortcut for right alignment parProperties()
-#' @param ... arguments passed to parProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' parRight()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-parRight = function( ... ) parProperties( text.align = "right", ... )
+parRight = function( ... ) {parProperties( text.align = "right", ... )}
 
 
-#' @title shortcut for left alignment
-#'
-#' @description
-#' shortcut for left alignment parProperties()
-#' @param ... arguments passed to parProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' parLeft()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-parLeft = function( ... ) parProperties( text.align = "left", ... )
+parLeft = function( ... ) {parProperties( text.align = "left", ... )}
 
-#' @title shortcut for centered alignment
-#'
-#' @description
-#' shortcut for center alignment parProperties()
-#' @param ... arguments passed to parProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' parLeft()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-parCenter = function( ... ) parProperties( text.align = "center", ... )
+parCenter = function( ... ) {parProperties( text.align = "center", ... )}
 
 
-#' @title shortcut for justified alignment
-#'
-#' @description
-#' shortcut for center alignment parProperties()
-#' @param ... arguments passed to parProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' parLeft()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-parJustify = function( ... ) parProperties( text.align = "justify", ... )
+parJustify = function( ... ) {parProperties( text.align = "justify", ... )}
 
 
-#' @title shortcut for dotted border
-#'
-#' @description
-#' shortcut for a dotted border borderProperties()
-#' @param ... arguments passed to borderProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' borderDotted()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-borderDotted = function( ... )  borderProperties( style="dotted", ... )
+borderDotted = function( ... )  {borderProperties( style="dotted", ... )}
 
 
 
-#' @title shortcut for dashed border
-#'
-#' @description
-#' shortcut for a dashed border borderProperties()
-#' @param ... arguments passed to borderProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' borderDashed()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderNone}}
-#' , \code{\link{borderSolid}}
-borderDashed = function( ... )  borderProperties( style="dashed", ... )
+borderDashed = function( ... )  {borderProperties( style="dashed", ... )}
 
 
 
-#' @title shortcut for no border
-#'
-#' @description
-#' shortcut for no border borderProperties()
-#' @param ... arguments passed to borderProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' borderNone()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderSolid}}
-borderNone = function( ... )  borderProperties( style="none", ... )
+borderNone = function( ... )  {borderProperties( style="none", ... )}
 
 
 
-#' @title shortcut for solid border
-#'
-#' @description
-#' shortcut for solid border borderProperties()
-#' @param ... arguments passed to borderProperties
+#' @rdname shortcut_properties
 #' @export
 #' @examples
 #' borderSolid()
-#' @seealso \code{\link{textNormal}}
-#' , \code{\link{textBold}}
-#' , \code{\link{textItalic}}
-#' , \code{\link{textBoldItalic}}
-#' , \code{\link{parRight}}
-#' , \code{\link{parLeft}}
-#' , \code{\link{parCenter}}
-#' , \code{\link{parJustify}}
-#' , \code{\link{borderDotted}}
-#' , \code{\link{borderDashed}}
-#' , \code{\link{borderNone}}
-borderSolid = function( ... )  borderProperties( style = "solid", ... )
+borderSolid = function( ... )  {borderProperties( style = "solid", ... )}
+
+#' @rdname shortcut_properties
+#' @export
+#' @examples
+#' cellBorderNone()
+cellBorderNone = function( ... )  {
+  cellProperties( border.left = borderNone(),
+                  border.top = borderNone(),
+                  border.bottom = borderNone(),
+                  border.right = borderNone(),
+                  ... )
+}
+
+#' @rdname shortcut_properties
+#' @export
+#' @examples
+#' cellBorderBottom()
+cellBorderBottom = function( ... )  {
+  cellProperties( border.left = borderNone(),
+                  border.top = borderNone(),
+                  border.bottom = borderSolid(),
+                  border.right = borderNone(),
+                  ... )
+}
+
+#' @rdname shortcut_properties
+#' @export
+#' @examples
+#' cellBorderTop()
+cellBorderTop = function( ... )  {
+  cellProperties( border.left = borderNone(),
+                  border.top = borderSolid(),
+                  border.bottom = borderNone(),
+                  border.right = borderNone(),
+                  ... )
+}
+#' @rdname shortcut_properties
+#' @export
+#' @examples
+#' cellBorderTB()
+cellBorderTB = function( ... )  {
+  cellProperties( border.left = borderNone(),
+                  border.top = borderSolid(),
+                  border.bottom = borderSolid(),
+                  border.right = borderNone(),
+                  ... )
+}
+
