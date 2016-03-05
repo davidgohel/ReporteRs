@@ -15,7 +15,7 @@ spanFlexTableRows(object, j, from, to, runs)
 
 \item{to}{index of the last row to span.}
 
-\item{runs}{a vector of size \code{numrow} of FlexTable. If provided, successive 
+\item{runs}{a vector of size \code{numrow} of FlexTable. If provided, successive
 runs of equal values will indicate to merge corresponding rows.}
 }
 \description{

@@ -101,6 +101,7 @@ textProp08 = chprop( textProp, font.size = 12,
 	font.weight = "bold", shading.color = "red" )
 }
 \seealso{
-\code{\link{pot}}, \code{\link{alterFlexTable}}
+\code{\link{pot}}, \code{\link{alterFlexTable}},
+\code{\link{shortcut_properties}}
 }
 

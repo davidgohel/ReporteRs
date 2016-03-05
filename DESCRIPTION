@@ -34,9 +34,12 @@ Imports:
 Suggests:
     ggplot2,
     jpeg, bmp,
-    testthat
+    testthat, magrittr,
+    knitr,
+    rmarkdown
 SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
     http://groups.google.com/group/reporters-package
 BugReports: https://github.com/davidgohel/ReporteRs/issues
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr

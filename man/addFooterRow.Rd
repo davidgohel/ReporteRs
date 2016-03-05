@@ -10,11 +10,11 @@ addFooterRow(x, value, colspan, text.properties, par.properties,
 \arguments{
 \item{x}{a \code{FlexTable} object}
 
-\item{value}{\code{FlexRow} object to insert as a footer row or a 
+\item{value}{\code{FlexRow} object to insert as a footer row or a
 character vector specifying labels to use as columns labels.}
 
-\item{colspan}{integer vector. Optional. Applies only when argument \code{value} 
-is a character vector. Vector specifying the number of columns to span 
+\item{colspan}{integer vector. Optional. Applies only when argument \code{value}
+is a character vector. Vector specifying the number of columns to span
 for each corresponding value (in \code{values}).}
 
 \item{text.properties}{Optional. textProperties to apply to each cell. Used only if values are not missing.}

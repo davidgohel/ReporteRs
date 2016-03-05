@@ -77,7 +77,8 @@
 #' @examples
 #' # cellProperties examples -------
 #' @example examples/cellProperties.R
-#' @seealso \code{\link{borderProperties}}, \code{\link{FlexTable}}
+#' @seealso \code{\link{borderProperties}}, \code{\link{FlexTable}},
+#' \code{\link{shortcut_properties}}
 cellProperties = function(
 	padding,
 	border.width, border.style, border.color,

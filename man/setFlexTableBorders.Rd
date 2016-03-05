@@ -21,17 +21,17 @@ setFlexTableBorders(object, inner.vertical = borderProperties(),
 
 \item{outer.horizontal}{a \code{\link{borderProperties}} object}
 
-\item{body}{a logical value (default to TRUE), specifies 
+\item{body}{a logical value (default to TRUE), specifies
 to apply scheme to table body}
 
-\item{header}{a logical value (default to TRUE), specifies 
+\item{header}{a logical value (default to TRUE), specifies
 to apply scheme to table header}
 
-\item{footer}{a logical value (default to FALSE), specifies 
+\item{footer}{a logical value (default to FALSE), specifies
 to apply scheme to table footer}
 }
 \description{
-apply borders scheme to a FlexTable. A border scheme is 
+apply borders scheme to a FlexTable. A border scheme is
 a set of 4 different borders: inner vectical and horizontal
 , outer vectical and horizontal.
 }

@@ -9,7 +9,8 @@
 #' borderProperties()
 #' borderProperties(color="orange", style="solid", width=1)
 #' borderProperties(color="gray", style="dotted", width=1)
-#' @seealso \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
+#' @seealso \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}},
+#' \code{\link{shortcut_properties}}
 #' @export
 borderProperties = function( color = "black", style = "solid", width = 1 ){
 

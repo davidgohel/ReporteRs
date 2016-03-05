@@ -182,6 +182,7 @@ cellProp23 = chprop( cellProp, background.color = "#517281"
   , border.color = "#F37257", border.width = 2  )
 }
 \seealso{
-\code{\link{borderProperties}}, \code{\link{FlexTable}}
+\code{\link{borderProperties}}, \code{\link{FlexTable}},
+\code{\link{shortcut_properties}}
 }
 

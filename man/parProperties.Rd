@@ -108,6 +108,7 @@ parProp05 = chprop( parProp, padding = 2 )
 parProp06 = chprop( parProp, padding = 2, text.align = "center" )
 }
 \seealso{
-\code{\link{alterFlexTable}}, \code{\link{addParagraph}}
+\code{\link{alterFlexTable}}, \code{\link{addParagraph}},
+\code{\link{shortcut_properties}}
 }
 

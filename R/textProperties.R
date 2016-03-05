@@ -34,7 +34,8 @@
 #' @examples
 #' # textProperties examples -------
 #' @example examples/textProperties.R
-#' @seealso \code{\link{pot}}, \code{\link{alterFlexTable}}
+#' @seealso \code{\link{pot}}, \code{\link{alterFlexTable}},
+#' \code{\link{shortcut_properties}}
 textProperties = function( color = "black", font.size = getOption("ReporteRs-fontsize")
 		, font.weight = "normal", font.style = "normal", underlined = FALSE
 		, font.family = getOption("ReporteRs-default-font")

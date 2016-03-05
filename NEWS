@@ -1,3 +1,18 @@
+ReporteRs 0.8.6
+==================================================================
+
+ENHANCEMENT
+------------------------------------------------------------------
+
+* set addPlot default background color to transparent
+
+DEBUG
+------------------------------------------------------------------
+
+* fix an issue with addParagraph.pptx that was overwriting all
+  paragraphs globally
+* force DrawningML instructions to be read as UTF-8
+
 ReporteRs 0.8.5
 ==================================================================
 

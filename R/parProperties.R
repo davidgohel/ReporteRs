@@ -40,7 +40,8 @@
 #' @examples
 #' # parProperties examples -------
 #' @example examples/parProperties.R
-#' @seealso \code{\link{alterFlexTable}}, \code{\link{addParagraph}}
+#' @seealso \code{\link{alterFlexTable}}, \code{\link{addParagraph}},
+#' \code{\link{shortcut_properties}}
 parProperties = function(text.align = "left",
 		padding.bottom = 1, padding.top = 1,
 		padding.left = 1, padding.right = 1, padding,

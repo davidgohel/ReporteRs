@@ -46,6 +46,7 @@ chprop(x, color="orange", style="dashed", width=1)
 chprop(x, width=5)
 }
 \seealso{
-\code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
+\code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}},
+\code{\link{shortcut_properties}}
 }
 

@@ -15,7 +15,7 @@ spanFlexTableColumns(object, i, from, to, runs)
 
 \item{to}{index of the last column to span.}
 
-\item{runs}{a vector of size \code{numcol} of FlexTable. If provided, successive 
+\item{runs}{a vector of size \code{numcol} of FlexTable. If provided, successive
 runs of equal values will indicate to merge corresponding columns.}
 }
 \description{
