@@ -357,7 +357,7 @@ addPlot.pptx = function(doc, fun, pointsize = 11,
 #' unlink("d3.min.js")
 #' doc <- addPlot(doc, fun = function() print(gg_p), ggiraph = TRUE)
 #'
-#' writeDoc(toto, "ggiraph/index.html")
+#' writeDoc(doc, "ggiraph/index.html")
 #' }
 #' }
 #'

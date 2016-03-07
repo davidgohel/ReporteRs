@@ -172,7 +172,7 @@ doc <- addJavascript(doc = doc, file = "d3.min.js" )
 unlink("d3.min.js")
 doc <- addPlot(doc, fun = function() print(gg_p), ggiraph = TRUE)
 
-writeDoc(toto, "ggiraph/index.html")
+writeDoc(doc, "ggiraph/index.html")
 }
 }
 
