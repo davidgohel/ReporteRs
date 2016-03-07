@@ -71,7 +71,7 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 
 	if( !is.color( color ) )
 		stop("color must be a valid color." )
-	else out$color = getHexColorCode( color )
+	else out$color = colorProperties( color )
 
 	if( is.character( font.family ) ){
 		out$font.family = font.family
@@ -86,7 +86,7 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 	if( !missing(shading.color) ){
 		if( !is.color( shading.color ) )
 			stop("shading.color must be a valid color." )
-		else out$shading.color = getHexColorCode( shading.color )
+		else out$shading.color = colorProperties( shading.color )
 	}
 
 	class( out ) = "textProperties"
@@ -102,17 +102,17 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 print.textProperties = function (x, ...){
 
 	if( !is.null( x$shading.color ) )
-		shading.color = paste0("background-color:", x$shading.color, ";")
+		shading.color = paste0("background-color:", as.character(x$shading.color), ";")
 	else shading.color = ""
 
-	cat( "{color:" , x$color, ";" )
-	cat( "font-size:" , x$font.size, ";" )
-	cat( "font-weight:" , x$font.weight, ";" )
-	cat( "font-style:" , x$font.style, ";" )
-	cat( "underlined:" , x$underlined, ";" )
-	cat( "font-family:" , x$font.family, ";" )
+	cat( "{color:" , as.character(x$color), ";", sep = "" )
+	cat( "font-size:" , x$font.size, ";", sep = "" )
+	cat( "font-weight:" , x$font.weight, ";", sep = "" )
+	cat( "font-style:" , x$font.style, ";", sep = "" )
+	cat( "underlined:" , x$underlined, ";", sep = "" )
+	cat( "font-family:" , x$font.family, ";", sep = "" )
 	cat( shading.color )
-	cat( "vertical.align:" , x$vertical.align, ";}" )
+	cat( "vertical.align:" , x$vertical.align, ";}", sep = "" )
 }
 
 #' @rdname textProperties
@@ -125,7 +125,7 @@ as.character.textProperties = function (x, ...){
 	else v.al = ""
 
 	if( !is.null( x$shading.color ) )
-		shading.color = paste0("background-color:", x$shading.color, ";")
+		shading.color = paste0("background-color:", as.character(x$shading.color), ";")
 	else shading.color = ""
 
 	paste0( "{color:" , x$color, ";"
@@ -145,12 +145,13 @@ as.character.textProperties = function (x, ...){
 		, robject$font.size, robject$font.weight=="bold"
 		, robject$font.style=="italic"
 		, robject$underlined
-		, robject$color
+		, .jcolorProperties(robject$color)
 		, robject$font.family
 		, robject$vertical.align
 		)
 	if( !is.null( robject$shading.color ) )
-		.jcall( jTextProperties, "V", "setShadingColor", robject$shading.color )
+		.jcall( jTextProperties, "V", "setShadingColor",
+		        .jcolorProperties(robject$shading.color ) )
 
 	jTextProperties
 }
@@ -203,7 +204,7 @@ chprop.textProperties <- function(object, color, font.size
 	if( !missing( color ) ){
 		if( !is.color( color ) )
 			stop("color must be a valid color." )
-		else object$color = getHexColorCode( color )
+		else object$color = colorProperties( color )
 	}
 
 	if( !missing( font.family ) ){
@@ -223,7 +224,7 @@ chprop.textProperties <- function(object, color, font.size
 	if( !missing(shading.color) ){
 		if( !is.color( shading.color ) )
 			stop("shading.color must be a valid color." )
-		else object$shading.color = getHexColorCode( shading.color )
+		else object$shading.color = colorProperties( shading.color )
 	}
 
 	object

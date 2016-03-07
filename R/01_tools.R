@@ -164,6 +164,11 @@ getHexColorCode = function( valid.color ){
 	rgb( t(col2rgb(valid.color)/255 ))
 }
 
+get_col_values = function( valid.color ){
+  mat <- as.vector( col2rgb(valid.color, alpha = TRUE) )
+  list( r = mat[1], g = mat[2], b = mat[3], a = mat[4] )
+}
+
 ReporteRs.border.styles = c( "none", "solid", "dotted", "dashed" )
 #ReporteRs.text.directions = c( "lrTb", "tbRl", "btLr" )
 ReporteRs.text.directions = c( "lrtb", "tbrl", "btlr" )

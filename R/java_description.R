@@ -19,6 +19,7 @@ class.tables.BorderProperties = "org/lysis/reporters/formats/BorderProperties"
 class.tables.CellProperties = "org/lysis/reporters/formats/CellProperties"
 class.text.ParProperties = "org/lysis/reporters/formats/ParProperties"
 class.text.TextProperties = "org/lysis/reporters/formats/TextProperties"
+class.text.Color = "org/lysis/reporters/formats/ColorProperties"
 
 # document objects
 class.docx4r.document = "org/lysis/reporters/docs/docx4R"

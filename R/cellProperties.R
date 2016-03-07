@@ -89,7 +89,7 @@ cellProperties = function(
 	border.right.color = "black", border.right.style = "solid", border.right.width = 1,
 	vertical.align = "middle",
 	padding.bottom = 0, padding.top = 0, padding.left = 0, padding.right = 0,
-	background.color = "white", text.direction = "lrtb"
+	background.color = "transparent", text.direction = "lrtb"
 ){
 vertical.align.styles = c( "top", "middle", "bottom" )
 
@@ -111,7 +111,7 @@ out = list(
 	, padding.top = 1
 	, padding.left = 1
 	, padding.right = 1
-	, background.color = "#FFFFFF"
+	, background.color = "#FFFFFF00"
 	, text.direction = "lrTb"
 
 )
@@ -212,7 +212,7 @@ out$border.right = borderProperties( color = border.right.color, style = border.
 # background-color checking
 if( !is.color( background.color ) )
 	stop("background.color must be a valid color." )
-else out$background.color = getHexColorCode(background.color)
+else out$background.color = colorProperties(background.color)
 
 
 match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
@@ -327,7 +327,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 
 	if( !missing( border.bottom.color ) ){
 		if( is.color( border.bottom.color ) ){
-			object$border.bottom$color = getHexColorCode( border.bottom.color )
+			object$border.bottom$color = colorProperties( border.bottom.color )
 		} else stop("border.bottom.color must be a valid color.")
 	}
 
@@ -347,7 +347,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 
 	if( !missing( border.top.color ) ){
 		if( is.color( border.top.color ) ){
-			object$border.top$color = getHexColorCode( border.top.color )
+			object$border.top$color = colorProperties( border.top.color )
 		} else stop("border.top.color must be a valid color.")
 	}
 
@@ -367,7 +367,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 
 	if( !missing( border.left.color ) ){
 		if( is.color( border.left.color ) ){
-			object$border.left$color = getHexColorCode( border.left.color )
+			object$border.left$color = colorProperties( border.left.color )
 		} else stop("border.left.color must be a valid color.")
 	}
 
@@ -387,7 +387,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 
 	if( !missing( border.right.color ) ){
 		if( is.color( border.right.color ) ){
-			object$border.right$color = getHexColorCode( border.right.color )
+			object$border.right$color = colorProperties( border.right.color )
 		} else stop("border.right.color must be a valid color.")
 	}
 
@@ -438,7 +438,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 		# background-color checking
 		if( !is.color( background.color ) )
 			stop("background.color must be a valid color." )
-		else object$background.color = getHexColorCode(background.color)
+		else object$background.color = colorProperties(background.color)
 
 	if( !missing( vertical.align ) ){
 		match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
@@ -491,7 +491,7 @@ print.cellProperties = function (x, ...){
 	cat( "padding.top: {", x$padding.top, "}\n" )
 	cat( "padding.left: {", x$padding.left, "}\n" )
 	cat( "padding.right: {", x$padding.right, "}\n" )
-	cat( "background.color: {", x$background.color, "}\n" )
+	cat( "background.color: {", as.character(x$background.color), "}\n" )
 	cat( "text.direction: {", x$text.direction, "}\n" )
 }
 
@@ -507,7 +507,7 @@ print.cellProperties = function (x, ...){
 			, as.integer( robject$padding.top )
 			, as.integer( robject$padding.left )
 			, as.integer( robject$padding.right )
-			, as.character(robject$background.color )
+			, .jcolorProperties(robject$background.color)
 			, as.character(robject$text.direction )
 	)
 	jcellProp

@@ -213,7 +213,7 @@ addPlot.docx = function(doc, fun,
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #'
 #' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
-#'   vector.graphic = TRUE, width = 5, height = 7 )
+#'   vector.graphic = TRUE, width = 5, height = 4 )
 #' if( !is_sunos ){
 #'   doc = addPlot( doc,
 #'     fun = function() barplot( 1:6, col = 2:7),

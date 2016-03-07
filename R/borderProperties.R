@@ -39,10 +39,8 @@ borderProperties = function( color = "black", style = "solid", width = 1 ){
 
 
 	out = list(
-			color = color
-			, style = style
-			, width = width
-	)
+	  color = colorProperties(color), style = style, width = width
+	  )
 	class( out ) = "borderProperties"
 	out
 }
@@ -70,7 +68,7 @@ chprop.borderProperties <- function(object, color, style, width, ... ) {
 		} else if( !is.color(color) ){
 			stop("color must be a valid color.")
 		}
-		object$color = color
+		object$color = colorProperties(color)
 	}
 	if( !missing( style ) ){
 		if( length( style ) != 1 ) stop("style must be a single character value")
@@ -102,7 +100,7 @@ chprop.borderProperties <- function(object, color, style, width, ... ) {
 #' @rdname borderProperties
 #' @export
 print.borderProperties = function (x, ...){
-	cat( "borderProperties{color:", x$color, ";" )
+	cat( "borderProperties{color:", as.character(x$color), ";" )
 	cat( "style:", x$style, ";" )
 	cat( "width:", x$width, ";" )
 	cat( "}" )
@@ -111,14 +109,14 @@ print.borderProperties = function (x, ...){
 #' @rdname borderProperties
 #' @export
 as.character.borderProperties = function (x, ...){
-	paste( "borderProperties{color:", x$color, ";",
+	paste( "borderProperties{color:", as.character(x$color), ";",
 			"style:", x$style, ";", "width:", x$width, ";}", sep = "" )
 
 }
 
 .jborderProperties = function( object ){
 	.jnew(class.tables.BorderProperties,
-			as.character(object$color),
+			.jcolorProperties(object$color),
 			as.character(object$style), as.integer( object$width ) )
 }
 

@@ -408,9 +408,13 @@ setZebraStyle = function (object, odd, even){
 	if( length( odd ) != 1 ) stop("odd must be of length 1")
 	if( length( even ) != 1 ) stop("even must be of length 1")
 
-	.jcall( object$jobj , "V", "setOddEvenColor"
-			, odd
-			, even
+  color_compounds <- get_color_compounds(c(even, odd))
+
+	.jcall( object$jobj , "V", "setOddEvenColor",
+	        .jarray( color_compounds$r ),
+	        .jarray( color_compounds$g ),
+	        .jarray( color_compounds$b ),
+	        .jarray( color_compounds$a )
 	)
 
 	object
@@ -447,11 +451,15 @@ setRowsColors = function (object, i, colors){
 	}
 	if( length( colors ) == 1 ) colors = rep(colors, length(i) )
 	if( length( colors ) != length(i) ) stop("expected ", length(i) , " colors")
+	color_compounds <- get_color_compounds(colors)
 
-	.jcall( object$jobj , "V", "setRowsColors"
-			, .jarray( as.integer( i - 1 ) )
-			, .jarray( as.character( colors ) )
-	)
+	.jcall( object$jobj , "V", "setRowsColors",
+	        .jarray( as.integer( i - 1 ) ),
+	        .jarray( color_compounds$r ),
+	        .jarray( color_compounds$g ),
+	        .jarray( color_compounds$b ),
+	        .jarray( color_compounds$a )
+	      )
 
 	object
 }
@@ -487,9 +495,14 @@ setColumnsColors = function (object, j, colors){
 	if( length( colors ) == 1 ) colors = rep(colors, length(j) )
 	if( length( colors ) != length(j) ) stop("expected ", length(j) , " colors")
 
-	.jcall( object$jobj , "V", "setColumnsColors"
-			, .jarray( as.integer( j - 1 ) )
-			, .jarray( as.character( colors ) )
+	color_compounds <- get_color_compounds(colors)
+
+	.jcall( object$jobj , "V", "setColumnsColors",
+	        .jarray( as.integer( j - 1 ) ),
+	        .jarray( color_compounds$r ),
+	        .jarray( color_compounds$g ),
+	        .jarray( color_compounds$b ),
+	        .jarray( color_compounds$a )
 	)
 
 	object

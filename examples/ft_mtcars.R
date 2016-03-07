@@ -19,7 +19,7 @@ ft_mtcars <- FlexTable( data = mtcars, add.rownames = TRUE,
   body.text.props = body_text )
 
 # zebra stripes - alternate colored backgrounds on table rows
-ft_mtcars <- setZebraStyle( ft_mtcars, odd = "#E1EEf4", even = "white" )
+ft_mtcars <- setZebraStyle( ft_mtcars, odd = "#E1EEf488", even = "white" )
 
 # applies a border grid on table
 ft_mtcars <- setFlexTableBorders( ft_mtcars,
