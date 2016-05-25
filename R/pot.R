@@ -38,11 +38,11 @@ pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 	.Object[[1]]$value = value
 	.Object[[1]]$jimg = NULL
 
-	if( !missing(format) ){
-		if( !inherits(format, "textProperties") )
-			stop("argument format must be a textProperties object.")
-		else .Object[[1]]$format = format
-	} else .Object[[1]]$format = NULL
+
+	if( !inherits(format, "textProperties") )
+		stop("argument format must be a textProperties object.")
+ 	.Object[[1]]$format = format
+
 
 	if( !missing( hyperlink )){
 		if( !is.character( hyperlink ) || length( hyperlink ) != 1 )
