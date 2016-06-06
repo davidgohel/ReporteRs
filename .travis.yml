@@ -3,7 +3,6 @@ language: r
 cache: packages
 
 r_packages:
- - rJava
  - covr
 
 after_success:
