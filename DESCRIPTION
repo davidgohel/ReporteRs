@@ -1,7 +1,7 @@
 Package: ReporteRs
 Type: Package
-Title: Microsoft Word, Microsoft Powerpoint and HTML Documents Generation
-Version: 0.8.6
+Title: Microsoft Word, Microsoft PowerPoint and HTML Documents Generation
+Version: 0.8.6.9000
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@lysis-consultants.fr"),
@@ -9,14 +9,13 @@ Authors@R: c(
     comment = "Bootstrap development team"),
     person("jQuery", role = c("ctb", "cph"),
     comment = "The jQuery Foundation") )
-Description: Create Microsoft Word document (>=2007),
-    Microsoft Powerpoint document (>=2007) and HTML documents from R. There are
+Description: Create 'Microsoft Word' document (>=2007),
+    'Microsoft PowerPoint' document (>=2007) and 'HTML' documents from R. There are
     several features to let you format and present R outputs ; e.g. Editable
     Vector Graphics, functions for complex tables reporting, reuse of corporate
-    template document (*.docx and *.pptx). You can use the package as a tool
-    for fast reporting and as a tool for reporting automation. The package does
-    not require any installation of Microsoft product to be able to write
-    Microsoft files (docx and pptx).
+    template document. You can use the package as a tool for fast reporting
+    and as a tool for reporting automation. The package does not require
+    any installation of Microsoft product to be able to write Microsoft files.
 License: GPL-3
 Copyright: See file COPYRIGHTS.
 Depends:
@@ -41,4 +40,3 @@ URL: http://davidgohel.github.io/ReporteRs/index.html,
     http://groups.google.com/group/reporters-package
 BugReports: https://github.com/davidgohel/ReporteRs/issues
 RoxygenNote: 5.0.1
-VignetteBuilder: knitr

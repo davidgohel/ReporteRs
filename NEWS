@@ -4,7 +4,10 @@ ReporteRs 0.8.6
 ENHANCEMENT
 ------------------------------------------------------------------
 
-* set addPlot default background color to transparent
+* set addPlot default background color to transparent.
+* add support for ggiraph plots.
+* add color opacity (not available for Word)
+
 
 DEBUG
 ------------------------------------------------------------------

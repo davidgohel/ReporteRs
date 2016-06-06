@@ -1,4 +1,4 @@
-#' ReporteRs lets you create Microsoft Word, Microsoft Powerpoint
+#' ReporteRs lets you create Microsoft Word, Microsoft PowerPoint
 #' and html documents.
 #'
 #' To get an r document object:

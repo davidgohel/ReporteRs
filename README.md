@@ -5,7 +5,7 @@
 
 ReporteRs
 ======
-ReporteRs is an R package for creating Microsoft Word, Microsoft Powerpoint and HTML documents from R.
+ReporteRs is an R package for creating Microsoft Word, Microsoft PowerPoint and HTML documents from R.
 
 Usefull links: 
 

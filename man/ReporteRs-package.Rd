@@ -6,7 +6,7 @@
 \alias{ReporteRs-package}
 \title{ReporteRs: a package to create document from R}
 \description{
-ReporteRs lets you create Microsoft Word, Microsoft Powerpoint
+ReporteRs lets you create Microsoft Word, Microsoft PowerPoint
 and html documents.
 }
 \details{

@@ -38,10 +38,6 @@ If you need a new layout, create it in PowerPoint :
 
 On the View tab, in the Presentation Views group, click Slide Master.
 
-read \url{http://office.microsoft.com/en-us/powerpoint-help/create-a-new-custom-layout-HA010079650.aspx}
-
-read \url{http://office.microsoft.com/en-us/powerpoint-help/change-a-placeholder-HA010064940.aspx}
-
 Function \code{slide.layouts} returns available layout names of the template used when pptx object has been created.
 It is important to know that when using addParagraph.pptx, paragraph and defaut font formats will be defined
 by the properties of the shape of the \code{slide.layout} where content will be added.
