@@ -22,7 +22,6 @@
 #'   \item \code{\link{addPlot}} add plots
 #'   \item \code{\link{addFlexTable}} add tables. See \code{\link{FlexTable}}
 #'   \item \code{\link{addImage}} add external images
-#'   \item \code{\link{addMarkdown}} add markdown text
 #'   \item \code{\link{addTOC}} add table of content
 #'   \item \code{\link{addPageBreak}} add page break
 #'   \item \code{\link{addSection}} add section (for landscape orientation)
@@ -40,7 +39,7 @@
 #' @examples
 #'
 #' @example examples/docx_example.R
-#' @seealso \code{\link{bsdoc}}, \code{\link{pptx}}, \code{\link{bookmark}}
+#' @seealso \code{\link{pptx}}, \code{\link{bookmark}}
 docx = function( title = "untitled", template, empty_template = FALSE, list.definition = getOption("ReporteRs-list-definition") ){
 
 	if( missing( template ) )

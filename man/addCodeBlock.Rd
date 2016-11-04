@@ -2,8 +2,8 @@
 % Please edit documentation in R/addCodeBlock.R
 \name{addCodeBlock}
 \alias{addCodeBlock}
-\alias{addCodeBlock.bsdoc}
 \alias{addCodeBlock.docx}
+\alias{addCodeBlock.bsdoc}
 \alias{addCodeBlock.pptx}
 \title{Add code block into a document object}
 \usage{
@@ -61,12 +61,6 @@ doc <- addCodeBlock( doc, text = cb )
 writeDoc( doc, file = "ex_codeblock.docx" )
 
 
-# bsdoc example ---------
-doc = bsdoc( )
-doc <- addCodeBlock( doc, text = cb )
-writeDoc( doc, file = "ex_codeblock/example.html" )
-
-
 # pptx example ---------
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
@@ -76,6 +70,6 @@ writeDoc( doc, file = "ex_codeblock.pptx" )
 
 }
 \seealso{
-\code{\link{bsdoc}}, \code{\link{docx}}, \code{\link{pptx}}
+\code{\link{docx}}, \code{\link{pptx}}
 }
 

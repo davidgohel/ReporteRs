@@ -152,19 +152,19 @@ if( !missing( padding ) ){
 }
 
 if( is.character( border.bottom.style ) ){
-	match.arg( border.bottom.style, choices = ReporteRs.border.styles, several.ok = F )
+	match.arg( border.bottom.style, choices = ReporteRs.border.styles, several.ok = FALSE )
 } else stop("border.bottom.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.left.style ) ){
-	match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = F )
+	match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = FALSE )
 } else stop("border.left.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.top.style ) ){
-	match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = F )
+	match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = FALSE )
 } else stop("border.top.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 if( is.character( border.right.style ) ){
-	match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = F )
+	match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = FALSE )
 } else stop("border.right.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 
 
@@ -215,11 +215,11 @@ if( !is.color( background.color ) )
 else out$background.color = colorProperties(background.color)
 
 
-match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
+match.arg( vertical.align, choices = vertical.align.styles, several.ok = FALSE )
 out$vertical.align = vertical.align
 
 if( is.character( text.direction ) ){
-	match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = F )
+	match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = FALSE )
 	out$text.direction = text.direction
 } else stop("text.direction must be a character scalar (", paste( ReporteRs.text.directions, collapse = "|") ,").")
 
@@ -314,7 +314,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 
 	if( !missing( border.bottom.style ) ){
 		if( is.character( border.bottom.style ) ){
-			match.arg( border.bottom.style, choices = ReporteRs.border.styles, several.ok = F )
+			match.arg( border.bottom.style, choices = ReporteRs.border.styles, several.ok = FALSE )
 			object$border.bottom$style = border.bottom.style
 		} else stop("border.bottom.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	}
@@ -334,7 +334,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 
 	if( !missing( border.top.style ) ){
 		if( is.character( border.top.style ) ){
-			match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = F )
+			match.arg( border.top.style, choices = ReporteRs.border.styles, several.ok = FALSE )
 			object$border.top$style = border.top.style
 		} else stop("border.top.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	}
@@ -354,7 +354,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 
 	if( !missing( border.left.style ) ){
 		if( is.character( border.left.style ) ){
-			match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = F )
+			match.arg( border.left.style, choices = ReporteRs.border.styles, several.ok = FALSE )
 			object$border.left$style = border.left.style
 		} else stop("border.left.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	}
@@ -374,7 +374,7 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 
 	if( !missing( border.right.style ) ){
 		if( is.character( border.right.style ) ){
-			match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = F )
+			match.arg( border.right.style, choices = ReporteRs.border.styles, several.ok = FALSE )
 			object$border.right$style = border.right.style
 		} else stop("border.right.style must be a character scalar (", paste( ReporteRs.border.styles, collapse = "|") ,").")
 	}
@@ -441,13 +441,13 @@ vertical.align.styles = c( "top", "middle", "bottom" )
 		else object$background.color = colorProperties(background.color)
 
 	if( !missing( vertical.align ) ){
-		match.arg( vertical.align, choices = vertical.align.styles, several.ok = F )
+		match.arg( vertical.align, choices = vertical.align.styles, several.ok = FALSE )
 		object$vertical.align = vertical.align
 	}
 
 	if( !missing( text.direction ) ){
 		if( is.character( text.direction ) ){
-			match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = F )
+			match.arg( text.direction, choices = ReporteRs.text.directions, several.ok = FALSE )
 			object$text.direction = text.direction
 		} else stop("text.direction must be a character scalar (",
 				paste( ReporteRs.text.directions, collapse = "|") ,").")

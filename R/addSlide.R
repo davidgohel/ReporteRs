@@ -71,7 +71,7 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 				"getNewSlide",
 				as.character(slide.layout)
 				),
-			silent = T)
+			silent = TRUE)
 		if( inherits( slide.part, "try-error")) {
 			.reg = regexpr(pattern = "java\\.lang\\.Exception: ", slide.part)
 			msg = substring( text = slide.part, first = .reg + attr( .reg, "match.length") )
@@ -85,7 +85,7 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 				"getAndReInitExistingSlide",
 				as.character(slide.layout), as.integer(bookmark)
 				),
-			silent = T)
+			silent = TRUE)
 		if( inherits( slide.part, "try-error")) {
 			.reg = regexpr(pattern = "java\\.lang\\.Exception: ", slide.part)
 			msg = substring( text = slide.part, first = .reg + attr( .reg, "match.length") )
@@ -96,7 +96,7 @@ addSlide.pptx = function( doc, slide.layout, bookmark, ... ) {
 
 	slide = try( .jnew(class.pptx4r.SlideContent,
 			slide.part, doc$obj, layout.description),
-		silent = T)
+		silent = TRUE)
 
 	if( inherits( slide, "try-error")) {
 		.reg = regexpr(pattern = "java\\.lang\\.Exception: ", slide)

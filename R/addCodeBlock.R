@@ -15,7 +15,7 @@
 #'
 #' options( "ReporteRs-fontsize" = 11 )
 #'
-#' @seealso \code{\link{bsdoc}}, \code{\link{docx}}, \code{\link{pptx}}
+#' @seealso \code{\link{docx}}, \code{\link{pptx}}
 addCodeBlock = function(doc, file, text, ... ){
 
   if( missing( file ) && missing( text ) )
@@ -70,13 +70,6 @@ addCodeBlock.docx = function(doc, file, text,
 }
 
 
-#' @examples
-#' # bsdoc example ---------
-#' doc = bsdoc( )
-#' doc <- addCodeBlock( doc, text = cb )
-#' writeDoc( doc, file = "ex_codeblock/example.html" )
-#'
-#'
 #' @export
 #' @rdname addCodeBlock
 addCodeBlock.bsdoc = function(doc, file, text,

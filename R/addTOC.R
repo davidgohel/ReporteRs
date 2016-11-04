@@ -51,17 +51,6 @@ addTOC.docx = function(doc, stylename, level_max = 3, ... ) {
 
 
 
-#' @details
-#'
-#' When working with \code{bsdoc} object:
-#'
-#' Table of contents will be added on the right side
-#' of the content.
-#' @examples
-#' doc.filename = "addTOC_example/example.html"
-#' @example examples/bsdoc.R
-#' @example examples/addTOC.bsdoc.R
-#' @example examples/writeDoc_file.R
 #' @rdname addTOC
 #' @export
 addTOC.bsdoc = function(doc, ... ) {

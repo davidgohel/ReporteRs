@@ -70,7 +70,7 @@ parProperties = function(text.align = "left",
 	}
 
 	if( is.character( text.align ) ){
-		match.arg( text.align, choices = c("left", "right", "center", "justify"), several.ok = F )
+		match.arg( text.align, choices = c("left", "right", "center", "justify"), several.ok = FALSE )
 		out$text.align = text.align
 	} else stop("text.align must be a character scalar ('left' | 'right' | 'center' | 'justify').")
 
@@ -97,7 +97,7 @@ parProperties = function(text.align = "left",
 
 
 	if( is.character( list.style ) ) {
-		match.arg( list.style, choices = c('none', 'ordered', 'unordered', 'blockquote' ), several.ok = F )
+		match.arg( list.style, choices = c('none', 'ordered', 'unordered', 'blockquote' ), several.ok = FALSE )
 		out$list.style = list.style
 	} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered', 'blockquote' ).")
 
@@ -173,7 +173,7 @@ chprop.parProperties <- function(object, text.align
 
 	if( !missing( text.align ) ){
 		if( is.character( text.align ) ){
-			match.arg( text.align, choices = c("left", "right", "center", "justify"), several.ok = F )
+			match.arg( text.align, choices = c("left", "right", "center", "justify"), several.ok = FALSE )
 			object$text.align = text.align
 		} else stop("text.align must be a character scalar ('left' | 'right' | 'center' | 'justify').")
 	}
@@ -234,7 +234,7 @@ chprop.parProperties <- function(object, text.align
 
 	if( !missing( list.style ) ){
 		if( is.character( list.style ) ) {
-			match.arg( list.style, choices = c('none', 'ordered', 'unordered', 'blockquote'), several.ok = F )
+			match.arg( list.style, choices = c('none', 'ordered', 'unordered', 'blockquote'), several.ok = FALSE )
 			object$list.style = list.style
 		} else stop("list.style must be a character value ('none' | 'ordered' | 'unordered' | 'blockquote').")
 	}

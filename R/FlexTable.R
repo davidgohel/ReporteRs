@@ -109,8 +109,7 @@
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 #' , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
 #' , \code{\link{setFlexTableBackgroundColors}}, \code{\link{pot}}
-#' , \code{\link{addFlexTable.docx}}
-#' , \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.bsdoc}}
+#' , \code{\link{addFlexTable}}
 FlexTable = function(data, numrow, numcol
 	, header.columns = TRUE, add.rownames = FALSE
 	, body.cell.props = cellProperties()
@@ -227,7 +226,7 @@ FlexTable = function(data, numrow, numcol
 		addFlexCellContent (out, seq_len(out$numrow), seq_len(out$numcol)
 				, value = data
 				, textProperties = body.text.props
-				, newpar = F
+				, newpar = FALSE
 				, byrow = FALSE
 		)
 	}

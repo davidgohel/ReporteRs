@@ -2,8 +2,8 @@
 % Please edit documentation in R/ReporteRs.R
 \docType{package}
 \name{ReporteRs-package}
-\alias{ReporteRs}
 \alias{ReporteRs-package}
+\alias{ReporteRs}
 \title{ReporteRs: a package to create document from R}
 \description{
 ReporteRs lets you create Microsoft Word, Microsoft PowerPoint
@@ -14,7 +14,7 @@ To get an r document object:
 \itemize{
   \item \code{\link{docx}} Create a Microsoft Word document object
   \item \code{\link{pptx}} Create a Microsoft PowerPoint document object
-  \item \code{\link{bsdoc}} Create an HTML document object
+  \item \code{\link{bsdoc}} Create an HTML document object (deprecated)
 }
 
 The following functions can be used whatever the output format is (docx, pptx, bsdoc).
@@ -24,7 +24,6 @@ The following functions can be used whatever the output format is (docx, pptx, b
   \item \code{\link{addFlexTable}} Add a table (new)
   \item \code{\link{addPlot}} Add plots
   \item \code{\link{addImage}} Add external images
-  \item \code{\link{addMarkdown}} Add markdown
   \item \code{\link{addParagraph}} Add paragraphs of text
   \item \code{\link{addRScript}} Add an r script
   \item \code{\link{writeDoc}} Write the document into a file or a directory
@@ -38,9 +37,6 @@ as a reference note.
 \code{ReporteRs} comes also with an object of class \code{\link{FlexTable}}
 that let you design and format tabular outputs.
 
-If many text output is needed you may consider using
-function \code{\link{addMarkdown}}.
-
 Default values:
 
 With ReporteRs, some options can be used to reduce usage of some parameters:
@@ -53,9 +49,7 @@ and argument \code{font.family} of \code{\link{pot}}.
 This will be used as default values for argument \code{pointsize} of \code{\link{addPlot}}
 and argument \code{font.size} of \code{\link{pot}}.
 
-\item \code{"ReporteRs-backtick-color"} backtick font color in markdown
-  \item \code{"ReporteRs-backtick-shading-color"} backtick shading color in markdown
-	 \item \code{"ReporteRs-list-definition"} see \code{\link{list.settings}}.
+\item \code{"ReporteRs-list-definition"} see \code{\link{list.settings}}.
   \item \code{"ReporteRs-locale.language"} language encoding (for html objects). Default to "en".
   \item \code{"ReporteRs-locale.region"} region encoding (for html objects). Default to "US".
 }

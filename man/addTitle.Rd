@@ -2,9 +2,9 @@
 % Please edit documentation in R/addTitle.R
 \name{addTitle}
 \alias{addTitle}
-\alias{addTitle.bsdoc}
 \alias{addTitle.docx}
 \alias{addTitle.pptx}
+\alias{addTitle.bsdoc}
 \title{Add a title into a document object}
 \usage{
 addTitle(doc, value, ...)
@@ -67,18 +67,6 @@ doc = pptx( title = "title" )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
 doc = addTitle( doc, "Title example 1" )
-
-writeDoc( doc, file = doc.filename )
-
-# Title example for bsdoc -------
-doc.filename = "ex_add_title/example.html"
-
-options( "ReporteRs-fontsize" = 11 )
-doc = bsdoc( )
-
-doc = addTitle( doc, "Title example 1", level = 1 )
-
-doc = addTitle( doc, "Title example 2", level = 1 )
 
 writeDoc( doc, file = doc.filename )
 }

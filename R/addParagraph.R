@@ -108,21 +108,6 @@ addParagraph.docx <- function(doc, value, stylename, bookmark,
 
 
 
-#' @examples
-#'
-#' # bsdoc example ---------
-#' doc.filename = "ex_paragraph/example.html"
-#' @example examples/bsdoc.R
-#' @example examples/addTitle1Level1.R
-#' @example examples/addParagraph_hello_nostylename.R
-#' @example examples/addTitle2Level1.R
-#' @example examples/pot1_example.R
-#' @example examples/pot2_example.R
-#' @example examples/set_of_paragraphs_example.R
-#' @example examples/addParagraph_sop_nostylename.R
-#' @example examples/addTitle3Level1.R
-#' @example examples/lists_doc.R
-#' @example examples/writeDoc_file.R
 #' @rdname addParagraph
 #' @export
 addParagraph.bsdoc <- function(doc, value,

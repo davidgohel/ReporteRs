@@ -18,10 +18,9 @@ a document object
 Insert a footer into a document object
 }
 \details{
-addFooter only works for pptx and bsdoc documents.
+addFooter only works for pptx documents.
 }
 \seealso{
-\code{\link{pptx}}, \code{\link{addFooter.pptx}}
-, \code{\link{bsdoc}}, \code{\link{addFooter.bsdoc}}
+\code{\link{pptx}}
 }
 

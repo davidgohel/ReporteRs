@@ -30,7 +30,7 @@
 #' @export
 addHeaderRow = function( x, value, colspan,
 		text.properties, par.properties, cell.properties,
-		first = F ){
+		first = FALSE ){
 
 	if( !inherits(x, c("FlexTable") ) )
 		stop("x must be a FlexTable object.")
@@ -150,7 +150,8 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #'
 #' @description add text or format a FlexTable object.
 #'
-#' @usage \method{[}{FlexTable} (x, i, j, text.properties, newpar = F, byrow = FALSE, to = "body", side = "top") <- value
+#' @usage \method{[}{FlexTable} (x, i, j, text.properties,
+#'   newpar = FALSE, byrow = FALSE, to = "body", side = "top") <- value
 #' @param x the \code{FlexTable} object
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection.
 #' @param j vector (integer index, col.names values or boolean vector) for columns selection.
@@ -215,7 +216,7 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @rdname FlexTable-alter
 #' @aliases alterFlexTable
 #' @export
-"[<-.FlexTable" = function( x, i, j, text.properties, newpar = F, byrow = FALSE,
+"[<-.FlexTable" = function( x, i, j, text.properties, newpar = FALSE, byrow = FALSE,
 		to = "body", side = "top", value ){
 
 	args.get.indexes = list(object = x)
@@ -684,12 +685,12 @@ spanFlexTableColumns = function (object, i, from, to, runs ){
 			} ) )
 		if( sum( weights ) != object$numcol )
 			stop("column spanning not possible, runs has wrong dimension")
-		object$colspan[rowid, ] = matrix( rep( weights, each = length(rowid)), nrow = length(rowid), byrow = F )
+		object$colspan[rowid, ] = matrix( rep( weights, each = length(rowid)), nrow = length(rowid), byrow = FALSE )
 	} else if( missing( from ) || missing( to ) ) {
 		stop("argument from and to cannot be missing.")
 	} else {
 		.seq = seq( from, to, by = 1 )
-		object$colspan[rowid, .seq] = t( apply( object$colspan[rowid, , drop = F], 1 , function( x, .seq ){
+		object$colspan[rowid, .seq] = t( apply( object$colspan[rowid, , drop = FALSE], 1 , function( x, .seq ){
 				x[.seq] = c( length(.seq), integer(length(.seq) - 1) )
 			}, .seq = .seq ) )
 	}

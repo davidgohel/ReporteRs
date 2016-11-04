@@ -85,14 +85,6 @@ addTitle.pptx = function( doc, value, ... ) {
 
 #' @param id \code{character} single and unique value to use as
 #' title id when doc is \code{bsdoc}.
-#' @examples
-#'
-#' # Title example for bsdoc -------
-#' doc.filename = "ex_add_title/example.html"
-#' @example examples/bsdoc.R
-#' @example examples/addTitle1Level1.R
-#' @example examples/addTitle2Level1.R
-#' @example examples/writeDoc_file.R
 #' @rdname addTitle
 #' @export
 addTitle.bsdoc = function( doc, value, level = 1, id, ... ) {

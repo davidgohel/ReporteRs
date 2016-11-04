@@ -42,8 +42,7 @@ pot2 = pot("Cats", textProperties(color = "red" ) ) +
     hyperlink = "http://www.wikipedia.org/" )
 }
 \seealso{
-\code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}},
- \code{\link{addParagraph.bsdoc}}, \code{\link{Footnote}}
+\code{\link{addParagraph}}, \code{\link{Footnote}}
 , \code{\link{+.pot}}
 }
 

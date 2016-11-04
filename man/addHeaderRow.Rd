@@ -5,7 +5,7 @@
 \title{add header in a FlexTable}
 \usage{
 addHeaderRow(x, value, colspan, text.properties, par.properties,
-  cell.properties, first = F)
+  cell.properties, first = FALSE)
 }
 \arguments{
 \item{x}{a \code{FlexTable} object}

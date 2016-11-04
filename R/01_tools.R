@@ -42,10 +42,11 @@
 		parset = .jnew( class.ParagraphSet, .jParProperties(par.properties) )
 	else parset = .jnew( class.ParagraphSet )
 
-	for( pot_index in 1:length( value ) ){
+	for( pot_index in seq_len(length(value)) ){
 		paragrah = .jnew(class.Paragraph )
 		pot_value = value[[pot_index]]
-		for( i in 1:length(pot_value)){
+
+		for( i in seq_len(length(pot_value))){
 			current_value = pot_value[[i]]
 			if( !is.null( current_value$jimg )){
 				.jcall( paragrah, "V", "addImage", current_value$jimg )
@@ -111,12 +112,12 @@ plotSlideLayout = function( doc, layout.name ){
 	dimensions = .jcall( doc$obj, "[I", "readSlideDimensions" )
 
 	content_dims = matrix( .jcall( layout_description, "[I", "getContentDimensions" ),
-		ncol = 4, byrow = T,
+		ncol = 4, byrow = TRUE,
 		dimnames = list(NULL, c( "offxs", "offys", "widths", "heights" ) )
 	)
 
 	header_dims = matrix( .jcall( layout_description, "[I", "getHeaderDimensions" ),
-		ncol = 5, byrow = T,
+		ncol = 5, byrow = TRUE,
 		dimnames = list(NULL, c( "name", "offxs", "offys", "widths", "heights") )
 	)
 
@@ -127,7 +128,7 @@ plotSlideLayout = function( doc, layout.name ){
 	} else header_names = character(0)
 
 	if( nrow(content_dims) > 0 )
-		body_names = paste("BODY", sprintf("%02.0f", 1:nrow(content_dims) ) )
+		body_names = paste("BODY", sprintf("%02.0f", seq_len(nrow(content_dims)) ) )
 	else body_names = character(0)
 
 	polygons_info = rbind( header_dims[, -1], content_dims )
@@ -145,7 +146,7 @@ plotSlideLayout = function( doc, layout.name ){
 	y = as.vector( apply( positions, 1, function( x ) c( x[4], x[3], x[3], x[4], NA ) ) )
 
 	graphics::plot( x = c(0, dimensions[1]) , y = c(0, dimensions[2]),
-			type = "n", axes = F,
+			type = "n", axes = FALSE,
 			xaxs = "i", yaxs = "i",
 			xlab = "", ylab = "", main = "" )
 	graphics::box()
@@ -254,7 +255,8 @@ get.pots.from.script = function( file, text
 				x = x[ order(x[,2] ), ]
 				out = pot("", format=default.properties)
 				last_pos = 0
-				for(i in 1:nrow(x) ){
+
+				for(i in seq_len(nrow(x)) ){
 					if( x[i,2] != (last_pos + 1) ){
 						.size = x[i,2] - (last_pos + 1)
 						out = out + pot( paste( rep( " ", .size ), collapse = "" ), format=default.properties)

@@ -18,12 +18,6 @@
 #' @details
 #' You can configure backtick rendering (single or double backtick) with
 #' options "ReporteRs-backtick-color" and "ReporteRs-backtick-shading-color".
-#' @examples
-#' doc.filename = "addMarkdown_example.docx"
-#' @example examples/docx.R
-#' @example examples/addMarkdown.R
-#' @example examples/writeDoc_file.R
-#' @seealso \code{\link{docx}}, \code{\link{addMarkdown}}
 #' @export
 addMarkdown.docx = function(doc, file, text,
 	text.properties = textProperties( font.size = getOption("ReporteRs-fontsize") ),

@@ -20,7 +20,6 @@
 #'   \item \code{\link{addTitle.pptx}} add titles
 #'   \item \code{\link{addParagraph.pptx}} add text
 #'   \item \code{\link{addPlot.pptx}} add plots
-#'   \item \code{\link{addMarkdown.pptx}} add markdown
 #'   \item \code{\link{addFlexTable.pptx}} add \code{\link{FlexTable}}
 #'   \item \code{\link{addDate.pptx}} add a date (most often in the bottom left area of the slide)
 #'   \item \code{\link{addFooter.pptx}} add a comment in the footer (most often in the bottom center area of the slide)
@@ -39,7 +38,7 @@
 #'
 #' @example examples/pptx_example.R
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{bsdoc}}
+#' @seealso \code{\link{docx}}
 pptx = function( title, template, list.definition = getOption("ReporteRs-list-definition")){
 
 	# title mngt

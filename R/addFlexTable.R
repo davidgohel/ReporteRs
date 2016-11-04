@@ -16,7 +16,7 @@
 #' ft_obj <- vanilla.table(mtcars)
 #'
 #' @seealso \code{\link{FlexTable}}, \code{\link{docx}}
-#' , \code{\link{pptx}}, \code{\link{bsdoc}}
+#' , \code{\link{pptx}}
 addFlexTable = function(doc, flextable, ...){
 
   checkHasSlide(doc)
@@ -54,13 +54,6 @@ addFlexTable.docx = function(doc, flextable
 }
 
 
-#' @examples
-#' # bsdoc example -----
-#' doc = bsdoc( )
-#' doc = addFlexTable( doc, flextable = ft_obj )
-#' writeDoc( doc, file = "add_ft_ex/index.html" )
-#'
-#'
 #' @rdname addFlexTable
 #' @export
 addFlexTable.bsdoc = function(doc, flextable,

@@ -2,34 +2,28 @@
 % Please edit documentation in R/addPlot.R
 \name{addPlot}
 \alias{addPlot}
-\alias{addPlot.bsdoc}
 \alias{addPlot.docx}
 \alias{addPlot.pptx}
+\alias{addPlot.bsdoc}
 \title{Add a plot into a document object}
 \usage{
-addPlot(doc, fun, pointsize = 12, vector.graphic = F, ...)
+addPlot(doc, fun, pointsize = 12, vector.graphic = FALSE, ...)
 
 \method{addPlot}{docx}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
   vector.graphic = FALSE, width = 6, height = 6,
-  fontname = getOption("ReporteRs-default-font"),
   fontname_serif = "Times New Roman", fontname_sans = "Calibri",
   fontname_mono = "Courier New", fontname_symbol = "Symbol",
   editable = TRUE, bookmark, par.properties = parProperties(text.align =
   "center", padding = 5), bg = "transparent", ...)
 
 \method{addPlot}{pptx}(doc, fun, pointsize = 11, vector.graphic = TRUE,
-  fontname = getOption("ReporteRs-default-font"),
   fontname_serif = "Times New Roman", fontname_sans = "Calibri",
   fontname_mono = "Courier New", fontname_symbol = "Symbol",
   editable = TRUE, offx, offy, width, height, bg = "transparent", ...)
 
 \method{addPlot}{bsdoc}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
-  vector.graphic = T, width = 6, height = 6,
-  fontname = getOption("ReporteRs-default-font"),
-  fontname_serif = "Times New Roman", fontname_sans = "Calibri",
-  fontname_mono = "Courier New", fontname_symbol = "Symbol",
-  tooltip_extra_css, hover_css, par.properties = parCenter(padding = 5),
-  bg = "transparent", ggiraph = FALSE, ...)
+  vector.graphic = FALSE, width = 6, height = 6,
+  par.properties = parCenter(padding = 5), bg = "transparent", ...)
 }
 \arguments{
 \item{doc}{document object}
@@ -50,8 +44,6 @@ produced instead, PNG images if FALSE.}
 
 \item{height}{plot height in inches (default value is 6).}
 
-\item{fontname}{deprecated. the default font family to use, default to getOption("ReporteRs-default-font").}
-
 \item{fontname_serif, fontname_sans, fontname_mono, fontname_symbol}{font
 names for font faces. Use fonts available on operating system.}
 
@@ -69,14 +61,6 @@ An object of class \code{\link{parProperties}}}
 \item{bg}{the initial background colour.}
 
 \item{offx, offy}{optional. x and y position of the shape (left top position of the bounding box) in inches. See details.}
-
-\item{tooltip_extra_css}{extra css (added to \code{position: absolute;pointer-events: none;})
-used to customize tooltip area. Only used when \code{ggiraph} is TRUE.}
-
-\item{hover_css}{css to apply when mouse is hover and element with a
-data-id attribute. Only used when \code{ggiraph} is TRUE.}
-
-\item{ggiraph}{boolean must be TRUE if graphic is made with package \code{ggiraph}.}
 }
 \value{
 a document object
@@ -105,11 +89,6 @@ the \code{pptx} object.
 
 If arguments offx, offy, width, height are provided, they become position and
 dimensions of the new shape.
-
-When document is a \code{bsdoc} object, ggplot2 objects made with ggiraph
-can be integrated. It will require to set \code{ggiraph} to TRUE
-and to add d3.js script in the bsdoc before adding ggiraph object.
-See example below.
 }
 \examples{
 
@@ -146,35 +125,6 @@ if( !is_sunos ){
 
 writeDoc( doc, file = "ex_plot.pptx" )
 
-
-
-# plot example for bsdoc -----
-
-doc = bsdoc( )
-
-doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
-  vector.graphic = TRUE, width = 5, height = 7,
-  par.properties = parProperties(text.align = "left")
-  )
-
-writeDoc( doc, file = "ex_plot/example.html" )
-
-\dontrun{
-if(require(ggiraph)){
-gg_p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width,
-    tooltip = Species)) +
-  geom_point_interactive(size = 3)
-
-doc <- bsdoc()
-download.file("https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js",
-  destfile = "d3.min.js")
-doc <- addJavascript(doc = doc, file = "d3.min.js" )
-unlink("d3.min.js")
-doc <- addPlot(doc, fun = function() print(gg_p), ggiraph = TRUE)
-
-writeDoc(doc, "ggiraph/index.html")
-}
-}
 
 }
 \seealso{

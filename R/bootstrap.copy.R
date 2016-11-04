@@ -9,13 +9,13 @@ bootstrap.copy = function ( www.directory, package.name ){
 
 
 	if( !file.exists( css_to ) ){
-		file.copy( from = css_from, to = www.directory,  overwrite = T, recursive = T )
+		file.copy( from = css_from, to = www.directory,  overwrite = TRUE, recursive = TRUE )
 	}
 	if( !file.exists( js_to ) ){
-		file.copy( from = js_from, to = www.directory,  overwrite = T, recursive = T )
+		file.copy( from = js_from, to = www.directory,  overwrite = TRUE, recursive = TRUE )
 	}
 	if( !file.exists( fonts_to ) ){
-		file.copy( from = fonts_from, to = www.directory,  overwrite = T, recursive = T )
+		file.copy( from = fonts_from, to = www.directory,  overwrite = TRUE, recursive = TRUE )
 	}
 	invisible()
 }

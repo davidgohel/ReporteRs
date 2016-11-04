@@ -6,33 +6,13 @@
 #' @param ... further arguments passed to other methods
 #' @return a document object
 #' @details
-#' addFooter only works for pptx and bsdoc documents.
+#' addFooter only works for pptx documents.
 #' @export
-#' @seealso \code{\link{pptx}}, \code{\link{addFooter.pptx}}
-#' , \code{\link{bsdoc}}, \code{\link{addFooter.bsdoc}}
-addFooter = function(doc, ...){
+#' @seealso \code{\link{pptx}}
+addFooter <- function(doc, ...){
 	checkHasSlide(doc)
 	UseMethod("addFooter")
 }
-
-
-
-#' @title Add an iframe into a document object
-#'
-#' @description Add an iframe into a document object
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @export
-#' @seealso \code{\link{addIframe.bsdoc}}
-addIframe = function(doc, ...){
-	checkHasSlide(doc)
-	UseMethod("addIframe")
-}
-
-
-
 
 
 
@@ -47,19 +27,22 @@ addIframe = function(doc, ...){
 #' available. Pandoc footnotes have been added (see
 #' \url{http://johnmacfarlane.net/pandoc/README.html#footnotes}.
 #'
+#' @note
+#' This function is deprecated.
+#'
 #' @param doc document object
 #' @param file markdown file. Not used if text is provided.
 #' @param text character vector. The markdown to parse.
 #' @param ... further arguments passed to other methods
 #' @return a document object
+#' @note
+#' This function is deprecated.
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{addMarkdown.docx}}
-#' , \code{\link{bsdoc}}, \code{\link{addMarkdown.bsdoc}}
-#' , \code{\link{pptx}}, \code{\link{addMarkdown.pptx}}
-addMarkdown = function(doc, file, text, ...){
-	if( missing( file ) && missing( text ) )
-		stop("need a markdown file or text argument.")
-	UseMethod("addMarkdown")
+addMarkdown <- function(doc, file, text, ...){
+  .Deprecated(msg = "addMarkdown function will be deleted in the next release.")
+  if( missing( file ) && missing( text ) )
+    stop("need a markdown file or text argument.")
+  UseMethod("addMarkdown")
 }
 
 
@@ -76,7 +59,7 @@ addMarkdown = function(doc, file, text, ...){
 #' See \code{\link{addPageNumber.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addPageNumber.pptx}}
-addPageNumber = function(doc, ...){
+addPageNumber <- function(doc, ...){
 	checkHasSlide(doc)
 	UseMethod("addPageNumber")
 }
@@ -94,7 +77,7 @@ addPageNumber = function(doc, ...){
 #' \code{addSubtitle} only works with pptx documents. See \code{\link{addSubtitle.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addSubtitle.pptx}}
-addSubtitle = function(doc, ...){
+addSubtitle <- function(doc, ...){
 	checkHasSlide(doc)
 	UseMethod("addSubtitle")
 }
@@ -114,7 +97,7 @@ addSubtitle = function(doc, ...){
 #' See \code{\link{toc.options.docx}} for examples.
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}
-toc.options = function(doc, ...){
+toc.options <- function(doc, ...){
 	UseMethod("toc.options")
 }
 
@@ -131,7 +114,7 @@ toc.options = function(doc, ...){
 #' @export
 #' @seealso \code{\link{cellProperties}}, \code{\link{textProperties}}
 #' , \code{\link{parProperties}}
-chprop = function( object, ... ){
+chprop <- function( object, ... ){
 	UseMethod("chprop")
 }
 
@@ -146,7 +129,7 @@ chprop = function( object, ... ){
 #' See \code{\link{FlexTable}} for examples.
 #' @export
 #' @seealso \code{\link{FlexTable}}
-as.html = function( object, ... ){
+as.html <- function( object, ... ){
 	UseMethod("as.html")
 }
 
@@ -160,7 +143,7 @@ as.html = function( object, ... ){
 #' @return a \code{\link{FlexTable}} object
 #' @export
 #' @seealso \code{\link{FlexTable}}
-as.FlexTable = function( x, ... ){
+as.FlexTable <- function( x, ... ){
 	UseMethod("as.FlexTable")
 }
 
@@ -178,7 +161,7 @@ as.FlexTable = function( x, ... ){
 #' @export
 #' @seealso \code{\link{docx}}, \code{\link{styles.docx}}
 #' , \code{\link{declareTitlesStyles.docx}}, \code{\link{addTOC.docx}}
-declareTitlesStyles = function(doc, ...){
+declareTitlesStyles <- function(doc, ...){
 	UseMethod("declareTitlesStyles")
 }
 
@@ -192,7 +175,7 @@ declareTitlesStyles = function(doc, ...){
 #' \code{slide.layouts} only works with pptx documents. See \code{\link{slide.layouts.pptx}} for examples.
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{slide.layouts.pptx}}, \code{\link{addSlide.pptx}}
-slide.layouts = function(doc, ...){
+slide.layouts <- function(doc, ...){
 	UseMethod("slide.layouts")
 }
 

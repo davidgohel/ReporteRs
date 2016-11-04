@@ -288,7 +288,6 @@ iris_ft = setFlexTableBorders( iris_ft,
 , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}
 , \code{\link{setRowsColors}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
 , \code{\link{setFlexTableBackgroundColors}}, \code{\link{pot}}
-, \code{\link{addFlexTable.docx}}
-, \code{\link{addFlexTable.pptx}}, \code{\link{addFlexTable.bsdoc}}
+, \code{\link{addFlexTable}}
 }
 

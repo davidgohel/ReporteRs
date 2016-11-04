@@ -19,8 +19,7 @@
 #' #
 #' @example examples/pot1_example.R
 #' @example examples/pot2_example.R
-#' @seealso \code{\link{addParagraph.docx}}, \code{\link{addParagraph.pptx}},
-#'  \code{\link{addParagraph.bsdoc}}, \code{\link{Footnote}}
+#' @seealso \code{\link{addParagraph}}, \code{\link{Footnote}}
 #' , \code{\link{+.pot}}
 pot = function( value ="", format = textProperties(), hyperlink, footnote ){
 
@@ -205,7 +204,7 @@ knit_print.pot<- function(x, ...){
 	}
 	paragrah = .jnew(class.Paragraph)
 	if( !missing( object ) )
-		for( i in 1:length(object)){
+		for( i in seq_len(length(object))){
 			current_value = object[[i]]
 			if( !is.null( current_value$jimg )){
 				.jcall( paragrah, "V", "addImage", current_value$jimg )

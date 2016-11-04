@@ -94,13 +94,6 @@ addRScript.pptx = function(doc, rscript, file, text, append = FALSE, ... ) {
 }
 
 
-#' @examples
-#'
-#' # bsdoc example -----------
-#' doc.filename = "ex_rscript/example.html"
-#' @example examples/bsdoc.R
-#' @example examples/addRScript.R
-#' @example examples/writeDoc_file.R
 #' @rdname addRScript
 #' @export
 addRScript.bsdoc = function(doc, rscript, file, text, ...) {

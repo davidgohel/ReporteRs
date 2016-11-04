@@ -2,8 +2,8 @@
 % Please edit documentation in R/addTOC.R
 \name{addTOC}
 \alias{addTOC}
-\alias{addTOC.bsdoc}
 \alias{addTOC.docx}
+\alias{addTOC.bsdoc}
 \title{Add a table of contents into a document object}
 \usage{
 addTOC(doc, ...)
@@ -34,11 +34,6 @@ If stylename is not used, a classical table of content will be produced.\cr
 If stylename is used, a custom table of contents will be produced,
 pointing to entries that have been formated with \code{stylename}.
 For example, this can be used to produce a toc with only plots.
-
-When working with \code{bsdoc} object:
-
-Table of contents will be added on the right side
-of the content.
 }
 \examples{
 
@@ -90,23 +85,6 @@ doc = addTOC(doc, stylename = "rPlotLegend")
 
 # Write the object in file "addTOC_example2.docx"
 writeDoc( doc, "addTOC_example2.docx" )
-doc.filename = "addTOC_example/example.html"
-
-options( "ReporteRs-fontsize" = 11 )
-doc = bsdoc( )
-doc = addTitle( doc, 'Title 1', level = 1 )
-
-doc = addTitle( doc, 'Title 2', level = 1 )
-
-doc = addTitle( doc, 'Title 3', level = 1 )
-
-doc = addTitle( doc, 'Title A', level = 2 )
-
-doc = addTitle( doc, 'Title B', level = 2 )
-
-doc = addTOC( doc )
-
-writeDoc( doc, file = doc.filename )
 }
 \seealso{
 \code{\link{docx}}, \code{\link{bsdoc}}, \code{\link{styles}},

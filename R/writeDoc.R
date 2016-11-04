@@ -5,11 +5,6 @@
 #' @param doc document object
 #' @param file single character value, name of the html file to write.
 #' @param ... unused
-#' @details
-#'
-#' When the document object is a \code{\link{bsdoc}} object, \code{writeDoc} is
-#' considering the directory where 'html' file is written. Bootstrap files (css, js, etc.)
-#' will be copied in the directory if directory does not exist.
 #'
 #' @export
 #' @examples
@@ -20,9 +15,7 @@
 #' doc <- addSlide(doc, "Title and Content")
 #' writeDoc( doc, "ex_write_doc.pptx")
 #'
-#' doc <- bsdoc()
-#' writeDoc( doc, "ex_write_doc/index.html")
-#' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
+#' @seealso \code{\link{docx}}, \code{\link{pptx}}
 writeDoc = function(doc, ...){
   UseMethod("writeDoc")
 }
@@ -39,12 +32,12 @@ writeDoc.docx = function(doc, file, ...) {
   if( .reg < 1 )
     stop(file , " is not a valid file.")
 
-  file = normalizePath( path.expand(file) , mustWork=F, winslash="/")
+  file = normalizePath( path.expand(file) , mustWork=FALSE, winslash="/")
 
   if( !tryCatch( {
     cat("", file = file)
-    T
-  }, error = function( e ) F, warning = function ( e ) F , finally = T) )
+    TRUE
+  }, error = function( e ) FALSE, warning = function ( e ) FALSE , finally = TRUE) )
     stop("writeDoc: Cannot write to ", file)
 
   .jcall( doc$obj , "V", "writeDocxToStream", file )
@@ -63,11 +56,11 @@ writeDoc.pptx = function(doc, file, ...) {
   if( .reg < 1 )
     stop(file , " is not a valid file.")
 
-  file = normalizePath( path.expand(file) , mustWork=F, winslash="/")
+  file = normalizePath( path.expand(file) , mustWork=FALSE, winslash="/")
   if( !tryCatch( {
     cat("", file = file)
-    T
-  }, error = function( e ) F, warning = function ( e ) F , finally = T) )
+    TRUE
+  }, error = function( e ) FALSE, warning = function ( e ) FALSE , finally = TRUE) )
     stop("writeDoc: Cannot write to ", file)
   out = .jcall( doc$obj , "I", "writePptxToStream", file )
 
@@ -88,12 +81,12 @@ writeDoc.bsdoc = function(doc, file, ...) {
 	if( .reg < 1 )
 		stop(file , " is not a valid file.")
 
-	file = normalizePath( path.expand(file) , mustWork=F, winslash="/")
+	file = normalizePath( path.expand(file) , mustWork=FALSE, winslash="/")
 
 	www.directory = dirname( file )
 
 	if( !file.exists( www.directory ) ){
-		dir.create( www.directory, recursive = T )
+		dir.create( www.directory, recursive = TRUE )
 	}
 
 	bootstrap.copy( www.directory, "ReporteRs")

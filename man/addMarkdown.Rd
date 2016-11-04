@@ -28,9 +28,9 @@ Images are not available as \code{addImage} or \code{addPlot} is
 available. Pandoc footnotes have been added (see
 \url{http://johnmacfarlane.net/pandoc/README.html#footnotes}.
 }
-\seealso{
-\code{\link{docx}}, \code{\link{addMarkdown.docx}}
-, \code{\link{bsdoc}}, \code{\link{addMarkdown.bsdoc}}
-, \code{\link{pptx}}, \code{\link{addMarkdown.pptx}}
+\note{
+This function is deprecated.
+
+This function is deprecated.
 }
 

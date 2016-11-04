@@ -2,8 +2,7 @@
 #'
 #' @description
 #' A footnote is a a set of paragraphs placed at the bottom of a page if
-#' document object is a \code{\link{docx}} object or used as a tooltip
-#' if document object is an \code{\link{bsdoc}} object.
+#' document object is a \code{\link{docx}} object.
 #'
 #' If in a \code{docx} object, footnote will be flagged by a number immediately
 #' following the portion of the text the note is in reference to.
@@ -14,8 +13,7 @@
 #' @examples
 #'
 #' @example examples/FootnoteDocxExample.R
-#' @example examples/FootnoteHTMLExample.R
-#' @seealso \code{\link{docx}}, \code{\link{bsdoc}}, \code{\link{pot}}
+#' @seealso \code{\link{docx}}, \code{\link{pot}}
 #' @export
 Footnote = function( index.text.properties = textProperties(vertical.align = "superscript") ) {
 
@@ -79,7 +77,8 @@ addParagraph.Footnote = function( doc, value, par.properties = parProperties(), 
 	}
 	footnote = .jnew( class.Footnote, .jTextProperties(object$text.properties) )
 	values = object$values
-	for( index in 1:length( values ) ){
+
+	for( index in seq_len(length( values )) ){
 
 		if( inherits( values[[index]]$value , "RScript") ){
 			.jcall( footnote, "V", "addParagraph" , values[[index]]$value$jobj )

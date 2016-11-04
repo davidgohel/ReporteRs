@@ -22,15 +22,6 @@ test_that("docx extension must be docx", {
   expect_is( res, "try-error" )
 })
 
-test_that("bsdoc extension must be html", {
-  doc <- bsdoc( )
-  res <- try( writeDoc(doc, "doc_3/index.html"), silent = TRUE )
-  expect_null( res )
-
-  doc <- bsdoc( )
-  res <- try( writeDoc(doc, "doc_3/index.htmll"), silent = TRUE )
-  expect_is( res, "try-error" )
-})
 
 unlink(list.files(pattern = "^doc_"), force = TRUE, recursive = TRUE)
 

@@ -5,7 +5,8 @@
 \alias{alterFlexTable}
 \title{alter FlexTable content and format}
 \usage{
-\method{[}{FlexTable} (x, i, j, text.properties, newpar = F, byrow = FALSE, to = "body", side = "top") <- value
+\method{[}{FlexTable} (x, i, j, text.properties,
+  newpar = FALSE, byrow = FALSE, to = "body", side = "top") <- value
 }
 \arguments{
 \item{x}{the \code{FlexTable} object}

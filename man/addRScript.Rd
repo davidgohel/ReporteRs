@@ -2,9 +2,9 @@
 % Please edit documentation in R/addRScript.R
 \name{addRScript}
 \alias{addRScript}
-\alias{addRScript.bsdoc}
 \alias{addRScript.docx}
 \alias{addRScript.pptx}
+\alias{addRScript.bsdoc}
 \title{Add R script into a document object}
 \usage{
 addRScript(doc, rscript, file, text, ...)
@@ -72,16 +72,6 @@ doc = pptx( title = "title" )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
 doc = addTitle( doc, "Title example 1" )
-doc = addRScript(doc, text = "x = rnorm(100)
-plot(density( x ) )" )
-
-writeDoc( doc, file = doc.filename )
-
-# bsdoc example -----------
-doc.filename = "ex_rscript/example.html"
-
-options( "ReporteRs-fontsize" = 11 )
-doc = bsdoc( )
 doc = addRScript(doc, text = "x = rnorm(100)
 plot(density( x ) )" )
 

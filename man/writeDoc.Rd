@@ -2,9 +2,9 @@
 % Please edit documentation in R/writeDoc.R
 \name{writeDoc}
 \alias{writeDoc}
-\alias{writeDoc.bsdoc}
 \alias{writeDoc.docx}
 \alias{writeDoc.pptx}
+\alias{writeDoc.bsdoc}
 \title{Write a document object}
 \usage{
 writeDoc(doc, ...)
@@ -25,11 +25,6 @@ writeDoc(doc, ...)
 \description{
 Write a document object into a file
 }
-\details{
-When the document object is a \code{\link{bsdoc}} object, \code{writeDoc} is
-considering the directory where 'html' file is written. Bootstrap files (css, js, etc.)
-will be copied in the directory if directory does not exist.
-}
 \examples{
 doc <- docx()
 writeDoc( doc, "ex_write_doc.docx")
@@ -38,10 +33,8 @@ doc <- pptx()
 doc <- addSlide(doc, "Title and Content")
 writeDoc( doc, "ex_write_doc.pptx")
 
-doc <- bsdoc()
-writeDoc( doc, "ex_write_doc/index.html")
 }
 \seealso{
-\code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
+\code{\link{docx}}, \code{\link{pptx}}
 }
 

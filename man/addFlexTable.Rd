@@ -2,8 +2,8 @@
 % Please edit documentation in R/addFlexTable.R
 \name{addFlexTable}
 \alias{addFlexTable}
-\alias{addFlexTable.bsdoc}
 \alias{addFlexTable.docx}
+\alias{addFlexTable.bsdoc}
 \alias{addFlexTable.pptx}
 \title{Insert a FlexTable into a document object}
 \usage{
@@ -72,12 +72,6 @@ writeDoc( doc, file = "add_ft_ex.docx" )
 
 
 # bsdoc example -----
-doc = bsdoc( )
-doc = addFlexTable( doc, flextable = ft_obj )
-writeDoc( doc, file = "add_ft_ex/index.html" )
-
-
-# bsdoc example -----
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addFlexTable( doc, flextable = ft_obj )
@@ -87,6 +81,6 @@ writeDoc( doc, file = "add_ft_ex.pptx" )
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{docx}}
-, \code{\link{pptx}}, \code{\link{bsdoc}}
+, \code{\link{pptx}}
 }
 

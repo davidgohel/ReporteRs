@@ -2,8 +2,8 @@
 % Please edit documentation in R/addImage.R
 \name{addImage}
 \alias{addImage}
-\alias{addImage.bsdoc}
 \alias{addImage.docx}
+\alias{addImage.bsdoc}
 \alias{addImage.pptx}
 \title{Add an external image into a document object}
 \usage{

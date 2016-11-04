@@ -1,8 +1,8 @@
-addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, byrow = FALSE){
-	
+addFlexCellContent = function (object, i, j, value, textProperties, newpar = FALSE, byrow = FALSE){
+
 	if( !inherits(textProperties, "textProperties") )
 		stop("argument textProperties must be a textProperties object.")
-	
+
 	jtext.properties = .jTextProperties( textProperties )
 
 	if( byrow ){
@@ -19,23 +19,23 @@ addFlexCellContent = function (object, i, j, value, textProperties, newpar = F, 
 				, .jarray( as.integer( j - 1 ) )
 				, .jarray( t( get.formatted.dataset( value ) ) )
 				, jtext.properties
-				, as.logical(newpar) 
+				, as.logical(newpar)
 		)
 	}
 	object
 }
 
 
-addContentToMetaRows = function (object, i, j, value, to, textProperties, newpar = F, byrow = FALSE){
-	
+addContentToMetaRows = function (object, i, j, value, to, textProperties, newpar = FALSE, byrow = FALSE){
+
 	if( !inherits(textProperties, "textProperties") )
 		stop("argument textProperties must be a textProperties object.")
-	
+
 	jtext.properties = .jTextProperties( textProperties )
 	if( to == "header" )
 		metarows = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
 	else metarows = .jcall( object$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
-	
+
 	if( byrow ){
 		.jcall( metarows, "V", "add"
 				, .jarray( as.integer( i - 1 ) )
@@ -50,7 +50,7 @@ addContentToMetaRows = function (object, i, j, value, to, textProperties, newpar
 				, .jarray( as.integer( j - 1 ) )
 				, .jarray( t( get.formatted.dataset( value ) ) )
 				, jtext.properties
-				, as.logical(newpar) 
+				, as.logical(newpar)
 		)
 	}
 	object
@@ -59,9 +59,9 @@ addContentToMetaRows = function (object, i, j, value, to, textProperties, newpar
 
 
 addFlexBodyPot = function( x, i, j, value, newpar ){
-	
+
 	.jcall( x$jobj, "V", "addBodyText"
-			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
+			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ),
 			.jpot( value ), as.logical(newpar)  )
 	x
 }
@@ -70,7 +70,7 @@ addPotToMetaRows = function( x, i, j, value, to, newpar ){
 		metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getHeader" )
 	else metarows = .jcall( x$jobj, "Lorg/lysis/reporters/tables/MetaRows;", "getFooter" )
 	.jcall( metarows, "V", "add"
-			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ), 
+			, .jarray( as.integer( i-1 ) ), .jarray( as.integer( j-1 ) ),
 			.jpot( value ), as.logical(newpar)  )
 	x
 }

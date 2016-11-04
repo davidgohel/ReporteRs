@@ -56,12 +56,12 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 	} else stop("font.size must be a numeric scalar (point unit).")
 
 	if( is.character( font.weight ) ){
-		match.arg( font.weight, choices = c("normal", "bold", "bolder", "lighter" , as.character( seq(100, 900, by=100 ) ) ), several.ok = F )
+		match.arg( font.weight, choices = c("normal", "bold", "bolder", "lighter" , as.character( seq(100, 900, by=100 ) ) ), several.ok = FALSE )
 		out$font.weight = font.weight
 	} else stop("font.weight must be a character scalar ('normal' | 'bold' | 'bolder' | 'lighter' | '100' | ... | '900').")
 
 	if( is.character( font.style ) ){
-		match.arg( font.style, choices = c("normal", "italic", "oblique" ), several.ok = F )
+		match.arg( font.style, choices = c("normal", "italic", "oblique" ), several.ok = FALSE )
 		out$font.style = font.style
 	} else stop("font.style must be a character scalar ('normal' | 'italic' | 'oblique').")
 
@@ -182,7 +182,7 @@ chprop.textProperties <- function(object, color, font.size
 
 	if( !missing( font.weight) ){
 		if( is.character( font.weight ) ){
-			match.arg( font.weight, choices = c("normal", "bold", "bolder", "lighter" , as.character( seq(100, 900, by=100 ) ) ), several.ok = F )
+			match.arg( font.weight, choices = c("normal", "bold", "bolder", "lighter" , as.character( seq(100, 900, by=100 ) ) ), several.ok = FALSE )
 			object$font.weight = font.weight
 		} else stop("font.weight must be a character scalar ('normal' | 'bold' | 'bolder' | 'lighter' | '100' | ... | '900').")
 	}
@@ -190,7 +190,7 @@ chprop.textProperties <- function(object, color, font.size
 
 	if( !missing( font.style ) ){
 		if( is.character( font.style ) ){
-			match.arg( font.style, choices = c("normal", "italic", "oblique" ), several.ok = F )
+			match.arg( font.style, choices = c("normal", "italic", "oblique" ), several.ok = FALSE )
 			object$font.style = font.style
 		} else stop("font.style must be a character scalar ('normal' | 'italic' | 'oblique').")
 	}
