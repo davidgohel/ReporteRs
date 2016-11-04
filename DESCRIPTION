@@ -25,7 +25,7 @@ Imports:
     grDevices,
     rJava,
     utils,
-    rvg (>= 0.0.8),
+    rvg (>= 0.1.1),
     xml2,
     gdtools,
     png,
@@ -34,9 +34,9 @@ Suggests:
     ggplot2,
     jpeg, bmp,
     testthat, magrittr,
-    rmarkdown, ggiraph
+    rmarkdown
 SystemRequirements: java (>= 1.6)
 URL: http://davidgohel.github.io/ReporteRs/index.html,
     http://groups.google.com/group/reporters-package
 BugReports: https://github.com/davidgohel/ReporteRs/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.1.9000
