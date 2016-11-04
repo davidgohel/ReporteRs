@@ -1,6 +1,6 @@
 Package: ReporteRs
 Type: Package
-Title: Microsoft Word, Microsoft PowerPoint and HTML Documents Generation
+Title: Microsoft Word and PowerPoint Documents Generation
 Version: 0.8.6.9000
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
