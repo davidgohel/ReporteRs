@@ -32,11 +32,12 @@ addCodeBlock = function(doc, file, text, ... ){
 #' @param bookmark Only for \code{docx}. A character value ; id of the Word bookmark to
 #' replace by the script. optional. See \code{\link{bookmark}}.
 #' @examples
+#' \donttest{
 #' # docx example ---------
 #' doc = docx( )
 #' doc <- addCodeBlock( doc, text = cb )
 #' writeDoc( doc, file = "ex_codeblock.docx" )
-#'
+#'}
 #'
 #' @export
 #' @rdname addCodeBlock
@@ -101,11 +102,12 @@ addCodeBlock.bsdoc = function(doc, file, text,
 #' can not add paragraphs after a FlexTable).
 #' @examples
 #' # pptx example ---------
+#' \donttest{
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' doc <- addCodeBlock( doc, text = cb )
 #' writeDoc( doc, file = "ex_codeblock.pptx" )
-#'
+#' }
 #'
 #' @export
 #' @rdname addCodeBlock

@@ -55,18 +55,20 @@ cb <- "ls -a\\nwhich -a ls"
 
 options( "ReporteRs-fontsize" = 11 )
 
+\donttest{
 # docx example ---------
 doc = docx( )
 doc <- addCodeBlock( doc, text = cb )
 writeDoc( doc, file = "ex_codeblock.docx" )
-
+}
 
 # pptx example ---------
+\donttest{
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 doc <- addCodeBlock( doc, text = cb )
 writeDoc( doc, file = "ex_codeblock.pptx" )
-
+}
 
 }
 \seealso{
