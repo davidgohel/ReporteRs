@@ -2,6 +2,9 @@ language: r
 
 sudo: required
 
+r_github_packages:
+ - davidgohel/gdtools
+
 r_packages:
  - covr
 

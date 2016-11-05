@@ -4,10 +4,10 @@ ReporteRs 0.8.7
 Deprectaded function
 ------------------------------------------------------------------
 
-* addMarkdown.pptx has been deleted
-* addMarkdown.docx and addMarkdown.bsdoc are deprecated
 * bsdoc is deprecated. The API has no more reason to be maintained
   as rmarkdown and many other solutions are offering better.
+* addMarkdown.pptx has been deleted
+* addMarkdown.docx and addMarkdown.bsdoc are deprecated
 
 
 DEBUG
