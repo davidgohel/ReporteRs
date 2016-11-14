@@ -255,7 +255,9 @@ addParagraph.pptx <- function(doc, value, offx, offy, width, height,
     if( append ){
       out = .jcall( slide, "I", "append" , parset, as.logical(restart.numbering))
       if( out == 1) stop("append is possible if current shape is a shape containing paragraphs.")
-    } else out = .jcall( slide, "I", "add" , parset, as.logical(restart.numbering))
+    } else {
+      out = .jcall( slide, "I", "add" , parset, as.logical(restart.numbering))
+    }
   }
 
   if( isSlideError( out ) ){

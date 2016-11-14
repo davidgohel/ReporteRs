@@ -105,7 +105,7 @@ if( has_img && has_jpeg ){
     height = dims[1]/72)
 }
 
-writeDoc( doc, file = "ex_add_image/example.html" )
+writeDoc( doc, file = "ex_add_image.html" )
 
 
 # Image example for MS PowerPoint -------

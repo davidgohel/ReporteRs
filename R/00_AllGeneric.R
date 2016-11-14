@@ -16,36 +16,6 @@ addFooter <- function(doc, ...){
 
 
 
-#' @title Add a markdown text or file
-#'
-#' @description Add markdown into a document object
-#'
-#' The markdown definition used is John Gruber documented here:
-#' \url{http://daringfireball.net/projects/markdown/syntax}.
-#'
-#' Images are not available as \code{addImage} or \code{addPlot} is
-#' available. Pandoc footnotes have been added (see
-#' \url{http://johnmacfarlane.net/pandoc/README.html#footnotes}.
-#'
-#' @note
-#' This function is deprecated.
-#'
-#' @param doc document object
-#' @param file markdown file. Not used if text is provided.
-#' @param text character vector. The markdown to parse.
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @note
-#' This function is deprecated.
-#' @export
-addMarkdown <- function(doc, file, text, ...){
-  .Deprecated(msg = "addMarkdown function will be deleted in the next release.")
-  if( missing( file ) && missing( text ) )
-    stop("need a markdown file or text argument.")
-  UseMethod("addMarkdown")
-}
-
-
 #' @title Insert a page number into a document object
 #'
 #' @description Insert a page number into a document object

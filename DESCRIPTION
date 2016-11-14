@@ -1,14 +1,11 @@
 Package: ReporteRs
 Type: Package
 Title: Microsoft Word and PowerPoint Documents Generation
-Version: 0.8.7
+Version: 0.8.7.9000
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
-    email = "david.gohel@lysis-consultants.fr"),
-    person("Bootstrap", role = c("ctb", "cph"),
-    comment = "Bootstrap development team"),
-    person("jQuery", role = c("ctb", "cph"),
-    comment = "The jQuery Foundation") )
+    email = "david.gohel@lysis-consultants.fr")
+    )
 Description: Create 'Microsoft Word' document (>=2007),
     'Microsoft PowerPoint' document (>=2007) and 'HTML' documents from R. There are
     several features to let you format and present R outputs ; e.g. Editable
@@ -17,7 +14,6 @@ Description: Create 'Microsoft Word' document (>=2007),
     and as a tool for reporting automation. The package does not require
     any installation of Microsoft product to be able to write Microsoft files.
 License: GPL-3
-Copyright: See file COPYRIGHTS.
 Depends:
     R (>= 3.0),
     ReporteRsjars (>= 0.0.2)

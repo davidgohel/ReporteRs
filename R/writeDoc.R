@@ -83,14 +83,6 @@ writeDoc.bsdoc = function(doc, file, ...) {
 
 	file = normalizePath( path.expand(file) , mustWork=FALSE, winslash="/")
 
-	www.directory = dirname( file )
-
-	if( !file.exists( www.directory ) ){
-		dir.create( www.directory, recursive = TRUE )
-	}
-
-	bootstrap.copy( www.directory, "ReporteRs")
-
 	out = .jcall( doc$jobj , "I", "writeHtml", file )
 	if( out != 1 ){
 		stop( "Problem while trying to write html content onto the disk." )

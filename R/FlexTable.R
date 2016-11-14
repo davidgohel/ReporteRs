@@ -256,7 +256,7 @@ print.FlexTable = function(x, ...){
 		cat("FlexTable object with", x$numrow, "row(s) and", x$numcol, "column(s).\n")
 	} else {
 		viewer <- getOption("viewer")
-		path = file.path(tempfile(), "temp_FlexTable.html" )
+		path = tempfile(fileext = ".html")
 		doc = bsdoc( )
 		doc = addFlexTable( doc, x )
 		writeDoc( doc, path, reset.dir = TRUE)

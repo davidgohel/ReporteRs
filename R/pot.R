@@ -117,7 +117,7 @@ print.pot = function (x, ...){
 		}
 	} else {
 
-		path = file.path(tempfile(), "index.html" )
+		path = tempfile(fileext = ".html")
 		doc = bsdoc( )
 		doc = addParagraph( doc, x )
 		doc = writeDoc( doc, path, reset.dir = TRUE)

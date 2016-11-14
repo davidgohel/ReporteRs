@@ -6,7 +6,7 @@
 #' @param ... further arguments passed to other methods
 #' @return a document object
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{bsdoc}}, \code{\link{styles}},
+#' @seealso \code{\link{docx}}, \code{\link{styles}},
 #' \code{\link{addTitle}}, \code{\link{addParagraph}}
 addTOC = function(doc, ...){
   UseMethod("addTOC")
@@ -49,13 +49,3 @@ addTOC.docx = function(doc, stylename, level_max = 3, ... ) {
 	doc
 	}
 
-
-
-#' @rdname addTOC
-#' @export
-addTOC.bsdoc = function(doc, ... ) {
-
-  .jcall( doc$jobj, "V", "addTOC" )
-
-  doc
-}

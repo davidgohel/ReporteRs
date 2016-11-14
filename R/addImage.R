@@ -113,7 +113,7 @@ addImage.docx = function(doc, filename, bookmark,
 #'     height = dims[1]/72)
 #' }
 #'
-#' writeDoc( doc, file = "ex_add_image/example.html" )
+#' writeDoc( doc, file = "ex_add_image.html" )
 #'
 #'
 #' @rdname addImage

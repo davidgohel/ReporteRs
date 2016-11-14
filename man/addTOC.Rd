@@ -3,14 +3,11 @@
 \name{addTOC}
 \alias{addTOC}
 \alias{addTOC.docx}
-\alias{addTOC.bsdoc}
 \title{Add a table of contents into a document object}
 \usage{
 addTOC(doc, ...)
 
 \method{addTOC}{docx}(doc, stylename, level_max = 3, ...)
-
-\method{addTOC}{bsdoc}(doc, ...)
 }
 \arguments{
 \item{doc}{document object}
@@ -87,7 +84,7 @@ doc = addTOC(doc, stylename = "rPlotLegend")
 writeDoc( doc, "addTOC_example2.docx" )
 }
 \seealso{
-\code{\link{docx}}, \code{\link{bsdoc}}, \code{\link{styles}},
+\code{\link{docx}}, \code{\link{styles}},
 \code{\link{addTitle}}, \code{\link{addParagraph}}
 }
 
