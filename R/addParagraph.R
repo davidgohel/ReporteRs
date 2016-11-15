@@ -176,6 +176,9 @@ addParagraph.bsdoc <- function(doc, value,
 #' Also, when document is a \code{pptx} object,
 #' shading and border settings of argument \code{par.properties}
 #' will have no effect.
+#'
+#' If character values are used to fill slides, parameter \code{append}
+#' will be ignored.
 #' @examples
 #'
 #' # pptx example -------
@@ -198,8 +201,6 @@ addParagraph.bsdoc <- function(doc, value,
 #' @example examples/set_of_paragraphs_example.R
 #' @example examples/addParagraph_parProperties.R
 #' @example examples/addSlide.R
-#' @example examples/addTitle1NoLevel.R
-#' @example examples/lists_slide.R
 #' @example examples/writeDoc_file.R
 #' @rdname addParagraph
 #' @export
@@ -229,41 +230,43 @@ addParagraph.pptx <- function(doc, value, offx, offy, width, height,
   }
 
 
-  if( inherits( value, "character" ) ){
-    value = gsub("\\r", "", value )
-    x = lapply( value, function(x) pot(value = x) )
-    value = do.call( "set_of_paragraphs", x )
-  }
   if( inherits( value, "pot" ) ){
     value = set_of_paragraphs( value )
   }
-
-  if( !inherits(value, "set_of_paragraphs") )
+  valid_class <- any( c("set_of_paragraphs", "character") %in% class(value) )
+  if( !valid_class )
     stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
 
-  if( !missing(par.properties) && !inherits( par.properties, "parProperties" ) ){
-    stop("argument 'par.properties' must be an object of class 'parProperties'")
-  }
-
   slide = doc$current_slide
-  if( !missing(par.properties) )
-    parset = .jset_of_paragraphs(value, par.properties)
-  else parset = .jset_of_paragraphs(value)
 
-  if( check.dims > 3 ){
-    if( missing(par.properties) )
-      stop("You have to specify par.properties when using arguments offx and offy")
-    out = .jcall( slide, "I", "add", parset
-                  , as.double( offx ), as.double( offy ), as.double( width ), as.double( height ),
-                  as.logical(restart.numbering) )
+  if( is.character( value ) ){
+    out = .jcall( slide, "I", "add" , .jarray(value) )
   } else {
-    if( append ){
-      out = .jcall( slide, "I", "append" , parset, as.logical(restart.numbering))
-      if( out == 1) stop("append is possible if current shape is a shape containing paragraphs.")
-    } else {
-      out = .jcall( slide, "I", "add" , parset, as.logical(restart.numbering))
+    if( !missing(par.properties) && !inherits( par.properties, "parProperties" ) ){
+      stop("argument 'par.properties' must be an object of class 'parProperties'")
     }
+
+    if( !missing(par.properties) )
+      parset = .jset_of_paragraphs(value, par.properties)
+    else parset = .jset_of_paragraphs(value)
+
+    if( check.dims > 3 ){
+      if( missing(par.properties) )
+        stop("You have to specify par.properties when using arguments offx and offy")
+      out = .jcall( slide, "I", "add", parset
+                    , as.double( offx ), as.double( offy ), as.double( width ), as.double( height ),
+                    as.logical(restart.numbering) )
+    } else {
+      if( append ){
+        out = .jcall( slide, "I", "append" , parset, as.logical(restart.numbering))
+        if( out == 1) stop("append is possible if current shape is a shape containing paragraphs.")
+      } else {
+        out = .jcall( slide, "I", "add" , parset, as.logical(restart.numbering))
+      }
+    }
+
   }
+
 
   if( isSlideError( out ) ){
     stop( getSlideErrorString( out , "pot") )
