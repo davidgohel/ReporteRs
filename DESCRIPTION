@@ -36,3 +36,4 @@ URL: http://davidgohel.github.io/ReporteRs/index.html,
     http://groups.google.com/group/reporters-package
 BugReports: https://github.com/davidgohel/ReporteRs/issues
 RoxygenNote: 5.0.1.9000
+VignetteBuilder: knitr

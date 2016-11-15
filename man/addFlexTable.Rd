@@ -28,7 +28,7 @@ addFlexTable(doc, flextable, ...)
 An object of class \code{\link{parProperties}}}
 
 \item{bookmark}{a character vector specifying bookmark id (where to put the table).
-If provided, table will be add after paragraph that contains the bookmark. See \code{\link{bookmark}}.
+If provided, table will be add after paragraph that contains the bookmark.
 If not provided, table will be added at the end of the document.}
 
 \item{offx}{optional, x position of the shape (top left position of the bounding box) in inches. See details.}

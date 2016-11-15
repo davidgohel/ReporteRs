@@ -45,7 +45,7 @@ addImage = function(doc, filename, ...){
 
 
 #' @param bookmark a character value ; id of the Word bookmark to replace by the image.
-#' optional. if missing, image is added at the end of the document. See \code{\link{bookmark}}.
+#' optional. if missing, image is added at the end of the document.
 #' @param par.properties paragraph formatting properties of the paragraph that contains images.
 #' An object of class \code{\link{parProperties}}. It has no effect if doc is
 #' a \code{pptx} object.

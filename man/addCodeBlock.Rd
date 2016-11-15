@@ -36,7 +36,7 @@ An object of class \code{\link{parProperties}}}
 An object of class \code{\link{textProperties}}}
 
 \item{bookmark}{Only for \code{docx}. A character value ; id of the Word bookmark to
-replace by the script. optional. See \code{\link{bookmark}}.}
+replace by the script. optional.}
 
 \item{append}{Only for \code{pptx}. boolean default to FALSE. If TRUE, paragraphs will be
 appened in the current shape instead of beeing sent into a new shape.

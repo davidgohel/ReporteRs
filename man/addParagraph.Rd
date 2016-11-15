@@ -32,7 +32,7 @@ Expected value is an existing stylename of the template document used to create 
 \code{docx} object. see \code{\link{styles.docx}}.}
 
 \item{bookmark}{a character value ; id of the Word bookmark to
-replace by the table. optional. See \code{\link{bookmark}}.}
+replace by the table. optional.}
 
 \item{par.properties}{\code{\link{parProperties}} to apply to paragraphs, only used
 if \code{stylename} if missing.}

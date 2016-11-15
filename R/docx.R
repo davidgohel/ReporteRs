@@ -30,7 +30,7 @@
 #' }
 #'
 #' R outputs (tables, plots, paragraphs and images) can be inserted (and not added at the end)
-#' in a document if a bookmark exists in the template file. See \code{\link{bookmark}}.
+#' in a document if a bookmark exists in the template file.
 #'
 #' Once object has content, user can write the docx into a ".docx" file, see \code{\link{writeDoc}}.
 #' @references Wikipedia: Office Open XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
@@ -39,7 +39,7 @@
 #' @examples
 #'
 #' @example examples/docx_example.R
-#' @seealso \code{\link{pptx}}, \code{\link{bookmark}}
+#' @seealso \code{\link{pptx}}
 docx = function( title = "untitled", template, empty_template = FALSE, list.definition = getOption("ReporteRs-list-definition") ){
 
 	if( missing( template ) )

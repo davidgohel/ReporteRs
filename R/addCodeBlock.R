@@ -30,7 +30,7 @@ addCodeBlock = function(doc, file, text, ... ){
 #' @param text.properties code block text properties.
 #' An object of class \code{\link{textProperties}}
 #' @param bookmark Only for \code{docx}. A character value ; id of the Word bookmark to
-#' replace by the script. optional. See \code{\link{bookmark}}.
+#' replace by the script. optional.
 #' @examples
 #' # docx example ---------
 #' doc = docx( )

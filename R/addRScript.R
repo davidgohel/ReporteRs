@@ -28,7 +28,7 @@ addRScript = function(doc, rscript, file, text, ... ){
 #' @param par.properties paragraph formatting properties of the
 #' paragraphs that contain rscript. An object of class \code{\link{parProperties}}
 #' @param bookmark a character value ; id of the Word bookmark to
-#' replace by the script. optional. See \code{\link{bookmark}}.
+#' replace by the script. optional.
 #' @examples
 #'
 #' # docx example -----------

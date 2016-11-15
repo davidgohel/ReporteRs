@@ -31,7 +31,7 @@ Not used if file or rscript is provided.}
 \item{...}{further arguments passed to other methods}
 
 \item{bookmark}{a character value ; id of the Word bookmark to
-replace by the script. optional. See \code{\link{bookmark}}.}
+replace by the script. optional.}
 
 \item{par.properties}{paragraph formatting properties of the
 paragraphs that contain rscript. An object of class \code{\link{parProperties}}}

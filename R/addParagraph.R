@@ -31,7 +31,7 @@ addParagraph <- function(doc, value, ...){
 #' Expected value is an existing stylename of the template document used to create the
 #' \code{docx} object. see \code{\link{styles.docx}}.
 #' @param bookmark a character value ; id of the Word bookmark to
-#' replace by the table. optional. See \code{\link{bookmark}}.
+#' replace by the table. optional.
 #' @param par.properties \code{\link{parProperties}} to apply to paragraphs, only used
 #' if \code{stylename} if missing.
 #' @param restart.numbering boolean value. If \code{TRUE}, next numbered

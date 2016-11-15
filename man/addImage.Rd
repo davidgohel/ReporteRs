@@ -27,7 +27,7 @@ of the external image}
 \item{...}{further arguments passed to other methods}
 
 \item{bookmark}{a character value ; id of the Word bookmark to replace by the image.
-optional. if missing, image is added at the end of the document. See \code{\link{bookmark}}.}
+optional. if missing, image is added at the end of the document.}
 
 \item{par.properties}{paragraph formatting properties of the paragraph that contains images.
 An object of class \code{\link{parProperties}}. It has no effect if doc is

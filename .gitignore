@@ -6,3 +6,4 @@ src/*.so
 src/*.dll
 .Rbuildignore
 todo.md
+inst/doc

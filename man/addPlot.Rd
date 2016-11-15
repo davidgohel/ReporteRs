@@ -52,7 +52,7 @@ names for font faces. Use fonts available on operating system.}
 \item{bookmark}{id of the Word bookmark to replace by the plot. optional.
 
 \code{bookmark} is a character vector specifying bookmark id to replace by the plot(s).\cr
-      If provided, plot(s) will replace the paragraph that contains the bookmark. See \code{\link{bookmark}}.\cr
+      If provided, plot(s) will replace the paragraph that contains the bookmark.\cr
       If not provided, plot(s) will be added at the end of the document.}
 
 \item{par.properties}{paragraph formatting properties of the paragraph that contains plot(s).

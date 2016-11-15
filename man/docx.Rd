@@ -54,7 +54,7 @@ Several methods can used to send R output into an object of class \code{\link{do
 }
 
 R outputs (tables, plots, paragraphs and images) can be inserted (and not added at the end)
-in a document if a bookmark exists in the template file. See \code{\link{bookmark}}.
+in a document if a bookmark exists in the template file.
 
 Once object has content, user can write the docx into a ".docx" file, see \code{\link{writeDoc}}.
 
@@ -210,6 +210,6 @@ dim( doc )
 Wikipedia: Office Open XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 }
 \seealso{
-\code{\link{pptx}}, \code{\link{bookmark}}
+\code{\link{pptx}}
 }
 
