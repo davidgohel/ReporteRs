@@ -16,8 +16,8 @@ Usefull links:
         
 Features
 --------
-* Create docx, pptx or html files with only a few lines of R code.
-* Add tables, plots, text or tables of contents into Word, PowerPoint and html documents.
+* Create docx and pptx files with only a few lines of R code.
+* Add tables, plots, text or tables of contents into Word and PowerPoint.
 * Customize formatting of R outputs.
 * Design and format any complex table.
 
@@ -45,8 +45,7 @@ Getting Started
     
     example(docx) #run a complete and detailed docx example
     example(pptx) #run a complete and detailed pptx example
-    example(bsdoc) #run a complete and detailed html example
     
 License
 -------
-The ReporteRs package is licensed under the GPLv3. See ``COPYRIGHTS`` file in the ``inst`` directory for additional details.
+The ReporteRs package is licensed under the GPLv3. 
