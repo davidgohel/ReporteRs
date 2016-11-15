@@ -50,7 +50,6 @@ addParagraph <- function(doc, value, ...){
 #' @example examples/pot1_example.R
 #' @example examples/pot2_example.R
 #' @example examples/set_of_paragraphs_example.R
-#' @example examples/addParagraph_sop_docx.R
 #' @example examples/addTitle4Level1.R
 #' @example examples/lists_doc.R
 #' @example examples/writeDoc_file.R
@@ -60,13 +59,23 @@ addParagraph.docx <- function(doc, value, stylename, bookmark,
 		par.properties = parProperties(),
 		restart.numbering = FALSE, ... ) {
 
-	if( !missing(stylename) && !is.element( stylename , styles( doc ) ) ){
-		stop(paste("Style {", stylename, "} does not exists.", sep = "") )
+  if( missing( value ) ){
+    stop("argument value is missing." )
+  }
+
+	if( !missing(stylename) && inherits(value, "character") ){
+	  if(!is.element( stylename , styles( doc ) ))
+		  stop(paste("Style {", stylename, "} does not exists.", sep = ""), call. = FALSE )
+
+	  if( missing( bookmark ) ){
+	    .jcall( doc$obj, "V", "addWithStyle" , .jarray(value), stylename)
+	  } else{
+	    .jcall( doc$obj, "V", "addWithStyle", .jarray(value), stylename, bookmark )
+	  }
+    return(doc)
 	}
 
-	if( missing( value ) ){
-		stop("argument value is missing." )
-	} else if( inherits( value, "character" ) ){
+	if( inherits( value, "character" ) ){
 		value = gsub("\\r", "", value )
 		x = lapply( value, function(x) pot(value = x) )
 		value = do.call( "set_of_paragraphs", x )
@@ -89,13 +98,9 @@ addParagraph.docx <- function(doc, value, stylename, bookmark,
 	}
 	.jcall( parset, "V", "setDOCXReference", doc$obj )
 
-	if( missing( bookmark ) && !missing( stylename ) ){
-		.jcall( doc$obj, "V", "addWithStyle" , parset, stylename)
-	} else if( missing( bookmark ) && missing( stylename ) ){
+	if( missing( bookmark ) ){
 		.jcall( doc$obj, "V", "add" , parset )
-	} else if( !missing( bookmark ) && !missing( stylename ) ){
-		.jcall( doc$obj, "V", "addWithStyle", parset, stylename, bookmark )
-	} else if( !missing( bookmark ) && missing( stylename ) ){
+	} else {
 		.jcall( doc$obj, "V", "add" , parset, bookmark )
 	}
 

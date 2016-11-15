@@ -118,9 +118,6 @@ pot2 = pot("Cats", textProperties(color = "red" ) ) +
 # create a set of paragraphs made of pot1 and pot2
 my.pars = set_of_paragraphs( pot1, pot2 )
 
-# Add my.pars into the document doc
-doc = addParagraph(doc, my.pars, stylename = "Normal" )
-
 doc = addTitle( doc, "Title example 4", level = 1 )
 # define some text
 text1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
