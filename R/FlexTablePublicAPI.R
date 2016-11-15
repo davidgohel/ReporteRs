@@ -409,7 +409,7 @@ setZebraStyle = function (object, odd, even){
 	if( length( odd ) != 1 ) stop("odd must be of length 1")
 	if( length( even ) != 1 ) stop("even must be of length 1")
 
-  color_compounds <- get_color_compounds(c(even, odd))
+  color_compounds <- get_color_compounds(c(odd, even))
 
 	.jcall( object$jobj , "V", "setOddEvenColor",
 	        .jarray( color_compounds$r ),
