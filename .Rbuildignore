@@ -6,3 +6,4 @@
 ^\.travis\.yml$
 ^examples$
 ^revdep$
+^README\.Rmd$

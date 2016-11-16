@@ -1,0 +1,286 @@
+---
+title: "Word documents"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true 
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Word documents}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ReporteRs)
+```
+
+## Getting Started
+
+1. Create a docx object
+    
+    Use the function `docx` to create an r object representing a Word document. 
+    It takes two arguments: a title (appearing only in the Word document properties) 
+    and a **template file**. If none is provided, the template file will be an empty 
+    document located in the package directory.
+    
+    When creating a docx object, you use a template file. This file is copied 
+    in memory and that copy becomes the document that will be completed with R outputs. 
+    Formats and available styles will be those available in the template file.
+
+2. Send R outputs into that object
+
+    Next, you create the components of your docx file. You create 
+    and format text, then insert it using the addParagraph function. 
+    You create and insert tables, perhaps merging cells, changing 
+    row and column colors or fonts. And, of course, you add plots. 
+    Tables, plots and paragraphs formats can be customised with 
+    dedicated functions.
+
+3. Write the object to a file
+
+    Finally, using `writeDoc`, you write the object into a file 
+    with the suffix `.docx` on your file system.
+
+## Example
+
+Below you can follow this process with a commented R script:
+
+```{r}
+library( ReporteRs )
+
+# Creation of mydoc, a mydocx object
+mydoc <- docx( )
+
+# add into mydoc first 10 lines of iris
+mydoc <- addFlexTable( mydoc, vanilla.table(iris[1:10,] ) )
+
+# add a page break
+mydoc <- addPageBreak( mydoc )
+
+# add text with stylename "Normal" into mydoc 
+mydoc <- addParagraph( mydoc, value = "Hello World!", stylename = "Normal" )
+
+# add a plot into mydoc 
+mydoc <- addPlot( mydoc, function() barplot( 1:8, col = 1:8 ) )
+
+filename <- tempfile(fileext = ".docx") # the document to produce
+# write the doc 
+writeDoc( mydoc, file = filename)
+```
+
+## Function list
+
+The following functions can only be used when the output format is docx, which you create as described above.
+
+* Get available styles from the template: styles
+* Add a title: addTitle
+* Add a table: addFlexTable
+* Add plots: addPlot
+* Add external images: addImage
+* add section (i.e for landscape, columns): addSection
+* Add syntax highlighted R code: addRScript
+* Add paragraphs of text: addParagraph
+* Add a table of contents: addTOC
+* Add a page break: addPageBreak
+* Delete a content located after a bookmark: deleteBookmarkNextContent
+* Write the document into a file: writeDoc
+
+## Templates
+
+You may need to generate docx documents in a particular corporate template 
+(with specific fonts, colour schemes, logos, etc.). The function `docx` 
+has an optional argument **template**, it lets you create documents based 
+on existing Word documents. 
+
+If you don't direct ReporteRs to a template file, an empty document 
+will be used (located into the package directory) and you will have a document 
+with its Word styles.
+
+**It loads in memory your template word document to add content to**. 
+R outputs will be inserted at the end of that copy (except if you are using bookmarks).
+The approach is to use a Word document that contains the layout and main styles of 
+your final document. You can edit an existing file in Word, delete the whole content 
+or not, modify paragraph styles, headers, etc., and use it as a template. New 
+reports will have the same layout and styles than the template.
+
+
+```{r eval=FALSE}
+# use D:/docs/template/my_corporate_template.docx as template
+doc <- docx(template = 'D:/docs/template/my_corporate_template.docx')
+
+# use default template
+doc <- docx()
+```
+
+If template content should be deleted, use the argument  `empty_template=TRUE` when calling `docx` function:
+
+```{r eval=FALSE}
+doc <- docx(template = 'D:/docs/template/my_corporate_template.docx', empty_template = TRUE)
+```
+
+## Styles 
+
+Available styles will be paragraph styles of the base document 
+(e.g. Normal, Title1, etc.). Names of the returned character vector 
+are internal Word labels associated with styles names.
+
+```{r}
+doc <- docx()
+styles( doc )
+```
+
+*When using a template, styles names of the template should only 
+contain letters (from a to z) and numbers. For example, in France 
+the default style named `Legend` becomes `L?gende` 
+and is returned as `Lgende` by the styles R function. The workaround 
+is to create a new style based on `L?gende` and to name it `Legende`. 
+It will be then a valid name to use with ReporteRs.*
+
+**styles** are used by several function, adding text with `addParagraph`, 
+adding titles with `addTitle`, adding specific TOC with `addTOC`.
+
+### Paragraphs and styles
+
+Function `addParagraph` has an optional argument `stylename` whose value must 
+be one of the names returned by the function `styles`.
+
+
+```{r}
+doc <- docx( )
+
+# display all available styles with their names
+doc <- addParagraph( doc, value = "Hello", stylename = "Normal")
+
+filename <- tempfile(fileext = ".docx") # the document to produce
+writeDoc( doc, file = filename)
+```
+
+## Specific functions
+
+### Table of contents
+
+Insert a table of contents with function `addTOC`.
+
+```{r eval=FALSE}
+doc <- addTOC(doc)
+```
+
+> When added, a TOC will make Word to pop-up a message-box asking you
+if you want to update TOC entries. **This is not an error**, you should
+click 'Yes' to update TOC entries.
+
+#### Customized table of contents
+
+Add a customized table of contents with the argument `stylename`.
+If used, a table of contents will be created containing entries
+formatted with specified styles.
+
+```{r eval=FALSE}
+# add a table of all paragraphs with style 'stylename'
+doc <- addTOC( doc, stylename = 'stylename' )
+```
+
+**Example: Add a list of figures and a list of tables**
+
+In the following example, style `figurereference` is used as style of paragraphs
+following graphics, as a **caption** for plots. Style `tablereference` is used as style
+of paragraphs following table, as a **caption** for tables.
+
+These styles are available in the template file *templates/template_toc.docx*.
+
+We will:
+
+1. add a table of content
+2. add a table of figures
+3. add a table of tables
+
+```{r message=FALSE}
+library( ReporteRs )
+library( ggplot2 )
+library(magrittr)
+
+myplot1 <- qplot(Sepal.Length, Petal.Length, 
+  data = iris, color = Species, 
+  size = Petal.Width, alpha = I(0.7))
+myplot2 <- qplot(mpg, wt, data = mtcars, colour = cyl )
+
+# Create a new document
+mydoc <- docx( template = "template_toc.docx" )
+
+# display available styles
+styles( mydoc )
+
+mydoc <- mydoc %>% addTitle( "Table of contents", level =  1 ) %>% 
+  addTOC( ) %>% # add a table of content
+  addPageBreak() # add a page break
+
+mydoc <- mydoc %>% addTitle( "List of graphics", level =  1 ) %>% 
+  addTOC( stylename = "figurereference" ) %>% 
+  addTitle( "List of tables", level =  1 ) %>% 
+  addTOC( stylename = "tablereference" )
+
+mydoc <- addPageBreak( mydoc )
+
+mydoc <- mydoc %>% addTitle( "iris outputs", level =  1 ) %>% 
+  addTitle( "Plot", level =  2 ) %>% 
+  addPlot(function( ) print( myplot1 ) ) %>% 
+  addParagraph( value = "iris plot", 
+    stylename = "figurereference") %>%  # Add a legend below the plot
+  addTitle( "Table", level =  2 ) %>% 
+  addFlexTable( vanilla.table( head( iris ) ) ) %>%
+  addParagraph( value = "iris table", 
+    stylename = "tablereference") # Add a legend below the table
+
+mydoc <- mydoc %>% addTitle( "mtcars outputs", level =  1 ) %>% 
+  addTitle( "Plot", level =  2 ) %>% 
+  addPlot(function( ) print( myplot2 ) ) %>% 
+  addParagraph( value = "mtcars plot", 
+    stylename = "figurereference") %>%  # Add a legend below the plot
+  addTitle( "Table", level =  2 ) %>% 
+  addFlexTable( vanilla.table( head( mtcars ) ) ) %>%
+  addParagraph( value = "mtcars table", 
+    stylename = "tablereference") # Add a legend below the table
+
+filename <- tempfile(fileext = ".docx") # the document to produce
+writeDoc( mydoc, file = filename)
+```
+
+### Page breaks
+
+Insert a page break with function addPageBreak
+
+    
+```{r eval=FALSE}
+doc <- addPageBreak(doc)
+```
+
+### Section
+
+Function `addSection` lets you add a section and change document orientation
+and split new content along 2 or more columns.
+
+The function requires you to add a section before and after the item(s) that 
+you want to be on a landscape and/or multicolumns mode page. 
+
+```{r message=FALSE}
+library(magrittr)
+
+doc <- docx()
+
+doc <- addSection( doc, landscape = TRUE) %>% 
+  addFlexTable( vanilla.table(mtcars)) %>% 
+  addSection()
+
+doc <- addSection( doc, ncol = 2, landscape = TRUE) %>% 
+  addParagraph( "My text on column 1", stylename = "Normal" ) %>% 
+  addColumnBreak( ) %>% 
+  addPlot(fun = function() barplot(1:5), width = 3, height = 3 ) %>% 
+  addSection( )
+
+filename <- tempfile(fileext = ".docx") # the document to produce
+writeDoc( doc, file = filename)
+```
+
+
