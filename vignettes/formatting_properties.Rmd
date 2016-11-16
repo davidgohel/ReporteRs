@@ -1,0 +1,154 @@
+---
+title: "Formatting properties"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Formatting properties}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ReporteRs)
+library( magrittr )
+```
+
+`ReporteRs` has functions to manage objects representing:
+
+* text formatting properties
+* paragraph formatting properties
+* border formatting properties
+* cell formatting properties.
+
+With ReporteRs, some options can be used to reduce usage of some parameters. These are 
+then used as default values for `textProperties` objects:
+
+```{r}
+getOption('ReporteRs-fontsize')
+getOption('ReporteRs-default-font')
+```
+
+## Available formatting properties
+
+### Text formatting properties
+
+Create a `textProperties` object that describes text formatting properties. It
+let you specify font name color, size, weight, etc.
+
+`textProperties` objects can be used with function `pot` and when manipulating `FlexTable` objects.
+
+#### Usage example
+
+```{r}
+my_text = pot('My tailor', textProperties(color='#1163A5', font.size = 10) ) +
+  pot(' is ', textProperties(font.style = 'italic', color='gray', font.size = 12) ) +
+  pot('rich', textProperties(font.weight='bold', color='#D63C3A', font.size = 10) )
+my_text
+
+MyFTable = vanilla.table( data = mtcars[1:5, ], add.rownames = TRUE )
+MyFTable[ 1, 1, to = "header"] = my_text
+MyFTable
+
+```
+
+### Paragraph formatting properties
+
+Create a `parProperties` object that describes paragraph formatting properties.
+It let you specify text alignment, paddings, the kind of numbering if paragraphs are a list, etc.
+
+A `parProperties` object is used by several functions, ie. addPlot, addFlexTable, addParagraph.
+
+#### Usage
+
+```{r}
+MyFTable = FlexTable( data = iris[1:5, ] )
+MyFTable[ 1:2, 4:5] = parProperties( text.align = 'right', padding = 3 )
+MyFTable
+```
+
+
+### Cell formatting properties
+
+Create a `cellProperties` object that describes cell formatting properties.
+It let you specify cell borders, background color, etc.
+
+A cellProperties object is used with `FlexTable` objects.
+
+#### Usage
+
+```{r}
+MyFTable = FlexTable( data = iris[1:5, ] )
+MyFTable[ 1:2, 4:5] = cellProperties( background.color = 'wheat' )
+MyFTable
+```
+
+
+### Border formatting properties
+
+Create a `borderProperties` object that describes border formatting properties.
+
+A borderProperties object is used with `FlexTable` objects and with `parProperties`
+objects.
+
+#### Usage
+
+```{r}
+MyFTable = FlexTable( data = iris[1:5, ] )
+MyFTable[ 1, to = "header", side = "bottom"] = borderProperties(color="orange", style="solid", width=4)
+MyFTable
+```
+
+
+## Change properties
+
+To get modified copies of textProperties, parProperties, and cellProperties objects,
+use the function `chprop`.
+
+It makes the code less verbose and makes easier to specify formatting properties on FlexTable.
+
+```{r}
+base_text_prop = textProperties( font.size = 10, color = "#3D3234" )
+base_par_prop = parProperties( text.align = "right" )
+base_cell_prop = cellProperties( padding = 0 )
+
+MyFTable <- vanilla.table( data = iris[1:5, ])
+MyFTable[] <- base_par_prop
+MyFTable[ , 5 ] <- chprop( base_par_prop, text.align = "center")
+MyFTable[] <- base_cell_prop
+MyFTable[ 3, ] <- chprop( base_cell_prop, background.color = "orange" )
+MyFTable[] <- base_text_prop
+MyFTable[ , 1] <- chprop( base_text_prop, font.weight = "bold" )
+MyFTable
+```
+
+## Shorcut functions
+
+The following functions are shortcuts for `textProperties` function calls:
+
+* **textNormal**: return default textProperties object.
+* **textBold**: return a textProperties object with bold font.
+* **textBoldItalic**: return a textProperties object with bold italic font.
+* **textItalic**: return a textProperties object with italic font.
+
+The following functions are shortcuts for `parProperties` function calls:
+
+* **parRight**: return a parProperties object with right text alignment.
+* **parLeft**: return a parProperties object with left text alignment.
+* **parJustify**: return a parProperties object with justified text alignment.
+* **parCenter**: return a parProperties object with center text alignment.
+
+```{r}
+MyFTable = vanilla.table( data = iris[1:5, ] )
+MyFTable[ to = "header" ] = textBold()
+MyFTable[ , 5 ] = textItalic()
+MyFTable[ , 1:4] = parRight()
+MyFTable
+```
+
+The following functions are shortcuts for `borderProperties` function calls: **borderDashed**,
+**borderDotted**, **borderSolid** and **borderNone**.
+
+The following functions are shortcuts for `cellProperties` function calls: **cellBorderNone**, **cellBorderBottom**, **cellBorderTop** and **cellBorderTB**.
+
+
