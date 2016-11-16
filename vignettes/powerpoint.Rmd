@@ -1,0 +1,323 @@
+---
+title: "PowerPoint documents"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true 
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{PowerPoint documents}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+library(ReporteRs)
+```
+
+
+## Getting Started
+
+### Create a pptx object
+
+Use the function `pptx` to create an r object representing a PowerPoint document.
+It takes two arguments: a title (appearing only in the document properties) and
+a template file. If none is provided, the template file will be an empty document
+located in the package directory.
+
+When creating a pptx object, you use a template file. This file is copied in memory
+and that copy becomes the document that will be completed with R outputs. Formats
+and available slide layouts will be those available in the template file.
+
+### Send R outputs into that object
+
+You must **add a slide before you are able to send R outputs** into that
+document (into that slide...). Use the function `addSlide` to add a 
+slide into the **pptx** object. The number of available shapes 
+that can be filled by R outputs is conditionned by the chosen 
+layout. For example, layout 'Title and Content'
+can receive only one R output, 'Two Content' can receive two R output. 
+
+Next, you create the components of your slide. You then add text, tables, 
+plots and other components into the slide that has just been added, available functions
+are documented [below](#functions_list). 
+
+*When adding an R output, if no position nor size is specified, the R output will be
+placed with position and dimensions of the available shape defined in the template
+layout. If you need a new layout, there are two options, create it in PowerPoint or 
+[force size and position](#force_size_and_position).*
+
+### Write the object to a file
+
+Finally, using `writeDoc`, you write the object into a file
+with the suffix *.pptx* on your file system.
+
+### Example
+
+Below you can follow this process with a commented R script:
+
+```{r message=FALSE}
+library( ReporteRs )
+
+# Creation of doc, a pptx object (default template)
+mydoc <- pptx( )
+
+# check my layout names:
+slide.layouts(mydoc)
+
+mydoc <- addSlide( mydoc, "Two Content" )
+# add into mydoc first 10 lines of iris
+mydoc <- addTitle( mydoc, "First 10 lines of iris" )
+mydoc <- addFlexTable( mydoc, vanilla.table(iris[1:10,] ) )
+
+# add text into mydoc (and an empty line just before). Paragraph 
+# properties will be those of the shape of the used layout.
+mydoc <- addParagraph( mydoc, value = c("", "Hello World!") )
+
+mydoc <- addSlide( mydoc, "Title and Content" )
+# add a plot into mydoc 
+mydoc <- addPlot( mydoc, function() barplot( 1:8, col = 1:8 ) )
+
+filename <- tempfile(fileext = ".pptx") # the document to produce
+# write mydoc 
+writeDoc( mydoc, filename )
+```
+
+## Templates, layouts and styles
+
+`pptx` will let you create documents based on a 'pptx' template file.
+
+If none is provided, an empty document will be used (located into the package directory).
+
+```{r eval=FALSE}
+# use D:/docs/template/my_corporate_template.pptx as template
+doc <- pptx(template = 'D:/docs/template/my_corporate_template.pptx')
+
+# use default template
+doc <- pptx()
+```
+
+`ReporteRs` use PowerPoint file as templates. A template is the original
+PowerPoint document where all slides layouts, shapes (placeholders) and
+styles come from:
+
+* Slide layouts are those available in the template.
+* Designs and formating properties of layouts and shapes
+(placeholders in a layout) are defined within the template.
+* Content of the PowerPoint template is not deleted, which lets
+you to easily add content into an existing presentation
+without usual annoying copy-paste operations.
+
+**If you need other layouts than those that come with PowerPoint's
+built-in Slide Master** of your template, you can add a layout and
+customize it for your PowerPoint presentation. To add your own layout,
+just follow these steps in PowerPoint:
+
+1. Switch to the Slide Master view
+2. Insert Layout.
+3. Insert the placeholders you want to add to the new layout.
+Move and or resize them regarding to the content it should contains.
+4. You can apply any formatting to new placeholders (i.e. change background color, font, etc.)
+5. Save and close the template
+6. Create a `pptx` object with function pptx using the argument `template` specifying the template filename.
+
+## Functions list
+
+The following functions can only be used when the output format is pptx, which you create as described above.
+
+* Add a title: addTitle
+* Add a table: addFlexTable
+* Add plots: addPlot
+* Add external images: addImage
+* Add syntax highlighted R code: addRScript
+* Add paragraphs of text: addParagraph
+* Add a slide: addSlide
+* Write the document into a file: writeDoc
+* Add a date: addDate
+* Add a footer: addFooter
+* Add a page number: addPageNumber
+* Add a sub title: addSubtitle
+
+
+## Key functions and arguments
+
+### Function addSlide
+
+**If no slide has been added into the document object no content (tables,
+plots, images, text) can be added.**
+
+Funtion `addSlide`  let you add a slide in the pptx object. Argument `slide.layout` 
+let you specify which layout to use to design the new slide.
+
+```{r}
+doc <- pptx()
+doc <- addSlide( doc, slide.layout = 'Title and Content' )
+doc <- addSlide( doc, slide.layout = 'Two Content' )
+```
+
+### Function `slide.layouts`
+
+Available layouts are those contained in the template. Slide layout concept is important in ReporteRs.
+
+Content is conditioned by the chosen layout. When a slide is added
+with layout 'Title and Content', this slide will only be able to
+contain 2 contents: a title and a content theses are shapes.
+
+Shapes (or placeholders) are where most of the formatting is done:
+plot size is defined by shapes dimensions in the layout, default
+fonts and paragraphs styles are those defined by the shape properties, etc.
+
+`slide.layouts` returns slide layouts names. When adding a slide with `addSlide`
+you may need that function to ckeck available names.
+
+```{r}
+doc <- pptx()
+slide.layouts(doc)
+```
+
+**Check slide layout**
+
+use optional argument `layout` with function `slide.layouts` to get
+a plot of the design of your layout.
+
+```{r}
+doc <- pptx()
+slide.layouts(doc, 'Comparison')
+```
+
+Here, the slide can receive the following shapes: a title, 4 contents
+(plots, tables, paragraphs), a date and a slide number.
+
+### Force size and position
+
+Width, height and positions of the output (i.e. shape size and position)
+are defined by the properties of the shape defined in the layout of the
+PowerPoint template used.
+
+**When adding content, ReporteRs read the properties of the next available
+shape in the current slide.**
+
+**You can explicitly specify shape position and dimensions for some specific
+outputs: tables, text, plots and external images.**.
+
+If arguments `offx`, `offy`, `width`, `height` are missing, position
+and dimensions are defined by the width and height of the next available shape of the slide.
+
+If these arguments are specified, they become position and dimensions of the
+new shape. It let you also to add content on a slide if no more shape is available.
+
+```{r}
+library( ggplot2 )
+
+mydoc <- pptx( title = "title" )
+
+mydoc <- addSlide( mydoc, slide.layout = "Title and Content" )
+
+myplot = qplot(Sepal.Length, Petal.Length, data = iris, 
+  color = Species, size = Petal.Width, alpha = I(0.7) )
+
+mydoc <- addPlot( doc = mydoc, fun = print, x = myplot, 
+  offx = 1, offy = 1, width = 6, height = 5 )
+
+mydoc <- addFlexTable( doc = mydoc, FlexTable( head( iris ) ),
+  offx = 8, offy = 2, width = 4.5, height = 3 )
+
+filename <- tempfile(fileext = ".pptx") # the document to produce
+writeDoc( mydoc, file = filename )
+```
+
+## Specific functions
+
+### Date
+
+Function `addDate` lets you adding a date in the current slide.
+The shape will be positioned with the date shape properties of the template document.
+
+```{r}
+doc <- pptx()
+doc <- addSlide( doc, slide.layout = 'Title and Content' )
+doc <- addDate( doc )
+doc <- addSlide( doc, slide.layout = 'Title and Content' )
+doc <- addDate( doc, 'Dummy date' )
+```
+
+
+### Page number
+
+Function `addPageNumber` lets you adding slide number in the current slide. The
+shape will be positioned with the page number shape properties of the template document.
+
+```{r}
+doc <-pptx()
+doc <-addSlide( doc, slide.layout = 'Title and Content' )
+doc <-addPageNumber( doc )
+doc <-addSlide( doc, slide.layout = 'Title and Content' )
+doc <-addPageNumber( doc, 'Dummy text' )
+```
+
+### Footer
+
+Function `addFooter` lets you adding a comment in the footer of current slide.
+The shape will be positioned with the footer shape properties of the template
+document.
+
+```{r}
+doc <- pptx()
+doc <- addSlide( doc, slide.layout = 'Title and Content' )
+doc <- addFooter( doc, 'Dummy text' )
+```
+
+### Subtitle
+
+Function `addSubtitle` lets you adding a subtitle in the current slide. The
+shape will be positioned with the subtitle shape properties of the template document.
+
+Subtitle shape only exist in slide of type 'Title Slide'.
+
+```{r}
+doc <- pptx()
+doc <- addSlide( doc, slide.layout = 'Title Slide' )
+doc <- addTitle( doc, 'Presentation title' )
+doc <- addSubtitle( doc , 'This document is generated with ReporteRs.')
+```
+
+
+## Replace slide
+
+To replace an existing slide by a new one, use `addSlide` with
+optional argument bookmark. Bookmark is the index of the slide
+that has to be replaced with a new empty one.
+
+```{r eval=FALSE}
+mydoc <-pptx( title = 'title', template = 'template_example.pptx' )
+
+myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = Petal.Width, alpha = I(0.7))
+
+mydoc <-addSlide( mydoc, slide.layout = 'Title and Content', bookmark = 3 )
+
+mydoc <-addTitle( mydoc, 'my new graph')
+
+mydoc <-addPlot( mydoc, print, x = myplot )
+
+writeDoc( mydoc, 'pp_replacement.pptx' )
+
+```
+
+
+## Working with pipes
+
+ReporteRs can be used with package `magrittr`, it makes code easier to read and more compact.
+
+```{r message=FALSE}
+library( magrittr )
+filename <- tempfile(fileext = ".pptx") # the document to produce
+
+pptx( title = "title" ) %>% 
+  addSlide( slide.layout = "Title and Content" ) %>% 
+  addFlexTable( vanilla.table(head(iris) ) ) %>% 
+  writeDoc( file = filename )
+```
+
+
