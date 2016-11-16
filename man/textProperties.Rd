@@ -57,17 +57,6 @@ Create a \code{textProperties} object that describes
 text formatting properties.
 }
 \details{
-Default values are:
-\itemize{
-  \item \code{color} "black"
-  \item \code{font.size} getOption("ReporteRs-fontsize")
-  \item \code{font.weight} "normal"
-  \item \code{font.style} "normal"
-  \item \code{underlined} FALSE
-  \item \code{font.family} getOption("ReporteRs-default-font")
-  \item \code{vertical.align} "baseline"
-}
-
 Get a modified version of a \code{textProperties} with
 \code{chprop}.
 }

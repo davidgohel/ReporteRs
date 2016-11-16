@@ -20,17 +20,6 @@
 #' a valid color (e.g. "#000000" or "black").
 #' @return a \code{textProperties} object
 #' @export
-#' @details
-#' Default values are:
-#' \itemize{
-#'   \item \code{color} "black"
-#'   \item \code{font.size} getOption("ReporteRs-fontsize")
-#'   \item \code{font.weight} "normal"
-#'   \item \code{font.style} "normal"
-#'   \item \code{underlined} FALSE
-#'   \item \code{font.family} getOption("ReporteRs-default-font")
-#'   \item \code{vertical.align} "baseline"
-#' }
 #' @examples
 #' # textProperties examples -------
 #' @example examples/textProperties.R
