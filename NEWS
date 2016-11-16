@@ -1,3 +1,15 @@
+# ReporteRs 0.8.8
+
+## DEBUG
+
+* bookmarks were lost after replacement in a docx
+
+CHANGES
+------------------------------------------------------------------
+
+* declareTitlesStyles has been renamed map_title
+* addMarkdown has been deleted
+
 ReporteRs 0.8.7
 ==================================================================
 

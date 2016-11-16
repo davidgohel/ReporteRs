@@ -25,7 +25,9 @@ addFlexTable(doc, flextable, ...)
 \item{...}{further arguments passed to other methods}
 
 \item{par.properties}{paragraph formatting properties of the paragraph that contains the table.
-An object of class \code{\link{parProperties}}}
+An object of class \code{\link{parProperties}}. Only alignment will be used, if you'd
+like to add space around a table, specify padding on preceding and or
+following paragraph.}
 
 \item{bookmark}{a character vector specifying bookmark id (where to put the table).
 If provided, table will be add after paragraph that contains the bookmark.
@@ -71,7 +73,7 @@ doc = addFlexTable( doc, flextable = ft_obj )
 writeDoc( doc, file = "add_ft_ex.docx" )
 
 
-# bsdoc example -----
+# pptx example -----
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addFlexTable( doc, flextable = ft_obj )

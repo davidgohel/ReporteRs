@@ -4,6 +4,7 @@
 #'
 #' FlexTable can be manipulated so that almost any formatting can be specified. See
 #' \code{\link{FlexTable}} for more details.
+#'
 #' @param doc document object
 #' @param flextable the \code{FlexTable} object
 #' @param ... further arguments passed to other methods
@@ -29,7 +30,9 @@ addFlexTable = function(doc, flextable, ...){
 
 
 #' @param par.properties paragraph formatting properties of the paragraph that contains the table.
-#' An object of class \code{\link{parProperties}}
+#' An object of class \code{\link{parProperties}}. Only alignment will be used, if you'd
+#' like to add space around a table, specify padding on preceding and or
+#' following paragraph.
 #' @param bookmark a character vector specifying bookmark id (where to put the table).
 #'   	If provided, table will be add after paragraph that contains the bookmark.
 #'   	If not provided, table will be added at the end of the document.
@@ -87,7 +90,7 @@ addFlexTable.bsdoc = function(doc, flextable,
 #' If arguments offx, offy, width, height are provided, they become position and
 #' dimensions of the new shape.
 #' @examples
-#' # bsdoc example -----
+#' # pptx example -----
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' doc = addFlexTable( doc, flextable = ft_obj )
