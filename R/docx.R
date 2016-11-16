@@ -75,7 +75,7 @@ docx = function( title = "untitled", template, empty_template = FALSE, list.defi
 	.Object$styles = styles( .Object )
 	matchheaders = regexpr("^(Heading|Titre|Rubrik|Overskrift|berschrift|)[1-9]{1}$", .Object$styles )
 	if( any( matchheaders > 0 ) ){
-		.Object = declareTitlesStyles(.Object, stylenames = sort( .Object$styles[ matchheaders > 0 ] ) )
+		.Object = map_title(.Object, stylenames = sort( .Object$styles[ matchheaders > 0 ] ) )
 	} else .Object$header.styles = character(0)
 
 
