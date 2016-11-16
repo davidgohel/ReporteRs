@@ -12,11 +12,15 @@ test_that("bookmark is kept and stylename is used", {
   doc <- docx( template = template )
   doc <- addParagraph(doc, value = "ipsem",
                stylename = "figurereference",
-               bookmark = "DATA")
+               bookmark = "DATA") %>%
+    addPlot(fun = function(x) barplot(1:9), bookmark = "PLOT")
   writeDoc(doc, target_file)
   unzip(zipfile = target_file, exdir = target_dir )
 
   doc <- read_xml(file.path(target_dir, "word/document.xml"))
+
+  bkm <- xml_find_first(doc, ".//w:bookmarkStart[@w:name='PLOT']")
+  expect_false( inherits(bkm, "xml_missing"))
 
   bkm <- xml_find_first(doc, ".//w:bookmarkStart[@w:name='DATA']")
   expect_false( inherits(bkm, "xml_missing"))
