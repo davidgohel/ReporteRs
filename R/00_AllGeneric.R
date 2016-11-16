@@ -117,23 +117,6 @@ as.FlexTable <- function( x, ... ){
 	UseMethod("as.FlexTable")
 }
 
-#' @title Set manually headers'styles of a document object
-#'
-#' @description Set manually titles'styles of a document object
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' \code{declareTitlesStyles} only works with docx documents.
-#'
-#' See \code{\link{declareTitlesStyles.docx}} for examples.
-#' @export
-#' @seealso \code{\link{docx}}, \code{\link{styles.docx}}
-#' , \code{\link{declareTitlesStyles.docx}}, \code{\link{addTOC.docx}}
-declareTitlesStyles <- function(doc, ...){
-	UseMethod("declareTitlesStyles")
-}
 
 #' @title Get layout names of a document object
 #'
