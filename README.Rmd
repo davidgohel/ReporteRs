@@ -74,35 +74,6 @@ When generating Word document, bookmarks can be used to define locations of
 replacements in the document. When generating PowerPoint document, slide indexes
 can be used to define locations of slides to replace in the presentation.
 
-## Main functions list
-
-The following functions can be used whatever the output format is (docx, pptx):
-
-* addTitle: Add a title
-* addFlexTable: Add a FlexTable
-* addPlot: Add plots
-* addImage: Add external images
-* addRScript: Add syntax highlighted R code
-* addParagraph: Add paragraphs of text
-* writeDoc: Write the document into a file
-* dim: Get shape/page dimensions
-
-The following functions can only be used when the output format is `docx`.
-
-* styles: Get available styles
-* addTOC: Add a table of contents
-* addPageBreak: Add a page break
-* addSection: Add a new section (landscape or portrait orientation and split content within columns)
-
-
-The following functions can only be used when the output format is `pptx`.
-
-* slide.layouts: Get available layout names
-* addSlide: Add a slide
-* addDate: Add a date
-* addPageNumber: Add a page number
-* addFooter: Add a comment in the footer
-* addSubtitle: Add a sub title
 
 ## Installation
 

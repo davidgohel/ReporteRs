@@ -247,24 +247,16 @@ length.FlexTable = function(x) {
 #'
 #' @param x a \code{\link{FlexTable}} object
 #' @param ... further arguments, not used.
+#' @importFrom htmltools HTML browsable
 #' @export
 print.FlexTable = function(x, ...){
 
-	if( is.jnull(x$jobj ) ) cat("java object is null. Object need to be rebuild.\n")
+	if( is.jnull(x$jobj ) ) stop("java object is null, object need to be rebuild", call. = FALSE)
 
 	if (!interactive() ){
 		cat("FlexTable object with", x$numrow, "row(s) and", x$numcol, "column(s).\n")
 	} else {
-		viewer <- getOption("viewer")
-		path = tempfile(fileext = ".html")
-		doc = bsdoc( )
-		doc = addFlexTable( doc, x )
-		writeDoc( doc, path, reset.dir = TRUE)
-		if( !is.null( viewer ) && is.function( viewer ) ){
-			viewer( path )
-		} else {
-			utils::browseURL(path)
-		}
+	  print( browsable( HTML( as.html(x) ) ) )
 	}
 
 	invisible()

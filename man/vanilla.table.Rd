@@ -2,7 +2,7 @@
 % Please edit documentation in R/FlexTable_theme.R
 \name{vanilla.table}
 \alias{vanilla.table}
-\title{get a simple FlexTable from a dataset}
+\title{vanilla FlexTable shortcut}
 \usage{
 vanilla.table(dataset, add.rownames = FALSE, text.direction = "lrtb")
 }
@@ -11,14 +11,14 @@ vanilla.table(dataset, add.rownames = FALSE, text.direction = "lrtb")
 
 \item{add.rownames}{logical value - should the row.names be included in the table.}
 
-\item{text.direction}{header cell text rotation - a single character value, expected 
+\item{text.direction}{header cell text rotation - a single character value, expected
 value is one of "lrtb", "tbrl", "btlr".}
 }
 \description{
 get a simple FlexTable from a dataset
 }
 \examples{
-vanilla.table( iris)
+ft <- vanilla.table( iris)
 }
 \seealso{
 \code{\link{FlexTable}}

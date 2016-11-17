@@ -1,12 +1,34 @@
 ---
 title: "docx bookmarks"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true 
+    toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{docx bookmarks}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ReporteRs)
+library(magrittr)
+as_link <- function(file, txt, label){invisible()}
+if(require("htmltools")){
+  if( !is.null( getOption("GH_BUILD") ) && getOption("GH_BUILD") ){
+    as_link <- function(file, txt, label){
+      div(
+        txt, 
+        a(label, href=markdown:::.b64EncodeFile(file))
+      )
+    }
+  } 
+    
+}
+options("ReporteRs-fontsize" = 11)
+```
+
 
 ## Use bookmarks to replace content
 
@@ -29,6 +51,7 @@ When used with `addFlexTable`, content (table) will be **added after** the parag
 
 We will use a specific file as template `bookmark_example.docx` containing various styles and bookmarks located in the package.
 
+
 ```{r message=FALSE, warning=FALSE}
 library( ReporteRs )
 
@@ -40,6 +63,12 @@ template <- system.file(package = "ReporteRs",
 doc = docx( template = template )
 styles(doc)
 ```
+```
+
+```{r echo=FALSE}
+as_link(file = template, txt = "The template: ", label = basename(template) )
+```
+
 
 Let use `iris` to illustrate tables and graphics.
 
@@ -69,6 +98,11 @@ doc %>%
   addPlot( fun = print, x = myplot1, bookmark = "PLOT" ) %>%
   writeDoc( file = target_file)
 ```
+
+```{r echo=FALSE}
+as_link(file = target_file, txt = "It produces ", label = basename(target_file) )
+```
+
 
 ## Notes 
 

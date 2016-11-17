@@ -3,7 +3,6 @@ ReporteRs R package
 
 -   [ReporteRs](#reporters)
     -   [Introduction](#introduction)
-    -   [Main functions list](#main-functions-list)
     -   [Installation](#installation)
     -   [Usefull links:](#usefull-links)
     -   [License](#license)
@@ -35,7 +34,6 @@ Below a short R script:
 
 ``` r
 require( ggplot2 )
-#> Warning: package 'ggplot2' was built under R version 3.3.2
 doc = docx( title = 'My document' )
 
 doc = addTitle( doc , 'First 5 lines of iris', level = 1)
@@ -59,36 +57,6 @@ It lets you also create corporate documents, creation of complex tables, pretty 
 To automate document generation only R code is necessary.
 
 With Word and PowerPoint document, you can add contents from R but also replace contents. By default, content is added at the end of the specified template document. When generating Word document, bookmarks can be used to define locations of replacements in the document. When generating PowerPoint document, slide indexes can be used to define locations of slides to replace in the presentation.
-
-Main functions list
--------------------
-
-The following functions can be used whatever the output format is (docx, pptx):
-
--   addTitle: Add a title
--   addFlexTable: Add a FlexTable
--   addPlot: Add plots
--   addImage: Add external images
--   addRScript: Add syntax highlighted R code
--   addParagraph: Add paragraphs of text
--   writeDoc: Write the document into a file
--   dim: Get shape/page dimensions
-
-The following functions can only be used when the output format is `docx`.
-
--   styles: Get available styles
--   addTOC: Add a table of contents
--   addPageBreak: Add a page break
--   addSection: Add a new section (landscape or portrait orientation and split content within columns)
-
-The following functions can only be used when the output format is `pptx`.
-
--   slide.layouts: Get available layout names
--   addSlide: Add a slide
--   addDate: Add a date
--   addPageNumber: Add a page number
--   addFooter: Add a comment in the footer
--   addSubtitle: Add a sub title
 
 Installation
 ------------

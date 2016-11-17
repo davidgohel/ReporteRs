@@ -1,0 +1,128 @@
+---
+title: "pot objects"
+output: 
+  rmarkdown::html_vignette:
+    toc: true 
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{pot objects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ReporteRs)
+library( magrittr )
+options("ReporteRs-fontsize" = 11)
+```
+
+A `pot` object (pieces of text or paragraph of text) is made 
+of one or more chunk of text with different formatting properties. 
+
+## Overview
+
+ReporteRs provide a class of object to enable text formatting: `pot` objects. 
+
+`pot` objects are created with function `pot`. These objects can be 
+concatenated: an object can be added with another pot object or with a single 
+text value (a character vector of length 1).
+
+**A `pot` object is a set of text chunks, each chunk is 
+associated with its own font properties.** A Footnote 
+and an hyperlink can be associated to a `pot` object.
+
+When `\\n` is used, a *soft return* is used.
+
+These objects are to be used when adding paragraphs into a document or when working with FlexTable.
+
+```{r}
+pot('Hello World!')
+pot('Hello') + ' ' + pot( 'World!', textItalic() )
+pot( 'Cats', textProperties( color = 'orange' ) ) + ' and ' + 
+  pot('dogs', textBold( color = '#E74C3C' ) )
+```
+
+
+## Usage
+
+The function pot has two arguments:
+
+* **value**: a text value or a value that has a format method returning character value.
+* **format** (optional): formating properties (an  textProperties` object).
+
+The following code show usage of these parameters:
+
+```{r}
+my_text_prop <- textProperties(color='#1163A5',
+  font.size = 20, font.weight = 'bold', font.family = 'Courier New' )
+
+my_text <- pot( value = 'My tailor', format = my_text_prop ) +
+  ' is rich. ' +
+  pot( value = 'Cats', format = chprop( my_text_prop, color = '#F0A91B') ) +
+  ' and ' +
+  pot( value = 'dogs', format = chprop( my_text_prop, color = '#D63C3A') )
+my_text
+```
+
+## Examples
+
+**add paragraphs**
+
+```{r}
+mydoc = docx( )
+mydoc = addParagraph( mydoc, value = my_text )
+
+```
+
+It produces this [document](./files/pot_objects/word_pot_demo.docx).
+
+
+**add into FlexTable**
+
+```{r}
+
+MyFTable = FlexTable( data = mtcars[1:5, ], add.rownames = TRUE )
+MyFTable = addFooterRow( MyFTable, value = '',colspan = ncol(mtcars) + 1)
+MyFTable[1,1, to = 'footer'] = my_text
+
+MyFTable
+```
+
+## Hyperlink
+
+Hyperlink can be added to pot objects.
+
+Use argument `hyperlink` with function `pot`.
+
+Here is an example:
+
+```{r}
+pot( 'Cats', hyperlink = 'http://en.wikipedia.org',
+  textBoldItalic( color = '#428BCA', underline = TRUE ) ) 
+```
+
+## Footnotes
+
+Footnotes can be added to pot objects.
+
+Use objects of class `Footnote` to create a Footnote. Function `pot` has an 
+argument `footnote` to specify which Footnote to use. If missing, no footnote 
+will be added.
+
+**Footnote are not supported within PowerPoint documents.**
+
+### Word example
+
+```{r}
+library( ReporteRs )
+
+footnote1 = Footnote( )
+footnote1 = addParagraph( footnote1, pot('About this reference', textBold( ) ) )
+
+mydoc = docx( )
+mydoc = addParagraph(mydoc, pot('Latius iam disseminata licentia', footnote = footnote1 ) )
+
+```
+
+

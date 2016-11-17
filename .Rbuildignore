@@ -7,3 +7,5 @@
 ^examples$
 ^revdep$
 ^README\.Rmd$
+^docs$
+_pkgdown\.yml

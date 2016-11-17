@@ -1,0 +1,390 @@
+---
+title: "FlexTable"
+output: 
+  rmarkdown::html_vignette:
+    toc: true 
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{FlexTable}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ReporteRs)
+library(magrittr)
+as_link <- function(file, txt, label){invisible()}
+if(require("htmltools")){
+  if( !is.null( getOption("GH_BUILD") ) && getOption("GH_BUILD") ){
+    as_link <- function(file, txt, label){
+      div(
+        txt, 
+        a(label, href=markdown:::.b64EncodeFile(file))
+      )
+    }
+  } 
+    
+}
+options("ReporteRs-fontsize" = 11)
+```
+
+`FlexTable` is a set of tools
+to customize tables, their formats and their contents. Formatting can be done
+on cells, paragraphs and text. It also lets you to insert headers and footers
+rows with eventually merged cells.
+
+## Table model
+
+Below a representation of the table model implemented with FlexTable.
+
+```{r echo=FALSE}
+dmodel <- data.frame( 
+  header_1 = c("data[1,1]", "data[2,1]", "...", "data[<code>n</code>,1]" ),
+  header_2 = c("data[1,2]", "data[2,2]", "...", "data[<code>n</code>,2]" ),
+  header_3 = c("data[1,...]", "data[2,...]", "...", "data[<code>n</code>,...]" ),
+  header_... = c("data[1,...]", "data[2,...]", "...", "data[<code>n</code>,...]" ),
+  header_p = c("data[1,<code>p</code>]", "data[2,<code>p</code>]", "...", "data[<code>n</code>,<code>p</code>]" )
+  )
+
+data_model = FlexTable( data = dmodel, header.columns = FALSE )
+data_model[ , 1:5] = textProperties( color="#DCDDD8" )
+data_model[ , 1:5] = parProperties( text.align="right" )
+data_model[ , 1:5] = cellProperties( background.color="#475F77")
+
+headerRow = FlexRow()
+headerRow[1] = FlexCell( pot( "Grouped header 1.1", format=textProperties(font.weight="bold") ), cell.properties = cellProperties( background.color="#DCDDD8"), colspan = 5 )
+data_model = addHeaderRow( data_model, headerRow)
+
+headerRow = FlexRow()
+headerRow[1] = FlexCell( pot( "Grouped header 2.1", format=textProperties(font.weight="bold") ), cell.properties = cellProperties( background.color="#DCDDD8"), colspan = 2 )
+headerRow[2] = FlexCell( pot( "Grouped header 2.2", format=textProperties(font.weight="bold") ), cell.properties = cellProperties( background.color="#DCDDD8"), colspan = 3 )
+data_model = addHeaderRow( data_model, headerRow)
+
+headerRow = FlexRow()
+for(i in 1:ncol(dmodel))
+	headerRow[i] = FlexCell( pot( names(dmodel)[i], format=textProperties(font.weight="bold") ), cell.properties = cellProperties( background.color="#DCDDD8") )
+data_model = addHeaderRow( data_model, headerRow)
+
+
+footerRow = FlexRow()
+footerRow[1] = FlexCell( pot( "Grouped footer 1.1", format=textProperties(font.weight="bold") ), cell.properties = cellProperties( background.color="#2BBBD8"), colspan = 2 )
+footerRow[2] = FlexCell( pot( "Grouped footer 1.2", format=textProperties(font.weight="bold") ), cell.properties = cellProperties( background.color="#2BBBD8"), colspan = 3 )
+data_model = addFooterRow( data_model, footerRow)
+#
+footerRow = FlexRow()
+footerRow[1] = FlexCell( pot( "Grouped footer 2.1", format=textProperties(font.weight="bold") ), cell.properties = cellProperties( background.color="#2BBBD8"), colspan = 5 )
+data_model = addFooterRow( data_model, footerRow)
+data_model
+```
+
+**Header rows**
+
+Header rows are the gray part of the table. A FlexTable can contain contain
+several header rows, it can also contain no header rows.
+
+**Body content**
+
+Body content is the blue part of the table.
+
+* It can be formatted (texts, paragraphs and cells)
+* Content can be added (from a vector, a data.frame or a matrix).
+* Cells can be merged horizontally or vertically.
+
+**Footer rows**
+
+Footer rows are the light-blue part of the table. A FlexTable can contain contain several footer rows, it can also contain no footer rows.
+
+## Usage
+
+FlexTable require either argument `data`, a data.frame object or a
+matrix, either argument `numrow` and `numcol`.
+
+When data is provided:
+
+* To add row.names, use `add.rownames = TRUE`. Remember that it increments the number
+of columns of your table.
+* To add data column names as headers, use `header.columns = TRUE`.
+
+Default format properties can also be specified:
+
+* `body.cell.props`: cellProperties object to apply to body cells.
+* `body.par.props`: parProperties object to apply to body cells.
+* `body.text.props`: textProperties object to apply to body cells.
+* `header.cell.props`: cellProperties object to apply to header and footer cells.
+* `header.par.props`: parProperties object to apply to header and footer cells.
+* `header.text.props`: textProperties object to apply to header and footer cells.
+
+Below an example. The following dataset will be used:
+
+```{r message=FALSE}
+library( dplyr )
+
+data(esoph)
+
+data_full = esoph %>% 
+  group_by( agegp, alcgp ) %>% 
+  summarize( n = n(),
+  ncases = sum( ncases, na.rm = T ), 
+  ncontrols = sum( ncases, na.rm = T ) )
+
+data = as.data.frame( head(data_full) )
+knitr::kable( data ) 
+```
+
+Below a first `FlexTable`:
+```{r}
+FlexTable(data)
+```
+
+There are also two shortcut functions to quickly produce FlexTable
+objects: `vanilla.table`and `light.table`.
+```{r}
+vanilla.table(data)
+```
+
+## Printing
+
+ If R session is interactive, the FlexTable is rendered in an HTML page
+and loaded into a WWW browser. Within RStudio FlexTable is rendered in
+the viewer.
+
+## Set Layout
+
+### Columns widths
+
+FlexTables have their columns autosized to the minimum width.
+Use `setFlexTableWidths` to specify each columns widths in inches.
+
+```{r}
+MyFTable <- vanilla.table(data)
+MyFTable <- setFlexTableWidths( MyFTable, widths = c(1, 1, rep(0.5, 3) ) )
+MyFTable
+```
+
+### Header Rows
+
+Add header rows with function `addHeaderRow`. As we want to add
+specific header rows, `header.columns` needs to be set to **FALSE**.
+
+```{r}
+MyFTable = FlexTable( data = data, header.columns= FALSE )
+# add first header row
+MyFTable = addHeaderRow( MyFTable, text.properties = textBold(),
+  value = c('Factors', 'Summary statistics'), colspan = c(2, 3) )
+# add second header row
+MyFTable = addHeaderRow( MyFTable, value = names( data ),
+  text.properties = textBold() )
+MyFTable
+```
+
+### Footer Rows
+
+Add footer rows with function `addFooterRow`.
+
+```{r}
+MyFTable = FlexTable( data = data )
+# add first header row
+MyFTable = addFooterRow( MyFTable, value = 'Summarized with dplyr',
+  colspan = 5, text.properties = textBoldItalic()
+)
+MyFTable
+```    
+
+### Merging data cell
+
+Functions `spanFlexTableRows` and `spanFlexTableColumns` are merging
+cells of a FlexTable object.
+
+There is a special argument `runs`. It specifies to merge cells that
+have identical values along `runs` values.
+
+The following code show usage of this parameter:
+
+```{r}
+MyFTable = FlexTable(data)
+MyFTable = spanFlexTableRows( MyFTable, j = 'agegp', runs = as.character( data$agegp ) )
+MyFTable
+```
+
+If argument **runs** is not what you need, there are arguments
+`from` and `to` that let you specify which cells are to be span.
+
+```{r}
+MyFTable = FlexTable(data)
+MyFTable = spanFlexTableColumns( MyFTable, i = 2, from = 2, to = 5 )
+MyFTable = spanFlexTableRows( MyFTable, j = 2, from = 3, to = 6 )
+MyFTable
+```
+
+### Rotate headers text of FlexTable
+
+When creating a table, you sometimes have a long table header like "Number of R users by country" and the data in the corresponding column is like "2", "123", ... That's an unpleasant mismatch of width. It's not a problem for two columns, but if you had 10 columns, a better use of space would be to rotate the headers so that the column width can be much narrower.
+
+FlexTable let you manage rotated headers text. It can be specified either with the `FlexTable` function either 
+whit the `addHeaderRow` function.
+
+It requires usage of argument `text.direction` within `cellProperties` associated with headers. This argument accept one of the following options: 
+
+* **lrtb**: default value, horizontal text
+* **tbrl**: 90 degree text rotation
+* **btlr**: 270 degree text rotation
+
+#### Method 1
+
+```{r}
+# define a cell properties object with text rotation 
+header_cells_props <- cellProperties( 
+  text.direction = "btlr", background.color = "#00557F", padding = 3 )
+
+header_text_props <- textProperties( 
+  color = "white", font.size = 11, font.weight = "bold" )
+
+MyFTable <- FlexTable( data = iris[46:55,], 
+    header.cell.props = header_cells_props, header.text.props = header_text_props, 
+    body.text.props = textProperties( font.size = 10 ) ) %>%
+  setFlexTableWidths( widths = c(.5, .5, .5, .5, .8 ))
+MyFTable[] = parCenter()
+
+doc <- pptx( title = "title" ) %>% 
+  addSlide( slide.layout = "Title and Content" ) %>% 
+  addFlexTable( MyFTable )
+filename <- tempfile(fileext = ".pptx") # the document to produce
+writeDoc( doc, file = filename )
+```
+
+```{r echo=FALSE}
+as_link(file = filename, txt = "It produces ", label = basename(filename) )
+```
+
+#### Method 2
+
+```{r}
+parprop <- parProperties(padding = 2)
+cellprop <- cellProperties( text.direction = "btlr" )
+MyFTable <- FlexTable( data = iris[46:55, ], header.columns = FALSE ) %>% 
+  addHeaderRow( value = c("Sepal", "Petal", ""), colspan = c( 2, 2, 1), 
+                par.properties = parprop ) %>% 
+  addHeaderRow( value=c("Length", "Width", "Length", "Width", "Species"), 
+    par.properties = parprop, cell.properties = cellprop )
+
+doc <- docx(  ) %>% 
+  addFlexTable( MyFTable )
+filename <- tempfile(fileext = ".docx") # the document to produce
+writeDoc( doc, file = filename )
+```
+
+
+## Format table
+
+### Change cell background color
+
+```{r}
+MyFTable = FlexTable(data)
+# change background colors of some cells in the table body
+MyFTable = setFlexTableBackgroundColors(MyFTable, j = 4,
+  colors = ifelse(data$ncases < 5, '#DDDDDD', 'orange'))
+# change background colors of a cell in the table header
+MyFTable = setFlexTableBackgroundColors(MyFTable, i = 1, j = 1,
+  colors = '#8888F0', to = 'header')
+MyFTable
+```
+
+### Set columns or rows background colors
+
+Modify rows or columns backgroud colors with `setRowsColors` and `setColumnsColors`.
+
+```{r}
+MyFTable = FlexTable( data = data )
+MyFTable = setRowsColors( MyFTable, i=3:4, colors = '#666633' )
+MyFTable = setColumnsColors( MyFTable, j=3, colors = '#990033' )
+MyFTable
+```
+
+### Zebra striped tables
+
+Modify rows or columns backgroud colors with `setRowsColors` and `setColumnsColors`.
+
+```{r}
+MyFTable = vanilla.table( data = data )
+MyFTable = setZebraStyle( MyFTable, odd = '#eeeeee', even = 'white' )
+MyFTable
+```
+
+### Format cell text values
+
+```{r}
+MyFTable = FlexTable(data)
+# format body content
+MyFTable[, 4:5] = textProperties( color = '#2BBBD8' )
+# format header content
+MyFTable[, 4:5, to = 'header'] = textProperties( color = '#2BBBD8', font.weight = 'bold' )
+MyFTable
+```
+
+### Format cells
+
+```{r}
+MyFTable = FlexTable(data)
+# format body content
+MyFTable[3:4, 'n'] = cellProperties( background.color = 'red' )
+# format header content
+MyFTable[, 'n', to = 'header'] = cellProperties( background.color = 'orange' )
+MyFTable
+```
+
+### Format paragraphs
+
+```{r}
+MyFTable = FlexTable(data)
+MyFTable <- setFlexTableWidths( MyFTable, widths = c(1, 1, rep(0.5, 3) ) )
+MyFTable[,c('agegp', 'alcgp')] = parRight()
+MyFTable[,c('agegp', 'alcgp'), to = 'header'] = parRight()
+MyFTable
+```
+
+### Change borders
+
+```{r}
+border_ <- borderProperties( style = 'dashed' )
+MyFTable[,'alcgp', side = 'bottom'] <- border_
+MyFTable[,'alcgp', to = 'header', side = 'bottom'] <- chprop(border_, color = "red")
+MyFTable
+```
+
+### Conditional formatting example
+
+```{r}
+# the default cellProperties
+myCellProps = cellProperties( )
+
+MyFTable = FlexTable( data = data, 
+                      header.text.props = textBold(), 
+                      header.cell.props = myCellProps, 
+                      body.cell.props= myCellProps )
+
+# modify the default cellProperties and apply
+# it to cells of columns 4 to 8 where n < 20
+MyFTable[ data$ncases < 1, 3:5] = chprop( myCellProps, background.color = '#666633')
+MyFTable
+```
+
+## Annotations
+
+You can add content with the substract operator.
+
+Function has an argument `text.properties` to specify text formatting properties:
+
+```{r}
+MyFTable[data$ncases < 1, 'n',
+  text.properties = textBold( vertical.align = 'superscript')] = '(1)'
+MyFTable
+```
+
+And an argument `newpar` to let create new paragraphs into cells.
+
+```{r}
+MyFTable[1, 1, text.properties = textBold(color = 'red'), newpar = TRUE] = 'newpar usage'
+MyFTable
+```
+

@@ -1,0 +1,100 @@
+title: ReporteRs package
+
+
+template:
+  package: tidytemplate2
+  bootswatch: simplex
+
+reference:
+  - title: Main functions
+    desc:  Most usefull functions when starting with ReporteRs
+    contents:
+    - docx
+    - pptx
+    - addTitle
+    - addParagraph
+    - addFlexTable
+    - addPlot
+    - addImage
+    - addRScript
+    - writeDoc
+  - title: Format functions
+    desc:  Main functions to be used when dealing with text
+    contents:
+    - pot
+    - textProperties
+    - parProperties
+  - title: Functions specific to Word
+    contents:
+    - addTOC
+    - addPageBreak
+    - addSection
+    - Footnote
+    - styles
+  - title: Functions specific to PowerPoint
+    contents:
+    - addSlide
+    - addDate
+    - addFooter
+    - addPageNumber
+    - addSubtitle
+    - slide.layouts
+  - title: FlexTable creation
+    contents:
+    - FlexTable
+    - vanilla.table
+    - light.table
+  - title: FlexTable layout
+    desc: Main functions to manage FlexTable layout
+    contents:
+    - addHeaderRow
+    - addFooterRow
+    - spanFlexTableRows
+    - spanFlexTableColumns
+    - setFlexTableWidths
+  - title: FlexTable format
+    desc: Main functions to format FlexTable content
+    contents:
+    - setFlexTableBackgroundColors
+    - setFlexTableBorders
+    - setZebraStyle
+    - setRowsColors
+    - setColumnsColors
+    - alterFlexTable
+    - cellProperties
+    - borderProperties
+  - title: FlexTable annotations
+    contents: alterFlexTable
+
+
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Word
+    menu:
+      - text: Overview
+        href: articles/word.html
+      - text: Replace content
+        href: articles/bookmarks.html
+  - text: Powerpoint
+    href: articles/powerpoint.html
+  - text: FlexTable
+    menu:
+      - text: Overview
+        href: articles/FlexTable.html
+      - text: Examples
+        href: articles/flextable_examples.html
+  - text: Formatting content
+    menu:
+      - text: Formatting properties
+        href: articles/formatting_properties.html
+      - text: pot objects
+        href: articles/pot.html
+      - text: Editable vector graphics
+        href: articles/evg.html
+  right:
+  - text: Function reference
+    href: reference/index.html
+  - icon: fa-github fa-lg
+    href: https://github.com/davidgohel/ReporteRs

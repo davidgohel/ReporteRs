@@ -1,0 +1,197 @@
+---
+title: "FlexTable examples"
+output: 
+  rmarkdown::html_vignette:
+    toc: true 
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{FlexTable examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ReporteRs)
+options("ReporteRs-fontsize" = 11)
+```
+
+## Correlation matrix
+
+```{r}
+data( mtcars )
+cormatrix = cor(mtcars)
+
+pal = c( "#D73027", "#F46D43", "#FDAE61", "#FEE08B", 
+  "#D9EF8B", "#A6D96A", "#66BD63", "#1A9850" )
+mycut = cut( cormatrix, 
+	breaks = c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1),
+	include.lowest = TRUE, label = FALSE )
+mycolors = pal[ mycut ]
+
+corrFT = FlexTable( round(cormatrix, 3), add.rownames = TRUE )
+
+# set computed colors
+corrFT = setFlexTableBackgroundColors( corrFT, 
+	j = seq_len(ncol(cormatrix)) + 1, 
+	colors = mycolors )
+
+# cosmetics
+corrFT = setFlexTableBackgroundColors( corrFT, i = 1, 
+	colors = "gray", to = "header" )
+corrFT[1, , to = "header"] = textBold(color="white")
+
+corrFT = setFlexTableBackgroundColors( corrFT, j = 1, colors = "gray" )
+corrFT[,1] = textBold(color="white")
+
+corrFT = setFlexTableBorders( corrFT
+	, inner.vertical = borderProperties( style = "dashed", color = "white" )
+	, inner.horizontal = borderProperties( style = "dashed", color = "white"  )
+	, outer.vertical = borderProperties( width = 2, color = "white"  )
+	, outer.horizontal = borderProperties( width = 2, color = "white"  )
+)
+corrFT
+```
+
+## Clinical like table
+
+### Example 1
+
+```{r message=FALSE}
+data = structure(list(Status = c("Alive", "Alive", "Alive", "Alive", 
+"Melanoma", "Melanoma", "Melanoma", "Melanoma", "Non-melanoma", 
+"Non-melanoma", "Non-melanoma", "Non-melanoma"), Gender = c("Female", 
+"Female", "Male", "Male", "Female", "Female", "Male", "Male", 
+"Female", "Female", "Male", "Male"), Ulceration = c("Absent", 
+"Present", "Absent", "Present", "Absent", "Present", "Absent", 
+"Present", "Absent", "Present", "Absent", "Present"), n = c(68L, 
+23L, 24L, 19L, 8L, 20L, 8L, 21L, 3L, 4L, 4L, 3L), Mean = c(1.693, 
+2.972, 1.468, 4.319, 2.139, 4.724, 3.266, 5.143, 1.667, 3.302, 
+2.42, 8.053), SD = c(2.004, 2.593, 1.719, 2.423, 1.184, 4.128, 
+4.681, 2.862, 1.141, 3.713, 2.499, 4.019)), class = "data.frame", .Names = c("Status", 
+"Gender", "Ulceration", "n", "Mean", "SD"), row.names = c(NA, 
+-12L))
+data
+
+# create a FlexTable
+# do not print header column names
+MyFTable = FlexTable( data = data[ , c( "Status", "Gender", "Ulceration", "n", "Mean") ], 
+  header.columns = FALSE )
+MyFTable
+
+# span rows of columns Status and Gender
+MyFTable = spanFlexTableRows( MyFTable, j = "Status", runs = as.character( data$Status ) )
+MyFTable = spanFlexTableRows( MyFTable, j = "Gender", runs = as.character( data$Gender ) )
+MyFTable
+
+# add "(sd)" to column 5
+MyFTable[, "Mean"] = paste0( " (&plusmn;", formatC( data$SD, digits=3, format = "f"), ")" )
+MyFTable
+
+#create a first header row
+MyFTable = addHeaderRow( MyFTable, 
+  value = c("", "Summary statistics for thickness"), colspan = c( 3, 2 ) )
+#create a second header row with names
+MyFTable = addHeaderRow(MyFTable, value = c( "Status"
+  , "Gender", "Ulceration", "Count", "Mean (&plusmn; sd)") )
+#create a footer row
+MyFTable = addFooterRow( MyFTable, value = c("* This is a footer note"), colspan = 5 )
+MyFTable[2,5, to="header"] = pot("*", textProperties( vertical.align = "superscript" ) )
+MyFTable
+
+    # border properties to use later
+    no_border = borderProperties( width = 0 )
+    big_border = borderProperties( width = 2 )
+    std_border = borderProperties( width = 1 )
+    another_border = borderProperties(width = 2, color = "red", style = "dashed")
+
+# format the table grid borders
+MyFTable = setFlexTableBorders( MyFTable, footer = TRUE, 
+  inner.vertical = no_border, inner.horizontal = std_border,
+  outer.vertical = no_border, outer.horizontal = big_border )
+
+MyFTable[2,1:3, to="header", side = "top"] = no_border
+MyFTable
+```
+
+## Model summary table
+
+```{r}
+data(mtcars)
+mtcars$cyl = as.factor(mtcars$cyl)
+data = summary(lm(mpg ~ wt + cyl, data=mtcars))$coefficients
+
+data = as.data.frame( data )
+
+
+# get signif codes
+signif.codes = cut( data[,4]
+  , breaks = c( -Inf, 0.001, 0.01, 0.05, Inf)
+  , labels= c("***", "**", "*", "" ) )
+
+# format the data values
+data[, 1] = formatC( data[, 1], digits=3, format = "f")
+data[, 2] = formatC( data[, 2], digits=3, format = "f")
+data[, 3] = formatC( data[, 3], digits=3, format = "f")
+data[, 4] = ifelse( data[, 4] < 0.001, "&lt; 0.001", formatC( data[, 4], digits=5, format = "f"))
+# add signif codes to data
+data$Signif = signif.codes
+
+# create an empty FlexTable
+coef_ft = FlexTable( data = data, add.rownames=TRUE
+  , body.par.props = parRight(), header.text.props = textBold() 
+  , header.columns = T
+)
+# center the first column and set text as bold italic
+coef_ft[,1] = parCenter()
+coef_ft[,1] = textBoldItalic()
+
+# define borders
+coef_ft = setFlexTableBorders( coef_ft
+  , inner.vertical = borderNone(), inner.horizontal = borderDotted()
+  , outer.vertical = borderNone(), outer.horizontal = borderSolid()
+)
+coef_ft
+```
+
+## Conditional colored table
+
+```{r}
+# a summary of mtcars
+dataset = aggregate( mtcars[, c("disp", "mpg", "wt")]
+  , by = mtcars[, c("cyl", "gear", "carb")]
+  , FUN = mean )
+
+dataset = dataset[ order(dataset$cyl, dataset$gear, dataset$carb), ]
+
+# set cell padding defaut to 2
+baseCellProp = cellProperties( padding = 2 )
+
+# Create a FlexTable with data.frame dataset
+my_ft = FlexTable( data = dataset
+  , body.cell.props = baseCellProp
+	, header.cell.props = baseCellProp
+	, header.par.props = parProperties(text.align = "center" )
+)
+
+# set columns widths (in inches)
+my_ft = setFlexTableWidths( my_ft, widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
+
+# span successive identical cells within column 1
+my_ft = spanFlexTableRows( my_ft, j = 1, runs = as.character( dataset$cyl ) )
+
+# overwrites some text formatting properties
+my_ft[dataset$wt < 3, 6] = textProperties( color="#FF3333", font.weight = "bold" )
+my_ft[dataset$mpg < 20, 5] = chprop( baseCellProp, background.color = "#00AAAA")
+
+# overwrites some paragraph formatting properties
+my_ft[, 4:6] = parProperties(text.align = "right")
+
+# applies a border grid on table
+my_ft = setFlexTableBorders( my_ft
+	, outer.vertical = borderProperties( width = 2 )
+	, outer.horizontal = borderProperties( width = 2 )
+)
+my_ft
+```
+

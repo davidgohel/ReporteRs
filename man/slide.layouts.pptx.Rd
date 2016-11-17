@@ -34,8 +34,7 @@ layouts
 for(i in layouts ){
 	slide.layouts(doc, i )
 	title(sub = i )
-	if( interactive() ) readline(prompt = "show next slide layout")
-} 
+}
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}

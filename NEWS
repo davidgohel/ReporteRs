@@ -3,6 +3,7 @@
 ## DEBUG
 
 * bookmarks were lost after replacement in a docx
+* fix print method
 
 CHANGES
 ------------------------------------------------------------------

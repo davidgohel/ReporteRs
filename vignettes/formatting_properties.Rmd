@@ -1,7 +1,9 @@
 ---
 title: "Formatting properties"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true 
+    toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{Formatting properties}
   %\VignetteEngine{knitr::rmarkdown}
@@ -12,6 +14,7 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
 library( magrittr )
+options("ReporteRs-fontsize" = 11)
 ```
 
 `ReporteRs` has functions to manage objects representing:

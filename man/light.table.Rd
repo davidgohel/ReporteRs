@@ -2,7 +2,7 @@
 % Please edit documentation in R/FlexTable_theme.R
 \name{light.table}
 \alias{light.table}
-\title{get a simple FlexTable from a dataset}
+\title{light FlexTable shortcut}
 \usage{
 light.table(dataset, add.rownames = FALSE, text.direction = "lrtb")
 }
@@ -11,14 +11,14 @@ light.table(dataset, add.rownames = FALSE, text.direction = "lrtb")
 
 \item{add.rownames}{logical value - should the row.names be included in the table.}
 
-\item{text.direction}{header cell text rotation - a single character value, expected 
+\item{text.direction}{header cell text rotation - a single character value, expected
 value is one of "lrtb", "tbrl", "btlr".}
 }
 \description{
 get a simple FlexTable from a dataset
 }
 \examples{
-light.table( iris)
+ft <- light.table( iris)
 }
 \seealso{
 \code{\link{FlexTable}}

@@ -17,11 +17,10 @@
 a \code{\link{FlexTable}} object
 }
 \description{
-Get a \code{\link{FlexTable}} object from 
+Get a \code{\link{FlexTable}} object from
 a \code{\link{sessionInfo}} object.
 }
 \examples{
-#
-as.FlexTable( sessionInfo() )
+ft <- as.FlexTable( sessionInfo() )
 }
 

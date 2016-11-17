@@ -23,7 +23,6 @@ slide.layouts.pptx = function( doc, layout, ... ) {
 		stop("You must defined layout in your pptx template.")
 	}
 
-
 	if( !missing( layout ) ){
 		if( !is.element( layout, doc$styles ) ){
 			stop("Slide layout '", layout, "' does not exist in defined layouts.")

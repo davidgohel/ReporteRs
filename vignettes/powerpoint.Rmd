@@ -1,10 +1,9 @@
 ---
 title: "PowerPoint documents"
-date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true 
-    toc_depth: 2
+    toc_depth: 3
 vignette: >
   %\VignetteIndexEntry{PowerPoint documents}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,6 +14,21 @@ vignette: >
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 library(ReporteRs)
+
+as_link <- function(file, txt, label){invisible()}
+if(require("htmltools")){
+  if( !is.null( getOption("GH_BUILD") ) && getOption("GH_BUILD") ){
+    as_link <- function(file, txt, label){
+      div(
+        txt, 
+        a(label, href=markdown:::.b64EncodeFile(file))
+      )
+    }
+  } 
+    
+}
+
+options("ReporteRs-fontsize" = 11)
 ```
 
 
@@ -85,6 +99,11 @@ filename <- tempfile(fileext = ".pptx") # the document to produce
 writeDoc( mydoc, filename )
 ```
 
+```{r echo=FALSE}
+as_link(file = filename, txt = "It produces ", label = basename(filename) )
+```
+
+
 ## Templates, layouts and styles
 
 `pptx` will let you create documents based on a 'pptx' template file.
@@ -123,23 +142,6 @@ Move and or resize them regarding to the content it should contains.
 5. Save and close the template
 6. Create a `pptx` object with function pptx using the argument `template` specifying the template filename.
 
-## Functions list
-
-The following functions can only be used when the output format is pptx, which you create as described above.
-
-* Add a title: addTitle
-* Add a table: addFlexTable
-* Add plots: addPlot
-* Add external images: addImage
-* Add syntax highlighted R code: addRScript
-* Add paragraphs of text: addParagraph
-* Add a slide: addSlide
-* Write the document into a file: writeDoc
-* Add a date: addDate
-* Add a footer: addFooter
-* Add a page number: addPageNumber
-* Add a sub title: addSubtitle
-
 
 ## Key functions and arguments
 
@@ -155,6 +157,12 @@ let you specify which layout to use to design the new slide.
 doc <- pptx()
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addSlide( doc, slide.layout = 'Two Content' )
+filename <- tempfile(fileext = ".pptx") # the document to produce
+writeDoc( mydoc, filename )
+```
+
+```{r echo=FALSE}
+as_link(file = filename, txt = "It produces ", label = basename(filename) )
 ```
 
 ### Function `slide.layouts`
@@ -227,6 +235,9 @@ mydoc <- addFlexTable( doc = mydoc, FlexTable( head( iris ) ),
 filename <- tempfile(fileext = ".pptx") # the document to produce
 writeDoc( mydoc, file = filename )
 ```
+```{r echo=FALSE}
+as_link(file = filename, txt = "It produces ", label = basename(filename) )
+```
 
 ## Specific functions
 
@@ -241,8 +252,12 @@ doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addDate( doc )
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addDate( doc, 'Dummy date' )
+filename <- tempfile(fileext = ".pptx") # the document to produce
+writeDoc( mydoc, file = filename )
 ```
-
+```{r echo=FALSE}
+as_link(file = filename, txt = "It produces ", label = basename(filename) )
+```
 
 ### Page number
 
@@ -255,6 +270,11 @@ doc <-addSlide( doc, slide.layout = 'Title and Content' )
 doc <-addPageNumber( doc )
 doc <-addSlide( doc, slide.layout = 'Title and Content' )
 doc <-addPageNumber( doc, 'Dummy text' )
+filename <- tempfile(fileext = ".pptx") # the document to produce
+writeDoc( mydoc, file = filename )
+```
+```{r echo=FALSE}
+as_link(file = filename, txt = "It produces ", label = basename(filename) )
 ```
 
 ### Footer
@@ -267,6 +287,11 @@ document.
 doc <- pptx()
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addFooter( doc, 'Dummy text' )
+filename <- tempfile(fileext = ".pptx") # the document to produce
+writeDoc( mydoc, file = filename )
+```
+```{r echo=FALSE}
+as_link(file = filename, txt = "It produces ", label = basename(filename) )
 ```
 
 ### Subtitle
@@ -281,6 +306,11 @@ doc <- pptx()
 doc <- addSlide( doc, slide.layout = 'Title Slide' )
 doc <- addTitle( doc, 'Presentation title' )
 doc <- addSubtitle( doc , 'This document is generated with ReporteRs.')
+filename <- tempfile(fileext = ".pptx") # the document to produce
+writeDoc( mydoc, file = filename )
+```
+```{r echo=FALSE}
+as_link(file = filename, txt = "It produces ", label = basename(filename) )
 ```
 
 
@@ -318,6 +348,11 @@ pptx( title = "title" ) %>%
   addSlide( slide.layout = "Title and Content" ) %>% 
   addFlexTable( vanilla.table(head(iris) ) ) %>% 
   writeDoc( file = filename )
+filename <- tempfile(fileext = ".pptx") # the document to produce
+writeDoc( mydoc, file = filename )
+```
+```{r echo=FALSE}
+as_link(file = filename, txt = "Get the result ", label = "here" )
 ```
 
 
