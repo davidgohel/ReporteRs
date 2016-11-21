@@ -118,15 +118,29 @@ Default format properties can also be specified:
 Below an example. The following dataset will be used:
 
 ```{r message=FALSE}
-library( dplyr )
-
-data(esoph)
-
-data_full = esoph %>% 
-  group_by( agegp, alcgp ) %>% 
-  summarize( n = n(),
-  ncases = sum( ncases, na.rm = T ), 
-  ncontrols = sum( ncases, na.rm = T ) )
+# library( dplyr )
+# 
+# data(esoph)
+# 
+# data_full = esoph %>% 
+#   group_by( agegp, alcgp ) %>% 
+#   summarize( n = n(),
+#   ncases = sum( ncases, na.rm = T ), 
+#   ncontrols = sum( ncases, na.rm = T ) )
+data_full <- structure(list(agegp = structure(c(1L, 1L, 1L, 1L, 2L, 2L, 2L, 
+2L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 5L, 5L, 5L, 5L, 6L, 6L, 6L, 
+6L), .Label = c("25-34", "35-44", "45-54", "55-64", "65-74", 
+"75+"), class = c("ordered", "factor")), alcgp = structure(c(1L, 
+2L, 3L, 4L, 1L, 2L, 3L, 4L, 1L, 2L, 3L, 4L, 1L, 2L, 3L, 4L, 1L, 
+2L, 3L, 4L, 1L, 2L, 3L, 4L), .Label = c("0-39g/day", "40-79", 
+"80-119", "120+"), class = c("ordered", "factor")), n = c(4L, 
+4L, 3L, 4L, 4L, 4L, 4L, 3L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 
+3L, 4L, 4L, 3L, 4L, 2L, 2L), ncases = c(0, 0, 0, 1, 1, 4, 0, 
+4, 1, 20, 12, 13, 12, 22, 24, 18, 11, 25, 13, 6, 4, 4, 2, 3), 
+    ncontrols = c(0, 0, 0, 1, 1, 4, 0, 4, 1, 20, 12, 13, 12, 
+    22, 24, 18, 11, 25, 13, 6, 4, 4, 2, 3)), .Names = c("agegp", 
+"alcgp", "n", "ncases", "ncontrols"), row.names = c(NA, -24L), class = c("grouped_df", 
+"tbl_df", "tbl", "data.frame"), vars = list(agegp), drop = TRUE)
 
 data = as.data.frame( head(data_full) )
 knitr::kable( data ) 
