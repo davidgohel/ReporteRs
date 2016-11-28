@@ -4,6 +4,8 @@
 
 * bookmarks were lost after replacement in a docx
 * fix print method
+* fix raster issue in editable plots when there were
+  more than one image to render.
 
 CHANGES
 ------------------------------------------------------------------

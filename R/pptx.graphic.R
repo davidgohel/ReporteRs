@@ -11,9 +11,9 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
   filename = tempfile( fileext = ".dml")
   filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
-  next_rels_id <- rJava::.jcall( slide, "S", "getNextRelID" )
-  next_rels_id <- gsub(pattern = "(.*)([0-9]+)$", "\\2", next_rels_id )
-  next_rels_id <- as.integer(next_rels_id) - 1
+  rel_xml <- rJava::.jcall( slide, "S", "getRelationship_xml" )
+  rel_ <- rel_df(rel_xml)
+  next_rels_id <- max(rel_$int_id)
   uid <- basename(tempfile(pattern = ""))
   raster_dir <- tempdir()
   img_directory <- file.path(raster_dir, uid )
@@ -27,7 +27,7 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
                         symbol = fontname_symbol),
            editable = editable,
            bg = bg,
-           next_rels_id = next_rels_id,
+           last_rel_id = next_rels_id,
            raster_prefix = img_directory
   )
   tryCatch(fun(...), finally = dev.off() )

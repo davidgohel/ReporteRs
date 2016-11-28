@@ -120,9 +120,9 @@ addPlot.docx = function(doc, fun,
     filename = tempfile( fileext = ".dml")
     filename = normalizePath( filename, winslash = "/", mustWork  = FALSE)
 
-    next_rels_id <- rJava::.jcall( doc$obj, "S", "getNextRelID" )
-    next_rels_id <- gsub(pattern = "^rId", "", next_rels_id )
-    next_rels_id <- as.integer(next_rels_id)-1
+    rel_xml <- rJava::.jcall( doc$obj, "S", "getRelationship_xml" )
+    rel_ <- rel_df(rel_xml)
+    last_rel_id <- max(rel_$int_id)
     uid <- basename(tempfile(pattern = ""))
     raster_dir <- tempdir()
     img_directory <- file.path(raster_dir, uid )
@@ -136,7 +136,7 @@ addPlot.docx = function(doc, fun,
                           serif = fontname_serif, mono = fontname_mono,
                           symbol = fontname_symbol),
              editable = editable,
-             next_rels_id = next_rels_id,
+             last_rel_id = last_rel_id,
              raster_prefix = img_directory, standalone = TRUE)
     tryCatch(fun(...),
              finally = dev.off()

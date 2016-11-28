@@ -303,5 +303,16 @@ next_shape_pos = function( doc ){
 }
 
 
+#' @importFrom xml2 read_xml xml_children xml_ns xml_attr
+rel_df <- function(x) {
+  doc <- read_xml( x )
+  children <- xml_children( doc )
+  ns <- xml_ns( doc )
+  id <- sapply( children, xml_attr, attr = "Id", ns)
+  int_id <- as.integer( gsub(pattern = "^rId", replacement = "", x = id ) )
+  type <- sapply( children, xml_attr, attr = "Type", ns)
+  target <- sapply( children, xml_attr, attr = "Target", ns)
+  data.frame(id = id, int_id = int_id, type = type, target = target, stringsAsFactors = FALSE )
+}
 
 
