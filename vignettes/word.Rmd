@@ -13,29 +13,15 @@ vignette: >
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
-as_link <- function(file, txt, label){invisible()}
-if(require("htmltools")){
-  if( !is.null( getOption("GH_BUILD") ) && getOption("GH_BUILD") ){
-    as_link <- function(file, txt, label){
-      tagList(
-        # tags$iframe(
-        #   "iframes are not supported",
-        #   src = paste0("http://view.officeapps.live.com/op/view.aspx?src=", 
-        #                getOption("base_url"),
-        #                
-        #                ),
-        #   width = "80%", height="500px;"
-        # ),
-        # 
-        div(
-          txt, 
-          a(label, href=markdown:::.b64EncodeFile(file))
-        )
-      )
-    }
-  } 
-    
-}
+# tags$iframe(
+#   "iframes are not supported",
+#   src = paste0("http://view.officeapps.live.com/op/view.aspx?src="),
+#   width = "80%", height="500px;"
+# ),
+# 
+if(!require(filelink))
+  as_link <- function(file, txt, label){invisible()}
+
 options("ReporteRs-fontsize" = 11)
 ```
 
@@ -276,11 +262,13 @@ doc <- addPageBreak(doc)
 
 ### Section
 
-Function `addSection` lets you add a section and change document orientation
-and split new content along 2 or more columns.
+Function `addSection` lets you add a section. 
+With a section, you can change document orientation and 
+split new content along 2 or more columns.
 
-The function requires you to **add a section before and after** the item(s) that 
-you want to be on a landscape and/or multicolumns mode page. 
+The function requires you to **add a section before 
+and after** the item(s) that you want to be on a 
+landscape and/or multicolumns mode page. 
 
 ```{r message=FALSE}
 library(magrittr)

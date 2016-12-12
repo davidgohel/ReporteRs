@@ -60,6 +60,9 @@
       <a href="articles/evg.html">Editable vector graphics</a>
     </li>
   </ul></li>
+<li>
+  <a href="articles/faq.html">FAQ</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="reference/index.html">Function reference</a>
 </li>
@@ -126,8 +129,10 @@ filename &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span cl
 <p><code>system("java -version")</code> should return <em>java version &lsquo;1.6.0&rsquo;</em> or greater.</p>
 <p>Test your <code>rJava</code> installation with the following code, you should get your java version in a string:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(rJava)
+<span class="kw">.jinit</span>()
+<span class="co">#&gt; [1] 0</span>
 <span class="kw">.jcall</span>(<span class="st">'java.lang.System'</span>,<span class="st">'S'</span>,<span class="st">'getProperty'</span>,<span class="st">'java.version'</span>)
-<span class="co">#&gt; [1] "1.6.0_65"</span></code></pre></div>
+<span class="co">#&gt; [1] "1.8.0_31"</span></code></pre></div>
 <div id="get-cran-version" class="section level3">
 <h3 class="hasAnchor"><a href="#get-cran-version" class="anchor"> </a>Get CRAN version</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'ReporteRs'</span>)</code></pre></div>

@@ -34,8 +34,9 @@ Expected value is an existing stylename of the template document used to create 
 \item{bookmark}{a character value ; id of the Word bookmark to
 replace by the table. optional.}
 
-\item{par.properties}{\code{\link{parProperties}} to apply to paragraphs, only used
-if \code{stylename} if missing.}
+\item{par.properties}{\code{\link{parProperties}} to apply to paragraphs. When used in Word
+documents, it will only be used if \code{stylename} if missing. When used in PowerPoint
+documents, it will be used if \code{offx} or \code{offy} is used.}
 
 \item{restart.numbering}{boolean value. If \code{TRUE}, next numbered
 list counter will be set to 1.}

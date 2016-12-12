@@ -69,8 +69,10 @@ Test your `rJava` installation with the following code, you should get your java
 
 ``` r
 require(rJava)
+.jinit()
+#> [1] 0
 .jcall('java.lang.System','S','getProperty','java.version')
-#> [1] "1.6.0_65"
+#> [1] "1.8.0_31"
 ```
 
 ### Get CRAN version

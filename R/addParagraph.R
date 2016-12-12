@@ -32,8 +32,9 @@ addParagraph <- function(doc, value, ...){
 #' \code{docx} object. see \code{\link{styles.docx}}.
 #' @param bookmark a character value ; id of the Word bookmark to
 #' replace by the table. optional.
-#' @param par.properties \code{\link{parProperties}} to apply to paragraphs, only used
-#' if \code{stylename} if missing.
+#' @param par.properties \code{\link{parProperties}} to apply to paragraphs. When used in Word
+#' documents, it will only be used if \code{stylename} if missing. When used in PowerPoint
+#' documents, it will be used if \code{offx} or \code{offy} is used.
 #' @param restart.numbering boolean value. If \code{TRUE}, next numbered
 #' list counter will be set to 1.
 #' @examples

@@ -93,6 +93,8 @@ navbar:
         href: articles/pot.html
       - text: Editable vector graphics
         href: articles/evg.html
+  - text: FAQ
+    href: articles/faq.html
   right:
   - text: Function reference
     href: reference/index.html

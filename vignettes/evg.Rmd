@@ -14,18 +14,9 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
 library(magrittr)
-as_link <- function(file, txt, label){invisible()}
-if(require("htmltools")){
-  if( !is.null( getOption("GH_BUILD") ) && getOption("GH_BUILD") ){
-    as_link <- function(file, txt, label){
-      div(
-        txt, 
-        a(label, href=markdown:::.b64EncodeFile(file))
-      )
-    }
-  } 
-    
-}
+if(!require(filelink))
+  as_link <- function(file, txt, label){invisible()}
+
 options("ReporteRs-fontsize" = 11)
 ```
 

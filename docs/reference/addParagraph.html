@@ -99,6 +99,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../articles/faq.html">FAQ</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -161,8 +164,9 @@ Expected value is an existing stylename of the template document used to create 
       <dd>a character value ; id of the Word bookmark to
 replace by the table. optional.</dd>
       <dt>par.properties</dt>
-      <dd><code><a href='parProperties.html'>parProperties</a></code> to apply to paragraphs, only used
-if <code>stylename</code> if missing.</dd>
+      <dd><code><a href='parProperties.html'>parProperties</a></code> to apply to paragraphs. When used in Word
+documents, it will only be used if <code>stylename</code> if missing. When used in PowerPoint
+documents, it will be used if <code>offx</code> or <code>offy</code> is used.</dd>
       <dt>restart.numbering</dt>
       <dd>boolean value. If <code>TRUE</code>, next numbered
 list counter will be set to 1.</dd>

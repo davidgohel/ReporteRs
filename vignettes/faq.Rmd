@@ -1,0 +1,163 @@
+---
+title: "FAQ"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FAQ}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ReporteRs)
+library(magrittr)
+if(!require(filelink))
+  as_link <- function(file, txt, label){invisible()}
+
+options("ReporteRs-fontsize" = 11)
+```
+
+## Installation
+
+Install ReporteRs from cran with the following command:
+
+```{r eval=FALSE}
+install.packages("ReporteRs")
+```
+
+
+Install developement version of ReporteRs from Github with the following command:
+
+```{r eval=FALSE}
+devtools::install_github("davidgohel/ReporteRs")
+```
+
+### Dependancies
+
+`ReporteRs` needs packages `rvg` and `gdtools`. 
+
+**This requires a cpp coompiler.** If have no idea what it means :
+
+* you're using R for Windows, install [Rtools](https://cran.r-project.org/bin/windows/Rtools)
+* you're using R for Mac, install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
+* you're using R for Linux, you should manage on your own!
+
+### Something screwed up
+
+#### Could not find build tools
+
+If you get an error during this step 
+saying `Error: Could not find build tools necessary to build XXX`, you are probably installing the package from source (and rebuilding also rvg or gdtools), best advice is to read again that [part](#dependancies) :). 
+
+
+#### rJava hell
+
+Common errors are:
+
+* JAVA_HOME cannot be determined from the Registry
+
+```
+Loading required package: rJava
+library(rJava)
+Error : .onLoad failed in loadNamespace() for ‘rJava’, details:
+call: fun(libname, pkgname)
+error: JAVA_HOME cannot be determined from the Registry
+```
+
+* unable to load shared object [...] rJava.dll
+
+```
+Error : .onLoad failed in loadNamespace() for 'rJava', details:
+  call: inDL(x, as.logical(local), as.logical(now), ...)
+  error: unable to load shared object '[...]/rJava/libs/x64/rJava.dll':
+  LoadLibrary failure:  %1 is not a valid Win32 application.
+
+Error: package/namespace load failed for 'rJava'
+```
+
+Most of the time, it comes from a bad java installation on your Windows machine:
+
+* you are running R 64 bits but you have installed java 32 bits
+* you are running R 32 bits but you have installed java 64 bits
+
+Solution is to install the java version corresponding to your R version. I found that post very usefull:
+
+https://www.r-statistics.com/2012/08/how-to-load-the-rjava-package-after-the-error-java_home-cannot-be-determined-from-the-registry/
+
+I have a Windows 64 bits, I installed java 32 bits and java 64 bits. When I install ReporteRs, I don't meet any trouble. 
+
+If you are on a Windows machine and (for any reason) you can only have one java version (32 or 64 bits), install the package with the following option :
+
+```{r eval=FALSE}
+install.packages("ReporteRs", INSTALL_opts = "--no-multiarch")
+```
+
+
+Some solutions on Stackoverflow involve to set environment variable `JAVA_HOME`. I never had to use that but it seems a valid solution for some configurations. 
+
+## Word: replace only a word in a paragraph
+
+That is not a feature but this can be achieved by formating your text with `pot` objects. 
+
+```{r}
+library(ReporteRs)
+
+# various text formatting properties we will use----
+base_text_prop <- textProperties(font.family = "Arial")
+bold_text_prop <- chprop( base_text_prop, 
+                          font.weight = "bold", color = "red")
+italic_text_prop <- chprop( base_text_prop, font.style = "italic")
+
+# concatenate chunk of formatted text -----
+your_pot <- pot("This is a pot ", format = base_text_prop) + 
+  pot( "with italic text", format = italic_text_prop) + 
+  pot( " and red bold", format = bold_text_prop)
+  
+
+# replace whole paragraph by the previous object -----
+doc <- docx( title = "My example",
+            template = file.path( system.file(package = "ReporteRs"),
+                                  "templates/bookmark_example.docx") ) 
+
+doc <- addParagraph(doc, your_pot, bookmark = "REVIEWER" )
+target_file <- tempfile(fileext = ".docx") # file to produce 
+writeDoc(doc, target_file)
+```
+
+```{r echo=FALSE}
+as_link(file = target_file, txt = "It produces ", label = basename(target_file) )
+```
+
+## PowerPoint: offx, offy, width and height
+
+You may want to arrange plot, tables or paragraphs freely on a slide - without mapping content to a layout defined in the slide master layouts. 
+
+In this case, usage of some parameters is becoming mandatory. You will need to specify:
+
+- `width` and `height` that are the shape dimensions 
+- arguments `offx` and `offy` that are the shape positions (left and top positions)
+
+## PowerPoint and par.properties
+
+Usually there is no need for managing `par.properties` when adding content in a slide: i.e. graphics and tables cannot be associated with center or padding properties. Paragraphs can.
+
+When formatting properties of paragraphs don't inherit from the template (**when adding a `pot` or a `set_of_paragraphs`**), `par.properties` can be used to specify alignment of paragraphs. 
+
+```{r}
+library(ReporteRs)
+
+doc <- pptx( )
+doc <- addSlide( doc, slide.layout = "Title and Content" )
+
+doc <- addParagraph( par.properties = parCenter(),
+    doc = doc, value = pot("this is a pot", textBold(color = "red")), 
+    offx = 3, offy = 5, width = 2, height = 1 )
+
+target_file <- tempfile(fileext = ".pptx") # file to produce 
+writeDoc(doc, target_file)
+```
+
+```{r echo=FALSE}
+as_link(file = target_file, txt = "It produces ", label = basename(target_file) )
+```
+

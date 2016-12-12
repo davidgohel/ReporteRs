@@ -85,6 +85,7 @@ Test your `rJava` installation with the following code, you should get your java
 
 ```{r message=FALSE}
 require(rJava)
+.jinit()
 .jcall('java.lang.System','S','getProperty','java.version')
 ```
 

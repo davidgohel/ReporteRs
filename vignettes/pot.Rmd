@@ -102,6 +102,23 @@ pot( 'Cats', hyperlink = 'http://en.wikipedia.org',
   textBoldItalic( color = '#428BCA', underline = TRUE ) ) 
 ```
 
+## pot_img
+
+`pot_img` have been implemented to let you arrange text (`pot`) and images(`pot_img`) into a paragraph. 
+
+```{r}
+img.file <- file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
+
+mypot <- "This paragraph mix an image and text into a paragraph: " + pot_img(filename = img.file, width = .3, height = .3) + pot( '4Cats', textBoldItalic( color = '#428BCA', underline = TRUE ) )
+mypot
+
+MyFTable = FlexTable( data = mtcars[1:5, ], add.rownames = TRUE )
+MyFTable[1,1, to = "header"] <- mypot
+MyFTable
+```
+
+**This feature is not available when working with `pptx` object (and you can't mix text and images in PowerPoint).**
+
 ## Footnotes
 
 Footnotes can be added to pot objects.
