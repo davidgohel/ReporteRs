@@ -90,6 +90,7 @@ If you are on a Windows machine and (for any reason) you can only have one java 
 
 ```{r eval=FALSE}
 install.packages("ReporteRs", INSTALL_opts = "--no-multiarch")
+install_github("davidgohel/ReporteRs", args = "--no-multiarch")
 ```
 
 
