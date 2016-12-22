@@ -53,11 +53,6 @@ styles(doc)
 ```
 ```
 
-```{r echo=FALSE}
-office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(template) ) )
-```
-
-
 Let use `iris` to illustrate tables and graphics.
 
 ```{r message=FALSE, warning=FALSE}

@@ -134,19 +134,8 @@ adding titles with `addTitle`, adding specific TOC with `addTOC`.
 Function `addParagraph` has an optional argument `stylename` whose value must 
 be one of the names returned by the function `styles`.
 
-
 ```{r}
-doc <- docx( )
-
-# display all available styles with their names
 doc <- addParagraph( doc, value = "Hello", stylename = "Normal")
-
-filename <- "styles.docx" # the document to produce
-writeDoc( doc, file = filename)
-```
-
-```{r echo=FALSE}
-office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ## Specific functions
