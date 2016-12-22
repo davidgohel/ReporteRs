@@ -37,11 +37,12 @@ addFlexTable = function(doc, flextable, ...){
 #'   	If provided, table will be add after paragraph that contains the bookmark.
 #'   	If not provided, table will be added at the end of the document.
 #' @examples
+#' \donttest{
 #' # docx example -----
 #' doc = docx( )
 #' doc = addFlexTable( doc, flextable = ft_obj )
 #' writeDoc( doc, file = "add_ft_ex.docx" )
-#'
+#' }
 #'
 #' @rdname addFlexTable
 #' @export
@@ -90,12 +91,13 @@ addFlexTable.bsdoc = function(doc, flextable,
 #' If arguments offx, offy, width, height are provided, they become position and
 #' dimensions of the new shape.
 #' @examples
+#' \donttest{
 #' # pptx example -----
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' doc = addFlexTable( doc, flextable = ft_obj )
 #' writeDoc( doc, file = "add_ft_ex.pptx" )
-#'
+#' }
 #'
 #' @rdname addFlexTable
 #' @export

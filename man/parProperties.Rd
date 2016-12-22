@@ -82,30 +82,22 @@ Get a modified version of a \code{parProperties} with
 \code{chprop}.
 }
 \examples{
-# parProperties examples -------
 parProperties( text.align = "center", padding = 5)
 
-parProperties( text.align = "center", 
-  padding.top = 5,
-  padding.bottom = 0,
-  padding.left = 2,
-  padding.right = 0
-)
+parProperties( text.align = "center",
+  padding.top = 5, padding.bottom = 0,
+  padding.left = 2, padding.right = 0 )
 
 parProperties( list.style = "ordered", level = 2)
 
 parProperties( list.style = "unordered", level = 2)
-
-# chprop usage example ------
 parProp = parProperties()
 
-parProp01 = chprop( parProp, text.align = "center" )
-parProp02 = chprop( parProp, padding.bottom = 2 )
-parProp03 = chprop( parProp, padding.top = 2 )
-parProp04 = chprop( parProp, padding.left = 2 )
-parProp05 = chprop( parProp, padding = 2 )
+chprop( parProp, text.align = "center" )
+chprop( parProp, padding.left = 2 )
+chprop( parProp, padding = 2 )
 
-parProp06 = chprop( parProp, padding = 2, text.align = "center" )
+chprop( parProp, padding = 2, text.align = "center" )
 }
 \seealso{
 \code{\link{alterFlexTable}}, \code{\link{addParagraph}},

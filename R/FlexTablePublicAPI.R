@@ -24,9 +24,34 @@
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFooterRow}}
 #' , \code{\link{alterFlexTable}}
 #' @examples
-#' #
-#' @example examples/addHeaderRowDefaults.R
-#' @example /examples/addHeaderRowFormats.R
+#' # simple example ----
+#'
+#' # set header.columns to FALSE so that default header row is not added in
+#' # the FlexTable object
+#' # We do only want the 4 first columns of the dataset
+#' MyFTable <- FlexTable( data = iris[46:55, ], header.columns = FALSE )
+#'
+#' # add an header row with 3 cells, the first one spans two columns,
+#' # the second one spans two columns and the last one does not span
+#' # multiple columns
+#' MyFTable <- addHeaderRow( MyFTable,
+#'   value = c("Sepal", "Petal", ""),
+#'   colspan = c( 2, 2, 1) )
+#'
+#' # add an header row with modified table columns labels
+#' MyFTable <- addHeaderRow( MyFTable,
+#'   value=c("Length", "Width", "Length", "Width", "Species") )
+#'
+#' # how to change default formats ----
+#'
+#' MyFTable <- FlexTable( data = iris[46:55, ], header.columns = FALSE,
+#'   body.cell.props = cellProperties(border.color="#7895A2"))
+#' # add an header row with table columns labels
+#' MyFTable <- addHeaderRow( MyFTable,
+#'   text.properties = textProperties(color = "#517281", font.weight="bold"),
+#'   cell.properties = cellProperties(border.color="#7895A2"),
+#'   value = c("Sepal Length", "Sepal Width",
+#'     "Sepal Length", "Sepal Width", "Species") )
 #' @export
 addHeaderRow = function( x, value, colspan,
 		text.properties, par.properties, cell.properties,
@@ -93,9 +118,29 @@ addHeaderRow = function( x, value, colspan,
 #' @seealso \code{\link{FlexTable}}, \code{\link{addHeaderRow}}
 #' , \code{\link{alterFlexTable}}
 #' @examples
-#' #
-#' @example examples/addFooterRowDefaults.R
-#' @example examples/addFooterRowComplex.R
+#' # simple example ----
+#' MyFTable <- FlexTable( data = iris[1:5,1:4] )
+#'
+#' # add a footer row with 1 cell that spans four columns
+#' MyFTable <- addFooterRow( MyFTable, value =
+#'   c("a note in table footer"), colspan = 4 )
+#'
+#' # another example ----
+#'
+#' # create a FlexTable
+#' MyFTable <- FlexTable( data = iris[1:5,1:4] )
+#'
+#' # define a complex formatted text
+#' mytext <- pot("*", format = textProperties(
+#'   vertical.align="superscript", font.size = 9) ) +
+#'   pot( " this text is superscripted", format = textProperties(font.size = 9) )
+#'
+#' # create a FlexRow - container for 1 cell
+#' footerRow <- FlexRow()
+#' footerRow[1] <- FlexCell( mytext, colspan = 4 )
+#'
+#' # finally, add the FlexRow to the FlexTable
+#' MyFTable <- addFooterRow( MyFTable, footerRow )
 addFooterRow = function( x, value, colspan, text.properties, par.properties, cell.properties ){
 
 	if( !inherits(x, c("FlexTable") ) )
@@ -208,10 +253,19 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' , \code{\link{cellProperties}}, \code{\link{parProperties}}
 #' , \code{\link{textProperties}}
 #' @examples
-#' #
-#' @example examples/FlexTable.mtcars.R
-#' @example examples/FlexTable.mtcars.alterProps.R
-#' @example examples/FlexTable.mtcars.alterContent.R
+#' MyFTable <- FlexTable( data = mtcars[1:10, ], add.rownames=TRUE )
+#' # modify the text formatting properties for the row.names column
+#' MyFTable[ , 1] <- textProperties( font.style="italic", font.size = 9)
+#' # align text to right for the row.names column
+#' MyFTable[ , 1] <- parProperties( text.align = "right" )
+#'
+#' # change cell formatting properties for various columns
+#' MyFTable[ c(3,6:9), c( "mpg", "disp", "hp", "drat", "wt",
+#'   "qsec" ) ] <- cellProperties( background.color="#CCCCCC")
+#' # add text to elements of the column cyl
+#' MyFTable[, "cyl", text.properties = textProperties(
+#'   vertical.align="superscript", font.size = 9) ] <- " miles/gallon"
+#'
 #' @example examples/FlexTableAPIFullDemo.R
 #' @rdname FlexTable-alter
 #' @aliases alterFlexTable
@@ -334,9 +388,12 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' @param footer a logical value (default to FALSE), specifies
 #' to apply scheme to table footer
 #' @examples
-#' #
-#' @example examples/FlexTable.mtcars.R
-#' @example examples/setFlexTableBorders1.R
+#' MyFTable <- FlexTable( data = mtcars[1:10, ], add.rownames=TRUE )
+#' MyFTable <- setFlexTableBorders( MyFTable,
+#'   inner.vertical = borderProperties( style = "dashed" ),
+#'   inner.horizontal = borderProperties( style = "dashed" ),
+#'   outer.vertical = borderProperties( width = 2 ),
+#'   outer.horizontal = borderProperties( width = 2 ) )
 #' @seealso \code{\link{FlexTable}}
 #' @export
 setFlexTableBorders = function (object
@@ -393,9 +450,11 @@ setFlexTableBorders = function (object
 #' @param odd background color applied to odd row indexes - single character value (e.g. "#000000" or "black")
 #' @param even background color applied to even row indexes - single character value (e.g. "#000000" or "black")
 #' @examples
-#' #
-#' @example examples/FlexTable.mtcars.R
-#' @example examples/setZebraStyle.R
+#' MyFTable <- FlexTable( data = iris[1:10, ] )
+#'
+#' # Zebra striped table
+#' MyFTable <- setZebraStyle( MyFTable, odd = "#8A949B", even = "#FAFAFA" )
+#'
 #' @seealso \code{\link{FlexTable}}
 #' @export
 setZebraStyle = function (object, odd, even){
@@ -429,9 +488,8 @@ setZebraStyle = function (object, odd, even){
 #' @param i vector (integer index, row.names values or boolean vector) for rows selection.
 #' @param colors background colors to apply (e.g. "#000000" or "black")
 #' @examples
-#' #
-#' @example examples/FlexTable.mtcars.R
-#' @example examples/setRowsColors.R
+#' MyFTable <- FlexTable( data = mtcars[1:10, ], add.rownames=TRUE )
+#' MyFTable <- setRowsColors( MyFTable, i=1:4, colors = "red" )
 #' @seealso \code{\link{FlexTable}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
 #' @export
 setRowsColors = function (object, i, colors){
@@ -473,9 +531,8 @@ setRowsColors = function (object, i, colors){
 #' @param j vector (integer index, col.names values or boolean vector) for columns selection.
 #' @param colors background colors to apply (e.g. "#000000" or "black")
 #' @examples
-#' #
-#' @example examples/FlexTable.mtcars.R
-#' @example examples/setColumnsColors.R
+#' MyFTable <- FlexTable( data = mtcars[1:10, ], add.rownames=TRUE )
+#' MyFTable <- setColumnsColors( MyFTable, j=3:4, colors = "red" )
 #' @seealso \code{\link{setRowsColors}}, \code{\link{FlexTable}}, \code{\link{setZebraStyle}}
 #' @export
 setColumnsColors = function (object, j, colors){
@@ -575,8 +632,18 @@ setFlexTableBackgroundColors = function (object, i, j, colors, to = "body"){
 #' @param runs a vector of size \code{numrow} of FlexTable. If provided, successive
 #' runs of equal values will indicate to merge corresponding rows.
 #' @examples
-#' #
-#' @example examples/spanFlexTableRows.R
+#' mydata = iris[46:55, ]
+#' MyFTable <- FlexTable( data = mydata )
+#'
+#' # merge line 5 to 7 in column 1
+#' MyFTable <- spanFlexTableRows( MyFTable, j = 3, from = 5, to = 7 )
+#'
+#' # merge cells in column "Species" when successive values
+#' # of Species are identical. Note
+#' # the character vector length is the same
+#' # than the number of lines of the FlexTable.
+#' MyFTable <- spanFlexTableRows( MyFTable, j = "Species",
+#'   runs = as.character( mydata$Species ) )
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{spanFlexTableColumns}}
 #' @export
@@ -657,8 +724,18 @@ spanFlexTableRows = function (object, j, from, to, runs ){
 #' @param runs a vector of size \code{numcol} of FlexTable. If provided, successive
 #' runs of equal values will indicate to merge corresponding columns.
 #' @examples
-#' #
-#' @example examples/spanFlexTableColumns.R
+#' mydata = iris[46:55, ]
+#' MyFTable <- FlexTable( data = mydata )
+#'
+#' # merge columns 2 to 4 in line 3
+#' MyFTable <- spanFlexTableColumns( MyFTable, i = 2, from = 2, to = 4 )
+#'
+#' # merge cells in line 4 when successive values of
+#' # a given character vector are identical. Note
+#' # the character vector length is the same
+#' # than the number of columns of the FlexTable.
+#' MyFTable <- spanFlexTableColumns( MyFTable, i = 4,
+#'   runs = c( "a", "b", "b", "c", "d") )
 #' @export
 #' @seealso \code{\link{spanFlexTableRows}}, \code{\link{FlexTable}}
 #' @export
@@ -719,8 +796,8 @@ spanFlexTableColumns = function (object, i, from, to, runs ){
 #' @param object a \code{FlexTable} object
 #' @param widths a numeric vector specifying columns widths in inches.
 #' @examples
-#' #
-#' @example examples/setFlexTableWidths.R
+#' MyFTable <- FlexTable( data = iris[1:10, ] )
+#' MyFTable <- setFlexTableWidths( MyFTable, widths = c(1,1,1,1,3))
 #' @seealso \code{\link{FlexTable}}
 #' @export
 setFlexTableWidths = function (object, widths ){

@@ -8,12 +8,19 @@
 #' @param ... further arguments, not used.
 #' @return a \code{\link{pptx}} document object
 #' @examples
-#' doc.filename = "addPageNumber_example.pptx"
-#' @example examples/pptx.R
-#' @example examples/addPageNumber.pptx.R
-#' @example examples/writeDoc_file.R
+#' \donttest{
+#' doc.filename <- "add_page_number_example.pptx"
+#' doc <- pptx( title = "title" )
+#' doc <- addSlide( doc, slide.layout = "Title Slide" )
+#' # add a page number on the current slide ---
+#' doc <- addPageNumber( doc )
+#' doc <- addSlide( doc, slide.layout = "Title and Content" )
+#' # add a page number with free text ----
+#' doc <- addPageNumber( doc, value = "Page number text")
+#' writeDoc( doc, file = doc.filename )
+#' }
 #' @export
-#' @seealso \code{\link{addPageNumber}}, \code{\link{addDate.pptx}}
+#' @seealso \code{\link{addPageNumber}}, \code{\link{addDate}}
 #' @export
 addPageNumber.pptx = function(doc, value, ... ) {
 

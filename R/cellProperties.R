@@ -75,8 +75,11 @@
 #'   \item \code{text.direction} "lrtb"
 #' }
 #' @examples
-#' # cellProperties examples -------
-#' @example examples/cellProperties.R
+#' cellProp01 <- cellProperties( border.color = "gray", border.width = 2 )
+#' cellProp02 <- cellProperties(border.left.width = 0, border.right.width = 0,
+#'   border.bottom.width = 2, border.top.width = 0,
+#'   padding.bottom = 2, padding.top = 2,
+#'   padding.left = 2, padding.right = 2 )
 #' @seealso \code{\link{borderProperties}}, \code{\link{FlexTable}},
 #' \code{\link{shortcut_properties}}
 cellProperties = function(
@@ -284,9 +287,16 @@ out
 #' Get a modified version of a \code{cellProperties} with
 #' \code{chprop}.
 #' @examples
+#' cellProp <- cellProperties()
 #'
-#' # chprop usage example ------
-#' @example examples/chprop.cellProperties.R
+#' chprop( cellProp, border.bottom.color = "#8A949B" )
+#' chprop( cellProp, border.color = "#8A949B" )
+#' chprop( cellProp, border.right.width = 2 )
+#' chprop( cellProp, border.width = 2 )
+#' chprop( cellProp, padding = 5 )
+#' chprop( cellProp,
+#'   border.bottom = borderProperties( style = "dotted" ) )
+#' chprop( cellProp, border.style = "dotted" )
 #' @export
 #' @rdname cellProperties
 chprop.cellProperties <- function(object

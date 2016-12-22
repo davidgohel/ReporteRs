@@ -53,27 +53,15 @@ only have to specify the text to use as title. There is no level concept.
 
 # Title example for MS Word -------
 doc.filename = "ex_add_title.docx"
-
-options( "ReporteRs-fontsize" = 10 )
-doc <- docx( )
-
-doc = addTitle( doc, "Title example 1", level = 1 )
-
-doc = addTitle( doc, "Title example 2", level = 1 )
-
+doc <- docx()
+doc <- addTitle( doc, "Title example 1", level = 1 )
+doc <- addTitle( doc, "Title example 2", level = 1 )
 writeDoc( doc, file = doc.filename )
-
 # Title example for PowerPoint -------
 doc.filename = "ex_add_title.pptx"
-
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
-
-# add a slide with layout "Title and Content"
-doc = addSlide( doc, slide.layout = "Title and Content" )
-
-doc = addTitle( doc, "Title example 1" )
-
+doc <- pptx()
+doc <- addSlide(doc, "Title and Content")
+doc <- addTitle(doc, "Title example")
 writeDoc( doc, file = doc.filename )
 }
 \seealso{

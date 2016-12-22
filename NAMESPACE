@@ -3,7 +3,6 @@
 S3method("+",pot)
 S3method("[<-",FlexRow)
 S3method("[<-",FlexTable)
-S3method(addCodeBlock,bsdoc)
 S3method(addCodeBlock,docx)
 S3method(addCodeBlock,pptx)
 S3method(addColumnBreak,docx)

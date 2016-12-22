@@ -17,15 +17,6 @@
 \description{
 add or replace FlexCell into a FlexRow object
 }
-\examples{
-#
-## example with FlexCell
-headerRow = FlexRow()
-headerRow[1] = FlexCell( "Column 1"
-  , cell.properties = cellProperties(background.color="#527578")  )
-headerRow[2] = FlexCell( "Column 2"
-  , cell.properties = cellProperties(background.color="#527578")  )
-}
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFlexTable}}, \code{\link{FlexRow}}
 , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}

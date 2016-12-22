@@ -22,10 +22,11 @@ a character vector
 List all bookmarks available in a \code{docx} object.
 }
 \examples{
-
-doc = docx( title = "My example", template = file.path(
+\donttest{
+doc <- docx( title = "My example", template = file.path(
   system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
 list_bookmarks( doc )
+}
 }
 \seealso{
 \code{\link{docx}}, \code{\link{text_extract}}

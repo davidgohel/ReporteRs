@@ -18,8 +18,10 @@ addPageBreak = function(doc, ...){
 
 
 #' @examples
+#' \donttest{
 #' doc = docx( title = "title" )
 #' doc = addPageBreak( doc )
+#' }
 #' @export
 #' @rdname addPageBreak
 addPageBreak.docx =  function( doc, ... ) {

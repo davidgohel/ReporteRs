@@ -11,10 +11,16 @@
 #' @details
 #' Subtitle shape only exist in slide of type 'Title Slide'.
 #' @examples
+#' \donttest{
 #' doc.filename = "addSubtitle_example.pptx"
-#' @example examples/pptx.R
-#' @example examples/addSubtitle.pptx.R
-#' @example examples/writeDoc_file.R
+#' doc <- pptx()
+#' doc <- addSlide( doc, slide.layout = "Title Slide" )
+#' #set the main title
+#' doc <- addTitle( doc, "Presentation title" )
+#' #set the sub-title
+#' doc <- addSubtitle( doc , "This document is generated with ReporteRs.")
+#' writeDoc( doc, file = doc.filename )
+#' }
 #' @seealso \code{\link{pptx}}, \code{\link{addSubtitle}}
 #' @export
 addSubtitle.pptx = function( doc, value, ... ) {

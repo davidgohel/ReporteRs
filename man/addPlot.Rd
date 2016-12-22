@@ -98,17 +98,18 @@ options( "ReporteRs-fontsize" = 11 )
 
 
 # plot example for docx -----
+\donttest{
 doc = docx( )
 doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
   vector.graphic = TRUE, width = 5, height = 7,
   par.properties = parProperties(text.align = "center")
   )
 writeDoc( doc, file = "ex_plot.docx" )
-
+}
 
 
 # plot example for pptx -----
-
+\donttest{
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 
@@ -124,7 +125,7 @@ if( !is_sunos ){
 }
 
 writeDoc( doc, file = "ex_plot.pptx" )
-
+}
 
 }
 \seealso{

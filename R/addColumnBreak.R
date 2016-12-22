@@ -17,13 +17,15 @@ addColumnBreak = function(doc, ...){
 
 
 #' @examples
+#' \donttest{
 #' doc.filename = "add_col_break.docx"
 #' doc = docx( )
 #' doc = addSection(doc, ncol = 2, columns.only = TRUE )
 #' doc = addParagraph( doc = doc, "Text 1.", "Normal" )
 #' doc = addColumnBreak(doc )
 #' doc = addParagraph( doc = doc, "Text 2.", "Normal" )
-#' @example examples/writeDoc_file.R
+#' writeDoc( doc, file = doc.filename )
+#' }
 #' @rdname addColumnBreak
 #' @export
 addColumnBreak.docx = function(doc, ...) {

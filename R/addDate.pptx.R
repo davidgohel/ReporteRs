@@ -22,10 +22,18 @@ addDate = function(doc, ...){
 #' @param str.format character value to use to format
 #' current date (if \code{value} is missing).
 #' @examples
-#' doc.filename = "addDate_example.pptx"
-#' @example examples/pptx.R
-#' @example examples/addDate_pptx.R
-#' @example examples/writeDoc_file.R
+#' \donttest{
+#' doc <- pptx()
+#'
+#' doc <- addSlide( doc, slide.layout = "Title and Content" )
+#' ## add a date on the current slide
+#' doc = addDate( doc )
+#'
+#' doc <- addSlide( doc, slide.layout = "Title and Content" )
+#' ## add a page number on the current slide but not
+#' ## the default text (slide number)
+#' doc = addDate( doc, "Dummy date" )
+#' }
 #' @export
 #' @rdname addDate
 #' @export

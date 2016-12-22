@@ -24,14 +24,15 @@ Add a column break into a section
 \code{addColumnBreak} only works with docx documents.
 }
 \examples{
+\donttest{
 doc.filename = "add_col_break.docx"
 doc = docx( )
 doc = addSection(doc, ncol = 2, columns.only = TRUE )
 doc = addParagraph( doc = doc, "Text 1.", "Normal" )
 doc = addColumnBreak(doc )
 doc = addParagraph( doc = doc, "Text 2.", "Normal" )
-
 writeDoc( doc, file = doc.filename )
+}
 }
 \seealso{
 \code{\link{docx}}, \code{\link{addSection}}

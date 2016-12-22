@@ -20,10 +20,12 @@ a document object
 Insert a footer shape into the current slide of a \code{pptx} object.
 }
 \examples{
+\donttest{
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addFooter( doc, "Hi!" )
 writeDoc( doc, file = "ex_footer.pptx" )
+}
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addDate.pptx}}

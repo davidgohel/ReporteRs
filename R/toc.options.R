@@ -1,11 +1,17 @@
 #' @title Set TOC options
 #'
-#' @description set options for custom table of contents
-#' of a \code{docx} object.
+#' @description Set custom table of contents options for a document object
 #'
 #' @param doc Object of class \code{docx}
+#' @param ... further arguments passed to other methods
+#' @return a document object
+#' @export
+#' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}
+toc.options <- function(doc, ...){
+  UseMethod("toc.options")
+}
+
 #' @param list.separator list separator (should be the same than in computer's regional settings)
-#' @param ... further arguments passed to other methods - not used.
 #' @details
 #' This function is to be used if TOC cannot be built. It is
 #' occuring when list separator used when building the TOC is
@@ -14,10 +20,13 @@
 #' See entry 302865 of Microsoft knowledge database for more information.
 #'
 #' @examples
+#' \donttest{
 #' doc = docx( title = "title" )
 #' doc = toc.options( doc, list.separator = "," )
+#' }
 #' @seealso \code{\link{docx}}, \code{\link{addTOC.docx}}
 #' @export
+#' @rdname toc.options
 toc.options.docx = function( doc, list.separator, ... ){
 
 	if( missing( list.separator ) )

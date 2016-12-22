@@ -59,13 +59,14 @@ addPlot = function(doc, fun, pointsize = 12, vector.graphic = FALSE, ...){
 #' @examples
 #'
 #' # plot example for docx -----
+#' \donttest{
 #' doc = docx( )
 #' doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
 #'   vector.graphic = TRUE, width = 5, height = 7,
 #'   par.properties = parProperties(text.align = "center")
 #'   )
 #' writeDoc( doc, file = "ex_plot.docx" )
-#'
+#' }
 #'
 #' @rdname addPlot
 #' @export
@@ -198,7 +199,7 @@ addPlot.docx = function(doc, fun,
 #' @examples
 #'
 #' # plot example for pptx -----
-#'
+#' \donttest{
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #'
@@ -214,7 +215,7 @@ addPlot.docx = function(doc, fun,
 #' }
 #'
 #' writeDoc( doc, file = "ex_plot.pptx" )
-#'
+#' }
 #'
 #' @rdname addPlot
 #' @export

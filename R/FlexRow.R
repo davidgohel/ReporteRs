@@ -13,10 +13,15 @@
 #' @seealso \code{\link{FlexTable}}, \code{\link{alterFlexRow}}
 #' , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples
-#' #
-#' @example examples/FlexRow1.R
-#' @example examples/FlexRow2.R
-FlexRow = function( values, colspan, text.properties = textProperties(),
+#' cell_fp <- cellProperties(background.color="#527578")
+#' # example with characters ----
+#' headerRow <- FlexRow( c("col 1", "col 2"), cell.properties = cell_fp )
+#' # example with FlexCell ----
+#' cell_fp <- cellProperties(background.color="#527578")
+#' headerRow <- FlexRow()
+#' headerRow[1] <- FlexCell( "col 1", cell.properties = cell_fp )
+#' headerRow[2] <- FlexCell( "col 2", cell.properties = cell_fp )
+FlexRow <- function( values, colspan, text.properties = textProperties(),
 	par.properties = parProperties(), cell.properties = cellProperties() ){
 
 	.Object = list()
@@ -73,9 +78,6 @@ weight.FlexRow = function(x) {
 #' @export
 #' @seealso \code{\link{FlexTable}}, \code{\link{addFlexTable}}, \code{\link{FlexRow}}
 #' , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
-#' @examples
-#' #
-#' @example examples/FlexRow2.R
 #' @rdname FlexRow-alter
 #' @aliases alterFlexRow
 #' @export

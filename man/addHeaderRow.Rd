@@ -38,42 +38,34 @@ has been created}
 add a header row in a FlexTable
 }
 \examples{
-#
-#############################
-# simple example
-#############################
+# simple example ----
 
 # set header.columns to FALSE so that default header row is not added in
 # the FlexTable object
 # We do only want the 4 first columns of the dataset
-MyFTable = FlexTable( data = iris[46:55, ], header.columns = FALSE )
+MyFTable <- FlexTable( data = iris[46:55, ], header.columns = FALSE )
 
-# add an header row with 3 cells, the first one spans two columns, 
-# the second one spans two columns and the last one does not span 
+# add an header row with 3 cells, the first one spans two columns,
+# the second one spans two columns and the last one does not span
 # multiple columns
-MyFTable = addHeaderRow( MyFTable, 
-  value = c("Sepal", "Petal", ""), 
-  colspan = c( 2, 2, 1) 
-)
+MyFTable <- addHeaderRow( MyFTable,
+  value = c("Sepal", "Petal", ""),
+  colspan = c( 2, 2, 1) )
 
 # add an header row with modified table columns labels
-MyFTable = addHeaderRow( MyFTable, 
-  value=c("Length", "Width", "Length", "Width", "Species")
-)
-#######################################
-# how to change default formats
-#######################################
+MyFTable <- addHeaderRow( MyFTable,
+  value=c("Length", "Width", "Length", "Width", "Species") )
 
-MyFTable = FlexTable( data = iris[46:55, ], header.columns = FALSE, 
-  body.cell.props = cellProperties(border.color="#7895A2")
-)
+# how to change default formats ----
+
+MyFTable <- FlexTable( data = iris[46:55, ], header.columns = FALSE,
+  body.cell.props = cellProperties(border.color="#7895A2"))
 # add an header row with table columns labels
-MyFTable = addHeaderRow( MyFTable, 
-  text.properties = textProperties(color = "#517281", font.weight="bold"), 
-  cell.properties = cellProperties(border.color="#7895A2"), 
-  value = c("Sepal Length", "Sepal Width", 
-	"Sepal Length", "Sepal Width", "Species")
-)
+MyFTable <- addHeaderRow( MyFTable,
+  text.properties = textProperties(color = "#517281", font.weight="bold"),
+  cell.properties = cellProperties(border.color="#7895A2"),
+  value = c("Sepal Length", "Sepal Width",
+    "Sepal Length", "Sepal Width", "Species") )
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addFooterRow}}

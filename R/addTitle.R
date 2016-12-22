@@ -37,11 +37,13 @@ addTitle = function(doc, value, ...){
 #' @examples
 #'
 #' # Title example for MS Word -------
+#' \donttest{
 #' doc.filename = "ex_add_title.docx"
-#' @example examples/docx.R
-#' @example examples/addTitle1Level1.R
-#' @example examples/addTitle2Level1.R
-#' @example examples/writeDoc_file.R
+#' doc <- docx()
+#' doc <- addTitle( doc, "Title example 1", level = 1 )
+#' doc <- addTitle( doc, "Title example 2", level = 1 )
+#' writeDoc( doc, file = doc.filename )
+#' }
 #' @rdname addTitle
 #' @seealso \code{\link{map_title}}
 #' @export
@@ -68,13 +70,14 @@ addTitle.docx = function( doc, value, level = 1, ... ) {
 #' only have to specify the text to use as title. There is no level concept.
 #'
 #' @examples
-#'
+#' \donttest{
 #' # Title example for PowerPoint -------
 #' doc.filename = "ex_add_title.pptx"
-#' @example examples/pptx.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle1NoLevel.R
-#' @example examples/writeDoc_file.R
+#' doc <- pptx()
+#' doc <- addSlide(doc, "Title and Content")
+#' doc <- addTitle(doc, "Title example")
+#' writeDoc( doc, file = doc.filename )
+#' }
 #' @rdname addTitle
 #' @export
 addTitle.pptx = function( doc, value, ... ) {

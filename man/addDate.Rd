@@ -31,26 +31,18 @@ Insert a date into a document object
 addDate only works for pptx documents.
 }
 \examples{
-doc.filename = "addDate_example.pptx"
+\donttest{
+doc <- pptx()
 
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
-doc = addSlide( doc, slide.layout = "Title Slide" )
-#set the main title
-doc = addTitle( doc, "Presentation title" ) 
-#set the sub-title
-doc = addSubtitle( doc , "This document is generated with ReporteRs.")
-
+doc <- addSlide( doc, slide.layout = "Title and Content" )
 ## add a date on the current slide
 doc = addDate( doc )
 
-
-doc = addSlide( doc, slide.layout = "Title and Content" )
-## add a page number on the current slide but not 
+doc <- addSlide( doc, slide.layout = "Title and Content" )
+## add a page number on the current slide but not
 ## the default text (slide number)
 doc = addDate( doc, "Dummy date" )
-
-writeDoc( doc, file = doc.filename )
+}
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{addFooter}},

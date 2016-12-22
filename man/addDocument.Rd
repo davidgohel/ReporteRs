@@ -28,7 +28,7 @@ ReporteRs does only copy the document as an external file. Headers and footers a
 imported and displayed. This function is not to be used to merge documents.
 }
 \examples{
-\dontrun{
+\donttest{
 doc.filename <- "addDocument_example.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )

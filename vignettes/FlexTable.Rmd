@@ -284,12 +284,12 @@ writeDoc( doc, file = filename )
 ### Change cell background color
 
 ```{r}
-MyFTable = FlexTable(data)
+MyFTable <- FlexTable(data)
 # change background colors of some cells in the table body
-MyFTable = setFlexTableBackgroundColors(MyFTable, j = 4,
+MyFTable <- setFlexTableBackgroundColors(MyFTable, j = 4,
   colors = ifelse(data$ncases < 5, '#DDDDDD', 'orange'))
 # change background colors of a cell in the table header
-MyFTable = setFlexTableBackgroundColors(MyFTable, i = 1, j = 1,
+MyFTable <- setFlexTableBackgroundColors(MyFTable, i = 1, j = 1,
   colors = '#8888F0', to = 'header')
 MyFTable
 ```

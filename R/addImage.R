@@ -9,6 +9,7 @@
 #' @return a document object
 #' @export
 #' @examples
+#'
 #' # get rlogo
 #' img.file <- file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
 #'
@@ -56,7 +57,7 @@ addImage = function(doc, filename, ...){
 #' \code{png::readPNG}, \code{jpeg::readJPEG} or \code{bmp::read.bmp}.
 #' @examples
 #' # Image example for MS Word -------
-#'
+#' \donttest{
 #' doc <- docx()
 #'
 #' if( has_img && has_jpeg ){
@@ -70,7 +71,7 @@ addImage = function(doc, filename, ...){
 #' }
 #'
 #' writeDoc( doc, file = "ex_add_image.docx" )
-#'
+#' }
 #'
 #' @rdname addImage
 #' @export
@@ -102,20 +103,6 @@ addImage.docx = function(doc, filename, bookmark,
 }
 
 
-#' @examples
-#' # Image example for an HTML document -------
-#'
-#' doc <- bsdoc()
-#'
-#' if( has_img && has_jpeg ){
-#'   dims <- attr( jpeg::readJPEG(img.file), "dim" )
-#'   doc <- addImage(doc, img.file, width = dims[2]/72,
-#'     height = dims[1]/72)
-#' }
-#'
-#' writeDoc( doc, file = "ex_add_image.html" )
-#'
-#'
 #' @rdname addImage
 #' @export
 addImage.bsdoc = function(doc, filename, width, height,
@@ -159,6 +146,7 @@ addImage.bsdoc = function(doc, filename, width, height,
 #' the \code{pptx} object.
 #' @examples
 #' # Image example for MS PowerPoint -------
+#' \donttest{
 #' if( !is_sunos ){
 #'
 #' doc <- pptx()
@@ -175,9 +163,8 @@ addImage.bsdoc = function(doc, filename, width, height,
 #' }
 #'
 #' writeDoc( doc, file = "ex_add_image.pptx" )
-#'
 #' }
-#'
+#' }
 #'
 #' @rdname addImage
 #' @export

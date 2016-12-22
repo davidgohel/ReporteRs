@@ -12,6 +12,26 @@
 #' @param ... further arguments passed to other methods
 #' @return a document object
 #' @export
+#' @examples
+#' # define some text
+#' sometext <- c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+#'   "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor.",
+#'   "Quisque dictum tristique ligula.")
+#'
+#' # "My tailor is rich" with formatting on some words
+#' pot1 <- pot("My tailor", textProperties(color = "red" ) ) +
+#'   " is " + pot("rich", textProperties(shading.color = "red",
+#'      font.weight = "bold" ) )
+#'
+#' # "Cats and dogs" with formatting on some words
+#' pot2 = pot("Cats", textProperties(color = "red" ) ) +
+#'   " and " +
+#'   pot("dogs", textProperties( color = "blue" ),
+#'       hyperlink = "http://www.wikipedia.org/" )
+#'
+#' # create a set of paragraphs made of pot1 and pot2
+#' my.pars <- set_of_paragraphs( pot1, pot2 )
+#'
 #' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}},
 #' \code{\link{pot}}, \code{\link{textProperties}}, \code{\link{parProperties}}
 addParagraph <- function(doc, value, ...){
@@ -38,20 +58,25 @@ addParagraph <- function(doc, value, ...){
 #' @param restart.numbering boolean value. If \code{TRUE}, next numbered
 #' list counter will be set to 1.
 #' @examples
-#'
 #' # docx example ---------
 #' doc.filename = "ex_paragraph.docx"
 #' doc <- docx()
 #' styles(doc)
-#' @example examples/addTitle1Level1.R
-#' @example examples/addParagraph_hello_docx.R
-#' @example examples/addTitle2Level1.R
-#' @example examples/addParagraph_bullets_docx.R
-#' @example examples/addTitle3Level1.R
-#' @example examples/pot1_example.R
-#' @example examples/pot2_example.R
-#' @example examples/set_of_paragraphs_example.R
-#' @example examples/addTitle4Level1.R
+#'
+#' doc <- addTitle( doc, "Title example 1", level = 1 )
+#' # Add "Hello World" into the document doc
+#' doc <- addParagraph(doc, "Hello Word", stylename = "Normal" )
+#'
+#' doc <- addTitle( doc, "Title example 2", level = 1 )
+#'
+#' # add sometext with stylename BulletList
+#' doc <- addParagraph( doc, value = sometext, stylename="BulletList" )
+#'
+#' doc <- addTitle( doc, "Title example 3", level = 1 )
+#'
+#' doc <- addParagraph( doc, value = my.pars, par.properties = parCenter() )
+#'
+#' doc <- addTitle( doc, "Title example 3", level = 1 )
 #' @example examples/lists_doc.R
 #' @example examples/writeDoc_file.R
 #' @rdname addParagraph
@@ -181,28 +206,28 @@ addParagraph.bsdoc <- function(doc, value,
 #' If character values are used to fill slides, parameter \code{append}
 #' will be ignored.
 #' @examples
-#'
+#' \donttest{
 #' # pptx example -------
 #' doc.filename = "ex_paragraph.pptx"
-#' @example examples/pptx.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle1NoLevel.R
-#' @example examples/addParagraph_hello_nostylename.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle2NoLevel.R
-#' @example examples/pot1_example.R
-#' @example examples/pot2_example.R
-#' @example examples/set_of_paragraphs_example.R
-#' @example examples/addParagraph_sop_nostylename.R
-#' @example examples/addParagraph_position_parProperties.R
-#' @example examples/addSlide.R
-#' @example examples/addTitle3NoLevel.R
-#' @example examples/pot1_example.R
-#' @example examples/pot2_example.R
-#' @example examples/set_of_paragraphs_example.R
-#' @example examples/addParagraph_parProperties.R
-#' @example examples/addSlide.R
-#' @example examples/writeDoc_file.R
+#' doc <- pptx()
+#' doc <- addSlide(doc, "Title and Content")
+#' # Add "Hello World" into the document doc
+#' doc <- addParagraph(doc, "Hello Word" )
+#'
+#' doc <- addSlide(doc, "Title and Content")
+#' doc <- addParagraph( doc, value = my.pars )
+#' # Add my.pars into the document doc
+#' doc <- addParagraph(doc, my.pars, offx = 3, offy = 3,
+#'   width = 2, height = 0.5,
+#'   par.properties=parProperties(text.align="center", padding=0) )
+
+#' doc <- addSlide(doc, "Title and Content")
+#' # Add my.pars into the document doc
+#' doc <- addParagraph(doc, my.pars,
+#'   par.properties=parProperties(text.align="center", padding=24) )
+#'
+#' writeDoc( doc, file = doc.filename )
+#' }
 #' @rdname addParagraph
 #' @export
 addParagraph.pptx <- function(doc, value, offx, offy, width, height,

@@ -1,3 +1,5 @@
+\donttest{
+
 ## docx example
 doc = docx( )
 
@@ -43,3 +45,4 @@ doc = addParagraph(doc, set_of_paragraphs( pot1, pot2 ) )
 docx.file = "footnote.docx"
 
 writeDoc( doc, file = docx.file )
+}

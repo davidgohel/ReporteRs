@@ -26,12 +26,13 @@ It returns a \code{character} vector containing all
 chunk of text found in the document.
 }
 \examples{
-
-doc = docx( title = "My example", template = file.path(
+\donttest{
+doc <- docx( title = "My example", template = file.path(
   system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
 text_extract( doc )
 text_extract( doc, header = FALSE, footer = FALSE )
 text_extract( doc, bookmark = "author" )
+}
 }
 \seealso{
 \code{\link{docx}}, \code{\link{list_bookmarks}}

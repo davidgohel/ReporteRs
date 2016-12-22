@@ -11,10 +11,18 @@
 #' If layout is specified, the layout representation will be produced in a plot.
 #' This can be useful to check available shapes.
 #' @examples
+#' \donttest{
 #' doc.filename = "addFlexTable_example.pptx"
-#' @example examples/pptx.R
-#' @example examples/slide.layouts_1.R
-#' @example examples/slide.layouts_2.R
+#' doc = pptx( title = "title" )
+#' layouts = slide.layouts(doc)
+#' layouts
+#'
+#' # loop over layout names to plot each slide style
+#' for(i in layouts ){
+#'   slide.layouts(doc, i )
+#'   title(sub = i )
+#' }
+#' }
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}
 #' @export
 slide.layouts.pptx = function( doc, layout, ... ) {

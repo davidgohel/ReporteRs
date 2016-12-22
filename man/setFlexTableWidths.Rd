@@ -15,10 +15,8 @@ setFlexTableWidths(object, widths)
 set columns widths of a FlexTable in inches.
 }
 \examples{
-#
-# Create a FlexTable object with first 10 lines of data.frame iris
-MyFTable = FlexTable( data = iris[1:10, ] )
-MyFTable = setFlexTableWidths( MyFTable, widths = c(1,1,1,1,3))
+MyFTable <- FlexTable( data = iris[1:10, ] )
+MyFTable <- setFlexTableWidths( MyFTable, widths = c(1,1,1,1,3))
 }
 \seealso{
 \code{\link{FlexTable}}

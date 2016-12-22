@@ -23,16 +23,14 @@ Create a representation of a row that can be inserted in a FlexTable.
 For internal usage.
 }
 \examples{
-#
-## example with characters
-headerRow = FlexRow( c("Column 1", "Column 2")
-  , cell.properties = cellProperties(background.color="#527578") )
-## example with FlexCell
-headerRow = FlexRow()
-headerRow[1] = FlexCell( "Column 1"
-  , cell.properties = cellProperties(background.color="#527578")  )
-headerRow[2] = FlexCell( "Column 2"
-  , cell.properties = cellProperties(background.color="#527578")  )
+cell_fp <- cellProperties(background.color="#527578")
+# example with characters ----
+headerRow <- FlexRow( c("col 1", "col 2"), cell.properties = cell_fp )
+# example with FlexCell ----
+cell_fp <- cellProperties(background.color="#527578")
+headerRow <- FlexRow()
+headerRow[1] <- FlexCell( "col 1", cell.properties = cell_fp )
+headerRow[2] <- FlexCell( "col 2", cell.properties = cell_fp )
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{alterFlexRow}}

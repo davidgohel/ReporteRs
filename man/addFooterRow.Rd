@@ -27,35 +27,29 @@ for each corresponding value (in \code{values}).}
 add a footer row in a FlexTable
 }
 \examples{
-#
-#############################
-# simple example
-#############################
-
-MyFTable = FlexTable( data = iris[1:5,1:4] )
+# simple example ----
+MyFTable <- FlexTable( data = iris[1:5,1:4] )
 
 # add a footer row with 1 cell that spans four columns
-MyFTable = addFooterRow( MyFTable, 
-  value = c("a note in table footer"), colspan = 4 )
-#########################################
-# example with FlexRow objects usage
-#########################################
+MyFTable <- addFooterRow( MyFTable, value =
+  c("a note in table footer"), colspan = 4 )
+
+# another example ----
 
 # create a FlexTable
-MyFTable = FlexTable( data = iris[1:5,1:4] )
+MyFTable <- FlexTable( data = iris[1:5,1:4] )
 
 # define a complex formatted text
-mytext = pot("*", 
-    format = textProperties(vertical.align="superscript", font.size = 9) 
-  ) + pot( " this text is superscripted", 
-    format = textProperties(font.size = 9) )
+mytext <- pot("*", format = textProperties(
+  vertical.align="superscript", font.size = 9) ) +
+  pot( " this text is superscripted", format = textProperties(font.size = 9) )
 
 # create a FlexRow - container for 1 cell
-footerRow = FlexRow()
-footerRow[1] = FlexCell( mytext, colspan = 4 )
+footerRow <- FlexRow()
+footerRow[1] <- FlexCell( mytext, colspan = 4 )
 
-# add the FlexRow to the FlexTable
-MyFTable = addFooterRow( MyFTable, footerRow )
+# finally, add the FlexRow to the FlexTable
+MyFTable <- addFooterRow( MyFTable, footerRow )
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addHeaderRow}}

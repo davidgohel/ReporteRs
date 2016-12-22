@@ -26,13 +26,14 @@ writeDoc(doc, ...)
 Write a document object into a file
 }
 \examples{
+\donttest{
 doc <- docx()
 writeDoc( doc, "ex_write_doc.docx")
 
 doc <- pptx()
 doc <- addSlide(doc, "Title and Content")
 writeDoc( doc, "ex_write_doc.pptx")
-
+}
 }
 \seealso{
 \code{\link{docx}}, \code{\link{pptx}}

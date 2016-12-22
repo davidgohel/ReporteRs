@@ -32,10 +32,12 @@ addCodeBlock = function(doc, file, text, ... ){
 #' @param bookmark Only for \code{docx}. A character value ; id of the Word bookmark to
 #' replace by the script. optional.
 #' @examples
+#' \donttest{
 #' # docx example ---------
 #' doc = docx( )
 #' doc <- addCodeBlock( doc, text = cb )
 #' writeDoc( doc, file = "ex_codeblock.docx" )
+#' }
 #'
 #' @export
 #' @rdname addCodeBlock
@@ -69,42 +71,18 @@ addCodeBlock.docx = function(doc, file, text,
 }
 
 
-#' @export
-#' @rdname addCodeBlock
-addCodeBlock.bsdoc = function(doc, file, text,
-		par.properties = parProperties(),
-		text.properties = textProperties( color = "#A7947D" ), ...) {
-
-	if( !missing ( file ) ){
-		script = CodeBlock( file = file,
-				par.properties = par.properties,
-				text.properties = text.properties )
-	} else if( !missing ( text ) ){
-		script = CodeBlock( text = text,
-				par.properties = par.properties,
-				text.properties = text.properties )
-	}
-
-	out = .jcall( doc$jobj, "I", "add" , script$jobj)
-	if( out != 1 ){
-		stop( "Problem while trying to add rscript." )
-	}
-	doc
-}
-
-
-
 #' @param append Only for \code{pptx}. boolean default to FALSE. If TRUE, paragraphs will be
 #' appened in the current shape instead of beeing sent into a new shape.
 #' Paragraphs can only be appended on shape containing paragraphs (i.e. you
 #' can not add paragraphs after a FlexTable).
 #' @examples
+#' \donttest{
 #' # pptx example ---------
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' doc <- addCodeBlock( doc, text = cb )
 #' writeDoc( doc, file = "ex_codeblock.pptx" )
-#'
+#' }
 #' @export
 #' @rdname addCodeBlock
 addCodeBlock.pptx = function(doc, file, text,

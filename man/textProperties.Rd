@@ -61,33 +61,24 @@ Get a modified version of a \code{textProperties} with
 \code{chprop}.
 }
 \examples{
-# textProperties examples -------
 textProperties( font.size = 12 )
-
-textProperties(color="red", 
-  font.weight = "bold", 
-  font.style = "italic",  
-  underlined = TRUE
-)
-
+textProperties(color="red", font.weight = "bold",
+  font.style = "italic", underlined = TRUE )
 textProperties( shading.color = "red" )
 print( textProperties (color="red", font.size = 12) )
 
 # chprop usage example ------
-textProp = textProperties()
+textProp <- textProperties()
 
-textProp01 = chprop( textProp, color = "red" )
-textProp02 = chprop( textProp, font.size = 12 )
-textProp03 = chprop( textProp, font.weight = "bold" )
-textProp04 = chprop( textProp, font.style = "italic" )
-textProp05 = chprop( textProp, underlined = TRUE )
-\dontrun{
-textProp06 = chprop( textProp, font.family = "Arial" )
-}
-textProp07 = chprop( textProp, vertical.align = "superscript" )
-
-textProp08 = chprop( textProp, font.size = 12, 
-	font.weight = "bold", shading.color = "red" )
+chprop( textProp, color = "red" )
+chprop( textProp, font.size = 12 )
+chprop( textProp, font.weight = "bold" )
+chprop( textProp, font.style = "italic" )
+chprop( textProp, underlined = TRUE )
+chprop( textProp, font.family = "Arial" )
+chprop( textProp, vertical.align = "superscript" )
+chprop( textProp, font.size = 12,
+        font.weight = "bold", shading.color = "red" )
 }
 \seealso{
 \code{\link{pot}}, \code{\link{alterFlexTable}},

@@ -21,27 +21,19 @@ a \code{\link{pptx}} document object
 Insert a page number shape into the current slide of a \code{pptx} object.
 }
 \examples{
-doc.filename = "addPageNumber_example.pptx"
-
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
-# add a slide with layout "Title Slide"
-doc = addSlide( doc, slide.layout = "Title Slide" )
-doc = addTitle( doc, "Presentation title" ) #set the main title
-#set the sub-title
-doc = addSubtitle( doc , "This document is generated with ReporteRs.")
-
-## add a page number on the current slide
-doc = addPageNumber( doc )
-
-doc = addSlide( doc, slide.layout = "Title and Content" )
-## add a page number on the current slide but 
-## not the default text (slide number)
-doc = addPageNumber( doc, value = "Page number text")
-
+\donttest{
+doc.filename <- "add_page_number_example.pptx"
+doc <- pptx( title = "title" )
+doc <- addSlide( doc, slide.layout = "Title Slide" )
+# add a page number on the current slide ---
+doc <- addPageNumber( doc )
+doc <- addSlide( doc, slide.layout = "Title and Content" )
+# add a page number with free text ----
+doc <- addPageNumber( doc, value = "Page number text")
 writeDoc( doc, file = doc.filename )
 }
+}
 \seealso{
-\code{\link{addPageNumber}}, \code{\link{addDate.pptx}}
+\code{\link{addPageNumber}}, \code{\link{addDate}}
 }
 

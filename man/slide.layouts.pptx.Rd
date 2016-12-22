@@ -23,17 +23,17 @@ If layout is specified, the layout representation will be produced in a plot.
 This can be useful to check available shapes.
 }
 \examples{
+\donttest{
 doc.filename = "addFlexTable_example.pptx"
-
-options( "ReporteRs-fontsize" = 24 )
 doc = pptx( title = "title" )
-# get layouts names
 layouts = slide.layouts(doc)
 layouts
+
 # loop over layout names to plot each slide style
 for(i in layouts ){
-	slide.layouts(doc, i )
-	title(sub = i )
+  slide.layouts(doc, i )
+  title(sub = i )
+}
 }
 }
 \seealso{

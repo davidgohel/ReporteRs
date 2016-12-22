@@ -85,44 +85,44 @@ If character values are used to fill slides, parameter \code{append}
 will be ignored.
 }
 \examples{
+# define some text
+sometext <- c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor.",
+  "Quisque dictum tristique ligula.")
+
+# "My tailor is rich" with formatting on some words
+pot1 <- pot("My tailor", textProperties(color = "red" ) ) +
+  " is " + pot("rich", textProperties(shading.color = "red",
+     font.weight = "bold" ) )
+
+# "Cats and dogs" with formatting on some words
+pot2 = pot("Cats", textProperties(color = "red" ) ) +
+  " and " +
+  pot("dogs", textProperties( color = "blue" ),
+      hyperlink = "http://www.wikipedia.org/" )
+
+# create a set of paragraphs made of pot1 and pot2
+my.pars <- set_of_paragraphs( pot1, pot2 )
 
 # docx example ---------
 doc.filename = "ex_paragraph.docx"
 doc <- docx()
 styles(doc)
 
-doc = addTitle( doc, "Title example 1", level = 1 )
-
+doc <- addTitle( doc, "Title example 1", level = 1 )
 # Add "Hello World" into the document doc
-doc = addParagraph(doc, "Hello Word", stylename = "Normal" )
+doc <- addParagraph(doc, "Hello Word", stylename = "Normal" )
 
-doc = addTitle( doc, "Title example 2", level = 1 )
-
-# define some text
-sometext = c( "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 
-"In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor.", 
-"Quisque dictum tristique ligula.")
+doc <- addTitle( doc, "Title example 2", level = 1 )
 
 # add sometext with stylename BulletList
-doc = addParagraph( doc, value = sometext, stylename="BulletList" )
+doc <- addParagraph( doc, value = sometext, stylename="BulletList" )
 
-doc = addTitle( doc, "Title example 3", level = 1 )
+doc <- addTitle( doc, "Title example 3", level = 1 )
 
-# "My tailor is rich" with formatting on some words
-pot1 = pot("My tailor", textProperties(color = "red" ) 
-  ) + " is " + pot("rich", textProperties(shading.color = "red", 
-  font.weight = "bold" ) )
+doc <- addParagraph( doc, value = my.pars, par.properties = parCenter() )
 
-# "Cats and dogs" with formatting on some words
-pot2 = pot("Cats", textProperties(color = "red" ) ) + 
-  " and " + 
-  pot("dogs", textProperties( color = "blue" ), 
-    hyperlink = "http://www.wikipedia.org/" )
-
-# create a set of paragraphs made of pot1 and pot2
-my.pars = set_of_paragraphs( pot1, pot2 )
-
-doc = addTitle( doc, "Title example 4", level = 1 )
+doc <- addTitle( doc, "Title example 3", level = 1 )
 # define some text
 text1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 text2 = "In sit amet ipsum tellus. Vivamus arcu sit amet faucibus auctor."
@@ -162,75 +162,27 @@ doc = addParagraph( doc, value = text2,
 
 
 writeDoc( doc, file = doc.filename )
-
+\donttest{
 # pptx example -------
 doc.filename = "ex_paragraph.pptx"
-
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
-
-# add a slide with layout "Title and Content"
-doc = addSlide( doc, slide.layout = "Title and Content" )
-
-doc = addTitle( doc, "Title example 1" )
-
+doc <- pptx()
+doc <- addSlide(doc, "Title and Content")
 # Add "Hello World" into the document doc
-doc = addParagraph(doc, "Hello Word" )
+doc <- addParagraph(doc, "Hello Word" )
 
-# add a slide with layout "Title and Content"
-doc = addSlide( doc, slide.layout = "Title and Content" )
-
-doc = addTitle( doc, "Title example 2" )
-
-# "My tailor is rich" with formatting on some words
-pot1 = pot("My tailor", textProperties(color = "red" ) 
-  ) + " is " + pot("rich", textProperties(shading.color = "red", 
-  font.weight = "bold" ) )
-
-# "Cats and dogs" with formatting on some words
-pot2 = pot("Cats", textProperties(color = "red" ) ) + 
-  " and " + 
-  pot("dogs", textProperties( color = "blue" ), 
-    hyperlink = "http://www.wikipedia.org/" )
-
-# create a set of paragraphs made of pot1 and pot2
-my.pars = set_of_paragraphs( pot1, pot2 )
-
+doc <- addSlide(doc, "Title and Content")
+doc <- addParagraph( doc, value = my.pars )
 # Add my.pars into the document doc
-doc = addParagraph(doc, my.pars )
-
-# Add my.pars into the document doc
-doc = addParagraph(doc, my.pars, offx = 3, offy = 3, 
+doc <- addParagraph(doc, my.pars, offx = 3, offy = 3,
   width = 2, height = 0.5,
   par.properties=parProperties(text.align="center", padding=0) )
-
-# add a slide with layout "Title and Content"
-doc = addSlide( doc, slide.layout = "Title and Content" )
-
-doc = addTitle( doc, "Title example 3" )
-
-# "My tailor is rich" with formatting on some words
-pot1 = pot("My tailor", textProperties(color = "red" ) 
-  ) + " is " + pot("rich", textProperties(shading.color = "red", 
-  font.weight = "bold" ) )
-
-# "Cats and dogs" with formatting on some words
-pot2 = pot("Cats", textProperties(color = "red" ) ) + 
-  " and " + 
-  pot("dogs", textProperties( color = "blue" ), 
-    hyperlink = "http://www.wikipedia.org/" )
-
-# create a set of paragraphs made of pot1 and pot2
-my.pars = set_of_paragraphs( pot1, pot2 )
-
+doc <- addSlide(doc, "Title and Content")
 # Add my.pars into the document doc
-doc = addParagraph(doc, my.pars, 
+doc <- addParagraph(doc, my.pars,
   par.properties=parProperties(text.align="center", padding=24) )
 
-# add a slide with layout "Title and Content"
-doc = addSlide( doc, slide.layout = "Title and Content" )
-
 writeDoc( doc, file = doc.filename )
+}
 }
 \seealso{
 \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}},

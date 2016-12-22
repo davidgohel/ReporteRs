@@ -51,31 +51,21 @@ Add R script into a document object
 You have to one of the following argument: file or text or rscript.
 }
 \examples{
-
+\donttest{
 # docx example -----------
 doc.filename = "ex_rscript.docx"
-
-options( "ReporteRs-fontsize" = 10 )
-doc <- docx( )
-doc = addRScript(doc, text = "x = rnorm(100)
-plot(density( x ) )" )
-
+doc <- docx()
+doc <- addRScript(doc, text = "x = rnorm(100)" )
 writeDoc( doc, file = doc.filename )
-
+}
+\donttest{
 # pptx example -----------
 doc.filename = "ex_rscript.pptx"
-
-options( "ReporteRs-fontsize" = 24 )
-doc = pptx( title = "title" )
-
-# add a slide with layout "Title and Content"
-doc = addSlide( doc, slide.layout = "Title and Content" )
-
-doc = addTitle( doc, "Title example 1" )
-doc = addRScript(doc, text = "x = rnorm(100)
-plot(density( x ) )" )
-
+doc <- pptx()
+doc <- addSlide(doc, "Title and Content")
+doc <- addRScript(doc, text = "x = rnorm(100)" )
 writeDoc( doc, file = doc.filename )
+}
 }
 \seealso{
 \code{\link{bsdoc}}, \code{\link{docx}}, \code{\link{pptx}}

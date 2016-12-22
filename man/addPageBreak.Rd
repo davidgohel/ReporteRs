@@ -26,8 +26,10 @@ Add a page break into a document object
 See \code{\link{addPageBreak.docx}} for examples.
 }
 \examples{
+\donttest{
 doc = docx( title = "title" )
 doc = addPageBreak( doc )
+}
 }
 \seealso{
 \code{\link{docx}}

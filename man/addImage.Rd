@@ -61,6 +61,7 @@ dimensions can be defined in the layout of the PowerPoint template used to creat
 the \code{pptx} object.
 }
 \examples{
+
 # get rlogo
 img.file <- file.path( Sys.getenv("R_HOME"), "doc", "html", "logo.jpg" )
 
@@ -79,7 +80,7 @@ if( has_wmf ){
 
 
 # Image example for MS Word -------
-
+\donttest{
 doc <- docx()
 
 if( has_img && has_jpeg ){
@@ -93,22 +94,10 @@ if( has_wmf ){
 }
 
 writeDoc( doc, file = "ex_add_image.docx" )
-
-
-# Image example for an HTML document -------
-
-doc <- bsdoc()
-
-if( has_img && has_jpeg ){
-  dims <- attr( jpeg::readJPEG(img.file), "dim" )
-  doc <- addImage(doc, img.file, width = dims[2]/72,
-    height = dims[1]/72)
 }
 
-writeDoc( doc, file = "ex_add_image.html" )
-
-
 # Image example for MS PowerPoint -------
+\donttest{
 if( !is_sunos ){
 
 doc <- pptx()
@@ -125,9 +114,8 @@ if( has_wmf ){
 }
 
 writeDoc( doc, file = "ex_add_image.pptx" )
-
 }
-
+}
 
 }
 \seealso{

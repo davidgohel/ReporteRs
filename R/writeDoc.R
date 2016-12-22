@@ -8,13 +8,14 @@
 #'
 #' @export
 #' @examples
+#' \donttest{
 #' doc <- docx()
 #' writeDoc( doc, "ex_write_doc.docx")
 #'
 #' doc <- pptx()
 #' doc <- addSlide(doc, "Title and Content")
 #' writeDoc( doc, "ex_write_doc.pptx")
-#'
+#' }
 #' @seealso \code{\link{docx}}, \code{\link{pptx}}
 writeDoc = function(doc, ...){
   UseMethod("writeDoc")

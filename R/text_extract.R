@@ -11,9 +11,13 @@
 #' @param bookmark a character value ; id of the Word bookmark to scan.
 #' @return a character vector
 #' @examples
-#'
-#' @example examples/text_extract_get_docx.R
-#' @example examples/text_extract.R
+#' \donttest{
+#' doc <- docx( title = "My example", template = file.path(
+#'   system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
+#' text_extract( doc )
+#' text_extract( doc, header = FALSE, footer = FALSE )
+#' text_extract( doc, bookmark = "author" )
+#' }
 #' @seealso \code{\link{docx}}, \code{\link{list_bookmarks}}
 #' @export
 text_extract = function( x, body = TRUE, header = TRUE, footer = TRUE, bookmark){
@@ -42,9 +46,11 @@ text_extract = function( x, body = TRUE, header = TRUE, footer = TRUE, bookmark)
 #' @param footer specifies to scan document footer
 #' @return a character vector
 #' @examples
-#'
-#' @example examples/text_extract_get_docx.R
-#' @example examples/list_bookmarks.R
+#' \donttest{
+#' doc <- docx( title = "My example", template = file.path(
+#'   system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
+#' list_bookmarks( doc )
+#' }
 #' @seealso \code{\link{docx}}, \code{\link{text_extract}}
 #' @export
 list_bookmarks = function( x, body = TRUE, header = TRUE, footer = TRUE){
