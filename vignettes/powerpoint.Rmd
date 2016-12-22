@@ -86,7 +86,7 @@ writeDoc( mydoc, filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 
@@ -148,7 +148,7 @@ writeDoc( doc, filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Function `slide.layouts`
@@ -223,7 +223,7 @@ writeDoc( mydoc, file = filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ## Specific functions
@@ -244,7 +244,7 @@ writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Page number
@@ -263,7 +263,7 @@ writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Footer
@@ -281,7 +281,7 @@ writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Subtitle
@@ -301,7 +301,7 @@ writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 
@@ -328,7 +328,7 @@ writeDoc( mydoc, file = filename )
 
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 
@@ -347,7 +347,7 @@ pptx( title = "title" ) %>%
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 

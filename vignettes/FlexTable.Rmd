@@ -255,7 +255,7 @@ writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 #### Method 2
@@ -276,7 +276,7 @@ writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 

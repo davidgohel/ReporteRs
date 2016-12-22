@@ -123,7 +123,7 @@ writeDoc(doc, target_file)
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(target_file) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(target_file) ) )
 ```
 
 ## PowerPoint: offx, offy, width and height
@@ -156,5 +156,5 @@ writeDoc(doc, target_file)
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(target_file) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(target_file) ) )
 ```

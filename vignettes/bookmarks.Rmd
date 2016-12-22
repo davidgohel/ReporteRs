@@ -54,7 +54,7 @@ styles(doc)
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(template) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(template) ) )
 ```
 
 
@@ -88,7 +88,7 @@ doc %>%
 ```
 
 ```{r echo=FALSE}
-office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(target_file) ) )
+office_web_viewer( url = paste0( "https://davidgohel.github.io/ReporteRs/articles/", basename(target_file) ) )
 ```
 
 ## Notes 
