@@ -11,9 +11,6 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
 library(magrittr)
-if(!require(filelink))
-  file_data_uri <- function(file, label, mime){invisible()}
-
 options("ReporteRs-fontsize" = 11)
 ```
 
@@ -121,12 +118,12 @@ doc <- docx( title = "My example",
                                   "templates/bookmark_example.docx") ) 
 
 doc <- addParagraph(doc, your_pot, bookmark = "REVIEWER" )
-target_file <- tempfile(fileext = ".docx") # file to produce 
+target_file <- "replace_and_pot.docx" # file to produce 
 writeDoc(doc, target_file)
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = target_file, label = basename(target_file) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(target_file) ) )
 ```
 
 ## PowerPoint: offx, offy, width and height
@@ -154,11 +151,10 @@ doc <- addParagraph( par.properties = parCenter(),
     doc = doc, value = pot("this is a pot", textBold(color = "red")), 
     offx = 3, offy = 5, width = 2, height = 1 )
 
-target_file <- tempfile(fileext = ".pptx") # file to produce 
+target_file <- "par_and_par_props.pptx" # file to produce 
 writeDoc(doc, target_file)
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = target_file, label = basename(target_file) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(target_file) ) )
 ```
-

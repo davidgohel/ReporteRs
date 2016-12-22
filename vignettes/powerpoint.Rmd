@@ -14,9 +14,6 @@ vignette: >
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 library(ReporteRs)
-if(!require(filelink))
-  file_data_uri <- function(file, label, mime){invisible()}
-
 options("ReporteRs-fontsize" = 11)
 ```
 
@@ -83,13 +80,13 @@ mydoc <- addSlide( mydoc, "Title and Content" )
 # add a plot into mydoc 
 mydoc <- addPlot( mydoc, function() barplot( 1:8, col = 1:8 ) )
 
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "base_example.pptx" # the document to produce
 # write mydoc 
 writeDoc( mydoc, filename )
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 
@@ -146,12 +143,12 @@ let you specify which layout to use to design the new slide.
 doc <- pptx()
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addSlide( doc, slide.layout = 'Two Content' )
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "addslide_example.pptx" # the document to produce
 writeDoc( mydoc, filename )
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Function `slide.layouts`
@@ -221,11 +218,12 @@ mydoc <- addPlot( doc = mydoc, fun = print, x = myplot,
 mydoc <- addFlexTable( doc = mydoc, FlexTable( head( iris ) ),
   offx = 8, offy = 2, width = 4.5, height = 3 )
 
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "force_pos_size.pptx" # the document to produce
 writeDoc( mydoc, file = filename )
 ```
+
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ## Specific functions
@@ -241,11 +239,12 @@ doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addDate( doc )
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addDate( doc, 'Dummy date' )
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "date_example.pptx" # the document to produce
 writeDoc( mydoc, file = filename )
 ```
+
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Page number
@@ -259,11 +258,12 @@ doc <-addSlide( doc, slide.layout = 'Title and Content' )
 doc <-addPageNumber( doc )
 doc <-addSlide( doc, slide.layout = 'Title and Content' )
 doc <-addPageNumber( doc, 'Dummy text' )
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "pagenumber_example.pptx" # the document to produce
 writeDoc( mydoc, file = filename )
 ```
+
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Footer
@@ -276,11 +276,12 @@ document.
 doc <- pptx()
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addFooter( doc, 'Dummy text' )
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "footer_example.pptx" # the document to produce
 writeDoc( mydoc, file = filename )
 ```
+
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Subtitle
@@ -295,11 +296,12 @@ doc <- pptx()
 doc <- addSlide( doc, slide.layout = 'Title Slide' )
 doc <- addTitle( doc, 'Presentation title' )
 doc <- addSubtitle( doc , 'This document is generated with ReporteRs.')
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "sub_example.pptx" # the document to produce
 writeDoc( mydoc, file = filename )
 ```
+
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 
@@ -317,11 +319,16 @@ myplot = qplot(Sepal.Length, Petal.Length, data = iris, color = Species, size = 
 mydoc <-addSlide( mydoc, slide.layout = 'Title and Content', bookmark = 3 )
 
 mydoc <-addTitle( mydoc, 'my new graph')
-
 mydoc <-addPlot( mydoc, print, x = myplot )
 
-writeDoc( mydoc, 'pp_replacement.pptx' )
+filename <- "pp_replacement.pptx" # the document to produce
+writeDoc( mydoc, file = filename )
+```
 
+
+
+```{r echo=FALSE}
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 
@@ -337,11 +344,12 @@ pptx( title = "title" ) %>%
   addSlide( slide.layout = "Title and Content" ) %>% 
   addFlexTable( vanilla.table(head(iris) ) ) %>% 
   writeDoc( file = filename )
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "pipe_example.pptx" # the document to produce
 writeDoc( mydoc, file = filename )
 ```
+
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = "here" )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 

@@ -14,9 +14,6 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
 library(magrittr)
-if(!require(filelink))
-  file_data_uri <- function(file, label, mime){invisible()}
-
 options("ReporteRs-fontsize" = 11)
 ```
 
@@ -253,12 +250,12 @@ MyFTable[] = parCenter()
 doc <- pptx( title = "title" ) %>% 
   addSlide( slide.layout = "Title and Content" ) %>% 
   addFlexTable( MyFTable )
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "header_rot.pptx" # the document to produce
 writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 #### Method 2
@@ -274,8 +271,12 @@ MyFTable <- FlexTable( data = iris[46:55, ], header.columns = FALSE ) %>%
 
 doc <- docx(  ) %>% 
   addFlexTable( MyFTable )
-filename <- tempfile(fileext = ".docx") # the document to produce
+filename <- "header_rot.docx" # the document to produce
 writeDoc( doc, file = filename )
+```
+
+```{r echo=FALSE}
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 

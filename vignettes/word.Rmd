@@ -13,15 +13,6 @@ vignette: >
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
-# tags$iframe(
-#   "iframes are not supported",
-#   src = paste0("http://view.officeapps.live.com/op/view.aspx?src="),
-#   width = "80%", height="500px;"
-# ),
-# 
-if(!require(filelink))
-  file_data_uri <- function(file, label, mime){invisible()}
-
 options("ReporteRs-fontsize" = 11)
 ```
 
@@ -74,14 +65,15 @@ mydoc <- addParagraph( mydoc, value = "Hello World!", stylename = "Normal" )
 # add a plot into mydoc 
 mydoc <- addPlot( mydoc, function() barplot( 1:8, col = 1:8 ) )
 
-filename <- tempfile(fileext = ".docx") # the document to produce
+filename <- "base_example.docx" # the document to produce
 # write the doc 
 writeDoc( mydoc, file = filename)
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
+
 
 ## Templates
 
@@ -149,12 +141,12 @@ doc <- docx( )
 # display all available styles with their names
 doc <- addParagraph( doc, value = "Hello", stylename = "Normal")
 
-filename <- tempfile(fileext = ".docx") # the document to produce
+filename <- "styles.docx" # the document to produce
 writeDoc( doc, file = filename)
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ## Specific functions
@@ -243,12 +235,12 @@ mydoc <- mydoc %>% addTitle( "mtcars outputs", level =  1 ) %>%
   addParagraph( value = "mtcars table", 
     stylename = "tablereference") # Add a legend below the table
 
-filename <- tempfile(fileext = ".docx") # the document to produce
-writeDoc( mydoc, file = filename)
+filename <- "toc.docx" # the document to produce
+writeDoc( doc, file = filename)
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
 
 ### Page breaks
@@ -285,13 +277,12 @@ doc <- addSection( doc, ncol = 2, landscape = TRUE) %>%
   addParagraph("Hi on the right", stylename = "Normal" ) %>% 
   addSection( )
 
-filename <- tempfile(fileext = ".docx") # the document to produce
+filename <- "section.docx" # the document to produce
 writeDoc( doc, file = filename)
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
-
 
 

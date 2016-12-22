@@ -14,9 +14,6 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
 library(magrittr)
-if(!require(filelink))
-  file_data_uri <- function(file, label, mime){invisible()}
-
 options("ReporteRs-fontsize" = 11)
 ```
 
@@ -71,10 +68,10 @@ mydoc = addTitle( mydoc, "Vector graphics format versus raster format" )
 mydoc = addPlot( mydoc, function( ) print( myplot ), vector.graphic = TRUE )
 mydoc = addPlot( mydoc, function( ) print( myplot ), vector.graphic = FALSE )
 
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "evg_example.pptx" # the document to produce
 writeDoc( mydoc, file = filename )
 ```
 
 ```{r echo=FALSE}
-file_data_uri(file = filename, label = basename(filename) )
+office_web_viewer( url = paste0( "http://davidgohel.github.io/ReporteRs/articles/", basename(filename) ) )
 ```
