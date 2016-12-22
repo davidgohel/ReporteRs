@@ -32,8 +32,9 @@
 #' # create a set of paragraphs made of pot1 and pot2
 #' my.pars <- set_of_paragraphs( pot1, pot2 )
 #'
-#' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}},
-#' \code{\link{pot}}, \code{\link{textProperties}}, \code{\link{parProperties}}
+#' @seealso \code{\link{docx}}, \code{\link{pptx}},
+#' \code{\link{pot}}, \code{\link{textProperties}},
+#' \code{\link{parProperties}}, \code{\link{list.settings}}
 addParagraph <- function(doc, value, ...){
   checkHasSlide(doc)
   if( !inherits( value, c("set_of_paragraphs", "character", "pot") ) )
@@ -59,6 +60,7 @@ addParagraph <- function(doc, value, ...){
 #' list counter will be set to 1.
 #' @examples
 #' # docx example ---------
+#' \donttest{
 #' doc.filename = "ex_paragraph.docx"
 #' doc <- docx()
 #' styles(doc)
@@ -76,9 +78,8 @@ addParagraph <- function(doc, value, ...){
 #'
 #' doc <- addParagraph( doc, value = my.pars, par.properties = parCenter() )
 #'
-#' doc <- addTitle( doc, "Title example 3", level = 1 )
-#' @example examples/lists_doc.R
-#' @example examples/writeDoc_file.R
+#' writeDoc( doc, file = doc.filename )
+#' }
 #' @rdname addParagraph
 #' @export
 addParagraph.docx <- function(doc, value, stylename, bookmark,

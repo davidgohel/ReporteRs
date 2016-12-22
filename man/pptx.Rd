@@ -63,7 +63,7 @@ Document are manipulated in-memory ; a \code{pptx}'s document is not written to 
 unless the \code{\link{writeDoc}} method has been called on the object.
 }
 \examples{
-
+\donttest{
 # set default font size to 10
 options( "ReporteRs-fontsize" = 11 )
 
@@ -130,10 +130,10 @@ doc = addTitle( doc, "FlexTable example" )
 
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body
-MyFTable = FlexTable( data = mtcars, add.rownames = TRUE, 
-	header.cell.props = cellProperties( background.color = "#00557F" ), 
-	header.text.props = textProperties( color = "white", 
-		font.size = 11, font.weight = "bold" ), 
+MyFTable = FlexTable( data = mtcars, add.rownames = TRUE,
+	header.cell.props = cellProperties( background.color = "#00557F" ),
+	header.text.props = textProperties( color = "white",
+		font.size = 11, font.weight = "bold" ),
 	body.text.props = textProperties( font.size = 10 )
 )
 # zebra stripes - alternate colored backgrounds on table rows
@@ -143,17 +143,18 @@ MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 MyFTable = setFlexTableBorders(MyFTable,
 	inner.vertical = borderProperties( color="#0070A8", style="solid" ),
 	inner.horizontal = borderNone(),
-	outer.vertical = borderProperties( color = "#006699", 
+	outer.vertical = borderProperties( color = "#006699",
 	  style = "solid", width = 2 ),
-	outer.horizontal = borderProperties( color = "#006699", 
+	outer.horizontal = borderProperties( color = "#006699",
 	  style = "solid", width = 2 )
 )
 
-# add MyFTable into document 
+# add MyFTable into document
 doc = addFlexTable( doc, MyFTable )
 
 # write the doc
 writeDoc( doc, file = pptx.file )
+}
 
 # get pptx page dimensions ------
 doc = pptx( title = "title" )

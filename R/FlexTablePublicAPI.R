@@ -266,7 +266,6 @@ addFooterRow = function( x, value, colspan, text.properties, par.properties, cel
 #' MyFTable[, "cyl", text.properties = textProperties(
 #'   vertical.align="superscript", font.size = 9) ] <- " miles/gallon"
 #'
-#' @example examples/FlexTableAPIFullDemo.R
 #' @rdname FlexTable-alter
 #' @aliases alterFlexTable
 #' @export
@@ -578,8 +577,74 @@ setColumnsColors = function (object, j, colors){
 #' @param to specify on which part of the FlexTable to apply colors, must be one of the following
 #' values "body" (default) or "header" or "footer"
 #' @examples
-#' #
-#' @example examples/setFlexTableBackgroundColors.R
+#' # example 1 ----
+#' ft <- vanilla.table(head(iris))
+#' ft <- setFlexTableBackgroundColors( ft,
+#'   i = 1:3, j = c("Petal.Length", "Species"), colors = "yellow" )
+#'
+#' # example 2 ----
+#' data <- structure(c(1, -0.991, -0.993, -0.956, 0.939, -0.986, 0.708,
+#' 0.932, 0.827, 0.768, -0.799, -0.991, 1, 0.992, 0.972, -0.923,
+#' 0.966, -0.766, -0.963, -0.783, -0.735, 0.82, -0.993, 0.992, 1,
+#' 0.944, -0.955, 0.987, -0.692, -0.93, -0.843, -0.801, 0.757, -0.956,
+#' 0.972, 0.944, 1, -0.819, 0.897, -0.88, -0.985, -0.635, -0.565,
+#' 0.924, 0.939, -0.923, -0.955, -0.819, 1, -0.975, 0.472, 0.795,
+#' 0.944, 0.92, -0.565, -0.986, 0.966, 0.987, 0.897, -0.975, 1,
+#' -0.59, -0.872, -0.903, -0.855, 0.697, 0.708, -0.766, -0.692,
+#' -0.88, 0.472, -0.59, 1, 0.899, 0.204, 0.14, -0.949, 0.932, -0.963,
+#' -0.93, -0.985, 0.795, -0.872, 0.899, 1, 0.594, 0.544, -0.912,
+#' 0.827, -0.783, -0.843, -0.635, 0.944, -0.903, 0.204, 0.594, 1,
+#' 0.979, -0.34, 0.768, -0.735, -0.801, -0.565, 0.92, -0.855, 0.14,
+#' 0.544, 0.979, 1, -0.236, -0.799, 0.82, 0.757, 0.924, -0.565,
+#' 0.697, -0.949, -0.912, -0.34, -0.236, 1), .Dim = c(11L, 11L),
+#' .Dimnames = list(c("mpg", "cyl", "disp", "hp", "drat", "wt",
+#' "qsec", "vs", "am", "gear", "carb"), c("mpg", "cyl", "disp",
+#' "hp", "drat", "wt", "qsec", "vs", "am", "gear", "carb")))
+#'
+#' mycolors <-
+#'   structure(c("#1A9850", "#D73027", "#D73027", "#D73027", "#1A9850",
+#'   "#D73027", "#66BD63", "#1A9850", "#1A9850", "#1A9850", "#D73027",
+#'   "#D73027", "#1A9850", "#1A9850", "#1A9850", "#D73027", "#1A9850",
+#'   "#D73027", "#D73027", "#D73027", "#F46D43", "#1A9850", "#D73027",
+#'   "#1A9850", "#1A9850", "#1A9850", "#D73027", "#1A9850", "#F46D43",
+#'   "#D73027", "#D73027", "#D73027", "#1A9850", "#D73027", "#1A9850",
+#'   "#1A9850", "#1A9850", "#D73027", "#1A9850", "#D73027", "#D73027",
+#'   "#F46D43", "#F46D43", "#1A9850", "#1A9850", "#D73027", "#D73027",
+#'   "#D73027", "#1A9850", "#D73027", "#A6D96A", "#1A9850", "#1A9850",
+#'   "#1A9850", "#F46D43", "#D73027", "#1A9850", "#1A9850", "#1A9850",
+#'   "#D73027", "#1A9850", "#F46D43", "#D73027", "#D73027", "#D73027",
+#'   "#66BD63", "#66BD63", "#D73027", "#F46D43", "#D73027", "#A6D96A",
+#'   "#F46D43", "#1A9850", "#1A9850", "#D9EF8B", "#D9EF8B", "#D73027",
+#'   "#1A9850", "#D73027", "#D73027", "#D73027", "#1A9850", "#D73027",
+#'   "#1A9850", "#1A9850", "#66BD63", "#66BD63", "#D73027", "#1A9850",
+#'   "#D73027", "#D73027", "#F46D43", "#1A9850", "#D73027", "#D9EF8B",
+#'   "#66BD63", "#1A9850", "#1A9850", "#FDAE61", "#1A9850", "#F46D43",
+#'   "#D73027", "#F46D43", "#1A9850", "#D73027", "#D9EF8B", "#66BD63",
+#'   "#1A9850", "#1A9850", "#FEE08B", "#D73027", "#1A9850", "#1A9850",
+#'   "#1A9850", "#F46D43", "#66BD63", "#D73027", "#D73027", "#FDAE61",
+#'   "#FEE08B", "#1A9850"), .Dim = c(11L, 11L))
+#'
+#' MyFTable <- FlexTable( data, add.rownames = TRUE )
+#'
+#' # set computed colors
+#' MyFTable <- setFlexTableBackgroundColors( MyFTable,
+#'   j = dimnames(data)[[2]], colors = mycolors )
+#'
+#' # cosmetics
+#' MyFTable <- setFlexTableBackgroundColors( MyFTable,
+#'   i = 1, colors = "gray", to = "header" )
+#' MyFTable[1, , to = "header"] <- textBold(color="white")
+#'
+#' MyFTable <- setFlexTableBackgroundColors( MyFTable,
+#'   j = 1, colors = "gray" )
+#' MyFTable[,1] <- textBold(color="white")
+#'
+#' bp1 <- borderProperties( color = "white"  )
+#' bp2 <- chprop( bp1, width = 2 )
+#' MyFTable <- setFlexTableBorders( MyFTable,
+#'   inner.vertical = bp1, inner.horizontal = bp1,
+#'   outer.vertical = bp2, outer.horizontal = bp2 )
+#'
 #' @seealso \code{\link{FlexTable}}, \code{\link{is.color}}
 #' @export
 setFlexTableBackgroundColors = function (object, i, j, colors, to = "body"){

@@ -57,7 +57,6 @@
 #'
 #' @examples
 #' options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Helvetica")
-#' @example examples/options.listdefinitions.R
 #' @name ReporteRs-package
 #' @aliases ReporteRs
 #' @title ReporteRs: a package to create document from R

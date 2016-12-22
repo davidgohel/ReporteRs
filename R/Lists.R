@@ -28,13 +28,70 @@
 #' It can be set in R session options or as a parameter in \code{\link{docx}} or
 #' \code{\link{pptx}}.
 #' @examples
-#' #
-#' @example examples/options.listdefinitions.R
+#' numbering.pattern = c( "%1.", "%1. %2.", "%1. %2. %3.",
+#'   "%4.", "%5.", "%6.", "%7.", "%8.", "%9." )
+#'
+#' ordered.formats = rep( c( "decimal", "upperRoman", "upperLetter"), 3 )
+#'
+#' unordered.formats = rep( c( "square", "disc", "circle"), 3 )
+#'
+#' left.indent = seq( from = 0, by = 0.5, length.out = 9)
+#'
+#' options("ReporteRs-list-definition" = list(
+#'   ol.left = left.indent,
+#'   ol.hanging = rep( 0.4, 9 ),
+#'   ol.format = ordered.formats,
+#'   ol.pattern = numbering.pattern,
+#'   ul.left = left.indent,
+#'   ul.hanging = rep( 0.4, 9 ),
+#'   ul.format = unordered.formats
+#'   )
+#' )
+#'
+#' doc.filename = "ex_list.docx"
+#' doc <- docx()
+#'
+#' doc <- addTitle( doc, "List example", level = 1 )
+#'
+#' # define some text
+#' text1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+#' text2 = "In sit amet ipsum tellus. Vivamus arcu sit amet faucibus auctor."
+#' text3 = "Quisque dictum tristique ligula."
+#'
+#' # define parProperties with list properties
+#' ordered.list.level1 = parProperties(list.style = "ordered",
+#'                                     level = 1 )
+#' ordered.list.level2 = parProperties(list.style = "ordered",
+#'                                     level = 2 )
+#'
+#' # define parProperties with list properties
+#' unordered.list.level1 = parProperties(list.style = "unordered",
+#'                                       level = 1 )
+#' unordered.list.level2 = parProperties(list.style = "unordered",
+#'                                       level = 2 )
+#'
+#' # add ordered list items
+#' doc = addParagraph( doc, value = text1,
+#'                     par.properties = ordered.list.level1 )
+#' doc = addParagraph( doc, value = text2,
+#'                     par.properties = ordered.list.level2 )
+#'
+#' # add ordered list items without restart renumbering
+#' doc = addParagraph( doc, value = c( text1, text2, text3),
+#'                     par.properties = ordered.list.level1 )
+#'
+#' # add ordered list items and restart renumbering
+#' doc = addParagraph( doc, value = c( text1, text2, text3),
+#'                     restart.numbering = TRUE, par.properties = ordered.list.level1 )
+#'
+#' # add unordered list items
+#' doc = addParagraph( doc, value = text1,
+#'                     par.properties = unordered.list.level1 )
+#' doc = addParagraph( doc, value = text2,
+#'                     par.properties = unordered.list.level2 )
+#'
+#' writeDoc( doc, file = doc.filename )
 #' @seealso \code{\link{addParagraph}}, \code{\link{ReporteRs}}
-#' @name doc-list-settings
-#' @aliases list.settings
-NULL
-
 list.settings = function(
 		ol.left = seq( from = 0, by = 0.4, length.out = 9),
 		ol.hanging = rep( 0.4, 9 ),
@@ -98,6 +155,5 @@ list.settings = function(
 		unorderedSettings )
 
 	numberingDefinition
-
 }
 

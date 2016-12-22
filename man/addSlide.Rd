@@ -47,16 +47,17 @@ Also when using addPlot, plot dimensions will be the shape dimensions. It means 
 , this has to be done in the PowerPoint template used when creating the \code{pptx} object.
 }
 \examples{
+\donttest{
 doc.filename = "addSlide_example.pptx"
 doc <- pptx()
 doc <- addSlide(doc, "Title and Content")
 doc <- addTitle(doc, "Title example")
 writeDoc( doc, file = doc.filename )
-
+}
 
 
 # demo slide replacement --------
-
+\donttest{
 # define 2 FlexTables
 ft1 = vanilla.table( mtcars[1:6,] , add.rownames = TRUE )
 ft2 = vanilla.table( iris[1:10,], add.rownames = TRUE )
@@ -72,12 +73,13 @@ mydoc = addParagraph( mydoc, "text example" )
 writeDoc( mydoc, "template_example.pptx" )
 
 # use file pp_template_example.pptx as template
-# and replace slide 1 
+# and replace slide 1
 mydoc = pptx(template = "template_example.pptx" )
 mydoc = addSlide( mydoc, slide.layout = "Title and Content", bookmark = 1)
 mydoc = addTitle( mydoc, "a new table")
 mydoc = addFlexTable( mydoc, ft2 )
 writeDoc( mydoc, "slide_replacement.pptx" )
+}
 }
 \seealso{
 \code{\link{pptx}}, \code{\link{slide.layouts}}

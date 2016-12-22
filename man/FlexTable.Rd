@@ -122,160 +122,108 @@ Span columns within rows with function \code{\link{spanFlexTableColumns}}.
 Set columns widths with function \code{\link{setFlexTableWidths}}.
 }
 \examples{
-#
 #####################################################################
 
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body
-MyFTable = FlexTable( data = mtcars, add.rownames = TRUE, 
-  header.cell.props = cellProperties( background.color = "#00557F" ), 
-  header.text.props = textProperties( color = "white", 
-    font.size = 11, font.weight = "bold" ), 
+MyFTable <- FlexTable( data = mtcars, add.rownames = TRUE,
+  header.cell.props = cellProperties( background.color = "#00557F" ),
+  header.text.props = textProperties( color = "white",
+    font.size = 11, font.weight = "bold" ),
   body.text.props = textProperties( font.size = 10 )
 )
 # zebra stripes - alternate colored backgrounds on table rows
-MyFTable = setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
+MyFTable <- setZebraStyle( MyFTable, odd = "#E1EEf4", even = "white" )
 
 # applies a border grid on table
-MyFTable = setFlexTableBorders(MyFTable,
+MyFTable <- setFlexTableBorders(MyFTable,
   inner.vertical = borderProperties( color="#0070A8", style="solid" ),
   inner.horizontal = borderNone(),
-  outer.vertical = borderProperties( color = "#006699", 
+  outer.vertical = borderProperties( color = "#006699",
 	style = "solid", width = 2 ),
-  outer.horizontal = borderProperties( color = "#006699", 
+  outer.horizontal = borderProperties( color = "#006699",
 	style = "solid", width = 2 )
 )
-#####################################################################
 
 # set default font size to 10
-options( "ReporteRs-fontsize" = 10 )
+options("ReporteRs-fontsize" = 10)
 
 # a summary of mtcars
-dataset = aggregate( mtcars[, c("disp", "mpg", "wt")]
-  , by = mtcars[, c("cyl", "gear", "carb")]
-  , FUN = mean )
-dataset = dataset[ order(dataset$cyl, dataset$gear, dataset$carb), ]
+dataset <- aggregate(mtcars[, c("disp", "mpg", "wt")],
+  by = mtcars[, c("cyl", "gear", "carb")], FUN = mean)
+dataset <- dataset[order(dataset$cyl, dataset$gear, dataset$carb),]
 
 
 # set cell padding defaut to 2
-baseCellProp = cellProperties( padding = 2 )
+baseCellProp <- cellProperties(padding = 2)
 
 # Create a FlexTable with data.frame dataset
-MyFTable = FlexTable( data = dataset
-  , body.cell.props = baseCellProp
-  , header.cell.props = baseCellProp
-  , header.par.props = parProperties(text.align = "right" )
-)
+MyFTable <- FlexTable( data = dataset,
+  body.cell.props = baseCellProp, header.cell.props = baseCellProp,
+  header.par.props = parProperties(text.align = "right") )
 
 # set columns widths (inch)
-MyFTable = setFlexTableWidths( MyFTable, 
-	widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7) )
+MyFTable <- setFlexTableWidths(MyFTable,
+                              widths = c(0.5, 0.5, 0.5, 0.7, 0.7, 0.7))
 
 # span successive identical cells within column 1, 2 and 3
-MyFTable = spanFlexTableRows( MyFTable, j = 1,
-	runs = as.character( dataset$cyl ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 2, 
-	runs = as.character( dataset$gear ) )
-MyFTable = spanFlexTableRows( MyFTable, j = 3, 
-	runs = as.character( dataset$carb ) )
+MyFTable <- spanFlexTableRows(MyFTable, j = 1,
+                             runs = as.character(dataset$cyl))
+MyFTable <- spanFlexTableRows(MyFTable, j = 2,
+                             runs = as.character(dataset$gear))
+MyFTable <- spanFlexTableRows(MyFTable, j = 3,
+                             runs = as.character(dataset$carb))
 
 # overwrites some text formatting properties
-MyFTable[dataset$wt < 3, 6] = textProperties( color="#003366")
-MyFTable[dataset$mpg < 20, 5] = textProperties( color="#993300")
+MyFTable[dataset$wt < 3, 6] <- textProperties(color = "#003366")
+MyFTable[dataset$mpg < 20, 5] <- textProperties(color = "#993300")
 
 # overwrites some paragraph formatting properties
-MyFTable[, 1:3] = parProperties(text.align = "center")
-MyFTable[, 4:6] = parProperties(text.align = "right")
+MyFTable[, 1:3] <- parProperties(text.align = "center")
+MyFTable[, 4:6] <- parProperties(text.align = "right")
 
 
-Footnote1 = Footnote(  )
+Footnote1 <- Footnote()
 
-par1 = pot("About this reference", textBold( ) )
-par2 = pot("Omni ab coalitos pro malivolus obsecrans graviter 
-cum perquisitor perquisitor pericula saepeque inmunibus coalitos ut.", 
-  textItalic(font.size = 8) )
-Footnote1 = addParagraph( Footnote1, set_of_paragraphs( par1, par2 ), 
-  parProperties(text.align = "justify"))
+par1 <- pot("About this reference", textBold())
+par2 <- pot(
+  "Omni ab coalitos pro malivolus obsecrans graviter cum perquisitor \\
+  perquisitor pericula saepeque inmunibus coalitos ut.",
+  textItalic(font.size = 8)
+)
+Footnote1 <- addParagraph(Footnote1,
+                         set_of_paragraphs(par1, par2),
+                         parProperties(text.align = "justify"))
 
-Footnote1 = addParagraph( Footnote1, 
-	set_of_paragraphs( "list item 1", "list item 2" ), 
-  parProperties(text.align = "left", list.style = "ordered"))
+Footnote1 <- addParagraph(
+  Footnote1,
+  set_of_paragraphs("list item 1", "list item 2"),
+  parProperties(text.align = "left", list.style = "ordered")
+)
 
-an_rscript = RScript( text = "ls()
-x = rnorm(10)" )
-Footnote1 = addParagraph( Footnote1, an_rscript )
+an_rscript <- RScript(text = "x = rnorm(10)")
+Footnote1 <- addParagraph(Footnote1, an_rscript)
 
-MyFTable[1, 1, newpar = TRUE] = pot("a note", 
-  footnote = Footnote1, format = textBold(color="gray") )
+MyFTable[1, 1, newpar = TRUE] <- pot("a note",
+                                    footnote = Footnote1,
+                                    format = textBold(color = "gray"))
 
-pot_link = pot(" (link example)", textProperties( color = "cyan" ), 
-  hyperlink = "http://www.wikipedia.org/" )
+pot_link <- pot(" (link example)", textProperties(color = "cyan"),
+               hyperlink = "http://www.wikipedia.org/")
 
-MyFTable[1, 1, to = "header"] = pot_link
+MyFTable[1, 1, to = "header"] <- pot_link
 
 # applies a border grid on table
-MyFTable = setFlexTableBorders( MyFTable, footer=TRUE
-  , inner.vertical = borderProperties( color = "#666666" )
-  , inner.horizontal = borderProperties( color = "#666666" )
-  , outer.vertical = borderProperties( width = 2, color = "#666666" )
-  , outer.horizontal = borderProperties( width = 2, color = "#666666" )
-)
-data <- cor( cor(mtcars) )
+MyFTable <- setFlexTableBorders( MyFTable, footer = TRUE,
+  inner.vertical = borderProperties(color = "#666666"),
+  inner.horizontal = borderProperties(color = "#666666"),
+  outer.vertical = borderProperties(width = 2, color = "#666666"),
+  outer.horizontal = borderProperties(width = 2, color = "#666666") )
 
-pal <- c( "#D73027", "#F46D43", "#FDAE61", "#FEE08B",
-  "#D9EF8B", "#A6D96A", "#66BD63", "#1A9850" )
-mycut <- cut( data,
-  breaks = c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1),
-  include.lowest = TRUE, label = FALSE )
-mycolors = pal[ mycut ]
+ft <- vanilla.table(head(iris))
+ft <- setFlexTableBackgroundColors( ft,
+  i = 1:3, j = c("Petal.Length", "Species"), colors = "yellow" )
 
-MyFTable <- FlexTable( round(data, 3), add.rownames = TRUE )
-
-# set computed colors
-MyFTable <- setFlexTableBackgroundColors( MyFTable,
-  j = seq_len(ncol(data)) + 1, colors = mycolors )
-
-# cosmetics
-MyFTable <- setFlexTableBackgroundColors( MyFTable, i = 1,
-  colors = "gray", to = "header" )
-MyFTable[1, , to = "header"] <- textBold(color="white")
-
-MyFTable <- setFlexTableBackgroundColors( MyFTable, j = 1, colors = "gray" )
-MyFTable[,1] <- textBold(color="white")
-
-MyFTable <- setFlexTableBorders( MyFTable,
-  inner.vertical = borderProperties( style = "dashed", color = "white" ),
-  inner.horizontal = borderProperties( style = "dashed", color = "white"  ),
-  outer.vertical = borderProperties( width = 2, color = "white"  ),
-  outer.horizontal = borderProperties( width = 2, color = "white"  ) )
-
-
-
-data( iris )
-iris = iris[1:10, c(5, 1:4)]
-
-default_text = textProperties( font.size = 11 )
-note_text = chprop(default_text, 
-	vertical.align = "superscript", color = "blue")
-
-iris_ft = FlexTable( data = iris, header.columns = FALSE )
-iris_ft = addHeaderRow( iris_ft, 
-	value = c("", "Measures" ), colspan = c( 4, 1 ) )
-iris_ft = addHeaderRow( iris_ft, 
-	value = gsub( "\\\\.", " ", names( iris ) ) )
-iris_ft[2, 2, newpar = TRUE ] = "Hi there"
-iris_ft[2, 1, to="header"] = pot("* this is a note", note_text )
-
-
-iris_ft = spanFlexTableRows( iris_ft, j = "Species", 
-	runs = as.character( iris$Species ) )
-iris_ft = setFlexTableBorders( iris_ft, 
-  inner.vertical = borderProperties( style = "none" ), 
-  inner.horizontal = borderProperties( width = 1 ), 
-  outer.vertical = borderProperties( width = 0 ), 
-  outer.horizontal = borderProperties( width = 2 ), 
-  footer = TRUE
-)
 }
 \seealso{
 \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}

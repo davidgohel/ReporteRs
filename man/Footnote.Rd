@@ -22,7 +22,6 @@ If in a \code{docx} object, footnote will be flagged by a number immediately
 following the portion of the text the note is in reference to.
 }
 \examples{
-
 \donttest{
 
 ## docx example

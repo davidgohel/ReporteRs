@@ -25,10 +25,34 @@ addSection = function(doc, ...){
 #' @param space_between width in inches of the space between columns of the section.
 #' @param columns.only logical value, if set to TRUE, no break page will (continuous section).
 #' @examples
+#' \donttest{
 #' doc.filename = "addSection.docx"
-#' @example examples/docx.R
-#' @example examples/addSection_example1.R
-#' @example examples/writeDoc_file.R
+#' doc <- docx()
+#' doc = addSection(doc, landscape = TRUE, ncol = 2 )
+#' doc = addPlot( doc = doc, fun = function() {
+#' 		barplot( 1:8, col = 1:8 )
+#' 	}, width = 3, height = 3, pointsize = 5)
+#'
+#' doc = addColumnBreak(doc )
+#' doc = addFlexTable(doc, FlexTable( iris[1:10,] ) )
+#'
+#' doc = addSection(doc, ncol = 2 )
+#' doc = addParagraph( doc = doc, "Text 1.", "Normal" )
+#' doc = addColumnBreak(doc )
+#' doc = addParagraph( doc = doc, "Text 2.", "Normal" )
+#'
+#'
+#' doc = addSection(doc, ncol = 2, columns.only = TRUE )
+#' doc = addFlexTable(doc, FlexTable(iris[1:10,] ) )
+#' doc = addColumnBreak(doc )
+#' doc = addParagraph( doc = doc, "Text 3.", "Normal" )
+#'
+#'
+#' doc = addSection( doc )
+#' doc = addFlexTable(doc, FlexTable(mtcars, add.rownames = TRUE) )
+#' doc = addParagraph( doc = doc, "Text 4.", "Normal" )
+#' writeDoc(doc, doc.filename)
+#' }
 #' @rdname addSection
 #' @export
 addSection.docx = function(doc, landscape = FALSE, ncol = 1, space_between = 0.3, columns.only = FALSE , ...) {
