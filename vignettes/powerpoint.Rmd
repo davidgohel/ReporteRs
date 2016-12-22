@@ -144,7 +144,7 @@ doc <- pptx()
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addSlide( doc, slide.layout = 'Two Content' )
 filename <- "addslide_example.pptx" # the document to produce
-writeDoc( mydoc, filename )
+writeDoc( doc, filename )
 ```
 
 ```{r echo=FALSE}
@@ -240,7 +240,7 @@ doc <- addDate( doc )
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addDate( doc, 'Dummy date' )
 filename <- "date_example.pptx" # the document to produce
-writeDoc( mydoc, file = filename )
+writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
@@ -259,7 +259,7 @@ doc <-addPageNumber( doc )
 doc <-addSlide( doc, slide.layout = 'Title and Content' )
 doc <-addPageNumber( doc, 'Dummy text' )
 filename <- "pagenumber_example.pptx" # the document to produce
-writeDoc( mydoc, file = filename )
+writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
@@ -277,7 +277,7 @@ doc <- pptx()
 doc <- addSlide( doc, slide.layout = 'Title and Content' )
 doc <- addFooter( doc, 'Dummy text' )
 filename <- "footer_example.pptx" # the document to produce
-writeDoc( mydoc, file = filename )
+writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
@@ -297,7 +297,7 @@ doc <- addSlide( doc, slide.layout = 'Title Slide' )
 doc <- addTitle( doc, 'Presentation title' )
 doc <- addSubtitle( doc , 'This document is generated with ReporteRs.')
 filename <- "sub_example.pptx" # the document to produce
-writeDoc( mydoc, file = filename )
+writeDoc( doc, file = filename )
 ```
 
 ```{r echo=FALSE}
@@ -338,14 +338,12 @@ ReporteRs can be used with package `magrittr`, it makes code easier to read and 
 
 ```{r message=FALSE}
 library( magrittr )
-filename <- tempfile(fileext = ".pptx") # the document to produce
+filename <- "pipe_example.pptx" # the document to produce
 
 pptx( title = "title" ) %>% 
   addSlide( slide.layout = "Title and Content" ) %>% 
   addFlexTable( vanilla.table(head(iris) ) ) %>% 
   writeDoc( file = filename )
-filename <- "pipe_example.pptx" # the document to produce
-writeDoc( mydoc, file = filename )
 ```
 
 ```{r echo=FALSE}

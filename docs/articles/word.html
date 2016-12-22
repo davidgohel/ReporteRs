@@ -262,7 +262,7 @@ mydoc &lt;-<span class="st"> </span>mydoc %&gt;%<span class="st"> </span><span c
     <span class="dt">stylename =</span> <span class="st">"tablereference"</span>) <span class="co"># Add a legend below the table</span>
 
 filename &lt;-<span class="st"> "toc.docx"</span> <span class="co"># the document to produce</span>
-<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( doc, <span class="dt">file =</span> filename)</code></pre></div>
+<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( mydoc, <span class="dt">file =</span> filename)</code></pre></div>
 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=http://davidgohel.github.io/ReporteRs/articles/toc.docx" width="80%" height="500px">iframes are not supported</iframe>
 </div>
 </div>
@@ -283,7 +283,7 @@ doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSect
 <span class="st">  </span><span class="kw"><a href="../reference/addFlexTable.html">addFlexTable</a></span>( <span class="kw"><a href="../reference/vanilla.table.html">vanilla.table</a></span>(mtcars)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/addSection.html">addSection</a></span>()
 
-doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSection.html">addSection</a></span>( doc, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">landscape =</span> <span class="ot">TRUE</span>) %&gt;%<span class="st"> </span>
+doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSection.html">addSection</a></span>( doc, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">landscape =</span> <span class="ot">FALSE</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/addParagraph.html">addParagraph</a></span>( <span class="st">"My text on column 1"</span>, <span class="dt">stylename =</span> <span class="st">"Normal"</span> ) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/addColumnBreak.html">addColumnBreak</a></span>( ) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/addParagraph.html">addParagraph</a></span>(<span class="st">"Hi on the right"</span>, <span class="dt">stylename =</span> <span class="st">"Normal"</span> ) %&gt;%<span class="st"> </span>

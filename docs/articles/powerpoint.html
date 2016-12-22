@@ -169,7 +169,7 @@ doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pptx.ht
 doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSlide.html">addSlide</a></span>( doc, <span class="dt">slide.layout =</span> <span class="st">'Title and Content'</span> )
 doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSlide.html">addSlide</a></span>( doc, <span class="dt">slide.layout =</span> <span class="st">'Two Content'</span> )
 filename &lt;-<span class="st"> "addslide_example.pptx"</span> <span class="co"># the document to produce</span>
-<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( mydoc, filename )</code></pre></div>
+<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( doc, filename )</code></pre></div>
 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=http://davidgohel.github.io/ReporteRs/articles/addslide_example.pptx" width="80%" height="500px">iframes are not supported</iframe>
 </div>
 <div id="function-slide-layouts" class="section level3">
@@ -235,7 +235,7 @@ doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addDate
 doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSlide.html">addSlide</a></span>( doc, <span class="dt">slide.layout =</span> <span class="st">'Title and Content'</span> )
 doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addDate.html">addDate</a></span>( doc, <span class="st">'Dummy date'</span> )
 filename &lt;-<span class="st"> "date_example.pptx"</span> <span class="co"># the document to produce</span>
-<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( mydoc, <span class="dt">file =</span> filename )</code></pre></div>
+<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( doc, <span class="dt">file =</span> filename )</code></pre></div>
 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=http://davidgohel.github.io/ReporteRs/articles/date_example.pptx" width="80%" height="500px">iframes are not supported</iframe>
 </div>
 <div id="page-number" class="section level3">
@@ -247,7 +247,7 @@ doc &lt;-<span class="kw"><a href="../reference/addPageNumber.html">addPageNumbe
 doc &lt;-<span class="kw"><a href="../reference/addSlide.html">addSlide</a></span>( doc, <span class="dt">slide.layout =</span> <span class="st">'Title and Content'</span> )
 doc &lt;-<span class="kw"><a href="../reference/addPageNumber.html">addPageNumber</a></span>( doc, <span class="st">'Dummy text'</span> )
 filename &lt;-<span class="st"> "pagenumber_example.pptx"</span> <span class="co"># the document to produce</span>
-<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( mydoc, <span class="dt">file =</span> filename )</code></pre></div>
+<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( doc, <span class="dt">file =</span> filename )</code></pre></div>
 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=http://davidgohel.github.io/ReporteRs/articles/pagenumber_example.pptx" width="80%" height="500px">iframes are not supported</iframe>
 </div>
 <div id="footer" class="section level3">
@@ -257,7 +257,7 @@ filename &lt;-<span class="st"> "pagenumber_example.pptx"</span> <span class="co
 doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSlide.html">addSlide</a></span>( doc, <span class="dt">slide.layout =</span> <span class="st">'Title and Content'</span> )
 doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addFooter.html">addFooter</a></span>( doc, <span class="st">'Dummy text'</span> )
 filename &lt;-<span class="st"> "footer_example.pptx"</span> <span class="co"># the document to produce</span>
-<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( mydoc, <span class="dt">file =</span> filename )</code></pre></div>
+<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( doc, <span class="dt">file =</span> filename )</code></pre></div>
 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=http://davidgohel.github.io/ReporteRs/articles/footer_example.pptx" width="80%" height="500px">iframes are not supported</iframe>
 </div>
 <div id="subtitle" class="section level3">
@@ -269,7 +269,7 @@ doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSlid
 doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addTitle.html">addTitle</a></span>( doc, <span class="st">'Presentation title'</span> )
 doc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/addSubtitle.html">addSubtitle</a></span>( doc , <span class="st">'This document is generated with ReporteRs.'</span>)
 filename &lt;-<span class="st"> "sub_example.pptx"</span> <span class="co"># the document to produce</span>
-<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( mydoc, <span class="dt">file =</span> filename )</code></pre></div>
+<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( doc, <span class="dt">file =</span> filename )</code></pre></div>
 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=http://davidgohel.github.io/ReporteRs/articles/sub_example.pptx" width="80%" height="500px">iframes are not supported</iframe>
 </div>
 </div>
@@ -293,14 +293,12 @@ filename &lt;-<span class="st"> "pp_replacement.pptx"</span> <span class="co"># 
 <h2 class="hasAnchor"><html><body><a href="#working-with-pipes" class="anchor"> </a></body></html>Working with pipes</h2>
 <p>ReporteRs can be used with package <code>magrittr</code>, it makes code easier to read and more compact.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>( magrittr )
-filename &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">".pptx"</span>) <span class="co"># the document to produce</span>
+filename &lt;-<span class="st"> "pipe_example.pptx"</span> <span class="co"># the document to produce</span>
 
 <span class="kw"><a href="../reference/pptx.html">pptx</a></span>( <span class="dt">title =</span> <span class="st">"title"</span> ) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/addSlide.html">addSlide</a></span>( <span class="dt">slide.layout =</span> <span class="st">"Title and Content"</span> ) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/addFlexTable.html">addFlexTable</a></span>( <span class="kw"><a href="../reference/vanilla.table.html">vanilla.table</a></span>(<span class="kw">head</span>(iris) ) ) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( <span class="dt">file =</span> filename )
-filename &lt;-<span class="st"> "pipe_example.pptx"</span> <span class="co"># the document to produce</span>
-<span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( mydoc, <span class="dt">file =</span> filename )</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="../reference/writeDoc.html">writeDoc</a></span>( <span class="dt">file =</span> filename )</code></pre></div>
 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=http://davidgohel.github.io/ReporteRs/articles/pipe_example.pptx" width="80%" height="500px">iframes are not supported</iframe>
 </div>
 </div>

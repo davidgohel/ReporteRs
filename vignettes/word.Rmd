@@ -236,7 +236,7 @@ mydoc <- mydoc %>% addTitle( "mtcars outputs", level =  1 ) %>%
     stylename = "tablereference") # Add a legend below the table
 
 filename <- "toc.docx" # the document to produce
-writeDoc( doc, file = filename)
+writeDoc( mydoc, file = filename)
 ```
 
 ```{r echo=FALSE}
@@ -271,7 +271,7 @@ doc <- addSection( doc, landscape = TRUE) %>%
   addFlexTable( vanilla.table(mtcars)) %>% 
   addSection()
 
-doc <- addSection( doc, ncol = 2, landscape = TRUE) %>% 
+doc <- addSection( doc, ncol = 2, landscape = FALSE) %>% 
   addParagraph( "My text on column 1", stylename = "Normal" ) %>% 
   addColumnBreak( ) %>% 
   addParagraph("Hi on the right", stylename = "Normal" ) %>% 
