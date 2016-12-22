@@ -161,35 +161,29 @@ for each corresponding value (in <code>values</code>).</dd>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#</span>
-<span class='co'>#############################</span>
-<span class='co'># simple example</span>
-<span class='co'>#############################</span>
-
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>:<span class='fl'>4</span>] )
+    <pre class="examples"><div class='input'><span class='co'># simple example ----</span>
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>:<span class='fl'>4</span>] )
 
 <span class='co'># add a footer row with 1 cell that spans four columns</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>addFooterRow</span>( <span class='no'>MyFTable</span>,
-  <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"a note in table footer"</span>), <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>4</span> )
-<span class='co'>#########################################</span>
-<span class='co'># example with FlexRow objects usage</span>
-<span class='co'>#########################################</span>
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>addFooterRow</span>( <span class='no'>MyFTable</span>, <span class='kw'>value</span> <span class='kw'>=</span>
+  <span class='fu'>c</span>(<span class='st'>"a note in table footer"</span>), <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>4</span> )
+
+<span class='co'># another example ----</span>
 
 <span class='co'># create a FlexTable</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>:<span class='fl'>4</span>] )
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>5</span>,<span class='fl'>1</span>:<span class='fl'>4</span>] )
 
 <span class='co'># define a complex formatted text</span>
-<span class='no'>mytext</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"*"</span>,
-    <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>vertical.align</span><span class='kw'>=</span><span class='st'>"superscript"</span>, <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>)
-  ) + <span class='fu'><a href='pot.html'>pot</a></span>( <span class='st'>" this text is superscripted"</span>,
-    <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>) )
+<span class='no'>mytext</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"*"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(
+  <span class='kw'>vertical.align</span><span class='kw'>=</span><span class='st'>"superscript"</span>, <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>) ) +
+  <span class='fu'><a href='pot.html'>pot</a></span>( <span class='st'>" this text is superscripted"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>) )
 
 <span class='co'># create a FlexRow - container for 1 cell</span>
-<span class='no'>footerRow</span> <span class='kw'>=</span> <span class='fu'><a href='FlexRow.html'>FlexRow</a></span>()
-<span class='no'>footerRow</span>[<span class='fl'>1</span>] <span class='kw'>=</span> <span class='fu'><a href='FlexCell.html'>FlexCell</a></span>( <span class='no'>mytext</span>, <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>4</span> )
+<span class='no'>footerRow</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexRow.html'>FlexRow</a></span>()
+<span class='no'>footerRow</span>[<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexCell.html'>FlexCell</a></span>( <span class='no'>mytext</span>, <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>4</span> )
 
-<span class='co'># add the FlexRow to the FlexTable</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>addFooterRow</span>( <span class='no'>MyFTable</span>, <span class='no'>footerRow</span> )</div></pre>
+<span class='co'># finally, add the FlexRow to the FlexTable</span>
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>addFooterRow</span>( <span class='no'>MyFTable</span>, <span class='no'>footerRow</span> )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

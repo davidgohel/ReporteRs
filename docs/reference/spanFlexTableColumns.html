@@ -159,18 +159,17 @@ runs of equal values will indicate to merge corresponding columns.</dd>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#</span>
-<span class='no'>mydata</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>46</span>:<span class='fl'>55</span>, ]
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mydata</span> )
+    <pre class="examples"><div class='input'><span class='no'>mydata</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>46</span>:<span class='fl'>55</span>, ]
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mydata</span> )
 
 <span class='co'># merge columns 2 to 4 in line 3</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>spanFlexTableColumns</span>( <span class='no'>MyFTable</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>4</span> )
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>spanFlexTableColumns</span>( <span class='no'>MyFTable</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fl'>4</span> )
 
-<span class='co'># merge cells in line 4 when successive values of </span>
-<span class='co'># a given character vector are identical. Note </span>
-<span class='co'># the character vector length is the same </span>
+<span class='co'># merge cells in line 4 when successive values of</span>
+<span class='co'># a given character vector are identical. Note</span>
+<span class='co'># the character vector length is the same</span>
 <span class='co'># than the number of columns of the FlexTable.</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>spanFlexTableColumns</span>( <span class='no'>MyFTable</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>spanFlexTableColumns</span>( <span class='no'>MyFTable</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>4</span>,
   <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>) )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -160,8 +160,7 @@ chunk of text found in the document.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='docx.html'>docx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"My example"</span>, <span class='kw'>template</span> <span class='kw'>=</span> <span class='fu'>file.path</span>(
+    <pre class="examples"><div class='input'><span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='docx.html'>docx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"My example"</span>, <span class='kw'>template</span> <span class='kw'>=</span> <span class='fu'>file.path</span>(
   <span class='fu'>system.file</span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ReporteRs"</span>), <span class='st'>"templates/bookmark_example.docx"</span>) )
 <span class='fu'>text_extract</span>( <span class='no'>doc</span> )</div><div class='output co'>#&gt;   [1] &quot;My&quot;                     &quot; rep&quot;                   &quot;ort&quot;                   
 #&gt;   [4] &quot;PLOT&quot;                   &quot;Illud&quot;                  &quot; &quot;                     
@@ -265,7 +264,8 @@ chunk of text found in the document.</p>
 #&gt; [161] &quot;iam&quot;           &quot; &quot;             &quot;consumendo&quot;    &quot; &quot;            
 #&gt; [165] &quot;inediae&quot;       &quot; &quot;             &quot;propinquantis&quot; &quot; &quot;            
 #&gt; [169] &quot;aerumnas&quot;      &quot; &quot;             &quot;exitialis&quot;     &quot; &quot;            
-#&gt; [173] &quot;horrebant&quot;     &quot;.&quot;            </div><div class='input'><span class='fu'>text_extract</span>( <span class='no'>doc</span>, <span class='kw'>bookmark</span> <span class='kw'>=</span> <span class='st'>"author"</span> )</div><div class='output co'>#&gt; [1] &quot;AUTHOR&quot;</div></pre>
+#&gt; [173] &quot;horrebant&quot;     &quot;.&quot;            </div><div class='input'><span class='fu'>text_extract</span>( <span class='no'>doc</span>, <span class='kw'>bookmark</span> <span class='kw'>=</span> <span class='st'>"author"</span> )</div><div class='output co'>#&gt; [1] &quot;AUTHOR&quot;</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

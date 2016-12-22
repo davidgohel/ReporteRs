@@ -149,7 +149,7 @@
       <dd><code>&quot;character&quot;</code> value, it represents the filename of the pptx file used as a template.</dd>
       <dt>list.definition</dt>
       <dd>a list definition to specify how ordered and unordered
-lists have to be formated. See <code><a href='doc-list-settings.html'>list.settings</a></code>. Default to
+lists have to be formated. See <code><a href='list.settings.html'>list.settings</a></code>. Default to
 <code>getOption(&quot;ReporteRs-list-definition&quot;)</code>.</dd>
       <dt>x</dt>
       <dd>Object of class <code>pptx</code></dd>
@@ -206,8 +206,7 @@ unless the <code><a href='writeDoc.html'>writeDoc</a></code> method has been cal
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># set default font size to 10</span>
+    <pre class="examples"><div class='input'><span class='co'># set default font size to 10</span>
 <span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>11</span> )
 
 <span class='co'># Word document to write</span>
@@ -295,7 +294,7 @@ unless the <code><a href='writeDoc.html'>writeDoc</a></code> method has been cal
           <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"solid"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
 )
 
-<span class='co'># add MyFTable into document </span>
+<span class='co'># add MyFTable into document</span>
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addFlexTable.html'>addFlexTable</a></span>( <span class='no'>doc</span>, <span class='no'>MyFTable</span> )
 
 <span class='co'># write the doc</span>
@@ -315,7 +314,8 @@ unless the <code><a href='writeDoc.html'>writeDoc</a></code> method has been cal
 #&gt; $slide.dim
 #&gt;    width   height 
 #&gt; 13.33333  7.50000 
-#&gt; </div></pre>
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

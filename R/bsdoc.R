@@ -57,10 +57,6 @@ bsdoc = function( title = "untitled", list.definition = getOption("ReporteRs-lis
 #' @param x a \code{\link{bsdoc}} object
 #' @param ... further arguments, not used.
 #'
-#' @examples
-#' # Create a new document
-#' doc = bsdoc( )
-#' print( doc )
 #' @export
 print.bsdoc = function(x, ...){
 

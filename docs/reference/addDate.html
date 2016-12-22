@@ -167,26 +167,16 @@ current date (if <code>value</code> is missing).</dd>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"addDate_example.pptx"</span>
+    <pre class="examples"><div class='input'><span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pptx.html'>pptx</a></span>()
 
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>24</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='pptx.html'>pptx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title Slide"</span> )
-<span class='co'>#set the main title</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Presentation title"</span> )
-<span class='co'>#set the sub-title</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSubtitle.html'>addSubtitle</a></span>( <span class='no'>doc</span> , <span class='st'>"This document is generated with ReporteRs."</span>)
-
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
 <span class='co'>## add a date on the current slide</span>
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addDate</span>( <span class='no'>doc</span> )
 
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
-<span class='co'>## add a page number on the current slide but not </span>
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
+<span class='co'>## add a page number on the current slide but not</span>
 <span class='co'>## the default text (slide number)</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addDate</span>( <span class='no'>doc</span>, <span class='st'>"Dummy date"</span> )
-
-<span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>doc.filename</span> )</div></pre>
+<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addDate</span>( <span class='no'>doc</span>, <span class='st'>"Dummy date"</span> )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

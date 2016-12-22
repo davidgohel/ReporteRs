@@ -293,46 +293,64 @@ value is one of &quot;lrtb&quot;, &quot;tbrl&quot;, &quot;btlr&quot;.</dd>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># cellProperties examples -------</span>
-<span class='no'>cellProp01</span> <span class='kw'>=</span> <span class='fu'>cellProperties</span>( <span class='kw'>border.color</span> <span class='kw'>=</span> <span class='st'>"gray"</span>, <span class='kw'>border.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
-<span class='no'>cellProp02</span> <span class='kw'>=</span> <span class='fu'>cellProperties</span>(<span class='kw'>border.left.width</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>border.right.width</span> <span class='kw'>=</span> <span class='fl'>0</span>
-  , <span class='kw'>border.bottom.width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>border.top.width</span> <span class='kw'>=</span> <span class='fl'>0</span>
-  , <span class='kw'>padding.bottom</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>padding.top</span> <span class='kw'>=</span> <span class='fl'>2</span>
-  , <span class='kw'>padding.left</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>padding.right</span> <span class='kw'>=</span> <span class='fl'>2</span> )
+    <pre class="examples"><div class='input'><span class='no'>cellProp01</span> <span class='kw'>&lt;-</span> <span class='fu'>cellProperties</span>( <span class='kw'>border.color</span> <span class='kw'>=</span> <span class='st'>"gray"</span>, <span class='kw'>border.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
+<span class='no'>cellProp02</span> <span class='kw'>&lt;-</span> <span class='fu'>cellProperties</span>(<span class='kw'>border.left.width</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>border.right.width</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>border.bottom.width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>border.top.width</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>padding.bottom</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>padding.top</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>padding.left</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>padding.right</span> <span class='kw'>=</span> <span class='fl'>2</span> )
+<span class='no'>cellProp</span> <span class='kw'>&lt;-</span> <span class='fu'>cellProperties</span>()
 
-<span class='co'># chprop usage example ------</span>
-<span class='no'>cellProp</span> <span class='kw'>=</span> <span class='fu'>cellProperties</span>()
-
-<span class='no'>cellProp01</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.bottom.color</span> <span class='kw'>=</span> <span class='st'>"#8A949B"</span> )
-<span class='no'>cellProp02</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.right.color</span> <span class='kw'>=</span> <span class='st'>"#8A949B"</span> )
-<span class='no'>cellProp03</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.left.color</span> <span class='kw'>=</span> <span class='st'>"#8A949B"</span> )
-<span class='no'>cellProp04</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.top.color</span> <span class='kw'>=</span> <span class='st'>"#8A949B"</span> )
-<span class='no'>cellProp05</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.color</span> <span class='kw'>=</span> <span class='st'>"#8A949B"</span> )
-
-<span class='no'>cellProp06</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.bottom.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
-<span class='no'>cellProp07</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.left.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
-<span class='no'>cellProp08</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.top.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
-<span class='no'>cellProp09</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.right.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
-<span class='no'>cellProp10</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
-
-<span class='no'>cellProp11</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>padding.bottom</span> <span class='kw'>=</span> <span class='fl'>5</span> )
-<span class='no'>cellProp12</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>padding.top</span> <span class='kw'>=</span> <span class='fl'>5</span> )
-<span class='no'>cellProp13</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>padding.left</span> <span class='kw'>=</span> <span class='fl'>5</span> )
-<span class='no'>cellProp14</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>padding.right</span> <span class='kw'>=</span> <span class='fl'>5</span> )
-<span class='no'>cellProp15</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>5</span> )
-
-<span class='no'>cellProp16</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>,
-        <span class='kw'>border.bottom</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"dotted"</span> ) )
-<span class='no'>cellProp17</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.left.style</span> <span class='kw'>=</span> <span class='st'>"dotted"</span> )
-<span class='no'>cellProp18</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.top.style</span> <span class='kw'>=</span> <span class='st'>"dotted"</span> )
-<span class='no'>cellProp19</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.right.style</span> <span class='kw'>=</span> <span class='st'>"dotted"</span> )
-<span class='no'>cellProp20</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.style</span> <span class='kw'>=</span> <span class='st'>"dotted"</span> )
-
-<span class='no'>cellProp21</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>vertical.align</span> <span class='kw'>=</span> <span class='st'>"middle"</span> )
-<span class='no'>cellProp22</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>background.color</span> <span class='kw'>=</span> <span class='st'>"#517281"</span> )
-
-<span class='no'>cellProp23</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>background.color</span> <span class='kw'>=</span> <span class='st'>"#517281"</span>
-  , <span class='kw'>border.color</span> <span class='kw'>=</span> <span class='st'>"#F37257"</span>, <span class='kw'>border.width</span> <span class='kw'>=</span> <span class='fl'>2</span>  )</div></pre>
+<span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.bottom.color</span> <span class='kw'>=</span> <span class='st'>"#8A949B"</span> )</div><div class='output co'>#&gt; cellProperties{border.bottom: borderProperties{color:rgba(138,148,155,1.00);style:solid;width:1;} ;border.top: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.left: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.right: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;
+#&gt; vertical.align: { middle }
+#&gt; padding.bottom: { 0 }
+#&gt; padding.top: { 0 }
+#&gt; padding.left: { 0 }
+#&gt; padding.right: { 0 }
+#&gt; background.color: { rgba(255,255,255,0.00) }
+#&gt; text.direction: { lrtb }</div><div class='input'><span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.color</span> <span class='kw'>=</span> <span class='st'>"#8A949B"</span> )</div><div class='output co'>#&gt; cellProperties{border.bottom: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.top: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.left: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.right: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;
+#&gt; vertical.align: { middle }
+#&gt; padding.bottom: { 0 }
+#&gt; padding.top: { 0 }
+#&gt; padding.left: { 0 }
+#&gt; padding.right: { 0 }
+#&gt; background.color: { rgba(255,255,255,0.00) }
+#&gt; text.direction: { lrtb }</div><div class='input'><span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.right.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )</div><div class='output co'>#&gt; cellProperties{border.bottom: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.top: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.left: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.right: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:2;} ;
+#&gt; vertical.align: { middle }
+#&gt; padding.bottom: { 0 }
+#&gt; padding.top: { 0 }
+#&gt; padding.left: { 0 }
+#&gt; padding.right: { 0 }
+#&gt; background.color: { rgba(255,255,255,0.00) }
+#&gt; text.direction: { lrtb }</div><div class='input'><span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.width</span> <span class='kw'>=</span> <span class='fl'>2</span> )</div><div class='output co'>#&gt; cellProperties{border.bottom: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.top: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.left: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.right: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;
+#&gt; vertical.align: { middle }
+#&gt; padding.bottom: { 0 }
+#&gt; padding.top: { 0 }
+#&gt; padding.left: { 0 }
+#&gt; padding.right: { 0 }
+#&gt; background.color: { rgba(255,255,255,0.00) }
+#&gt; text.direction: { lrtb }</div><div class='input'><span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>5</span> )</div><div class='output co'>#&gt; cellProperties{border.bottom: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.top: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.left: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.right: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;
+#&gt; vertical.align: { middle }
+#&gt; padding.bottom: { 5 }
+#&gt; padding.top: { 5 }
+#&gt; padding.left: { 5 }
+#&gt; padding.right: { 5 }
+#&gt; background.color: { rgba(255,255,255,0.00) }
+#&gt; text.direction: { lrtb }</div><div class='input'><span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>,
+  <span class='kw'>border.bottom</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"dotted"</span> ) )</div><div class='output co'>#&gt; cellProperties{border.bottom: borderProperties{color:rgba(0,0,0,1.00);style:dotted;width:1;} ;border.top: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.left: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.right: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;
+#&gt; vertical.align: { middle }
+#&gt; padding.bottom: { 0 }
+#&gt; padding.top: { 0 }
+#&gt; padding.left: { 0 }
+#&gt; padding.right: { 0 }
+#&gt; background.color: { rgba(255,255,255,0.00) }
+#&gt; text.direction: { lrtb }</div><div class='input'><span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>cellProp</span>, <span class='kw'>border.style</span> <span class='kw'>=</span> <span class='st'>"dotted"</span> )</div><div class='output co'>#&gt; cellProperties{border.bottom: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.top: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.left: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;border.right: borderProperties{color:rgba(0,0,0,1.00);style:solid;width:1;} ;
+#&gt; vertical.align: { middle }
+#&gt; padding.bottom: { 0 }
+#&gt; padding.top: { 0 }
+#&gt; padding.left: { 0 }
+#&gt; padding.right: { 0 }
+#&gt; background.color: { rgba(255,255,255,0.00) }
+#&gt; text.direction: { lrtb }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

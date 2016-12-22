@@ -154,20 +154,18 @@ For internal usage.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#</span>
-<span class='fu'>FlexCell</span>( <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"Hello"</span> )</div><div class='output co'>#&gt; Hello</div><div class='input'><span class='fu'>FlexCell</span>( <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"Hello"</span>, <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; Hello</div><div class='input'><span class='fu'>FlexCell</span>( <span class='st'>"Column 1"</span>,
+    <pre class="examples"><div class='input'><span class='fu'>FlexCell</span>( <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"Hello"</span> )</div><div class='output co'>#&gt; Hello</div><div class='input'><span class='fu'>FlexCell</span>( <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"Hello"</span>, <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; Hello</div><div class='input'><span class='fu'>FlexCell</span>( <span class='st'>"Column 1"</span>,
         <span class='kw'>cell.properties</span> <span class='kw'>=</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>(<span class='kw'>background.color</span><span class='kw'>=</span><span class='st'>"#527578"</span>)  )</div><div class='output co'>#&gt; Column 1</div><div class='input'>
-
 <span class='co'># define a complex formatted text</span>
-<span class='no'>mytext</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Hello"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>)
-  ) + <span class='st'>" "</span> + <span class='fu'><a href='pot.html'>pot</a></span>( <span class='st'>"world"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>)
-)
+<span class='no'>mytext</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Hello"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) ) +
+  <span class='st'>" "</span> +
+  <span class='fu'><a href='pot.html'>pot</a></span>( <span class='st'>"world"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>) )
 <span class='no'>Fcell</span> <span class='kw'>=</span> <span class='fu'>FlexCell</span>( <span class='no'>mytext</span>, <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fl'>4</span> )
 
 <span class='co'># define two paragraph and put them in a FlexCell</span>
-<span class='no'>mytext1</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Hello"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) )
-<span class='no'>mytext2</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>( <span class='st'>"world"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>) )
-<span class='no'>Fcell</span> <span class='kw'>=</span> <span class='fu'>FlexCell</span>( <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>( <span class='no'>mytext1</span>, <span class='no'>mytext2</span> ) )</div></pre>
+<span class='no'>mytext1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Hello"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) )
+<span class='no'>mytext2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>( <span class='st'>"world"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>) )
+<span class='no'>Fcell</span> <span class='kw'>&lt;-</span> <span class='fu'>FlexCell</span>( <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>( <span class='no'>mytext1</span>, <span class='no'>mytext2</span> ) )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

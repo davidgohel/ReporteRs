@@ -179,7 +179,7 @@ and argument <code>font.family</code> of <code><a href='pot.html'>pot</a></code>
 This will be used as default values for argument <code>pointsize</code> of <code><a href='addPlot.html'>addPlot</a></code>
 and argument <code>font.size</code> of <code><a href='pot.html'>pot</a></code>.</p>
     <p></li>
-<li> <code>&quot;ReporteRs-list-definition&quot;</code> see <code><a href='doc-list-settings.html'>list.settings</a></code>.
+<li> <code>&quot;ReporteRs-list-definition&quot;</code> see <code><a href='list.settings.html'>list.settings</a></code>.
   </li>
 <li> <code>&quot;ReporteRs-locale.language&quot;</code> language encoding (for html objects). Default to &quot;en&quot;.
   </li>
@@ -197,26 +197,7 @@ default font, run first</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>options</span>(<span class='st'>"ReporteRs-fontsize"</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='st'>"ReporteRs-default-font"</span><span class='kw'>=</span><span class='st'>"Helvetica"</span>)
-<span class='no'>numbering.pattern</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='st'>"%1."</span>, <span class='st'>"%1. %2."</span>, <span class='st'>"%1. %2. %3."</span>,
-  <span class='st'>"%4."</span>, <span class='st'>"%5."</span>, <span class='st'>"%6."</span>, <span class='st'>"%7."</span>, <span class='st'>"%8."</span>, <span class='st'>"%9."</span> )
-
-<span class='no'>ordered.formats</span> <span class='kw'>=</span> <span class='fu'>rep</span>( <span class='fu'>c</span>( <span class='st'>"decimal"</span>, <span class='st'>"upperRoman"</span>, <span class='st'>"upperLetter"</span>), <span class='fl'>3</span> )
-
-<span class='no'>unordered.formats</span> <span class='kw'>=</span> <span class='fu'>rep</span>( <span class='fu'>c</span>( <span class='st'>"square"</span>, <span class='st'>"disc"</span>, <span class='st'>"circle"</span>), <span class='fl'>3</span> )
-
-<span class='no'>left.indent</span> <span class='kw'>=</span> <span class='fu'>seq</span>( <span class='kw'>from</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fl'>9</span>)
-
-<span class='fu'>options</span>(<span class='st'>"ReporteRs-list-definition"</span> <span class='kw'>=</span> <span class='fu'>list</span>(
-  <span class='kw'>ol.left</span> <span class='kw'>=</span> <span class='no'>left.indent</span>,
-  <span class='kw'>ol.hanging</span> <span class='kw'>=</span> <span class='fu'>rep</span>( <span class='fl'>0.4</span>, <span class='fl'>9</span> ),
-  <span class='kw'>ol.format</span> <span class='kw'>=</span> <span class='no'>ordered.formats</span>,
-  <span class='kw'>ol.pattern</span> <span class='kw'>=</span> <span class='no'>numbering.pattern</span>,
-  <span class='kw'>ul.left</span> <span class='kw'>=</span> <span class='no'>left.indent</span>,
-  <span class='kw'>ul.hanging</span> <span class='kw'>=</span> <span class='fu'>rep</span>( <span class='fl'>0.4</span>, <span class='fl'>9</span> ),
-  <span class='kw'>ul.format</span> <span class='kw'>=</span> <span class='no'>unordered.formats</span>
-  )
-)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>options</span>(<span class='st'>"ReporteRs-fontsize"</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='st'>"ReporteRs-default-font"</span><span class='kw'>=</span><span class='st'>"Helvetica"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

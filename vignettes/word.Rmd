@@ -20,7 +20,7 @@ library(ReporteRs)
 # ),
 # 
 if(!require(filelink))
-  as_link <- function(file, txt, label){invisible()}
+  file_data_uri <- function(file, label, mime){invisible()}
 
 options("ReporteRs-fontsize" = 11)
 ```
@@ -80,7 +80,7 @@ writeDoc( mydoc, file = filename)
 ```
 
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 ## Templates
@@ -154,7 +154,7 @@ writeDoc( doc, file = filename)
 ```
 
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 ## Specific functions
@@ -248,7 +248,7 @@ writeDoc( mydoc, file = filename)
 ```
 
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 ### Page breaks
@@ -290,7 +290,7 @@ writeDoc( doc, file = filename)
 ```
 
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 

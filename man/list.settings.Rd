@@ -67,6 +67,7 @@ options("ReporteRs-list-definition" = list(
   )
 )
 
+\donttest{
 doc.filename = "ex_list.docx"
 doc <- docx()
 
@@ -110,6 +111,7 @@ doc = addParagraph( doc, value = text2,
                     par.properties = unordered.list.level2 )
 
 writeDoc( doc, file = doc.filename )
+}
 }
 \seealso{
 \code{\link{addParagraph}}, \code{\link{ReporteRs}}

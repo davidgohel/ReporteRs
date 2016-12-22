@@ -233,22 +233,21 @@ See <code><a href='[<-.FlexTable.html'>alterFlexTable</a></code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#</span>
-<span class='co'>#####################################################################</span>
+    <pre class="examples"><div class='input'><span class='co'>#####################################################################</span>
 
 <span class='co'># Create a FlexTable with data.frame mtcars, display rownames</span>
 <span class='co'># use different formatting properties for header and body</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>FlexTable</span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>add.rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>FlexTable</span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>add.rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>header.cell.props</span> <span class='kw'>=</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>( <span class='kw'>background.color</span> <span class='kw'>=</span> <span class='st'>"#00557F"</span> ),
   <span class='kw'>header.text.props</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
     <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>font.weight</span> <span class='kw'>=</span> <span class='st'>"bold"</span> ),
   <span class='kw'>body.text.props</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>10</span> )
 )
 <span class='co'># zebra stripes - alternate colored backgrounds on table rows</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setZebraStyle.html'>setZebraStyle</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>odd</span> <span class='kw'>=</span> <span class='st'>"#E1EEf4"</span>, <span class='kw'>even</span> <span class='kw'>=</span> <span class='st'>"white"</span> )
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setZebraStyle.html'>setZebraStyle</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>odd</span> <span class='kw'>=</span> <span class='st'>"#E1EEf4"</span>, <span class='kw'>even</span> <span class='kw'>=</span> <span class='st'>"white"</span> )
 
 <span class='co'># applies a border grid on table</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>(<span class='no'>MyFTable</span>,
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>(<span class='no'>MyFTable</span>,
   <span class='kw'>inner.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"#0070A8"</span>, <span class='kw'>style</span><span class='kw'>=</span><span class='st'>"solid"</span> ),
   <span class='kw'>inner.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>borderNone</a></span>(),
   <span class='kw'>outer.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#006699"</span>,
@@ -256,142 +255,85 @@ See <code><a href='[<-.FlexTable.html'>alterFlexTable</a></code>.</p>
   <span class='kw'>outer.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#006699"</span>,
         <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"solid"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
 )
-<span class='co'>#####################################################################</span>
 
 <span class='co'># set default font size to 10</span>
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>10</span> )
+<span class='fu'>options</span>(<span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 
 <span class='co'># a summary of mtcars</span>
-<span class='no'>dataset</span> <span class='kw'>=</span> <span class='fu'>aggregate</span>( <span class='no'>mtcars</span>[, <span class='fu'>c</span>(<span class='st'>"disp"</span>, <span class='st'>"mpg"</span>, <span class='st'>"wt"</span>)]
-  , <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[, <span class='fu'>c</span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>, <span class='st'>"carb"</span>)]
-  , <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>mean</span> )
-<span class='no'>dataset</span> <span class='kw'>=</span> <span class='no'>dataset</span>[ <span class='fu'>order</span>(<span class='no'>dataset</span>$<span class='no'>cyl</span>, <span class='no'>dataset</span>$<span class='no'>gear</span>, <span class='no'>dataset</span>$<span class='no'>carb</span>), ]
+<span class='no'>dataset</span> <span class='kw'>&lt;-</span> <span class='fu'>aggregate</span>(<span class='no'>mtcars</span>[, <span class='fu'>c</span>(<span class='st'>"disp"</span>, <span class='st'>"mpg"</span>, <span class='st'>"wt"</span>)],
+  <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[, <span class='fu'>c</span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>, <span class='st'>"carb"</span>)], <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>mean</span>)
+<span class='no'>dataset</span> <span class='kw'>&lt;-</span> <span class='no'>dataset</span>[<span class='fu'>order</span>(<span class='no'>dataset</span>$<span class='no'>cyl</span>, <span class='no'>dataset</span>$<span class='no'>gear</span>, <span class='no'>dataset</span>$<span class='no'>carb</span>),]
 
 
 <span class='co'># set cell padding defaut to 2</span>
-<span class='no'>baseCellProp</span> <span class='kw'>=</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>( <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>2</span> )
+<span class='no'>baseCellProp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>(<span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='co'># Create a FlexTable with data.frame dataset</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>FlexTable</span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dataset</span>
-  , <span class='kw'>body.cell.props</span> <span class='kw'>=</span> <span class='no'>baseCellProp</span>
-  , <span class='kw'>header.cell.props</span> <span class='kw'>=</span> <span class='no'>baseCellProp</span>
-  , <span class='kw'>header.par.props</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"right"</span> )
-)
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>FlexTable</span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dataset</span>,
+  <span class='kw'>body.cell.props</span> <span class='kw'>=</span> <span class='no'>baseCellProp</span>, <span class='kw'>header.cell.props</span> <span class='kw'>=</span> <span class='no'>baseCellProp</span>,
+  <span class='kw'>header.par.props</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"right"</span>) )
 
 <span class='co'># set columns widths (inch)</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableWidths.html'>setFlexTableWidths</a></span>( <span class='no'>MyFTable</span>,
-        <span class='kw'>widths</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.5</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span>, <span class='fl'>0.7</span>, <span class='fl'>0.7</span>, <span class='fl'>0.7</span>) )
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setFlexTableWidths.html'>setFlexTableWidths</a></span>(<span class='no'>MyFTable</span>,
+                              <span class='kw'>widths</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.5</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span>, <span class='fl'>0.7</span>, <span class='fl'>0.7</span>, <span class='fl'>0.7</span>))
 
 <span class='co'># span successive identical cells within column 1, 2 and 3</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='spanFlexTableRows.html'>spanFlexTableRows</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-        <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>as.character</span>( <span class='no'>dataset</span>$<span class='no'>cyl</span> ) )
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='spanFlexTableRows.html'>spanFlexTableRows</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-        <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>as.character</span>( <span class='no'>dataset</span>$<span class='no'>gear</span> ) )
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='spanFlexTableRows.html'>spanFlexTableRows</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-        <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>as.character</span>( <span class='no'>dataset</span>$<span class='no'>carb</span> ) )
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='spanFlexTableRows.html'>spanFlexTableRows</a></span>(<span class='no'>MyFTable</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+                             <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>as.character</span>(<span class='no'>dataset</span>$<span class='no'>cyl</span>))
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='spanFlexTableRows.html'>spanFlexTableRows</a></span>(<span class='no'>MyFTable</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+                             <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>as.character</span>(<span class='no'>dataset</span>$<span class='no'>gear</span>))
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='spanFlexTableRows.html'>spanFlexTableRows</a></span>(<span class='no'>MyFTable</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+                             <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>as.character</span>(<span class='no'>dataset</span>$<span class='no'>carb</span>))
 
 <span class='co'># overwrites some text formatting properties</span>
-<span class='no'>MyFTable</span>[<span class='no'>dataset</span>$<span class='no'>wt</span> <span class='kw'>&lt;</span> <span class='fl'>3</span>, <span class='fl'>6</span>] <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"#003366"</span>)
-<span class='no'>MyFTable</span>[<span class='no'>dataset</span>$<span class='no'>mpg</span> <span class='kw'>&lt;</span> <span class='fl'>20</span>, <span class='fl'>5</span>] <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"#993300"</span>)
+<span class='no'>MyFTable</span>[<span class='no'>dataset</span>$<span class='no'>wt</span> <span class='kw'>&lt;</span> <span class='fl'>3</span>, <span class='fl'>6</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#003366"</span>)
+<span class='no'>MyFTable</span>[<span class='no'>dataset</span>$<span class='no'>mpg</span> <span class='kw'>&lt;</span> <span class='fl'>20</span>, <span class='fl'>5</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#993300"</span>)
 
 <span class='co'># overwrites some paragraph formatting properties</span>
-<span class='no'>MyFTable</span>[, <span class='fl'>1</span>:<span class='fl'>3</span>] <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"center"</span>)
-<span class='no'>MyFTable</span>[, <span class='fl'>4</span>:<span class='fl'>6</span>] <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"right"</span>)
+<span class='no'>MyFTable</span>[, <span class='fl'>1</span>:<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"center"</span>)
+<span class='no'>MyFTable</span>[, <span class='fl'>4</span>:<span class='fl'>6</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"right"</span>)
 
 
-<span class='no'>Footnote1</span> <span class='kw'>=</span> <span class='fu'><a href='Footnote.html'>Footnote</a></span>(  )
+<span class='no'>Footnote1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Footnote.html'>Footnote</a></span>()
 
-<span class='no'>par1</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"About this reference"</span>, <span class='fu'><a href='textNormal.html'>textBold</a></span>( ) )
-<span class='no'>par2</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Omni ab coalitos pro malivolus obsecrans graviter 
-cum perquisitor perquisitor pericula saepeque inmunibus coalitos ut."</span>,
-  <span class='fu'><a href='textNormal.html'>textItalic</a></span>(<span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>8</span>) )
-<span class='no'>Footnote1</span> <span class='kw'>=</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>( <span class='no'>Footnote1</span>, <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>( <span class='no'>par1</span>, <span class='no'>par2</span> ),
-  <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"justify"</span>))
+<span class='no'>par1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"About this reference"</span>, <span class='fu'><a href='textNormal.html'>textBold</a></span>())
+<span class='no'>par2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>(
+  <span class='st'>"Omni ab coalitos pro malivolus obsecrans graviter cum perquisitor \
+  perquisitor pericula saepeque inmunibus coalitos ut."</span>,
+  <span class='fu'><a href='textNormal.html'>textItalic</a></span>(<span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>8</span>)
+)
+<span class='no'>Footnote1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>(<span class='no'>Footnote1</span>,
+                         <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>(<span class='no'>par1</span>, <span class='no'>par2</span>),
+                         <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"justify"</span>))
 
-<span class='no'>Footnote1</span> <span class='kw'>=</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>( <span class='no'>Footnote1</span>,
-        <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>( <span class='st'>"list item 1"</span>, <span class='st'>"list item 2"</span> ),
-  <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>list.style</span> <span class='kw'>=</span> <span class='st'>"ordered"</span>))
+<span class='no'>Footnote1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>(
+  <span class='no'>Footnote1</span>,
+  <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>(<span class='st'>"list item 1"</span>, <span class='st'>"list item 2"</span>),
+  <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>list.style</span> <span class='kw'>=</span> <span class='st'>"ordered"</span>)
+)
 
-<span class='no'>an_rscript</span> <span class='kw'>=</span> <span class='fu'><a href='RScript.html'>RScript</a></span>( <span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"ls()
-x = rnorm(10)"</span> )
-<span class='no'>Footnote1</span> <span class='kw'>=</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>( <span class='no'>Footnote1</span>, <span class='no'>an_rscript</span> )
+<span class='no'>an_rscript</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='RScript.html'>RScript</a></span>(<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"x = rnorm(10)"</span>)
+<span class='no'>Footnote1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>(<span class='no'>Footnote1</span>, <span class='no'>an_rscript</span>)
 
-<span class='no'>MyFTable</span>[<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='kw'>newpar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>] <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"a note"</span>,
-  <span class='kw'>footnote</span> <span class='kw'>=</span> <span class='no'>Footnote1</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>textBold</a></span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>"gray"</span>) )
+<span class='no'>MyFTable</span>[<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='kw'>newpar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"a note"</span>,
+                                    <span class='kw'>footnote</span> <span class='kw'>=</span> <span class='no'>Footnote1</span>,
+                                    <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>textBold</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"gray"</span>))
 
-<span class='no'>pot_link</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>" (link example)"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"cyan"</span> ),
-  <span class='kw'>hyperlink</span> <span class='kw'>=</span> <span class='st'>"http://www.wikipedia.org/"</span> )
+<span class='no'>pot_link</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>" (link example)"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"cyan"</span>),
+               <span class='kw'>hyperlink</span> <span class='kw'>=</span> <span class='st'>"http://www.wikipedia.org/"</span>)
 
-<span class='no'>MyFTable</span>[<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"header"</span>] <span class='kw'>=</span> <span class='no'>pot_link</span>
+<span class='no'>MyFTable</span>[<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"header"</span>] <span class='kw'>&lt;-</span> <span class='no'>pot_link</span>
 
 <span class='co'># applies a border grid on table</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>footer</span><span class='kw'>=</span><span class='fl'>TRUE</span>
-  , <span class='kw'>inner.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#666666"</span> )
-  , <span class='kw'>inner.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#666666"</span> )
-  , <span class='kw'>outer.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#666666"</span> )
-  , <span class='kw'>outer.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#666666"</span> )
-)
-<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>cor</span>( <span class='fu'>cor</span>(<span class='no'>mtcars</span>) )
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>inner.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#666666"</span>),
+  <span class='kw'>inner.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#666666"</span>),
+  <span class='kw'>outer.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#666666"</span>),
+  <span class='kw'>outer.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>(<span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#666666"</span>) )
 
-<span class='no'>pal</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='st'>"#D73027"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#FDAE61"</span>, <span class='st'>"#FEE08B"</span>,
-  <span class='st'>"#D9EF8B"</span>, <span class='st'>"#A6D96A"</span>, <span class='st'>"#66BD63"</span>, <span class='st'>"#1A9850"</span> )
-<span class='no'>mycut</span> <span class='kw'>=</span> <span class='fu'>cut</span>( <span class='no'>data</span>,
-  <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>1</span>,-<span class='fl'>0.75</span>,-<span class='fl'>0.5</span>,-<span class='fl'>0.25</span>,<span class='fl'>0</span>,<span class='fl'>0.25</span>,<span class='fl'>0.5</span>,<span class='fl'>0.75</span>,<span class='fl'>1</span>),
-  <span class='kw'>include.lowest</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> )
-<span class='no'>mycolors</span> <span class='kw'>=</span> <span class='no'>pal</span>[ <span class='no'>mycut</span> ]
-
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>FlexTable</span>( <span class='fu'>round</span>(<span class='no'>data</span>, <span class='fl'>3</span>), <span class='kw'>add.rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span> )
-
-<span class='co'># set computed colors</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBackgroundColors.html'>setFlexTableBackgroundColors</a></span>( <span class='no'>MyFTable</span>,
-  <span class='kw'>j</span> <span class='kw'>=</span> <span class='fu'>seq_len</span>(<span class='fu'>ncol</span>(<span class='no'>data</span>)) + <span class='fl'>1</span>,
-  <span class='kw'>colors</span> <span class='kw'>=</span> <span class='no'>mycolors</span> )
-
-<span class='co'># cosmetics</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBackgroundColors.html'>setFlexTableBackgroundColors</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>colors</span> <span class='kw'>=</span> <span class='st'>"gray"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"header"</span> )
-<span class='no'>MyFTable</span>[<span class='fl'>1</span>, , <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"header"</span>] <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>textBold</a></span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>"white"</span>)
-
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBackgroundColors.html'>setFlexTableBackgroundColors</a></span>( <span class='no'>MyFTable</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-        <span class='kw'>colors</span> <span class='kw'>=</span> <span class='st'>"gray"</span> )
-<span class='no'>MyFTable</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>textBold</a></span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>"white"</span>)
-
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>( <span class='no'>MyFTable</span>,
-  <span class='kw'>inner.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>,
-        <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span> ),
-  <span class='kw'>inner.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>,
-        <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>  ),
-  <span class='kw'>outer.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>  ),
-  <span class='kw'>outer.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>  )
-)
-
-
-
-<span class='fu'>data</span>( <span class='no'>iris</span> )
-<span class='no'>iris</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='fu'>c</span>(<span class='fl'>5</span>, <span class='fl'>1</span>:<span class='fl'>4</span>)]
-
-<span class='no'>default_text</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>11</span> )
-<span class='no'>note_text</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>(<span class='no'>default_text</span>,
-        <span class='kw'>vertical.align</span> <span class='kw'>=</span> <span class='st'>"superscript"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>)
-
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'>FlexTable</span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>header.columns</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> )
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='addHeaderRow.html'>addHeaderRow</a></span>( <span class='no'>iris_ft</span>,
-        <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>""</span>, <span class='st'>"Measures"</span> ), <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='fl'>4</span>, <span class='fl'>1</span> ) )
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='addHeaderRow.html'>addHeaderRow</a></span>( <span class='no'>iris_ft</span>,
-        <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>gsub</span>( <span class='st'>"\\."</span>, <span class='st'>" "</span>, <span class='fu'>names</span>( <span class='no'>iris</span> ) ) )
-<span class='no'>iris_ft</span>[<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='kw'>newpar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span> ] <span class='kw'>=</span> <span class='st'>"Hi there"</span>
-<span class='no'>iris_ft</span>[<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='kw'>to</span><span class='kw'>=</span><span class='st'>"header"</span>] <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"* this is a note"</span>, <span class='no'>note_text</span> )
-
-
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='spanFlexTableRows.html'>spanFlexTableRows</a></span>( <span class='no'>iris_ft</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='st'>"Species"</span>,
-        <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>as.character</span>( <span class='no'>iris</span>$<span class='no'>Species</span> ) )
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>( <span class='no'>iris_ft</span>,
-  <span class='kw'>inner.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"none"</span> ),
-  <span class='kw'>inner.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>1</span> ),
-  <span class='kw'>outer.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>0</span> ),
-  <span class='kw'>outer.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span> ),
-  <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div></pre>
+<span class='no'>ft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vanilla.table.html'>vanilla.table</a></span>(<span class='fu'>head</span>(<span class='no'>iris</span>))
+<span class='no'>ft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setFlexTableBackgroundColors.html'>setFlexTableBackgroundColors</a></span>( <span class='no'>ft</span>,
+  <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Petal.Length"</span>, <span class='st'>"Species"</span>), <span class='kw'>colors</span> <span class='kw'>=</span> <span class='st'>"yellow"</span> )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

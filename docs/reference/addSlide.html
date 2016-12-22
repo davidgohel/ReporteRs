@@ -177,38 +177,14 @@ For example, if you set the shape formatting properties to a &#39;no bullet&#39;
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"addSlide_example.pptx"</span>
-
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>24</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='pptx.html'>pptx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
-
-<span class='co'># add a slide with layout "Title Slide"</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addSlide</span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title Slide"</span> )
-<span class='co'>#set the main title</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Presentation title"</span> )
-<span class='co'>#set the sub-title</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSubtitle.html'>addSubtitle</a></span>( <span class='no'>doc</span> , <span class='st'>"This document is generated with ReporteRs."</span>)
-
-<span class='co'># add a slide with layout "Title and Content" then add content</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addSlide</span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Iris sample dataset"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addFlexTable.html'>addFlexTable</a></span>( <span class='no'>doc</span>, <span class='fu'><a href='vanilla.table.html'>vanilla.table</a></span>( <span class='no'>iris</span>[ <span class='fl'>1</span>:<span class='fl'>10</span>,] ) )
-
-<span class='co'># add a slide with layout "Two Content" then add content</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addSlide</span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Two Content"</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Two Content demo"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addFlexTable.html'>addFlexTable</a></span>( <span class='no'>doc</span>, <span class='fu'><a href='vanilla.table.html'>vanilla.table</a></span>( <span class='no'>iris</span>[ <span class='fl'>46</span>:<span class='fl'>55</span>,] ) )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>(<span class='no'>doc</span>, <span class='st'>"Hello Word!"</span> )
-
-<span class='co'># to see available layouts :</span>
-<span class='fu'><a href='slide.layouts.html'>slide.layouts</a></span>( <span class='no'>doc</span> )</div><div class='output co'>#&gt;  [1] &quot;Blank&quot;                   &quot;Title Only&quot;             
-#&gt;  [3] &quot;Title and Content&quot;       &quot;Section Header&quot;         
-#&gt;  [5] &quot;Title and Vertical Text&quot; &quot;Comparison&quot;             
-#&gt;  [7] &quot;Content with Caption&quot;    &quot;Title Slide&quot;            
-#&gt;  [9] &quot;Two Content&quot;             &quot;Vertical Title and Text&quot;</div><div class='input'>
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pptx.html'>pptx</a></span>()
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addSlide</span>(<span class='no'>doc</span>, <span class='st'>"Title and Content"</span>)
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>(<span class='no'>doc</span>, <span class='st'>"Title example"</span>)
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>doc.filename</span> )
 
-<span class='co'># demo slide replacement --------</span>
 
+
+<span class='co'># demo slide replacement --------</span>
 <span class='co'># define 2 FlexTables</span>
 <span class='no'>ft1</span> <span class='kw'>=</span> <span class='fu'><a href='vanilla.table.html'>vanilla.table</a></span>( <span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>6</span>,] , <span class='kw'>add.rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span> )
 <span class='no'>ft2</span> <span class='kw'>=</span> <span class='fu'><a href='vanilla.table.html'>vanilla.table</a></span>( <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>10</span>,], <span class='kw'>add.rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span> )
@@ -224,7 +200,7 @@ For example, if you set the shape formatting properties to a &#39;no bullet&#39;
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>mydoc</span>, <span class='st'>"template_example.pptx"</span> )
 
 <span class='co'># use file pp_template_example.pptx as template</span>
-<span class='co'># and replace slide 1 </span>
+<span class='co'># and replace slide 1</span>
 <span class='no'>mydoc</span> <span class='kw'>=</span> <span class='fu'><a href='pptx.html'>pptx</a></span>(<span class='kw'>template</span> <span class='kw'>=</span> <span class='st'>"template_example.pptx"</span> )
 <span class='no'>mydoc</span> <span class='kw'>=</span> <span class='fu'>addSlide</span>( <span class='no'>mydoc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span>, <span class='kw'>bookmark</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='no'>mydoc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>mydoc</span>, <span class='st'>"a new table"</span>)

@@ -27,10 +27,12 @@ map_title to indicate which available styles are meant to be
 used as header styles.
 }
 \examples{
+\donttest{
 doc.filename = "addImage_example.docx"
 doc <- docx()
 doc = map_title(doc, stylenames = c("Titre1", "Titre2", "Titre3",
   "Titre4", "Titre5", "Titre6", "Titre7", "Titre8", "Titre9" ) )
+}
 }
 \seealso{
 \code{\link{docx}},\code{\link{styles.docx}},\code{\link{addTitle.docx}}

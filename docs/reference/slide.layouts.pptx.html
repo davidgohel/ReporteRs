@@ -159,20 +159,19 @@ This can be useful to check available shapes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"addFlexTable_example.pptx"</span>
-
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>24</span> )
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='pptx.html'>pptx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
-<span class='co'># get layouts names</span>
 <span class='no'>layouts</span> <span class='kw'>=</span> <span class='fu'><a href='slide.layouts.html'>slide.layouts</a></span>(<span class='no'>doc</span>)
 <span class='no'>layouts</span></div><div class='output co'>#&gt;  [1] &quot;Blank&quot;                   &quot;Title Only&quot;             
 #&gt;  [3] &quot;Title and Content&quot;       &quot;Section Header&quot;         
 #&gt;  [5] &quot;Title and Vertical Text&quot; &quot;Comparison&quot;             
 #&gt;  [7] &quot;Content with Caption&quot;    &quot;Title Slide&quot;            
-#&gt;  [9] &quot;Two Content&quot;             &quot;Vertical Title and Text&quot;</div><div class='input'><span class='co'># loop over layout names to plot each slide style</span>
+#&gt;  [9] &quot;Two Content&quot;             &quot;Vertical Title and Text&quot;</div><div class='input'>
+<span class='co'># loop over layout names to plot each slide style</span>
 <span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='no'>layouts</span> ){
-        <span class='fu'><a href='slide.layouts.html'>slide.layouts</a></span>(<span class='no'>doc</span>, <span class='no'>i</span> )
-        <span class='fu'>title</span>(<span class='kw'>sub</span> <span class='kw'>=</span> <span class='no'>i</span> )
-}</div><img src='slide.layouts.pptx-4.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-5.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-6.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-7.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-8.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-9.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-10.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-11.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-12.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-13.png' alt='' width='540' height='400' /></pre>
+  <span class='fu'><a href='slide.layouts.html'>slide.layouts</a></span>(<span class='no'>doc</span>, <span class='no'>i</span> )
+  <span class='fu'>title</span>(<span class='kw'>sub</span> <span class='kw'>=</span> <span class='no'>i</span> )
+}</div><img src='slide.layouts.pptx-4.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-5.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-6.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-7.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-8.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-9.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-10.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-11.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-12.png' alt='' width='540' height='400' /><img src='slide.layouts.pptx-13.png' alt='' width='540' height='400' /><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

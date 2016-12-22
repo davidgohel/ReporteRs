@@ -157,16 +157,14 @@ For internal usage.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#</span>
-<span class='co'>## example with characters</span>
-<span class='no'>headerRow</span> <span class='kw'>=</span> <span class='fu'>FlexRow</span>( <span class='fu'>c</span>(<span class='st'>"Column 1"</span>, <span class='st'>"Column 2"</span>)
-  , <span class='kw'>cell.properties</span> <span class='kw'>=</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>(<span class='kw'>background.color</span><span class='kw'>=</span><span class='st'>"#527578"</span>) )
-<span class='co'>## example with FlexCell</span>
-<span class='no'>headerRow</span> <span class='kw'>=</span> <span class='fu'>FlexRow</span>()
-<span class='no'>headerRow</span>[<span class='fl'>1</span>] <span class='kw'>=</span> <span class='fu'><a href='FlexCell.html'>FlexCell</a></span>( <span class='st'>"Column 1"</span>
-  , <span class='kw'>cell.properties</span> <span class='kw'>=</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>(<span class='kw'>background.color</span><span class='kw'>=</span><span class='st'>"#527578"</span>)  )
-<span class='no'>headerRow</span>[<span class='fl'>2</span>] <span class='kw'>=</span> <span class='fu'><a href='FlexCell.html'>FlexCell</a></span>( <span class='st'>"Column 2"</span>
-  , <span class='kw'>cell.properties</span> <span class='kw'>=</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>(<span class='kw'>background.color</span><span class='kw'>=</span><span class='st'>"#527578"</span>)  )</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>cell_fp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>(<span class='kw'>background.color</span><span class='kw'>=</span><span class='st'>"#527578"</span>)
+<span class='co'># example with characters ----</span>
+<span class='no'>headerRow</span> <span class='kw'>&lt;-</span> <span class='fu'>FlexRow</span>( <span class='fu'>c</span>(<span class='st'>"col 1"</span>, <span class='st'>"col 2"</span>), <span class='kw'>cell.properties</span> <span class='kw'>=</span> <span class='no'>cell_fp</span> )
+<span class='co'># example with FlexCell ----</span>
+<span class='no'>cell_fp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>(<span class='kw'>background.color</span><span class='kw'>=</span><span class='st'>"#527578"</span>)
+<span class='no'>headerRow</span> <span class='kw'>&lt;-</span> <span class='fu'>FlexRow</span>()
+<span class='no'>headerRow</span>[<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexCell.html'>FlexCell</a></span>( <span class='st'>"col 1"</span>, <span class='kw'>cell.properties</span> <span class='kw'>=</span> <span class='no'>cell_fp</span> )
+<span class='no'>headerRow</span>[<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexCell.html'>FlexCell</a></span>( <span class='st'>"col 2"</span>, <span class='kw'>cell.properties</span> <span class='kw'>=</span> <span class='no'>cell_fp</span> )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

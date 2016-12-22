@@ -15,7 +15,7 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 library(ReporteRs)
 if(!require(filelink))
-  as_link <- function(file, txt, label){invisible()}
+  file_data_uri <- function(file, label, mime){invisible()}
 
 options("ReporteRs-fontsize" = 11)
 ```
@@ -89,7 +89,7 @@ writeDoc( mydoc, filename )
 ```
 
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 
@@ -151,7 +151,7 @@ writeDoc( mydoc, filename )
 ```
 
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 ### Function `slide.layouts`
@@ -225,7 +225,7 @@ filename <- tempfile(fileext = ".pptx") # the document to produce
 writeDoc( mydoc, file = filename )
 ```
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 ## Specific functions
@@ -245,7 +245,7 @@ filename <- tempfile(fileext = ".pptx") # the document to produce
 writeDoc( mydoc, file = filename )
 ```
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 ### Page number
@@ -263,7 +263,7 @@ filename <- tempfile(fileext = ".pptx") # the document to produce
 writeDoc( mydoc, file = filename )
 ```
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 ### Footer
@@ -280,7 +280,7 @@ filename <- tempfile(fileext = ".pptx") # the document to produce
 writeDoc( mydoc, file = filename )
 ```
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 ### Subtitle
@@ -299,7 +299,7 @@ filename <- tempfile(fileext = ".pptx") # the document to produce
 writeDoc( mydoc, file = filename )
 ```
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```
 
 
@@ -341,7 +341,7 @@ filename <- tempfile(fileext = ".pptx") # the document to produce
 writeDoc( mydoc, file = filename )
 ```
 ```{r echo=FALSE}
-as_link(file = filename, txt = "Get the result ", label = "here" )
+file_data_uri(file = filename, label = "here" )
 ```
 
 

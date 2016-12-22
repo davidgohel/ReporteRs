@@ -174,9 +174,7 @@ multicolumns mode page.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"addSection.docx"</span>
-
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>10</span> )
-<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='docx.html'>docx</a></span>( )
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='docx.html'>docx</a></span>()
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addSection</span>(<span class='no'>doc</span>, <span class='kw'>landscape</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span> )
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addPlot.html'>addPlot</a></span>( <span class='kw'>doc</span> <span class='kw'>=</span> <span class='no'>doc</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='kw'>function</span>() {
                 <span class='fu'>barplot</span>( <span class='fl'>1</span>:<span class='fl'>8</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>8</span> )
@@ -200,8 +198,7 @@ multicolumns mode page.</p>
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addSection</span>( <span class='no'>doc</span> )
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addFlexTable.html'>addFlexTable</a></span>(<span class='no'>doc</span>, <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>(<span class='no'>mtcars</span>, <span class='kw'>add.rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) )
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>( <span class='kw'>doc</span> <span class='kw'>=</span> <span class='no'>doc</span>, <span class='st'>"Text 4."</span>, <span class='st'>"Normal"</span> )
-
-<span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>doc.filename</span> )</div></pre>
+<span class='fu'><a href='writeDoc.html'>writeDoc</a></span>(<span class='no'>doc</span>, <span class='no'>doc.filename</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

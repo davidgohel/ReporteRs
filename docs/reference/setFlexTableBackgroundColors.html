@@ -156,40 +156,73 @@ values &quot;body&quot; (default) or &quot;header&quot; or &quot;footer&quot;</d
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#</span>
-<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>cor</span>( <span class='fu'>cor</span>(<span class='no'>mtcars</span>) )
+    <pre class="examples"><div class='input'><span class='co'># example 1 ----</span>
+<span class='no'>ft</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vanilla.table.html'>vanilla.table</a></span>(<span class='fu'>head</span>(<span class='no'>iris</span>))
+<span class='no'>ft</span> <span class='kw'>&lt;-</span> <span class='fu'>setFlexTableBackgroundColors</span>( <span class='no'>ft</span>,
+  <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Petal.Length"</span>, <span class='st'>"Species"</span>), <span class='kw'>colors</span> <span class='kw'>=</span> <span class='st'>"yellow"</span> )
 
-<span class='no'>pal</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='st'>"#D73027"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#FDAE61"</span>, <span class='st'>"#FEE08B"</span>,
-  <span class='st'>"#D9EF8B"</span>, <span class='st'>"#A6D96A"</span>, <span class='st'>"#66BD63"</span>, <span class='st'>"#1A9850"</span> )
-<span class='no'>mycut</span> <span class='kw'>=</span> <span class='fu'>cut</span>( <span class='no'>data</span>,
-  <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>1</span>,-<span class='fl'>0.75</span>,-<span class='fl'>0.5</span>,-<span class='fl'>0.25</span>,<span class='fl'>0</span>,<span class='fl'>0.25</span>,<span class='fl'>0.5</span>,<span class='fl'>0.75</span>,<span class='fl'>1</span>),
-  <span class='kw'>include.lowest</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> )
-<span class='no'>mycolors</span> <span class='kw'>=</span> <span class='no'>pal</span>[ <span class='no'>mycut</span> ]
+<span class='co'># example 2 ----</span>
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>structure</span>(<span class='fu'>c</span>(<span class='fl'>1</span>, -<span class='fl'>0.991</span>, -<span class='fl'>0.993</span>, -<span class='fl'>0.956</span>, <span class='fl'>0.939</span>, -<span class='fl'>0.986</span>, <span class='fl'>0.708</span>,
+<span class='fl'>0.932</span>, <span class='fl'>0.827</span>, <span class='fl'>0.768</span>, -<span class='fl'>0.799</span>, -<span class='fl'>0.991</span>, <span class='fl'>1</span>, <span class='fl'>0.992</span>, <span class='fl'>0.972</span>, -<span class='fl'>0.923</span>,
+<span class='fl'>0.966</span>, -<span class='fl'>0.766</span>, -<span class='fl'>0.963</span>, -<span class='fl'>0.783</span>, -<span class='fl'>0.735</span>, <span class='fl'>0.82</span>, -<span class='fl'>0.993</span>, <span class='fl'>0.992</span>, <span class='fl'>1</span>,
+<span class='fl'>0.944</span>, -<span class='fl'>0.955</span>, <span class='fl'>0.987</span>, -<span class='fl'>0.692</span>, -<span class='fl'>0.93</span>, -<span class='fl'>0.843</span>, -<span class='fl'>0.801</span>, <span class='fl'>0.757</span>, -<span class='fl'>0.956</span>,
+<span class='fl'>0.972</span>, <span class='fl'>0.944</span>, <span class='fl'>1</span>, -<span class='fl'>0.819</span>, <span class='fl'>0.897</span>, -<span class='fl'>0.88</span>, -<span class='fl'>0.985</span>, -<span class='fl'>0.635</span>, -<span class='fl'>0.565</span>,
+<span class='fl'>0.924</span>, <span class='fl'>0.939</span>, -<span class='fl'>0.923</span>, -<span class='fl'>0.955</span>, -<span class='fl'>0.819</span>, <span class='fl'>1</span>, -<span class='fl'>0.975</span>, <span class='fl'>0.472</span>, <span class='fl'>0.795</span>,
+<span class='fl'>0.944</span>, <span class='fl'>0.92</span>, -<span class='fl'>0.565</span>, -<span class='fl'>0.986</span>, <span class='fl'>0.966</span>, <span class='fl'>0.987</span>, <span class='fl'>0.897</span>, -<span class='fl'>0.975</span>, <span class='fl'>1</span>,
+-<span class='fl'>0.59</span>, -<span class='fl'>0.872</span>, -<span class='fl'>0.903</span>, -<span class='fl'>0.855</span>, <span class='fl'>0.697</span>, <span class='fl'>0.708</span>, -<span class='fl'>0.766</span>, -<span class='fl'>0.692</span>,
+-<span class='fl'>0.88</span>, <span class='fl'>0.472</span>, -<span class='fl'>0.59</span>, <span class='fl'>1</span>, <span class='fl'>0.899</span>, <span class='fl'>0.204</span>, <span class='fl'>0.14</span>, -<span class='fl'>0.949</span>, <span class='fl'>0.932</span>, -<span class='fl'>0.963</span>,
+-<span class='fl'>0.93</span>, -<span class='fl'>0.985</span>, <span class='fl'>0.795</span>, -<span class='fl'>0.872</span>, <span class='fl'>0.899</span>, <span class='fl'>1</span>, <span class='fl'>0.594</span>, <span class='fl'>0.544</span>, -<span class='fl'>0.912</span>,
+<span class='fl'>0.827</span>, -<span class='fl'>0.783</span>, -<span class='fl'>0.843</span>, -<span class='fl'>0.635</span>, <span class='fl'>0.944</span>, -<span class='fl'>0.903</span>, <span class='fl'>0.204</span>, <span class='fl'>0.594</span>, <span class='fl'>1</span>,
+<span class='fl'>0.979</span>, -<span class='fl'>0.34</span>, <span class='fl'>0.768</span>, -<span class='fl'>0.735</span>, -<span class='fl'>0.801</span>, -<span class='fl'>0.565</span>, <span class='fl'>0.92</span>, -<span class='fl'>0.855</span>, <span class='fl'>0.14</span>,
+<span class='fl'>0.544</span>, <span class='fl'>0.979</span>, <span class='fl'>1</span>, -<span class='fl'>0.236</span>, -<span class='fl'>0.799</span>, <span class='fl'>0.82</span>, <span class='fl'>0.757</span>, <span class='fl'>0.924</span>, -<span class='fl'>0.565</span>,
+<span class='fl'>0.697</span>, -<span class='fl'>0.949</span>, -<span class='fl'>0.912</span>, -<span class='fl'>0.34</span>, -<span class='fl'>0.236</span>, <span class='fl'>1</span>), <span class='kw'>.Dim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>11L</span>, <span class='fl'>11L</span>),
+<span class='kw'>.Dimnames</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='fu'>c</span>(<span class='st'>"mpg"</span>, <span class='st'>"cyl"</span>, <span class='st'>"disp"</span>, <span class='st'>"hp"</span>, <span class='st'>"drat"</span>, <span class='st'>"wt"</span>,
+<span class='st'>"qsec"</span>, <span class='st'>"vs"</span>, <span class='st'>"am"</span>, <span class='st'>"gear"</span>, <span class='st'>"carb"</span>), <span class='fu'>c</span>(<span class='st'>"mpg"</span>, <span class='st'>"cyl"</span>, <span class='st'>"disp"</span>,
+<span class='st'>"hp"</span>, <span class='st'>"drat"</span>, <span class='st'>"wt"</span>, <span class='st'>"qsec"</span>, <span class='st'>"vs"</span>, <span class='st'>"am"</span>, <span class='st'>"gear"</span>, <span class='st'>"carb"</span>)))
 
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='fu'>round</span>(<span class='no'>data</span>, <span class='fl'>3</span>), <span class='kw'>add.rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span> )
+<span class='no'>mycolors</span> <span class='kw'>&lt;-</span>
+  <span class='fu'>structure</span>(<span class='fu'>c</span>(<span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>,
+  <span class='st'>"#D73027"</span>, <span class='st'>"#66BD63"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>,
+  <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>,
+  <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>,
+  <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#F46D43"</span>,
+  <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>,
+  <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>,
+  <span class='st'>"#F46D43"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>,
+  <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#A6D96A"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>,
+  <span class='st'>"#1A9850"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>,
+  <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>,
+  <span class='st'>"#66BD63"</span>, <span class='st'>"#66BD63"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#A6D96A"</span>,
+  <span class='st'>"#F46D43"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D9EF8B"</span>, <span class='st'>"#D9EF8B"</span>, <span class='st'>"#D73027"</span>,
+  <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>,
+  <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#66BD63"</span>, <span class='st'>"#66BD63"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>,
+  <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D9EF8B"</span>,
+  <span class='st'>"#66BD63"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#FDAE61"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#F46D43"</span>,
+  <span class='st'>"#D73027"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D9EF8B"</span>, <span class='st'>"#66BD63"</span>,
+  <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#FEE08B"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#1A9850"</span>, <span class='st'>"#1A9850"</span>,
+  <span class='st'>"#1A9850"</span>, <span class='st'>"#F46D43"</span>, <span class='st'>"#66BD63"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#D73027"</span>, <span class='st'>"#FDAE61"</span>,
+  <span class='st'>"#FEE08B"</span>, <span class='st'>"#1A9850"</span>), <span class='kw'>.Dim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>11L</span>, <span class='fl'>11L</span>))
+
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='no'>data</span>, <span class='kw'>add.rownames</span> <span class='kw'>=</span> <span class='fl'>TRUE</span> )
 
 <span class='co'># set computed colors</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>setFlexTableBackgroundColors</span>( <span class='no'>MyFTable</span>,
-  <span class='kw'>j</span> <span class='kw'>=</span> <span class='fu'>seq_len</span>(<span class='fu'>ncol</span>(<span class='no'>data</span>)) + <span class='fl'>1</span>,
-  <span class='kw'>colors</span> <span class='kw'>=</span> <span class='no'>mycolors</span> )
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>setFlexTableBackgroundColors</span>( <span class='no'>MyFTable</span>,
+  <span class='kw'>j</span> <span class='kw'>=</span> <span class='fu'>dimnames</span>(<span class='no'>data</span>)<span class='kw'>[[</span><span class='fl'>2</span>]], <span class='kw'>colors</span> <span class='kw'>=</span> <span class='no'>mycolors</span> )
 
 <span class='co'># cosmetics</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>setFlexTableBackgroundColors</span>( <span class='no'>MyFTable</span>, <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>colors</span> <span class='kw'>=</span> <span class='st'>"gray"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"header"</span> )
-<span class='no'>MyFTable</span>[<span class='fl'>1</span>, , <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"header"</span>] <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>textBold</a></span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>"white"</span>)
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>setFlexTableBackgroundColors</span>( <span class='no'>MyFTable</span>,
+  <span class='kw'>i</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>colors</span> <span class='kw'>=</span> <span class='st'>"gray"</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"header"</span> )
+<span class='no'>MyFTable</span>[<span class='fl'>1</span>, , <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"header"</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='textNormal.html'>textBold</a></span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>"white"</span>)
 
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'>setFlexTableBackgroundColors</span>( <span class='no'>MyFTable</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-        <span class='kw'>colors</span> <span class='kw'>=</span> <span class='st'>"gray"</span> )
-<span class='no'>MyFTable</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>textBold</a></span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>"white"</span>)
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'>setFlexTableBackgroundColors</span>( <span class='no'>MyFTable</span>,
+  <span class='kw'>j</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>colors</span> <span class='kw'>=</span> <span class='st'>"gray"</span> )
+<span class='no'>MyFTable</span>[,<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='textNormal.html'>textBold</a></span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>"white"</span>)
 
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>( <span class='no'>MyFTable</span>,
-  <span class='kw'>inner.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>,
-        <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span> ),
-  <span class='kw'>inner.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>,
-        <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>  ),
-  <span class='kw'>outer.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>  ),
-  <span class='kw'>outer.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>  )
-)</div></pre>
+<span class='no'>bp1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>  )
+<span class='no'>bp2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='chprop.html'>chprop</a></span>( <span class='no'>bp1</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span> )
+<span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>( <span class='no'>MyFTable</span>,
+  <span class='kw'>inner.vertical</span> <span class='kw'>=</span> <span class='no'>bp1</span>, <span class='kw'>inner.horizontal</span> <span class='kw'>=</span> <span class='no'>bp1</span>,
+  <span class='kw'>outer.vertical</span> <span class='kw'>=</span> <span class='no'>bp2</span>, <span class='kw'>outer.horizontal</span> <span class='kw'>=</span> <span class='no'>bp2</span> )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

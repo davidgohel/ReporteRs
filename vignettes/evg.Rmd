@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
 library(magrittr)
 if(!require(filelink))
-  as_link <- function(file, txt, label){invisible()}
+  file_data_uri <- function(file, label, mime){invisible()}
 
 options("ReporteRs-fontsize" = 11)
 ```
@@ -76,5 +76,5 @@ writeDoc( mydoc, file = filename )
 ```
 
 ```{r echo=FALSE}
-as_link(file = filename, txt = "It produces ", label = basename(filename) )
+file_data_uri(file = filename, label = basename(filename) )
 ```

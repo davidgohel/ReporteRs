@@ -16,8 +16,10 @@ styles = function(doc, ...){
 #' of the base document (e.g. Normal, Title1, etc.).
 #' Names of the returned character vector are labels associated with styles names.
 #' @examples
+#' \donttest{
 #' doc = docx( title = "title" )
 #' styles(doc)
+#' }
 #' @rdname styles
 #' @export
 styles.docx = function( doc, ... ) {

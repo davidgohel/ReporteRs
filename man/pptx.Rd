@@ -155,11 +155,12 @@ doc = addFlexTable( doc, MyFTable )
 # write the doc
 writeDoc( doc, file = pptx.file )
 }
-
+\donttest{
 # get pptx page dimensions ------
 doc = pptx( title = "title" )
 doc = addSlide( doc, "Title and Content" )
 dim(doc)
+}
 }
 \references{
 Wikipedia: Office Open XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}

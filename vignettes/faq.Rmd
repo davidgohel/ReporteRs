@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
 library(magrittr)
 if(!require(filelink))
-  as_link <- function(file, txt, label){invisible()}
+  file_data_uri <- function(file, label, mime){invisible()}
 
 options("ReporteRs-fontsize" = 11)
 ```
@@ -126,7 +126,7 @@ writeDoc(doc, target_file)
 ```
 
 ```{r echo=FALSE}
-as_link(file = target_file, txt = "It produces ", label = basename(target_file) )
+file_data_uri(file = target_file, label = basename(target_file) )
 ```
 
 ## PowerPoint: offx, offy, width and height
@@ -159,6 +159,6 @@ writeDoc(doc, target_file)
 ```
 
 ```{r echo=FALSE}
-as_link(file = target_file, txt = "It produces ", label = basename(target_file) )
+file_data_uri(file = target_file, label = basename(target_file) )
 ```
 

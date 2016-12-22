@@ -168,7 +168,8 @@ For example, this can be used to produce a toc with only plots.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># simple TOC -----</span>
+
 <span class='co'># Create a new document</span>
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='docx.html'>docx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
 <span class='co'>#leave the first page blank and add a page break</span>
@@ -184,6 +185,9 @@ For example, this can be used to produce a toc with only plots.</p>
 
 <span class='co'># Write the object in file "addTOC_example1.docx"</span>
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='st'>"addTOC_example1.docx"</span> )
+
+<span class='co'># custom TOC -----</span>
+
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='docx.html'>docx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
 
 <span class='co'>#leave the first page blank and add a page break</span>
@@ -203,7 +207,7 @@ For example, this can be used to produce a toc with only plots.</p>
     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>,
     <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>Petal.Width</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'>I</span>(<span class='fl'>0.7</span>))
   <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addPlot.html'>addPlot</a></span>( <span class='kw'>doc</span> <span class='kw'>=</span> <span class='no'>doc</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='no'>print</span>,
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>myplot</span> <span class='co'>#this argument MUST be named, print is expecting argument 'x' </span>
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>myplot</span> <span class='co'>#this argument MUST be named, print is expecting argument 'x'</span>
   )
   <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addParagraph.html'>addParagraph</a></span>( <span class='no'>doc</span>, <span class='kw'>value</span><span class='kw'>=</span><span class='st'>"graph example 2"</span>,
     <span class='kw'>stylename</span> <span class='kw'>=</span> <span class='st'>"rPlotLegend"</span> )

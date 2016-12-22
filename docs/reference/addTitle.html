@@ -185,27 +185,16 @@ only have to specify the text to use as title. There is no level concept.</p>
     <pre class="examples"><div class='input'>
 <span class='co'># Title example for MS Word -------</span>
 <span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"ex_add_title.docx"</span>
-
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>10</span> )
-<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='docx.html'>docx</a></span>( )
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addTitle</span>( <span class='no'>doc</span>, <span class='st'>"Title example 1"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addTitle</span>( <span class='no'>doc</span>, <span class='st'>"Title example 2"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='docx.html'>docx</a></span>()
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addTitle</span>( <span class='no'>doc</span>, <span class='st'>"Title example 1"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addTitle</span>( <span class='no'>doc</span>, <span class='st'>"Title example 2"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>doc.filename</span> )
 
 <span class='co'># Title example for PowerPoint -------</span>
 <span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"ex_add_title.pptx"</span>
-
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>24</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='pptx.html'>pptx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
-
-<span class='co'># add a slide with layout "Title and Content"</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addTitle</span>( <span class='no'>doc</span>, <span class='st'>"Title example 1"</span> )
-
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pptx.html'>pptx</a></span>()
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>(<span class='no'>doc</span>, <span class='st'>"Title and Content"</span>)
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addTitle</span>(<span class='no'>doc</span>, <span class='st'>"Title example"</span>)
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>doc.filename</span> )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

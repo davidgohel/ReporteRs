@@ -152,28 +152,18 @@ optionnal. If missing current slide number will be used.</dd>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='addPageNumber.html'>addPageNumber</a></code>, <code><a href='addDate.html'>addDate.pptx</a></code></p>
+    <p><code><a href='addPageNumber.html'>addPageNumber</a></code>, <code><a href='addDate.html'>addDate</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"addPageNumber_example.pptx"</span>
-
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>24</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='pptx.html'>pptx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
-<span class='co'># add a slide with layout "Title Slide"</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title Slide"</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Presentation title"</span> ) <span class='co'>#set the main title</span>
-<span class='co'>#set the sub-title</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSubtitle.html'>addSubtitle</a></span>( <span class='no'>doc</span> , <span class='st'>"This document is generated with ReporteRs."</span>)
-
-<span class='co'>## add a page number on the current slide</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addPageNumber.html'>addPageNumber</a></span>( <span class='no'>doc</span> )
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
-<span class='co'>## add a page number on the current slide but </span>
-<span class='co'>## not the default text (slide number)</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addPageNumber.html'>addPageNumber</a></span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"Page number text"</span>)
-
+    <pre class="examples"><div class='input'><span class='no'>doc.filename</span> <span class='kw'>&lt;-</span> <span class='st'>"add_page_number_example.pptx"</span>
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pptx.html'>pptx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title Slide"</span> )
+<span class='co'># add a page number on the current slide ---</span>
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addPageNumber.html'>addPageNumber</a></span>( <span class='no'>doc</span> )
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
+<span class='co'># add a page number with free text ----</span>
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addPageNumber.html'>addPageNumber</a></span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"Page number text"</span>)
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>doc.filename</span> )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

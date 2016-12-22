@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ReporteRs)
 library(magrittr)
 if(!require(filelink))
-  as_link <- function(file, txt, label){invisible()}
+  file_data_uri <- function(file, label, mime){invisible()}
 
 options("ReporteRs-fontsize" = 11)
 ```
@@ -46,7 +46,7 @@ We will use a specific file as template `bookmark_example.docx` containing vario
 ```{r message=FALSE, warning=FALSE}
 library( ReporteRs )
 
-target_file <- tempfile(fileext = ".docx") # file to produce 
+target_file <- "bookmark_example.docx" # file to produce 
 
 template <- system.file(package = "ReporteRs", 
   "templates/bookmark_example.docx" ) # template example
@@ -57,7 +57,7 @@ styles(doc)
 ```
 
 ```{r echo=FALSE}
-as_link(file = template, txt = "The template: ", label = basename(template) )
+file_data_uri(file = template, label = basename(template) )
 ```
 
 
@@ -91,7 +91,7 @@ doc %>%
 ```
 
 ```{r echo=FALSE}
-as_link(file = target_file, txt = "It produces ", label = basename(target_file) )
+file_data_uri(file = target_file, label = basename(target_file) )
 ```
 
 

@@ -16,9 +16,4 @@ print a \code{\link{bsdoc}} object.
 If R session is interactive, the document is
 rendered in an HTML page and loaded into a WWW browser.
 }
-\examples{
-# Create a new document
-doc = bsdoc( )
-print( doc )
-}
 

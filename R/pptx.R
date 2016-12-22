@@ -188,11 +188,12 @@ pptx = function( title, template, list.definition = getOption("ReporteRs-list-de
 #'
 #' @param x Object of class \code{pptx}
 #' @examples
-#'
+#' \donttest{
 #' # get pptx page dimensions ------
 #' doc = pptx( title = "title" )
 #' doc = addSlide( doc, "Title and Content" )
 #' dim(doc)
+#' }
 #' @rdname pptx
 #' @export
 dim.pptx = function( x ){

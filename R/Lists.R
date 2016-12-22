@@ -48,6 +48,7 @@
 #'   )
 #' )
 #'
+#' \donttest{
 #' doc.filename = "ex_list.docx"
 #' doc <- docx()
 #'
@@ -91,6 +92,7 @@
 #'                     par.properties = unordered.list.level2 )
 #'
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' @seealso \code{\link{addParagraph}}, \code{\link{ReporteRs}}
 list.settings = function(
 		ol.left = seq( from = 0, by = 0.4, length.out = 9),

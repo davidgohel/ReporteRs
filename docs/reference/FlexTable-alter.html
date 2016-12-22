@@ -208,51 +208,18 @@ properties.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#</span>
-<span class='co'># Create a FlexTable object with first 10 lines of data.frame mtcars</span>
-<span class='co'># add row.names as first column</span>
-<span class='no'>MyFTable</span> <span class='kw'>=</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>10</span>, ]
-  , <span class='kw'>add.rownames</span><span class='kw'>=</span><span class='fl'>TRUE</span>
-)
+    <pre class="examples"><div class='input'><span class='no'>MyFTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>10</span>, ], <span class='kw'>add.rownames</span><span class='kw'>=</span><span class='fl'>TRUE</span> )
 <span class='co'># modify the text formatting properties for the row.names column</span>
-<span class='no'>MyFTable</span>[ , <span class='fl'>1</span>] <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>font.style</span><span class='kw'>=</span><span class='st'>"italic"</span>, <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>)
+<span class='no'>MyFTable</span>[ , <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>font.style</span><span class='kw'>=</span><span class='st'>"italic"</span>, <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>)
 <span class='co'># align text to right for the row.names column</span>
-<span class='no'>MyFTable</span>[ , <span class='fl'>1</span>] <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>( <span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"right"</span> )
+<span class='no'>MyFTable</span>[ , <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>( <span class='kw'>text.align</span> <span class='kw'>=</span> <span class='st'>"right"</span> )
 
 <span class='co'># change cell formatting properties for various columns</span>
 <span class='no'>MyFTable</span>[ <span class='fu'>c</span>(<span class='fl'>3</span>,<span class='fl'>6</span>:<span class='fl'>9</span>), <span class='fu'>c</span>( <span class='st'>"mpg"</span>, <span class='st'>"disp"</span>, <span class='st'>"hp"</span>, <span class='st'>"drat"</span>, <span class='st'>"wt"</span>,
-        <span class='st'>"qsec"</span> ) ] <span class='kw'>=</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>( <span class='kw'>background.color</span><span class='kw'>=</span><span class='st'>"#CCCCCC"</span>)
+  <span class='st'>"qsec"</span> ) ] <span class='kw'>&lt;-</span> <span class='fu'><a href='cellProperties.html'>cellProperties</a></span>( <span class='kw'>background.color</span><span class='kw'>=</span><span class='st'>"#CCCCCC"</span>)
 <span class='co'># add text to elements of the column cyl</span>
 <span class='no'>MyFTable</span>[, <span class='st'>"cyl"</span>, <span class='kw'>text.properties</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(
-  <span class='kw'>vertical.align</span><span class='kw'>=</span><span class='st'>"superscript"</span>, <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>) ] <span class='kw'>=</span> <span class='st'>" miles/gallon"</span>
-
-
-
-<span class='fu'>data</span>( <span class='no'>iris</span> )
-<span class='no'>iris</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='fu'>c</span>(<span class='fl'>5</span>, <span class='fl'>1</span>:<span class='fl'>4</span>)]
-
-<span class='no'>default_text</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>11</span> )
-<span class='no'>note_text</span> <span class='kw'>=</span> <span class='fu'><a href='chprop.html'>chprop</a></span>(<span class='no'>default_text</span>,
-        <span class='kw'>vertical.align</span> <span class='kw'>=</span> <span class='st'>"superscript"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>)
-
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='FlexTable.html'>FlexTable</a></span>( <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>header.columns</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> )
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='addHeaderRow.html'>addHeaderRow</a></span>( <span class='no'>iris_ft</span>,
-        <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>""</span>, <span class='st'>"Measures"</span> ), <span class='kw'>colspan</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='fl'>4</span>, <span class='fl'>1</span> ) )
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='addHeaderRow.html'>addHeaderRow</a></span>( <span class='no'>iris_ft</span>,
-        <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>gsub</span>( <span class='st'>"\\."</span>, <span class='st'>" "</span>, <span class='fu'>names</span>( <span class='no'>iris</span> ) ) )
-<span class='no'>iris_ft</span>[<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='kw'>newpar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span> ] <span class='kw'>=</span> <span class='st'>"Hi there"</span>
-<span class='no'>iris_ft</span>[<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='kw'>to</span><span class='kw'>=</span><span class='st'>"header"</span>] <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"* this is a note"</span>, <span class='no'>note_text</span> )
-
-
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='spanFlexTableRows.html'>spanFlexTableRows</a></span>( <span class='no'>iris_ft</span>, <span class='kw'>j</span> <span class='kw'>=</span> <span class='st'>"Species"</span>,
-        <span class='kw'>runs</span> <span class='kw'>=</span> <span class='fu'>as.character</span>( <span class='no'>iris</span>$<span class='no'>Species</span> ) )
-<span class='no'>iris_ft</span> <span class='kw'>=</span> <span class='fu'><a href='setFlexTableBorders.html'>setFlexTableBorders</a></span>( <span class='no'>iris_ft</span>,
-  <span class='kw'>inner.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"none"</span> ),
-  <span class='kw'>inner.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>1</span> ),
-  <span class='kw'>outer.vertical</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>0</span> ),
-  <span class='kw'>outer.horizontal</span> <span class='kw'>=</span> <span class='fu'><a href='borderProperties.html'>borderProperties</a></span>( <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span> ),
-  <span class='kw'>footer</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div></pre>
+  <span class='kw'>vertical.align</span><span class='kw'>=</span><span class='st'>"superscript"</span>, <span class='kw'>font.size</span> <span class='kw'>=</span> <span class='fl'>9</span>) ] <span class='kw'>&lt;-</span> <span class='st'>" miles/gallon"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

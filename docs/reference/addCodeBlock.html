@@ -138,11 +138,6 @@
 <span class='fu'>addCodeBlock</span>(<span class='no'>doc</span>, <span class='no'>file</span>, <span class='no'>text</span>, <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(),
   <span class='kw'>text.properties</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#A7947D"</span>), <span class='no'>bookmark</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for bsdoc</span>
-<span class='fu'>addCodeBlock</span>(<span class='no'>doc</span>, <span class='no'>file</span>, <span class='no'>text</span>,
-  <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(), <span class='kw'>text.properties</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span>
-  <span class='st'>"#A7947D"</span>), <span class='no'>...</span>)
-
 <span class='co'># S3 method for pptx</span>
 <span class='fu'>addCodeBlock</span>(<span class='no'>doc</span>, <span class='no'>file</span>, <span class='no'>text</span>, <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(),
   <span class='kw'>text.properties</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#A7947D"</span>), <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
@@ -193,6 +188,7 @@ can not add paragraphs after a FlexTable).</dd>
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='docx.html'>docx</a></span>( )
 <span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addCodeBlock</span>( <span class='no'>doc</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='no'>cb</span> )
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ex_codeblock.docx"</span> )
+
 
 <span class='co'># pptx example ---------</span>
 <span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='pptx.html'>pptx</a></span>( )

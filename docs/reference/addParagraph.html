@@ -211,12 +211,31 @@ will be ignored.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='docx.html'>docx</a></code>, <code><a href='pptx.html'>pptx</a></code>, <code><a href='bsdoc.html'>bsdoc</a></code>,
-<code><a href='pot.html'>pot</a></code>, <code><a href='textProperties.html'>textProperties</a></code>, <code><a href='parProperties.html'>parProperties</a></code></p>
+    <p><code><a href='docx.html'>docx</a></code>, <code><a href='pptx.html'>pptx</a></code>,
+<code><a href='pot.html'>pot</a></code>, <code><a href='textProperties.html'>textProperties</a></code>,
+<code><a href='parProperties.html'>parProperties</a></code>, <code><a href='list.settings.html'>list.settings</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># define some text</span>
+<span class='no'>sometext</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>( <span class='st'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</span>,
+  <span class='st'>"In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."</span>,
+  <span class='st'>"Quisque dictum tristique ligula."</span>)
+
+<span class='co'># "My tailor is rich" with formatting on some words</span>
+<span class='no'>pot1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"My tailor"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span> ) ) +
+  <span class='st'>" is "</span> + <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"rich"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>shading.color</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
+     <span class='kw'>font.weight</span> <span class='kw'>=</span> <span class='st'>"bold"</span> ) )
+
+<span class='co'># "Cats and dogs" with formatting on some words</span>
+<span class='no'>pot2</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Cats"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span> ) ) +
+  <span class='st'>" and "</span> +
+  <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"dogs"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span> ),
+      <span class='kw'>hyperlink</span> <span class='kw'>=</span> <span class='st'>"http://www.wikipedia.org/"</span> )
+
+<span class='co'># create a set of paragraphs made of pot1 and pot2</span>
+<span class='no'>my.pars</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>( <span class='no'>pot1</span>, <span class='no'>pot2</span> )
+
 <span class='co'># docx example ---------</span>
 <span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"ex_paragraph.docx"</span>
 <span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='docx.html'>docx</a></span>()
@@ -238,144 +257,38 @@ will be ignored.</p>
 #&gt;                 &quot;Titre10&quot;              &quot;BulletList&quot;                 &quot;Titre20&quot; 
 #&gt;                  TitleDoc                rRawOutput              rTableLegend 
 #&gt;                &quot;TitleDoc&quot;              &quot;rRawOutput&quot;            &quot;rTableLegend&quot; </div><div class='input'>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 1"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 1"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
 <span class='co'># Add "Hello World" into the document doc</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='st'>"Hello Word"</span>, <span class='kw'>stylename</span> <span class='kw'>=</span> <span class='st'>"Normal"</span> )
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='st'>"Hello Word"</span>, <span class='kw'>stylename</span> <span class='kw'>=</span> <span class='st'>"Normal"</span> )
 
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 2"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-
-<span class='co'># define some text</span>
-<span class='no'>sometext</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='st'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</span>,
-<span class='st'>"In sit amet ipsum tellus. Vivamus dignissim arcu sit amet faucibus auctor."</span>,
-<span class='st'>"Quisque dictum tristique ligula."</span>)
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 2"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
 
 <span class='co'># add sometext with stylename BulletList</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>sometext</span>, <span class='kw'>stylename</span><span class='kw'>=</span><span class='st'>"BulletList"</span> )
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>sometext</span>, <span class='kw'>stylename</span><span class='kw'>=</span><span class='st'>"BulletList"</span> )
 
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 3"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 3"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
 
-<span class='co'># "My tailor is rich" with formatting on some words</span>
-<span class='no'>pot1</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"My tailor"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span> )
-  ) + <span class='st'>" is "</span> + <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"rich"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>shading.color</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>font.weight</span> <span class='kw'>=</span> <span class='st'>"bold"</span> ) )
-
-<span class='co'># "Cats and dogs" with formatting on some words</span>
-<span class='no'>pot2</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Cats"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span> ) ) +
-  <span class='st'>" and "</span> +
-  <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"dogs"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span> ),
-    <span class='kw'>hyperlink</span> <span class='kw'>=</span> <span class='st'>"http://www.wikipedia.org/"</span> )
-
-<span class='co'># create a set of paragraphs made of pot1 and pot2</span>
-<span class='no'>my.pars</span> <span class='kw'>=</span> <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>( <span class='no'>pot1</span>, <span class='no'>pot2</span> )
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 4"</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-<span class='co'># define some text</span>
-<span class='no'>text1</span> <span class='kw'>=</span> <span class='st'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</span>
-<span class='no'>text2</span> <span class='kw'>=</span> <span class='st'>"In sit amet ipsum tellus. Vivamus arcu sit amet faucibus auctor."</span>
-<span class='no'>text3</span> <span class='kw'>=</span> <span class='st'>"Quisque dictum tristique ligula."</span>
-
-<span class='co'># define parProperties with list properties</span>
-<span class='no'>ordered.list.level1</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>list.style</span> <span class='kw'>=</span> <span class='st'>"ordered"</span>,
-        <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-<span class='no'>ordered.list.level2</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>list.style</span> <span class='kw'>=</span> <span class='st'>"ordered"</span>,
-        <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span> )
-
-<span class='co'># define parProperties with list properties</span>
-<span class='no'>unordered.list.level1</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>list.style</span> <span class='kw'>=</span> <span class='st'>"unordered"</span>,
-        <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span> )
-<span class='no'>unordered.list.level2</span> <span class='kw'>=</span> <span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>list.style</span> <span class='kw'>=</span> <span class='st'>"unordered"</span>,
-        <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>2</span> )
-
-<span class='co'># add ordered list items </span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>text1</span>,
-        <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='no'>ordered.list.level1</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>text2</span>,
-        <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='no'>ordered.list.level2</span> )
-
-<span class='co'># add ordered list items without restart renumbering</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='no'>text1</span>, <span class='no'>text2</span>, <span class='no'>text3</span>),
-        <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='no'>ordered.list.level1</span> )
-
-<span class='co'># add ordered list items and restart renumbering</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='no'>text1</span>, <span class='no'>text2</span>, <span class='no'>text3</span>),
-<span class='kw'>restart.numbering</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='no'>ordered.list.level1</span> )
-
-<span class='co'># add unordered list items</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>text1</span>,
-        <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='no'>unordered.list.level1</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>text2</span>,
-        <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='no'>unordered.list.level2</span> )
-
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>my.pars</span>, <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>parCenter</a></span>() )
 
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>doc.filename</span> )
 
 <span class='co'># pptx example -------</span>
 <span class='no'>doc.filename</span> <span class='kw'>=</span> <span class='st'>"ex_paragraph.pptx"</span>
-
-<span class='fu'>options</span>( <span class='st'>"ReporteRs-fontsize"</span> <span class='kw'>=</span> <span class='fl'>24</span> )
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='pptx.html'>pptx</a></span>( <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"title"</span> )
-
-<span class='co'># add a slide with layout "Title and Content"</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 1"</span> )
-
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pptx.html'>pptx</a></span>()
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>(<span class='no'>doc</span>, <span class='st'>"Title and Content"</span>)
 <span class='co'># Add "Hello World" into the document doc</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='st'>"Hello Word"</span> )
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='st'>"Hello Word"</span> )
 
-<span class='co'># add a slide with layout "Title and Content"</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 2"</span> )
-
-<span class='co'># "My tailor is rich" with formatting on some words</span>
-<span class='no'>pot1</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"My tailor"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span> )
-  ) + <span class='st'>" is "</span> + <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"rich"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>shading.color</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>font.weight</span> <span class='kw'>=</span> <span class='st'>"bold"</span> ) )
-
-<span class='co'># "Cats and dogs" with formatting on some words</span>
-<span class='no'>pot2</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Cats"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span> ) ) +
-  <span class='st'>" and "</span> +
-  <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"dogs"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span> ),
-    <span class='kw'>hyperlink</span> <span class='kw'>=</span> <span class='st'>"http://www.wikipedia.org/"</span> )
-
-<span class='co'># create a set of paragraphs made of pot1 and pot2</span>
-<span class='no'>my.pars</span> <span class='kw'>=</span> <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>( <span class='no'>pot1</span>, <span class='no'>pot2</span> )
-
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>(<span class='no'>doc</span>, <span class='st'>"Title and Content"</span>)
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addParagraph</span>( <span class='no'>doc</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>my.pars</span> )
 <span class='co'># Add my.pars into the document doc</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='no'>my.pars</span> )
-
-<span class='co'># Add my.pars into the document doc</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='no'>my.pars</span>, <span class='kw'>offx</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>offy</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='no'>my.pars</span>, <span class='kw'>offx</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>offy</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
   <span class='kw'>par.properties</span><span class='kw'>=</span><span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span><span class='kw'>=</span><span class='st'>"center"</span>, <span class='kw'>padding</span><span class='kw'>=</span><span class='fl'>0</span>) )
-
-<span class='co'># add a slide with layout "Title and Content"</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
-
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addTitle.html'>addTitle</a></span>( <span class='no'>doc</span>, <span class='st'>"Title example 3"</span> )
-
-<span class='co'># "My tailor is rich" with formatting on some words</span>
-<span class='no'>pot1</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"My tailor"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span> )
-  ) + <span class='st'>" is "</span> + <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"rich"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>shading.color</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
-  <span class='kw'>font.weight</span> <span class='kw'>=</span> <span class='st'>"bold"</span> ) )
-
-<span class='co'># "Cats and dogs" with formatting on some words</span>
-<span class='no'>pot2</span> <span class='kw'>=</span> <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"Cats"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span> ) ) +
-  <span class='st'>" and "</span> +
-  <span class='fu'><a href='pot.html'>pot</a></span>(<span class='st'>"dogs"</span>, <span class='fu'><a href='textProperties.html'>textProperties</a></span>( <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span> ),
-    <span class='kw'>hyperlink</span> <span class='kw'>=</span> <span class='st'>"http://www.wikipedia.org/"</span> )
-
-<span class='co'># create a set of paragraphs made of pot1 and pot2</span>
-<span class='no'>my.pars</span> <span class='kw'>=</span> <span class='fu'><a href='set_of_paragraphs.html'>set_of_paragraphs</a></span>( <span class='no'>pot1</span>, <span class='no'>pot2</span> )
-
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>(<span class='no'>doc</span>, <span class='st'>"Title and Content"</span>)
 <span class='co'># Add my.pars into the document doc</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='no'>my.pars</span>,
+<span class='no'>doc</span> <span class='kw'>&lt;-</span> <span class='fu'>addParagraph</span>(<span class='no'>doc</span>, <span class='no'>my.pars</span>,
   <span class='kw'>par.properties</span><span class='kw'>=</span><span class='fu'><a href='parProperties.html'>parProperties</a></span>(<span class='kw'>text.align</span><span class='kw'>=</span><span class='st'>"center"</span>, <span class='kw'>padding</span><span class='kw'>=</span><span class='fl'>24</span>) )
-
-<span class='co'># add a slide with layout "Title and Content"</span>
-<span class='no'>doc</span> <span class='kw'>=</span> <span class='fu'><a href='addSlide.html'>addSlide</a></span>( <span class='no'>doc</span>, <span class='kw'>slide.layout</span> <span class='kw'>=</span> <span class='st'>"Title and Content"</span> )
 
 <span class='fu'><a href='writeDoc.html'>writeDoc</a></span>( <span class='no'>doc</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>doc.filename</span> )</div></pre>
   </div>
