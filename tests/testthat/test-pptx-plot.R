@@ -93,3 +93,55 @@ test_that("[vg] test raster", {
                       vector.graphic = TRUE), silent = TRUE)
   expect_is(doc, "pptx" )
 })
+
+
+
+test_that("raster plot is referenced in relationships", {
+  skip_on_os("solaris")
+  myplot <- qplot(Sepal.Length, Petal.Length,
+                  data = iris, color = Petal.Width,
+                  alpha = I(0.7) )
+  target_file <- tempfile(fileext = ".pptx")
+  target_dir <- tempfile(fileext = "")
+  doc <- pptx( )
+  doc <- addSlide( doc, "Title and Content" )
+  doc <- addPlot(doc, fun = print,
+                 x = myplot,
+                 vector.graphic = TRUE)
+  writeDoc(doc, target_file)
+
+  unzip(zipfile = target_file, exdir = target_dir )
+  rels <- get_relationship(file.path(target_dir, "ppt/slides/_rels/slide1.xml.rels"))
+  expect_equal( sum( grepl( "image$", rels$type ) ), 1 )
+
+
+  # vg with a raster
+  doc <- pptx( )
+  doc <- addSlide( doc, "Title and Content" )
+  doc <- addPlot(doc, fun = print,
+                 x = myplot,
+                 vector.graphic = TRUE)
+  writeDoc(doc, target_file)
+
+  unzip(zipfile = target_file, exdir = target_dir )
+  rels <- get_relationship(file.path(target_dir, "ppt/slides/_rels/slide1.xml.rels"))
+  expect_equal( sum( grepl( "image$", rels$type ) ), 1 )
+})
+
+
+test_that("vg plot is not referenced in relationships", {
+  skip_on_os("solaris")
+  myplot <- qplot(Sepal.Length, Petal.Length, data = iris )
+  target_file <- tempfile(fileext = ".pptx")
+  target_dir <- tempfile(fileext = "")
+  doc <- pptx( )
+  doc <- addSlide( doc, "Title and Content" )
+  doc <- addPlot(doc, fun = print,
+                 x = myplot,
+                 vector.graphic = TRUE)
+  writeDoc(doc, target_file)
+
+  unzip(zipfile = target_file, exdir = target_dir )
+  rels <- get_relationship(file.path(target_dir, "ppt/slides/_rels/slide1.xml.rels"))
+  expect_equal( sum( grepl( "image$", rels$type ) ), 0 )
+})
