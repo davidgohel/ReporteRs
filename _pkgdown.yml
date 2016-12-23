@@ -31,6 +31,9 @@ reference:
     - addSection
     - Footnote
     - styles
+    - list_bookmarks
+    - deleteBookmarkNextContent
+    - deleteBookmark
   - title: Functions specific to PowerPoint
     contents:
     - addSlide
@@ -55,12 +58,12 @@ reference:
   - title: FlexTable format
     desc: Main functions to format FlexTable content
     contents:
+    - alterFlexTable
     - setFlexTableBackgroundColors
     - setFlexTableBorders
     - setZebraStyle
     - setRowsColors
     - setColumnsColors
-    - alterFlexTable
     - cellProperties
     - borderProperties
   - title: FlexTable annotations
