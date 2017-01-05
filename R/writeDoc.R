@@ -28,7 +28,7 @@ writeDoc.docx = function(doc, file, ...) {
 
   if( !is.character( file ) ) stop("argument file must be a valid filename (a string value).")
   if( length( file ) != 1 ) stop("length of argument file is not 1.")
-  if( !is.character( file ) ) stop("argument file must be a string value (a filename).")
+
   .reg = regexpr( paste( "(\\.(?i)(docx))$", sep = "" ), file )
   if( .reg < 1 )
     stop(file , " is not a valid file.")
@@ -52,7 +52,7 @@ writeDoc.pptx = function(doc, file, ...) {
 
   if( !is.character( file ) ) stop("argument file must be a valid filename (a string value).")
   if( length( file ) != 1 ) stop("length of argument file is not 1.")
-  if( !is.character( file ) ) stop("argument file must be a string value (a filename).")
+
   .reg = regexpr( paste( "(\\.(?i)(pptx))$", sep = "" ), file )
   if( .reg < 1 )
     stop(file , " is not a valid file.")
