@@ -224,8 +224,10 @@ addParagraph.pptx <- function(doc, value, offx, offy, width, height,
 
   slide = doc$current_slide
 
-  if( is.character( value ) ){
+  if( is.character( value ) && !append ){
     out = .jcall( slide, "I", "add" , .jarray(value) )
+  } else if(is.character( value ) && append) {
+    out = .jcall( slide, "I", "append" , .jarray(value) )
   } else {
     if( !missing(par.properties) && !inherits( par.properties, "parProperties" ) ){
       stop("argument 'par.properties' must be an object of class 'parProperties'")
