@@ -52,6 +52,25 @@ test_that("header rows", {
   xml_path_ <- paste(xml_path_0, collapse = "")
   hvalues <- xml_find_all(doc, xml_path_) %>% xml_text()
   expect_equal( hvalues, row1 )
+  xml_path_0 <- c("/p:sld/p:cSld/p:spTree/p:graphicFrame/a:graphic/a:graphicData",
+                  "/a:tbl/a:tr[1]",
+                  "/a:tc")
+  xml_path_ <- paste(xml_path_0, collapse = "")
+  expect_length(xml_find_all(doc, xml_path_), 5) # check 5 cell are created
+
+  xml_path_0 <- c("/p:sld/p:cSld/p:spTree/p:graphicFrame/a:graphic/a:graphicData",
+                  "/a:tbl/a:tr[1]",
+                  "/a:tc")
+  xml_path_ <- paste(xml_path_0, collapse = "")
+  nodes <- xml_find_all(doc, xml_path_)
+  expect_equal(# check correct attributes for gridSpan
+    nodes %>% xml_attr(attr = "gridSpan"),
+    c("2", NA, "2", NA, NA)
+  )
+  expect_equal(# check correct attributes for hMerge
+    nodes %>% xml_attr(attr = "hMerge"),
+    c(NA, "true", NA, "true", NA)
+  )
 
   xml_path_1 <- xml_path_0[2] <- "/a:tbl/a:tr[2]"
   xml_path_ <- paste(xml_path_0, collapse = "")
@@ -88,6 +107,21 @@ test_that("header rows", {
           function(x) xml_find_all(doc, x) %>% xml_text() )
   expect_equal( hvalues[[1]], row1 )
   expect_equal( hvalues[[2]], row2 )
+
+  xml_path_0 <- c("/w:document/w:body/w:tbl/w:tr[./w:trPr/w:tblHeader]",
+                  "[1]/w:tc")
+  xml_path_ <- paste(xml_path_0, collapse = "")
+  nodes <- xml_find_all(doc, xml_path_)
+  expect_length(nodes, 3) # check 3 cell are created
+
+  xml_path_0 <- c("/w:document/w:body/w:tbl/w:tr[./w:trPr/w:tblHeader]",
+                  "[1]/w:tc/w:tcPr/w:gridSpan")
+  xml_path_ <- paste(xml_path_0, collapse = "")
+  nodes <- xml_find_all(doc, xml_path_)
+  expect_equal(# check correct attributes for gridSpan
+    nodes %>% xml_attr(attr = "val"),
+    c("2", "2")
+  )
 
 
   target_dir <- docx_doc(flextable = ft2)
