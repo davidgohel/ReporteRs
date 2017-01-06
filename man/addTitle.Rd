@@ -4,7 +4,6 @@
 \alias{addTitle}
 \alias{addTitle.docx}
 \alias{addTitle.pptx}
-\alias{addTitle.bsdoc}
 \title{Add a title}
 \usage{
 addTitle(doc, value, ...)
@@ -12,8 +11,6 @@ addTitle(doc, value, ...)
 \method{addTitle}{docx}(doc, value, level = 1, ...)
 
 \method{addTitle}{pptx}(doc, value, ...)
-
-\method{addTitle}{bsdoc}(doc, value, level = 1, id, ...)
 }
 \arguments{
 \item{doc}{document object}
@@ -24,9 +21,6 @@ addTitle(doc, value, ...)
 
 \item{level}{\code{"integer"} positive value to use as
 heading level. 1 for title1, 2 for title2, etc. Default to 1.}
-
-\item{id}{\code{character} single and unique value to use as
-title id when doc is \code{bsdoc}.}
 }
 \value{
 a document object

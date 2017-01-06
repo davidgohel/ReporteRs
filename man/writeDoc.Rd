@@ -4,7 +4,6 @@
 \alias{writeDoc}
 \alias{writeDoc.docx}
 \alias{writeDoc.pptx}
-\alias{writeDoc.bsdoc}
 \title{Write a document object}
 \usage{
 writeDoc(doc, ...)
@@ -12,8 +11,6 @@ writeDoc(doc, ...)
 \method{writeDoc}{docx}(doc, file, ...)
 
 \method{writeDoc}{pptx}(doc, file, ...)
-
-\method{writeDoc}{bsdoc}(doc, file, ...)
 }
 \arguments{
 \item{doc}{document object}

@@ -58,23 +58,6 @@ addFlexTable.docx = function(doc, flextable
 }
 
 
-#' @rdname addFlexTable
-#' @export
-addFlexTable.bsdoc = function(doc, flextable,
-                              par.properties = parProperties(text.align = "left" ), ... ) {
-
-  .jcall( flextable$jobj, "V", "setParProperties", .jParProperties(par.properties) )
-
-  out = .jcall( doc$jobj, "I", "add", flextable$jobj )
-  if( out != 1 ){
-    stop( "Problem while trying to add FlexTable." )
-  }
-
-  doc
-}
-
-
-
 #' @param offx optional, x position of the shape (top left position of the bounding box) in inches. See details.
 #' @param offy optional, y position of the shape (top left position of the bounding box) in inches. See details.
 #' @param width optional, width of the shape in inches. See details.

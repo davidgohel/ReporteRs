@@ -3,7 +3,6 @@
 \name{addParagraph}
 \alias{addParagraph}
 \alias{addParagraph.docx}
-\alias{addParagraph.bsdoc}
 \alias{addParagraph.pptx}
 \title{Add a paragraph into a document object}
 \usage{
@@ -11,9 +10,6 @@ addParagraph(doc, value, ...)
 
 \method{addParagraph}{docx}(doc, value, stylename, bookmark,
   par.properties = parProperties(), restart.numbering = FALSE, ...)
-
-\method{addParagraph}{bsdoc}(doc, value, par.properties = parProperties(),
-  restart.numbering = FALSE, ...)
 
 \method{addParagraph}{pptx}(doc, value, offx, offy, width, height,
   par.properties, append = FALSE, restart.numbering = FALSE, ...)

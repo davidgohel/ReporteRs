@@ -3,7 +3,6 @@
 \name{addImage}
 \alias{addImage}
 \alias{addImage.docx}
-\alias{addImage.bsdoc}
 \alias{addImage.pptx}
 \title{Add an external image into a document object}
 \usage{
@@ -12,9 +11,6 @@ addImage(doc, filename, ...)
 \method{addImage}{docx}(doc, filename, bookmark,
   par.properties = parProperties(text.align = "center", padding = 5), width,
   height, ...)
-
-\method{addImage}{bsdoc}(doc, filename, width, height,
-  par.properties = parProperties(text.align = "center", padding = 5), ...)
 
 \method{addImage}{pptx}(doc, filename, offx, offy, width, height, ...)
 }
@@ -119,6 +115,6 @@ writeDoc( doc, file = "ex_add_image.pptx" )
 
 }
 \seealso{
-\code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
+\code{\link{docx}}, \code{\link{pptx}}
 }
 

@@ -4,7 +4,6 @@
 \alias{addRScript}
 \alias{addRScript.docx}
 \alias{addRScript.pptx}
-\alias{addRScript.bsdoc}
 \title{Add R script into a document object}
 \usage{
 addRScript(doc, rscript, file, text, ...)
@@ -13,8 +12,6 @@ addRScript(doc, rscript, file, text, ...)
   par.properties = parProperties(), ...)
 
 \method{addRScript}{pptx}(doc, rscript, file, text, append = FALSE, ...)
-
-\method{addRScript}{bsdoc}(doc, rscript, file, text, ...)
 }
 \arguments{
 \item{doc}{document object}
@@ -68,6 +65,6 @@ writeDoc( doc, file = doc.filename )
 }
 }
 \seealso{
-\code{\link{bsdoc}}, \code{\link{docx}}, \code{\link{pptx}}
+\code{\link{docx}}, \code{\link{pptx}}
 }
 

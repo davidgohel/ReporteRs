@@ -3,7 +3,6 @@
 \name{addFlexTable}
 \alias{addFlexTable}
 \alias{addFlexTable.docx}
-\alias{addFlexTable.bsdoc}
 \alias{addFlexTable.pptx}
 \title{Insert a FlexTable into a document object}
 \usage{
@@ -11,9 +10,6 @@ addFlexTable(doc, flextable, ...)
 
 \method{addFlexTable}{docx}(doc, flextable,
   par.properties = parProperties(text.align = "left"), bookmark, ...)
-
-\method{addFlexTable}{bsdoc}(doc, flextable,
-  par.properties = parProperties(text.align = "left"), ...)
 
 \method{addFlexTable}{pptx}(doc, flextable, offx, offy, width, height, ...)
 }

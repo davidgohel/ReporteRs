@@ -90,39 +90,3 @@ addTitle.pptx = function( doc, value, ... ) {
   doc
 }
 
-
-
-#' @param id \code{character} single and unique value to use as
-#' title id when doc is \code{bsdoc}.
-#' @rdname addTitle
-#' @export
-addTitle.bsdoc = function( doc, value, level = 1, id, ... ) {
-
-	if( !is.numeric( level ) )
-		stop("level must be an integer vector of length 1.")
-	if( length( level ) != 1 )
-		stop("level must be an integer vector of length 1.")
-
-	if( !missing( id ) ){
-		if( !inherits( id, "character" ) )
-			stop("id must be a single character value")
-		if( length( id ) != 1 )
-			stop("id must be a single character value")
-	}
-	if( !missing( id ) ){
-		if( is.character( value ) )
-			jtitle = .jnew(class.html4r.Title, as.character(value), as.integer(level), id )
-		else jtitle = .jnew(class.html4r.Title, .jpot(value), as.integer(level), id )
-	} else {
-		if( is.character( value ) )
-			jtitle = .jnew(class.html4r.Title, as.character(value), as.integer(level)  )
-		else jtitle = .jnew(class.html4r.Title, .jpot(value), as.integer(level)  )
-	}
-	out = .jcall( doc$jobj , "I", "add", jtitle )
-	if( out != 1 ){
-		stop( "Problem while trying to add title." )
-	}
-	doc
-}
-
-

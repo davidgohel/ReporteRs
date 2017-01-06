@@ -70,38 +70,3 @@ writeDoc.pptx = function(doc, file, ...) {
 
 }
 
-
-
-
-#' @rdname writeDoc
-#' @export
-writeDoc.bsdoc = function(doc, file, ...) {
-	if( !is.character( file ) ) stop("argument file must be a valid filename (a string value).")
-	if( length( file ) != 1 ) stop("length of argument file is not 1.")
-	.reg = regexpr( paste( "(\\.(?i)(html))$", sep = "" ), file )
-	if( .reg < 1 )
-		stop(file , " is not a valid file.")
-
-	file = normalizePath( path.expand(file) , mustWork=FALSE, winslash="/")
-
-	out = .jcall( doc$jobj , "I", "writeHtml", file )
-	if( out != 1 ){
-		stop( "Problem while trying to write html content onto the disk." )
-	}
-	invisible()
-}
-
-#' @title get HTML code from a bsdoc object
-#'
-#' @description get HTML code from a bsdoc document
-#'
-#' @param object the \code{bsdoc} object
-#' @param ... further arguments passed to other methods
-#' @return a character value
-#' @seealso \code{\link{bsdoc}}
-#' @export
-as.html.bsdoc = function( object, ... ) {
-	.jcall( object$jobj, "S", "getHTML" )
-
-}
-

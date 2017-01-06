@@ -5,10 +5,9 @@
 #' \itemize{
 #'   \item \code{\link{docx}} Create a Microsoft Word document object
 #'   \item \code{\link{pptx}} Create a Microsoft PowerPoint document object
-#'   \item \code{\link{bsdoc}} Create an HTML document object (deprecated)
 #' }
 #'
-#' The following functions can be used whatever the output format is (docx, pptx, bsdoc).
+#' The following functions can be used whatever the output format is (docx, pptx).
 #'
 #' \itemize{
 #'   \item \code{\link{addTitle}} Add a title
@@ -48,7 +47,7 @@
 #'
 #' @note
 #'
-#' Examples are in a \code{dontrun} section as they are using font that may be not
+#' Examples are in a \code{donttest} section as they are using font that may be not
 #' available on the host machine. Default font is Helvetica, it can be modified
 #' with option \code{ReporteRs-default-font}. To run an example with 'Arial'
 #' default font, run first

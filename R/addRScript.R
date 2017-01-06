@@ -14,7 +14,7 @@
 #' You have to one of the following argument: file or text or rscript.
 #' @return a document object
 #' @export
-#' @seealso \code{\link{bsdoc}}, \code{\link{docx}}, \code{\link{pptx}}
+#' @seealso \code{\link{docx}}, \code{\link{pptx}}
 addRScript = function(doc, rscript, file, text, ... ){
 
   if( missing( file ) && missing( text ) && missing( rscript ) )
@@ -90,24 +90,6 @@ addRScript.pptx = function(doc, rscript, file, text, append = FALSE, ... ) {
   else out = .jcall( doc$current_slide, "I", "append", rscript$jobj )
   if( isSlideError( out ) ){
     stop( getSlideErrorString( out , "RScript") )
-  }
-  doc
-}
-
-
-#' @rdname addRScript
-#' @export
-addRScript.bsdoc = function(doc, rscript, file, text, ...) {
-
-  if( !missing ( file ) ){
-    rscript = RScript( file = file, ... )
-  } else if( !missing ( text ) ){
-    rscript = RScript( text = text, ... )
-  }
-
-  out = .jcall( doc$jobj, "I", "add" , rscript$jobj)
-  if( out != 1 ){
-    stop( "Problem while trying to add rscript." )
   }
   doc
 }

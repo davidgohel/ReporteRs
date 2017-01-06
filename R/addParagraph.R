@@ -136,48 +136,6 @@ addParagraph.docx <- function(doc, value, stylename, bookmark,
 
 
 
-
-
-
-
-#' @rdname addParagraph
-#' @export
-addParagraph.bsdoc <- function(doc, value,
-                              par.properties = parProperties(),
-                              restart.numbering = FALSE, ... ) {
-
-  if( inherits( value, "character" ) ){
-    x = lapply( value, function(x) pot(value = x) )
-    value = do.call( "set_of_paragraphs", x )
-  }
-  if( inherits( value, "pot" ) ){
-    value = set_of_paragraphs( value )
-  }
-
-  if( !inherits(value, "set_of_paragraphs") )
-    stop("value must be an object of class pot, set_of_paragraphs or a character vector.")
-
-  parset = .jset_of_paragraphs(value, par.properties)
-
-  if( !inherits( par.properties, "parProperties" ) ){
-    stop("argument 'par.properties' must be an object of class 'parProperties'")
-  }
-
-  if( restart.numbering ){
-    .jcall( doc$jobj, "V", "restartNumbering" )
-  }
-
-  out = .jcall( doc$jobj, "I", "add" , parset )
-  if( out != 1 ){
-    stop( "Problem while trying to add paragrahs." )
-  }
-  doc
-}
-
-
-
-
-
 #' @param offx optional, x position of the shape (top left position of the bounding box)
 #' in inches. See details.
 #' @param offy optional, y position of the shape (top left position of the bounding box)

@@ -4,7 +4,6 @@
 \alias{addPlot}
 \alias{addPlot.docx}
 \alias{addPlot.pptx}
-\alias{addPlot.bsdoc}
 \title{Add a plot into a document object}
 \usage{
 addPlot(doc, fun, pointsize = 12, vector.graphic = FALSE, ...)
@@ -20,10 +19,6 @@ addPlot(doc, fun, pointsize = 12, vector.graphic = FALSE, ...)
   fontname_serif = "Times New Roman", fontname_sans = "Calibri",
   fontname_mono = "Courier New", fontname_symbol = "Symbol",
   editable = TRUE, offx, offy, width, height, bg = "transparent", ...)
-
-\method{addPlot}{bsdoc}(doc, fun, pointsize = getOption("ReporteRs-fontsize"),
-  vector.graphic = FALSE, width = 6, height = 6,
-  par.properties = parCenter(padding = 5), bg = "transparent", ...)
 }
 \arguments{
 \item{doc}{document object}
@@ -75,8 +70,8 @@ into a function whose parameters will be specified as '...'.
 
 If you want to add ggplot2 or lattice plot, use \code{print} function.
 
-\code{vector.graphic}: SVG will be produced for \code{bsdoc} objects
-and DrawingML instructions for \code{docx} and \code{pptx} objects.
+\code{vector.graphic}: DrawingML instructions will be produced
+for \code{docx} and \code{pptx} objects.
 Don't use vector graphics if document is a docx and MS Word version
 used to open the document is 2007.
 
@@ -129,6 +124,6 @@ writeDoc( doc, file = "ex_plot.pptx" )
 
 }
 \seealso{
-\code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
+\code{\link{docx}}, \code{\link{pptx}}
 }
 

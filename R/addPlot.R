@@ -21,8 +21,8 @@
 #'
 #' If you want to add ggplot2 or lattice plot, use \code{print} function.
 #'
-#' \code{vector.graphic}: SVG will be produced for \code{bsdoc} objects
-#' and DrawingML instructions for \code{docx} and \code{pptx} objects.
+#' \code{vector.graphic}: DrawingML instructions will be produced
+#' for \code{docx} and \code{pptx} objects.
 #' Don't use vector graphics if document is a docx and MS Word version
 #' used to open the document is 2007.
 #'
@@ -33,7 +33,7 @@
 #' options( "ReporteRs-fontsize" = 11 )
 #'
 #' @export
-#' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
+#' @seealso \code{\link{docx}}, \code{\link{pptx}}
 addPlot = function(doc, fun, pointsize = 12, vector.graphic = FALSE, ...){
 
   checkHasSlide(doc)
@@ -297,40 +297,5 @@ addPlot.pptx = function(doc, fun, pointsize = 11,
   }
 
   doc
-}
-
-
-# addPlot for bsdoc -------
-#' @rdname addPlot
-#' @export
-addPlot.bsdoc = function(doc, fun, pointsize=getOption("ReporteRs-fontsize"),
-                         vector.graphic = FALSE,
-                         width=6, height=6,
-                         par.properties = parCenter( padding = 5 ),
-                         bg = "transparent",
-                         ... ) {
-
-	plotargs = list(...)
-
-	dirname = tempfile( )
-	dir.create( dirname )
-
-	filename = paste( dirname, "/plot%03d.png" ,sep = "" )
-	grDevices::png (filename = filename
-			, width = width, height = height, units = 'in'
-			, pointsize = pointsize, res = 300, bg = bg
-	)
-
-	fun_res = try( fun(...), silent = TRUE )
-	dev.off()
-	plotfiles = list.files( dirname , full.names = TRUE )
-	if( length( plotfiles ) > 1 )
-	  stop( length( plotfiles ), " files have been produced. multiple plot files are not supported")
-	if( length( plotfiles ) < 1 )
-	  stop("unable to produce a plot")
-
-	doc = addImage( doc, plotfiles, width = width, height = height,
-			par.properties = par.properties )
-	doc
 }
 

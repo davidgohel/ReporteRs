@@ -27,7 +27,7 @@
 #' }
 #'
 #'
-#' @seealso \code{\link{docx}}, \code{\link{pptx}}, \code{\link{bsdoc}}
+#' @seealso \code{\link{docx}}, \code{\link{pptx}}
 addImage = function(doc, filename, ...){
   checkHasSlide(doc)
   if( missing( filename ) )
@@ -102,34 +102,6 @@ addImage.docx = function(doc, filename, bookmark,
 	doc
 }
 
-
-#' @rdname addImage
-#' @export
-addImage.bsdoc = function(doc, filename, width, height,
-                          par.properties = parProperties(text.align = "center", padding = 5 ),
-                          ... ) {
-
-  if( missing(width) )
-    stop("width can not be missing")
-  if( missing(height) )
-    stop("height can not be missing")
-
-  if( !is.numeric( width ) )
-    stop("arguments width must be a numeric vector")
-  if( !is.numeric( height ) )
-    stop("arguments height must be a numeric vector")
-
-  filename <- getAbsolutePath(filename, expandTilde = TRUE)
-  jimg = .jnew(class.Image , filename, .jfloat( width ), .jfloat( height ) )
-
-  .jcall( jimg, "V", "setParProperties", .jParProperties(par.properties) )
-
-  out = .jcall( doc$jobj, "I", "add", jimg )
-  if( out != 1 )
-    stop( "Problem while trying to add image(s)." )
-
-  doc
-}
 
 
 #' @param offx optional, x position of the shape (top left position of the bounding box) in inches. See details.
