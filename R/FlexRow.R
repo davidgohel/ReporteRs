@@ -13,6 +13,7 @@
 #' @seealso \code{\link{FlexTable}}, \code{\link{alterFlexRow}}
 #' , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples
+#' \donttest{
 #' cell_fp <- cellProperties(background.color="#527578")
 #' # example with characters ----
 #' headerRow <- FlexRow( c("col 1", "col 2"), cell.properties = cell_fp )
@@ -21,6 +22,7 @@
 #' headerRow <- FlexRow()
 #' headerRow[1] <- FlexCell( "col 1", cell.properties = cell_fp )
 #' headerRow[2] <- FlexCell( "col 2", cell.properties = cell_fp )
+#' }
 FlexRow <- function( values, colspan, text.properties = textProperties(),
 	par.properties = parProperties(), cell.properties = cellProperties() ){
 

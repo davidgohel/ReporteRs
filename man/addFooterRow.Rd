@@ -27,6 +27,7 @@ for each corresponding value (in \code{values}).}
 add a footer row in a FlexTable
 }
 \examples{
+\donttest{
 # simple example ----
 MyFTable <- FlexTable( data = iris[1:5,1:4] )
 
@@ -50,6 +51,7 @@ footerRow[1] <- FlexCell( mytext, colspan = 4 )
 
 # finally, add the FlexRow to the FlexTable
 MyFTable <- addFooterRow( MyFTable, footerRow )
+}
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{addHeaderRow}}

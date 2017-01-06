@@ -122,7 +122,7 @@ Span columns within rows with function \code{\link{spanFlexTableColumns}}.
 Set columns widths with function \code{\link{setFlexTableWidths}}.
 }
 \examples{
-#####################################################################
+\donttest{
 
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body
@@ -223,7 +223,7 @@ MyFTable <- setFlexTableBorders( MyFTable, footer = TRUE,
 ft <- vanilla.table(head(iris))
 ft <- setFlexTableBackgroundColors( ft,
   i = 1:3, j = c("Petal.Length", "Species"), colors = "yellow" )
-
+}
 }
 \seealso{
 \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}

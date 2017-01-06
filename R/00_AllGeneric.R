@@ -36,24 +36,6 @@ addPageNumber <- function(doc, ...){
 
 
 
-#' @title Add a subtitle shape into a document object
-#'
-#' @description Add a subtitle shape into a document object
-#'
-#' @param doc document object
-#' @param ... further arguments passed to other methods
-#' @return a document object
-#' @details
-#' \code{addSubtitle} only works with pptx documents. See \code{\link{addSubtitle.pptx}} for examples.
-#' @export
-#' @seealso \code{\link{pptx}}, \code{\link{addSubtitle.pptx}}
-addSubtitle <- function(doc, ...){
-	checkHasSlide(doc)
-	UseMethod("addSubtitle")
-}
-
-
-
 #' @title Change a formatting properties object
 #'
 #' @description Change a formatting properties object

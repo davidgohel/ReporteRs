@@ -1,15 +1,26 @@
+#' @title Add a subtitle shape into a document object
+#'
+#' @description Add a subtitle shape into a document object
+#'
+#' @param doc document object
+#' @param ... further arguments passed to other methods
+#' @return a document object
+#' @export
+#' @seealso \code{\link{pptx}}
+addSubtitle <- function(doc, ...){
+  checkHasSlide(doc)
+  UseMethod("addSubtitle")
+}
+
 #' @title Insert a addSubtitle shape into a pptx object
 #'
 #' @description Add a addSubtitle shape into a \code{\link{pptx}} object.
 #'
-#' @param doc \code{\link{pptx}} object
 #' @param value \code{"character"} value to use as subtitle text
-#' @param ... further arguments, not used.
-#'
-#' @return an object of class \code{\link{pptx}}.
 #'
 #' @details
 #' Subtitle shape only exist in slide of type 'Title Slide'.
+#' @rdname addSubtitle
 #' @examples
 #' \donttest{
 #' doc.filename = "addSubtitle_example.pptx"
@@ -21,7 +32,6 @@
 #' doc <- addSubtitle( doc , "This document is generated with ReporteRs.")
 #' writeDoc( doc, file = doc.filename )
 #' }
-#' @seealso \code{\link{pptx}}, \code{\link{addSubtitle}}
 #' @export
 addSubtitle.pptx = function( doc, value, ... ) {
 

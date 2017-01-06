@@ -99,7 +99,7 @@
 #'
 #' @export
 #' @examples
-#' #####################################################################
+#' \donttest{
 #'
 #' # Create a FlexTable with data.frame mtcars, display rownames
 #' # use different formatting properties for header and body
@@ -201,7 +201,7 @@
 #' ft <- vanilla.table(head(iris))
 #' ft <- setFlexTableBackgroundColors( ft,
 #'   i = 1:3, j = c("Petal.Length", "Species"), colors = "yellow" )
-#'
+#' }
 #' @seealso \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}, \code{\link{setFlexTableWidths}}
 #' , \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}}
 #' , \code{\link{spanFlexTableRows}}, \code{\link{spanFlexTableColumns}}

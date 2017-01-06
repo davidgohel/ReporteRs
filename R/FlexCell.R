@@ -10,6 +10,7 @@
 #' @export
 #' @seealso \code{\link{addFlexTable}}, \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 #' @examples
+#' \donttest{
 #' FlexCell( value = "Hello" )
 #' FlexCell( value = "Hello", colspan = 3)
 #' FlexCell( "Column 1",
@@ -25,6 +26,7 @@
 #' mytext1 <- pot("Hello", format = textProperties(color = "blue") )
 #' mytext2 <- pot( "world", format = textProperties(font.size = 9) )
 #' Fcell <- FlexCell( set_of_paragraphs( mytext1, mytext2 ) )
+#' }
 FlexCell = function( value, colspan = 1, par.properties = parProperties(), cell.properties = cellProperties() ) {
 
 	if( !inherits( par.properties, "parProperties" ) ){

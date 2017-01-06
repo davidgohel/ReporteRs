@@ -18,11 +18,12 @@ applies background color to alternate rows (zebra striping).
 Set a color if row index is odd and another if row index is even.
 }
 \examples{
+\donttest{
 MyFTable <- FlexTable( data = iris[1:10, ] )
 
 # Zebra striped table
 MyFTable <- setZebraStyle( MyFTable, odd = "#8A949B", even = "#FAFAFA" )
-
+}
 }
 \seealso{
 \code{\link{FlexTable}}

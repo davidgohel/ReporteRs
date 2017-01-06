@@ -17,8 +17,10 @@ setRowsColors(object, i, colors)
 applies background colors to rows of a FlexTable
 }
 \examples{
+\donttest{
 MyFTable <- FlexTable( data = mtcars[1:10, ], add.rownames=TRUE )
 MyFTable <- setRowsColors( MyFTable, i=1:4, colors = "red" )
+}
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}

@@ -18,7 +18,9 @@ value is one of "lrtb", "tbrl", "btlr".}
 get a simple FlexTable from a dataset
 }
 \examples{
+\donttest{
 ft <- light.table( iris)
+}
 }
 \seealso{
 \code{\link{FlexTable}}

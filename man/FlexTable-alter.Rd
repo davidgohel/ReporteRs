@@ -73,6 +73,7 @@ If dealing with \code{borderProperties} objects, use also argument
 properties.
 }
 \examples{
+\donttest{
 MyFTable <- FlexTable( data = mtcars[1:10, ], add.rownames=TRUE )
 # modify the text formatting properties for the row.names column
 MyFTable[ , 1] <- textProperties( font.style="italic", font.size = 9)
@@ -85,7 +86,7 @@ MyFTable[ c(3,6:9), c( "mpg", "disp", "hp", "drat", "wt",
 # add text to elements of the column cyl
 MyFTable[, "cyl", text.properties = textProperties(
   vertical.align="superscript", font.size = 9) ] <- " miles/gallon"
-
+}
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{borderProperties}}

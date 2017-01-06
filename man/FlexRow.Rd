@@ -23,6 +23,7 @@ Create a representation of a row that can be inserted in a FlexTable.
 For internal usage.
 }
 \examples{
+\donttest{
 cell_fp <- cellProperties(background.color="#527578")
 # example with characters ----
 headerRow <- FlexRow( c("col 1", "col 2"), cell.properties = cell_fp )
@@ -31,6 +32,7 @@ cell_fp <- cellProperties(background.color="#527578")
 headerRow <- FlexRow()
 headerRow[1] <- FlexCell( "col 1", cell.properties = cell_fp )
 headerRow[2] <- FlexCell( "col 2", cell.properties = cell_fp )
+}
 }
 \seealso{
 \code{\link{FlexTable}}, \code{\link{alterFlexRow}}
