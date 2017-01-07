@@ -13,9 +13,9 @@
 #' @examples
 #'
 #' options( "ReporteRs-fontsize" = 11 )
-#'
+#' \donttest{
 #' ft_obj <- vanilla.table(mtcars)
-#'
+#' }
 #' @seealso \code{\link{FlexTable}}, \code{\link{docx}}
 #' , \code{\link{pptx}}
 addFlexTable = function(doc, flextable, ...){

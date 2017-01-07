@@ -13,10 +13,12 @@
 #' apply the properties. It must be one of \dQuote{bottom}, \dQuote{top}, \dQuote{left}, \dQuote{right}.
 #' @param ... unused
 #' @examples
+#' \donttest{
 #' my_ft <- vanilla.table( head( iris, n = 5 ) )
 #' my_ft <- chprop( my_ft, textBoldItalic(), i = 1, to = "header" )
 #' my_ft <- chprop( my_ft, parCenter(), j = 5 )
 #' my_ft <- chprop( my_ft, borderSolid(color = "red"), i = 5, side = "bottom" )
+#' }
 #' @export
 chprop.FlexTable <- function(object, value, i, j, to = "body", side = "top", ...){
 
@@ -77,7 +79,7 @@ chprop.FlexTable <- function(object, value, i, j, to = "body", side = "top", ...
              object <- chFooterCellProperties( x = object, i=i, j=j, value=value )
            }, stop("to should be one of 'body', 'header', 'footer'.")
     )
-  } else stop("unknown formatting property.")
+  } else stop("unknown formatting property.", call. = FALSE)
 
   object
 }
