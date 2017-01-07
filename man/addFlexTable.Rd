@@ -60,9 +60,9 @@ dimensions of the new shape.
 \examples{
 
 options( "ReporteRs-fontsize" = 11 )
-
+\donttest{
 ft_obj <- vanilla.table(mtcars)
-
+}
 \donttest{
 # docx example -----
 doc = docx( )

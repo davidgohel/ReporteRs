@@ -147,7 +147,6 @@ corrFT =<span class="st"> </span><span class="kw"><a href="../reference/setFlexT
     , <span class="dt">outer.horizontal =</span> <span class="kw"><a href="../reference/borderProperties.html">borderProperties</a></span>( <span class="dt">width =</span> <span class="dv">2</span>, <span class="dt">color =</span> <span class="st">"white"</span>  )
 )
 corrFT</code></pre></div>
-<div>
 <table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead><tr>
 <td style="background-color:rgba(190, 190, 190, 1);border-bottom-color:rgba(255, 255, 255, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(255, 255, 255, 1);border-top-style:solid;border-top-width:2px;border-right-color:rgba(255, 255, 255, 1);border-right-style:dashed;border-right-width:1px;border-left-color:rgba(255, 255, 255, 1);border-left-style:solid;border-left-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
@@ -897,7 +896,6 @@ corrFT</code></pre></div>
 <tfoot></tfoot>
 </table>
 </div>
-</div>
 <div id="clinical-like-table" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#clinical-like-table" class="anchor"> </a></body></html>Clinical like table</h2>
@@ -936,7 +934,6 @@ data</code></pre></div>
 MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/FlexTable.html">FlexTable</a></span>( <span class="dt">data =</span> data[ , <span class="kw">c</span>( <span class="st">"Status"</span>, <span class="st">"Gender"</span>, <span class="st">"Ulceration"</span>, <span class="st">"n"</span>, <span class="st">"Mean"</span>) ],
   <span class="dt">header.columns =</span> <span class="ot">FALSE</span> )
 MyFTable</code></pre></div>
-<div>
 <table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead></thead>
 <tbody>
@@ -1267,12 +1264,10 @@ MyFTable</code></pre></div>
 </tbody>
 <tfoot></tfoot>
 </table>
-</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># span rows of columns Status and Gender</span>
 MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/spanFlexTableRows.html">spanFlexTableRows</a></span>( MyFTable, <span class="dt">j =</span> <span class="st">"Status"</span>, <span class="dt">runs =</span> <span class="kw">as.character</span>( data$Status ) )
 MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/spanFlexTableRows.html">spanFlexTableRows</a></span>( MyFTable, <span class="dt">j =</span> <span class="st">"Gender"</span>, <span class="dt">runs =</span> <span class="kw">as.character</span>( data$Gender ) )
 MyFTable</code></pre></div>
-<div>
 <table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead></thead>
 <tbody>
@@ -1528,11 +1523,9 @@ MyFTable</code></pre></div>
 </tbody>
 <tfoot></tfoot>
 </table>
-</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add "(sd)" to column 5</span>
 MyFTable[, <span class="st">"Mean"</span>] =<span class="st"> </span><span class="kw">paste0</span>( <span class="st">" (&amp;plusmn;"</span>, <span class="kw">formatC</span>( data$SD, <span class="dt">digits=</span><span class="dv">3</span>, <span class="dt">format =</span> <span class="st">"f"</span>), <span class="st">")"</span> )
 MyFTable</code></pre></div>
-<div>
 <table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead></thead>
 <tbody>
@@ -1788,7 +1781,6 @@ MyFTable</code></pre></div>
 </tbody>
 <tfoot></tfoot>
 </table>
-</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#create a first header row</span>
 MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/addHeaderRow.html">addHeaderRow</a></span>( MyFTable,
   <span class="dt">value =</span> <span class="kw">c</span>(<span class="st">""</span>, <span class="st">"Summary statistics for thickness"</span>), <span class="dt">colspan =</span> <span class="kw">c</span>( <span class="dv">3</span>, <span class="dv">2</span> ) )
@@ -1799,7 +1791,6 @@ MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/addHea
 MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/addFooterRow.html">addFooterRow</a></span>( MyFTable, <span class="dt">value =</span> <span class="kw">c</span>(<span class="st">"* This is a footer note"</span>), <span class="dt">colspan =</span> <span class="dv">5</span> )
 MyFTable[<span class="dv">2</span>,<span class="dv">5</span>, to=<span class="st">"header"</span>] =<span class="st"> </span><span class="kw"><a href="../reference/pot.html">pot</a></span>(<span class="st">"*"</span>, <span class="kw"><a href="../reference/textProperties.html">textProperties</a></span>( <span class="dt">vertical.align =</span> <span class="st">"superscript"</span> ) )
 MyFTable</code></pre></div>
-<div>
 <table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead>
 <tr>
@@ -2100,7 +2091,6 @@ MyFTable</code></pre></div>
 </td>
 </tr></tfoot>
 </table>
-</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># border properties to use later</span>
     no_border =<span class="st"> </span><span class="kw"><a href="../reference/borderProperties.html">borderProperties</a></span>( <span class="dt">width =</span> <span class="dv">0</span> )
     big_border =<span class="st"> </span><span class="kw"><a href="../reference/borderProperties.html">borderProperties</a></span>( <span class="dt">width =</span> <span class="dv">2</span> )
@@ -2114,7 +2104,6 @@ MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/setFle
 
 MyFTable[<span class="dv">2</span>,<span class="dv">1</span>:<span class="dv">3</span>, to=<span class="st">"header"</span>, side =<span class="st"> "top"</span>] =<span class="st"> </span>no_border
 MyFTable</code></pre></div>
-<div>
 <table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead>
 <tr>
@@ -2417,7 +2406,6 @@ MyFTable</code></pre></div>
 </table>
 </div>
 </div>
-</div>
 <div id="model-summary-table" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#model-summary-table" class="anchor"> </a></body></html>Model summary table</h2>
@@ -2456,7 +2444,6 @@ coef_ft =<span class="st"> </span><span class="kw"><a href="../reference/setFlex
   , <span class="dt">outer.vertical =</span> <span class="kw"><a href="../reference/textNormal.html">borderNone</a></span>(), <span class="dt">outer.horizontal =</span> <span class="kw"><a href="../reference/textNormal.html">borderSolid</a></span>()
 )
 coef_ft</code></pre></div>
-<div>
 <table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead><tr>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
@@ -2622,7 +2609,6 @@ coef_ft</code></pre></div>
 <tfoot></tfoot>
 </table>
 </div>
-</div>
 <div id="conditional-colored-table" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#conditional-colored-table" class="anchor"> </a></body></html>Conditional colored table</h2>
@@ -2662,7 +2648,6 @@ my_ft =<span class="st"> </span><span class="kw"><a href="../reference/setFlexTa
     , <span class="dt">outer.horizontal =</span> <span class="kw"><a href="../reference/borderProperties.html">borderProperties</a></span>( <span class="dt">width =</span> <span class="dv">2</span> )
 )
 my_ft</code></pre></div>
-<div>
 <table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <col width="36">
 <col width="36">
@@ -3045,7 +3030,6 @@ my_ft</code></pre></div>
 </tbody>
 <tfoot></tfoot>
 </table>
-</div>
 </div>
 </div>
   </div>

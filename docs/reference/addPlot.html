@@ -146,12 +146,7 @@
 <span class='fu'>addPlot</span>(<span class='no'>doc</span>, <span class='no'>fun</span>, <span class='kw'>pointsize</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>vector.graphic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>fontname_serif</span> <span class='kw'>=</span> <span class='st'>"Times New Roman"</span>, <span class='kw'>fontname_sans</span> <span class='kw'>=</span> <span class='st'>"Calibri"</span>,
   <span class='kw'>fontname_mono</span> <span class='kw'>=</span> <span class='st'>"Courier New"</span>, <span class='kw'>fontname_symbol</span> <span class='kw'>=</span> <span class='st'>"Symbol"</span>,
-  <span class='kw'>editable</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>offx</span>, <span class='no'>offy</span>, <span class='no'>width</span>, <span class='no'>height</span>, <span class='kw'>bg</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for bsdoc</span>
-<span class='fu'>addPlot</span>(<span class='no'>doc</span>, <span class='no'>fun</span>, <span class='kw'>pointsize</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"ReporteRs-fontsize"</span>),
-  <span class='kw'>vector.graphic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>6</span>,
-  <span class='kw'>par.properties</span> <span class='kw'>=</span> <span class='fu'><a href='textNormal.html'>parCenter</a></span>(<span class='kw'>padding</span> <span class='kw'>=</span> <span class='fl'>5</span>), <span class='kw'>bg</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>editable</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>offx</span>, <span class='no'>offy</span>, <span class='no'>width</span>, <span class='no'>height</span>, <span class='kw'>bg</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -203,8 +198,8 @@ An object of class <code><a href='parProperties.html'>parProperties</a></code></
 However, the most convenient usage is to wrap the plot code
 into a function whose parameters will be specified as &#39;...&#39;.</p>
     <p>If you want to add ggplot2 or lattice plot, use <code>print</code> function.</p>
-    <p><code>vector.graphic</code>: SVG will be produced for <code>bsdoc</code> objects
-and DrawingML instructions for <code>docx</code> and <code>pptx</code> objects.
+    <p><code>vector.graphic</code>: DrawingML instructions will be produced
+for <code>docx</code> and <code>pptx</code> objects.
 Don&#39;t use vector graphics if document is a docx and MS Word version
 used to open the document is 2007.</p>
     <p>When document is a <code>pptx</code> object, two positioning methods are available.</p>
@@ -217,7 +212,7 @@ dimensions of the new shape.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='docx.html'>docx</a></code>, <code><a href='pptx.html'>pptx</a></code>, <code><a href='bsdoc.html'>bsdoc</a></code></p>
+    <p><code><a href='docx.html'>docx</a></code>, <code><a href='pptx.html'>pptx</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

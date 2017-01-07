@@ -374,6 +374,17 @@ MyFTable[ data$ncases < 1, 3:5] = chprop( myCellProps, background.color = '#6666
 MyFTable
 ```
 
+### apply chrprop to FlexTable
+
+```{r}
+tp <- textProperties( color = '#2BBBD8', font.weight = 'bold' )
+MyFTable <- FlexTable( data = data, header.text.props = textBold(), 
+  header.cell.props = myCellProps, body.cell.props= myCellProps )
+MyFTable <- chprop( MyFTable, i = data$ncases < 1, j = 3:5, value = tp )
+MyFTable <- chprop( MyFTable, i = data$ncases < 1, j = 3:5, value = parCenter() )
+MyFTable
+```
+
 ## Annotations
 
 You can add content with the substract operator.

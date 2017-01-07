@@ -29,9 +29,11 @@ apply the properties. It must be one of \dQuote{bottom}, \dQuote{top}, \dQuote{l
 Format a FlexTable object.
 }
 \examples{
+\donttest{
 my_ft <- vanilla.table( head( iris, n = 5 ) )
 my_ft <- chprop( my_ft, textBoldItalic(), i = 1, to = "header" )
 my_ft <- chprop( my_ft, parCenter(), j = 5 )
 my_ft <- chprop( my_ft, borderSolid(color = "red"), i = 5, side = "bottom" )
+}
 }
 

@@ -58,7 +58,7 @@ reference:
   - title: FlexTable format
     desc: Main functions to format FlexTable content
     contents:
-    - alterFlexTable
+    - chprop.FlexTable
     - setFlexTableBackgroundColors
     - setFlexTableBorders
     - setZebraStyle

@@ -132,7 +132,16 @@
     <p>Create an object with a text to display and its formatting properties.</p>
     
 
-    <pre><span class='fu'>pot</span>(<span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(), <span class='no'>hyperlink</span>, <span class='no'>footnote</span>)</pre>
+    <pre><span class='fu'>pot</span>(<span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='fu'><a href='textProperties.html'>textProperties</a></span>(), <span class='no'>hyperlink</span>, <span class='no'>footnote</span>)
+
+<span class='co'># S3 method for pot</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for pot</span>
+<span class='fu'>as.character</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for pot</span>
+<span class='fu'>knit_print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -144,6 +153,10 @@
       <dd>a valid url to use as hyperlink when clicking on <code>value</code>.</dd>
       <dt>footnote</dt>
       <dd>a <code><a href='Footnote.html'>Footnote</a></code> object.</dd>
+      <dt>x</dt>
+      <dd>a <code>pot</code> object</dd>
+      <dt>...</dt>
+      <dd>further arguments, not used.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -157,7 +170,7 @@ a <code>pptx</code> object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='addParagraph.html'>addParagraph</a></code>, <code><a href='Footnote.html'>Footnote</a></code>
-, <code><a href='+.pot.html'>+.pot</a></code></p>
+, <code><a href='+.pot.html'>+.pot</a></code>, <code><a href='pot_img.html'>pot_img</a></code>,</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

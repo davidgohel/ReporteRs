@@ -31,7 +31,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Word
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -49,7 +49,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     FlexTable
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -64,7 +64,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Formatting content
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -90,7 +90,7 @@
 <li>
   <a href="https://github.com/davidgohel/ReporteRs">
     <span class="fa fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -101,16 +101,16 @@
 </div>
 <!--/.navbar -->
 
-      
+
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
       <h1>Formatting properties</h1>
-            
+
           </div>
 
-    
-    
+
+
 <div class="contents">
 <p><code>ReporteRs</code> has functions to manage objects representing:</p>
 <ul>
@@ -145,8 +145,7 @@ my_text</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/vanilla.table.html">vanilla.table</a></span>( <span class="dt">data =</span> mtcars[<span class="dv">1</span>:<span class="dv">5</span>, ], <span class="dt">add.rownames =</span> <span class="ot">TRUE</span> )
 MyFTable[ <span class="dv">1</span>, <span class="dv">1</span>, to =<span class="st"> "header"</span>] =<span class="st"> </span>my_text
 MyFTable</code></pre></div>
-<div>
-<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;" class="table">
+<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead><tr>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:right;padding-top:1pt;padding-bottom:1pt;padding-right:4pt;padding-left:4pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
@@ -525,7 +524,6 @@ MyFTable</code></pre></div>
 </table>
 </div>
 </div>
-</div>
 <div id="paragraph-formatting-properties" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#paragraph-formatting-properties" class="anchor"> </a></body></html>Paragraph formatting properties</h3>
@@ -537,8 +535,7 @@ MyFTable</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/FlexTable.html">FlexTable</a></span>( <span class="dt">data =</span> iris[<span class="dv">1</span>:<span class="dv">5</span>, ] )
 MyFTable[ <span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">4</span>:<span class="dv">5</span>] =<span class="st"> </span><span class="kw"><a href="../reference/parProperties.html">parProperties</a></span>( <span class="dt">text.align =</span> <span class="st">'right'</span>, <span class="dt">padding =</span> <span class="dv">3</span> )
 MyFTable</code></pre></div>
-<div>
-<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;" class="table">
+<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead><tr>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;border-right-color:rgba(0, 0, 0, 1);border-right-style:solid;border-right-width:1px;border-left-color:rgba(0, 0, 0, 1);border-left-style:solid;border-left-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:0pt;padding-bottom:0pt;padding-right:0pt;padding-left:0pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
@@ -705,7 +702,6 @@ MyFTable</code></pre></div>
 </tbody>
 <tfoot></tfoot>
 </table>
-</div>
 </div>
 </div>
 <div id="cell-formatting-properties" class="section level3">
@@ -719,8 +715,7 @@ MyFTable</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/FlexTable.html">FlexTable</a></span>( <span class="dt">data =</span> iris[<span class="dv">1</span>:<span class="dv">5</span>, ] )
 MyFTable[ <span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">4</span>:<span class="dv">5</span>] =<span class="st"> </span><span class="kw"><a href="../reference/cellProperties.html">cellProperties</a></span>( <span class="dt">background.color =</span> <span class="st">'wheat'</span> )
 MyFTable</code></pre></div>
-<div>
-<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;" class="table">
+<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead><tr>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:1px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;border-right-color:rgba(0, 0, 0, 1);border-right-style:solid;border-right-width:1px;border-left-color:rgba(0, 0, 0, 1);border-left-style:solid;border-left-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:0pt;padding-bottom:0pt;padding-right:0pt;padding-left:0pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
@@ -887,7 +882,6 @@ MyFTable</code></pre></div>
 </tbody>
 <tfoot></tfoot>
 </table>
-</div>
 </div>
 </div>
 <div id="border-formatting-properties" class="section level3">
@@ -901,8 +895,7 @@ MyFTable</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MyFTable =<span class="st"> </span><span class="kw"><a href="../reference/FlexTable.html">FlexTable</a></span>( <span class="dt">data =</span> iris[<span class="dv">1</span>:<span class="dv">5</span>, ] )
 MyFTable[ <span class="dv">1</span>, to =<span class="st"> "header"</span>, side =<span class="st"> "bottom"</span>] =<span class="st"> </span><span class="kw"><a href="../reference/borderProperties.html">borderProperties</a></span>(<span class="dt">color=</span><span class="st">"orange"</span>, <span class="dt">style=</span><span class="st">"solid"</span>, <span class="dt">width=</span><span class="dv">4</span>)
 MyFTable</code></pre></div>
-<div>
-<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;" class="table">
+<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead><tr>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(255, 165, 0, 1);border-bottom-style:solid;border-bottom-width:4px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:1px;border-right-color:rgba(0, 0, 0, 1);border-right-style:solid;border-right-width:1px;border-left-color:rgba(0, 0, 0, 1);border-left-style:solid;border-left-width:1px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:left;padding-top:0pt;padding-bottom:0pt;padding-right:0pt;padding-left:0pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
@@ -1069,7 +1062,6 @@ MyFTable</code></pre></div>
 </tbody>
 <tfoot></tfoot>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -1090,8 +1082,7 @@ MyFTable[ <span class="dv">3</span>, ] &lt;-<span class="st"> </span><span class
 MyFTable[] &lt;-<span class="st"> </span>base_text_prop
 MyFTable[ , <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw"><a href="../reference/chprop.html">chprop</a></span>( base_text_prop, <span class="dt">font.weight =</span> <span class="st">"bold"</span> )
 MyFTable</code></pre></div>
-<div>
-<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;" class="table">
+<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead><tr>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:right;padding-top:1pt;padding-bottom:1pt;padding-right:4pt;padding-left:4pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
@@ -1259,7 +1250,6 @@ MyFTable</code></pre></div>
 <tfoot></tfoot>
 </table>
 </div>
-</div>
 <div id="shorcut-functions" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#shorcut-functions" class="anchor"> </a></body></html>Shorcut functions</h2>
@@ -1290,8 +1280,7 @@ MyFTable[ to =<span class="st"> "header"</span> ] =<span class="st"> </span><spa
 MyFTable[ , <span class="dv">5</span> ] =<span class="st"> </span><span class="kw"><a href="../reference/textNormal.html">textItalic</a></span>()
 MyFTable[ , <span class="dv">1</span>:<span class="dv">4</span>] =<span class="st"> </span><span class="kw"><a href="../reference/textNormal.html">parRight</a></span>()
 MyFTable</code></pre></div>
-<div>
-<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;" class="table">
+<table style="margin-left:0px;margin-right:auto;border-collapse:collapse;">
 <thead><tr>
 <td style="background-color:rgba(255, 255, 255, 0);border-bottom-color:rgba(0, 0, 0, 1);border-bottom-style:solid;border-bottom-width:2px;border-top-color:rgba(0, 0, 0, 1);border-top-style:solid;border-top-width:2px;vertical-align:middle;padding-left:0pt;padding-right:0pt;padding-top:0pt;padding-bottom:0pt;">
 <p style="text-align:right;padding-top:1pt;padding-bottom:1pt;padding-right:4pt;padding-left:4pt;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:0pt;">
@@ -1458,7 +1447,6 @@ MyFTable</code></pre></div>
 </tbody>
 <tfoot></tfoot>
 </table>
-</div>
 <p>The following functions are shortcuts for <code>borderProperties</code> function calls: <strong>borderDashed</strong>, <strong>borderDotted</strong>, <strong>borderSolid</strong> and <strong>borderNone</strong>.</p>
 <p>The following functions are shortcuts for <code>cellProperties</code> function calls: <strong>cellBorderNone</strong>, <strong>cellBorderBottom</strong>, <strong>cellBorderTop</strong> and <strong>cellBorderTB</strong>.</p>
 </div>
