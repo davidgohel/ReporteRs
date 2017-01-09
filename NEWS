@@ -3,15 +3,14 @@
 ## DEBUG
 
 * bookmarks were lost after replacement in a docx
-* fix print method
 * fix raster issue in editable plots when there were
   more than one image to render.
 
-CHANGES
-------------------------------------------------------------------
+## CHANGES
 
 * declareTitlesStyles has been renamed map_title
 * addMarkdown has been deleted
+* bsdoc has been deleted
 
 ReporteRs 0.8.7
 ==================================================================

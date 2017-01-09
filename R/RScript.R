@@ -21,8 +21,10 @@
 #' @param default.properties default txtProperties object
 #' @param par.properties a parProperties object
 #' @examples
+#' \donttest{
 #' an_rscript = RScript( text = "ls()
 #' x = rnorm(10)" )
+#' }
 #' @seealso \code{\link{addRScript}}
 #' @export
 RScript = function( file, text

@@ -62,8 +62,10 @@ RScript(file, text, comment.properties = textProperties(color = "#A7947D"),
 Colored RScript object
 }
 \examples{
+\donttest{
 an_rscript = RScript( text = "ls()
 x = rnorm(10)" )
+}
 }
 \seealso{
 \code{\link{addRScript}}

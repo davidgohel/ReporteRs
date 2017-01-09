@@ -22,7 +22,9 @@ Code Block Object. A code block object is a block of text
 treated as verbatim text in a document object.
 }
 \examples{
+\donttest{
 cb_example <- CodeBlock( text = "ls -a\\nwhich -a ls" )
+}
 }
 \seealso{
 \code{\link{addCodeBlock}}
