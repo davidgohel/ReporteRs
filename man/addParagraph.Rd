@@ -25,7 +25,8 @@ or a character vector.}
 
 \item{stylename}{value of the named style to apply to paragraphs in the docx document.
 Expected value is an existing stylename of the template document used to create the
-\code{docx} object. see \code{\link{styles.docx}}.}
+\code{docx} object. This argument can only be used when value is a
+character vector. see \code{\link{styles.docx}}.}
 
 \item{bookmark}{a character value ; id of the Word bookmark to
 replace by the table. optional.}
