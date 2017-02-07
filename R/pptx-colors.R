@@ -21,6 +21,9 @@ pptxColors <- function(doc, full=FALSE, veryLight = 0.1, veryDark  = 0.9){
 }
 ##' @rdname pptxColors
 ##' @export
+pptxColour <- pptxColors;
+##' @rdname pptxColors
+##' @export
 pptxColors.pptx <- function(doc, full=FALSE, veryLight = 0.1, veryDark  = 0.9){
     pptxColors.character(doc$basefile, full=full, veryLight = veryLight, veryDark  = veryDark);
 }

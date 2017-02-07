@@ -2,11 +2,14 @@
 % Please edit documentation in R/pptx-colors.R
 \name{pptxColors}
 \alias{pptxColors}
+\alias{pptxColour}
 \alias{pptxColors.pptx}
 \alias{pptxColors.character}
 \title{Colors in the powerpoint document}
 \usage{
 pptxColors(doc, full = FALSE, veryLight = 0.1, veryDark = 0.9)
+
+pptxColour(doc, full = FALSE, veryLight = 0.1, veryDark = 0.9)
 
 \method{pptxColors}{pptx}(doc, full = FALSE, veryLight = 0.1,
   veryDark = 0.9)
