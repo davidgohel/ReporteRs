@@ -25,7 +25,7 @@ Imports:
     xml2,
     gdtools,
     png,
-    R.utils, knitr, shiny, htmltools
+    R.utils, knitr, shiny, htmltools, memoise
 Suggests:
     ggplot2,
     jpeg, bmp,
