@@ -31,9 +31,34 @@
 		ul.left = seq( from = 0, by = 0.4, length.out = 9),
 		ul.hanging = rep( 0.4, 9 ),
 		ul.format = c( "disc", "circle", "square", "disc", "circle", "square", "disc", "circle", "square" )
-		)
-	)
-	invisible()
+		));
+    setupMemoize();
+    invisible()
+}
+
+##' This setups the memoized functions.
+##'
+##' To easily create a memozied function by adding a \code{.slow <- NULL}
+##' to the end of a function.
+##'
+##' For example, to memozie the function in the namespace
+##' \code{rxModelVars.character} you would add a line:
+##' \code{rxModelVars.character.slow <- NULL}
+##'
+##' @author Matthew L. Fidler
+setupMemoize <- function(){
+    reSlow <- "[.]slow$"
+    f <- sys.function(-1)
+    ns <- environment(f)
+    .slow <- ls(pattern=reSlow,envir=ns);
+    for (slow in .slow){
+        fast <- sub(reSlow, "", slow);
+        if (!memoise::is.memoised(get(fast, envir=ns)) && is.null(get(slow, envir=ns))){
+            utils::assignInMyNamespace(slow, get(fast, envir=ns))
+            utils::assignInMyNamespace(fast, memoise::memoise(get(slow, envir=ns)))
+        }
+
+    }
 }
 
 .jset_of_paragraphs = function( value, par.properties ){
