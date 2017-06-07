@@ -37,4 +37,3 @@ doc = map_title(doc, stylenames = c("Titre1", "Titre2", "Titre3",
 \seealso{
 \code{\link{docx}},\code{\link{styles.docx}},\code{\link{addTitle.docx}}
 }
-

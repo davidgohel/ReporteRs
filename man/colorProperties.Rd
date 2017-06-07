@@ -22,4 +22,3 @@ colorProperties(value = "black")
 \description{
 create a color properties object.
 }
-

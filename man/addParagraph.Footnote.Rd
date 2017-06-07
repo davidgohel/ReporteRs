@@ -30,4 +30,3 @@ paragraphs with their associated \code{parProperties} objects with this function
 \code{\link{Footnote}}, \code{\link{parProperties}}, \code{\link{pot}}
 , \code{\link{set_of_paragraphs}}
 }
-

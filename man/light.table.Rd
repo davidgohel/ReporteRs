@@ -25,4 +25,3 @@ ft <- light.table( iris)
 \seealso{
 \code{\link{FlexTable}}
 }
-

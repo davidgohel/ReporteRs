@@ -70,4 +70,3 @@ x = rnorm(10)" )
 \seealso{
 \code{\link{addRScript}}
 }
-

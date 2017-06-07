@@ -31,4 +31,3 @@ writeDoc( doc, file = "ex_footer.pptx" )
 \code{\link{pptx}}, \code{\link{addDate.pptx}}
 , \code{\link{addPageNumber.pptx}}
 }
-

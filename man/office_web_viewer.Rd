@@ -17,4 +17,3 @@ office_web_viewer(url, width = "80\%", height = "500px")
 Produce an iframe linked to Office Web Viewer. It let's you
 display a Microsoft Office document in a Web browser.
 }
-

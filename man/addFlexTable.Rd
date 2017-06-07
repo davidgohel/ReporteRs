@@ -83,4 +83,3 @@ writeDoc( doc, file = "add_ft_ex.pptx" )
 \code{\link{FlexTable}}, \code{\link{docx}}
 , \code{\link{pptx}}
 }
-

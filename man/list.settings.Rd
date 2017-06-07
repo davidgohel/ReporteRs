@@ -116,4 +116,3 @@ writeDoc( doc, file = doc.filename )
 \seealso{
 \code{\link{addParagraph}}, \code{\link{ReporteRs}}
 }
-

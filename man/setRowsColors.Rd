@@ -25,4 +25,3 @@ MyFTable <- setRowsColors( MyFTable, i=1:4, colors = "red" )
 \seealso{
 \code{\link{FlexTable}}, \code{\link{setColumnsColors}}, \code{\link{setZebraStyle}}
 }
-

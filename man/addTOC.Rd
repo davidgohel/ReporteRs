@@ -93,4 +93,3 @@ writeDoc( doc, "addTOC_example2.docx" )
 \code{\link{docx}}, \code{\link{styles}},
 \code{\link{addTitle}}, \code{\link{addParagraph}}
 }
-

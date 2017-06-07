@@ -28,4 +28,3 @@ MyFTable <- setZebraStyle( MyFTable, odd = "#8A949B", even = "#FAFAFA" )
 \seealso{
 \code{\link{FlexTable}}
 }
-

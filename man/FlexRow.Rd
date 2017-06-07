@@ -38,4 +38,3 @@ headerRow[2] <- FlexCell( "col 2", cell.properties = cell_fp )
 \code{\link{FlexTable}}, \code{\link{alterFlexRow}}
 , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 }
-

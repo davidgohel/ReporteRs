@@ -103,4 +103,3 @@ chprop( parProp, padding = 2, text.align = "center" )
 \code{\link{alterFlexTable}}, \code{\link{addParagraph}},
 \code{\link{shortcut_properties}}
 }
-

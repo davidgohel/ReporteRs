@@ -49,4 +49,3 @@ chprop(x, width=5)
 \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}},
 \code{\link{shortcut_properties}}
 }
-

@@ -31,4 +31,3 @@ list_bookmarks( doc )
 \seealso{
 \code{\link{docx}}, \code{\link{text_extract}}
 }
-

@@ -43,4 +43,3 @@ MyFTable <- spanFlexTableColumns( MyFTable, i = 4,
 \seealso{
 \code{\link{spanFlexTableRows}}, \code{\link{FlexTable}}
 }
-

@@ -23,4 +23,3 @@ See \code{\link{FlexTable}} for examples.
 \seealso{
 \code{\link{FlexTable}}
 }
-

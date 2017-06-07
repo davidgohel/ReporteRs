@@ -56,4 +56,3 @@ pot2 = pot("Cats", textProperties(color = "red" ) ) +
 \code{\link{addParagraph}}, \code{\link{Footnote}}
 , \code{\link{+.pot}}, \code{\link{pot_img}},
 }
-

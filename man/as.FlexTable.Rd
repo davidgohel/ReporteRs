@@ -21,4 +21,3 @@ an R object.
 \seealso{
 \code{\link{FlexTable}}
 }
-

@@ -52,4 +52,3 @@ if( file.exists(img.file) && requireNamespace("jpeg", quietly = TRUE) ){
 \seealso{
 \code{\link{docx}}
 }
-

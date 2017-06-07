@@ -35,4 +35,3 @@ writeDoc( doc, "ex_write_doc.pptx")
 \seealso{
 \code{\link{docx}}, \code{\link{pptx}}
 }
-

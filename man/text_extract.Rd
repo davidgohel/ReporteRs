@@ -37,4 +37,3 @@ text_extract( doc, bookmark = "author" )
 \seealso{
 \code{\link{docx}}, \code{\link{list_bookmarks}}
 }
-

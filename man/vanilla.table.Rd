@@ -25,4 +25,3 @@ ft <- vanilla.table( iris)
 \seealso{
 \code{\link{FlexTable}}
 }
-

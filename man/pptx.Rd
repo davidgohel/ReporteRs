@@ -168,4 +168,3 @@ Wikipedia: Office Open XML\cr\url{http://en.wikipedia.org/wiki/Office_Open_XML}
 \seealso{
 \code{\link{docx}}
 }
-

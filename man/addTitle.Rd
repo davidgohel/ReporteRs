@@ -65,4 +65,3 @@ writeDoc( doc, file = doc.filename )
 \seealso{
 \code{\link{map_title}}
 }
-

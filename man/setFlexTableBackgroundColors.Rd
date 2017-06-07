@@ -96,4 +96,3 @@ MyFTable <- setFlexTableBorders( MyFTable,
 \seealso{
 \code{\link{FlexTable}}, \code{\link{is.color}}
 }
-

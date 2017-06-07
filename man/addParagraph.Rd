@@ -78,6 +78,8 @@ Also, when document is a \code{pptx} object,
 shading and border settings of argument \code{par.properties}
 will have no effect.
 
+Argument par.properties is only used when value is a \code{pot} or a \code{set_of_paragraphs}.
+
 If character values are used to fill slides, parameter \code{append}
 will be ignored.
 }
@@ -149,4 +151,3 @@ writeDoc( doc, file = doc.filename )
 \code{\link{pot}}, \code{\link{textProperties}},
 \code{\link{parProperties}}, \code{\link{list.settings}}
 }
-

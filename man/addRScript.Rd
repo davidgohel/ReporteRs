@@ -67,4 +67,3 @@ writeDoc( doc, file = doc.filename )
 \seealso{
 \code{\link{docx}}, \code{\link{pptx}}
 }
-

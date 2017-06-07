@@ -14,4 +14,3 @@
 \description{
 FlexTable custom printing function for knitr
 }
-

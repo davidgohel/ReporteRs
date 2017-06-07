@@ -17,4 +17,3 @@ delete a bookmark into a docx object
 \seealso{
 \code{\link{docx}}
 }
-

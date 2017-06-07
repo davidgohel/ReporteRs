@@ -25,4 +25,3 @@ as.html( my_pot )
 \seealso{
 \code{\link{pot}}
 }
-

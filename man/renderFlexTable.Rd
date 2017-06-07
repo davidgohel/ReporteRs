@@ -20,4 +20,3 @@ is useful if you want to save an expression in a variable.}
 Creates a reactive FlexTable that is suitable for
 assigning to a \code{tableOutput} slot.
 }
-

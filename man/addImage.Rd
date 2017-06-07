@@ -117,4 +117,3 @@ writeDoc( doc, file = "ex_add_image.pptx" )
 \seealso{
 \code{\link{docx}}, \code{\link{pptx}}
 }
-

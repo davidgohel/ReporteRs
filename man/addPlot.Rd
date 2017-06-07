@@ -126,4 +126,3 @@ writeDoc( doc, file = "ex_plot.pptx" )
 \seealso{
 \code{\link{docx}}, \code{\link{pptx}}
 }
-

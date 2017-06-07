@@ -16,4 +16,3 @@ pot_img(filename, width, height)
 \description{
 Create an pot object that handle images.
 }
-

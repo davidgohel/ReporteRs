@@ -233,4 +233,3 @@ ft <- setFlexTableBackgroundColors( ft,
 , \code{\link{setFlexTableBackgroundColors}}, \code{\link{pot}}
 , \code{\link{addFlexTable}}
 }
-

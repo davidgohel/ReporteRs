@@ -25,4 +25,3 @@ or \code{\link{chprop.cellProperties}} for examples.
 \code{\link{cellProperties}}, \code{\link{textProperties}}
 , \code{\link{parProperties}}
 }
-

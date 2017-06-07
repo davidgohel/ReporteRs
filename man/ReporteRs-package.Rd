@@ -67,4 +67,3 @@ options("ReporteRs-fontsize"=10, "ReporteRs-default-font"="Helvetica")
 \author{
 David Gohel \email{david.gohel@lysis-consultants.fr}
 }
-

@@ -31,4 +31,3 @@ styles(doc)
 \seealso{
 \code{\link{docx}}, \code{\link{styles}}
 }
-

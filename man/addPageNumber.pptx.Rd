@@ -36,4 +36,3 @@ writeDoc( doc, file = doc.filename )
 \seealso{
 \code{\link{addPageNumber}}, \code{\link{addDate}}
 }
-

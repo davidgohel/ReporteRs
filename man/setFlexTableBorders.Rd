@@ -48,4 +48,3 @@ MyFTable <- setFlexTableBorders( MyFTable,
 \seealso{
 \code{\link{FlexTable}}
 }
-

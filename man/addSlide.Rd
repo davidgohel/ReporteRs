@@ -84,4 +84,3 @@ writeDoc( mydoc, "slide_replacement.pptx" )
 \seealso{
 \code{\link{pptx}}, \code{\link{slide.layouts}}
 }
-

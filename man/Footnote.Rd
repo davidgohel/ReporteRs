@@ -74,4 +74,3 @@ writeDoc( doc, file = docx.file )
 \seealso{
 \code{\link{docx}}, \code{\link{pot}}
 }
-

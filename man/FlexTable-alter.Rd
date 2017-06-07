@@ -93,4 +93,3 @@ MyFTable[, "cyl", text.properties = textProperties(
 , \code{\link{cellProperties}}, \code{\link{parProperties}}
 , \code{\link{textProperties}}
 }
-

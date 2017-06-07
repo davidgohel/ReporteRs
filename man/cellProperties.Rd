@@ -160,4 +160,3 @@ chprop( cellProp, border.style = "dotted" )
 \code{\link{borderProperties}}, \code{\link{FlexTable}},
 \code{\link{shortcut_properties}}
 }
-

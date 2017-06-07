@@ -34,4 +34,3 @@ doc = addPageBreak( doc )
 \seealso{
 \code{\link{docx}}
 }
-

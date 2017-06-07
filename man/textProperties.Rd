@@ -84,4 +84,3 @@ chprop( textProp, font.size = 12,
 \code{\link{pot}}, \code{\link{alterFlexTable}},
 \code{\link{shortcut_properties}}
 }
-

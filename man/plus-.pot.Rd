@@ -28,4 +28,3 @@ pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 \seealso{
 \code{\link{addParagraph}}
 }
-

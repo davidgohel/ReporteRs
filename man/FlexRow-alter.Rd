@@ -21,4 +21,3 @@ add or replace FlexCell into a FlexRow object
 \code{\link{FlexTable}}, \code{\link{addFlexTable}}, \code{\link{FlexRow}}
 , \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 }
-

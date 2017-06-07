@@ -39,4 +39,3 @@ for(i in layouts ){
 \seealso{
 \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}
 }
-

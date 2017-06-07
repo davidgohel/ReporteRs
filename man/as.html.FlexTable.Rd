@@ -20,4 +20,3 @@ get HTML code from a FlexTable
 \seealso{
 \code{\link{FlexTable}}
 }
-

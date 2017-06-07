@@ -23,4 +23,3 @@ a \code{\link{sessionInfo}} object.
 \examples{
 ft <- as.FlexTable( sessionInfo() )
 }
-

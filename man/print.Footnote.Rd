@@ -14,4 +14,3 @@
 \description{
 print a Footnote
 }
-

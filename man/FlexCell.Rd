@@ -42,4 +42,3 @@ Fcell <- FlexCell( set_of_paragraphs( mytext1, mytext2 ) )
 \seealso{
 \code{\link{addFlexTable}}, \code{\link{addHeaderRow}}, \code{\link{addFooterRow}}
 }
-

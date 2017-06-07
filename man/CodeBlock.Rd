@@ -29,4 +29,3 @@ cb_example <- CodeBlock( text = "ls -a\\nwhich -a ls" )
 \seealso{
 \code{\link{addCodeBlock}}
 }
-

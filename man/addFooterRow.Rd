@@ -57,4 +57,3 @@ MyFTable <- addFooterRow( MyFTable, footerRow )
 \code{\link{FlexTable}}, \code{\link{addHeaderRow}}
 , \code{\link{alterFlexTable}}
 }
-

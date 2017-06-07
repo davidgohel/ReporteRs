@@ -71,4 +71,3 @@ writeDoc(doc, doc.filename)
 \seealso{
 \code{\link{docx}}
 }
-

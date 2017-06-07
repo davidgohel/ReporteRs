@@ -25,4 +25,3 @@ See \code{\link{addPageNumber.pptx}} for examples.
 \seealso{
 \code{\link{pptx}}, \code{\link{addPageNumber.pptx}}
 }
-

@@ -16,4 +16,3 @@ print a \code{\link{FlexTable}} object.
 If R session is interactive, the FlexTable is
 rendered in an HTML page and loaded into a WWW browser.
 }
-

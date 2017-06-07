@@ -48,4 +48,3 @@ doc = addDate( doc, "Dummy date" )
 \code{\link{pptx}}, \code{\link{addFooter}},
 \code{\link{addPageNumber}}
 }
-

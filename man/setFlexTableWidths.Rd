@@ -23,4 +23,3 @@ MyFTable <- setFlexTableWidths( MyFTable, widths = c(1,1,1,1,3))
 \seealso{
 \code{\link{FlexTable}}
 }
-

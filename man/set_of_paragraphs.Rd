@@ -28,4 +28,3 @@ my.pars = set_of_paragraphs( pot1, pot2 )
 \code{\link{addParagraph}}, \code{\link{addParagraph.docx}},
 \code{\link{addParagraph.pptx}}, \code{\link{pot}}
 }
-

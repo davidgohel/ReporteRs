@@ -23,4 +23,3 @@ addFooter only works for pptx documents.
 \seealso{
 \code{\link{pptx}}
 }
-

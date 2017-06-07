@@ -36,4 +36,3 @@ my_ft <- chprop( my_ft, parCenter(), j = 5 )
 my_ft <- chprop( my_ft, borderSolid(color = "red"), i = 5, side = "bottom" )
 }
 }
-

@@ -25,4 +25,3 @@ my.pars = add.pot( my.pars, pot2 )
 \seealso{
 \code{\link{set_of_paragraphs}}, \code{\link{pot}}
 }
-

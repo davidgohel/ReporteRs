@@ -40,4 +40,3 @@ doc = toc.options( doc, list.separator = "," )
 
 \code{\link{docx}}, \code{\link{addTOC.docx}}
 }
-
