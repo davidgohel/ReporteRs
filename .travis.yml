@@ -1,24 +1,15 @@
-language: r
-cache: packages
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-matrix:
-  include:
-    - os: linux
-      dist: precise
-      sudo: false
-    - os: osx
-      osx_image: xcode8.1
-      latex: false
+language: R
+cache: packages
 
 r_github_packages:
   - jimhester/covr
 
-warnings_are_errors: true
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+r:
+ - oldrel
+ - release
+ - devel
 
 after_success:
-  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
+  - Rscript -e 'library(covr);codecov()'
