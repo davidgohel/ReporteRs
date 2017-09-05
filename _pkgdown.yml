@@ -2,7 +2,7 @@ title: ReporteRs package
 
 
 template:
-  package: tidytemplate2
+  package: ardatatemplate
   bootswatch: simplex
 
 reference:

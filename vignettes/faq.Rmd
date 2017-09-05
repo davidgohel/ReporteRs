@@ -33,7 +33,7 @@ devtools::install_github("davidgohel/ReporteRs")
 
 `ReporteRs` needs packages `rvg` and `gdtools`. 
 
-**This requires a cpp coompiler.** If have no idea what it means :
+If you need to install them from source, you will need a cpp coompiler.** If have no idea what it means :
 
 * you're using R for Windows, install [Rtools](https://cran.r-project.org/bin/windows/Rtools)
 * you're using R for Mac, install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835)
@@ -90,8 +90,36 @@ install.packages("ReporteRs", INSTALL_opts = "--no-multiarch")
 install_github("davidgohel/ReporteRs", args = "--no-multiarch")
 ```
 
-
 Some solutions on Stackoverflow involve to set environment variable `JAVA_HOME`. I never had to use that but it seems a valid solution for some configurations. 
+
+
+If you are on a mac, the most common issue with java is a newer version of java messed your setup.
+
+From a terminal, run:
+
+```
+R CMD javareconf
+```
+
+Then reintall the package.
+
+### font config error: unable to match font pattern
+
+This probably means you are running R for mac OS. Package `gdtools` need `cairo` to be correctly installed. From a terminal, run:
+
+```
+brew update
+brew upgrade
+brew reinsall cairo
+```
+Then from R, run:
+
+```{r eval=FALSE}
+devtools::install_github("davidgohel/gdtools") 
+devtools::install_github("davidgohel/rvg")
+devtools::install_github("davidgohel/ReporteRs")
+```
+
 
 ## Word: replace only a word in a paragraph
 

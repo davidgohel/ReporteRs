@@ -2,6 +2,7 @@ ReporteRs R package
 ================
 
 -   [ReporteRs](#reporters)
+    -   [Important note](#important-note)
     -   [Introduction](#introduction)
     -   [Installation](#installation)
     -   [Usefull links:](#usefull-links)
@@ -13,6 +14,15 @@ ReporteRs
 =========
 
 `ReporteRs` is an R package for creating Microsoft Word and Powerpoint documents. It does not require any Microsoft component to be used. It runs on Windows, Linux, Unix and Mac OS systems. It is designed to automate reporting generation from R.
+
+### Important note
+
+**ReporteRs will be maintained but will not evolve anymore. It has been rewritten with no java dependency**:
+
+-   The new package is [`officer`](https://cran.r-project.org/package=officer).
+-   FlexTable objects are now implemented in package [`flextable`](https://CRAN.R-project.org/package=flextable).
+-   Vector graphics are now implemented in package [`rvg`](https://CRAN.R-project.org/package=rvg)
+-   Native Microsoft charts can be produced with package [`mschart`](https://github.com/ardata-fr/mschart)
 
 Introduction
 ------------

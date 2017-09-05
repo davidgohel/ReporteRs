@@ -9,9 +9,9 @@ office_web_viewer(url, width = "80\%", height = "500px")
 \arguments{
 \item{url}{file url}
 
-\item{width}{iframe width}
+\item{width}{iframe width - deprecated}
 
-\item{height}{iframe height}
+\item{height}{iframe height - deprecated}
 }
 \description{
 Produce an iframe linked to Office Web Viewer. It let's you
