@@ -32,7 +32,7 @@ character vector. see \code{\link{styles.docx}}.}
 replace by the table. optional.}
 
 \item{par.properties}{\code{\link{parProperties}} to apply to paragraphs. When used in Word
-documents, it will only be used if \code{stylename} if missing. When used in PowerPoint
+documents, it will only be used if \code{stylename} is missing. When used in PowerPoint
 documents, it will be used if \code{offx} or \code{offy} is used.}
 
 \item{restart.numbering}{boolean value. If \code{TRUE}, next numbered
