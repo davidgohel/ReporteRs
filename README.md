@@ -1,14 +1,8 @@
 ReporteRs R package
 ================
 
-[![Travis-CI Build
-Status](https://travis-ci.org/davidgohel/ReporteRs.svg?branch=master)](https://travis-ci.org/davidgohel/ReporteRs)
-[![CRAN
-version](http://www.r-pkg.org/badges/version/ReporteRs)](http://cran.rstudio.com/web/packages/ReporteRs/index.html)
-![cranlogs](http://cranlogs.r-pkg.org./badges/ReporteRs)
-![active](http://www.repostatus.org/badges/latest/inactive.svg)
 
-# ReporteRs
+## Overview
 
 `ReporteRs` is an R package for creating Microsoft Word and Powerpoint
 documents. It does not require any Microsoft component to be used. It
@@ -64,8 +58,7 @@ doc = addPlot( doc = doc , fun = print, x = myggplot )
 doc = addTitle( doc , 'Text example', level = 1)
 doc = addParagraph( doc, 'My tailor is rich.', stylename = 'Normal' )
 
-filename <- tempfile(fileext = ".docx") # the document to produce
-writeDoc( doc, filename )
+writeDoc( doc, "demo.docx" )
 ```
 
 ### Reporting automation

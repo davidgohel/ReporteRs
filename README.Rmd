@@ -17,8 +17,7 @@ knitr::opts_chunk$set(
 library(ReporteRs)
 ```
 
-ReporteRs
-======
+## Overview
 
 `ReporteRs` is an R package for creating Microsoft Word and Powerpoint documents. It does not require any Microsoft component to be used. It runs on Windows, Linux, Unix and Mac OS systems. It is designed to automate reporting generation from R.
 
@@ -49,7 +48,7 @@ of R outputs in few lines of codes.
 
 Below a short R script:
 
-```{r message=FALSE}
+```{r message=FALSE, eval=FALSE}
 require( ggplot2 )
 doc = docx( title = 'My document' )
 
@@ -63,8 +62,7 @@ doc = addPlot( doc = doc , fun = print, x = myggplot )
 doc = addTitle( doc , 'Text example', level = 1)
 doc = addParagraph( doc, 'My tailor is rich.', stylename = 'Normal' )
 
-filename <- tempfile(fileext = ".docx") # the document to produce
-writeDoc( doc, filename )
+writeDoc( doc, "demo.docx" )
 ```
 
 

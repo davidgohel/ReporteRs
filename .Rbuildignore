@@ -1,7 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^todo\.md$
-^README\.md$
 ^appveyor\.yml$
 ^\.travis\.yml$
 ^revdep$
@@ -12,3 +11,4 @@ _pkgdown\.yml
 ^_pkgdown\.yml$
 ^ISSUE_TEMPLATE\.md$
 ^cran-comments\.md$
+^revdep$
