@@ -1,6 +1,12 @@
 ReporteRs R package
 ================
 
+[![Travis-CI Build
+Status](https://travis-ci.org/davidgohel/ReporteRs.svg?branch=master)](https://travis-ci.org/davidgohel/ReporteRs)
+[![CRAN
+version](http://www.r-pkg.org/badges/version/ReporteRs)](http://cran.rstudio.com/web/packages/ReporteRs/index.html)
+![cranlogs](http://cranlogs.r-pkg.org./badges/ReporteRs)
+![active](http://www.repostatus.org/badges/latest/inactive.svg)
 
 ## Overview
 
