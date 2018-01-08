@@ -10,3 +10,5 @@
 _pkgdown\.yml
 ^vignettes$
 ^_pkgdown\.yml$
+^ISSUE_TEMPLATE\.md$
+^cran-comments\.md$
