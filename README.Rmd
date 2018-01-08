@@ -1,9 +1,7 @@
 ---
 title: "ReporteRs R package"
 output:
-  github_document:
-    toc: true 
-    toc_depth: 2
+  github_document
 ---
 
 [![Travis-CI Build Status](https://travis-ci.org/davidgohel/ReporteRs.svg?branch=master)](https://travis-ci.org/davidgohel/ReporteRs)
@@ -114,20 +112,21 @@ devtools::install_github('davidgohel/ReporteRs')
 ```
 
 
+## Ressources
 
-## Usefull links: 
+### Online documentation
 
-* Help pages: [**Documentation**](http://davidgohel.github.io/ReporteRs/index.html) 
-* if you have questions, use the mailing list: [**Mailing list**](http://groups.google.com/forum/#!forum/reporters-package "if you have questions, use the mailing list")  
-* Report a bug: [**Bug report**](http://github.com/davidgohel/ReporteRs/issues "please provide a reproducible example"). If you report a bug, try to send a reproducible example 
-    and don't forget to send the result of `sessionInfo()`.
-        
+The help pages are located at https://davidgohel.github.io/ReporteRs/.
 
-## License
-```{r, eval=FALSE}
-library(ReporteRs)
-example(docx) #run a complete and detailed docx example
-example(pptx) #run a complete and detailed pptx example
-```
+### Getting help
 
-The ReporteRs package is licensed under the GPLv3. 
+This project is developped and maintained on my own time. In order to help me to maintain the 
+package, do not send me private emails if you only have questions about how to use the package.
+Instead, visit Stackoverflow, `ReporteRs` has its own tag [Stackoverflow link](https://stackoverflow.com/questions/tagged/reporters)! 
+I usually read them and answer when possible. 
+
+
+### Bug reports
+
+When you file a [bug report](https://github.com/davidgohel/ReporteRs/issues), please spend some time making it easy for me to follow and reproduce. The more time you spend on making the bug report coherent, the more time I can dedicate to investigate the bug as opposed to the bug report.
+

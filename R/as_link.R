@@ -4,9 +4,7 @@
 #' @description Produce an iframe linked to Office Web Viewer. It let's you
 #' display a Microsoft Office document in a Web browser.
 #' @param url file url
-#' @param width iframe width - deprecated
-#' @param height iframe height - deprecated
-office_web_viewer <- function(url, width = "80%", height="500px"){
+office_web_viewer <- function(url){
   tags$p(  tags$span("Download file "),
                       tags$a(basename(url), href = url),
                       tags$span(" - view with"),
