@@ -1,10 +1,10 @@
 Package: ReporteRs
 Type: Package
 Title: Microsoft Word and PowerPoint Documents Generation
-Version: 0.8.9
+Version: 0.8.11
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
-    email = "david.gohel@lysis-consultants.fr")
+    email = "david.gohel@ardata.fr")
     )
 Description: Create 'Microsoft Word' document (>=2007) and 
     'Microsoft PowerPoint' document (>=2007) from R. There are
@@ -21,11 +21,10 @@ Imports:
     grDevices,
     rJava,
     utils,
-    rvg (>= 0.1.2),
     xml2,
     gdtools,
     png,
-    R.utils, knitr, shiny, htmltools
+    tools, knitr, shiny, htmltools
 Suggests:
     ggplot2,
     jpeg, bmp,

@@ -59,7 +59,7 @@
 #' @name ReporteRs-package
 #' @aliases ReporteRs
 #' @title ReporteRs: a package to create document from R
-#' @author David Gohel \email{david.gohel@@lysis-consultants.fr}
+#' @author David Gohel \email{david.gohel@@ardata.fr}
 #' @docType package
 NULL
 
