@@ -86,7 +86,7 @@ pot_img = function( filename, width, height ){
 		stop("length of filename must be 1.")
 	}
 
-  filename <- getAbsolutePath(filename, expandTilde = TRUE)
+  filename <- file_path_as_absolute2(filename)
 
   if( !file.exists( filename ) )
 		stop( filename, " does not exist")

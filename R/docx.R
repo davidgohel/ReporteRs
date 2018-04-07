@@ -178,7 +178,7 @@ docx = function( title = "untitled", template, empty_template = FALSE, list.defi
 		template = file.path( system.file(package = "ReporteRs"), "templates/EMPTY_DOC.docx" )
 	.reg = regexpr( paste( "(\\.(?i)(docx))$", sep = "" ), template )
 
-	template <- getAbsolutePath(template, expandTilde = TRUE)
+	template <- file_path_as_absolute2(template)
 
 	if( .reg < 1 )
 	  stop("invalid template name, it must have extension .docx")

@@ -90,7 +90,7 @@ addImage.docx = function(doc, filename, bookmark,
   if( !is.numeric( height ) )
     stop("arguments height must be a numeric vector")
 
-  filename <- getAbsolutePath(filename, expandTilde = TRUE)
+  filename <- file_path_as_absolute2(filename)
   jimg = .jnew(class.Image , filename, .jfloat( width ), .jfloat( height ) )
 
 	if( missing( bookmark ) )
@@ -172,7 +172,7 @@ addImage.pptx = function(doc, filename, offx, offy, width, height, ... ) {
     free_layout <- TRUE
   }
 
-  filename <- getAbsolutePath(filename, expandTilde = TRUE)
+  filename <- file_path_as_absolute2(filename)
   jimg = .jnew(class.Image , filename, .jfloat( width_ ), .jfloat( height_ ) )
   out = .jcall( slide, "I", "add", jimg, .jfloat( offx_ ), .jfloat( offy_ ), free_layout )
 
