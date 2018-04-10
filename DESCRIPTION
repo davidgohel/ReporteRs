@@ -25,11 +25,10 @@ Imports:
     xml2,
     gdtools,
     png,
-    tools, knitr, shiny, htmltools
+    knitr, shiny, htmltools
 Suggests:
     ggplot2,
-    jpeg, bmp,
-    testthat, magrittr,
+    jpeg, bmp,magrittr,
     rmarkdown
 SystemRequirements: java (>= 6)
 URL: https://davidgohel.github.io/ReporteRs

@@ -12,3 +12,4 @@ _pkgdown\.yml
 ^ISSUE_TEMPLATE\.md$
 ^cran-comments\.md$
 ^revdep$
+^tests$
