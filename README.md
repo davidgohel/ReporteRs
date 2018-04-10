@@ -4,7 +4,7 @@ ReporteRs R package
 [![Travis-CI Build
 Status](https://travis-ci.org/davidgohel/ReporteRs.svg?branch=master)](https://travis-ci.org/davidgohel/ReporteRs)
 [![CRAN
-version](http://www.r-pkg.org/badges/version/ReporteRs)](http://cran.rstudio.com/web/packages/ReporteRs/index.html)
+version](http://www.r-pkg.org/badges/version/ReporteRs)](https://CRAN.R-project.org/package=ReporteRs)
 ![cranlogs](http://cranlogs.r-pkg.org./badges/ReporteRs)
 ![active](http://www.repostatus.org/badges/latest/inactive.svg)
 
@@ -97,7 +97,7 @@ require(rJava)
 .jinit()
 #> [1] 0
 .jcall('java.lang.System','S','getProperty','java.version')
-#> [1] "1.8.0_31"
+#> [1] "1.8.0_162"
 ```
 
 ### Get CRAN version

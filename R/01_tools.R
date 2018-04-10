@@ -12,8 +12,7 @@
 #' @importFrom utils getParseData
 #' @importFrom utils browseURL
 .onLoad= function(libname, pkgname){
-
-	.jpackage( pkgname, lib.loc = libname )
+  .jpackage(name = pkgname, jars = "*")
 
   jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
   reg <- "([0-9]+)[\\.|\\+]{1}([0-9]+)[\\.]{0,1}(.*)"

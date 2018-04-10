@@ -1,7 +1,7 @@
 Package: ReporteRs
 Type: Package
 Title: Microsoft Word and PowerPoint Documents Generation
-Version: 0.8.11
+Version: 0.8.12
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr")
@@ -21,6 +21,7 @@ Imports:
     grDevices,
     rJava,
     utils,
+    rvg (>= 0.1.2),
     xml2,
     gdtools,
     png,
