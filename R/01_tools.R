@@ -14,16 +14,6 @@
 .onLoad= function(libname, pkgname){
   .jpackage(name = pkgname, jars = "*")
 
-  jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
-  reg <- "([0-9]+)[\\.|\\+]{1}([0-9]+)[\\.]{0,1}(.*)"
-  majorv <- as.integer(gsub(reg, "\\1", jv))
-  minorv <- as.integer(gsub(reg, "\\2", jv))
-  if(majorv == 1 ){
-    if( minorv < 6 ) {
-      stop("java version should be at minimum version 6 (>=1.6)")
-    }
-  }
-
 	.jcall('java.lang.System','S','setProperty','file.encoding', 'UTF-8')
 	.jcall('java.lang.System','S','setProperty','java.awt.headless', 'true')
 	options("ReporteRs-default-font" = "Times New Roman")

@@ -1,3 +1,7 @@
+# ReporteRs 0.8.11
+
+* Now use Java version check from ReporteRsjars
+
 # ReporteRs 0.8.9
 
 * modification of SystemRequirements in DESCRIPTION file.
