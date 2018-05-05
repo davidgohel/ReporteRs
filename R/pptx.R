@@ -132,7 +132,8 @@
 #' @seealso \code{\link{docx}}
 pptx = function( title, template, list.definition = getOption("ReporteRs-list-definition")){
 
-	# title mngt
+  .Deprecated(msg = "Function pptx is deprecated, please use officer::read_pptx() instead.")
+  # title mngt
 	if( missing( title ) ) title = ""
 
 

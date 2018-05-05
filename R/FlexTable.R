@@ -219,6 +219,10 @@ FlexTable = function(data, numrow, numcol
 	, header.par.props = parProperties(padding=0)
 	, header.text.props = textProperties( font.weight= "bold" )
 ){
+
+  .Deprecated(msg = "FlexTable is deprecated, please use flextable::flextable() or flextable::regulartable() instead.")
+
+
 	miss_data = missing( data )
 	if( !inherits(body.text.props, "textProperties") )
 		stop("argument body.text.props must be a textProperties object.")

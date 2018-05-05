@@ -176,6 +176,8 @@
 #' @seealso \code{\link{pptx}}
 docx = function( title = "untitled", template, empty_template = FALSE, list.definition = getOption("ReporteRs-list-definition") ){
 
+  .Deprecated(msg = "Function docx is deprecated, please use officer::read_docx() instead.")
+
 	if( missing( template ) )
 		template = file.path( system.file(package = "ReporteRs"), "templates/EMPTY_DOC.docx" )
 	.reg = regexpr( paste( "(\\.(?i)(docx))$", sep = "" ), template )

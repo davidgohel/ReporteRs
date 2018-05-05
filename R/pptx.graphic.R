@@ -6,6 +6,9 @@ vector.pptx.graphic = function(doc, fun, pointsize = 11,
                                offx, offy, width, height, bg = "white",
                                free_layout = FALSE,
                                ... ) {
+
+  .Deprecated(msg = "addPlot is deprecated, please use packages rvg and officer instead.")
+
   slide = doc$current_slide
 
   filename = tempfile( fileext = ".dml")
