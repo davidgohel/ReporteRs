@@ -30,9 +30,11 @@ Format a FlexTable object.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 my_ft <- vanilla.table( head( iris, n = 5 ) )
 my_ft <- chprop( my_ft, textBoldItalic(), i = 1, to = "header" )
 my_ft <- chprop( my_ft, parCenter(), j = 5 )
 my_ft <- chprop( my_ft, borderSolid(color = "red"), i = 5, side = "bottom" )
+}
 }
 }

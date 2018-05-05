@@ -8,10 +8,12 @@
 #' @return a document object
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' doc = addFooter( doc, "Hi!" )
 #' writeDoc( doc, file = "ex_footer.pptx" )
+#' }
 #' }
 #' @export
 #' @seealso \code{\link{pptx}}, \code{\link{addDate.pptx}}

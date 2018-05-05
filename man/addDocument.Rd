@@ -29,6 +29,7 @@ imported and displayed. This function is not to be used to merge documents.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 doc.filename <- "addDocument_example.docx"
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
@@ -46,6 +47,7 @@ if( file.exists(img.file) && requireNamespace("jpeg", quietly = TRUE) ){
   doc <- docx( )
   doc <- addDocument( doc, filename = "external_file.docx" )
   writeDoc( doc, file = doc.filename )
+}
 }
 }
 }

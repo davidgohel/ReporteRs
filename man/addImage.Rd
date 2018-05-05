@@ -77,6 +77,7 @@ if( has_wmf ){
 
 # Image example for MS Word -------
 \donttest{
+if( check_valid_java_version() ){
 doc <- docx()
 
 if( has_img && has_jpeg ){
@@ -91,9 +92,11 @@ if( has_wmf ){
 
 writeDoc( doc, file = "ex_add_image.docx" )
 }
+}
 
 # Image example for MS PowerPoint -------
 \donttest{
+if( check_valid_java_version() ){
 if( !is_sunos ){
 
 doc <- pptx()
@@ -110,6 +113,7 @@ if( has_wmf ){
 }
 
 writeDoc( doc, file = "ex_add_image.pptx" )
+}
 }
 }
 

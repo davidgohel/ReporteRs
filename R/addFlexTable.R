@@ -38,10 +38,12 @@ addFlexTable = function(doc, flextable, ...){
 #'   	If not provided, table will be added at the end of the document.
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # docx example -----
 #' doc = docx( )
 #' doc = addFlexTable( doc, flextable = ft_obj )
 #' writeDoc( doc, file = "add_ft_ex.docx" )
+#' }
 #' }
 #'
 #' @rdname addFlexTable
@@ -75,11 +77,13 @@ addFlexTable.docx = function(doc, flextable
 #' dimensions of the new shape.
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # pptx example -----
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' doc = addFlexTable( doc, flextable = ft_obj )
 #' writeDoc( doc, file = "add_ft_ex.pptx" )
+#' }
 #' }
 #'
 #' @rdname addFlexTable

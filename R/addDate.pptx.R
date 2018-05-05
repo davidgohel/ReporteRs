@@ -23,6 +23,7 @@ addDate = function(doc, ...){
 #' current date (if \code{value} is missing).
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc <- pptx()
 #'
 #' doc <- addSlide( doc, slide.layout = "Title and Content" )
@@ -33,6 +34,7 @@ addDate = function(doc, ...){
 #' ## add a page number on the current slide but not
 #' ## the default text (slide number)
 #' doc = addDate( doc, "Dummy date" )
+#' }
 #' }
 #' @export
 #' @rdname addDate

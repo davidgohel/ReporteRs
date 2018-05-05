@@ -27,11 +27,13 @@ chunk of text found in the document.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 doc <- docx( title = "My example", template = file.path(
   system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
 text_extract( doc )
 text_extract( doc, header = FALSE, footer = FALSE )
 text_extract( doc, bookmark = "author" )
+}
 }
 }
 \seealso{

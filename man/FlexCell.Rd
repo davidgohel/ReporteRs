@@ -22,6 +22,7 @@ For internal usage.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 FlexCell( value = "Hello" )
 FlexCell( value = "Hello", colspan = 3)
 FlexCell( "Column 1",
@@ -37,6 +38,7 @@ Fcell = FlexCell( mytext, colspan = 4 )
 mytext1 <- pot("Hello", format = textProperties(color = "blue") )
 mytext2 <- pot( "world", format = textProperties(font.size = 9) )
 Fcell <- FlexCell( set_of_paragraphs( mytext1, mytext2 ) )
+}
 }
 }
 \seealso{

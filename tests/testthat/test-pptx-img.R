@@ -7,6 +7,7 @@ points(.5,.5)
 dev.off()
 
 test_that("no position no size generate no error", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
@@ -15,6 +16,7 @@ test_that("no position no size generate no error", {
 })
 
 test_that("no position but size generate no error", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
@@ -25,6 +27,7 @@ test_that("no position but size generate no error", {
 
 test_that("position and size generate no error", {
   skip_on_os("solaris")
+  skip_if_not(check_valid_java_version())
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addImage(doc, "img.png",
@@ -34,6 +37,7 @@ test_that("position and size generate no error", {
 })
 
 test_that("position no size generate an error", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
@@ -45,6 +49,7 @@ test_that("position no size generate an error", {
 
 
 test_that("image is referenced in relationships", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   target_file <- tempfile(fileext = ".pptx")
   target_dir <- tempfile(fileext = "")

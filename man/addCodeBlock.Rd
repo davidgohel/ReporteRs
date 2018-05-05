@@ -51,18 +51,21 @@ cb <- "ls -a\\nwhich -a ls"
 options( "ReporteRs-fontsize" = 11 )
 
 \donttest{
+if( check_valid_java_version() ){
 # docx example ---------
 doc = docx( )
 doc <- addCodeBlock( doc, text = cb )
 writeDoc( doc, file = "ex_codeblock.docx" )
 }
-
+}
 \donttest{
+if( check_valid_java_version() ){
 # pptx example ---------
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 doc <- addCodeBlock( doc, text = cb )
 writeDoc( doc, file = "ex_codeblock.pptx" )
+}
 }
 }
 \seealso{

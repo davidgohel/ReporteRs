@@ -8,6 +8,7 @@ dummy_plot <- function(){
 }
 
 test_that("[vg] no position no size generate no error", {
+  skip_if_not(check_valid_java_version())
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addPlot(doc, fun = dummy_plot, vector.graphic = TRUE), silent = TRUE)
@@ -15,6 +16,7 @@ test_that("[vg] no position no size generate no error", {
 })
 
 test_that("[raster] no position no size generate no error", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
@@ -24,6 +26,7 @@ test_that("[raster] no position no size generate no error", {
 })
 
 test_that("[vg] no position but size generate no error", {
+  skip_if_not(check_valid_java_version())
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addPlot(doc, fun = dummy_plot,
@@ -33,6 +36,7 @@ test_that("[vg] no position but size generate no error", {
 })
 
 test_that("[raster] no position but size generate no error", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
@@ -43,6 +47,7 @@ test_that("[raster] no position but size generate no error", {
 })
 
 test_that("[vg] position and size generate no error", {
+  skip_if_not(check_valid_java_version())
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addPlot(doc, fun = dummy_plot,
@@ -53,6 +58,7 @@ test_that("[vg] position and size generate no error", {
 })
 
 test_that("[raster] position and size generate no error", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
@@ -64,6 +70,7 @@ test_that("[raster] position and size generate no error", {
 })
 
 test_that("[vg] position but no size generate an error", {
+  skip_if_not(check_valid_java_version())
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   doc <- try( addPlot(doc, fun = dummy_plot,
@@ -73,6 +80,7 @@ test_that("[vg] position but no size generate an error", {
 })
 
 test_that("[raster] position but no size generate an error", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
@@ -83,6 +91,7 @@ test_that("[raster] position but no size generate an error", {
 })
 
 test_that("[vg] test raster", {
+  skip_if_not(check_valid_java_version())
   myplot <- qplot(Sepal.Length, Petal.Length,
                    data = iris, color = Petal.Width,
                    alpha = I(0.7) )
@@ -97,6 +106,7 @@ test_that("[vg] test raster", {
 
 
 test_that("raster plot is referenced in relationships", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   myplot <- qplot(Sepal.Length, Petal.Length,
                   data = iris, color = Petal.Width,
@@ -130,6 +140,7 @@ test_that("raster plot is referenced in relationships", {
 
 
 test_that("vg plot is not referenced in relationships", {
+  skip_if_not(check_valid_java_version())
   skip_on_os("solaris")
   myplot <- qplot(Sepal.Length, Petal.Length, data = iris )
   target_file <- tempfile(fileext = ".pptx")

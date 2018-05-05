@@ -9,11 +9,13 @@
 #' Objects of class \code{set_of_paragraphs} are to be used with \code{\link{addParagraph}}.
 #' @export
 #' @examples
+#' if( check_valid_java_version() ){
 #' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
 #' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 #' 	, textProperties(color="blue") )
 #' my.pars = set_of_paragraphs( pot1, pot2 )
+#' }
 #' @seealso \code{\link{addParagraph}}, \code{\link{addParagraph.docx}},
 #' \code{\link{addParagraph.pptx}}, \code{\link{pot}}
 set_of_paragraphs = function( ... ){
@@ -46,12 +48,14 @@ set_of_paragraphs = function( ... ){
 #' @param value \code{pot} object to add as a new paragraph
 #' @export
 #' @examples
+#' if( check_valid_java_version() ){
 #' pot1 = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
 #' my.pars = set_of_paragraphs( pot1 )
 #' pot2 = pot("Cats", textProperties(color="red") ) + " and " + pot("Dogs"
 #' 	, textProperties(color="blue") )
 #' my.pars = add.pot( my.pars, pot2 )
+#' }
 #' @seealso \code{\link{set_of_paragraphs}}, \code{\link{pot}}
 add.pot = function( x, value ){
 	if ( class( x )!= "set_of_paragraphs" )

@@ -33,12 +33,13 @@ addCodeBlock = function(doc, file, text, ... ){
 #' replace by the script. optional.
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # docx example ---------
 #' doc = docx( )
 #' doc <- addCodeBlock( doc, text = cb )
 #' writeDoc( doc, file = "ex_codeblock.docx" )
 #' }
-#'
+#' }
 #' @export
 #' @rdname addCodeBlock
 addCodeBlock.docx = function(doc, file, text,
@@ -77,11 +78,13 @@ addCodeBlock.docx = function(doc, file, text,
 #' can not add paragraphs after a FlexTable).
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # pptx example ---------
 #' doc = pptx( )
 #' doc = addSlide( doc, slide.layout = "Title and Content" )
 #' doc <- addCodeBlock( doc, text = cb )
 #' writeDoc( doc, file = "ex_codeblock.pptx" )
+#' }
 #' }
 #' @export
 #' @rdname addCodeBlock

@@ -17,11 +17,6 @@ value is one of "lrtb", "tbrl", "btlr".}
 \description{
 get a simple FlexTable from a dataset
 }
-\examples{
-\donttest{
-ft <- vanilla.table( iris)
-}
-}
 \seealso{
 \code{\link{FlexTable}}
 }

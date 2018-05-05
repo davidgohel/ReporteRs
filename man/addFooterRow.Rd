@@ -28,6 +28,7 @@ add a footer row in a FlexTable
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 # simple example ----
 MyFTable <- FlexTable( data = iris[1:5,1:4] )
 
@@ -51,6 +52,7 @@ footerRow[1] <- FlexCell( mytext, colspan = 4 )
 
 # finally, add the FlexRow to the FlexTable
 MyFTable <- addFooterRow( MyFTable, footerRow )
+}
 }
 }
 \seealso{

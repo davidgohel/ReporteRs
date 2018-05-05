@@ -63,8 +63,10 @@ Colored RScript object
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 an_rscript = RScript( text = "ls()
 x = rnorm(10)" )
+}
 }
 }
 \seealso{

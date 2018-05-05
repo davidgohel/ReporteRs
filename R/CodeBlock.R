@@ -7,10 +7,6 @@
 #' @param text character vector. The text to parse. Not used if file is provided.
 #' @param text.properties default textProperties object
 #' @param par.properties default parProperties object
-#' @examples
-#' \donttest{
-#' cb_example <- CodeBlock( text = "ls -a\nwhich -a ls" )
-#' }
 #' @seealso \code{\link{addCodeBlock}}
 #' @export
 CodeBlock = function( file, text, text.properties = textProperties( color = "#A7947D" ),

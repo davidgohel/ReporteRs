@@ -40,6 +40,7 @@ multicolumns mode page.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 doc.filename = "addSection.docx"
 doc <- docx()
 doc = addSection(doc, landscape = TRUE, ncol = 2 )
@@ -66,6 +67,7 @@ doc = addSection( doc )
 doc = addFlexTable(doc, FlexTable(mtcars, add.rownames = TRUE) )
 doc = addParagraph( doc = doc, "Text 4.", "Normal" )
 writeDoc(doc, doc.filename)
+}
 }
 }
 \seealso{

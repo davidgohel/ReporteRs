@@ -3,6 +3,7 @@ library(xml2)
 
 test_that("bookmark is kept and stylename is used", {
 
+  skip_if_not(check_valid_java_version())
   target_file <- tempfile(fileext = ".docx") # file to produce
   target_dir <- tempfile(fileext = "") # file to produce
 
@@ -32,6 +33,7 @@ test_that("bookmark is kept and stylename is used", {
 
 test_that("manipulate bookmark", {
 
+  skip_if_not(check_valid_java_version())
   template <- system.file(package = "ReporteRs",
                           "templates/bookmark_example.docx" ) # template example
 
@@ -50,6 +52,7 @@ test_that("manipulate bookmark", {
 
 test_that("delete content", {
 
+  skip_if_not(check_valid_java_version())
   target_file <- tempfile(fileext = ".docx") # file to produce
   target_dir <- tempfile(fileext = "") # file to produce
 

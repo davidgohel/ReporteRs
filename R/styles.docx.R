@@ -16,9 +16,11 @@ styles = function(doc, ...){
 #' of the base document (e.g. Normal, Title1, etc.).
 #' Names of the returned character vector are labels associated with styles names.
 #' @examples
+#' if( check_valid_java_version() ){
 #' \donttest{
 #' doc = docx( title = "title" )
 #' styles(doc)
+#' }
 #' }
 #' @rdname styles
 #' @export

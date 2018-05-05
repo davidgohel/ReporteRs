@@ -58,6 +58,7 @@ addPlot = function(doc, fun, pointsize = 12, vector.graphic = FALSE, ...){
 #' names for font faces. Use fonts available on operating system.
 #' @examples
 #'
+#' if( check_valid_java_version() ){
 #' # plot example for docx -----
 #' \donttest{
 #' doc = docx( )
@@ -66,6 +67,7 @@ addPlot = function(doc, fun, pointsize = 12, vector.graphic = FALSE, ...){
 #'   par.properties = parProperties(text.align = "center")
 #'   )
 #' writeDoc( doc, file = "ex_plot.docx" )
+#' }
 #' }
 #'
 #' @rdname addPlot
@@ -198,6 +200,7 @@ addPlot.docx = function(doc, fun,
 #' dimensions of the new shape.
 #' @examples
 #'
+#' if( check_valid_java_version() ){
 #' # plot example for pptx -----
 #' \donttest{
 #' doc = pptx( )
@@ -215,6 +218,7 @@ addPlot.docx = function(doc, fun,
 #' }
 #'
 #' writeDoc( doc, file = "ex_plot.pptx" )
+#' }
 #' }
 #'
 #' @rdname addPlot

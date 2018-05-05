@@ -47,6 +47,7 @@ Also when using addPlot, plot dimensions will be the shape dimensions. It means 
 , this has to be done in the PowerPoint template used when creating the \code{pptx} object.
 }
 \examples{
+if( check_valid_java_version() ){
 \donttest{
 doc.filename = "addSlide_example.pptx"
 doc <- pptx()
@@ -79,6 +80,7 @@ mydoc = addSlide( mydoc, slide.layout = "Title and Content", bookmark = 1)
 mydoc = addTitle( mydoc, "a new table")
 mydoc = addFlexTable( mydoc, ft2 )
 writeDoc( mydoc, "slide_replacement.pptx" )
+}
 }
 }
 \seealso{

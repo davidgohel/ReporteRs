@@ -30,9 +30,11 @@ different from the list separator in your computer's regional settings.
 See entry 302865 of Microsoft knowledge database for more information.
 }
 \examples{
+if( check_valid_java_version() ){
 \donttest{
 doc = docx( title = "title" )
 doc = toc.options( doc, list.separator = "," )
+}
 }
 }
 \seealso{

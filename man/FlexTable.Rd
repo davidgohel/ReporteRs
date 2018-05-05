@@ -124,6 +124,7 @@ Set columns widths with function \code{\link{setFlexTableWidths}}.
 \examples{
 \donttest{
 
+if( check_valid_java_version() ){
 # Create a FlexTable with data.frame mtcars, display rownames
 # use different formatting properties for header and body
 MyFTable <- FlexTable( data = mtcars, add.rownames = TRUE,
@@ -223,6 +224,7 @@ MyFTable <- setFlexTableBorders( MyFTable, footer = TRUE,
 ft <- vanilla.table(head(iris))
 ft <- setFlexTableBackgroundColors( ft,
   i = 1:3, j = c("Petal.Length", "Species"), colors = "yellow" )
+}
 }
 }
 \seealso{

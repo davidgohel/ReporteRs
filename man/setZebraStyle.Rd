@@ -19,10 +19,12 @@ Set a color if row index is odd and another if row index is even.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 MyFTable <- FlexTable( data = iris[1:10, ] )
 
 # Zebra striped table
 MyFTable <- setZebraStyle( MyFTable, odd = "#8A949B", even = "#FAFAFA" )
+}
 }
 }
 \seealso{

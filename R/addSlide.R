@@ -36,6 +36,7 @@ addSlide = function(doc, ...){
 #' Also when using addPlot, plot dimensions will be the shape dimensions. It means that if you want to change plot dimensions
 #' , this has to be done in the PowerPoint template used when creating the \code{pptx} object.
 #' @examples
+#' if( check_valid_java_version() ){
 #' \donttest{
 #' doc.filename = "addSlide_example.pptx"
 #' doc <- pptx()
@@ -68,6 +69,7 @@ addSlide = function(doc, ...){
 #' mydoc = addTitle( mydoc, "a new table")
 #' mydoc = addFlexTable( mydoc, ft2 )
 #' writeDoc( mydoc, "slide_replacement.pptx" )
+#' }
 #' }
 #' @rdname addSlide
 #' @export

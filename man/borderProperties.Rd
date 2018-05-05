@@ -36,14 +36,18 @@ Get a modified version of a \code{borderProperties} with
 \code{chprop}.
 }
 \examples{
+if( check_valid_java_version() ){
 borderProperties()
 borderProperties(color="orange", style="solid", width=1)
 borderProperties(color="gray", style="dotted", width=1)
+}
+if( check_valid_java_version() ){
 
 # update borderProperties --------
 x = borderProperties()
 chprop(x, color="orange", style="dashed", width=1)
 chprop(x, width=5)
+}
 }
 \seealso{
 \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}},

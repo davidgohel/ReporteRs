@@ -19,8 +19,10 @@ addPageBreak = function(doc, ...){
 
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc = docx( title = "title" )
 #' doc = addPageBreak( doc )
+#' }
 #' }
 #' @export
 #' @rdname addPageBreak

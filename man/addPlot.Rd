@@ -92,6 +92,7 @@ is_sunos <- tolower(Sys.info()[["sysname"]]) == "sunos"
 options( "ReporteRs-fontsize" = 11 )
 
 
+if( check_valid_java_version() ){
 # plot example for docx -----
 \donttest{
 doc = docx( )
@@ -101,8 +102,10 @@ doc = addPlot( doc, fun = function() barplot( 1:6, col = 2:7),
   )
 writeDoc( doc, file = "ex_plot.docx" )
 }
+}
 
 
+if( check_valid_java_version() ){
 # plot example for pptx -----
 \donttest{
 doc = pptx( )
@@ -120,6 +123,7 @@ if( !is_sunos ){
 }
 
 writeDoc( doc, file = "ex_plot.pptx" )
+}
 }
 
 }

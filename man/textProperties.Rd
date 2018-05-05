@@ -61,11 +61,13 @@ Get a modified version of a \code{textProperties} with
 \code{chprop}.
 }
 \examples{
+if( check_valid_java_version() ){
 textProperties( font.size = 12 )
 textProperties(color="red", font.weight = "bold",
   font.style = "italic", underlined = TRUE )
 textProperties( shading.color = "red" )
-print( textProperties (color="red", font.size = 12) )
+}
+if( check_valid_java_version() ){
 
 # chprop usage example ------
 textProp <- textProperties()
@@ -79,6 +81,7 @@ chprop( textProp, font.family = "Arial" )
 chprop( textProp, vertical.align = "superscript" )
 chprop( textProp, font.size = 12,
         font.weight = "bold", shading.color = "red" )
+}
 }
 \seealso{
 \code{\link{pot}}, \code{\link{alterFlexTable}},

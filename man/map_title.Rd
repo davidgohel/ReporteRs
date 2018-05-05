@@ -28,10 +28,12 @@ used as header styles.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 doc.filename = "addImage_example.docx"
 doc <- docx()
 doc = map_title(doc, stylenames = c("Titre1", "Titre2", "Titre3",
   "Titre4", "Titre5", "Titre6", "Titre7", "Titre8", "Titre9" ) )
+}
 }
 }
 \seealso{

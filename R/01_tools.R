@@ -1,3 +1,11 @@
+#' @export
+#' @title check validity of java version for the package
+#' @description check that the java version is <= 1.8
+check_valid_java_version <- function(){
+  jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+  substr(jv, 1L, 2L) == "1."
+}
+
 #' @import rJava
 #' @import ReporteRsjars
 #' @importFrom grDevices col2rgb
@@ -35,6 +43,19 @@
 	)
 	invisible()
 }
+
+
+.onAttach <- function(libname, pkgname){
+
+  packageStartupMessage("Please consider using package officer instead of package ReporteRs. ")
+
+  jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+  if(!check_valid_java_version()) {
+    packageStartupMessage("Java <= 1.8 is needed for this package but not available")
+  }
+
+}
+
 
 .jset_of_paragraphs = function( value, par.properties ){
 

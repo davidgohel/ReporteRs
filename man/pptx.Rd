@@ -64,6 +64,7 @@ unless the \code{\link{writeDoc}} method has been called on the object.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 # set default font size to 10
 options( "ReporteRs-fontsize" = 11 )
 
@@ -155,11 +156,14 @@ doc = addFlexTable( doc, MyFTable )
 # write the doc
 writeDoc( doc, file = pptx.file )
 }
+}
 \donttest{
+if( check_valid_java_version() ){
 # get pptx page dimensions ------
 doc = pptx( title = "title" )
 doc = addSlide( doc, "Title and Content" )
 dim(doc)
+}
 }
 }
 \references{

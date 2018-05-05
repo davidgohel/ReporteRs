@@ -12,11 +12,13 @@
 #' @return a character vector
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc <- docx( title = "My example", template = file.path(
 #'   system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
 #' text_extract( doc )
 #' text_extract( doc, header = FALSE, footer = FALSE )
 #' text_extract( doc, bookmark = "author" )
+#' }
 #' }
 #' @seealso \code{\link{docx}}, \code{\link{list_bookmarks}}
 #' @export
@@ -46,10 +48,12 @@ text_extract = function( x, body = TRUE, header = TRUE, footer = TRUE, bookmark)
 #' @param footer specifies to scan document footer
 #' @return a character vector
 #' @examples
+#' if( check_valid_java_version() ){
 #' \donttest{
 #' doc <- docx( title = "My example", template = file.path(
 #'   system.file(package = "ReporteRs"), "templates/bookmark_example.docx") )
 #' list_bookmarks( doc )
+#' }
 #' }
 #' @seealso \code{\link{docx}}, \code{\link{text_extract}}
 #' @export

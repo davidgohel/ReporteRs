@@ -62,6 +62,7 @@ addParagraph <- function(doc, value, ...){
 #' @examples
 #' # docx example ---------
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc.filename = "ex_paragraph.docx"
 #' doc <- docx()
 #' styles(doc)
@@ -80,6 +81,7 @@ addParagraph <- function(doc, value, ...){
 #' doc <- addParagraph( doc, value = my.pars, par.properties = parCenter() )
 #'
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @rdname addParagraph
 #' @export
@@ -169,6 +171,8 @@ addParagraph.docx <- function(doc, value, stylename, bookmark,
 #' will be ignored.
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
+#' # pptx example -------
 #' # pptx example -------
 #' doc.filename = "ex_paragraph.pptx"
 #' doc <- pptx()
@@ -189,6 +193,7 @@ addParagraph.docx <- function(doc, value, stylename, bookmark,
 #'   par.properties=parProperties(text.align="center", padding=24) )
 #'
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @rdname addParagraph
 #' @export

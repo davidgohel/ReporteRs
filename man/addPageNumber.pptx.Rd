@@ -22,6 +22,7 @@ Insert a page number shape into the current slide of a \code{pptx} object.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 doc.filename <- "add_page_number_example.pptx"
 doc <- pptx( title = "title" )
 doc <- addSlide( doc, slide.layout = "Title Slide" )
@@ -31,6 +32,7 @@ doc <- addSlide( doc, slide.layout = "Title and Content" )
 # add a page number with free text ----
 doc <- addPageNumber( doc, value = "Page number text")
 writeDoc( doc, file = doc.filename )
+}
 }
 }
 \seealso{

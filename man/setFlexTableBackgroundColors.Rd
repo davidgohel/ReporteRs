@@ -24,6 +24,7 @@ applies background colors to cells of a FlexTable
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 # example 1 ----
 ft <- vanilla.table(head(iris))
 ft <- setFlexTableBackgroundColors( ft,
@@ -91,6 +92,7 @@ bp2 <- chprop( bp1, width = 2 )
 MyFTable <- setFlexTableBorders( MyFTable,
   inner.vertical = bp1, inner.horizontal = bp1,
   outer.vertical = bp2, outer.horizontal = bp2 )
+}
 }
 }
 \seealso{

@@ -8,10 +8,6 @@
 #' @param text.direction header cell text rotation - a single character value, expected
 #' value is one of "lrtb", "tbrl", "btlr".
 #' @export
-#' @examples
-#' \donttest{
-#' ft <- vanilla.table( iris)
-#' }
 #' @seealso \code{\link{FlexTable}}
 vanilla.table = function( dataset, add.rownames = FALSE, text.direction = "lrtb" ){
 	for(j in names( dataset ) ){
@@ -46,10 +42,6 @@ vanilla.table = function( dataset, add.rownames = FALSE, text.direction = "lrtb"
 #' @param text.direction header cell text rotation - a single character value, expected
 #' value is one of "lrtb", "tbrl", "btlr".
 #' @export
-#' @examples
-#' \donttest{
-#' ft <- light.table( iris)
-#' }
 #' @seealso \code{\link{FlexTable}}
 light.table = function( dataset, add.rownames = FALSE, text.direction = "lrtb" ){
 	for(j in names( dataset ) ){

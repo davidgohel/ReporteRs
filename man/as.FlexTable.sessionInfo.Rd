@@ -20,6 +20,3 @@ a \code{\link{FlexTable}} object
 Get a \code{\link{FlexTable}} object from
 a \code{\link{sessionInfo}} object.
 }
-\examples{
-ft <- as.FlexTable( sessionInfo() )
-}

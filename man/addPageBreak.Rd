@@ -27,8 +27,10 @@ See \code{\link{addPageBreak.docx}} for examples.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 doc = docx( title = "title" )
 doc = addPageBreak( doc )
+}
 }
 }
 \seealso{

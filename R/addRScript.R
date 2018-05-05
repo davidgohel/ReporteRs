@@ -30,12 +30,14 @@ addRScript = function(doc, rscript, file, text, ... ){
 #' @param bookmark a character value ; id of the Word bookmark to
 #' replace by the script. optional.
 #' @examples
+#' if( check_valid_java_version() ){
 #' \donttest{
 #' # docx example -----------
 #' doc.filename = "ex_rscript.docx"
 #' doc <- docx()
 #' doc <- addRScript(doc, text = "x = rnorm(100)" )
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @rdname addRScript
 #' @export
@@ -69,12 +71,14 @@ addRScript.docx = function(doc, rscript, file, text, bookmark, par.properties = 
 #' can not add paragraphs after a FlexTable).
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # pptx example -----------
 #' doc.filename = "ex_rscript.pptx"
 #' doc <- pptx()
 #' doc <- addSlide(doc, "Title and Content")
 #' doc <- addRScript(doc, text = "x = rnorm(100)" )
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @export
 #' @rdname addRScript

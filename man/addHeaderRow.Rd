@@ -39,6 +39,7 @@ add a header row in a FlexTable
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 # simple example ----
 
 # set header.columns to FALSE so that default header row is not added in
@@ -67,6 +68,7 @@ MyFTable <- addHeaderRow( MyFTable,
   cell.properties = cellProperties(border.color="#7895A2"),
   value = c("Sepal Length", "Sepal Width",
     "Sepal Length", "Sepal Width", "Species") )
+}
 }
 }
 \seealso{

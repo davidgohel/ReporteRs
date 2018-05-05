@@ -8,12 +8,14 @@ dummy_plot <- function(){
 }
 
 test_that("[vg] no size generate no error", {
+  skip_if_not(check_valid_java_version())
   doc <- docx( )
   doc <- try( addPlot(doc, fun = dummy_plot,
                       vector.graphic = TRUE), silent = TRUE)
   expect_is(doc, "docx" )
 })
 test_that("[raster] no size generate no error", {
+  skip_if_not(check_valid_java_version())
   doc <- docx( )
   doc <- try( addPlot(doc, fun = dummy_plot,
                       vector.graphic = FALSE), silent = TRUE)
@@ -21,6 +23,7 @@ test_that("[raster] no size generate no error", {
 })
 
 test_that("[vg] size generate no error", {
+  skip_if_not(check_valid_java_version())
   doc <- docx( )
   doc <- try( addPlot(doc, fun = dummy_plot,
                       width = 4, height = 4,
@@ -30,6 +33,7 @@ test_that("[vg] size generate no error", {
 })
 
 test_that("[raster] size generate no error", {
+  skip_if_not(check_valid_java_version())
   doc <- docx( )
   doc <- try( addPlot(doc, fun = dummy_plot,
                       width = 4, height = 4,
@@ -39,6 +43,7 @@ test_that("[raster] size generate no error", {
 })
 
 test_that("[vg] test raster", {
+  skip_if_not(check_valid_java_version())
   myplot <- qplot(Sepal.Length, Petal.Length,
                   data = iris, color = Petal.Width,
                   alpha = I(0.7) )

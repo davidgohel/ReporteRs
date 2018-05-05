@@ -11,6 +11,7 @@
 #' If layout is specified, the layout representation will be produced in a plot.
 #' This can be useful to check available shapes.
 #' @examples
+#' if( check_valid_java_version() ){
 #' \donttest{
 #' doc.filename = "addFlexTable_example.pptx"
 #' doc = pptx( title = "title" )
@@ -21,6 +22,7 @@
 #' for(i in layouts ){
 #'   slide.layouts(doc, i )
 #'   title(sub = i )
+#' }
 #' }
 #' }
 #' @seealso \code{\link{pptx}}, \code{\link{addSlide.pptx}}, \code{\link{slide.layouts}}

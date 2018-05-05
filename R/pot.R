@@ -16,6 +16,7 @@
 #' a \code{pptx} object.
 #' @export
 #' @examples
+#' if( check_valid_java_version() ){
 #' # "My tailor is rich" with formatting on some words
 #' pot1 <- pot("My tailor", textProperties(color = "red" ) ) +
 #'   " is " + pot("rich", textProperties(shading.color = "red",
@@ -26,6 +27,7 @@
 #'   " and " +
 #'   pot("dogs", textProperties( color = "blue" ),
 #'       hyperlink = "http://www.wikipedia.org/" )
+#' }
 #' @seealso \code{\link{addParagraph}}, \code{\link{Footnote}}
 #' , \code{\link{+.pot}}, \code{\link{pot_img}},
 pot = function( value ="", format = textProperties(), hyperlink, footnote ){
@@ -149,8 +151,10 @@ as.character.pot = function (x, ...){
 #' \code{pot} object with no associated format ; therefore, document default document style
 #' will be used (see \code{\link{addParagraph}}).
 #' @examples
+#' if( check_valid_java_version() ){
 #' pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
+#' }
 #' @seealso \code{\link{addParagraph}}
 #' @export
 "+.pot" = function(e1, e2) {
@@ -174,9 +178,11 @@ as.character.pot = function (x, ...){
 #' @return a character value
 #' @seealso \code{\link{pot}}
 #' @examples
+#' if( check_valid_java_version() ){
 #' my_pot = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 #' 	, textProperties(font.weight="bold") )
 #' as.html( my_pot )
+#' }
 #' @export
 as.html.pot = function( object, ... ) {
 	par = .jpot( object )

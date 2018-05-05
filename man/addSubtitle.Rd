@@ -29,6 +29,7 @@ Subtitle shape only exist in slide of type 'Title Slide'.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 doc.filename = "addSubtitle_example.pptx"
 doc <- pptx()
 doc <- addSlide( doc, slide.layout = "Title Slide" )
@@ -37,6 +38,7 @@ doc <- addTitle( doc, "Presentation title" )
 #set the sub-title
 doc <- addSubtitle( doc , "This document is generated with ReporteRs.")
 writeDoc( doc, file = doc.filename )
+}
 }
 }
 \seealso{

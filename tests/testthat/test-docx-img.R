@@ -6,12 +6,14 @@ points(.5,.5)
 dev.off()
 
 test_that("[docx] image with no size generate an error", {
+  skip_if_not(check_valid_java_version())
   doc <- docx( )
   doc <- try( addImage(doc, "img.png"), silent = TRUE)
   expect_is(doc, "try-error" )
 })
 
 test_that("[docx] image with size generate no error", {
+  skip_if_not(check_valid_java_version())
   doc <- docx( )
   doc <- try( addImage(doc, "img.png",
                        width = 4, height = 4 ), silent = TRUE)

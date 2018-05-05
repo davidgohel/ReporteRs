@@ -64,18 +64,22 @@ options( "ReporteRs-fontsize" = 11 )
 ft_obj <- vanilla.table(mtcars)
 }
 \donttest{
+if( check_valid_java_version() ){
 # docx example -----
 doc = docx( )
 doc = addFlexTable( doc, flextable = ft_obj )
 writeDoc( doc, file = "add_ft_ex.docx" )
 }
+}
 
 \donttest{
+if( check_valid_java_version() ){
 # pptx example -----
 doc = pptx( )
 doc = addSlide( doc, slide.layout = "Title and Content" )
 doc = addFlexTable( doc, flextable = ft_obj )
 writeDoc( doc, file = "add_ft_ex.pptx" )
+}
 }
 
 }

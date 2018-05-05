@@ -58,6 +58,7 @@ addImage = function(doc, filename, ...){
 #' @examples
 #' # Image example for MS Word -------
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc <- docx()
 #'
 #' if( has_img && has_jpeg ){
@@ -71,6 +72,7 @@ addImage = function(doc, filename, ...){
 #' }
 #'
 #' writeDoc( doc, file = "ex_add_image.docx" )
+#' }
 #' }
 #'
 #' @rdname addImage
@@ -119,6 +121,7 @@ addImage.docx = function(doc, filename, bookmark,
 #' @examples
 #' # Image example for MS PowerPoint -------
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' if( !is_sunos ){
 #'
 #' doc <- pptx()
@@ -135,6 +138,7 @@ addImage.docx = function(doc, filename, bookmark,
 #' }
 #'
 #' writeDoc( doc, file = "ex_add_image.pptx" )
+#' }
 #' }
 #' }
 #'

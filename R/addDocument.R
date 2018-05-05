@@ -30,6 +30,7 @@ addDocument = function(doc, filename, ...){
 #'
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc.filename <- "addDocument_example.docx"
 #' # set default font size to 10
 #' options( "ReporteRs-fontsize" = 10 )
@@ -47,6 +48,7 @@ addDocument = function(doc, filename, ...){
 #'   doc <- docx( )
 #'   doc <- addDocument( doc, filename = "external_file.docx" )
 #'   writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' }
 #' @rdname addDocument

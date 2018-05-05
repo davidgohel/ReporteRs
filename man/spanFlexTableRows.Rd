@@ -26,6 +26,7 @@ Overlappings of horizontally merged cells and vertically merged cells are forbid
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 mydata = iris[46:55, ]
 MyFTable <- FlexTable( data = mydata )
 
@@ -38,6 +39,7 @@ MyFTable <- spanFlexTableRows( MyFTable, j = 3, from = 5, to = 7 )
 # than the number of lines of the FlexTable.
 MyFTable <- spanFlexTableRows( MyFTable, j = "Species",
   runs = as.character( mydata$Species ) )
+}
 }
 }
 \seealso{

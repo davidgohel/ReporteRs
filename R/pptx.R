@@ -35,6 +35,7 @@
 #' unless the \code{\link{writeDoc}} method has been called on the object.
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # set default font size to 10
 #' options( "ReporteRs-fontsize" = 11 )
 #'
@@ -126,6 +127,7 @@
 #' # write the doc
 #' writeDoc( doc, file = pptx.file )
 #' }
+#' }
 #' @export
 #' @seealso \code{\link{docx}}
 pptx = function( title, template, list.definition = getOption("ReporteRs-list-definition")){
@@ -188,10 +190,12 @@ pptx = function( title, template, list.definition = getOption("ReporteRs-list-de
 #' @param x Object of class \code{pptx}
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # get pptx page dimensions ------
 #' doc = pptx( title = "title" )
 #' doc = addSlide( doc, "Title and Content" )
 #' dim(doc)
+#' }
 #' }
 #' @rdname pptx
 #' @export

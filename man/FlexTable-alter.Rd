@@ -73,6 +73,7 @@ If dealing with \code{borderProperties} objects, use also argument
 properties.
 }
 \examples{
+if( check_valid_java_version() ){
 \donttest{
 MyFTable <- FlexTable( data = mtcars[1:10, ], add.rownames=TRUE )
 # modify the text formatting properties for the row.names column
@@ -86,6 +87,7 @@ MyFTable[ c(3,6:9), c( "mpg", "disp", "hp", "drat", "wt",
 # add text to elements of the column cyl
 MyFTable[, "cyl", text.properties = textProperties(
   vertical.align="superscript", font.size = 9) ] <- " miles/gallon"
+}
 }
 }
 \seealso{

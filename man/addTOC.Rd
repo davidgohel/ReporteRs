@@ -34,6 +34,7 @@ For example, this can be used to produce a toc with only plots.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 # simple TOC -----
 
 # Create a new document
@@ -87,6 +88,7 @@ doc = addTOC(doc, stylename = "rPlotLegend")
 
 # Write the object in file "addTOC_example2.docx"
 writeDoc( doc, "addTOC_example2.docx" )
+}
 }
 }
 \seealso{

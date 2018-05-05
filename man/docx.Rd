@@ -69,6 +69,7 @@ Word 2007-2013 (*.docx) file formats are the only supported files.\cr Document a
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 # set default font size to 10
 options( "ReporteRs-fontsize" = 10 )
 
@@ -201,6 +202,7 @@ doc <- addParagraph( doc, value = "my first table",
 
 # write the doc
 writeDoc( doc, file = "document_example.docx")
+}
 }
 \donttest{
 # get docx page dimensions ------

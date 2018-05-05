@@ -6,9 +6,11 @@
 #' @param style border style - single character value : "none" or "solid" or "dotted" or "dashed"
 #' @param width border width - an integer value : 0>= value
 #' @examples
+#' if( check_valid_java_version() ){
 #' borderProperties()
 #' borderProperties(color="orange", style="solid", width=1)
 #' borderProperties(color="gray", style="dotted", width=1)
+#' }
 #' @seealso \code{\link{alterFlexTable}}, \code{\link{setFlexTableBorders}},
 #' \code{\link{shortcut_properties}}
 #' @export
@@ -52,11 +54,13 @@ borderProperties = function( color = "black", style = "solid", width = 1 ){
 #' Get a modified version of a \code{borderProperties} with
 #' \code{chprop}.
 #' @examples
+#' if( check_valid_java_version() ){
 #'
 #' # update borderProperties --------
 #' x = borderProperties()
 #' chprop(x, color="orange", style="dashed", width=1)
 #' chprop(x, width=5)
+#' }
 #' @rdname borderProperties
 #' @export
 chprop.borderProperties <- function(object, color, style, width, ... ) {

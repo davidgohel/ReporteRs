@@ -18,6 +18,7 @@ addColumnBreak = function(doc, ...){
 
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc.filename = "add_col_break.docx"
 #' doc = docx( )
 #' doc = addSection(doc, ncol = 2, columns.only = TRUE )
@@ -25,6 +26,7 @@ addColumnBreak = function(doc, ...){
 #' doc = addColumnBreak(doc )
 #' doc = addParagraph( doc = doc, "Text 2.", "Normal" )
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @rdname addColumnBreak
 #' @export

@@ -29,6 +29,7 @@ docx_doc <- function(flextable){
 
 test_that("header rows", {
 
+  skip_if_not(check_valid_java_version())
   row1 <- c("Sepal", "Petal", "")
   row2 <- c("Length", "Width", "Length", "Width", "Species")
 
@@ -138,6 +139,7 @@ test_that("header rows", {
 
 test_that("footer rows", {
 
+  skip_if_not(check_valid_java_version())
   row1 <- c("Sepal", "Petal", "")
   ft1 <- vanilla.table( data = head( iris, n = 3 ) )
   ft1 <- addFooterRow( ft1, value = row1, colspan = c( 2, 2, 1) )

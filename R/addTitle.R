@@ -38,11 +38,13 @@ addTitle = function(doc, value, ...){
 #'
 #' # Title example for MS Word -------
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc.filename = "ex_add_title.docx"
 #' doc <- docx()
 #' doc <- addTitle( doc, "Title example 1", level = 1 )
 #' doc <- addTitle( doc, "Title example 2", level = 1 )
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @rdname addTitle
 #' @seealso \code{\link{map_title}}
@@ -71,12 +73,14 @@ addTitle.docx = function( doc, value, level = 1, ... ) {
 #'
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # Title example for PowerPoint -------
 #' doc.filename = "ex_add_title.pptx"
 #' doc <- pptx()
 #' doc <- addSlide(doc, "Title and Content")
 #' doc <- addTitle(doc, "Title example")
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @rdname addTitle
 #' @export

@@ -82,6 +82,7 @@ Get a modified version of a \code{parProperties} with
 \code{chprop}.
 }
 \examples{
+if( check_valid_java_version() ){
 parProperties( text.align = "center", padding = 5)
 
 parProperties( text.align = "center",
@@ -91,6 +92,8 @@ parProperties( text.align = "center",
 parProperties( list.style = "ordered", level = 2)
 
 parProperties( list.style = "unordered", level = 2)
+}
+if( check_valid_java_version() ){
 parProp = parProperties()
 
 chprop( parProp, text.align = "center" )
@@ -98,6 +101,7 @@ chprop( parProp, padding.left = 2 )
 chprop( parProp, padding = 2 )
 
 chprop( parProp, padding = 2, text.align = "center" )
+}
 }
 \seealso{
 \code{\link{alterFlexTable}}, \code{\link{addParagraph}},

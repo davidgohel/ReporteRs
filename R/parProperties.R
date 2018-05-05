@@ -38,6 +38,7 @@
 #' @return a \code{parProperties} object
 #' @export
 #' @examples
+#' if( check_valid_java_version() ){
 #' parProperties( text.align = "center", padding = 5)
 #'
 #' parProperties( text.align = "center",
@@ -47,6 +48,7 @@
 #' parProperties( list.style = "ordered", level = 2)
 #'
 #' parProperties( list.style = "unordered", level = 2)
+#' }
 #' @seealso \code{\link{alterFlexTable}}, \code{\link{addParagraph}},
 #' \code{\link{shortcut_properties}}
 parProperties = function(text.align = "left",
@@ -157,6 +159,7 @@ parProperties = function(text.align = "left",
 #' Get a modified version of a \code{parProperties} with
 #' \code{chprop}.
 #' @examples
+#' if( check_valid_java_version() ){
 #' parProp = parProperties()
 #'
 #' chprop( parProp, text.align = "center" )
@@ -164,6 +167,7 @@ parProperties = function(text.align = "left",
 #' chprop( parProp, padding = 2 )
 #'
 #' chprop( parProp, padding = 2, text.align = "center" )
+#' }
 #' @export
 #' @rdname parProperties
 chprop.parProperties <- function(object, text.align
@@ -216,31 +220,6 @@ chprop.parProperties <- function(object, text.align
 			object$padding.right = as.integer( padding.right )
 		} else stop("padding.right must be a numeric scalar (pixel unit).")
 	}
-
-#	if( !missing( margin.bottom ) )
-#		if( is.numeric( margin.bottom ) ) {
-#			if( as.integer( margin.bottom ) < 0 || !is.finite( as.integer( margin.bottom ) ) ) stop("invalid margin.bottom : ", margin.bottom)
-#			object$margin.bottom = as.integer( margin.bottom )
-#		} else stop("margin.bottom must be a numeric scalar (pixel unit).")
-#
-#	if( !missing( margin.top ) )
-#		if( is.numeric( margin.top ) ) {
-#			if( as.integer( margin.top ) < 0 || !is.finite( as.integer( margin.top ) ) ) stop("invalid margin.top : ", margin.top)
-#			object$margin.top = as.integer( margin.top )
-#		} else stop("margin.top must be a numeric scalar (pixel unit).")
-#
-#	if( !missing( margin.left ) )
-#		if( is.numeric( margin.left ) ) {
-#			if( as.integer( margin.left ) < 0 || !is.finite( as.integer( margin.left ) ) ) stop("invalid margin.left : ", margin.left)
-#			object$margin.left = as.integer( margin.left )
-#		} else stop("margin.left must be a numeric scalar (pixel unit).")
-#
-#	if( !missing( margin.right ) )
-#		if( is.numeric( margin.right ) ) {
-#			if( as.integer( margin.right ) < 0 || !is.finite( as.integer( margin.right ) ) ) stop("invalid margin.right : ", margin.right)
-#			object$margin.right = as.integer( margin.right )
-#		} else stop("margin.right must be a numeric scalar (pixel unit).")
-#
 
 
 	if( !missing( list.style ) ){

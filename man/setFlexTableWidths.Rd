@@ -16,8 +16,10 @@ set columns widths of a FlexTable in inches.
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 MyFTable <- FlexTable( data = iris[1:10, ] )
 MyFTable <- setFlexTableWidths( MyFTable, widths = c(1,1,1,1,3))
+}
 }
 }
 \seealso{

@@ -12,6 +12,7 @@
 #' @return an object of class \code{\link{Footnote}}.
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #'
 #' ## docx example
 #' doc = docx( )
@@ -58,6 +59,7 @@
 #' docx.file = "footnote.docx"
 #'
 #' writeDoc( doc, file = docx.file )
+#' }
 #' }
 #' @seealso \code{\link{docx}}, \code{\link{pot}}
 #' @export

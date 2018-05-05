@@ -38,6 +38,7 @@
 #' @export
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' # set default font size to 10
 #' options( "ReporteRs-fontsize" = 10 )
 #'
@@ -170,6 +171,7 @@
 #'
 #' # write the doc
 #' writeDoc( doc, file = "document_example.docx")
+#' }
 #' }
 #' @seealso \code{\link{pptx}}
 docx = function( title = "untitled", template, empty_template = FALSE, list.definition = getOption("ReporteRs-list-definition") ){

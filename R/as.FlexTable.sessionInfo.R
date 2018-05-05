@@ -7,8 +7,6 @@
 #' @param locale show locale information?
 #' @param ... further arguments, not used.
 #' @return a \code{\link{FlexTable}} object
-#' @examples
-#' ft <- as.FlexTable( sessionInfo() )
 #' @export
 as.FlexTable.sessionInfo = function( x, locale = TRUE, ... ){
 

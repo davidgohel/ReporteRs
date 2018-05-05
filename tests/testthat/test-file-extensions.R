@@ -1,6 +1,7 @@
 context("file extensions")
 
 test_that("pptx extension must be pptx", {
+  skip_if_not(check_valid_java_version())
   doc <- pptx( )
   doc <- addSlide( doc, "Title and Content" )
   res <- try( writeDoc(doc, "doc_1.pptx"), silent = TRUE )
@@ -13,6 +14,7 @@ test_that("pptx extension must be pptx", {
 })
 
 test_that("docx extension must be docx", {
+  skip_if_not(check_valid_java_version())
   doc <- docx( )
   res <- try( writeDoc(doc, "doc_2.docx"), silent = TRUE )
   expect_null( res )

@@ -48,6 +48,7 @@ Add R script into a document object
 You have to one of the following argument: file or text or rscript.
 }
 \examples{
+if( check_valid_java_version() ){
 \donttest{
 # docx example -----------
 doc.filename = "ex_rscript.docx"
@@ -55,13 +56,16 @@ doc <- docx()
 doc <- addRScript(doc, text = "x = rnorm(100)" )
 writeDoc( doc, file = doc.filename )
 }
+}
 \donttest{
+if( check_valid_java_version() ){
 # pptx example -----------
 doc.filename = "ex_rscript.pptx"
 doc <- pptx()
 doc <- addSlide(doc, "Title and Content")
 doc <- addRScript(doc, text = "x = rnorm(100)" )
 writeDoc( doc, file = doc.filename )
+}
 }
 }
 \seealso{

@@ -41,6 +41,7 @@ A pot can be associated with a Footnote. Note that footnotes can not be inserted
 a \code{pptx} object.
 }
 \examples{
+if( check_valid_java_version() ){
 # "My tailor is rich" with formatting on some words
 pot1 <- pot("My tailor", textProperties(color = "red" ) ) +
   " is " + pot("rich", textProperties(shading.color = "red",
@@ -51,6 +52,7 @@ pot2 = pot("Cats", textProperties(color = "red" ) ) +
   " and " +
   pot("dogs", textProperties( color = "blue" ),
       hyperlink = "http://www.wikipedia.org/" )
+}
 }
 \seealso{
 \code{\link{addParagraph}}, \code{\link{Footnote}}

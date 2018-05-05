@@ -18,8 +18,10 @@ applies background colors to rows of a FlexTable
 }
 \examples{
 \donttest{
+if( check_valid_java_version() ){
 MyFTable <- FlexTable( data = mtcars[1:10, ], add.rownames=TRUE )
 MyFTable <- setRowsColors( MyFTable, i=1:4, colors = "red" )
+}
 }
 }
 \seealso{

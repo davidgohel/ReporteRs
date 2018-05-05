@@ -18,9 +18,11 @@ a character value
 get HTML code from a pot
 }
 \examples{
+if( check_valid_java_version() ){
 my_pot = pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 	, textProperties(font.weight="bold") )
 as.html( my_pot )
+}
 }
 \seealso{
 \code{\link{pot}}

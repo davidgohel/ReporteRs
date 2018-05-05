@@ -23,6 +23,7 @@ writeDoc(doc, ...)
 Write a document object into a file
 }
 \examples{
+if( check_valid_java_version() ){
 \donttest{
 doc <- docx()
 writeDoc( doc, "ex_write_doc.docx")
@@ -30,6 +31,7 @@ writeDoc( doc, "ex_write_doc.docx")
 doc <- pptx()
 doc <- addSlide(doc, "Title and Content")
 writeDoc( doc, "ex_write_doc.pptx")
+}
 }
 }
 \seealso{

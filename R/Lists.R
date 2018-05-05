@@ -28,6 +28,7 @@
 #' It can be set in R session options or as a parameter in \code{\link{docx}} or
 #' \code{\link{pptx}}.
 #' @examples
+#' if( check_valid_java_version() ){
 #' numbering.pattern = c( "%1.", "%1. %2.", "%1. %2. %3.",
 #'   "%4.", "%5.", "%6.", "%7.", "%8.", "%9." )
 #'
@@ -92,6 +93,7 @@
 #'                     par.properties = unordered.list.level2 )
 #'
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @seealso \code{\link{addParagraph}}, \code{\link{ReporteRs}}
 list.settings = function(

@@ -140,11 +140,14 @@ Get a modified version of a \code{cellProperties} with
 \code{chprop}.
 }
 \examples{
+if( check_valid_java_version() ){
 cellProp01 <- cellProperties( border.color = "gray", border.width = 2 )
 cellProp02 <- cellProperties(border.left.width = 0, border.right.width = 0,
   border.bottom.width = 2, border.top.width = 0,
   padding.bottom = 2, padding.top = 2,
   padding.left = 2, padding.right = 2 )
+}
+if( check_valid_java_version() ){
 cellProp <- cellProperties()
 
 chprop( cellProp, border.bottom.color = "#8A949B" )
@@ -155,6 +158,7 @@ chprop( cellProp, padding = 5 )
 chprop( cellProp,
   border.bottom = borderProperties( style = "dotted" ) )
 chprop( cellProp, border.style = "dotted" )
+}
 }
 \seealso{
 \code{\link{borderProperties}}, \code{\link{FlexTable}},

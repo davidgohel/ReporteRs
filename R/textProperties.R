@@ -21,10 +21,12 @@
 #' @return a \code{textProperties} object
 #' @export
 #' @examples
+#' if( check_valid_java_version() ){
 #' textProperties( font.size = 12 )
 #' textProperties(color="red", font.weight = "bold",
 #'   font.style = "italic", underlined = TRUE )
 #' textProperties( shading.color = "red" )
+#' }
 #' @seealso \code{\link{pot}}, \code{\link{alterFlexTable}},
 #' \code{\link{shortcut_properties}}
 textProperties = function( color = "black", font.size = getOption("ReporteRs-fontsize")
@@ -86,8 +88,6 @@ textProperties = function( color = "black", font.size = getOption("ReporteRs-fon
 }
 
 #' @param x \code{textProperties} object to print
-#' @examples
-#' print( textProperties (color="red", font.size = 12) )
 #' @rdname textProperties
 #' @export
 print.textProperties = function (x, ...){
@@ -155,6 +155,7 @@ as.character.textProperties = function (x, ...){
 #' Get a modified version of a \code{textProperties} with
 #' \code{chprop}.
 #' @examples
+#' if( check_valid_java_version() ){
 #'
 #' # chprop usage example ------
 #' textProp <- textProperties()
@@ -168,6 +169,7 @@ as.character.textProperties = function (x, ...){
 #' chprop( textProp, vertical.align = "superscript" )
 #' chprop( textProp, font.size = 12,
 #'         font.weight = "bold", shading.color = "red" )
+#' }
 #' @rdname textProperties
 #' @export
 chprop.textProperties <- function(object, color, font.size

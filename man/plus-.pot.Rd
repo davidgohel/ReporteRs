@@ -22,8 +22,10 @@ If one of the 2 parameters is a simple string, it is converted as a
 will be used (see \code{\link{addParagraph}}).
 }
 \examples{
+if( check_valid_java_version() ){
 pot("My tailor", textProperties(color="red") ) + " is " + pot("rich"
 	, textProperties(font.weight="bold") )
+}
 }
 \seealso{
 \code{\link{addParagraph}}

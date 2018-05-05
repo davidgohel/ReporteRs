@@ -23,6 +23,7 @@ addSubtitle <- function(doc, ...){
 #' @rdname addSubtitle
 #' @examples
 #' \donttest{
+#' if( check_valid_java_version() ){
 #' doc.filename = "addSubtitle_example.pptx"
 #' doc <- pptx()
 #' doc <- addSlide( doc, slide.layout = "Title Slide" )
@@ -31,6 +32,7 @@ addSubtitle <- function(doc, ...){
 #' #set the sub-title
 #' doc <- addSubtitle( doc , "This document is generated with ReporteRs.")
 #' writeDoc( doc, file = doc.filename )
+#' }
 #' }
 #' @export
 addSubtitle.pptx = function( doc, value, ... ) {
