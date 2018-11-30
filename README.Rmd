@@ -6,6 +6,8 @@ output:
 
 # Important note
 
+![](https://upload.wikimedia.org/wikipedia/commons/6/66/Danger_radiation.svg)
+
 ReporteRs has been rewritten. The new package is 
 [`officer`](https://cran.r-project.org/package=officer). FlexTable objects are 
 now implemented in package [`flextable`](https://CRAN.R-project.org/package=flextable). 
@@ -91,13 +93,6 @@ require(rJava)
 .jcall('java.lang.System','S','getProperty','java.version')
 ```
 
-
-### Get CRAN version
-
-```{r eval=FALSE}
-install.packages('ReporteRs')
-```
-    
 
 ### From Github
 
