@@ -17,6 +17,8 @@ charts can be produced with package
 Please **use officer instead of ReporteRs**. There are issues when using
 java \> 1.8 that won’t be fixed.
 
+We are aware that joe@subspace.net copied the project to Subspace (He did it then asked if it was ok...). We don't think it is a good idea and will not spend time adapting code from rvg or gdtools to help resurrecting this obsolete project.
+
 ## Overview
 
 `ReporteRs` is an R package for creating Microsoft Word and Powerpoint
